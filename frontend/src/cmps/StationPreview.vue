@@ -1,10 +1,15 @@
 <template>
-  <section @click="goToStationDetails">
-    {{ station.name }}
-    <img :src="station.songs[0].imgUrl" />
-    <button @click="removeStation(station._id)">x</button>
+  <section class="playlist-preview" @click="goToStationDetails">
+    <div class="playlist-image">
+      <img :src="station.songs[0].imgUrl" />
+    </div>
+    <div class="playlist-info">
+      <h3 class="playlist-title">{{ station.name }}</h3>
+      <button class="remove-button" @click="removeStation(station._id)">x</button>
+    </div>
   </section>
 </template>
+
 
 <script>
 export default {
