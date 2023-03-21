@@ -1,8 +1,8 @@
 <template>
-  <section class="station-list stations-container">
+  <section class="station-list-container stations-container">
     <h1>happy</h1>
-    <ul class="clean-list">
-      <li class="toy" v-for="station in huppyStations" :key="station._id">
+    <ul class="clean-list station-list">
+      <li class="station" v-for="station in happyStations" :key="station._id">
         <StationPreview
           :station="station"
           @removed="$emit('removed', station._id)"
@@ -14,7 +14,7 @@
   <section class="station-list stations-container">
     <h1>funk</h1>
     <ul class="clean-list">
-      <li class="toy" v-for="station in funkStations" :key="station.id">
+      <li class="station" v-for="station in funkStations" :key="station.id">
         <StationPreview
           :station="station"
           @removed="$emit('removed', station.id)"
@@ -40,7 +40,7 @@ export default {
     StationPreview,
   },
   computed: {
-    huppyStations() {
+    happyStations() {
       return this.stations.filter((station) => station.tags.includes('Happy'))
     },
     funkStations() {
