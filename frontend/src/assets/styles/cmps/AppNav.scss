@@ -1,30 +1,90 @@
 nav {
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: $clr2;
+  font-family: gotham;
+  font-size: 0.875rem;
+  font-weight: 700;
+
+  .sticky-nav {
+    position: sticky;
+    width: 100%;
     top: 0;
-    left: 0;
-    width: 230px;
-    height: 100%;
-    background-color: $clr2;
+    z-index: 2;
     padding: 25px 16px;
-  
-    a {
+
+    &::after {
+      content: "";
       display: block;
-      text-decoration: none;
-      font-size: 14px;
-      color: $clr3;
-      padding: 8px 0;
-  
-      &:hover {
-        color: $clr6;
-      }
-  
-      &.active {
-        color: $clr6;
-        font-weight: bold;
-      }
+      width: calc(100% - 32px); // Adjust the value to control the length of the border
+      height: 1px;
+      background-color: rgba($clr6, 0.2);
+      margin: 16px auto 0;
     }
   }
+  .logo-container {
+    display: flex;
+    align-items: center;
+    margin-block-end: 25px;
+
+    .logo {
+      width: 45px;
+      height: 45px;
+      margin-inline-end: 8px;
+    }
+
+    span {
+      font-size: 22px;
+      font-weight: bold;
+      color: $clr6;
+    }
+  }
+
+  .main-nav,
+  .liked-create-nav {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .main-nav {
+    margin-block-end: 16px;
+  }
+  .liked-create-nav {
+    // border-bottom: 1px solid rgba($clr6, 0.2);
+    // padding-block-end: 16px;
+    margin-block-end: 16px;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-size: 14px;
+    color: $clr3;
+    padding: 8px 0;
+    width: 100%;
+
+    &:hover {
+      color: $clr6;
+    }
+
+    &.active {
+      color: $clr6;
+      font-weight: bold;
+    }
+
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      margin-inline-start: 10px;
+      background-color: transparent;
+      /* Placeholder for the icons */
+    }
+  }
+}
+
   

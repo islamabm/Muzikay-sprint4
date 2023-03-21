@@ -10,8 +10,8 @@ export const stationService = {
   getById,
   save,
   remove,
-  getEmptyStation,
-  addStationMsg,
+  // getEmptyStation,
+  // addStationMsg,
 }
 window.cs = stationService
 
@@ -49,21 +49,21 @@ async function save(station) {
   return savedStation
 }
 
-async function addStationMsg(stationId, name) {
-  // Later, this is all done by the backend
-  const station = await getById(stationId)
-  if (!station.msgs) station.msgs = []
+// async function addStationMsg(stationId, name) {
+//   // Later, this is all done by the backend
+//   const station = await getById(stationId)
+//   if (!station.msgs) station.msgs = []
 
-  const msg = {
-    id: utilService.makeId(),
-    by: userService.getLoggedinUser(),
-    name,
-  }
-  station.msgs.push(msg)
-  await storageService.put(STORAGE_KEY, station)
+//   const msg = {
+//     id: utilService.makeId(),
+//     by: userService.getLoggedinUser(),
+//     name,
+//   }
+//   station.msgs.push(msg)
+//   await storageService.put(STORAGE_KEY, station)
 
-  return msg
-}
+//   return msg
+// }
 
 function getEmptyStation() {
   return {
