@@ -35,6 +35,9 @@ export const stationStore = {
     stations({ stations }) {
       return stations
     },
+    songs({ stations }) {
+      return stations.songs
+    },
   },
   mutations: {
     setStations(state, { stations }) {
@@ -43,7 +46,7 @@ export const stationStore = {
     // addStation(state, { station }) {
     //   state.stations.push(station)
     // },
-    // updateStation(state, { station }) {
+    // edit(state, { station }) {
     //   const idx = state.stations.findIndex((c) => c._id === station._id)
     //   state.stations.splice(idx, 1, station)
     // },
@@ -99,6 +102,27 @@ export const stationStore = {
         throw err
       }
     },
+    async removeStation(context, { stationId }) {
+      try {
+        await stationService.remove(stationId)
+        context.commit(getActionRemoveStation(stationId))
+      } catch (err) {
+        console.log('stationStore: Error in removeStation', err)
+        throw err
+      }
+    },
+    // edit({ commit }, { station }) {
+    //   return stationService
+    //     .save(station)
+    //     .then((savedStation) => {
+    //       commit({ type: 'edit', station: savedStation })
+    //     })
+    //     .catch((err) => {
+    //       console.error('Cannot edit toy', err)
+    //       throw err
+    //     })
+    // },
+
     // async addStationMsg(context, { stationId, txt }) {
     //   try {
     //     const msg = await stationService.addStationMsg(stationId, txt)

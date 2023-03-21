@@ -34,6 +34,7 @@ const routes = [
     name: 'station-details',
     component: StationDetails,
   },
+
   {
     path: '/station',
     name: 'Home',
