@@ -12,6 +12,8 @@ import UserLibrary from './views/UserLibrary.vue'
 import CreateStation from './views/CreateStation.vue'
 import LikedSongs from './views/LikedSongs.vue'
 import StationIndex from './views/StationIndex.vue'
+import Signup from './views/Signup.vue'
+import Login from './views/Login.vue'
 
 //  buttons for navigation
 
@@ -23,6 +25,16 @@ import StationIndex from './views/StationIndex.vue'
 }
 
 const routes = [
+  {
+    path: '/signup',
+    name: 'signup',
+    component: Signup,
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login,
+  },
   {
     path: '/',
     name: 'Home',
@@ -51,16 +63,7 @@ const routes = [
       },
     ],
   },
-  {
-    path: '/signup',
-    name: 'signup',
-    component: Signup,
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: Login,
-  },
+
 ]
 
 export const router = createRouter({
