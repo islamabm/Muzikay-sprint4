@@ -1,6 +1,6 @@
 <template>
   <section class="station-list-container stations-container">
-    <h1>happy</h1>
+    <h1 class="category-tag">Happy</h1>
     <ul class="clean-list station-list">
       <li class="station" v-for="station in happyStations" :key="station._id">
         <StationPreview
@@ -11,9 +11,9 @@
     </ul>
   </section>
   <hr />
-  <section class="station-list stations-container">
-    <h1>funk</h1>
-    <ul class="clean-list">
+  <section class="station-list-container stations-container">
+    <h1 class="category-tag">Funk</h1>
+    <ul class="clean-list station-list">
       <li class="station" v-for="station in funkStations" :key="station.id">
         <StationPreview
           :station="station"
