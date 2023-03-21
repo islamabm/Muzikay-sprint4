@@ -1,6 +1,6 @@
 import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
-import { userService } from './user.service.js'
+// import { userService } from './user.service.js'
 
 const STORAGE_KEY = 'station'
 _createStations()
@@ -10,7 +10,7 @@ export const stationService = {
   getById,
   save,
   remove,
-  // getEmptyStation,
+  getEmptyStation,
   // addStationMsg,
 }
 window.cs = stationService
@@ -67,8 +67,8 @@ async function save(station) {
 
 function getEmptyStation() {
   return {
-    vendor: 'Susita-' + (Date.now() % 1000),
-    price: utilService.getRandomIntInclusive(1000, 9000),
+    _id: utilService.makeId(),
+    // price: utilService.getRandomIntInclusive(1000, 9000),
   }
 }
 
