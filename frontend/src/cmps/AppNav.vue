@@ -2,12 +2,8 @@
   <nav>
     <div class="sticky-nav">
       <div class="logo-container">
-        <img
-          src="https://www.citypng.com/public/uploads/small/11661570403whwxybsmx9s49gydvycyvydsof4sqok0xk0cisomyqi9tvzojomgsfwp1ffra1pqt5ndii64wnwpzmkqsvjr7wkuh3fpukvy2eki.png"
-          alt="Muzikay logo"
-          class="logo"
-        />
-        <span>Muzikay</span>
+        <i class="logo" v-html="getSvg('whiteLogo')"></i>
+        <span>Muzikay<span class="trademark">®</span></span>
       </div>
       <div class="main-nav">
         <RouterLink to="/station">Home</RouterLink>
@@ -23,5 +19,12 @@
   </nav>
 </template>
 <script>
-export default {}
+import svgService from '../services/SVG.service.js'
+export default {
+methods: {
+  getSvg(iconName) {
+      return svgService.getSpotifySvg(iconName)
+    },
+}
+}
 </script>
