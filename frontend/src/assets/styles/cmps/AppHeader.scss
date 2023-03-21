@@ -1,32 +1,30 @@
 header {
-    position: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    top: 0;
-    left: 230px;
-    width: calc(100% - 230px); //fix later
-    height: 60px;
-    background-color: $clr1;
-    padding: 0 16px;
-  
-    a {
-      display: block;
-      text-decoration: none;
-      font-size: 14px;
-      color: $clr3;
-      padding: 8px 0;
-  
-      &:hover {
-        color: $clr6;
-      }
-  
-      &.active {
-        color: $clr6;
-        font-weight: bold;
-      }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 60px;
+  background-color: $clr1;
+  padding: 0 16px;
+
+  a {
+    display: block;
+    text-decoration: none;
+    font-size: 14px;
+    color: $clr3;
+    padding: 8px 0;
+
+    &:hover {
+      color: $clr6;
+    }
+
+    &.active {
+      color: $clr6;
+      font-weight: bold;
     }
   }
+}
+
   
 
 
