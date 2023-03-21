@@ -1,35 +1,25 @@
 <template>
   <nav>
     <div class="sticky-nav">
-    <div class="logo-container">
-      <img
-        src="https://www.citypng.com/public/uploads/small/11661570403whwxybsmx9s49gydvycyvydsof4sqok0xk0cisomyqi9tvzojomgsfwp1ffra1pqt5ndii64wnwpzmkqsvjr7wkuh3fpukvy2eki.png"
-        alt="Muzikay logo"
-        class="logo"
-      />
-      <span>Muzikay</span>
-    </div>
-    <div class="main-nav">
-      <RouterLink to="/station">Home</RouterLink>
-      <RouterLink to="/search">Search</RouterLink>
-      <RouterLink to="/library">Your Library</RouterLink>
-    </div>
+      <div class="logo-container">
+        <img
+          src="https://www.citypng.com/public/uploads/small/11661570403whwxybsmx9s49gydvycyvydsof4sqok0xk0cisomyqi9tvzojomgsfwp1ffra1pqt5ndii64wnwpzmkqsvjr7wkuh3fpukvy2eki.png"
+          alt="Muzikay logo"
+          class="logo"
+        />
+        <span>Muzikay</span>
+      </div>
+      <div class="main-nav">
+        <RouterLink to="/station">Home</RouterLink>
+        <RouterLink to="/search">Search</RouterLink>
+        <RouterLink to="/library">Your Library</RouterLink>
+      </div>
 
-<<<<<<< HEAD
-    <div class="liked-create-nav">
-      <RouterLink to="/create">Create playlist</RouterLink>
-      <RouterLink to="/like">Liked songs</RouterLink>
+      <div class="liked-create-nav">
+        <RouterLink to="/create">Create playlist</RouterLink>
+        <RouterLink to="/like">Liked songs</RouterLink>
+      </div>
     </div>
-=======
-  <div class="liked-create-nav">
-    <RouterLink to="/create">Create playlist</RouterLink>
-    <RouterLink to="/like">Liked songs</RouterLink>
-<<<<<<< HEAD
-=======
-  </div>
-</div>
->>>>>>> 8577ec11e174f2badd1d32252224f7d5f5b2214d
->>>>>>> 95305efdb3503ed34c90dabfa3349c8ce92ede4a
   </nav>
 </template>
 <script>

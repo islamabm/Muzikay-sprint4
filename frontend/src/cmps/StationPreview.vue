@@ -1,8 +1,9 @@
 <template>
-  {{ station.name }}
-  <img :src="station.songs[0].imgUrl" />
-  <button @click="removeStation(station._id)">x</button>
-  <router-link :to="{ path: 'station/' + station._id }">details</router-link>|
+  <section @click="goToStationDetails">
+    {{ station.name }}
+    <img :src="station.songs[0].imgUrl" />
+    <button @click="removeStation(station._id)">x</button>
+  </section>
 </template>
 
 <script>
@@ -12,9 +13,9 @@ export default {
     station: Object,
   },
   methods: {
-    // goToStationDetails() {
-    //   this.$router.push(`/station/${this.station._id}`)
-    // },
+    goToStationDetails() {
+      this.$router.push(`/station/${this.station._id}`)
+    },
   },
 }
 </script>
