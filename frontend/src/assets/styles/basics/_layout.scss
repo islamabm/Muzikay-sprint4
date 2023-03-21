@@ -5,7 +5,7 @@
     grid-template-areas:
       "nav header"
       "nav content";
-    height: 100vh;
+    height: auto;
   
     // Header component
     & > header {
@@ -17,12 +17,11 @@
       grid-area: nav;
     }
   
-    // RouterView component
+    // Main content
     & > router-view,
     & > .router-view {
       grid-area: content;
-      background-color: #181818;
-      overflow-y: auto;
+      background-color: $clr1;
     }
   
     // UserMsg component

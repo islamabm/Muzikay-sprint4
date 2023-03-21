@@ -1,8 +1,9 @@
-import { storageService } from './async-storage.service.js'
-import { utilService } from './util.service.js'
-import { userService } from './user.service.js'
+import { storageService } from "./async-storage.service.js"
+import { utilService } from "./util.service.js"
+import { userService } from "./user.service.js"
 
-const STORAGE_KEY = 'station'
+const STORAGE_KEY = "station"
+_createStations()
 
 export const stationService = {
   query,
@@ -14,10 +15,10 @@ export const stationService = {
 }
 window.cs = stationService
 
-async function query(filterBy = { name: '' }) {
+async function query(filterBy = { name: "" }) {
   var stations = await storageService.query(STORAGE_KEY)
   if (filterBy.name) {
-    const regex = new RegExp(filterBy.name, 'i')
+    const regex = new RegExp(filterBy.name, "i")
     stations = stations.filter((station) => regex.test(station.name))
     // || regex.test(station.description))
   }
@@ -37,6 +38,7 @@ async function remove(stationId) {
 
 async function save(station) {
   var savedStation
+  console.log("station", station)
   if (station._id) {
     savedStation = await storageService.put(STORAGE_KEY, station)
   } else {
@@ -63,47 +65,159 @@ async function save(station) {
 //   return msg
 // }
 
-// function getEmptyStation() {
-//   return {
-//     name: 'Susita-' + (Date.now() % 1000),
-//     price: utilService.getRandomIntInclusive(1000, 9000),
-//   }
-// }
+function getEmptyStation() {
+  return {
+    vendor: "Susita-" + (Date.now() % 1000),
+    price: utilService.getRandomIntInclusive(1000, 9000),
+  }
+}
 
-;(async () => {
-  await storageService.post(STORAGE_KEY, {
-    _id: '5cksxjas89xjsa8xjsa8jxs09',
-    name: 'Funky Monks',
-    tags: ['Funk', 'Happy'],
-    createdBy: {
-      _id: 'u101',
-      fullname: 'Puki Ben David',
-      imgUrl: 'http://some-photo/',
-    },
-    likedByUsers: ['{minimal-user}', '{minimal-user}'],
-    songs: [
+function _createStations() {
+  var stations = JSON.parse(localStorage.getItem(STORAGE_KEY))
+  if (!stations || !stations.length) {
+    const stationsList = [
       {
-        id: 's1001',
-        title: 'The Meters - Cissy Strut',
-        url: 'youtube/song.mp4',
-        imgUrl: 'https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg',
-        addedBy: '{minimal-user}',
-        addedAt: 162521765262,
+        _id: '5cksxjas89xjsa8xjsa8jxs09',
+        name: 'Funky Monks',
+        tags: ['Funk', 'Happy'],
+        createdBy: {
+          _id: 'u101',
+          fullname: 'Puki Ben David',
+          imgUrl: 'http://some-photo/',
+        },
+        likedByUsers: ['{minimal-user}', '{minimal-user}'],
+        songs: [
+          {
+            id: 's1001',
+            title: 'The Meters - Cissy Strut',
+            url: 'youtube/song.mp4',
+            imgUrl: 'https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg',
+            addedBy: '{minimal-user}',
+            addedAt: 162521765262,
+          },
+          {
+            id: 'mUkfiLjooxs',
+            title: "The JB's - Pass The Peas",
+            url: 'youtube/song.mp4',
+            imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
+            addedBy: {},
+          },
+        ],
+        msgs: [
+          {
+            id: 'm101',
+            from: '{mini-user}',
+            txt: 'Manish?',
+          },
+        ],
       },
       {
-        id: 'mUkfiLjooxs',
-        title: "The JB's - Pass The Peas",
-        url: 'youtube/song.mp4',
-        imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
-        addedBy: {},
+        _id: '5cksxjas89xjsa8xjsa8jxs09',
+        name: 'Funky Monks',
+        tags: ['Funk', 'Happy'],
+        createdBy: {
+          _id: 'u101',
+          fullname: 'Puki Ben David',
+          imgUrl: 'http://some-photo/',
+        },
+        likedByUsers: ['{minimal-user}', '{minimal-user}'],
+        songs: [
+          {
+            id: 's1001',
+            title: 'The Meters - Cissy Strut',
+            url: 'youtube/song.mp4',
+            imgUrl: 'https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg',
+            addedBy: '{minimal-user}',
+            addedAt: 162521765262,
+          },
+          {
+            id: 'mUkfiLjooxs',
+            title: "The JB's - Pass The Peas",
+            url: 'youtube/song.mp4',
+            imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
+            addedBy: {},
+          },
+        ],
+        msgs: [
+          {
+            id: 'm101',
+            from: '{mini-user}',
+            txt: 'Manish?',
+          },
+        ],
       },
-    ],
-    msgs: [
       {
-        id: 'm101',
-        from: '{mini-user}',
-        txt: 'Manish?',
+        _id: '5cksxjas89xjsa8xjsa8jxs09',
+        name: 'Funky Monks',
+        tags: ['Funk', 'Happy'],
+        createdBy: {
+          _id: 'u101',
+          fullname: 'Puki Ben David',
+          imgUrl: 'http://some-photo/',
+        },
+        likedByUsers: ['{minimal-user}', '{minimal-user}'],
+        songs: [
+          {
+            id: 's1001',
+            title: 'The Meters - Cissy Strut',
+            url: 'youtube/song.mp4',
+            imgUrl: 'https://static.onecms.io/wp-content/uploads/sites/6/2020/11/25/Best-Music-3.jpg',
+            addedBy: '{minimal-user}',
+            addedAt: 162521765262,
+          },
+          {
+            id: 'mUkfiLjooxs',
+            title: "The JB's - Pass The Peas",
+            url: 'youtube/song.mp4',
+            imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
+            addedBy: {},
+          },
+        ],
+        msgs: [
+          {
+            id: 'm101',
+            from: '{mini-user}',
+            txt: 'Manish?',
+          },
+        ],
       },
-    ],
-  })
-})()
+      {
+        _id: '5cksxjas89xjsa8xjsa8jxs09',
+        name: 'Funky Monks',
+        tags: ['Funk', 'Happy'],
+        createdBy: {
+          _id: 'u101',
+          fullname: 'Puki Ben David',
+          imgUrl: 'http://some-photo/',
+        },
+        likedByUsers: ['{minimal-user}', '{minimal-user}'],
+        songs: [
+          {
+            id: 's1001',
+            title: 'The Meters - Cissy Strut',
+            url: 'youtube/song.mp4',
+            imgUrl: 'https://www.innocence-paris.com/files/revue-album-photo-grand-format-noel-01_7f227be09e13b375ae99d211bec41616.jpeg',
+            addedBy: '{minimal-user}',
+            addedAt: 162521765262,
+          },
+          {
+            id: 'mUkfiLjooxs',
+            title: "The JB's - Pass The Peas",
+            url: 'youtube/song.mp4',
+            imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
+            addedBy: {},
+          },
+        ],
+        msgs: [
+          {
+            id: 'm101',
+            from: '{mini-user}',
+            txt: 'Manish?',
+          },
+        ],
+      },
+    ] 
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(stationsList))
+ 
+  }
+}

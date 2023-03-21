@@ -1,33 +1,95 @@
-header {
+.header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: sticky;
   width: 100%;
-  height: 60px;
-  background-color: $clr1;
+  top: 0;
+  height: 64px;
+  z-index: 100;
+  background-color: rgba($clr2, 0.4);
   padding: 0 16px;
+  font-family: gotham;
+  font-size: 1rem;
 
-  a {
-    display: block;
-    text-decoration: none;
-    font-size: 14px;
-    color: $clr3;
-    padding: 8px 0;
+  .page-navigation,
+  .login-signup {
+    display: flex;
+    gap: 16px;
 
-    &:hover {
-      color: $clr6;
+  }
+
+  .page-navigation {
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      font-size: inherit;
+      color: $clr3;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: rgba($clr2, 0.4);
+
+      &:hover {
+        background-color: rgba($clr6, 0.4);
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .login-signup {
+    a {
+      align-items: center;
+      text-decoration: none;
+      font-size: 14px;
+      color: $clr3;
+      padding: 6px 16px;
+      margin-inline-start: 8px;
+      border: 1px solid transparent;
+
+      &:hover {
+        color: $clr6;
+      }
+
+      &.active {
+        color: $clr6;
+        font-weight: bold;
+      }
     }
 
-    &.active {
-      color: $clr6;
-      font-weight: bold;
+    .btn-signup{
+      display: flex;
+      font-size: 1rem;
+      background-color: transparent;
+
+      &:hover{
+        transform: scale(1.05);
+      }
+    }
+
+    .btn-login {
+      position: relative;
+      color: $clr2;
+      min-block-size: 48px;
+      background-color: $clr6;
+      font-size: 1rem;
+      display: flex;
+      border-radius: 500px;
+      padding-block: 8px;
+      padding-inline: 32px;
+      vertical-align: baseline;
+      font-weight: 700;
+
+      &:hover {
+        background-color: $clr3;
+        color: $clr2;
+        transform: scale(1.05);
+      }
     }
   }
 }
-
-  
-
-
 
 // header {
 //     background-color: $clr2;
@@ -64,5 +126,5 @@ header {
 //     nav .active {
 //         color: $clr1;
 //     }
-    
+
 // }
