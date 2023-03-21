@@ -14,11 +14,8 @@
   <div class="liked-create-nav">
     <RouterLink to="/create">Create playlist</RouterLink>
     <RouterLink to="/like">Liked songs</RouterLink>
-<<<<<<< HEAD
-=======
   </div>
 </div>
->>>>>>> 8577ec11e174f2badd1d32252224f7d5f5b2214d
   </nav>
 </template>
 <script>
