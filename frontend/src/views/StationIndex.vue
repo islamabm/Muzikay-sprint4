@@ -16,7 +16,7 @@ import {
 export default {
   data() {
     return {
-      stationToAdd: stationService.getEmptyStation(),
+      // stationToAdd: stationService.getEmptyStation(),
     }
   },
   computed: {

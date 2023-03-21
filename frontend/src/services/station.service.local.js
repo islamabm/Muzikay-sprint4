@@ -9,8 +9,8 @@ export const stationService = {
   getById,
   save,
   remove,
-  getEmptyStation,
-  addStationMsg,
+  // getEmptyStation,
+  // addStationMsg,
 }
 window.cs = stationService
 
@@ -47,41 +47,30 @@ async function save(station) {
   return savedStation
 }
 
-async function addStationMsg(stationId, name) {
-  // Later, this is all done by the backend
-  const station = await getById(stationId)
-  if (!station.msgs) station.msgs = []
+// async function addStationMsg(stationId, name) {
+//   // Later, this is all done by the backend
+//   const station = await getById(stationId)
+//   if (!station.msgs) station.msgs = []
 
-  const msg = {
-    id: utilService.makeId(),
-    by: userService.getLoggedinUser(),
-    name,
-  }
-  station.msgs.push(msg)
-  await storageService.put(STORAGE_KEY, station)
+//   const msg = {
+//     id: utilService.makeId(),
+//     by: userService.getLoggedinUser(),
+//     name,
+//   }
+//   station.msgs.push(msg)
+//   await storageService.put(STORAGE_KEY, station)
 
-  return msg
-}
+//   return msg
+// }
 
-function getEmptyStation() {
-  return {
-    vendor: 'Susita-' + (Date.now() % 1000),
-    price: utilService.getRandomIntInclusive(1000, 9000),
-  }
-}
+// function getEmptyStation() {
+//   return {
+//     name: 'Susita-' + (Date.now() % 1000),
+//     price: utilService.getRandomIntInclusive(1000, 9000),
+//   }
+// }
 
-// TEST DATA
 ;(async () => {
-  // await storageService.post(STORAGE_KEY, {
-  //   name: 'Pink Floyd World',
-  //   imgUrl:
-  //     'https://globalnews.ca/wp-content/uploads/2023/01/GettyImages-1315781620.jpg?quality=85&strip=all',
-  // })
-  // await storageService.post(STORAGE_KEY, {
-  //   name: 'Classical',
-  //   imgUrl:
-  //     'https://img.apmcdn.org/c75e4ad850e43237fe0568a59ab71b15cb2511ac/square/993c31-20120627-flute-concert.jpg',
-  // })
   await storageService.post(STORAGE_KEY, {
     _id: '5cksxjas89xjsa8xjsa8jxs09',
     name: 'Funky Monks',

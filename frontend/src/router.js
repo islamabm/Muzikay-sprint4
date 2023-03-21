@@ -1,12 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-// import Home from './views/Home.vue'
-// import Chat from './views/Chat.vue'
-// import CarIndex from './views/CarIndex.vue'
-// import ReviewIndex from './views/ReviewIndex.vue'
-// import LoginSignup from './views/LoginSignup.vue'
-// import UserDetails from './views/UserDetails.vue'
-
 import Search from './views/Search.vue'
 import UserLibrary from './views/UserLibrary.vue'
 import CreateStation from './views/CreateStation.vue'
@@ -42,28 +35,27 @@ const routes = [
 
     childern: [
       {
-        path: '/search',
+        path: 'search',
         name: 'search',
         component: Search,
       },
       {
-        path: '/library',
+        path: 'library',
         name: 'Library',
         component: UserLibrary,
       },
       {
-        path: '/create',
+        path: 'create',
         name: 'CreateStation',
         component: CreateStation,
       },
       {
-        path: '/like',
+        path: 'like',
         name: 'like',
         component: LikedSongs,
       },
     ],
   },
-
 ]
 
 export const router = createRouter({
