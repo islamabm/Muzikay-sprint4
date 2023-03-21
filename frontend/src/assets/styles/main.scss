@@ -12,21 +12,10 @@
 @import 'basics/forms';
 
 // Components
-<<<<<<< HEAD
-@import "cmps/AppHeader";
-@import "cmps/UserMsg";
-@import "cmps/ReviewList";
-@import "cmps/CarList";
-@import "cmps/AppNav";
-@import "cmps/StationIndex";
-@import "cmps/Signup.scss";
-
-=======
 @import 'cmps/AppHeader';
 @import 'cmps/UserMsg';
 @import 'cmps/ReviewList';
 @import 'cmps/CarList';
 @import 'cmps/AppNav';
 @import 'cmps/StationIndex';
-@import 'cmps/login';
->>>>>>> a0405bb9311ef9d25e1d960bcddacc5890f47ac5
+@import 'cmps/Signup.scss';
