@@ -1,15 +1,14 @@
 header {
-    background-color: $clr5;
+    background-color: $clr2;
+    color: $clr3;
     padding: 10px;
     display: flex;
     justify-content: space-between;
 
     .loggedin-user {
-        background-color: $clr1;
         padding: 2px 8px;
         border-radius: 1em;
         align-self: flex-end;
-        color: whitesmoke;
         span{
             background-color: $clr2;
             padding: 4px;
@@ -23,7 +22,7 @@ header {
         }
     }
     nav {
-        background-color: $clr4;
+        background-color: $clr2;
         padding: 5px 0;
     }
     nav a:not(:first-child) {
