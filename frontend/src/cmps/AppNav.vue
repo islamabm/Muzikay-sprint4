@@ -1,5 +1,6 @@
 <template>
   <nav>
+    <span>Muzikay</span>
     <RouterLink to="/">Home</RouterLink>
     <RouterLink to="/search">Search</RouterLink>
     <RouterLink to="/library">Your Library</RouterLink>

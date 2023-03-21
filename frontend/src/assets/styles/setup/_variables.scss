@@ -1,10 +1,20 @@
-// Colors
-$clr1: #ce2e6c;
-$clr2: #4f3a65;
-$clr3: #574f7d;
-$clr4: #95adbe;
-$clr5: #dff0ea;
-$clr6: #fff;
+// Main Color
+$clrGreen: #1ed760;
+$clrGreenLight: #1fdf64; //HOVER
+
+//B&W
+$clr1: #181818; //main BG
+$clr2: #000; //nav & initial header
+$clr3: #b3b3b3; //NAV/HEADER font clr
+$clr4: #212121; //borders/outlines
+$clr5: #3e3d3d; //box shadow
+$clr6: #fff; 
+$clr7:  #121212; //station preview
+
+
+//FACEBOOK
+$clrFb: #405A93; 
+$clrFbHover: #384F81;
 
 // Breakpoints
 $mobile-breakpoint: 460px;
