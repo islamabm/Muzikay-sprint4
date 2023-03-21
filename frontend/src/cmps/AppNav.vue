@@ -6,7 +6,7 @@
     <span>Muzikay</span>
   </div>
   <div class="main-nav">
-    <RouterLink to="/">Home</RouterLink>
+    <RouterLink to="/station">Home</RouterLink>
     <RouterLink to="/search">Search</RouterLink>
     <RouterLink to="/library">Your Library</RouterLink>
   </div>
