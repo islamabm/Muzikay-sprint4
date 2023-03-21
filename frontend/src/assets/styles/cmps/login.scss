@@ -1,0 +1,240 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+.spotify-login-page {
+  height: 100vh;
+  overflow-x: hidden;
+  background-color: white;
+}
+.spotify-login-header {
+  border-bottom: 1px solid rgb(217, 218, 220);
+  padding: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 100%;
+}
+.spotify-login-header-containt {
+  height: 60px;
+  padding: 0px 0px 6px;
+}
+
+.spotify-login-user-content {
+  flex: 3 1 0%;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  justify-content: center;
+  padding: 10px;
+  margin: 0 auto;
+  background: white;
+  width: 32.5%;
+}
+.spotify-login-user-content-header {
+  text-align: center;
+}
+.btns-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  text-indent: 0px;
+  display: flex;
+  flex-direction: column;
+}
+.btn-li {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  text-indent: 0px;
+}
+.spotify-btn {
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 500px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  vertical-align: middle;
+  transform: translate3d(0px, 0px, 0px);
+  padding-block: 7px;
+  padding-inline: 31px;
+  position: relative;
+  border: 1px solid #878787;
+  color: #000000;
+  min-block-size: 48px;
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  inline-size: 100%;
+  height: fit-content;
+}
+.spotify-btn:hover {
+  border-color: var(--essential-base, #000000);
+}
+.login-li-svg {
+  height: 1px;
+}
+.ul-btns-hr {
+  margin: 12px 0px 20px;
+  flex: 1 1 0%;
+  border-top: 1px solid rgb(217, 218, 220);
+}
+.ul-or-div {
+  display: flex;
+  flex-direction: row;
+}
+.spotify-login-user-content-span {
+  flex: 0.3 1 0%;
+  align-self: center;
+  text-align: center;
+  line-height: 1px;
+  font-weight: 700;
+  background: rgb(255, 255, 255);
+  text-transform: uppercase;
+}
+
+.spotify-login-apple-btn {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  text-transform: uppercase;
+  &:focus {
+    outline: 3px solid #212121;
+    outline-offset: 2px;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+}
+.spotify-login-google-btn {
+  color: rgb(106, 106, 106);
+  text-transform: uppercase;
+  background-color: transparent;
+  &:focus {
+    outline: 3px solid #212121;
+    outline-offset: 2px;
+    color: rgb(106, 106, 106, 0.5);
+  }
+}
+.spotify-login-facebook-btn {
+  color: rgb(248, 248, 248);
+  background-color: rgb(24, 119, 242);
+  border-color: rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  &:focus {
+    outline: 3px solid #212121;
+    outline-offset: 2px;
+    background-color: rgb(24, 119, 242, 0.5);
+  }
+}
+
+.spotify-form-group {
+  padding-bottom: 16px;
+}
+
+.login-form-labels {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.login-form-inputs:hover {
+  box-shadow: inset 0 0 0 1px #000000;
+}
+
+.login-form-inputs {
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1px #878787;
+  min-block-size: 48px;
+  padding-inline: 14px;
+  transition: box-shadow 0.1s ease-in-out 0s, color 0.1s ease-in-out 0s;
+  inline-size: 100%;
+  font-size: 1rem;
+  font-weight: 400;
+  border: 0px;
+  margin-block-start: 0.5em;
+}
+.login-li-span {
+  letter-spacing: 0.107em;
+}
+.google-img {
+  height: 20px;
+}
+.login-btn {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  background-color: #1ed760;
+  color: #000000;
+  display: flex;
+  border-radius: 500px;
+  font-size: inherit;
+  min-block-size: 48px;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  padding-block: 8px;
+  padding-inline: 32px;
+  border: none;
+  &:hover {
+    scale: 1.05;
+    cursor: pointer;
+  }
+}
+.spotify-form-validitions-password {
+  text-decoration: underline;
+  color: inherit;
+  cursor: pointer;
+}
+.spotify-form-validitions-password:hover {
+  text-decoration: underline;
+  color: var(--text-bright-accent, #117a37);
+  cursor: pointer;
+}
+
+.login-container {
+  display: flex;
+  justify-content: space-between;
+}
+.spotify-form-forgot {
+  margin-block-end: 1em;
+}
+.login-page-h2 {
+  text-align: center;
+  margin-block: 0px;
+  font-size: 1.125rem;
+  font-weight: 700;
+  padding-block-end: 20px;
+  color: inherit;
+}
+
+.spotify-login-signup-btn {
+  background-color: transparent;
+  color: #6a6a6a;
+  font-size: 0.875rem;
+}
+
+.spotify-login-user-content-header {
+  font-size: 0.875rem;
+  color: inherit;
+  font-weight: 900;
+}
+
+.checkbox-span-container {
+  position: relative;
+}
+
+.spotify-form-validitions-Remember {
+  margin-inline-start: 0.5em;
+}
+.checkbox-input {
+  margin-left: 0;
+}
+.spotify-img {
+  height: 50px;
+}
