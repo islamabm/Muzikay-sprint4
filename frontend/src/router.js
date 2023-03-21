@@ -1,48 +1,48 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-import Home from './views/Home.vue'
-import Chat from './views/Chat.vue'
-import CarIndex from './views/CarIndex.vue'
-import ReviewIndex from './views/ReviewIndex.vue'
-import LoginSignup from './views/LoginSignup.vue'
-import UserDetails from './views/UserDetails.vue'
+// import Home from './views/Home.vue'
+// import Chat from './views/Chat.vue'
+// import CarIndex from './views/CarIndex.vue'
+// import ReviewIndex from './views/ReviewIndex.vue'
+// import LoginSignup from './views/LoginSignup.vue'
+// import UserDetails from './views/UserDetails.vue'
+import Search from './views/Search.vue'
+import UserLibrary from './views/UserLibrary.vue'
+import CreateStation from './views/CreateStation.vue'
+import LikedSongs from './views/LikedSongs.vue'
+import Cookies from './views/Cookies.vue'
 import StationIndex from './views/StationIndex.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
-  },
-  {
-    path: '/car',
-    name: 'CarIndex',
-    component: CarIndex,
-  },
-  {
-    path: '/station',
-    name: 'StationIndex',
     component: StationIndex,
   },
   {
-    path: '/review',
-    name: 'ReviewIndex',
-    component: ReviewIndex,
+    path: '/search',
+    name: 'search',
+    component: Search,
   },
   {
-    path: '/chat',
-    name: 'Chat',
-    component: Chat,
+    path: '/library',
+    name: 'Library',
+    component: UserLibrary,
   },
   {
-    path: '/login',
-    name: 'LoginSignup',
-    component: LoginSignup,
+    path: '/create',
+    name: 'CreateStation',
+    component: CreateStation,
   },
   {
-    path: '/user/:id',
-    name: 'UserDetails',
-    component: UserDetails,
+    path: '/like',
+    name: 'like',
+    component: LikedSongs,
+  },
+  {
+    path: '/cookies',
+    name: 'cookies',
+    component: Cookies,
   },
 ]
 

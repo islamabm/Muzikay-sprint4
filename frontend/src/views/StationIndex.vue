@@ -4,15 +4,16 @@
       <li v-for="station in stations" :key="station._id">
         <p>
           {{ station.name }}
+          <img :src="station.songs[0].imgUrl" />
         </p>
         <!-- <p>${{ station.price?.toLocaleString() }}</p> -->
         <button @click="removeStation(station._id)">x</button>
         <button @click="updateStation(station)">Update</button>
         <hr />
-        <button @click="addStationMsg(station._id)">Add station msg</button>
+        <!-- <button @click="addStationMsg(station._id)">Add station msg</button>
         <button @click="printStationToConsole(station)">
           Print msgs to console
-        </button>
+        </button> -->
       </li>
     </ul>
     <hr />
@@ -72,29 +73,29 @@ export default {
         showErrorMsg('Cannot remove station')
       }
     },
-    async updateStation(station) {
-      try {
-        station = { ...station }
-        // station.price = +prompt('New price?', station.price)
-        await this.$store.dispatch(getActionUpdateStation(station))
-        showSuccessMsg('Station updated')
-      } catch (err) {
-        console.log(err)
-        showErrorMsg('Cannot update station')
-      }
-    },
-    async addStationMsg(stationId) {
-      try {
-        await this.$store.dispatch(getActionAddStationMsg(stationId))
-        showSuccessMsg('Station msg added')
-      } catch (err) {
-        console.log(err)
-        showErrorMsg('Cannot add station msg')
-      }
-    },
-    printStationToConsole(station) {
-      console.log('Station msgs:', station.msgs)
-    },
+    // async updateStation(station) {
+    //   try {
+    //     station = { ...station }
+    //     // station.price = +prompt('New price?', station.price)
+    //     await this.$store.dispatch(getActionUpdateStation(station))
+    //     showSuccessMsg('Station updated')
+    //   } catch (err) {
+    //     console.log(err)
+    //     showErrorMsg('Cannot update station')
+    //   }
+    // },
+    // async addStationMsg(stationId) {
+    //   try {
+    //     await this.$store.dispatch(getActionAddStationMsg(stationId))
+    //     showSuccessMsg('Station msg added')
+    //   } catch (err) {
+    //     console.log(err)
+    //     showErrorMsg('Cannot add station msg')
+    //   }
+    // },
+    // printStationToConsole(station) {
+    //   console.log('Station msgs:', station.msgs)
+    // },
   },
 }
 </script>
