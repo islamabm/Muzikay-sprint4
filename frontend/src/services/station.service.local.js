@@ -91,7 +91,77 @@ function _createStations() {
             id: 's1001',
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
-            imgUrl: 'https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg',
+            imgUrl: 'https://cdn4.vectorstock.com/i/1000x1000/17/23/lets-rock-music-print-graphic-design-with-guitar-vector-23381723.jpg',
+            addedBy: '{minimal-user}',
+            addedAt: 162521765262,
+          },
+          {
+            id: 'mUkfiLjooxs',
+            title: "The JB's - Pass The Peas",
+            url: 'youtube/song.mp4',
+            imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
+            addedBy: {},
+          },
+        ],
+        msgs: [
+          {
+            id: 'm101',
+            from: '{mini-user}',
+            txt: 'Manish?',
+          },
+        ],
+      },
+      {
+        _id: '5cksxjas89xjsa8xjsa8jxs09',
+        name: 'Funky Monks',
+        tags: ['Funk'],
+        createdBy: {
+          _id: 'u101',
+          fullname: 'Puki Ben David',
+          imgUrl: 'http://some-photo/',
+        },
+        likedByUsers: ['{minimal-user}', '{minimal-user}'],
+        songs: [
+          {
+            id: 's1001',
+            title: 'The Meters - Cissy Strut',
+            url: 'youtube/song.mp4',
+            imgUrl: 'https://assets.vogue.com/photos/5cdc3d9ac39901ae59dbfbe5/3:4/w_1773,h_2364,c_limit/00-promo-classical-music.jpg',
+            addedBy: '{minimal-user}',
+            addedAt: 162521765262,
+          },
+          {
+            id: 'mUkfiLjooxs',
+            title: "The JB's - Pass The Peas",
+            url: 'youtube/song.mp4',
+            imgUrl: 'https://i.ytimg.com/vi/kgx4WGK0oNU/maxresdefault.jpg', //changed
+            addedBy: {},
+          },
+        ],
+        msgs: [
+          {
+            id: 'm101',
+            from: '{mini-user}',
+            txt: 'Manish?',
+          },
+        ],
+      },
+      {
+        _id: '5cksxjas89xjsa8xjsa8jxs09',
+        name: 'Funky Monks',
+        tags: ['Funk'],
+        createdBy: {
+          _id: 'u101',
+          fullname: 'Puki Ben David',
+          imgUrl: 'http://some-photo/',
+        },
+        likedByUsers: ['{minimal-user}', '{minimal-user}'],
+        songs: [
+          {
+            id: 's1001',
+            title: 'The Meters - Cissy Strut',
+            url: 'youtube/song.mp4',
+            imgUrl: 'https://i.scdn.co/image/ab67616d0000b27319e9d00ec40455f230a217ad',
             addedBy: '{minimal-user}',
             addedAt: 162521765262,
           },
@@ -171,6 +241,80 @@ function _createStations() {
             title: "The JB's - Pass The Peas",
             url: 'youtube/song.mp4',
             imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
+            addedBy: {},
+          },
+        ],
+        msgs: [
+          {
+            id: 'm101',
+            from: '{mini-user}',
+            txt: 'Manish?',
+          },
+        ],
+      },
+      {
+        _id: '5cksxjas89xjsa8xjsa8jxs09',
+        name: 'Funky Monks',
+        tags: ['Happy'],
+        createdBy: {
+          _id: 'u101',
+          fullname: 'Puki Ben David',
+          imgUrl: 'http://some-photo/',
+        },
+        likedByUsers: ['{minimal-user}', '{minimal-user}'],
+        songs: [
+          {
+            id: 's1001',
+            title: 'The Meters - Cissy Strut',
+            url: 'youtube/song.mp4',
+            imgUrl:
+              'https://www.innocence-paris.com/files/revue-album-photo-https://i1.sndcdn.com/artworks-ZHCyxMGGVtXQZ68L-xLrrjQ-t500x500.jpggrand-format-noel-01_7f227be09e13b375ae99d211bec41616.jpeg',
+            addedBy: '{minimal-user}',
+            addedAt: 162521765262,
+          },
+          {
+            id: 'mUkfiLjooxs',
+            title: "The JB's - Pass The Peas",
+            url: 'youtube/song.mp4',
+            imgUrl:
+              'https://cdn10.phillymag.com/wp-content/uploads/sites/3/2020/09/monthly-playlist.jpg',
+            addedBy: {},
+          },
+        ],
+        msgs: [
+          {
+            id: 'm101',
+            from: '{mini-user}',
+            txt: 'Manish?',
+          },
+        ],
+      },
+      {
+        _id: '5cksxjas89xjsa8xjsa8jxs09',
+        name: 'Funky Monks',
+        tags: ['Happy'],
+        createdBy: {
+          _id: 'u101',
+          fullname: 'Puki Ben David',
+          imgUrl: 'http://some-photo/',
+        },
+        likedByUsers: ['{minimal-user}', '{minimal-user}'],
+        songs: [
+          {
+            id: 's1001',
+            title: 'The Meters - Cissy Strut',
+            url: 'youtube/song.mp4',
+            imgUrl:
+              'https://www.billboard.com/wp-content/uploads/2022/12/winter-music-playlist-2022-billboard-1548.jpg?w=942&h=623&crop=1',
+            addedBy: '{minimal-user}',
+            addedAt: 162521765262,
+          },
+          {
+            id: 'mUkfiLjooxs',
+            title: "The JB's - Pass The Peas",
+            url: 'youtube/song.mp4',
+            imgUrl:
+              'https://cdn10.phillymag.com/wp-content/uploads/sites/3/2020/09/monthly-playlist.jpg',
             addedBy: {},
           },
         ],
