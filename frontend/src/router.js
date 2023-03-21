@@ -29,7 +29,7 @@ const routes = [
     component: Login,
   },
   {
-    path: '/station/?:stationId',
+    path: '/station/:stationId',
     name: 'station-details',
     component: StationDetails,
   },
