@@ -1,5 +1,5 @@
 <template>
-  <div class="container home">
+  <div class="container home station-list-container">
     <ul class="station-list">
       <li v-for="station in stations" :key="station._id">
         <p>

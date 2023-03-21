@@ -1,0 +1,21 @@
+.container {
+    margin-left: 230px;
+    padding: 16px;
+    background-color: $clr1;
+    min-height: calc(100vh - 60px);
+    color: $clr3;
+  
+    .station-list-container {
+      ul.station-list {
+  
+          img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            margin-inline-start: 10px;
+          }
+      }
+
+    }
+  }
+  

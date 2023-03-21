@@ -1,0 +1,30 @@
+nav {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    top: 0;
+    left: 0;
+    width: 230px;
+    height: 100%;
+    background-color: $clr2;
+    padding: 25px 16px;
+  
+    a {
+      display: block;
+      text-decoration: none;
+      font-size: 14px;
+      color: $clr3;
+      padding: 8px 0;
+  
+      &:hover {
+        color: $clr6;
+      }
+  
+      &.active {
+        color: $clr6;
+        font-weight: bold;
+      }
+    }
+  }
+  
