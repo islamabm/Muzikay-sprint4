@@ -11,13 +11,13 @@
       </div>
       <div class="main-nav">
         <RouterLink to="/station">Home</RouterLink>
-        <RouterLink to="/search">Search</RouterLink>
-        <RouterLink to="/library">Your Library</RouterLink>
+        <RouterLink to="/station/search">Search</RouterLink>
+        <RouterLink to="/station/library">Your Library</RouterLink>
       </div>
 
       <div class="liked-create-nav">
-        <RouterLink to="/create">Create playlist</RouterLink>
-        <RouterLink to="/like">Liked songs</RouterLink>
+        <RouterLink to="/station/create">Create playlist</RouterLink>
+        <RouterLink to="/station/like">Liked songs</RouterLink>
       </div>
     </div>
   </nav>

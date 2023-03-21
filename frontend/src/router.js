@@ -2,7 +2,6 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 import Search from './views/Search.vue'
 import UserLibrary from './views/UserLibrary.vue'
-import CreateStation from './views/CreateStation.vue'
 import LikedSongs from './views/LikedSongs.vue'
 import StationIndex from './views/StationIndex.vue'
 import Signup from './views/Signup.vue'
@@ -30,7 +29,7 @@ const routes = [
     component: Login,
   },
   {
-    path: '/station/:stationId',
+    path: '/station/?:stationId',
     name: 'station-details',
     component: StationDetails,
   },
@@ -41,19 +40,14 @@ const routes = [
 
     childern: [
       {
-        path: 'search',
+        path: '/search',
         name: 'search',
         component: Search,
       },
       {
-        path: 'library',
+        path: '/library',
         name: 'Library',
         component: UserLibrary,
-      },
-      {
-        path: 'create',
-        name: 'CreateStation',
-        component: CreateStation,
       },
       {
         path: 'like',
