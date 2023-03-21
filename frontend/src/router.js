@@ -10,7 +10,6 @@ import Search from './views/Search.vue'
 import UserLibrary from './views/UserLibrary.vue'
 import CreateStation from './views/CreateStation.vue'
 import LikedSongs from './views/LikedSongs.vue'
-import Cookies from './views/Cookies.vue'
 import StationIndex from './views/StationIndex.vue'
 
 const routes = [
@@ -39,11 +38,7 @@ const routes = [
     name: 'like',
     component: LikedSongs,
   },
-  {
-    path: '/cookies',
-    name: 'cookies',
-    component: Cookies,
-  },
+
 ]
 
 export const router = createRouter({
