@@ -16,7 +16,7 @@
 </template>
 <script>
 export default {
-  //Note: this header will take the color of the station's img. 
+  //Note: this header will take the color of the station's img.
   data() {
     return {
       headerOpacity: 0,

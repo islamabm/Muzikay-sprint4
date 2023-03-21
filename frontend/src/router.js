@@ -7,6 +7,7 @@ import LikedSongs from './views/LikedSongs.vue'
 import StationIndex from './views/StationIndex.vue'
 import Signup from './views/Signup.vue'
 import Login from './views/Login.vue'
+import StationDetails from './views/StationDetails.vue'
 
 //  buttons for navigation
 
@@ -29,7 +30,12 @@ const routes = [
     component: Login,
   },
   {
-    path: '/',
+    path: '/station/:stationId',
+    name: 'station-details',
+    component: StationDetails,
+  },
+  {
+    path: '/station',
     name: 'Home',
     component: StationIndex,
 
