@@ -6,7 +6,7 @@ nav {
   font-family: gotham;
   font-size: 0.875rem;
   font-weight: 700;
-  height: 100vh;
+  height: 100%;
 
   .sticky-nav {
     position: sticky;
@@ -30,8 +30,8 @@ nav {
     margin-block-end: 25px;
 
     .logo {
-      width: 45px;
-      height: 45px;
+      width: 42px;
+      height: 42px;
       margin-inline-end: 8px;
     }
 
@@ -39,6 +39,14 @@ nav {
       font-size: 22px;
       font-weight: bold;
       color: $clr6;
+      line-height: 42px;
+      position: relative;
+      .trademark {
+        font-size: 0.5rem;
+        position: absolute;
+        margin-inline-start: 1px;
+        
+      }
     }
   }
 

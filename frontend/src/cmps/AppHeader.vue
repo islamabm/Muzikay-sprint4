@@ -15,6 +15,7 @@
   </header>
 </template>
 <script>
+import svgService from '../services/SVG.service.js'
 export default {
   //Note: this header will take the color of the station's img.
   data() {
