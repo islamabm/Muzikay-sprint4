@@ -71,7 +71,50 @@ function getEmptyStation() {
 }
 
 // TEST DATA
-// ;(async ()=>{
-//     await storageService.post(STORAGE_KEY, {vendor: 'Subali Karov 1', price: 180})
-//     await storageService.post(STORAGE_KEY, {vendor: 'Subali Rahok 2', price: 240})
-// })()
+;(async () => {
+  // await storageService.post(STORAGE_KEY, {
+  //   name: 'Pink Floyd World',
+  //   imgUrl:
+  //     'https://globalnews.ca/wp-content/uploads/2023/01/GettyImages-1315781620.jpg?quality=85&strip=all',
+  // })
+  // await storageService.post(STORAGE_KEY, {
+  //   name: 'Classical',
+  //   imgUrl:
+  //     'https://img.apmcdn.org/c75e4ad850e43237fe0568a59ab71b15cb2511ac/square/993c31-20120627-flute-concert.jpg',
+  // })
+  await storageService.post(STORAGE_KEY, {
+    _id: '5cksxjas89xjsa8xjsa8jxs09',
+    name: 'Funky Monks',
+    tags: ['Funk', 'Happy'],
+    createdBy: {
+      _id: 'u101',
+      fullname: 'Puki Ben David',
+      imgUrl: 'http://some-photo/',
+    },
+    likedByUsers: ['{minimal-user}', '{minimal-user}'],
+    songs: [
+      {
+        id: 's1001',
+        title: 'The Meters - Cissy Strut',
+        url: 'youtube/song.mp4',
+        imgUrl: 'https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg',
+        addedBy: '{minimal-user}',
+        addedAt: 162521765262,
+      },
+      {
+        id: 'mUkfiLjooxs',
+        title: "The JB's - Pass The Peas",
+        url: 'youtube/song.mp4',
+        imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
+        addedBy: {},
+      },
+    ],
+    msgs: [
+      {
+        id: 'm101',
+        from: '{mini-user}',
+        txt: 'Manish?',
+      },
+    ],
+  })
+})()
