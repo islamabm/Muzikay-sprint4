@@ -1,20 +1,30 @@
-<!-- <template>
-  <ul class="station-list">
-    <li v-for="station in stations" :key="station._id">
-      <p>
-        {{ station.name }}
-      </p>
-      <!-- <p>${{ station.price?.toLocaleString() }}</p> -->
-
-      <hr />
-      <!-- <button @click="addStationMsg(station._id)">Add station msg</button> -->
-      <!-- <button @click="printStationToConsole(station)"> -->
-      <!-- Print msgs to console -->
-      <!-- </button> -->
-    </li>
-  </ul>
+<template>
+  <section class="station-list stations-container">
+    <ul class="clean-list">
+      <li class="toy" v-for="station in stations" :key="station.id">
+        <StationPreview
+          :station="station"
+          @removed="$emit('removed', station._id)"
+        />
+      </li>
+    </ul>
+  </section>
 </template>
 
 <script>
-export default {}
-</script> -->
+import StationPreview from './StationPreview.vue'
+export default {
+  name: 'StationsList',
+  props: {
+    stations: {
+      type: Array,
+    },
+  },
+  data() {
+    return {}
+  },
+  components: {
+    StationPreview,
+  },
+}
+</script>

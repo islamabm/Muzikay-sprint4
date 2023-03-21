@@ -1,37 +1,17 @@
 <template>
-  <div class="container home station-list-container">
-    <ul class="station-list">
-      <li v-for="station in stations" :key="station._id">
-        <p>
-          {{ station.name }}
-          <img :src="station.songs[0].imgUrl" />
-        </p>
-        <!-- <p>${{ station.price?.toLocaleString() }}</p> -->
-        <button @click="removeStation(station._id)">x</button>
-        <button @click="updateStation(station)">Update</button>
-        <hr />
-        <!-- <button @click="addStationMsg(station._id)">Add station msg</button>
-        <button @click="printStationToConsole(station)">
-          Print msgs to console
-        </button> -->
-      </li>
-    </ul>
-    <hr />
-    <form @submit.prevent="addStation()">
-      <h2>Add station</h2>
-      <input type="text" v-model="stationToAdd.name" />
-      <button>Save</button>
-    </form>
-  </div>
+  <section class="stations-app">
+    <StationsList :stations="stations" @removed="removeStation" />
+  </section>
 </template>
 
 <script>
+import StationsList from '../cmps/StationList.vue'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { stationService } from '../services/station.service.local'
 import {
   getActionRemoveStation,
-  getActionUpdateStation,
-  getActionAddStationMsg,
+  // getActionUpdateStation,
+  // getActionAddStationMsg,
 } from '../store/station.store'
 export default {
   data() {
@@ -51,19 +31,16 @@ export default {
     this.$store.dispatch({ type: 'loadStations' })
   },
   methods: {
-    async addStation() {
-      try {
-        await this.$store.dispatch({
-          type: 'addStation',
-          station: this.stationToAdd,
-        })
-        showSuccessMsg('Station added')
-        this.stationToAdd = stationService.getEmptyStation()
-      } catch (err) {
-        console.log(err)
-        showErrorMsg('Cannot add station')
-      }
-    },
+    // async addStation() {
+    //   try {
+    //     await this.$store.dispatch({ type: 'addStation', station: this.stationToAdd })
+    //     showSuccessMsg('Station added')
+    //     this.stationToAdd = stationService.getEmptyStation()
+    //   } catch (err) {
+    //     console.log(err)
+    //     showErrorMsg('Cannot add station')
+    //   }
+    // },
     async removeStation(stationId) {
       try {
         await this.$store.dispatch(getActionRemoveStation(stationId))
@@ -76,7 +53,7 @@ export default {
     // async updateStation(station) {
     //   try {
     //     station = { ...station }
-    //     // station.price = +prompt('New price?', station.price)
+    //     station.price = +prompt('New price?', station.price)
     //     await this.$store.dispatch(getActionUpdateStation(station))
     //     showSuccessMsg('Station updated')
     //   } catch (err) {
@@ -96,6 +73,9 @@ export default {
     // printStationToConsole(station) {
     //   console.log('Station msgs:', station.msgs)
     // },
+  },
+  components: {
+    StationsList,
   },
 }
 </script>

@@ -6,24 +6,56 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 // import ReviewIndex from './views/ReviewIndex.vue'
 // import LoginSignup from './views/LoginSignup.vue'
 // import UserDetails from './views/UserDetails.vue'
+
 import Search from './views/Search.vue'
 import UserLibrary from './views/UserLibrary.vue'
 import CreateStation from './views/CreateStation.vue'
 import LikedSongs from './views/LikedSongs.vue'
 import StationIndex from './views/StationIndex.vue'
 
+//  buttons for navigation
+
+{/* <RouterLink to="/back">back</RouterLink> */}
+{/* <RouterLink to="/go">go</RouterLink> */}
+
+
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: StationIndex,
+    
+    childern: [
+      {
+        path: '/search',
+        name: 'search',
+        component: Search,
+      },
+      {
+        path: '/library',
+        name: 'Library',
+        component: UserLibrary,
+      },
+      {
+        path: '/create',
+        name: 'CreateStation',
+        component: CreateStation,
+      },
+      {
+        path: '/like',
+        name: 'like',
+        component: LikedSongs,
+      },
+    ],
+    
   },
   {
-    path: '/search',
-    name: 'search',
-    component: Search,
+    path: '/signup',
+    name: 'signup',
+    component: Signup,
   },
   {
+<<<<<<< HEAD
     path: '/library',
     name: 'Library',
     component: UserLibrary,
@@ -39,6 +71,12 @@ const routes = [
     component: LikedSongs,
   },
 
+=======
+    path: '/login',
+    name: 'login',
+    component: Login,
+  },
+>>>>>>> a0405bb9311ef9d25e1d960bcddacc5890f47ac5
 ]
 
 export const router = createRouter({
