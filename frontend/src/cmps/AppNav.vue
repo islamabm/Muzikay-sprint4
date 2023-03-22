@@ -34,11 +34,10 @@
         <!-- >details</router-link -->
         <!-- >| -->
 
-        =======
+<!-- 
         <RouterLink :to="{ path: '/station/' + station._id }"
           >Create playlist</RouterLink
-        >
-        >>>>>>> a4797896226f5090d08c1828bf3005e5c5717af2
+        > -->
         <RouterLink to="/station/like">Liked songs</RouterLink>
       </div>
     </div>
