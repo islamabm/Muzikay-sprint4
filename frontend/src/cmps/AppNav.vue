@@ -27,16 +27,6 @@
 
       <div class="liked-create-nav">
         <a @click="createPlayList">Create Playlist</a>
-        <!-- <RouterLink :to="{ path: '/station/' + station._id }"
-          >Create playlist</RouterLink
-        > -->
-        <!-- <router-link class="toy-details-link" :to="{ path: 'toy/' + toy._id }" -->
-        <!-- >details</router-link -->
-        <!-- >| -->
-        <!-- 
-        <RouterLink :to="{ path: '/station/' + station._id }"
-          >Create playlist</RouterLink
-        > -->
 
         <RouterLink to="/station/like">Liked songs</RouterLink>
       </div>
