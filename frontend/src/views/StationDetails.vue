@@ -5,7 +5,7 @@
       <button v-else><svg>🎵</svg></button>
 
       <div class="station-info">
-        <h1 class="playlist-word" @click="editStation">Playlist</h1>
+        <h1 class="playlist-word" @click="toggleModal">Playlist</h1>
         <h1 class="station-name">{{ station.name || stationCount }}</h1>
         <p class="station-description">
           Playlist Relax and indulge with beautiful piano pieces
@@ -41,7 +41,7 @@
     </section>
   </section>
   <section v-if="showModal">
-    <StationEdit></StationEdit>
+    <StationEdit :showModal="showModal"></StationEdit>
     <button @click="toggleModal">x</button>
   </section>
 </template>
@@ -62,36 +62,6 @@ export default {
       dominantColor: null,
     }
   },
-
-  computed: {
-    songsCount() {
-      const count = this.station.songs.length
-      return `${count} Songs`
-    },
-    // updateStationName() {
-    //   let editedStation = this.getStation
-    //   // editedStation.name = this.nameEdited
-    //   this.$store
-    //     .dispatch({ type: 'editStation', station: editedStation })
-    //     .then(() => {
-    //       showSuccessMsg('station edited')
-    //     })
-    //     .catch((err) => {
-    //       showErrorMsg('Cannot edit station', err)
-    //     })
-    // },
-    // getStation() {
-    //   const { stationId } = this.$route.params
-    //   const stations = this.stations
-    //   const station = stations.find((s) => s._id === stationId)
-
-    //   return station
-    // },
-
-    stations() {
-      return this.$store.getters.stations
-    },
-  },
   methods: {
     stationCount() {
       this.counter++
@@ -101,6 +71,15 @@ export default {
     toggleModal() {
       console.log(this.showModal)
       this.showModal = !this.showModal
+    },
+
+    getSvg(iconName) {
+      return svgService.getSpotifySvg(iconName)
+    },
+    stationCount() {
+      this.counter++
+      // const count = this.station.length
+      return `My Playlist #${this.counter}`
     },
   },
   watch: {
@@ -117,33 +96,13 @@ export default {
   components: {
     StationEdit,
   },
-    computed: {
-      songsCount() {
-        const count = this.station.songs.length
-        return `${count} Songs`
-      },
-      getStation() {
-        const { stationId } = this.$route.params
-        const stations = this.stations
-        const station = stations.find((s) => s._id === stationId)
-        //   console.log(toy)
-        return station
-      },
-
-      stations() {
-        return this.$store.getters.stations
-      },
+  computed: {
+    songsCount() {
+      const count = this.station.songs.length
+      return `${count} Songs`
     },
-    methods: {
-
-      getSvg(iconName) {
-        return svgService.getSpotifySvg(iconName)
-      },
-      stationCount() {
-        this.counter++
-        // const count = this.station.length
-        return `My Playlist #${this.counter}`
-      },
+    stations() {
+      return this.$store.getters.stations
     },
   },
 }

@@ -3,14 +3,18 @@
         <AppHeader />
         <AppNav />
         <UserMsg />
+        <AppFooter />
         <RouterView />
   </section>
 </template>
 
 <script>
+
 import AppHeader from '../cmps/AppHeader.vue'
 import UserMsg from '../cmps/UserMsg.vue'
 import AppNav from '../cmps/AppNav.vue'
+import AppFooter from '../cmps/AppFooter.vue'
+
 export default {
     name:'',
     props: [],
@@ -26,6 +30,7 @@ components:{
     AppNav,
     UserMsg,
     AppHeader,
+    AppFooter,
 },
 }
     </script>
