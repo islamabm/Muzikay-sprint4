@@ -467,10 +467,10 @@ function _createStations() {
   }
 }
 
-function createNewStation() {
+function createNewStation(name) {
   const newStation = {
     _id: utilService.makeId(),
-    name: '',
+    name: name,
     tags: [],
     createdBy: {
       _id: '',
