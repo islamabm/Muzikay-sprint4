@@ -57,10 +57,6 @@ import StationEdit from '../cmps/StationEdit.vue'
 import Search from './Search.vue'
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
-<<<<<<< HEAD
-=======
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
->>>>>>> 4e258199b9f742fe5cd368066efa793d08d95686
 export default {
   name: 'station-details',
   data() {
