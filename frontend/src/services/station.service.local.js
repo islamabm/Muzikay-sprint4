@@ -43,7 +43,7 @@ async function save(station) {
     savedStation = await storageService.put(STORAGE_KEY, station)
   } else {
     // Later, owner is set by the backend
-    station.owner = userService.getLoggedinUser()
+    // station.owner = userService.getLoggedinUser()
     savedStation = await storageService.post(STORAGE_KEY, station)
   }
   return savedStation
@@ -91,7 +91,8 @@ function _createStations() {
             id: 's1001',
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
-            imgUrl: 'https://cdn4.vectorstock.com/i/1000x1000/17/23/lets-rock-music-print-graphic-design-with-guitar-vector-23381723.jpg',
+            imgUrl:
+              'https://cdn4.vectorstock.com/i/1000x1000/17/23/lets-rock-music-print-graphic-design-with-guitar-vector-23381723.jpg',
             addedBy: '{minimal-user}',
             addedAt: 162521765262,
           },
@@ -126,7 +127,8 @@ function _createStations() {
             id: 's1001',
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
-            imgUrl: 'https://assets.vogue.com/photos/5cdc3d9ac39901ae59dbfbe5/3:4/w_1773,h_2364,c_limit/00-promo-classical-music.jpg',
+            imgUrl:
+              'https://assets.vogue.com/photos/5cdc3d9ac39901ae59dbfbe5/3:4/w_1773,h_2364,c_limit/00-promo-classical-music.jpg',
             addedBy: '{minimal-user}',
             addedAt: 162521765262,
           },
@@ -161,7 +163,8 @@ function _createStations() {
             id: 's1001',
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
-            imgUrl: 'https://i.scdn.co/image/ab67616d0000b27319e9d00ec40455f230a217ad',
+            imgUrl:
+              'https://i.scdn.co/image/ab67616d0000b27319e9d00ec40455f230a217ad',
             addedBy: '{minimal-user}',
             addedAt: 162521765262,
           },
