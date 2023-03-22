@@ -31,20 +31,43 @@
         <RouterLink to="/station/like">Liked songs</RouterLink>
       </div>
     </div>
+
+    <ul class="clean-list">
+  <li v-for="playlist in playlists" :key="playlist._id">
+    <RouterLink :to="`/station/${playlist._id}`">{{ playlist.name }}</RouterLink>
+  </li>
+</ul>
+    
   </nav>
 </template>
 <script>
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
 export default {
+<<<<<<< HEAD
+=======
+  data() {
+    return {
+      playlists: [],
+      playlistCounter: 0,
+      // station: stationService.createNewStation(),
+    }
+  },
+>>>>>>> 4e258199b9f742fe5cd368066efa793d08d95686
   methods: {
     getSvg(iconName) {
       return svgService.getSpotifySvg(iconName)
     },
     createPlayList() {
-      const station = stationService.createNewStation()
-      this.$router.push(`/station/${station._id}`)
-    },
+  this.playlistCounter++;
+  const playlistName = `My Playlist #${this.playlistCounter}`;
+  const station = stationService.createNewStation(playlistName, playlistName); // Pass the name as a second argument
+  const newPlaylist = { _id: station._id, name: playlistName };
+  this.playlists.push(newPlaylist);
+  this.$router.push(`/station/${newPlaylist._id}`);
+},
+
+
   },
 }
 </script>

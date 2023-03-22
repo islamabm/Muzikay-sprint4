@@ -24,11 +24,16 @@ export const stationStore = {
     setStations(state, { stations }) {
       state.stations = stations
     },
-    addMsg(state, { toyId, newMsg }) {
-      const toy = state.toys.find((toy) => toy._id === toyId)
-      if (!toy.msgs) toy.msgs = []
-      toy.msgs.push(newMsg)
+    removeSong(state, { songId, stationId }) {
+      const station = state.stations.find((s) => s._id === stationId)
+      const idx = station.songs.findIndex((so) => so.id === songId)
+      station.songs.splice(idx, 1)
     },
+    // addMsg(state, { toyId, newMsg }) {
+    //   const toy = state.toys.find((toy) => toy._id === toyId)
+    //   if (!toy.msgs) toy.msgs = []
+    //   toy.msgs.push(newMsg)
+    // },
     // addSong(state, { newStation }) {
     //   state.stations.push(newStation)
     //   console.log(newStation)
@@ -83,13 +88,25 @@ export const stationStore = {
         throw err
       }
     },
-    async addSong({ commit }, { video, station }) {
-      console.log('video from store' , video)
-      console.log('station from store' ,station)
+    async removeSong({ commit }, { songId, stationId }) {
       try {
-        console.log('video inside try store' , video)
-        console.log('station inside try store' ,station)
-        const updatedStation = await stationService.addSongToStation(video, station)
+        await stationService.removeSong(songId, stationId)
+        commit({ type: 'removeSong', songId, stationId })
+      } catch (err) {
+        // console.log(err)
+        console.log('Could Not delete msg')
+      }
+    },
+    async addSong({ commit }, { video, station }) {
+      console.log('video from store', video)
+      console.log('station from store', station)
+      try {
+        console.log('video inside try store', video)
+        console.log('station inside try store', station)
+        const updatedStation = await stationService.addSongToStation(
+          video,
+          station
+        )
         console.log('This is the updated station: ', updatedStation)
         commit({ type: 'editStation', station: updatedStation })
       } catch (err) {
@@ -97,7 +114,7 @@ export const stationStore = {
         throw err
       }
     },
-    
+
     // async addMsg({ commit }, { toyId, txt }) {
     //   try {
     //     const newMsg = await toyService.addMsg(toyId, txt)

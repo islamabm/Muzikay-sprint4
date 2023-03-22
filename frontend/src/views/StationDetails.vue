@@ -1,14 +1,13 @@
 <template>
   <section v-if="station" class="station-details">
     <section ref="stationDetailsHeader" class="station-details-header">
-      <!-- <img v-if="station.songs" :src="station.songs[0].imgUrl" /> -->
+      <img v-if="station.songs && station.songs.length > 0" :src="station.songs[0].imgUrl" />
       <button><svg>🎵</svg></button>
 
       <div class="station-info">
         <h1 class="playlist-word" @click="toggleModal">Playlist</h1>
-        <h1 class="station-name">
-          {{ station.name ? station.name : stationCount }}
-        </h1>
+        <h1 class="station-name">{{ station.name }}</h1>
+
         <p class="station-description">
           Playlist Relax and indulge with beautiful piano pieces
         </p>
@@ -32,6 +31,7 @@
         <span>{{ idx + 1 }}</span>
         <img class="song-img" :src="song.imgUrl" />
         <p class="song-title">{{ song.title }}</p>
+        <button @click="removeSong(song.id, station._id)">x</button>
         <p class="posted-at">1 day ago</p>
         <p class="song-duration">1:40</p>
       </li>
@@ -57,6 +57,10 @@ import StationEdit from '../cmps/StationEdit.vue'
 import Search from './Search.vue'
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
+<<<<<<< HEAD
+=======
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+>>>>>>> 4e258199b9f742fe5cd368066efa793d08d95686
 export default {
   name: 'station-details',
   data() {
@@ -89,6 +93,16 @@ export default {
         } catch (e) {
           console.error(e)
         }
+      }
+    },
+    async removeSong(songId, stationId) {
+      try {
+        // const station = this.stations.find((s) => s._id === stationId)
+        await this.$store.dispatch({ type: 'removeSong', songId, stationId })
+        showSuccessMsg('song removed')
+      } catch (err) {
+        console.log(err)
+        showErrorMsg('Cannot remove song')
       }
     },
     toggleModal() {
