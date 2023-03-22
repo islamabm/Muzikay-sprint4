@@ -55,13 +55,13 @@ const routes = [
         name: 'like',
         component: LikedSongs,
       },
+      {
+        path: '/station/:stationId',
+        name: 'station-details',
+        component: StationDetails,
+      },
     ],
   },
-  {
-    path: '/station/:stationId',
-    name: 'station-details',
-    component: StationDetails,
-  }
 ]
 
 export const router = createRouter({
