@@ -89,15 +89,6 @@ function getEmptyStation() {
     // price: utilService.getRandomIntInclusive(1000, 9000),
   }
 }
-<<<<<<< HEAD
-function getVideos() {
-  if (Object.keys(gSearchCache).length > 0) {
-    console.log('Loading from cache')
-    return Promise.resolve(gSearchCache)
-  }
-
-  return axios.get(gUrl).then((res) => {
-=======
 function getVideos(keyword) {
   if (gSearchCache[keyword]) {
     console.log('Loading from cache')
@@ -105,7 +96,6 @@ function getVideos(keyword) {
   }
 
   return axios.get(gUrl + keyword).then((res) => {
->>>>>>> 66d20e35b0170262125372393a29a7c0ff494e79
     console.log('res', res)
     const videos = res.data.items.map((item) => _prepareData(item))
     console.log('Fetched videos:', videos)
