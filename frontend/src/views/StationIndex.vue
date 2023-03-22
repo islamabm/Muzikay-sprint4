@@ -1,81 +1,31 @@
 <template>
-  <section class="stations-app">
-    <StationsList :stations="stations" @removed="removeStation" />
+    <section class="main-layout">
+        <AppHeader />
+        <AppNav />
+        <UserMsg />
+        <RouterView />
   </section>
 </template>
 
 <script>
-import StationsList from '../cmps/StationList.vue'
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
-import { stationService } from '../services/station.service.local'
-import {
-  getActionRemoveStation,
-  // getActionUpdateStation,
-  // getActionAddStationMsg,
-} from '../store/station.store'
+import AppHeader from '../cmps/AppHeader.vue'
+import UserMsg from '../cmps/UserMsg.vue'
+import AppNav from '../cmps/AppNav.vue'
 export default {
-  data() {
-    return {
-      // stationToAdd: stationService.getEmptyStation(),
-    }
-  },
-  computed: {
-    loggedInUser() {
-      return this.$store.getters.loggedinUser
-    },
-    stations() {
-      return this.$store.getters.stations
-    },
-  },
-  created() {
+    name:'',
+    props: [],
+    created() {
     this.$store.dispatch({ type: 'loadStations' })
   },
-  methods: {
-    // async addStation() {
-    //   try {
-    //     await this.$store.dispatch({ type: 'addStation', station: this.stationToAdd })
-    //     showSuccessMsg('Station added')
-    //     this.stationToAdd = stationService.getEmptyStation()
-    //   } catch (err) {
-    //     console.log(err)
-    //     showErrorMsg('Cannot add station')
-    //   }
-    // },
-    async removeStation(stationId) {
-      try {
-        await this.$store.dispatch(getActionRemoveStation(stationId))
-        showSuccessMsg('Station removed')
-      } catch (err) {
-        console.log(err)
-        showErrorMsg('Cannot remove station')
-      }
-    },
-    // async updateStation(station) {
-    //   try {
-    //     station = { ...station }
-    //     station.price = +prompt('New price?', station.price)
-    //     await this.$store.dispatch(getActionUpdateStation(station))
-    //     showSuccessMsg('Station updated')
-    //   } catch (err) {
-    //     console.log(err)
-    //     showErrorMsg('Cannot update station')
-    //   }
-    // },
-    // async addStationMsg(stationId) {
-    //   try {
-    //     await this.$store.dispatch(getActionAddStationMsg(stationId))
-    //     showSuccessMsg('Station msg added')
-    //   } catch (err) {
-    //     console.log(err)
-    //     showErrorMsg('Cannot add station msg')
-    //   }
-    // },
-    // printStationToConsole(station) {
-    //   console.log('Station msgs:', station.msgs)
-    // },
+  data() {
+    return {}
   },
-  components: {
-    StationsList,
-  },
+  methods: {},
+  computed: {},
+components:{
+    AppNav,
+    UserMsg,
+    AppHeader,
+},
 }
-</script>
+    </script>

@@ -6,7 +6,7 @@
         <span>Muzikay<span class="trademark">®</span></span>
       </div>
       <div class="main-nav">
-        <RouterLink to="/station">Home</RouterLink>
+        <RouterLink to="/station/collection">Home</RouterLink>
         <RouterLink to="/station/search">Search</RouterLink>
         <RouterLink to="/station/library">Your Library</RouterLink>
       </div>

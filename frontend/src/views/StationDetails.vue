@@ -69,7 +69,6 @@ export default {
     '$route.params': {
       handler() {
         const { stationId } = this.$route.params
-
         stationService
           .getById(stationId)
           .then((station) => (this.station = station))
@@ -82,7 +81,7 @@ export default {
       const count = this.station.songs.length
       return `${count} Songs`
     },
-    station() {
+    getStation() {
       const { stationId } = this.$route.params
       const stations = this.stations
       const station = stations.find((s) => s._id === stationId)

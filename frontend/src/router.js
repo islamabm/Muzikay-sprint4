@@ -7,6 +7,7 @@ import StationIndex from './views/StationIndex.vue'
 import Signup from './views/Signup.vue'
 import Login from './views/Login.vue'
 import StationDetails from './views/StationDetails.vue'
+import StationCollection from './views/StationCollection.vue'
 
 //  buttons for navigation
 
@@ -29,34 +30,38 @@ const routes = [
     component: Login,
   },
   {
-    path: '/station/:stationId',
-    name: 'station-details',
-    component: StationDetails,
-  },
-
-  {
     path: '/station',
     name: 'Home',
     component: StationIndex,
 
-    childern: [
+    children: [
       {
-        path: '/search',
+        path: '/station/collection',
+        name: 'collection',
+        component: StationCollection,
+      },
+      {
+        path: '/station/search',
         name: 'search',
         component: Search,
       },
       {
-        path: '/library',
+        path: '/station/library',
         name: 'Library',
         component: UserLibrary,
       },
       {
-        path: 'like',
+        path: '/station/like',
         name: 'like',
         component: LikedSongs,
       },
     ],
   },
+  {
+    path: '/station/:stationId',
+    name: 'station-details',
+    component: StationDetails,
+  }
 ]
 
 export const router = createRouter({
