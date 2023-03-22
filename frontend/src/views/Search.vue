@@ -45,13 +45,16 @@ export default {
       }
       console.log('search cmp', { ...obj })
       this.$store
-        .dispatch({ type: 'addSong', station: { ...obj } })
-        .then(() => {
-          showSuccessMsg('song added')
-        })
-        .catch((err) => {
-          showErrorMsg('Cannot add song', err)
-        })
+  .dispatch({ type: 'addSong', obj: { ...obj } })
+  .then(() => {
+    console.log('Added song to playlist')
+    // showSuccessMsg('song added')
+  })
+  .catch((err) => {
+    console.log('failed to add', err)
+    // showErrorMsg('Cannot add song', err)
+  })
+
     },
   },
   computed: {
