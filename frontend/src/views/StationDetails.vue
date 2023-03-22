@@ -1,20 +1,25 @@
 <template>
   <section v-if="station" class="station-details">
-    <section class="stetion">
-      <h1 @click="editStation">Playlist</h1>
-      <p>Playlist Relax and indulge with beautiful piano pieces</p>
-      <h1>{{ station.name || stationCount }}</h1>
+    <section class="station-details-header">
       <img v-if="station.songs" :src="station.songs[0].imgUrl" />
       <button v-else><svg>🎵</svg></button>
-      <img
-        class="spotify-img"
-        src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Black.png"
-      />
-      <div v-if="station.songs">
-        <span>6,950,331 likes</span>, <span>{{ songsCount }}</span>
-        <span>about 11 hr </span>
+
+      <div class="station-info">
+        <h1 class="playlist-word" @click="editStation">Playlist</h1>
+        <h1 class="station-name">{{ station.name || stationCount }}</h1>
+        <p class="station-description">
+          Playlist Relax and indulge with beautiful piano pieces
+        </p>
+        <div v-if="station.songs">
+          <div class="likes-count-logo">
+            <i class="logo-green" v-html="getSvg('greenLogo')"></i>
+            <span class="small-logo-word">Muzikay</span>
+            <span>6,950,331 likes</span>•<span>{{ songsCount }}</span>
+          </div>
+          <span>about 11 hr </span>
+        </div>
+        <div v-else>...</div>
       </div>
-      <div v-else>...</div>
     </section>
     <hr />
 
@@ -35,35 +40,68 @@
       </div>
     </section>
   </section>
-  <section v-if="showModal" class="modal">
-    <h1>Edit details</h1>
-    <button @click="closeModal">xxxxxxxxxxxxxxxx</button>
-    <img src="#" />
-    <input
-      type="text"
-      @input="stationInput"
-      v-model="station.title"
-      :placeholder="station.title"
-    />
-    <textarea id="w3review" name="w3review" rows="4" cols="50"></textarea>
-
-    <p>
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi amet
-      temporibus sunt quisquam ullam, eum sint, recusandae debitis harum, minima
-    </p>
+  <section v-if="showModal">
+    <StationEdit></StationEdit>
+    <button @click="toggleModal">x</button>
   </section>
 </template>
 
 <script>
+import StationEdit from './StationEdit.vue'
+import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+// import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 export default {
   name: 'station-details',
   data() {
     return {
       station: null,
+      showModal: '',
       counter: 0,
+      // nameEdited: '',
+      dominantColor: null,
     }
+  },
+
+  computed: {
+    songsCount() {
+      const count = this.station.songs.length
+      return `${count} Songs`
+    },
+    // updateStationName() {
+    //   let editedStation = this.getStation
+    //   // editedStation.name = this.nameEdited
+    //   this.$store
+    //     .dispatch({ type: 'editStation', station: editedStation })
+    //     .then(() => {
+    //       showSuccessMsg('station edited')
+    //     })
+    //     .catch((err) => {
+    //       showErrorMsg('Cannot edit station', err)
+    //     })
+    // },
+    // getStation() {
+    //   const { stationId } = this.$route.params
+    //   const stations = this.stations
+    //   const station = stations.find((s) => s._id === stationId)
+
+    //   return station
+    // },
+
+    stations() {
+      return this.$store.getters.stations
+    },
+  },
+  methods: {
+    stationCount() {
+      this.counter++
+      // const count = this.station.length
+      return `My Playlist #${this.counter}`
+    },
+    toggleModal() {
+      console.log(this.showModal)
+      this.showModal = !this.showModal
+    },
   },
   watch: {
     '$route.params': {
@@ -76,45 +114,51 @@ export default {
       immediate: true,
     },
   },
-  computed: {
-    songsCount() {
-      const count = this.station.songs.length
-      return `${count} Songs`
-    },
-    getStation() {
-      const { stationId } = this.$route.params
-      const stations = this.stations
-      const station = stations.find((s) => s._id === stationId)
-      //   console.log(toy)
-      return station
-    },
+  components: {
+    StationEdit,
+    computed: {
+      songsCount() {
+        const count = this.station.songs.length
+        return `${count} Songs`
+      },
+      getStation() {
+        const { stationId } = this.$route.params
+        const stations = this.stations
+        const station = stations.find((s) => s._id === stationId)
+        //   console.log(toy)
+        return station
+      },
 
-    stations() {
-      return this.$store.getters.stations
+      stations() {
+        return this.$store.getters.stations
+      },
     },
-  },
-  methods: {
-    // stationInput() {
-    //   let editedStation = this.station
-    //   this.$store
-    //     .dispatch({ type: 'edit', station: editedStation })
-    //     .then(() => {
-    //       showSuccessMsg('station edited')
-    //     })
-    //     .catch((err) => {
-    //       showErrorMsg('Cannot edit station', err)
-    //     })
-    // },
-    // closeModal() {
-    //   this.showModal = false
-    // },
-    // editStation() {
-    //   this.showModal = true
-    // },
-    stationCount() {
-      this.counter++
-      // const count = this.station.length
-      return `My Playlist #${this.counter}`
+    methods: {
+      // stationInput() {
+      //   let editedStation = this.station
+      //   this.$store
+      //     .dispatch({ type: 'edit', station: editedStation })
+      //     .then(() => {
+      //       showSuccessMsg('station edited')
+      //     })
+      //     .catch((err) => {
+      //       showErrorMsg('Cannot edit station', err)
+      //     })
+      // },
+      // closeModal() {
+      //   this.showModal = false
+      // },
+      // editStation() {
+      //   this.showModal = true
+      // },
+      getSvg(iconName) {
+        return svgService.getSpotifySvg(iconName)
+      },
+      stationCount() {
+        this.counter++
+        // const count = this.station.length
+        return `My Playlist #${this.counter}`
+      },
     },
   },
 }

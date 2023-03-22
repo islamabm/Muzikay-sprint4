@@ -46,10 +46,12 @@ export const stationStore = {
     // addStation(state, { station }) {
     //   state.stations.push(station)
     // },
-    // edit(state, { station }) {
-    //   const idx = state.stations.findIndex((c) => c._id === station._id)
-    //   state.stations.splice(idx, 1, station)
-    // },
+    editStation(state, { station }) {
+      console.log(station)
+      const idx = state.stations.findIndex((c) => c._id === station._id)
+      state.stations.splice(idx, 1, station)
+      console.log(state.stations)
+    },
     removeStation(state, { stationId }) {
       state.stations = state.stations.filter(
         (station) => station._id !== stationId
@@ -74,16 +76,7 @@ export const stationStore = {
     //     throw err
     //   }
     // },
-    // async updateStation(context, { station }) {
-    //   try {
-    //     station = await stationService.save(station)
-    //     context.commit(getActionUpdateStation(station))
-    //     return station
-    //   } catch (err) {
-    //     console.log('stationStore: Error in updateStation', err)
-    //     throw err
-    //   }
-    // },
+
     async loadStations(context) {
       try {
         const stations = await stationService.query()
@@ -111,17 +104,15 @@ export const stationStore = {
         throw err
       }
     },
-    // edit({ commit }, { station }) {
-    //   return stationService
-    //     .save(station)
-    //     .then((savedStation) => {
-    //       commit({ type: 'edit', station: savedStation })
-    //     })
-    //     .catch((err) => {
-    //       console.error('Cannot edit toy', err)
-    //       throw err
-    //     })
-    // },
+    async editstation({ commit }, { station }) {
+      try {
+        const savedStation = await stationService.save(station)
+        commit({ type: 'editStation', station: savedStation })
+      } catch (err) {
+        console.error('Cannot edit toy', err)
+        throw err
+      }
+    },
 
     // async addStationMsg(context, { stationId, txt }) {
     //   try {
