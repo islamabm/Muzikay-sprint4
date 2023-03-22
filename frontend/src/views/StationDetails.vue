@@ -1,6 +1,6 @@
 <template>
   <section v-if="station" class="station-details">
-    <section class="station-details-header">
+    <section ref="stationDetailsHeader" class="station-details-header">
       <img v-if="station.songs" :src="station.songs[0].imgUrl" />
       <button v-else><svg>🎵</svg></button>
 
@@ -23,7 +23,6 @@
     </section>
     <hr />
 
- 
     <ul v-if="station.songs" class="clean-list songs-list-details">
       <li class="station" v-for="(song, idx) in station.songs" :key="idx">
         <span>{{ idx + 1 }}</span>
@@ -33,9 +32,6 @@
         <p class="song-duration">1:40</p>
       </li>
     </ul>
- 
-
-
 
     <section v-else class="empty-station-content">
       <button>x</button>
@@ -52,7 +48,8 @@
 </template>
 
 <script>
-import StationEdit from './StationEdit.vue'
+import { FastAverageColor } from 'fast-average-color'
+import StationEdit from '../cmps/StationEdit.vue'
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
 // import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
@@ -68,6 +65,29 @@ export default {
     }
   },
   methods: {
+    updateHeaderBackgroundColor(color) {
+      this.$refs.stationDetailsHeader.style.backgroundColor = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
+    },
+    async getDominantColor(imageSrc) {
+  const fac = new FastAverageColor();
+  const img = new Image();
+  img.crossOrigin = 'Anonymous';
+
+  // Prefix the image URL with the CORS proxy URL
+  const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
+  img.src = corsProxyUrl + imageSrc;
+
+  img.onload = async () => {
+    try {
+      const color = await fac.getColorAsync(img);
+      this.updateHeaderBackgroundColor(color);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+},
+
+
     stationCount() {
       this.counter++
       // const count = this.station.length
@@ -91,9 +111,12 @@ export default {
     '$route.params': {
       handler() {
         const { stationId } = this.$route.params
-        stationService
-          .getById(stationId)
-          .then((station) => (this.station = station))
+        stationService.getById(stationId).then((station) => {
+          this.station = station
+          if (station.songs && station.songs.length > 0) {
+            this.getDominantColor(station.songs[0].imgUrl)
+          }
+        })
       },
       immediate: true,
     },

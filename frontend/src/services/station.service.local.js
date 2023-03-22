@@ -1,8 +1,13 @@
 import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
-// import { userService } from './user.service.js'
+import axios from 'axios'
 
+// import { userService } from './user.service.js'
+const gUrl =
+  'https://www.googleapis.com/youtube/v3/search?part=snippet&q=love&key=AIzaSyCscIfKwq9Of8nNDj5BpdSTPiMvVebphhg'
 const STORAGE_KEY = 'station'
+const SEARCH_KEY = 'videosDB'
+let gSearchCache = utilService.loadFromStorage(SEARCH_KEY) || {}
 _createStations()
 
 export const stationService = {
@@ -11,6 +16,7 @@ export const stationService = {
   save,
   remove,
   getEmptyStation,
+  getVideos,
   // addStationMsg,
 }
 window.cs = stationService
@@ -71,6 +77,27 @@ function getEmptyStation() {
     // price: utilService.getRandomIntInclusive(1000, 9000),
   }
 }
+function getVideos() {
+  if (gSearchCache) {
+    console.log('Loading from cache')
+    return Promise.resolve(gSearchCache)
+  }
+
+  return axios.get(gUrl).then((res) => {
+    console.log('res', res)
+    const videos = res.data.items.map((item) => _prepareData(item))
+    gSearchCache = videos
+    utilService.saveToStorage(SEARCH_KEY, gSearchCache)
+    return videos
+  })
+}
+function _prepareData(item) {
+  return {
+    videoId: item.id.videoId,
+    title: item.snippet.title,
+    url: item.snippet.thumbnails.high.url,
+  }
+}
 
 function _createStations() {
   var stations = JSON.parse(localStorage.getItem(STORAGE_KEY))
@@ -92,7 +119,7 @@ function _createStations() {
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
             imgUrl:
-              'https://cdn4.vectorstock.com/i/1000x1000/17/23/lets-rock-music-print-graphic-design-with-guitar-vector-23381723.jpg',
+              'https://images.unsplash.com/photo-1619983081563-430f63602796?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80',
             addedBy: '{minimal-user}',
             addedAt: 162521765262,
           },

@@ -10,7 +10,7 @@
       </li>
     </ul>
   </section>
-  <hr />
+
   <section class="station-list-container stations-container">
     <h1 class="category-tag">Funk</h1>
     <ul class="clean-list station-list">
