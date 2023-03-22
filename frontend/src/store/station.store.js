@@ -90,7 +90,7 @@ export const stationStore = {
         console.log('video inside try store', video)
         console.log('station inside try store', station)
         const newStation = await stationService.addSongToStation(video, station)
-        console.log(newStation)
+        console.log('This is the updated station: ', newStation)
         // commit({ type: 'addSong', newStation })
       } catch (err) {
         // console.error('Cannot add song', err)
