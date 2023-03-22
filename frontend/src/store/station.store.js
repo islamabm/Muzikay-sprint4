@@ -74,10 +74,10 @@ export const stationStore = {
         throw err
       }
     },
-    async addSong({ commit }, { obj }) {
+    async addSong({ commit }, { station }) {
       try {
         // console.log(obj.video)
-        console.log({ ...obj })
+        console.log(station)
         // const savedStation = await stationService.save(station)
         // commit({ type: 'editStation', obj: savedStation })
       } catch (err) {

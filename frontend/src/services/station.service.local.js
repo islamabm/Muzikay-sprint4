@@ -17,6 +17,7 @@ export const stationService = {
   getEmptyStation,
   getVideos,
   createNewStation,
+  addSongToStation,
   // addStationMsg,
 }
 window.cs = stationService
@@ -112,7 +113,6 @@ function _prepareData(item) {
     url: `https://www.youtube.com/embed/${item.id.videoId}`, // Changed from 'item.snippet.thumbnails.default.url'
   }
 }
-
 
 function _createStations() {
   var stations = JSON.parse(localStorage.getItem(STORAGE_KEY))
@@ -506,10 +506,18 @@ function createNewStation() {
     ],
   }
   const stations = utilService.loadFromStorage(STORAGE_KEY)
-  // console.log(stations)
+
   if (stations.length) stations.push(newStation)
   utilService.saveToStorage(STORAGE_KEY, stations)
   return newStation
+}
+
+function addSongToStation(song, station) {
+  const newStation =  station.songs.push(song)
+  const stations = utilService.loadFromStorage(STORAGE_KEY)
+
+  if (stations.length) stations.push(newStation)
+  utilService.saveToStorage(STORAGE_KEY, stations)
 }
 
 // const stationsList = {

@@ -45,7 +45,7 @@ export default {
       }
       console.log('search cmp', { ...obj })
       this.$store
-        .dispatch({ type: 'addSong', station: { ...obj } })
+        .dispatch({ type: 'addSong', station: obj })
         .then(() => {
           showSuccessMsg('song added')
         })
