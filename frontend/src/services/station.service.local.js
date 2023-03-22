@@ -16,6 +16,7 @@ export const stationService = {
   remove,
   getEmptyStation,
   getVideos,
+  createNewStation,
   // addStationMsg,
 }
 window.cs = stationService
@@ -85,19 +86,9 @@ async function save(station) {
 // }
 function getEmptyStation() {
   return {
-    _id: utilService.makeId(),
-    // price: utilService.getRandomIntInclusive(1000, 9000),
+    //   _id: utilService.makeId(),
   }
 }
-<<<<<<< HEAD
-function getVideos() {
-  if (Object.keys(gSearchCache).length > 0) {
-    console.log('Loading from cache')
-    return Promise.resolve(gSearchCache)
-  }
-
-  return axios.get(gUrl).then((res) => {
-=======
 function getVideos(keyword) {
   if (gSearchCache[keyword]) {
     console.log('Loading from cache')
@@ -105,7 +96,6 @@ function getVideos(keyword) {
   }
 
   return axios.get(gUrl + keyword).then((res) => {
->>>>>>> 66d20e35b0170262125372393a29a7c0ff494e79
     console.log('res', res)
     const videos = res.data.items.map((item) => _prepareData(item))
     console.log('Fetched videos:', videos)
@@ -492,6 +482,33 @@ function _createStations() {
     ]
     localStorage.setItem(STORAGE_KEY, JSON.stringify(stationsList))
   }
+}
+
+function createNewStation() {
+  const newStation = {
+    _id: utilService.makeId(),
+    name: '',
+    tags: [],
+    createdBy: {
+      _id: '',
+      fullname: '',
+      imgUrl: '',
+    },
+    likedByUsers: [],
+
+    msgs: [
+      {
+        id: '',
+        from: '',
+        txt: '',
+      },
+    ],
+  }
+  const stations = utilService.loadFromStorage(STORAGE_KEY)
+  // console.log(stations)
+  if (stations.length) stations.push(newStation)
+  utilService.saveToStorage(STORAGE_KEY, stations)
+  return newStation
 }
 
 // const stationsList = {
