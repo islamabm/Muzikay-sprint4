@@ -109,9 +109,10 @@ function _prepareData(item) {
   return {
     videoId: item.id.videoId,
     title: item.snippet.title,
-    url: item.snippet.thumbnails.default.url, // Changed from 'thumbnails.high.url'
+    url: `https://www.youtube.com/embed/${item.id.videoId}`, // Changed from 'item.snippet.thumbnails.default.url'
   }
 }
+
 
 function _createStations() {
   var stations = JSON.parse(localStorage.getItem(STORAGE_KEY))
