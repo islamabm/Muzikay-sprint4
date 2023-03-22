@@ -18,6 +18,7 @@ export const stationService = {
   getVideos,
   createNewStation,
   addSongToStation,
+  removeSong,
   // addStationMsg,
 }
 window.cs = stationService
@@ -56,39 +57,20 @@ async function save(station) {
   return savedStation
 }
 
-// async function addStationMsg(stationId, name) {
-//   // Later, this is all done by the backend
-//   const station = await getById(stationId)
-//   if (!station.msgs) station.msgs = []
-
-//   const msg = {
-//     id: utilService.makeId(),
-//     by: userService.getLoggedinUser(),
-//     name,
-//   }
-//   station.msgs.push(msg)
-//   await storageService.put(STORAGE_KEY, station)
-
-//   return msg
-// }
-// function getVideos(keyword) {
-//   if (gSearchCache[keyword]) {
-//     console.log('Loading from cache')
-//     return Promise.resolve(gSearchCache[keyword])
-//   }
-
-//   return axios.get(urlYT + keyword).then(res => {
-//     console.log('res', res)
-//     const videos = res.data.items.map(item => _prepareData(item))
-//     gSearchCache[keyword] = videos
-//     saveToStorage(SEARCH_KEY, gSearchCache)
-//     return videos
-//   })
-// }
 function getEmptyStation() {
   return {
     //   _id: utilService.makeId(),
   }
+}
+
+function removeSong(songId, stationId) {
+  const stations = utilService.loadFromStorage(STORAGE_KEY)
+  const station = stations.find((s) => s._id === stationId)
+  const songIdx = station.songs.findIndex((so) => so._id === songId)
+  const newSongs = station.songs.splice(songIdx, 1)
+  station.songs = newSongs
+  stations.push(station)
+  utilService.saveToStorage(STORAGE_KEY, stations)
 }
 function getVideos(keyword) {
   if (gSearchCache[keyword]) {
@@ -119,7 +101,7 @@ function _createStations() {
   if (!stations || !stations.length) {
     const stationsList = [
       {
-        _id: '5cksxjas89xjsa8xjsa8jxs09',
+        _id: '100',
         name: 'Funky Monks',
         tags: ['Funk'],
         createdBy: {
@@ -139,7 +121,7 @@ function _createStations() {
             addedAt: 162521765262,
           },
           {
-            id: 'mUkfiLjooxs',
+            id: 's1002',
             title: "The JB's - Pass The Peas",
             url: 'youtube/song.mp4',
             imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
@@ -155,7 +137,7 @@ function _createStations() {
         ],
       },
       {
-        _id: '5cksxjas89xjsa8xjsa8jxs09',
+        _id: '101',
         name: 'Funky Monks',
         tags: ['Funk'],
         createdBy: {
@@ -166,7 +148,7 @@ function _createStations() {
         likedByUsers: ['{minimal-user}', '{minimal-user}'],
         songs: [
           {
-            id: 's1001',
+            id: 's1003',
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
             imgUrl:
@@ -175,7 +157,7 @@ function _createStations() {
             addedAt: 162521765262,
           },
           {
-            id: 'mUkfiLjooxs',
+            id: 's1004',
             title: "The JB's - Pass The Peas",
             url: 'youtube/song.mp4',
             imgUrl: 'https://i.ytimg.com/vi/kgx4WGK0oNU/maxresdefault.jpg', //changed
@@ -191,7 +173,7 @@ function _createStations() {
         ],
       },
       {
-        _id: '5cksxjas89xjsa8xjsa8jxs09',
+        _id: '102',
         name: 'Funky Monks',
         tags: ['Funk'],
         createdBy: {
@@ -202,7 +184,7 @@ function _createStations() {
         likedByUsers: ['{minimal-user}', '{minimal-user}'],
         songs: [
           {
-            id: 's1001',
+            id: 's1005',
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
             imgUrl:
@@ -211,7 +193,7 @@ function _createStations() {
             addedAt: 162521765262,
           },
           {
-            id: 'mUkfiLjooxs',
+            id: 's1006',
             title: "The JB's - Pass The Peas",
             url: 'youtube/song.mp4',
             imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
@@ -227,7 +209,7 @@ function _createStations() {
         ],
       },
       {
-        _id: '5cksxjas89xjsa8xjsa8jxs09',
+        _id: '103',
         name: 'Funky Monks',
         tags: ['Funk'],
         createdBy: {
@@ -238,7 +220,7 @@ function _createStations() {
         likedByUsers: ['{minimal-user}', '{minimal-user}'],
         songs: [
           {
-            id: 's1001',
+            id: 's1007',
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
             imgUrl: 'https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg',
@@ -246,7 +228,7 @@ function _createStations() {
             addedAt: 162521765262,
           },
           {
-            id: 'mUkfiLjooxs',
+            id: 's1008',
             title: "The JB's - Pass The Peas",
             url: 'youtube/song.mp4',
             imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
@@ -262,7 +244,7 @@ function _createStations() {
         ],
       },
       {
-        _id: '5cksxjas89xjsa8xjsa8jxs09',
+        _id: '104',
         name: 'Funky Monks',
         tags: ['Funk'],
         createdBy: {
@@ -273,7 +255,7 @@ function _createStations() {
         likedByUsers: ['{minimal-user}', '{minimal-user}'],
         songs: [
           {
-            id: 's1001',
+            id: 's1009',
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
             imgUrl:
@@ -282,7 +264,7 @@ function _createStations() {
             addedAt: 162521765262,
           },
           {
-            id: 'mUkfiLjooxs',
+            id: 's1010',
             title: "The JB's - Pass The Peas",
             url: 'youtube/song.mp4',
             imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
@@ -298,7 +280,7 @@ function _createStations() {
         ],
       },
       {
-        _id: '5cksxjas89xjsa8xjsa8jxs09',
+        _id: '105',
         name: 'Funky Monks',
         tags: ['Happy'],
         createdBy: {
@@ -309,7 +291,7 @@ function _createStations() {
         likedByUsers: ['{minimal-user}', '{minimal-user}'],
         songs: [
           {
-            id: 's1001',
+            id: 's1011',
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
             imgUrl:
@@ -318,7 +300,7 @@ function _createStations() {
             addedAt: 162521765262,
           },
           {
-            id: 'mUkfiLjooxs',
+            id: 's1012',
             title: "The JB's - Pass The Peas",
             url: 'youtube/song.mp4',
             imgUrl:
@@ -335,7 +317,7 @@ function _createStations() {
         ],
       },
       {
-        _id: '5cksxjas89xjsa8xjsa8jxs09',
+        _id: '106',
         name: 'Funky Monks',
         tags: ['Happy'],
         createdBy: {
@@ -346,7 +328,7 @@ function _createStations() {
         likedByUsers: ['{minimal-user}', '{minimal-user}'],
         songs: [
           {
-            id: 's1001',
+            id: 's1013',
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
             imgUrl:
@@ -355,7 +337,7 @@ function _createStations() {
             addedAt: 162521765262,
           },
           {
-            id: 'mUkfiLjooxs',
+            id: 's1014',
             title: "The JB's - Pass The Peas",
             url: 'youtube/song.mp4',
             imgUrl:
@@ -372,7 +354,7 @@ function _createStations() {
         ],
       },
       {
-        _id: '5cksxjas89xjsa8xjsa8jxs09',
+        _id: '107',
         name: 'Funky Monks',
         tags: ['Happy'],
         createdBy: {
@@ -383,7 +365,7 @@ function _createStations() {
         likedByUsers: ['{minimal-user}', '{minimal-user}'],
         songs: [
           {
-            id: 's1001',
+            id: 's1015',
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
             imgUrl:
@@ -392,7 +374,7 @@ function _createStations() {
             addedAt: 162521765262,
           },
           {
-            id: 'mUkfiLjooxs',
+            id: 's1017',
             title: "The JB's - Pass The Peas",
             url: 'youtube/song.mp4',
             imgUrl:
@@ -409,7 +391,7 @@ function _createStations() {
         ],
       },
       {
-        _id: '5cksxjas89xjsa8xjsa8jxs09',
+        _id: '108',
         name: 'Funky Monks',
         tags: ['Happy'],
         createdBy: {
@@ -420,7 +402,7 @@ function _createStations() {
         likedByUsers: ['{minimal-user}', '{minimal-user}'],
         songs: [
           {
-            id: 's1001',
+            id: 's1018',
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
             imgUrl:
@@ -429,7 +411,7 @@ function _createStations() {
             addedAt: 162521765262,
           },
           {
-            id: 'mUkfiLjooxs',
+            id: 's1019',
             title: "The JB's - Pass The Peas",
             url: 'youtube/song.mp4',
             imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
@@ -445,7 +427,7 @@ function _createStations() {
         ],
       },
       {
-        _id: '5cksxjas89xjsa8xjsa8jxs09',
+        _id: '110',
         name: 'Funky Monks',
         tags: ['Happy'],
         createdBy: {
@@ -456,7 +438,7 @@ function _createStations() {
         likedByUsers: ['{minimal-user}', '{minimal-user}'],
         songs: [
           {
-            id: 's1001',
+            id: 's1020',
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
             imgUrl:
@@ -465,7 +447,7 @@ function _createStations() {
             addedAt: 162521765262,
           },
           {
-            id: 'mUkfiLjooxs',
+            id: 's1021',
             title: "The JB's - Pass The Peas",
             url: 'youtube/song.mp4',
             imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
@@ -519,4 +501,3 @@ async function addSongToStation(video, station) {
   const savedStation = await save(updatedStation)
   return savedStation
 }
-

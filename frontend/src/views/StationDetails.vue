@@ -31,6 +31,7 @@
         <span>{{ idx + 1 }}</span>
         <img class="song-img" :src="song.imgUrl" />
         <p class="song-title">{{ song.title }}</p>
+        <button @click="removeSong(song.id, station._id)">x</button>
         <p class="posted-at">1 day ago</p>
         <p class="song-duration">1:40</p>
       </li>
@@ -56,7 +57,7 @@ import StationEdit from '../cmps/StationEdit.vue'
 import Search from './Search.vue'
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
-// import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 export default {
   name: 'station-details',
   data() {
@@ -88,6 +89,16 @@ export default {
         } catch (e) {
           console.error(e)
         }
+      }
+    },
+    async removeSong(songId, stationId) {
+      try {
+        // const station = this.stations.find((s) => s._id === stationId)
+        await this.$store.dispatch({ type: 'removeSong', songId, stationId })
+        showSuccessMsg('song removed')
+      } catch (err) {
+        console.log(err)
+        showErrorMsg('Cannot remove song')
       }
     },
     toggleModal() {

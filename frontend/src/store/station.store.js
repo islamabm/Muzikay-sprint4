@@ -24,6 +24,11 @@ export const stationStore = {
     setStations(state, { stations }) {
       state.stations = stations
     },
+    removeSong(state, { songId, stationId }) {
+      const station = state.stations.find((s) => s._id === stationId)
+      const idx = station.songs.findIndex((so) => so.id === songId)
+      station.songs.splice(idx, 1)
+    },
     // addMsg(state, { toyId, newMsg }) {
     //   const toy = state.toys.find((toy) => toy._id === toyId)
     //   if (!toy.msgs) toy.msgs = []
@@ -81,6 +86,15 @@ export const stationStore = {
       } catch (err) {
         console.error('Cannot edit toy', err)
         throw err
+      }
+    },
+    async removeSong({ commit }, { songId, stationId }) {
+      try {
+        await stationService.removeSong(songId, stationId)
+        commit({ type: 'removeSong', songId, stationId })
+      } catch (err) {
+        // console.log(err)
+        console.log('Could Not delete msg')
       }
     },
     async addSong({ commit }, { video, station }) {
