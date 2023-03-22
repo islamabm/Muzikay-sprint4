@@ -1,7 +1,8 @@
 import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 // import { userService } from './user.service.js'
-
+const gUrl =
+  'https://www.googleapis.com/youtube/v3/search?part=snippet&q=love&key=AIzaSyCscIfKwq9Of8nNDj5BpdSTPiMvVebphhg'
 const STORAGE_KEY = 'station'
 _createStations()
 
@@ -11,6 +12,7 @@ export const stationService = {
   save,
   remove,
   getEmptyStation,
+  getVideos,
   // addStationMsg,
 }
 window.cs = stationService
@@ -69,6 +71,27 @@ function getEmptyStation() {
   return {
     _id: utilService.makeId(),
     // price: utilService.getRandomIntInclusive(1000, 9000),
+  }
+}
+function getVideos() {
+  // if (gSearchCache[keyword]) {
+  //   console.log('Loading from cache')
+  //   return Promise.resolve(gSearchCache[keyword])
+  // }
+
+  return axios.get(gUrl).then((res) => {
+    console.log('res', res)
+    const videos = res.data.items.map((item) => _prepareData(item))
+    // gSearchCache[keyword] = videos
+    // saveToStorage(SEARCH_KEY, gSearchCache)
+    return videos
+  })
+}
+function _prepareData(item) {
+  return {
+    videoId: item.id.videoId,
+    title: item.snippet.title,
+    url: item.snippet.thumbnails.high.url,
   }
 }
 

@@ -7,25 +7,6 @@ export function getActionRemoveStation(stationId) {
     stationId,
   }
 }
-// export function getActionAddStation(station) {
-//   return {
-//     type: 'addStation',
-//     station,
-//   }
-// }
-// export function getActionUpdateStation(station) {
-//   return {
-//     type: 'updateStation',
-//     station,
-//   }
-// }
-// export function getActionAddStationMsg(stationId) {
-//   return {
-//     type: 'addStationMsg',
-//     stationId,
-//     txt: 'Stam txt',
-//   }
-// }
 
 export const stationStore = {
   state: {
@@ -43,9 +24,7 @@ export const stationStore = {
     setStations(state, { stations }) {
       state.stations = stations
     },
-    // addStation(state, { station }) {
-    //   state.stations.push(station)
-    // },
+
     editStation(state, { station }) {
       console.log(station)
       const idx = state.stations.findIndex((c) => c._id === station._id)
@@ -57,26 +36,8 @@ export const stationStore = {
         (station) => station._id !== stationId
       )
     },
-    // addStationMsg(state, { stationId, msg }) {
-    //   const station = state.stations.find(
-    //     (station) => station._id === stationId
-    //   )
-    //   if (!station.msgs) station.msgs = []
-    //   station.msgs.push(msg)
-    // },
   },
   actions: {
-    // async addStation(context, { station }) {
-    //   try {
-    //     station = await stationService.save(station)
-    //     context.commit(getActionAddStation(station))
-    //     return station
-    //   } catch (err) {
-    //     console.log('stationStore: Error in addStation', err)
-    //     throw err
-    //   }
-    // },
-
     async loadStations(context) {
       try {
         const stations = await stationService.query()
@@ -95,15 +56,15 @@ export const stationStore = {
         throw err
       }
     },
-    async removeStation(context, { stationId }) {
-      try {
-        await stationService.remove(stationId)
-        context.commit(getActionRemoveStation(stationId))
-      } catch (err) {
-        console.log('stationStore: Error in removeStation', err)
-        throw err
-      }
-    },
+    // async removeStation(context, { stationId }) {
+    //   try {
+    //     await stationService.remove(stationId)
+    //     context.commit(getActionRemoveStation(stationId))
+    //   } catch (err) {
+    //     console.log('stationStore: Error in removeStation', err)
+    //     throw err
+    //   }
+    // },
     async editstation({ commit }, { station }) {
       try {
         const savedStation = await stationService.save(station)
@@ -113,15 +74,30 @@ export const stationStore = {
         throw err
       }
     },
-
-    // async addStationMsg(context, { stationId, txt }) {
-    //   try {
-    //     const msg = await stationService.addStationMsg(stationId, txt)
-    //     context.commit({ type: 'addStationMsg', stationId, msg })
-    //   } catch (err) {
-    //     console.log('stationStore: Error in addStationMsg', err)
-    //     throw err
-    //   }
-    // },
+    async updateStationSong(context, { stationId, newSong }) {
+      try {
+        const stationIdx = context.state.stations.findIndex(
+          (station) => station._id === stationId
+        )
+        if (stationIdx === -1) return // station not found
+        const station = context.state.stations[stationIdx]
+        const updatedStation = {
+          ...station,
+          songs: [newSong, ...station.songs.slice(1)],
+        }
+        const savedStation = await stationService.save(updatedStation)
+        context.commit({
+          type: 'setStations',
+          stations: [
+            ...context.state.stations.slice(0, stationIdx),
+            savedStation,
+            ...context.state.stations.slice(stationIdx + 1),
+          ],
+        })
+      } catch (err) {
+        console.error('Cannot update station song', err)
+        throw err
+      }
+    },
   },
 }
