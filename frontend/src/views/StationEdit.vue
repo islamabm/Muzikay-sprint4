@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     stationInput() {
-      let editedStation = this.station
+      let editedStation = {...this.station}
       this.$store
         .dispatch({ type: 'editstation', station: editedStation })
         .then(() => {

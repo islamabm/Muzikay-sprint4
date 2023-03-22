@@ -14,9 +14,9 @@
           <div class="likes-count-logo">
             <i class="logo-green" v-html="getSvg('greenLogo')"></i>
             <span class="small-logo-word">Muzikay</span>
-            <span>6,950,331 likes</span>•<span>{{ songsCount }}</span>
+            <span>6,950,331 likes</span>•<span>{{ songsCount }},</span>
+            <span>about 11 hr </span>
           </div>
-          <span>about 11 hr </span>
         </div>
         <div v-else>...</div>
       </div>
