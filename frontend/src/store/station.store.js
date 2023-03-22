@@ -24,11 +24,11 @@ export const stationStore = {
     setStations(state, { stations }) {
       state.stations = stations
     },
-    addMsg(state, { toyId, newMsg }) {
-      const toy = state.toys.find((toy) => toy._id === toyId)
-      if (!toy.msgs) toy.msgs = []
-      toy.msgs.push(newMsg)
-    },
+    // addMsg(state, { toyId, newMsg }) {
+    //   const toy = state.toys.find((toy) => toy._id === toyId)
+    //   if (!toy.msgs) toy.msgs = []
+    //   toy.msgs.push(newMsg)
+    // },
     // addSong(state, { newStation }) {
     //   state.stations.push(newStation)
     //   console.log(newStation)
@@ -84,12 +84,15 @@ export const stationStore = {
       }
     },
     async addSong({ commit }, { video, station }) {
-      console.log('video from store' , video)
-      console.log('station from store' ,station)
+      console.log('video from store', video)
+      console.log('station from store', station)
       try {
-        console.log('video inside try store' , video)
-        console.log('station inside try store' ,station)
-        const updatedStation = await stationService.addSongToStation(video, station)
+        console.log('video inside try store', video)
+        console.log('station inside try store', station)
+        const updatedStation = await stationService.addSongToStation(
+          video,
+          station
+        )
         console.log('This is the updated station: ', updatedStation)
         commit({ type: 'editStation', station: updatedStation })
       } catch (err) {
@@ -97,7 +100,7 @@ export const stationStore = {
         throw err
       }
     },
-    
+
     // async addMsg({ commit }, { toyId, txt }) {
     //   try {
     //     const newMsg = await toyService.addMsg(toyId, txt)
