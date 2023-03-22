@@ -1,22 +1,33 @@
 <template>
   <section v-if="station" class="station-details">
-    <section class="stetion">
-      <h1 @click="editStation">Playlist</h1>
-      <p>Playlist Relax and indulge with beautiful piano pieces</p>
-      <h1>{{ station.name || stationCount }}</h1>
+
+    <section class="station-details-header">
+
       <img v-if="station.songs" :src="station.songs[0].imgUrl" />
       <button v-else><svg>🎵</svg></button>
-      <img
-        class="spotify-img"
-        src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Black.png"
-      />
+
+
+
+      <div class="station-info">
+      <h1 class="playlist-word" @click="editStation">Playlist</h1>
+      <h1 class="station-name">{{ station.name || stationCount }}</h1>
+      <p class="station-description">Playlist Relax and indulge with beautiful piano pieces</p>
       <div v-if="station.songs">
-        <span>6,950,331 likes</span>, <span>{{ songsCount }}</span>
+        <div class="likes-count-logo">
+          <i class="logo-green" v-html="getSvg('greenLogo')"></i>
+          <span class="small-logo-word">Muzikay</span>
+        <span>6,950,331 likes</span>•<span>{{ songsCount }}</span>
+      </div>
         <span>about 11 hr </span>
       </div>
       <div v-else>...</div>
+    </div>
     </section>
     <hr />
+
+
+
+
 
     <ul v-if="station.songs" class="clean-list">
       <li class="station" v-for="(song, idx) in station.songs" :key="idx">
@@ -55,6 +66,7 @@
 </template>
 
 <script>
+import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 export default {
@@ -63,6 +75,7 @@ export default {
     return {
       station: null,
       counter: 0,
+      dominantColor: null,
     }
   },
   watch: {
@@ -111,6 +124,9 @@ export default {
     // editStation() {
     //   this.showModal = true
     // },
+    getSvg(iconName) {
+      return svgService.getSpotifySvg(iconName)
+    },
     stationCount() {
       this.counter++
       // const count = this.station.length
