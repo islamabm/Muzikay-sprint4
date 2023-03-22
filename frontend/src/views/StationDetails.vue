@@ -1,8 +1,8 @@
 <template>
   <section v-if="station" class="station-details">
     <section ref="stationDetailsHeader" class="station-details-header">
-      <img v-if="station.songs" :src="station.songs[0].imgUrl" />
-      <button v-else><svg>🎵</svg></button>
+      <!-- <img v-if="station.songs" :src="station.songs[0].imgUrl" /> -->
+      <button><svg>🎵</svg></button>
 
       <div class="station-info">
         <h1 class="playlist-word" @click="toggleModal">Playlist</h1>
