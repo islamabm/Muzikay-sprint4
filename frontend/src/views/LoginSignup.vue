@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="container about">
     <p>{{ msg }}</p>
 
@@ -119,4 +119,4 @@ export default {
     ImgUploader
   }
 }
-</script>
+</script> -->

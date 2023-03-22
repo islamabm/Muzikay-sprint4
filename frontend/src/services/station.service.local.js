@@ -92,7 +92,7 @@ function _createStations() {
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
             imgUrl:
-              'https://cdn4.vectorstock.com/i/1000x1000/17/23/lets-rock-music-print-graphic-design-with-guitar-vector-23381723.jpg',
+              'https://images.unsplash.com/photo-1619983081563-430f63602796?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80',
             addedBy: '{minimal-user}',
             addedAt: 162521765262,
           },
