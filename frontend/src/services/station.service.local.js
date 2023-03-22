@@ -4,6 +4,8 @@ import { utilService } from './util.service.js'
 const gUrl =
   'https://www.googleapis.com/youtube/v3/search?part=snippet&q=love&key=AIzaSyCscIfKwq9Of8nNDj5BpdSTPiMvVebphhg'
 const STORAGE_KEY = 'station'
+const SEARCH_KEY = 'videosDB'
+let gSearchCache = loadFromStorage(SEARCH_KEY) || {}
 _createStations()
 
 export const stationService = {
@@ -74,16 +76,16 @@ function getEmptyStation() {
   }
 }
 function getVideos() {
-  // if (gSearchCache[keyword]) {
-  //   console.log('Loading from cache')
-  //   return Promise.resolve(gSearchCache[keyword])
-  // }
+  if (gSearchCache) {
+    console.log('Loading from cache')
+    return Promise.resolve(gSearchCache)
+  }
 
   return axios.get(gUrl).then((res) => {
     console.log('res', res)
     const videos = res.data.items.map((item) => _prepareData(item))
-    // gSearchCache[keyword] = videos
-    // saveToStorage(SEARCH_KEY, gSearchCache)
+    gSearchCache = videos
+    saveToStorage(SEARCH_KEY, gSearchCache)
     return videos
   })
 }
