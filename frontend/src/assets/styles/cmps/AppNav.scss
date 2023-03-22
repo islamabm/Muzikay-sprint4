@@ -55,25 +55,36 @@ nav {
   .liked-create-nav {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start; /* add this line to align items to the start of the flex container */
 
     width: 100%;
   }
 
   .main-nav {
     margin-block-end: 16px;
-    margin-inline-start: 0;
+    width: 300px;
+
+    .home-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
     .home-icon {
-      width: 40px;
-      height: 40px;
+      width: 25px;
+      height: 25px;
+      margin-inline-end: 10px;
       fill: $clr6;
     }
     .search-icon {
       width: 25px;
       height: 25px;
+      margin-inline-end: 10px;
       fill: $clr6;
     }
     .library-icon {
       fill: $clr6;
+      margin-inline-end: 10px;
       width: 25px;
       height: 25px;
     }
@@ -99,15 +110,6 @@ nav {
       color: $clr6;
       font-weight: bold;
     }
-
-    &::before {
-      content: '';
-      display: inline-block;
-      width: 24px;
-      height: 24px;
-      margin-inline-start: 5px;
-      background-color: transparent;
-      /* Placeholder for the icons */
-    }
   }
 }
+

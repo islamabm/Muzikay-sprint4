@@ -23,7 +23,6 @@
     </div>
   </section>
 </template>
-
 <script>
 import { stationService } from '../services/station.service.local'
 
