@@ -53,39 +53,6 @@ async function save(station) {
   return savedStation
 }
 
-<<<<<<< HEAD
-// async function addStationMsg(stationId, name) {
-//   // Later, this is all done by the backend
-//   const station = await getById(stationId)
-//   if (!station.msgs) station.msgs = []
-
-//   const msg = {
-//     id: utilService.makeId(),
-//     by: userService.getLoggedinUser(),
-//     name,
-//   }
-//   station.msgs.push(msg)
-//   await storageService.put(STORAGE_KEY, station)
-
-//   return msg
-// }
-// function getVideos(keyword) {
-//   if (gSearchCache[keyword]) {
-//     console.log('Loading from cache')
-//     return Promise.resolve(gSearchCache[keyword])
-//   }
-
-//   return axios.get(urlYT + keyword).then(res => {
-//     console.log('res', res)
-//     const videos = res.data.items.map(item => _prepareData(item))
-//     gSearchCache[keyword] = videos
-//     saveToStorage(SEARCH_KEY, gSearchCache)
-//     return videos
-//   })
-// }
-
-=======
->>>>>>> 4e258199b9f742fe5cd368066efa793d08d95686
 function getEmptyStation() {
   return {
     //   _id: utilService.makeId(),
