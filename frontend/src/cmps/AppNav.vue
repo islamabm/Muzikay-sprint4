@@ -44,8 +44,6 @@
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
 export default {
-<<<<<<< HEAD
-=======
   data() {
     return {
       playlists: [],
@@ -53,7 +51,6 @@ export default {
       // station: stationService.createNewStation(),
     }
   },
->>>>>>> 4e258199b9f742fe5cd368066efa793d08d95686
   methods: {
     getSvg(iconName) {
       return svgService.getSpotifySvg(iconName)
