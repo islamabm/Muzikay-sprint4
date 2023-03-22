@@ -4,8 +4,8 @@
     v-bind:style="{ backgroundColor: `rgba(10,10,10, ${headerOpacity})` }"
   >
     <div class="page-navigation">
-      <RouterLink to="/">&#60;</RouterLink>
-      <RouterLink to="/go">&#62;</RouterLink>
+      <!-- <RouterLink to="/">&#60;</RouterLink>
+      <RouterLink to="/go">&#62;</RouterLink> -->
     </div>
 
     <div class="login-signup">

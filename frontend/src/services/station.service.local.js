@@ -3,8 +3,7 @@ import { utilService } from './util.service.js'
 import axios from 'axios'
 
 // import { userService } from './user.service.js'
-const gUrl =
-  'https://www.googleapis.com/youtube/v3/search?part=snippet&q=love&key=AIzaSyCscIfKwq9Of8nNDj5BpdSTPiMvVebphhg'
+const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyCscIfKwq9Of8nNDj5BpdSTPiMvVebphhg&q=`
 const STORAGE_KEY = 'station'
 const SEARCH_KEY = 'videosDB'
 let gSearchCache = utilService.loadFromStorage(SEARCH_KEY) || {}
@@ -70,13 +69,27 @@ async function save(station) {
 
 //   return msg
 // }
+// function getVideos(keyword) {
+//   if (gSearchCache[keyword]) {
+//     console.log('Loading from cache')
+//     return Promise.resolve(gSearchCache[keyword])
+//   }
 
+//   return axios.get(urlYT + keyword).then(res => {
+//     console.log('res', res)
+//     const videos = res.data.items.map(item => _prepareData(item))
+//     gSearchCache[keyword] = videos
+//     saveToStorage(SEARCH_KEY, gSearchCache)
+//     return videos
+//   })
+// }
 function getEmptyStation() {
   return {
     _id: utilService.makeId(),
     // price: utilService.getRandomIntInclusive(1000, 9000),
   }
 }
+<<<<<<< HEAD
 function getVideos() {
   if (Object.keys(gSearchCache).length > 0) {
     console.log('Loading from cache')
@@ -84,6 +97,15 @@ function getVideos() {
   }
 
   return axios.get(gUrl).then((res) => {
+=======
+function getVideos(keyword) {
+  if (gSearchCache[keyword]) {
+    console.log('Loading from cache')
+    return Promise.resolve(gSearchCache[keyword])
+  }
+
+  return axios.get(gUrl + keyword).then((res) => {
+>>>>>>> 66d20e35b0170262125372393a29a7c0ff494e79
     console.log('res', res)
     const videos = res.data.items.map((item) => _prepareData(item))
     console.log('Fetched videos:', videos)
@@ -485,7 +507,7 @@ function _createStations() {
 //               "publishedAt": "2022-11-10T19:23:58Z",
 //               "channelId": "UC2G6H2xxjSVGHPOopafVCdQ",
 //               "title": "Oliver Tree & Robin Schulz - Miss You [Official Music Video]",
-//               "description": "Oliver Tree & Robin Schulz - Miss You [Music Video]\nStream/Download: https://olivertree.lnk.to/MissYouID\n\nConnect with Oliver Tree - https://instagram.com/olivertree\nhttps://tiktok.com/@olivertree\n\nDirected & Written by Oliver Tree\nProduced by Danny Pollack\nExecutive Producers: Oliver Tree, Wes Teshome, Danny Pollack\nProduction Company: Dojohouse, Alien Boy Films\nProduction Manager: Autumn Maschi\n1st AD: Evan Coniglio\n2nd AD: Lexi Cardiel\nDP: Brett Arndt\n1st AC: Eric Gauntt\n2nd AC: Joe Albierto\nSteadicam: Luke Rihl\nProduction Designer: Matt Sokoler\nArt Director: Mitch Dillon\nSet Dresser: Emmett Tretska\nGaffer: Tristan Moffatt\nKey Grip: Kurtis Myers\nBest Boy: Julian Ross\nSwing: Travis Moffatt\nStylist: Ken Law\nStylist Assist: Matthew Johns\nKey Hair: Romina Porras\nKey Makeup: Olga Tarnovetska\nClown HMU: Patrick Bradberry\nBowlcut Mullet Supervisor: Paul Donatelli\nProduction Coordinator: Brian Mickens\nTruck PA: Alexa Casale\nSet PA: Carlos Sanchez\nSet PA: Bryant Gonzalez\nSet PA: Jesse Rojas\nSet PA: Joe Cargulia\nAD PA: Alex Turner\nDIT: Mauricio Cimino\nEditor: John Rizkallah\nAE: Digital Sword\nVFX: Thermonuclear\nColor: Company 3, Bryan Smaller\nClown Talent: Will Roberts\nLabel: Atlantic Records\nVideo Commissioner: Wes Teshome\nMarketing (Atlantic Records): Brian “Busy” Dackowski\nOliver Tree Management: Dan Awad, Paul Donatelli\nSenior Director of Video Operations: Lily Thrall\n\nLyrics: \nDon’t remind me \nI’m minding my own damn business \nDon’t try to find me \nI’m better left alone than in this\nIt doesn’t surprise me \nDo you really think that I could care \nIf you really don’t like me\nFind somebody else\nIt could be anyone else out there\n \nDon’t fret \nI don’t ever want to see you\nAnd I never want to meet you again\nOne thing\nWhen you’re angry you’re a jerk \nAnd then you treat me like I’m worth nothing \nDon’t fret \nI don’t ever want to see you \nAnd I never want to meet you again\nIt’ll happen again\nI watch it happen over and over again\n\nDon’t fret \nI don’t ever want to see you \nAnd I never want to meet you again\nOne thing\nWhen you’re angry you’re a jerk \nAnd then you treat me like I’m worth nothing \n\nDon’t remind me \nI’m minding my own damn business \nDon’t try to find me \nI’m better left alone than in this\nIt doesn’t surprise me \nDo you really think that I could care \nIf you really don’t like me\nFind somebody else\n \nDon’t fret \nI don’t ever want to see you\nAnd I never want to meet you again\nOne thing\nWhen you’re angry you’re a jerk \nAnd then you treat me like I’m worth nothing \nDon’t fret \nI don’t ever want to see you \nAnd I never want to meet you again\nIt’ll happen again\nI watch it happen over and over again\n\nDon’t fret \nI don’t ever want to see you \nAnd I never want to meet you again\nOne thing\nWhen you’re angry you’re a jerk \nAnd then you treat me like I’m worth nothing \n\nConnect with Oliver Tree:\nhttp://olivertreemusic.com\nhttps://instagram.com/olivertree\nhttps://tiktok.com/@olivertree\nhttps://twitter.com/olivertree\nhttps://facebook.com/olivertreemusic\nhttps://soundcloud.com/olivertree\nhttps://vk.com/olivertree\n\nConnect with Robin Schulz:\nhttps://robin-schulz.com\nhttps://instagram.com/robin__schulz\nhttps://tiktok.com/@robinschulzofficial\nhttps://youtube.com/robinschulz\nhttps://twitter.com/robin_schulz\nhttps://facebook.com/robin.schulz.official\n\n#OliverTree #MissYou #RobinSchulz  #IDontEverWannaSeeYouAgain #OfficialVideo #AtlanticRecords",
+//              "description": "Oliver Tree & Robin Schulz - Miss You [Music Video]\nStream/Download: https://olivertree.lnk.to/MissYouID\n\nConnect with Oliver Tree - https://instagram.com/olivertree\nhttps://tiktok.com/@olivertree\n\nDirected & Written by Oliver Tree\nProduced by Danny Pollack\nExecutive Producers: Oliver Tree, Wes Teshome, Danny Pollack\nProduction Company: Dojohouse, Alien Boy Films\nProduction Manager: Autumn Maschi\n1st AD: Evan Coniglio\n2nd AD: Lexi Cardiel\nDP: Brett Arndt\n1st AC: Eric Gauntt\n2nd AC: Joe Albierto\nSteadicam: Luke Rihl\nProduction Designer: Matt Sokoler\nArt Director: Mitch Dillon\nSet Dresser: Emmett Tretska\nGaffer: Tristan Moffatt\nKey Grip: Kurtis Myers\nBest Boy: Julian Ross\nSwing: Travis Moffatt\nStylist: Ken Law\nStylist Assist: Matthew Johns\nKey Hair: Romina Porras\nKey Makeup: Olga Tarnovetska\nClown HMU: Patrick Bradberry\nBowlcut Mullet Supervisor: Paul Donatelli\nProduction Coordinator: Brian Mickens\nTruck PA: Alexa Casale\nSet PA: Carlos Sanchez\nSet PA: Bryant Gonzalez\nSet PA: Jesse Rojas\nSet PA: Joe Cargulia\nAD PA: Alex Turner\nDIT: Mauricio Cimino\nEditor: John Rizkallah\nAE: Digital Sword\nVFX: Thermonuclear\nColor: Company 3, Bryan Smaller\nClown Talent: Will Roberts\nLabel: Atlantic Records\nVideo Commissioner: Wes Teshome\nMarketing (Atlantic Records): Brian “Busy” Dackowski\nOliver Tree Management: Dan Awad, Paul Donatelli\nSenior Director of Video Operations: Lily Thrall\n\nLyrics: \nDon’t remind me \nI’m minding my own damn business \nDon’t try to find me \nI’m better left alone than in this\nIt doesn’t surprise me \nDo you really think that I could care \nIf you really don’t like me\nFind somebody else\nIt could be anyone else out there\n \nDon’t fret \nI don’t ever want to see you\nAnd I never want to meet you again\nOne thing\nWhen you’re angry you’re a jerk \nAnd then you treat me like I’m worth nothing \nDon’t fret \nI don’t ever want to see you \nAnd I never want to meet you again\nIt’ll happen again\nI watch it happen over and over again\n\nDon’t fret \nI don’t ever want to see you \nAnd I never want to meet you again\nOne thing\nWhen you’re angry you’re a jerk \nAnd then you treat me like I’m worth nothing \n\nDon’t remind me \nI’m minding my own damn business \nDon’t try to find me \nI’m better left alone than in this\nIt doesn’t surprise me \nDo you really think that I could care \nIf you really don’t like me\nFind somebody else\n \nDon’t fret \nI don’t ever want to see you\nAnd I never want to meet you again\nOne thing\nWhen you’re angry you’re a jerk \nAnd then you treat me like I’m worth nothing \nDon’t fret \nI don’t ever want to see you \nAnd I never want to meet you again\nIt’ll happen again\nI watch it happen over and over again\n\nDon’t fret \nI don’t ever want to see you \nAnd I never want to meet you again\nOne thing\nWhen you’re angry you’re a jerk \nAnd then you treat me like I’m worth nothing \n\nConnect with Oliver Tree:\nhttp://olivertreemusic.com\nhttps://instagram.com/olivertree\nhttps://tiktok.com/@olivertree\nhttps://twitter.com/olivertree\nhttps://facebook.com/olivertreemusic\nhttps://soundcloud.com/olivertree\nhttps://vk.com/olivertree\n\nConnect with Robin Schulz:\nhttps://robin-schulz.com\nhttps://instagram.com/robin__schulz\nhttps://tiktok.com/@robinschulzofficial\nhttps://youtube.com/robinschulz\nhttps://twitter.com/robin_schulz\nhttps://facebook.com/robin.schulz.official\n\n#OliverTree #MissYou #RobinSchulz  #IDontEverWannaSeeYouAgain #OfficialVideo #AtlanticRecords",
 //               "thumbnails": {
 //                   "default": {
 //                       "url": "https://i.ytimg.com/vi/BX0lKSa_PTk/default.jpg",
