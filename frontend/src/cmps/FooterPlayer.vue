@@ -1,7 +1,7 @@
 <template>
     <div>
       <YouTube hidden
-        src="https://www.youtube.com/watch?v=RjrA-slMoZ4" 
+        src="https://www.youtube.com/watch?v=Zl64MRAqQxk" 
         @ready="onReady"
         @state-change="onStateChange"
         ref="youtube"/>
@@ -27,6 +27,7 @@
   import YouTube from 'vue3-youtube'
   
   export default {
+    props: ['station'],
     components: {
       YouTube,
     },
@@ -36,6 +37,7 @@
         currentTime: 0,
         isPlaying: false,
         intervalId: null,
+        songId: 'Zl64MRAqQxk',
       }
     },
     methods: {
@@ -57,7 +59,7 @@
             this.isPlaying = true
         } else { 
             this.isPlaying = false
-            if(this.intervalId) clearInterval(this.intervalId)
+            // if(this.intervalId) clearInterval(this.intervalId)
         }
       },
       // play/pause video
