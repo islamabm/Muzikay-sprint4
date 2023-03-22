@@ -1,121 +1,81 @@
 <template>
-<div>
-    <vue-youtube
-      ref="youtubePlayer"
-      video-id="RjrA-slMoZ4"
-      :player-vars="playerVars"
-      @ready="onPlayerReady"
-      @state-change="onPlayerStateChange"
-    />
-    <button @click="playAudio">Play</button>
-    <button @click="pauseAudio">Pause</button>
-  </div>
-</template>
-
-
-<script>
-export default {
-  data() {
-    return {
-      player: null,
-      audio: new Audio(),
-      playerVars: {
-        autoplay: 0,
-        mute: 1,
-        controls: 0,
-        showinfo: 0,
-        rel: 0,
-        fs: 0,
-      },
-    }
-  },
-  methods: {
-    onPlayerReady(event) {
-      this.player = event.target
-      this.audio.src = `https://www.youtube.com/watch?v=${this.player.getVideoData().video_id}`
-      this.audio.load()
-    },
-    onPlayerStateChange(event) {
-      if (event.data === window.YT.PlayerState.PLAYING) {
-        setInterval(() => {
-          this.audio.currentTime = this.player.getCurrentTime()
-        }, 1000)
-      }
-    },
-    playAudio() {
-      this.player.playVideo()
-      this.audio.play()
-    },
-    pauseAudio() {
-      this.player.pauseVideo()
-      this.audio.pause()
-    },
-  },
-}
-</script>
-<!-- 
-<template>
     <div>
-      <vue-youtube
-        ref="youtubePlayer"
-        video-id="VIDEO_ID"
-        :player-vars="playerVars"
-        @ready="onPlayerReady"
-        @state-change="onPlayerStateChange"
-      />
-      <button @click="playAudio">Play</button>
-      <button @click="pauseAudio">Pause</button>
+      <YouTube hidden
+        src="https://www.youtube.com/watch?v=RjrA-slMoZ4" 
+        @ready="onReady"
+        @state-change="onStateChange"
+        ref="youtube"/>
+  
+      <div class="control-buttons">
+        <button >🔀</button>
+        <button >👈</button>
+        <button @click="playAudio('play')">Play</button>
+        <button @click="playAudio('pause')">Pause</button>
+        <button >👉</button>
+        <button >🔁</button>
+      </div>
+  
+      <div class="music-bar">
+        <span>{{ formatTime(currentTime) }}</span>
+        <div class="progress-bar" :style="{ width: (currentTime / duration) * 100 + '%' }"></div>
+        <span>{{ formatTime(duration) }}</span>
+      </div>
     </div>
   </template>
   
   <script>
-
-import { createApp } from 'vue'
-import VueYoutube from 'vue3-youtube'
-import App from './App.vue'
-
-// const app = createApp(App)
-
-// app.use(VueYoutube)
-
-// app.mount('#app')
-
+  import YouTube from 'vue3-youtube'
+  
   export default {
+    components: {
+      YouTube,
+    },
     data() {
       return {
-        player: null,
-        audio: new Audio(),
-        playerVars: {
-          autoplay: 0,
-          mute: 1,
-          controls: 0,
-          showinfo: 0,
-          rel: 0,
-          fs: 0,
-        },
+        duration: 0,
+        currentTime: 0,
+        isPlaying: false,
+        intervalId: null,
       }
     },
     methods: {
-      onPlayerReady(event) {
-        this.player = event.target
-        this.audio.src = `https://www.youtube.com/watch?v=${this.player.getVideoData().video_id}`
-        this.audio.load()
+        // when the video is ready
+      onReady() {
+        this.duration = this.$refs.youtube.getDuration()
+        this.$refs.youtube.playVideo()
+        this.isPlaying = true
+        this.intervalId = setInterval(() => {
+          this.currentTime = this.$refs.youtube.getCurrentTime()
+        }, 1000)
       },
-      onPlayerStateChange(event) {
-        if (event.data === window.YT.PlayerState.PLAYING) {
-          setInterval(() => {
-            this.audio.currentTime = this.player.getCurrentTime()
-          }, 1000)
+      // when something happens- Video has ended/Video is playing/Video is paused
+      onStateChange(event) {
+        if (event.data === 0) {
+          clearInterval(this.intervalId)
+          this.isPlaying = false
+        } else if (event.data === 1) {
+            this.isPlaying = true
+        } else { 
+            this.isPlaying = false
+            if(this.intervalId) clearInterval(this.intervalId)
         }
       },
-      playAudio() {
-        this.player.playVideo()
-        this.audio.play()
+      // play/pause video
+      playAudio(action) {
+        if (action === 'play') {
+          this.$refs.youtube.playVideo()
+          this.isPlaying = true
+        } else {
+          this.$refs.youtube.pauseVideo()
+          this.isPlaying = false
+        }
       },
-      pauseAudio() {
-        this.player.pauseVideo()
-        this.audio.pause()
+      // handel the time format by parameter - currentTime / duration
+      formatTime(time) {
+        const minutes = Math.floor(time / 60)
+        const seconds = Math.floor(time % 60)
+        return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`
       },
     },
   }
-  </script> -->
+  </script>

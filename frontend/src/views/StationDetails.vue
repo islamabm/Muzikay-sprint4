@@ -14,24 +14,29 @@
           <div class="likes-count-logo">
             <i class="logo-green" v-html="getSvg('greenLogo')"></i>
             <span class="small-logo-word">Muzikay</span>
-            <span>6,950,331 likes</span>•<span>{{ songsCount }}</span>
+            <span>6,950,331 likes</span>•<span>{{ songsCount }},</span>
+            <span>about 11 hr </span>
           </div>
-          <span>about 11 hr </span>
         </div>
         <div v-else>...</div>
       </div>
     </section>
     <hr />
 
-    <ul v-if="station.songs" class="clean-list">
+ 
+    <ul v-if="station.songs" class="clean-list songs-list-details">
       <li class="station" v-for="(song, idx) in station.songs" :key="idx">
         <span>{{ idx + 1 }}</span>
-        <img :src="song.imgUrl" />
-        <p>{{ song.title }}</p>
-        <p>1 day ago</p>
-        <p>1:40</p>
+        <img class="song-img" :src="song.imgUrl" />
+        <p class="song-title">{{ song.title }}</p>
+        <p class="posted-at">1 day ago</p>
+        <p class="song-duration">1:40</p>
       </li>
     </ul>
+ 
+
+
+
     <section v-else class="empty-station-content">
       <button>x</button>
       <div>

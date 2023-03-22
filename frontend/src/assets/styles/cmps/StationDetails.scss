@@ -19,7 +19,7 @@
     .logo-green {
       height: 24px;
       width: 24px;
-      margin-right: 5px;
+      margin-inline-end: 5px;
     }
 
     img {
@@ -27,27 +27,10 @@
       height: 17%;
       object-fit: cover;
       border-radius: 5px;
-      margin-right: 24px;
+      margin-inline-end: 24px;
 
     }
 
-    button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 150px;
-      height: 150px;
-      background-color: #2d2d2d;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-right: 24px;
-
-      svg {
-        font-size: 48px;
-        color: #1db954;
-      }
-    }
 
     .station-info {
       display: flex;
@@ -56,44 +39,106 @@
       font-family: 'Roboto-Regular';
 
       .playlist-word {
-        font-size: 16px;
+        font-size: 0.9rem;
         font-weight: 600;
-        color: #ffffff;
+        color: $clr6;
         cursor: pointer;
-        margin-bottom: 8px;
+        margin-block-end: 1rem;
+        font-family: 'Circular-book';
       }
 
       .station-name {
         font-size: 4.5rem;
         width: 100%;
         font-weight: 900;
-        color: #ffffff;
-        margin-bottom: 8px;
+        color: $clr6;
+        margin-block-end: 8px;
         font-family: 'Circular-book';
       }
 
       .station-description {
-        font-size: 16px;
-        color: #ffffff;
-        margin-bottom: 16px;
+        font-size: 0.9rem;
+        color: $clr3;
         width: 100%;
+        margin-block-start: 8px; // Add a margin to the start to bring the description down
+        margin-block-end: 0;
       }
 
       .small-logo-word {
         font-family: 'Circular-book';
         line-height: 24px;
-        margin-left: -5px;
+        margin-inline-start: -5px;
       }
 
       span {
         font-size: 14px;
-        color: #ffffff;
-        margin-right: 8px;
+        color: $clr6;
+        margin-inline-end: 8px;
 
         &:last-child {
-          margin-right: 0;
+          margin-inline-end: 0;
         }
       }
+    }
+  }
+}
+
+
+.songs-list-details {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  
+  li {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba($clr2, 0.1);
+    
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    span {
+      flex-shrink: 0;
+      width: 40px;
+      text-align: center;
+      font-size: 14px;
+      color: rgba($clr3, 0.6);
+      
+    }
+
+    .song-img {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-inline-end: 1rem;
+    }
+
+    .song-title {
+      flex-grow: 1;
+      font-size: 1rem;
+      font-weight: 600;
+      color: $clr6;
+      margin-inline-end: 1rem;
+    }
+
+    .posted-at {
+      flex-shrink: 0;
+      font-size: 0.8rem;
+      color: rgba($clr3, 0.6);
+      margin-right: 16px;
+    }
+
+    .song-duration {
+      flex-shrink: 0;
+      font-size: 0.8rem;
+      color: rgba($clr3, 0.6);
+      text-align: right;
+      width: 40px;
     }
   }
 }
