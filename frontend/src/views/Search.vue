@@ -29,21 +29,6 @@ export default {
     async add() { // this function makes a mess Tal help!
       this.videos = await stationService.getVideos(this.search)
     },
-<<<<<<< HEAD
-     addToPlaylist(video) {
-      const { stationId } = this.$route.params
-      const station = this.stations.find(s => s._id === stationId)
-
-      this.$store
-        .dispatch({ type: 'addSong', video: video, station: station })
-        .then(() => {
-          console.log('Added song to playlist')
-          // showSuccessMsg('song added')
-        })
-        .catch((err) => {
-          console.log('failed to add', err)
-          // showErrorMsg('Cannot add song', err)
-=======
     async addToPlaylist(video) {
       try {
         console.log(video)
@@ -55,7 +40,6 @@ export default {
           type: 'addSong',
           video: video,
           station: station,
->>>>>>> 4e258199b9f742fe5cd368066efa793d08d95686
         })
         console.log('Added song to playlist')
         // showSuccessMsg('song added')
