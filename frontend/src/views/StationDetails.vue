@@ -24,6 +24,7 @@
       </div>
     </section>
     <hr />
+    <Search />
 
     <ul v-if="station.songs" class="clean-list songs-list-details">
       <li class="station" v-for="(song, idx) in station.songs" :key="idx">
@@ -52,6 +53,7 @@
 <script>
 import { FastAverageColor } from 'fast-average-color'
 import StationEdit from '../cmps/StationEdit.vue'
+import Search from './Search.vue'
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
 // import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
@@ -62,7 +64,7 @@ export default {
       station: null,
       showModal: '',
       counter: 0,
-      // nameEdited: '',
+      // newStationName: '',
       dominantColor: null,
     }
   },
@@ -96,11 +98,6 @@ export default {
     getSvg(iconName) {
       return svgService.getSpotifySvg(iconName)
     },
-    stationCount() {
-      this.counter++
-      // const count = this.station.length
-      return `My Playlist #${this.counter}`
-    },
   },
   watch: {
     '$route.params': {
@@ -124,9 +121,15 @@ export default {
     stations() {
       return this.$store.getters.stations
     },
+    stationCount() {
+      this.counter++
+
+      return `My Playlist #${this.counter}`
+    },
   },
   components: {
     StationEdit,
+    Search,
   },
 }
 </script>
