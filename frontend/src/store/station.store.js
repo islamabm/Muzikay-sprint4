@@ -78,13 +78,20 @@ export const stationStore = {
       try {
         // console.log(obj.video)
         console.log({ ...obj })
-        // const savedStation = await stationService.save(station)
-        // commit({ type: 'editStation', obj: savedStation })
+        
+        const updatedStation = {
+          ...obj.station,
+          songs: [...obj.station.songs, obj.video],
+        };
+        const savedStation = await stationService.save(updatedStation);
+        commit({ type: 'editStation', station: savedStation });
+    
       } catch (err) {
         console.error('Cannot add song', err)
         throw err
       }
     },
+    
 
     async updateStationSong(context, { stationId, newSong }) {
       try {
