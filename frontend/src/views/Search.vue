@@ -37,24 +37,20 @@ export default {
     addToPlaylist(video) {
       console.log(video)
       const { stationId } = this.$route.params
+      console.log(stationId)
+      console.log(this.stations)
       const station = this.stations.find((s) => s._id === stationId)
-      // let editedStation = {...this.station}
-      let obj = {
-        video,
-        station,
-      }
-      console.log('search cmp', { ...obj })
-      this.$store
-  .dispatch({ type: 'addSong', obj: { ...obj } })
-  .then(() => {
-    console.log('Added song to playlist')
-    // showSuccessMsg('song added')
-  })
-  .catch((err) => {
-    console.log('failed to add', err)
-    // showErrorMsg('Cannot add song', err)
-  })
 
+      this.$store
+        .dispatch({ type: 'addSong', video: video, station: station })
+        .then(() => {
+          console.log('Added song to playlist')
+          // showSuccessMsg('song added')
+        })
+        .catch((err) => {
+          console.log('failed to add', err)
+          // showErrorMsg('Cannot add song', err)
+        })
     },
   },
   computed: {
