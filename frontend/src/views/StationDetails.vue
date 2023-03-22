@@ -1,14 +1,13 @@
 <template>
   <section v-if="station" class="station-details">
     <section ref="stationDetailsHeader" class="station-details-header">
-      <!-- <img v-if="station.songs" :src="station.songs[0].imgUrl" /> -->
+      <img v-if="station.songs && station.songs.length > 0" :src="station.songs[0].imgUrl" />
       <button><svg>🎵</svg></button>
 
       <div class="station-info">
         <h1 class="playlist-word" @click="toggleModal">Playlist</h1>
-        <h1 class="station-name">
-          {{ station.name ? station.name : stationCount }}
-        </h1>
+        <h1 class="station-name">{{ station.name }}</h1>
+
         <p class="station-description">
           Playlist Relax and indulge with beautiful piano pieces
         </p>
