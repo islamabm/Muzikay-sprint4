@@ -33,14 +33,8 @@
         <!-- <router-link class="toy-details-link" :to="{ path: 'toy/' + toy._id }" -->
         <!-- >details</router-link -->
         <!-- >| -->
-<<<<<<< HEAD
-
-     
-        <!-- <RouterLink :to="{ path: '/station/' + station._id }"
-=======
         <!-- 
         <RouterLink :to="{ path: '/station/' + station._id }"
->>>>>>> 21c557b1142d1d82b33a1673935cc498b8e9ae73
           >Create playlist</RouterLink
         > -->
 
