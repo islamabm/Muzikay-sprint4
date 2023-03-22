@@ -9,15 +9,6 @@ import Login from './views/Login.vue'
 import StationDetails from './views/StationDetails.vue'
 import StationCollection from './views/StationCollection.vue'
 
-//  buttons for navigation
-
-// {
-/* <RouterLink to="/back">back</RouterLink> */
-// }
-// {
-/* <RouterLink to="/go">go</RouterLink> */
-// }
-
 const routes = [
   {
     path: '/signup',
@@ -67,5 +58,4 @@ const routes = [
 export const router = createRouter({
   routes,
   history: createWebHashHistory(),
-  // base: process.env.BASE_URL,
 })

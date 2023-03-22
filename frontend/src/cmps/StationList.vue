@@ -34,12 +34,6 @@ export default {
     },
   },
   emits: ['removed'],
-  data() {
-    return {}
-  },
-  components: {
-    StationPreview,
-  },
   computed: {
     happyStations() {
       return this.stations.filter((station) => station.tags.includes('Happy'))
@@ -47,6 +41,9 @@ export default {
     funkStations() {
       return this.stations.filter((station) => station.tags.includes('Funk'))
     },
+  },
+  components: {
+    StationPreview,
   },
 }
 </script>

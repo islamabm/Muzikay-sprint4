@@ -1,10 +1,12 @@
 <template>
   <section class="modal">
+    
     <label @drop.prevent="handleFile" @dragover.prevent>
       <div v-if="loading" class="loader"></div>
       <img class="image-edit" :src="img" alt="" />
       <input type="file" @change="handleFile" hidden />
     </label>
+
     <input
       @input="stationInput"
       id="name"
@@ -31,16 +33,17 @@ export default {
     }
   },
   methods: {
-    stationInput() {
+   async stationInput() { // how to change it to async function?
       let editedStation = {...this.station}
-      this.$store
+      await this.$store
         .dispatch({ type: 'editstation', station: editedStation })
-        .then(() => {
+        try {
           showSuccessMsg('station edited')
-        })
-        .catch((err) => {
+
+        }
+        catch (err) {
           showErrorMsg('Cannot edit station', err)
-        })
+        }
     },
 
     async handleFile(ev) {

@@ -51,6 +51,7 @@
         }, 1000)
       },
       // when something happens- Video has ended/Video is playing/Video is paused
+      // work but has alot of error msges 
       onStateChange(event) {
         if (event.data === 0) {
           clearInterval(this.intervalId)
@@ -59,7 +60,6 @@
             this.isPlaying = true
         } else { 
             this.isPlaying = false
-            // if(this.intervalId) clearInterval(this.intervalId)
         }
       },
       // play/pause video

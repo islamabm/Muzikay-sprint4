@@ -1,13 +1,18 @@
 <template>
   <footer class="main-footer">
     <div v-if="station" class="footer-details">
-      <!-- <img class="footer-details-img" :src=" station[0].imgUrl"> -->
-      <!-- <h3>{{ station[0].title }}</h3> -->
+      <img class="footer-details-img" :src=" station[0].imgUrl">
+      <h3>{{ station[0].title }}</h3>
       <button>💚</button>
       <button>🖼</button>
     </div>
     <div class="footer-media-player"><FooterPlayer :station="station" /></div>
-    <div class="footer-media-adjusments">alo</div>
+    <div class="footer-media-adjusments">
+      <button>🎤</button>
+      <button>orgenize</button>
+      <button>💻</button>
+      <button>🔉</button>
+    </div>
   </footer>
 </template>
 
@@ -28,13 +33,16 @@ export default {
   },
   watch: {
     '$route.params': {
-      handler() {
+     async handler() {
         const { stationId } = this.$route.params
-        stationService.getById(stationId).then((station) => {
+        const station = await stationService.getById(stationId)
+        try {
           this.station = station.songs
-          console.log(this.station)
           return this.station
-        })
+        }
+        catch (err) {
+          console.log(err);
+        }
       },
       immediate: true,
     },

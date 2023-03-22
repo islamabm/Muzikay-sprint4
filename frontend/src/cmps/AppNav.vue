@@ -37,11 +37,6 @@
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
 export default {
-  data() {
-    return {
-      // station: stationService.createNewStation(),
-    }
-  },
   methods: {
     getSvg(iconName) {
       return svgService.getSpotifySvg(iconName)
@@ -51,10 +46,5 @@ export default {
       this.$router.push(`/station/${station._id}`)
     },
   },
-  // computed: {
-  //   makeNewStation() {
-  //     return stationService.getEmptyStation()
-  //   }
-  // }
 }
 </script>

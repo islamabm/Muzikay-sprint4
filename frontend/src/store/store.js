@@ -4,7 +4,7 @@ import { userStore } from './user.store.js'
 import { stationStore } from './station.store.js'
 
 export const store = Vuex.createStore({
-  // strict: true,
+  strict: true,
   modules: {
     userStore,
     stationStore,

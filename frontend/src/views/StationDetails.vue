@@ -24,6 +24,7 @@
       </div>
     </section>
     <hr />
+
     <Search />
 
     <ul v-if="station.songs" class="clean-list songs-list-details">
@@ -36,13 +37,13 @@
       </li>
     </ul>
 
-    <section v-else class="empty-station-content">
+    <!-- <section v-else class="empty-station-content">
       <button>x</button>
       <div>
         <h3>Let's find something for your playlist</h3>
         <input type="text" placeholder="Search for songs or episodes" />
       </div>
-    </section>
+    </section> -->
   </section>
   <section v-if="showModal">
     <StationEdit :showModal="showModal"></StationEdit>
@@ -56,7 +57,6 @@ import StationEdit from '../cmps/StationEdit.vue'
 import Search from './Search.vue'
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
-// import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 export default {
   name: 'station-details',
   data() {
@@ -64,11 +64,12 @@ export default {
       station: null,
       showModal: '',
       counter: 0,
-      // newStationName: '',
       dominantColor: null,
     }
   },
   methods: {
+    // need to be fixed - permisson to photos?
+
     updateHeaderBackgroundColor(color) {
       this.$refs.stationDetailsHeader.style.backgroundColor = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
     },
@@ -91,7 +92,6 @@ export default {
       }
     },
     toggleModal() {
-      console.log(this.showModal)
       this.showModal = !this.showModal
     },
 
@@ -101,15 +101,19 @@ export default {
   },
   watch: {
     '$route.params': {
-      handler() {
+     async handler() {
         const { stationId } = this.$route.params
-        stationService.getById(stationId).then((station) => {
+        const station = await stationService.getById(stationId)
+        try {
           this.station = station
-          if (station.songs && station.songs.length > 0) {
+          if (station.songs && station.songs.length > 0) { // maybe remove after && after 11pm we dont delete anything
             this.getDominantColor(station.songs[0].imgUrl)
-          }
-        })
-      },
+        }
+      }
+      catch (err) {
+        console.log(err);
+      }
+    },
       immediate: true,
     },
   },

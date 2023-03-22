@@ -27,17 +27,21 @@
     .footer-details {
         display: flex;
         justify-content: space-between;
-        padding: 0 16px;
+        padding: 0 16px; // need to be rm
         h3 {
             // justify-content: center;
             // align-items: center;
-            margin-top: 22px;
+            margin-top: 22px; // need to be rm
         }
 
         img {
             width: 56px;
             height: 56px;
         }
+    }
+
+    .footer-media-adjusments {
+        margin-top: 22px; // need to be rm
     }
 }
 

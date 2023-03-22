@@ -8,21 +8,9 @@
 import StationsList from '../cmps/StationList.vue'
 
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
-import { stationService } from '../services/station.service.local'
-import {
-  getActionRemoveStation,
-  // getActionUpdateStation,
-  // getActionAddStationMsg,
-} from '../store/station.store'
+import {getActionRemoveStation} from '../store/station.store'
 export default {
-  data() {
-    return {
-      // stationToAdd: stationService.getEmptyStation(),
-    }
-  },
-  created() {
-    console.log('got in')
-  },
+
   computed: {
     loggedInUser() {
       return this.$store.getters.loggedinUser
@@ -33,16 +21,6 @@ export default {
   },
 
   methods: {
-    // async addStation() {
-    //   try {
-    //     await this.$store.dispatch({ type: 'addStation', station: this.stationToAdd })
-    //     showSuccessMsg('Station added')
-    //     this.stationToAdd = stationService.getEmptyStation()
-    //   } catch (err) {
-    //     console.log(err)
-    //     showErrorMsg('Cannot add station')
-    //   }
-    // },
     async removeStation(stationId) {
       try {
         await this.$store.dispatch(getActionRemoveStation(stationId))
@@ -52,29 +30,6 @@ export default {
         showErrorMsg('Cannot remove station')
       }
     },
-    // async updateStation(station) {
-    //   try {
-    //     station = { ...station }
-    //     station.price = +prompt('New price?', station.price)
-    //     await this.$store.dispatch(getActionUpdateStation(station))
-    //     showSuccessMsg('Station updated')
-    //   } catch (err) {
-    //     console.log(err)
-    //     showErrorMsg('Cannot update station')
-    //   }
-    // },
-    // async addStationMsg(stationId) {
-    //   try {
-    //     await this.$store.dispatch(getActionAddStationMsg(stationId))
-    //     showSuccessMsg('Station msg added')
-    //   } catch (err) {
-    //     console.log(err)
-    //     showErrorMsg('Cannot add station msg')
-    //   }
-    // },
-    // printStationToConsole(station) {
-    //   console.log('Station msgs:', station.msgs)
-    // },
   },
   components: {
     StationsList,

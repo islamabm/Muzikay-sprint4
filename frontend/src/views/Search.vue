@@ -11,10 +11,6 @@
           <img :src="video.url" />
           <button @click="addToPlaylist(video)">Add</button>
         </li>
-
-        <!-- <iframe autoplay loop width="150" height="150" controls muted="false">
-          <source :src="video.url" type="video/mp4" />
-        </iframe> -->
       </ul>
     </div>
   </section>
@@ -30,16 +26,12 @@ export default {
     }
   },
   methods: {
-    async add() {
+    async add() { // this function makes a mess Tal help!
       this.videos = await stationService.getVideos(this.search)
-      console.log('Assigned videos:', this.videos)
     },
-    addToPlaylist(video) {
-      console.log(video)
+     addToPlaylist(video) {
       const { stationId } = this.$route.params
-      console.log(stationId)
-      console.log(this.stations)
-      const station = this.stations.find((s) => s._id === stationId)
+      const station = this.stations.find(s => s._id === stationId)
 
       this.$store
         .dispatch({ type: 'addSong', video: video, station: station })

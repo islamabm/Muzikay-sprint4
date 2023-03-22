@@ -27,11 +27,7 @@ async function query(filterBy = { name: '' }) {
   if (filterBy.name) {
     const regex = new RegExp(filterBy.name, 'i')
     stations = stations.filter((station) => regex.test(station.name))
-    // || regex.test(station.description))
   }
-  // if (filterBy.price) {
-  //     stations = stations.filter(station => station.price <= filterBy.price)
-  // }
   return stations
 }
 
@@ -85,6 +81,7 @@ async function save(station) {
 //     return videos
 //   })
 // }
+
 function getEmptyStation() {
   return {
     //   _id: utilService.makeId(),
@@ -92,14 +89,11 @@ function getEmptyStation() {
 }
 function getVideos(keyword) {
   if (gSearchCache[keyword]) {
-    console.log('Loading from cache')
     return Promise.resolve(gSearchCache[keyword])
   }
 
   return axios.get(gUrl + keyword).then((res) => {
-    console.log('res', res)
     const videos = res.data.items.map((item) => _prepareData(item))
-    console.log('Fetched videos:', videos)
     gSearchCache = videos
     utilService.saveToStorage(SEARCH_KEY, gSearchCache)
     return videos
