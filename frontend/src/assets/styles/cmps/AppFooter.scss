@@ -12,4 +12,13 @@
     border-top: $clr8; // does not work whyy Rania whyyy 😭
     display: flex;
     justify-content: space-between;
+
+    .music-bar {
+        display: flex;
+        gap: 8px;
+        justify-content: space-between;
+        width: 100%;
+    }
+    
 }
+
