@@ -7,13 +7,23 @@
     <div>
       <div v-for="video in videos" :key="video.videoId">
         <h2>{{ video.title }}</h2>
-        <iframe autoplay loop width="150" height="150" controls muted="false">
-          <source :src="video.url" type="video/mp4" />
-        </iframe>
+        <iframe
+          :src="video.url"
+          autoplay
+          loop
+          width="150"
+          height="150"
+          controls
+          muted="false"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+        ></iframe>
       </div>
     </div>
   </section>
 </template>
+
 <script>
 import { stationService } from '../services/station.service.local'
 
