@@ -6,6 +6,7 @@
 
 <script>
 import StationsList from '../cmps/StationList.vue'
+
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { stationService } from '../services/station.service.local'
 import {
@@ -20,7 +21,7 @@ export default {
     }
   },
   created() {
-    console.log('got in');
+    console.log('got in')
   },
   computed: {
     loggedInUser() {
