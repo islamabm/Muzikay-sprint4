@@ -3,8 +3,7 @@ import { utilService } from './util.service.js'
 import axios from 'axios'
 
 // import { userService } from './user.service.js'
-const gUrl =
-  'https://www.googleapis.com/youtube/v3/search?part=snippet&q=love&key=AIzaSyCscIfKwq9Of8nNDj5BpdSTPiMvVebphhg'
+const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyCscIfKwq9Of8nNDj5BpdSTPiMvVebphhg&q=`
 const STORAGE_KEY = 'station'
 const SEARCH_KEY = 'videosDB'
 let gSearchCache = utilService.loadFromStorage(SEARCH_KEY) || {}
@@ -70,32 +69,47 @@ async function save(station) {
 
 //   return msg
 // }
+// function getVideos(keyword) {
+//   if (gSearchCache[keyword]) {
+//     console.log('Loading from cache')
+//     return Promise.resolve(gSearchCache[keyword])
+//   }
 
+//   return axios.get(urlYT + keyword).then(res => {
+//     console.log('res', res)
+//     const videos = res.data.items.map(item => _prepareData(item))
+//     gSearchCache[keyword] = videos
+//     saveToStorage(SEARCH_KEY, gSearchCache)
+//     return videos
+//   })
+// }
 function getEmptyStation() {
   return {
     _id: utilService.makeId(),
     // price: utilService.getRandomIntInclusive(1000, 9000),
   }
 }
-function getVideos() {
-  if (gSearchCache) {
+function getVideos(keyword) {
+  if (gSearchCache[keyword]) {
     console.log('Loading from cache')
-    return Promise.resolve(gSearchCache)
+    return Promise.resolve(gSearchCache[keyword])
   }
 
-  return axios.get(gUrl).then((res) => {
+  return axios.get(gUrl + keyword).then((res) => {
     console.log('res', res)
     const videos = res.data.items.map((item) => _prepareData(item))
+    console.log('Fetched videos:', videos)
     gSearchCache = videos
     utilService.saveToStorage(SEARCH_KEY, gSearchCache)
     return videos
   })
 }
+
 function _prepareData(item) {
   return {
     videoId: item.id.videoId,
     title: item.snippet.title,
-    url: item.snippet.thumbnails.high.url,
+    url: item.snippet.thumbnails.default.url, // Changed from 'thumbnails.high.url'
   }
 }
 

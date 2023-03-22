@@ -23,5 +23,21 @@
     .progress-bar {
         background-color: aqua;
     }
+
+    .footer-details {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 16px;
+        h3 {
+            // justify-content: center;
+            // align-items: center;
+            margin-top: 22px;
+        }
+
+        img {
+            width: 56px;
+            height: 56px;
+        }
+    }
 }
 
