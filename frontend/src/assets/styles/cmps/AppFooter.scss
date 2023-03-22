@@ -1,0 +1,16 @@
+.main-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    padding: 0 10px;
+    width: 100%;
+    background-color: $clr1;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    height: 90px;
+    z-index: 1;
+    border-top: $clr8; // does not work whyy Rania whyyy 😭
+    display: flex;
+    justify-content: space-between;
+}
