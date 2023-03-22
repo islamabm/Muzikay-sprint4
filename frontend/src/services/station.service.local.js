@@ -3,7 +3,7 @@ import { utilService } from './util.service.js'
 import axios from 'axios'
 
 // import { userService } from './user.service.js'
-const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyCscIfKwq9Of8nNDj5BpdSTPiMvVebphhg&q=`
+const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyA7mUfwc8_dAf8qblavJOThFcYsKufDt38&q=`
 const STORAGE_KEY = 'station'
 const SEARCH_KEY = 'videosDB'
 let gSearchCache = utilService.loadFromStorage(SEARCH_KEY) || {}
@@ -512,15 +512,11 @@ function createNewStation() {
   return newStation
 }
 
-function addSongToStation(song, station) {
-  console.log(song)
-  console.log(station)
-  const newStation = { ...station }
-  newStation.songs.push(song)
-  console.log(newStation)
-  const stations = utilService.loadFromStorage(STORAGE_KEY)
-
-  if (stations.length) stations.push(newStation)
-  utilService.saveToStorage(STORAGE_KEY, stations)
-  return newStation
+async function addSongToStation(video, station) {
+  console.log('video from addSongToStation', video)
+  console.log('station from addSongToStation', station)
+  const updatedStation = { ...station, songs: [...station.songs, video] }
+  const savedStation = await save(updatedStation)
+  return savedStation
 }
+
