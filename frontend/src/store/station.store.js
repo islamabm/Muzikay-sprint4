@@ -89,14 +89,18 @@ export const stationStore = {
       try {
         console.log('video inside try store', video)
         console.log('station inside try store', station)
-        const newStation = await stationService.addSongToStation(video, station)
-        console.log('This is the updated station: ', newStation)
-        // commit({ type: 'addSong', newStation })
+        const updatedStation = await stationService.addSongToStation(
+          video,
+          station
+        )
+        console.log('This is the updated station: ', updatedStation)
+        commit({ type: 'editStation', station: updatedStation })
       } catch (err) {
         // console.error('Cannot add song', err)
         throw err
       }
     },
+
     // async addMsg({ commit }, { toyId, txt }) {
     //   try {
     //     const newMsg = await toyService.addMsg(toyId, txt)

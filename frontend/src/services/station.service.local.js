@@ -512,15 +512,11 @@ function createNewStation() {
   return newStation
 }
 
-function addSongToStation(song, station) {
-  console.log(song)
-  console.log(station)
-  const newStation = { ...station }
-  newStation.songs.push(song)
-  console.log(newStation)
-  const stations = utilService.loadFromStorage(STORAGE_KEY)
-
-  if (stations.length) stations.push(newStation)
-  utilService.saveToStorage(STORAGE_KEY, stations)
-  return newStation
+async function addSongToStation(video, station) {
+  console.log('video from addSongToStation', video)
+  console.log('station from addSongToStation', station)
+  const updatedStation = { ...station, songs: [...station.songs, video] }
+  const savedStation = await save(updatedStation)
+  return savedStation
 }
+
