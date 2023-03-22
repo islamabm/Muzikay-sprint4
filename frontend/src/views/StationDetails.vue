@@ -116,6 +116,7 @@ export default {
   },
   components: {
     StationEdit,
+  },
     computed: {
       songsCount() {
         const count = this.station.songs.length
@@ -134,23 +135,7 @@ export default {
       },
     },
     methods: {
-      // stationInput() {
-      //   let editedStation = this.station
-      //   this.$store
-      //     .dispatch({ type: 'edit', station: editedStation })
-      //     .then(() => {
-      //       showSuccessMsg('station edited')
-      //     })
-      //     .catch((err) => {
-      //       showErrorMsg('Cannot edit station', err)
-      //     })
-      // },
-      // closeModal() {
-      //   this.showModal = false
-      // },
-      // editStation() {
-      //   this.showModal = true
-      // },
+
       getSvg(iconName) {
         return svgService.getSpotifySvg(iconName)
       },

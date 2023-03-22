@@ -7,7 +7,7 @@
     v-model="station.name"
     :placeholder="station.name"
   />
-  <!-- <button @click="updateStationName">save</button> -->
+  <button @click="stationInput">save</button>
 </template>
 
 <script>
