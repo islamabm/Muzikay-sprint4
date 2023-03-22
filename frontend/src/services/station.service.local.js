@@ -79,20 +79,19 @@ function getEmptyStation() {
 }
 function getVideos() {
   if (Object.keys(gSearchCache).length > 0) {
-    console.log('Loading from cache');
-    return Promise.resolve(gSearchCache);
+    console.log('Loading from cache')
+    return Promise.resolve(gSearchCache)
   }
 
   return axios.get(gUrl).then((res) => {
-    console.log('res', res);
-    const videos = res.data.items.map((item) => _prepareData(item));
-    console.log('Fetched videos:', videos);
-    gSearchCache = videos;
-    utilService.saveToStorage(SEARCH_KEY, gSearchCache);
-    return videos;
-  });
+    console.log('res', res)
+    const videos = res.data.items.map((item) => _prepareData(item))
+    console.log('Fetched videos:', videos)
+    gSearchCache = videos
+    utilService.saveToStorage(SEARCH_KEY, gSearchCache)
+    return videos
+  })
 }
-
 
 function _prepareData(item) {
   return {

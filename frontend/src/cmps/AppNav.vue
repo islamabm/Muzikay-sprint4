@@ -6,9 +6,20 @@
         <span>Muzikay<span class="trademark">®</span></span>
       </div>
       <div class="main-nav">
-        <RouterLink to="/station/collection">Home</RouterLink>
-        <RouterLink to="/station/search">Search</RouterLink>
-        <RouterLink to="/station/library">Your Library</RouterLink>
+
+        <RouterLink to="/station/collection">
+        <i class="home-icon icons" v-html="getSvg('homeIcon')"></i>
+        Home
+      </RouterLink>
+
+        <RouterLink to="/station/search">
+          <i class="search-icon icons" v-html="getSvg('searchIcon')"></i>
+          Search</RouterLink>
+
+        <RouterLink to="/station/library">
+          <i class="library-icon icons" v-html="getSvg('libraryIcon')"></i>
+          Your Library</RouterLink>
+
       </div>
 
       <div class="liked-create-nav">

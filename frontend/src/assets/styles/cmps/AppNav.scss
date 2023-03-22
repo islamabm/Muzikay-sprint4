@@ -15,12 +15,11 @@ nav {
     top: 0;
     z-index: 2;
     padding: 25px 16px;
-    
 
     &::after {
-      content: "";
+      content: '';
       display: block;
-      width: calc(100% - 32px); // Adjust the value to control the length of the border
+      width: calc(100% - 32px);
       height: 1px;
       background-color: rgba($clr6, 0.2);
       margin: 16px auto 0;
@@ -48,7 +47,6 @@ nav {
         font-size: 0.5rem;
         position: absolute;
         margin-inline-start: 1px;
-        
       }
     }
   }
@@ -57,15 +55,30 @@ nav {
   .liked-create-nav {
     display: flex;
     flex-direction: column;
+
     width: 100%;
   }
 
   .main-nav {
     margin-block-end: 16px;
+   margin-inline-start: 0;
+    .home-icon {
+      width: 40px;
+      height: 40px;
+      fill: $clr6;
+    }
+    .search-icon {
+      width: 25px;
+      height: 25px;
+      fill: $clr6;
+    }
+    .library-icon {
+      fill: $clr6;
+      width: 25px;
+      height: 25px;
+    }
   }
   .liked-create-nav {
-    // border-bottom: 1px solid rgba($clr6, 0.2);
-    // padding-block-end: 16px;
     margin-block-end: 16px;
   }
 
@@ -75,7 +88,7 @@ nav {
     text-decoration: none;
     font-size: 14px;
     color: $clr3;
-    padding: 8px 0;
+    padding: 8px 0 8px 5px;
     width: 100%;
 
     &:hover {
@@ -88,15 +101,13 @@ nav {
     }
 
     &::before {
-      content: "";
+      content: '';
       display: inline-block;
       width: 24px;
       height: 24px;
-      margin-inline-start: 10px;
+      margin-inline-start: 5px;
       background-color: transparent;
       /* Placeholder for the icons */
     }
   }
 }
-
-  
