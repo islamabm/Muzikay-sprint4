@@ -1,11 +1,13 @@
 import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
+import axios from 'axios'
+
 // import { userService } from './user.service.js'
 const gUrl =
   'https://www.googleapis.com/youtube/v3/search?part=snippet&q=love&key=AIzaSyCscIfKwq9Of8nNDj5BpdSTPiMvVebphhg'
 const STORAGE_KEY = 'station'
 const SEARCH_KEY = 'videosDB'
-let gSearchCache = loadFromStorage(SEARCH_KEY) || {}
+let gSearchCache = utilService.loadFromStorage(SEARCH_KEY) || {}
 _createStations()
 
 export const stationService = {
@@ -85,7 +87,7 @@ function getVideos() {
     console.log('res', res)
     const videos = res.data.items.map((item) => _prepareData(item))
     gSearchCache = videos
-    saveToStorage(SEARCH_KEY, gSearchCache)
+    utilService.saveToStorage(SEARCH_KEY, gSearchCache)
     return videos
   })
 }
