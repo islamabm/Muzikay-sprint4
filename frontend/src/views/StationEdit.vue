@@ -1,22 +1,27 @@
 <template>
-  <input
-    class="modal"
-    @input="stationInput"
-    id="name"
-    type="text"
-    v-model="station.name"
-    :placeholder="station.name"
-  />
-  <!-- <button @click="updateStationName">save</button> -->
+  <section class="modal">
+    <input
+      @input="stationInput"
+      id="name"
+      type="text"
+      v-model="station.name"
+      :placeholder="station.name"
+    />
+    <button @click="stationInput">save</button>
+    <button @click="showModal = false">x</button>
+  </section>
 </template>
 
 <script>
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 export default {
   name: 'StationEdit',
+  props: {
+    showModal: Boolean,
+  },
   methods: {
     stationInput() {
-      let editedStation = this.station
+      let editedStation = {...this.station}
       this.$store
         .dispatch({ type: 'editstation', station: editedStation })
         .then(() => {
