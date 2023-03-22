@@ -3,10 +3,10 @@
     class="header"
     v-bind:style="{ backgroundColor: `rgba(10,10,10, ${headerOpacity})` }"
   >
-    <!-- <div class="page-navigation"> -->
-      <!-- <RouterLink to="/">&#60;</RouterLink>
-      <RouterLink to="/go">&#62;</RouterLink> -->
-    <!-- </div> -->
+    <div class="page-navigation">
+      <RouterLink to="#">&#60;</RouterLink>
+      <RouterLink to="#">&#62;</RouterLink>
+    </div>
 
     <div class="login-signup">
       <RouterLink class="btn-signup" to="/signup">Sign up</RouterLink>

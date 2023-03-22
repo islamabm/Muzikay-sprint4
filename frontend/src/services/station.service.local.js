@@ -16,6 +16,7 @@ export const stationService = {
   remove,
   getEmptyStation,
   getVideos,
+  createNewStation,
   // addStationMsg,
 }
 window.cs = stationService
@@ -85,8 +86,7 @@ async function save(station) {
 // }
 function getEmptyStation() {
   return {
-    _id: utilService.makeId(),
-    // price: utilService.getRandomIntInclusive(1000, 9000),
+    //   _id: utilService.makeId(),
   }
 }
 function getVideos(keyword) {
@@ -109,9 +109,10 @@ function _prepareData(item) {
   return {
     videoId: item.id.videoId,
     title: item.snippet.title,
-    url: item.snippet.thumbnails.default.url, // Changed from 'thumbnails.high.url'
+    url: `https://www.youtube.com/embed/${item.id.videoId}`, // Changed from 'item.snippet.thumbnails.default.url'
   }
 }
+
 
 function _createStations() {
   var stations = JSON.parse(localStorage.getItem(STORAGE_KEY))
@@ -482,6 +483,33 @@ function _createStations() {
     ]
     localStorage.setItem(STORAGE_KEY, JSON.stringify(stationsList))
   }
+}
+
+function createNewStation() {
+  const newStation = {
+    _id: utilService.makeId(),
+    name: '',
+    tags: [],
+    createdBy: {
+      _id: '',
+      fullname: '',
+      imgUrl: '',
+    },
+    likedByUsers: [],
+
+    msgs: [
+      {
+        id: '',
+        from: '',
+        txt: '',
+      },
+    ],
+  }
+  const stations = utilService.loadFromStorage(STORAGE_KEY)
+  // console.log(stations)
+  if (stations.length) stations.push(newStation)
+  utilService.saveToStorage(STORAGE_KEY, stations)
+  return newStation
 }
 
 // const stationsList = {

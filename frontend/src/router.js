@@ -12,10 +12,10 @@ import StationCollection from './views/StationCollection.vue'
 //  buttons for navigation
 
 // {
-  /* <RouterLink to="/back">back</RouterLink> */
+/* <RouterLink to="/back">back</RouterLink> */
 // }
 // {
-  /* <RouterLink to="/go">go</RouterLink> */
+/* <RouterLink to="/go">go</RouterLink> */
 // }
 
 const routes = [

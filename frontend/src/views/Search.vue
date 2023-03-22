@@ -7,9 +7,11 @@
     <div>
       <div v-for="video in videos" :key="video.videoId">
         <h2>{{ video.title }}</h2>
-        <iframe autoplay loop width="150" height="150" controls muted="false">
+        <img :src="video.url" />
+
+        <!-- <iframe autoplay loop width="150" height="150" controls muted="false">
           <source :src="video.url" type="video/mp4" />
-        </iframe>
+        </iframe> -->
       </div>
     </div>
   </section>

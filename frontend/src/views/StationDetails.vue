@@ -6,7 +6,9 @@
 
       <div class="station-info">
         <h1 class="playlist-word" @click="toggleModal">Playlist</h1>
-        <h1 class="station-name">{{ station.name || stationCount }}</h1>
+        <h1 class="station-name">
+          {{ station.name ? station.name : stationCount }}
+        </h1>
         <p class="station-description">
           Playlist Relax and indulge with beautiful piano pieces
         </p>
@@ -69,29 +71,22 @@ export default {
       this.$refs.stationDetailsHeader.style.backgroundColor = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
     },
     async getDominantColor(imageSrc) {
-  const fac = new FastAverageColor();
-  const img = new Image();
-  img.crossOrigin = 'Anonymous';
+      const fac = new FastAverageColor()
+      const img = new Image()
+      img.crossOrigin = 'Anonymous'
 
-  // Prefix the image URL with the CORS proxy URL
-  const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
-  img.src = corsProxyUrl + imageSrc;
+      // Prefix the image URL with the CORS proxy URL
+      const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/'
+      img.src = corsProxyUrl + imageSrc
 
-  img.onload = async () => {
-    try {
-      const color = await fac.getColorAsync(img);
-      this.updateHeaderBackgroundColor(color);
-    } catch (e) {
-      console.error(e);
-    }
-  };
-},
-
-
-    stationCount() {
-      this.counter++
-      // const count = this.station.length
-      return `My Playlist #${this.counter}`
+      img.onload = async () => {
+        try {
+          const color = await fac.getColorAsync(img)
+          this.updateHeaderBackgroundColor(color)
+        } catch (e) {
+          console.error(e)
+        }
+      }
     },
     toggleModal() {
       console.log(this.showModal)
@@ -121,9 +116,6 @@ export default {
       immediate: true,
     },
   },
-  components: {
-    StationEdit,
-  },
   computed: {
     songsCount() {
       const count = this.station.songs.length
@@ -132,6 +124,9 @@ export default {
     stations() {
       return this.$store.getters.stations
     },
+  },
+  components: {
+    StationEdit,
   },
 }
 </script>
