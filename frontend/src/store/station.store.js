@@ -84,35 +84,19 @@ export const stationStore = {
       }
     },
     async addSong({ commit }, { video, station }) {
-      console.log(video)
-      console.log(station)
+      console.log('video from store' , video)
+      console.log('station from store' ,station)
       try {
-<<<<<<< HEAD
-        // console.log(obj.video)
-        console.log({ ...obj })
-        
-        const updatedStation = {
-          ...obj.station,
-          songs: [...obj.station.songs, obj.video],
-        };
-        const savedStation = await stationService.save(updatedStation);
-        commit({ type: 'editStation', station: savedStation });
-    
-=======
-        console.log(video)
-        console.log(station)
+        console.log('video inside try store' , video)
+        console.log('station inside try store' ,station)
         const newStation = await stationService.addSongToStation(video, station)
-        console.log(newStation)
+        console.log('This is the updated station: ',newStation)
         // commit({ type: 'addSong', newStation })
->>>>>>> 75f5636f86400c7797c0ff19f085f431139f1433
       } catch (err) {
         // console.error('Cannot add song', err)
         throw err
       }
     },
-<<<<<<< HEAD
-    
-=======
     // async addMsg({ commit }, { toyId, txt }) {
     //   try {
     //     const newMsg = await toyService.addMsg(toyId, txt)
@@ -122,7 +106,6 @@ export const stationStore = {
     //     console.log('Could Not add msg')
     //   }
     // },
->>>>>>> 75f5636f86400c7797c0ff19f085f431139f1433
 
     async updateStationSong(context, { stationId, newSong }) {
       try {
