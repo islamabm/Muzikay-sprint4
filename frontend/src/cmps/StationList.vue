@@ -33,6 +33,7 @@ export default {
       type: Array,
     },
   },
+  emits: ['removed'],
   data() {
     return {}
   },
