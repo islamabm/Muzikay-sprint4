@@ -24,6 +24,7 @@
           Your Library</RouterLink
         >
       </div>
+      <!-- <RouterLink to="/station/modal"> Modal</RouterLink> -->
 
       <div class="liked-create-nav">
         <a @click="createPlayList">Create Playlist</a>
@@ -33,11 +34,12 @@
     </div>
 
     <ul class="clean-list">
-  <li v-for="playlist in playlists" :key="playlist._id">
-    <RouterLink :to="`/station/${playlist._id}`">{{ playlist.name }}</RouterLink>
-  </li>
-</ul>
-    
+      <li v-for="playlist in playlists" :key="playlist._id">
+        <RouterLink :to="`/station/${playlist._id}`">{{
+          playlist.name
+        }}</RouterLink>
+      </li>
+    </ul>
   </nav>
 </template>
 <script>
@@ -56,15 +58,16 @@ export default {
       return svgService.getSpotifySvg(iconName)
     },
     createPlayList() {
-  this.playlistCounter++;
-  const playlistName = `My Playlist #${this.playlistCounter}`;
-  const station = stationService.createNewStation(playlistName, playlistName); // Pass the name as a second argument
-  const newPlaylist = { _id: station._id, name: playlistName };
-  this.playlists.push(newPlaylist);
-  this.$router.push(`/station/${newPlaylist._id}`);
-},
-
-
+      this.playlistCounter++
+      const playlistName = `My Playlist #${this.playlistCounter}`
+      const station = stationService.createNewStation(
+        playlistName,
+        playlistName
+      ) // Pass the name as a second argument
+      const newPlaylist = { _id: station._id, name: playlistName }
+      this.playlists.push(newPlaylist)
+      this.$router.push(`/station/${newPlaylist._id}`)
+    },
   },
 }
 </script>
