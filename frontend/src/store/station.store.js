@@ -19,6 +19,15 @@ export const stationStore = {
     songs({ stations }) {
       return stations.songs
     },
+    getUserStations({ stations }) {
+      const userStations = stations.filter(
+        (s) => s.createdBy.fullname === 'guest'
+      )
+      // if (userStations) {
+      //   console.log(userStations)
+      return userStations
+      // }
+    },
     // stationById({ stations }, stationId) {
     // console.log('before find', stations)
     // const station = stations.find((s) => {
@@ -37,6 +46,8 @@ export const stationStore = {
       state.stations = stations
     },
     removeSong(state, { songId, stationId }) {
+      console.log('mutataion', songId)
+      console.log('MUTATION', stationId)
       const station = state.stations.find((s) => s._id === stationId)
       const idx = station.songs.findIndex((so) => so.id === songId)
       station.songs.splice(idx, 1)
@@ -84,6 +95,8 @@ export const stationStore = {
     },
     async removeSong({ commit }, { songId, stationId }) {
       try {
+        console.log('store', songId)
+        console.log('store', stationId)
         await stationService.removeSong(songId, stationId)
         commit({ type: 'removeSong', songId, stationId })
       } catch (err) {
@@ -92,19 +105,18 @@ export const stationStore = {
         throw err
       }
     },
-    async addSong({ commit }, { video, stationId }) {
-      // console.log('video from store', video)
-      // console.log('station from store', station)
+    async addSong({ commit }, { video, station }) {
+      console.log('video from store', video)
+      console.log('station from store', station)
       try {
-        const station = state.station.find((s) => s._id === stationId)
-        // console.log('video inside try store', video)
-        // console.log('station inside try store', station)
+        console.log('video inside try store', video)
+        console.log('station inside try store', station)
         const updatedStation = await stationService.addSongToStation(
           video,
           station
         )
         console.log('This is the updated station: ', updatedStation)
-        commit({ type: 'addSong', station: updatedStation })
+        commit({ type: 'editStation', station: updatedStation })
       } catch (err) {
         console.error('Cannot add song', err)
         throw err

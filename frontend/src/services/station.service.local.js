@@ -63,12 +63,14 @@ function getEmptyStation() {
 
 function removeSong(songId, stationId) {
   const stations = utilService.loadFromStorage(STORAGE_KEY)
-  const station = stations.find((s) => s._id === stationId)
+  const stationIdx = stations.findIndex((s) => s._id === stationId)
+  const station = stations[stationIdx]
   const songIdx = station.songs.findIndex((so) => so._id === songId)
-  const newSongs = station.songs.splice(songIdx, 1)
-  station.songs = newSongs
-  stations.push(station)
+  station.songs.splice(songIdx, 1)
+  console.log(station)
+  stations[stationIdx] = station // Update the station in the stations array
   utilService.saveToStorage(STORAGE_KEY, stations)
+  console.log(stations)
 }
 function getVideos(keyword) {
   if (gSearchCache[keyword]) {
@@ -126,17 +128,6 @@ function createNewStation(name) {
 
   return newStation
 }
-
-// function createUserStations() {
-//   var stations = JSON.parse(localStorage.getItem(USER_KEY))
-//   if (!stations || !stations.length) {
-//     const userStations = [
-//       createNewStation('rania mamy'),
-//       createNewStation('itay maniak'),
-//     ]
-//     localStorage.setItem(USER_KEY, JSON.stringify(userStations))
-//   }
-// }
 
 async function addSongToStation(video, station) {
   console.log('video from addSongToStation', video)

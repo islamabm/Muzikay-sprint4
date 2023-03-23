@@ -34,7 +34,7 @@
     </div>
 
     <ul class="clean-list">
-      <li v-for="playlist in playlists" :key="playlist._id">
+      <li v-for="playlist in userStations" :key="playlist._id">
         <RouterLink :to="`/station/${playlist._id}`">{{
           playlist.name
         }}</RouterLink>
@@ -48,7 +48,6 @@ import { stationService } from '../services/station.service.local.js'
 export default {
   data() {
     return {
-      playlists: [],
       playlistCounter: 0,
       // station: stationService.createNewStation(),
     }
@@ -59,15 +58,21 @@ export default {
     },
     createPlayList() {
       this.playlistCounter++
+      console.log(this.playlistCounter)
       const playlistName = `My Playlist #${this.playlistCounter}`
       const station = stationService.createNewStation(
         playlistName
         // playlistName
       ) // Pass the name as a second argument
       console.log(station)
-      const newPlaylist = { _id: station._id, name: playlistName }
-      this.playlists.push(newPlaylist)
-      this.$router.push(`/station/${newPlaylist._id}`)
+      // const newPlaylist = { _id: station._id, name: playlistName }
+      this.userStations.push(station)
+      this.$router.push(`/station/${station._id}`)
+    },
+  },
+  computed: {
+    userStations() {
+      return this.$store.getters.getUserStations
     },
   },
 }

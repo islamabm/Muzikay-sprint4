@@ -32,10 +32,10 @@ export default {
     },
     async addToPlaylist(video) {
       const { stationId } = this.$route.params
-      console.log(stationId)
       try {
-        // const station = this.stations.find((s) => s._id === stationId)
-        await this.$store.dispatch({ type: 'addSong', video, stationId })
+        const station = this.stations.find((s) => s._id === stationId)
+        console.log(station)
+        await this.$store.dispatch({ type: 'addSong', video, station })
 
         //   type: 'addSong',
         //   video: video,

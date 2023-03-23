@@ -37,9 +37,8 @@
         <span>{{ idx + 1 }}</span>
         <img class="song-img" :src="song.imgUrl" />
         <p class="song-title">{{ song.title }}</p>
-        <!-- v-if="(station.createdBy.fullname = 'guest')" -->
         <button
-          @click="removeSong(song.id, station._id)"
+          @click="removeSong(song.videoId, station._id)"
           v-if="station.createdBy.fullname === 'guest'"
         >
           x
@@ -72,6 +71,7 @@ import StationEdit from '../cmps/StationEdit.vue'
 import Search from './Search.vue'
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 export default {
   name: 'station-details',
   data() {
@@ -113,6 +113,8 @@ export default {
     },
 
     async removeSong(songId, stationId) {
+      console.log('atationDetails', songId)
+      console.log('stationDetails', stationId)
       try {
         // const station = this.stations.find((s) => s._id === stationId)
         await this.$store.dispatch({ type: 'removeSong', songId, stationId })
@@ -123,7 +125,11 @@ export default {
       }
     },
     toggleModal() {
-      this.showModal = !this.showModal
+      if (this.station.createdBy.fullname === 'guest') {
+        this.showModal = !this.showModal
+      } else {
+        console.log('not user data')
+      }
     },
 
     getSvg(iconName) {

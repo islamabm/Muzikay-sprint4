@@ -152,7 +152,6 @@
       "_id": "u101",
       "fullname": "system",
       "imgUrl": "http://some-photo/"
-
     },
     "likedByUsers": ["{minimal-user}", "{minimal-user}"],
     "songs": [
