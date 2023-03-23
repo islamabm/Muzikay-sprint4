@@ -1,28 +1,17 @@
 <template>
-  <section class="station-list-container stations-container">
-    <h1 class="category-tag">Happy</h1>
-    <ul class="clean-list station-list">
-      <li class="station" v-for="station in happyStations" :key="station._id">
+  <section v-for="(stationTag, tag) in categorizedStations" :key="tag" class="station-list-container">
+    <h1 class="category-tag">{{ tag }}</h1>
+    <div class="station-list">
+      <article class="station" v-for="station in stationTag" :key="station._id">
         <StationPreview
           :station="station"
           @removed="$emit('removed', station._id)"
         />
-      </li>
-    </ul>
-  </section>
-
-  <section class="station-list-container stations-container">
-    <h1 class="category-tag">Funk</h1>
-    <ul class="clean-list station-list">
-      <li class="station" v-for="station in funkStations" :key="station.id">
-        <StationPreview
-          :station="station"
-          @removed="$emit('removed', station.id)"
-        />
-      </li>
-    </ul>
+      </article>
+    </div>
   </section>
 </template>
+
 
 <script>
 import StationPreview from './StationPreview.vue'
@@ -35,11 +24,16 @@ export default {
   },
   emits: ['removed'],
   computed: {
-    happyStations() {
-      return this.stations.filter((station) => station.tags.includes('Happy'))
-    },
-    funkStations() {
-      return this.stations.filter((station) => station.tags.includes('Funk'))
+    categorizedStations() {
+      return this.stations.reduce((acc, station) => {
+        station.tags.forEach(tag => {
+          if (!acc[tag]) {
+            acc[tag] = [];
+          }
+          acc[tag].push(station);
+        });
+        return acc;
+      }, {});
     },
   },
   components: {

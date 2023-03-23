@@ -5,7 +5,7 @@
         v-if="station.songs && station.songs.length > 0"
         :src="station.songs[0].imgUrl"
       />
-      <button v-else><svg>🎵</svg></button>
+      <img v-else src="../assets/img/empty-img.png" />
 
       <div class="station-info">
         <h1 class="playlist-word" @click="toggleModal">Playlist</h1>
@@ -21,6 +21,7 @@
             <span @click="toggleModal">6,950,331 likes</span>•<span
               >{{ songsCount }},</span
             >
+
             <span>about 11 hr </span>
           </div>
         </div>
@@ -36,22 +37,31 @@
         <span>{{ idx + 1 }}</span>
         <img class="song-img" :src="song.imgUrl" />
         <p class="song-title">{{ song.title }}</p>
-        <button @click="removeSong(song.id, station._id)">x</button>
+        <!-- v-if="(station.createdBy.fullname = 'guest')" -->
+        <button
+          @click="removeSong(song.id, station._id)"
+          v-if="station.createdBy.fullname === 'guest'"
+        >
+          x
+        </button>
         <p class="posted-at">1 day ago</p>
         <p class="song-duration">1:40</p>
       </li>
     </ul>
 
-    <!-- <section v-else class="empty-station-content">
+    <section v-else class="empty-station-content">
       <button>x</button>
       <div>
         <h3>Let's find something for your playlist</h3>
         <input type="text" placeholder="Search for songs or episodes" />
       </div>
-    </section> -->
+    </section>
   </section>
   <section v-if="showModal">
-    <StationEdit :showModal="showModal" @close="showModal = false"></StationEdit>
+    <StationEdit
+      :showModal="showModal"
+      @close="showModal = false"
+    ></StationEdit>
     <button @click="toggleModal">x</button>
   </section>
 </template>
@@ -76,34 +86,31 @@ export default {
     // need to be fixed - permisson to photos?
 
     updateBodyBackgroundColor(color) {
-  const gradient = `linear-gradient(to bottom, ${color.rgba}, #000)`
-  document.body.style.backgroundImage = gradient
-  this.$refs.stationDetailsHeader.style.backgroundColor = color.rgb
-},
-
-
+      const gradient = `linear-gradient(to bottom, ${color.rgba}, #000)`
+      document.body.style.backgroundImage = gradient
+      this.$refs.stationDetailsHeader.style.backgroundColor = color.rgb
+    },
 
     async getDominantColor(imageSrc) {
-  const fac = new FastAverageColor()
-  const img = new Image()
-  img.crossOrigin = 'Anonymous'
+      const fac = new FastAverageColor()
+      const img = new Image()
+      img.crossOrigin = 'Anonymous'
 
-  // Replace the CORS Anywhere proxy URL with a different one
-  const corsProxyUrl = 'https://api.codetabs.com/v1/proxy?quest='
-  img.src = corsProxyUrl + encodeURIComponent(imageSrc)
+      // Replace the CORS Anywhere proxy URL with a different one
+      const corsProxyUrl = 'https://api.codetabs.com/v1/proxy?quest='
+      img.src = corsProxyUrl + encodeURIComponent(imageSrc)
 
-  img.onload = async () => {
-  console.log('Image loaded')
-  try {
-    const color = await fac.getColorAsync(img)
-console.log('inside try' ,color)
-this.updateBodyBackgroundColor(color)
-
-  } catch (e) {
-    console.error(e)
-  }
-}
-},
+      img.onload = async () => {
+        console.log('Image loaded')
+        try {
+          const color = await fac.getColorAsync(img)
+          console.log('inside try', color)
+          this.updateBodyBackgroundColor(color)
+        } catch (e) {
+          console.error(e)
+        }
+      }
+    },
 
     async removeSong(songId, stationId) {
       try {
@@ -116,7 +123,6 @@ this.updateBodyBackgroundColor(color)
       }
     },
     toggleModal() {
-      console.log('alo')
       this.showModal = !this.showModal
     },
 
@@ -131,11 +137,19 @@ this.updateBodyBackgroundColor(color)
         try {
           this.station = await stationService.getById(stationId)
           // this.station = await this.$store.getters.stationById(stationId)
+<<<<<<< HEAD
           console.log(this.station)
           // if (this.station.songs && this.station.songs.length > 0) {
           // maybe remove after && after 11pm we dont delete anything
           // this.getDominantColor(this.station.songs[0].imgUrl)
           // }
+=======
+          // console.log(this.station)
+          if (this.station.songs && this.station.songs.length > 0) {
+            // maybe remove after && after 11pm we dont delete anything
+            this.getDominantColor(this.station.songs[0].imgUrl)
+          }
+>>>>>>> a55e58b36cd797224466a710f551f2a98f771431
         } catch (err) {
           console.log(err)
         }

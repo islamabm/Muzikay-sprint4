@@ -2,13 +2,15 @@ import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 import axios from 'axios'
 
+import gStations from '../../data/station.json'
 // import { userService } from './user.service.js'
 const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyA7mUfwc8_dAf8qblavJOThFcYsKufDt38&q=`
 const STORAGE_KEY = 'station'
 const SEARCH_KEY = 'videosDB'
+const USER_KEY = 'userStationDB'
 let gSearchCache = utilService.loadFromStorage(SEARCH_KEY) || {}
 _createStations()
-
+// createUserStations()
 export const stationService = {
   query,
   getById,
@@ -90,6 +92,7 @@ function _prepareData(item) {
 }
 
 function _createStations() {
+<<<<<<< HEAD
   var stations = JSON.parse(localStorage.getItem(STORAGE_KEY))
   if (!stations || !stations.length) {
     const stationsList = [
@@ -457,6 +460,11 @@ function _createStations() {
       },
     ]
     localStorage.setItem(STORAGE_KEY, JSON.stringify(stationsList))
+=======
+  let stations = gStations
+  if (!localStorage.getItem(STORAGE_KEY)) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(stations))
+>>>>>>> a55e58b36cd797224466a710f551f2a98f771431
   }
 }
 
@@ -467,7 +475,7 @@ function createNewStation(name) {
     tags: [],
     createdBy: {
       _id: '',
-      fullname: '',
+      fullname: 'guest',
       imgUrl: '',
     },
     likedByUsers: [],
@@ -481,16 +489,31 @@ function createNewStation(name) {
     ],
     new: true,
   }
-  const stations = utilService.loadFromStorage(STORAGE_KEY)
 
-  if (stations.length) stations.push(newStation)
-  utilService.saveToStorage(STORAGE_KEY, stations)
+  const stations = utilService.loadFromStorage(STORAGE_KEY)
+  stations.push(newStation)
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(stations))
+
   return newStation
 }
+
+// function createUserStations() {
+//   var stations = JSON.parse(localStorage.getItem(USER_KEY))
+//   if (!stations || !stations.length) {
+//     const userStations = [
+//       createNewStation('rania mamy'),
+//       createNewStation('itay maniak'),
+//     ]
+//     localStorage.setItem(USER_KEY, JSON.stringify(userStations))
+//   }
+// }
 
 async function addSongToStation(video, station) {
   console.log('video from addSongToStation', video)
   console.log('station from addSongToStation', station)
+  if (!station) {
+    throw new Error('Station parameter is undefined')
+  }
   const updatedStation = { ...station, songs: [...station.songs, video] }
   const savedStation = await save(updatedStation)
   return savedStation
