@@ -121,7 +121,7 @@ export default {
         const { stationId } = this.$route.params
         try {
           // const station = await stationService.getById(stationId)
-          this.station = this.$store.getters.stationById(stationId)
+          // this.station = this.$store.getters.stationById(stationId)
           console.log(this.station)
           if (station.songs && station.songs.length > 0) {
             // maybe remove after && after 11pm we dont delete anything

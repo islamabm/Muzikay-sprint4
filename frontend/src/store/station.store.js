@@ -106,11 +106,11 @@ export const stationStore = {
 
     async updateStationSong(context, { stationId, newSong }) {
       try {
-        const stationIdx = context.state.stations.findIndex(
+        const idx = context.state.stations.findIndex(
           (station) => station._id === stationId
         )
-        if (stationIdx === -1) return // station not found
-        const station = context.state.stations[stationIdx]
+        if (idx === -1) return // station not found
+        const station = context.state.stations[idx]
         const updatedStation = {
           ...station,
           songs: [newSong, ...station.songs.slice(1)],
@@ -119,9 +119,9 @@ export const stationStore = {
         context.commit({
           type: 'setStations',
           stations: [
-            ...context.state.stations.slice(0, stationIdx),
+            ...context.state.stations.slice(0, idx),
             savedStation,
-            ...context.state.stations.slice(stationIdx + 1),
+            ...context.state.stations.slice(idx + 1),
           ],
         })
       } catch (err) {
