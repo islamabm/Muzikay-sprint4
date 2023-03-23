@@ -42,13 +42,13 @@
       </li>
     </ul>
 
-    <!-- <section v-else class="empty-station-content">
+    <section v-else class="empty-station-content">
       <button>x</button>
       <div>
         <h3>Let's find something for your playlist</h3>
         <input type="text" placeholder="Search for songs or episodes" />
       </div>
-    </section> -->
+    </section>
   </section>
   <section v-if="showModal">
     <StationEdit
