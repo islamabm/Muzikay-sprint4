@@ -139,8 +139,8 @@ function createNewStation(name) {
 // }
 
 async function addSongToStation(video, station) {
-  console.log('video from addSongToStation', video)
-  console.log('station from addSongToStation', station)
+  // console.log('video from addSongToStation', video)
+  // console.log('station from addSongToStation', station)
   if (!station) {
     throw new Error('Station parameter is undefined')
   }
