@@ -120,17 +120,18 @@ export default {
       async handler() {
         const { stationId } = this.$route.params
         try {
-          // const station = await stationService.getById(stationId)
-          // this.station = this.$store.getters.stationById(stationId)
+          // this.station = await stationService.getById(stationId)
+          this.station = await this.$store.getters.stationById(stationId)
           console.log(this.station)
-          if (station.songs && station.songs.length > 0) {
-            // maybe remove after && after 11pm we dont delete anything
-            this.getDominantColor(station.songs[0].imgUrl)
-          }
+          // if (this.station.songs && this.station.songs.length > 0) {
+          // maybe remove after && after 11pm we dont delete anything
+          // this.getDominantColor(this.station.songs[0].imgUrl)
+          // }
         } catch (err) {
           console.log(err)
         }
       },
+      deep: true,
       immediate: true,
     },
   },
