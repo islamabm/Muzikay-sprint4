@@ -25,8 +25,8 @@
             @blur="stationInput"
             id="description"
             rows="4"
-            v-model="station.description"
-            :placeholder="station.description"
+            v-model="station.desc"
+            placeholder="add an optional description"
           ></textarea>
           <button class="btn-save-changes" @click="stationInput">Save</button>
         </div>
@@ -51,7 +51,10 @@ export default {
   methods: {
     async stationInput() {
       let editedStation = { ...this.station }
-      await this.$store.dispatch({ type: 'editstation', station: editedStation })
+      await this.$store.dispatch({
+        type: 'editstation',
+        station: editedStation,
+      })
       try {
         showSuccessMsg('station edited')
       } catch (err) {

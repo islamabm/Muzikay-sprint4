@@ -5,7 +5,7 @@
         v-if="station.songs && station.songs.length > 0"
         :src="station.songs[0].imgUrl"
       />
-      <img v-else src="../assets/img/empty-img.png" />
+      <img class="deafult-image" v-else src="../assets/img/empty-img.png" />
 
       <div class="station-info">
         <h1 class="playlist-word" @click="toggleModal">Playlist</h1>
@@ -47,6 +47,32 @@
         <p class="song-duration">1:40</p>
       </li>
     </ul>
+    <!-- <ul
+      v-if="station.songs"
+      class="clean-list songs-list-details"
+      @dragover.prevent
+      @drop="onDrop"
+    >
+      <li
+        class="station"
+        v-for="(song, idx) in station.songs"
+        :key="idx"
+        draggable="true"
+        @dragstart="onDragStart(song, idx)"
+      >
+        <span>{{ idx + 1 }}</span>
+        <img class="song-img" :src="song.imgUrl" />
+        <p class="song-title">{{ song.title }}</p>
+        <button
+          @click="removeSong(song.videoId, station._id)"
+          v-if="station.createdBy.fullname === 'guest'"
+        >
+          x
+        </button>
+        <p class="posted-at">1 day ago</p>
+        <p class="song-duration">1:40</p>
+      </li>
+    </ul> -->
 
     <section v-else class="empty-station-content">
       <button>x</button>
