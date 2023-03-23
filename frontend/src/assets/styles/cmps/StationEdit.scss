@@ -11,7 +11,7 @@
   z-index: 999;
 }
 
-.playlist-edit-modal {
+.edit-details-section {
   background-color: #282828;
   padding: 20px;
   border-radius: 5px;
@@ -19,7 +19,7 @@
   font-family: 'Circular-book';
   
 
-  .modal-header {
+  .edit-details-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -41,23 +41,23 @@
     }
   }
 
-  .modal-content {
+  .edit-details-img{
     display: flex;
 
-    .cover-image {
+    .cover-img {
       position: relative;
       width: 50%;
       height: 200px;
       margin-right: 20px;
 
-      .image-edit {
+      .img-edit {
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
     }
 
-    .modal-body {
+    .edit-details-inputs {
       display: flex;
       flex-direction: column;
       flex: 1;

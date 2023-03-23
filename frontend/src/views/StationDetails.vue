@@ -130,11 +130,13 @@ export default {
           console.log(err)
         }
       },
+      //deep watch - yaron
       immediate: true,
     },
   },
   computed: {
     songsCount() {
+      //this 'songs' word should be dynamic, in case we might wanna translate it
       const count = this.station.songs.length
       return `${count} Songs`
     },
@@ -142,6 +144,7 @@ export default {
       return this.$store.getters.stations
     },
     stationCount() {
+      //computed can't do this
       this.counter++
 
       return `My Playlist #${this.counter}`

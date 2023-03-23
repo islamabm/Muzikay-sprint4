@@ -1,17 +1,17 @@
 <template>
   <div class="backdrop">
-    <section class="playlist-edit-modal">
-      <div class="modal-header">
+    <section class="edit-details-section">
+      <div class="edit-details-header">
         <h3>Edit details</h3>
         <button class="btn-close-modal" @click="showModal = false">x</button>
       </div>
-      <div class="modal-content">
-        <label class="cover-image" @drop.prevent="handleFile" @dragover.prevent>
+      <div class="edit-details-img">
+        <label class="cover-img" @drop.prevent="handleFile" @dragover.prevent>
           <div v-if="loading" class="loader"></div>
-          <img class="image-edit" :src="img" alt="Playlist cover" />
+          <img class="img-edit" :src="img" alt="Station cover" />
           <input type="file" @change="handleFile" hidden />
         </label>
-        <div class="modal-body">
+        <div class="edit-details-inputs">
           <input
             class="edit-name"
             @input="stationInput"
