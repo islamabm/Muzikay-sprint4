@@ -21,15 +21,13 @@ import MediaPlayer from './MediaPlayer.vue'
 // import { stationService } from '../services/station.service.local'
 export default {
   name: 'AppFooter',
+  emits: ['songIdx'],
   data() {
     return {
       station: null,
       currStation: null,
       currSongIdx: 0,
     }
-  },
-  created() {
-    this.$store.dispatch({ type: 'loadStations' })
   },
   methods: {
     getSongIdx(songIdx) {

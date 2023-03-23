@@ -17,12 +17,11 @@
   
       <div class="music-bar">
         <span>{{ formatTime(currentTime) }}</span>
-        <div class="progress-bar" :style="{ width: (currentTime / duration) * 100 + '%' }"></div>
+        <div class="progress-bar"></div>
         <span>{{ formatTime(duration) }}</span>
       </div>
     </div>
   </template>
-  
   <script>
   import YouTube from 'vue3-youtube'
   // import {stationService} from '../services/station.service.local'
@@ -97,8 +96,6 @@
         try {
           this.station = await this.$store.getters.stationById(stationId)
           this.currStation = this.station
-
-          console.log(this.station);
         }
         catch (err) {
           console.log(err,'cannot get id from route params');
