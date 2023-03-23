@@ -25,12 +25,10 @@
   
   <script>
   import YouTube from 'vue3-youtube'
-  import {stationService} from '../services/station.service.local'
+  // import {stationService} from '../services/station.service.local'
 
   export default {
-    // props: {
-    //   station: Object, // supossed to get station._id to the youtube search
-    // },
+    name: ['MediaPlayer'],
     components: {
       YouTube,
     },
@@ -49,15 +47,13 @@
       stationId() {
         if(this.currStation) return this.currStation.songs[this.songIdx].id
         else return 'Oqtnee5Nqxw' 
-        //  console.log(this.currStation.songs[this.songIdx].id)
       }
     },
     methods: {
       // the function gets direction 1/-1 and switches the song by it.
       switchSong(num) {
         this.songIdx += num
-        // this.currStation.songs[this.songIdx]
-        // console.log(this.currStation.songs,num,'currstation and num');
+        this.$emit('songIdx' , this.songIdx)
       },
       // when the video is ready
       onReady() {
@@ -101,6 +97,7 @@
         try {
           this.station = await this.$store.getters.stationById(stationId)
           this.currStation = this.station
+
           console.log(this.station);
         }
         catch (err) {

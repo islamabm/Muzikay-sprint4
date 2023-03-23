@@ -137,19 +137,11 @@ export default {
         try {
           this.station = await stationService.getById(stationId)
           // this.station = await this.$store.getters.stationById(stationId)
-<<<<<<< HEAD
-          console.log(this.station)
-          // if (this.station.songs && this.station.songs.length > 0) {
-          // maybe remove after && after 11pm we dont delete anything
-          // this.getDominantColor(this.station.songs[0].imgUrl)
-          // }
-=======
           // console.log(this.station)
           if (this.station.songs && this.station.songs.length > 0) {
             // maybe remove after && after 11pm we dont delete anything
             this.getDominantColor(this.station.songs[0].imgUrl)
           }
->>>>>>> a55e58b36cd797224466a710f551f2a98f771431
         } catch (err) {
           console.log(err)
         }

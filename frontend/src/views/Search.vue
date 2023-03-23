@@ -31,6 +31,7 @@ export default {
       this.videos = await stationService.getVideos(this.search)
     },
     async addToPlaylist(video) {
+      console.log('video',video);
       const { stationId } = this.$route.params
       console.log(stationId)
       try {
