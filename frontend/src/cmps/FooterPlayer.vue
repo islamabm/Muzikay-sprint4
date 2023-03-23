@@ -1,7 +1,7 @@
 <template>
     <div>
       <YouTube hidden
-        src="https://www.youtube.com/watch?v=Zl64MRAqQxk" 
+        :src="`https://www.youtube.com/watch?v=4x1ckzoywqY`" 
         @ready="onReady"
         @state-change="onStateChange"
         ref="youtube"/>
@@ -27,7 +27,9 @@
   import YouTube from 'vue3-youtube'
   
   export default {
-    props: ['station'],
+    props: {
+      station: Object, // supossed to get station._id to the youtube search
+    },
     components: {
       YouTube,
     },
@@ -37,11 +39,10 @@
         currentTime: 0,
         isPlaying: false,
         intervalId: null,
-        songId: 'Zl64MRAqQxk',
       }
     },
     methods: {
-        // when the video is ready
+      // when the video is ready
       onReady() {
         this.duration = this.$refs.youtube.getDuration()
         this.$refs.youtube.playVideo()

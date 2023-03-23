@@ -1,8 +1,8 @@
 <template>
   <footer class="main-footer">
     <div v-if="station" class="footer-details">
-      <img class="footer-details-img" :src=" station[0].imgUrl">
-      <h3>{{ station[0].title }}</h3>
+      <img class="footer-details-img" :src="station.songs[0].imgUrl">
+      <h3>{{ station.songs[0].title }}</h3>
       <button>💚</button>
       <button>🖼</button>
     </div>
@@ -21,41 +21,28 @@ import FooterPlayer from './FooterPlayer.vue'
 import { stationService } from '../services/station.service.local'
 export default {
   name: 'AppFooter',
-  props: [],
   data() {
     return {
-      station: nul
+      station: null
     }
   },
   created() {
     this.$store.dispatch({ type: 'loadStations' })
-    this.station = this.stations
   },
   watch: {
     '$route.params': {
      async handler() {
         const { stationId } = this.$route.params
         const station = await stationService.getById(stationId)
+        console.log(station);
         try {
-          this.station = station.songs
-          return this.station
+          this.station = station
         }
         catch (err) {
           console.log(err);
         }
       },
       immediate: true,
-    },
-  },
-  computed: {
-    stations() {
-      // console.log(this.$store.getters.stations[0].songs[0].imgUrl);
-      // this.song = {
-      // img: this.$store.getters.stations[0].songs[0].imgUrl,
-      // title: this.$store.getters.stations[0].songs[0].title
-      // }
-      //   return this.$store.getters.stations[0].songs[0].imgUrl
-      // return this.song
     },
   },
   components: {
