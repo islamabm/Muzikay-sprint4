@@ -1,4 +1,7 @@
 <template>
+  <!-- <section v-if="station.new">
+    <h1> i am maniak</h1>
+  </section> -->
   <section v-if="station" class="station-details">
     <section ref="stationDetailsHeader" class="station-details-header">
       <img
@@ -21,6 +24,7 @@
             <span @click="toggleModal">6,950,331 likes</span>•<span
               >{{ songsCount }},</span
             >
+
             <span>about 11 hr </span>
           </div>
         </div>
