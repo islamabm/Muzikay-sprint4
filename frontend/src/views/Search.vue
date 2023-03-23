@@ -13,7 +13,27 @@
         </li>
       </ul>
     </div>
+
+    <h2 class="category-h2">Browse all</h2>
+
+    <div class="category-container">
+      <img src="../assets/img/‏‏podcusts.PNG" alt="">
+      <img src="../assets/img/‏‏live-events.PNG" alt="">
+      <img src="../assets/img/‏‏made-for-you.PNG" alt="">
+      <img src="../assets/img/‏‏new-releases.PNG" alt="">
+      <img src="../assets/img/pop.PNG" alt="">
+      <img src="../assets/img/‏‏hip-hop.PNG" alt="">
+      <img src="../assets/img/‏‏rock.PNG" alt="">
+      <img src="../assets/img/latin.PNG" alt="">
+      <img src="../assets/img/‏‏charts.PNG" alt="">
+      <img src="../assets/img/‏‏dance-electronic.PNG" alt="">
+      <img src="../assets/img/‏‏mood.PNG" alt="">
+      <img src="../assets/img/‏‏indie.PNG" alt="">
+    </div>
   </section>
+
+
+
 </template>
 <script>
 import { stationService } from '../services/station.service.local'
