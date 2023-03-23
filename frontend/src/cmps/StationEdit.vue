@@ -3,7 +3,7 @@
     <section class="edit-details-section">
       <div class="edit-details-header">
         <h3>Edit details</h3>
-        <button class="btn-close-modal" @click="closeModal">x</button>
+        <button class="btn-close-modal" @click="$emit('close')">x</button>
       </div>
       <div class="edit-details-img">
         <label class="cover-img" @drop.prevent="handleFile" @dragover.prevent>
@@ -80,9 +80,6 @@ export default {
       } finally {
         this.loading = false // clear the loading flag once the upload is complete
       }
-    },
-    closeModal() {
-      this.$emit('update:showModal', false)
     },
   },
 
