@@ -4,25 +4,7 @@
       <input type="text" v-model="search" />
       <button type="submit">search</button>
     </form>
-    <article class="station" v-for="video in videos" :key="video.videoId">
-      <section class="playlist-preview" @click="goToStationDetails">
-        <div class="playlist-image">
-          <img src="../assets/img/empty-img.png" />
-        </div>
-        <div class="playlist-info">
-          <h2>{{ video.title }}</h2>
-          <button @click="addToPlaylist(video)">Add</button>
-        </div>
-      </section>
-      <!-- <h2>{{ video.title }}</h2>
-      <img :src="video.url" />
-      <button @click="addToPlaylist(video)">Add</button> -->
-      <!-- <StationPreview
-          :station="station"
-          @removed="$emit('removed', station._id)"
-        /> -->
-    </article>
-    <!-- <div>
+    <div>
       <ul class="clean-list" v-for="video in videos" :key="video.videoId">
         <li>
           <h2>{{ video.title }}</h2>
@@ -30,7 +12,24 @@
           <button @click="addToPlaylist(video)">Add</button>
         </li>
       </ul>
-    </div> -->
+    </div>
+
+    <h2 class="category-h2">Browse all</h2>
+
+    <div class="category-container">
+      <img src="../assets/img/‏‏podcusts.PNG" alt="" />
+      <img src="../assets/img/‏‏live-events.PNG" alt="" />
+      <img src="../assets/img/‏‏made-for-you.PNG" alt="" />
+      <img src="../assets/img/‏‏new-releases.PNG" alt="" />
+      <img src="../assets/img/pop.PNG" alt="" />
+      <img src="../assets/img/‏‏hip-hop.PNG" alt="" />
+      <img src="../assets/img/‏‏rock.PNG" alt="" />
+      <img src="../assets/img/latin.PNG" alt="" />
+      <img src="../assets/img/‏‏charts.PNG" alt="" />
+      <img src="../assets/img/‏‏dance-electronic.PNG" alt="" />
+      <img src="../assets/img/‏‏mood.PNG" alt="" />
+      <img src="../assets/img/‏‏indie.PNG" alt="" />
+    </div>
   </section>
 </template>
 <script>

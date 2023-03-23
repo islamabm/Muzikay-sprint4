@@ -30,7 +30,7 @@
     </section>
     <hr />
 
-    <Search />
+    <MiniSearch />
 
     <ul v-if="station.songs" class="clean-list songs-list-details">
       <li class="station" v-for="(song, idx) in station.songs" :key="idx">
@@ -98,6 +98,8 @@ import Search from './Search.vue'
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+import MiniSearch from '../cmps/MiniSearch.vue'
+
 export default {
   name: 'station-details',
   data() {
@@ -202,6 +204,7 @@ export default {
   components: {
     StationEdit,
     Search,
+    MiniSearch,
   },
   beforeUnmount() {
     document.body.style.background = '#181818'

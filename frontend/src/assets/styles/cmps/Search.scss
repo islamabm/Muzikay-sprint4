@@ -1,0 +1,15 @@
+.category-container {
+    display: grid;
+    grid-template-columns: repeat(6,minmax(100px,300px));
+    gap: 24px;
+    padding: 0 32px;
+    border-radius: 10px;
+    img {
+        max-width: 185px;
+    }
+}
+
+.category-h2 {
+   margin-inline-start: 32px; 
+   font-family: Circular-book;
+}
