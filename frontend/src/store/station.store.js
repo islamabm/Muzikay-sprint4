@@ -19,18 +19,18 @@ export const stationStore = {
     songs({ stations }) {
       return stations.songs
     },
-    stationById({ stations }, stationId) {
-      console.log('before find', stations)
-      const station = stations.find((s) => {
-        s._id === stationId
-        console.log('id', s._id)
-      })
-      console.log('after find', station)
-      return station
-      // stationById: (state) => (id) => {
-      // return state.stations.find((station) => station._id === id)
-      // },
+    // stationById({ stations }, stationId) {
+    // console.log('before find', stations)
+    // const station = stations.find((s) => {
+    // s._id === stationId
+    // console.log('id', s._id)
+    // })
+    // console.log('after find', station)
+    // return station
+    stationById: (state) => (id) => {
+      return state.stations.find((station) => station._id === id)
     },
+    // },
   },
   mutations: {
     setStations(state, { stations }) {

@@ -5,7 +5,7 @@
         v-if="station.songs && station.songs.length > 0"
         :src="station.songs[0].imgUrl"
       />
-      <button v-else><svg>🎵</svg></button>
+      <img v-else src="../assets/img/empty-img.png" />
 
       <div class="station-info">
         <h1 class="playlist-word" @click="toggleModal">Playlist</h1>
@@ -51,7 +51,10 @@
     </section> -->
   </section>
   <section v-if="showModal">
-    <StationEdit :showModal="showModal" @close="showModal = false"></StationEdit>
+    <StationEdit
+      :showModal="showModal"
+      @close="showModal = false"
+    ></StationEdit>
     <button @click="toggleModal">x</button>
   </section>
 </template>
@@ -76,34 +79,31 @@ export default {
     // need to be fixed - permisson to photos?
 
     updateBodyBackgroundColor(color) {
-  const gradient = `linear-gradient(to bottom, ${color.rgba}, #000)`
-  document.body.style.backgroundImage = gradient
-  this.$refs.stationDetailsHeader.style.backgroundColor = color.rgb
-},
-
-
+      const gradient = `linear-gradient(to bottom, ${color.rgba}, #000)`
+      document.body.style.backgroundImage = gradient
+      this.$refs.stationDetailsHeader.style.backgroundColor = color.rgb
+    },
 
     async getDominantColor(imageSrc) {
-  const fac = new FastAverageColor()
-  const img = new Image()
-  img.crossOrigin = 'Anonymous'
+      const fac = new FastAverageColor()
+      const img = new Image()
+      img.crossOrigin = 'Anonymous'
 
-  // Replace the CORS Anywhere proxy URL with a different one
-  const corsProxyUrl = 'https://api.codetabs.com/v1/proxy?quest='
-  img.src = corsProxyUrl + encodeURIComponent(imageSrc)
+      // Replace the CORS Anywhere proxy URL with a different one
+      const corsProxyUrl = 'https://api.codetabs.com/v1/proxy?quest='
+      img.src = corsProxyUrl + encodeURIComponent(imageSrc)
 
-  img.onload = async () => {
-  console.log('Image loaded')
-  try {
-    const color = await fac.getColorAsync(img)
-console.log('inside try' ,color)
-this.updateBodyBackgroundColor(color)
-
-  } catch (e) {
-    console.error(e)
-  }
-}
-},
+      img.onload = async () => {
+        console.log('Image loaded')
+        try {
+          const color = await fac.getColorAsync(img)
+          console.log('inside try', color)
+          this.updateBodyBackgroundColor(color)
+        } catch (e) {
+          console.error(e)
+        }
+      }
+    },
 
     async removeSong(songId, stationId) {
       try {
@@ -132,10 +132,10 @@ this.updateBodyBackgroundColor(color)
           // this.station = await stationService.getById(stationId)
           this.station = await this.$store.getters.stationById(stationId)
           console.log(this.station)
-          // if (this.station.songs && this.station.songs.length > 0) {
-          // maybe remove after && after 11pm we dont delete anything
-          // this.getDominantColor(this.station.songs[0].imgUrl)
-          // }
+          if (this.station.songs && this.station.songs.length > 0) {
+            // maybe remove after && after 11pm we dont delete anything
+            this.getDominantColor(this.station.songs[0].imgUrl)
+          }
         } catch (err) {
           console.log(err)
         }

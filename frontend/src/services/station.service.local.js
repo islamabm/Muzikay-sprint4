@@ -6,9 +6,10 @@ import axios from 'axios'
 const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyA7mUfwc8_dAf8qblavJOThFcYsKufDt38&q=`
 const STORAGE_KEY = 'station'
 const SEARCH_KEY = 'videosDB'
+const USER_KEY = 'userStationDB'
 let gSearchCache = utilService.loadFromStorage(SEARCH_KEY) || {}
 _createStations()
-
+createUserStations()
 export const stationService = {
   query,
   getById,
@@ -481,11 +482,27 @@ function createNewStation(name) {
     ],
     new: true,
   }
-  const stations = utilService.loadFromStorage(STORAGE_KEY)
 
-  if (stations.length) stations.push(newStation)
-  utilService.saveToStorage(STORAGE_KEY, stations)
+  const stations = utilService.loadFromStorage(USER_KEY)
+  console.log(stations)
+  if (!stations.length) {
+    utilService.saveToStorage(USER_KEY, newStation)
+  } else {
+    stations.push(newStation)
+    utilService.saveToStorage(USER_KEY, stations)
+  }
   return newStation
+}
+
+function createUserStations() {
+  var stations = JSON.parse(localStorage.getItem(USER_KEY))
+  if (!stations || !stations.length) {
+    const userStations = [
+      createNewStation('rania mamy'),
+      createNewStation('itay maniak'),
+    ]
+    localStorage.setItem(USER_KEY, JSON.stringify(userStations))
+  }
 }
 
 async function addSongToStation(video, station) {

@@ -61,9 +61,10 @@ export default {
       this.playlistCounter++
       const playlistName = `My Playlist #${this.playlistCounter}`
       const station = stationService.createNewStation(
-        playlistName,
         playlistName
+        // playlistName
       ) // Pass the name as a second argument
+      console.log(station)
       const newPlaylist = { _id: station._id, name: playlistName }
       this.playlists.push(newPlaylist)
       this.$router.push(`/station/${newPlaylist._id}`)
