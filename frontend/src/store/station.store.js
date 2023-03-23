@@ -19,9 +19,18 @@ export const stationStore = {
     songs({ stations }) {
       return stations.songs
     },
-    stationById(stationId){
-
-    }
+    stationById({ stations }, stationId) {
+      console.log('before find', stations)
+      const station = stations.find((s) => {
+        s._id === stationId
+        console.log('id', s._id)
+      })
+      console.log('after find', station)
+      return station
+      // stationById: (state) => (id) => {
+      // return state.stations.find((station) => station._id === id)
+      // },
+    },
   },
   mutations: {
     setStations(state, { stations }) {
@@ -32,15 +41,6 @@ export const stationStore = {
       const idx = station.songs.findIndex((so) => so.id === songId)
       station.songs.splice(idx, 1)
     },
-    // addMsg(state, { toyId, newMsg }) {
-    //   const toy = state.toys.find((toy) => toy._id === toyId)
-    //   if (!toy.msgs) toy.msgs = []
-    //   toy.msgs.push(newMsg)
-    // },
-    // addSong(state, { newStation }) {
-    //   state.stations.push(newStation)
-    //   console.log(newStation)
-    // },
 
     editStation(state, { station }) {
       console.log(station)
@@ -73,21 +73,13 @@ export const stationStore = {
         throw err
       }
     },
-    // async removeStation(context, { stationId }) {
-    //   try {
-    //     await stationService.remove(stationId)
-    //     context.commit(getActionRemoveStation(stationId))
-    //   } catch (err) {
-    //     console.log('stationStore: Error in removeStation', err)
-    //     throw err
-    //   }
-    // },
+
     async editstation({ commit }, { station }) {
       try {
         const savedStation = await stationService.save(station)
         commit({ type: 'editStation', station: savedStation })
       } catch (err) {
-        console.error('Cannot edit toy', err)
+        console.error('Cannot edit station', err)
         throw err
       }
     },
@@ -97,7 +89,8 @@ export const stationStore = {
         commit({ type: 'removeSong', songId, stationId })
       } catch (err) {
         // console.log(err)
-        console.log('Could Not delete msg')
+        console.log('Could Not delete song')
+        throw err
       }
     },
     async addSong({ commit }, { video, station }) {
@@ -113,28 +106,18 @@ export const stationStore = {
         console.log('This is the updated station: ', updatedStation)
         commit({ type: 'editStation', station: updatedStation })
       } catch (err) {
-        // console.error('Cannot add song', err)
+        console.error('Cannot add song', err)
         throw err
       }
     },
 
-    // async addMsg({ commit }, { toyId, txt }) {
-    //   try {
-    //     const newMsg = await toyService.addMsg(toyId, txt)
-    //     commit({ type: 'addMsg', toyId, newMsg })
-    //   } catch (err) {
-    //     console.log(err)
-    //     console.log('Could Not add msg')
-    //   }
-    // },
-
     async updateStationSong(context, { stationId, newSong }) {
       try {
-        const stationIdx = context.state.stations.findIndex(
+        const idx = context.state.stations.findIndex(
           (station) => station._id === stationId
         )
-        if (stationIdx === -1) return // station not found
-        const station = context.state.stations[stationIdx]
+        if (idx === -1) return // station not found
+        const station = context.state.stations[idx]
         const updatedStation = {
           ...station,
           songs: [newSong, ...station.songs.slice(1)],
@@ -143,9 +126,9 @@ export const stationStore = {
         context.commit({
           type: 'setStations',
           stations: [
-            ...context.state.stations.slice(0, stationIdx),
+            ...context.state.stations.slice(0, idx),
             savedStation,
-            ...context.state.stations.slice(stationIdx + 1),
+            ...context.state.stations.slice(idx + 1),
           ],
         })
       } catch (err) {

@@ -1,7 +1,7 @@
 <template>
   <footer class="main-footer">
     <div v-if="station" class="footer-details">
-      <img class="footer-details-img" :src="station.songs[0].imgUrl">
+      <img class="footer-details-img" :src="station.songs[0].imgUrl" />
       <h3>{{ station.songs[0].title }}</h3>
       <button>💚</button>
       <button>🖼</button>
@@ -23,7 +23,7 @@ export default {
   name: 'AppFooter',
   data() {
     return {
-      station: null
+      station: null,
     }
   },
   created() {
@@ -34,12 +34,11 @@ export default {
       async handler() {
         const { stationId } = this.$route.params
         const station = await stationService.getById(stationId)
-        console.log(station);
+        console.log(station)
         try {
           this.station = station
-        }
-        catch (err) {
-          console.log(err);
+        } catch (err) {
+          console.log(err)
         }
       },
       immediate: true,

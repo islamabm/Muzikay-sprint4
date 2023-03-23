@@ -479,6 +479,7 @@ function createNewStation(name) {
         txt: '',
       },
     ],
+    new: true,
   }
   const stations = utilService.loadFromStorage(STORAGE_KEY)
 

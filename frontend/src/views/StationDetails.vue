@@ -129,17 +129,18 @@ this.updateBodyBackgroundColor(color)
       async handler() {
         const { stationId } = this.$route.params
         try {
-          const station = await stationService.getById(stationId)
-          this.station = station
-          if (station.songs && station.songs.length > 0) {
-            // maybe remove after && after 11pm we dont delete anything
-            this.getDominantColor(station.songs[0].imgUrl)
-          }
+          // this.station = await stationService.getById(stationId)
+          this.station = await this.$store.getters.stationById(stationId)
+          console.log(this.station)
+          // if (this.station.songs && this.station.songs.length > 0) {
+          // maybe remove after && after 11pm we dont delete anything
+          // this.getDominantColor(this.station.songs[0].imgUrl)
+          // }
         } catch (err) {
           console.log(err)
         }
       },
-      //deep watch - yaron
+      deep: true,
       immediate: true,
     },
   },
@@ -152,6 +153,7 @@ this.updateBodyBackgroundColor(color)
     stations() {
       return this.$store.getters.stations
     },
+
     stationCount() {
       //computed can't do this
       this.counter++

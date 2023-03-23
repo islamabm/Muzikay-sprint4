@@ -27,7 +27,7 @@
 <script>
 import StationPreview from './StationPreview.vue'
 export default {
-  name: 'StationsList',
+  name: 'StationList',
   props: {
     stations: {
       type: Array,
