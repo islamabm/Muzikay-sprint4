@@ -10,7 +10,7 @@ const SEARCH_KEY = 'videosDB'
 const USER_KEY = 'userStationDB'
 let gSearchCache = utilService.loadFromStorage(SEARCH_KEY) || {}
 _createStations()
-createUserStations()
+// createUserStations()
 export const stationService = {
   query,
   getById,
@@ -120,27 +120,23 @@ function createNewStation(name) {
     new: true,
   }
 
-  const stations = utilService.loadFromStorage(USER_KEY)
-  console.log(stations)
-  // if (!stations.length) {
-  //   utilService.saveToStorage(USER_KEY, newStation)
-  // } else {
-  //   stations.push(newStation)
-  //   utilService.saveToStorage(USER_KEY, stations)
-  // }
+  const stations = utilService.loadFromStorage(STORAGE_KEY)
+  stations.push(newStation)
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(stations))
+
   return newStation
 }
 
-function createUserStations() {
-  var stations = JSON.parse(localStorage.getItem(USER_KEY))
-  if (!stations || !stations.length) {
-    const userStations = [
-      createNewStation('rania mamy'),
-      createNewStation('itay maniak'),
-    ]
-    localStorage.setItem(USER_KEY, JSON.stringify(userStations))
-  }
-}
+// function createUserStations() {
+//   var stations = JSON.parse(localStorage.getItem(USER_KEY))
+//   if (!stations || !stations.length) {
+//     const userStations = [
+//       createNewStation('rania mamy'),
+//       createNewStation('itay maniak'),
+//     ]
+//     localStorage.setItem(USER_KEY, JSON.stringify(userStations))
+//   }
+// }
 
 async function addSongToStation(video, station) {
   console.log('video from addSongToStation', video)
