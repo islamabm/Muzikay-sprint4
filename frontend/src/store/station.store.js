@@ -55,7 +55,6 @@ export const stationStore = {
     },
 
     editStation(state, { station }) {
-      console.log(station)
       const idx = state.stations.findIndex((c) => c._id === station._id)
       state.stations.splice(idx, 1, station)
       console.log(state.stations)
@@ -105,18 +104,19 @@ export const stationStore = {
         throw err
       }
     },
-    async addSong({ commit }, { video, station }) {
-      console.log('video from store', video)
-      console.log('station from store', station)
+    async addSong({ commit }, { video, stationId }) {
+      // console.log('video from store', video)
+      // console.log('station from store', station)
       try {
-        console.log('video inside try store', video)
-        console.log('station inside try store', station)
+        const station = state.station.find((s) => s._id === stationId)
+        // console.log('video inside try store', video)
+        // console.log('station inside try store', station)
         const updatedStation = await stationService.addSongToStation(
           video,
           station
         )
         console.log('This is the updated station: ', updatedStation)
-        commit({ type: 'editStation', station: updatedStation })
+        commit({ type: 'addSong', station: updatedStation })
       } catch (err) {
         console.error('Cannot add song', err)
         throw err

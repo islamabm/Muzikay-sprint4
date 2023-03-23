@@ -1,36 +1,33 @@
 <template>
     <div>
       <YouTube hidden
-        :src="`https://www.youtube.com/watch?v=${station? station.songs[0].id : 'ITm2605EBUg'}`" 
+        :src="`https://www.youtube.com/watch?v=${stationId}`" 
         @ready="onReady"
         @state-change="onStateChange"
         ref="youtube"/>
   
       <div class="control-buttons">
         <button >🔀</button>
-        <button >👈</button>
+        <button @click="switchSong(-1)">👈</button>
         <button @click="playAudio('play')">Play</button>
         <button @click="playAudio('pause')">Pause</button>
-        <button >👉</button>
+        <button @click="switchSong(1)">👉</button>
         <button >🔁</button>
       </div>
   
       <div class="music-bar">
         <span>{{ formatTime(currentTime) }}</span>
-        <div class="progress-bar" :style="{ width: (currentTime / duration) * 100 + '%' }"></div>
+        <div class="progress-bar"></div>
         <span>{{ formatTime(duration) }}</span>
       </div>
     </div>
   </template>
-  
   <script>
   import YouTube from 'vue3-youtube'
-  import {stationService} from '../services/station.service.local'
+  // import {stationService} from '../services/station.service.local'
 
   export default {
-    // props: {
-    //   station: Object, // supossed to get station._id to the youtube search
-    // },
+    name: ['MediaPlayer'],
     components: {
       YouTube,
     },
@@ -41,9 +38,22 @@
         isPlaying: false,
         intervalId: null,
         station: null,
+        currStation: null,
+        songIdx: 0,
+      }
+    },
+    computed: {
+      stationId() {
+        if(this.currStation) return this.currStation.songs[this.songIdx].id
+        else return 'Oqtnee5Nqxw' 
       }
     },
     methods: {
+      // the function gets direction 1/-1 and switches the song by it.
+      switchSong(num) {
+        this.songIdx += num
+        this.$emit('songIdx' , this.songIdx)
+      },
       // when the video is ready
       onReady() {
         this.duration = this.$refs.youtube.getDuration()
@@ -59,13 +69,10 @@
         if (event.data === 0) {
           clearInterval(this.intervalId)
           this.isPlaying = false
-        } else if (event.data === 1) {
-            this.isPlaying = true
-        } else { 
-            this.isPlaying = false
-        }
+        } 
+        this.isPlaying = (event.data === 1) ? true : false 
       },
-      // play/pause video
+      // play/pause video >> will be with one button and do toggle
       playAudio(action) {
         if (action === 'play') {
           this.$refs.youtube.playVideo()
@@ -87,12 +94,12 @@
       async handler() {
         const { stationId } = this.$route.params
         try {
-          const station = await stationService.getById(stationId)
-          this.station = station
-          console.log(station);
+          this.station = await this.$store.getters.stationById(stationId)
+          this.currStation = this.station
         }
         catch (err) {
-          console.log(err);
+          console.log(err,'cannot get id from route params');
+          throw err
         }
       },
       immediate: true,
