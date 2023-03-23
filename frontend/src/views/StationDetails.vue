@@ -1,7 +1,4 @@
 <template>
-  <!-- <section v-if="station.new">
-    <h1> i am maniak</h1>
-  </section> -->
   <section v-if="station" class="station-details">
     <section ref="stationDetailsHeader" class="station-details-header">
       <img
@@ -40,7 +37,13 @@
         <span>{{ idx + 1 }}</span>
         <img class="song-img" :src="song.imgUrl" />
         <p class="song-title">{{ song.title }}</p>
-        <button @click="removeSong(song.id, station._id)">x</button>
+        <!-- v-if="(station.createdBy.fullname = 'guest')" -->
+        <button
+          @click="removeSong(song.id, station._id)"
+          v-if="station.createdBy.fullname === 'guest'"
+        >
+          x
+        </button>
         <p class="posted-at">1 day ago</p>
         <p class="song-duration">1:40</p>
       </li>
@@ -134,7 +137,7 @@ export default {
         try {
           this.station = await stationService.getById(stationId)
           // this.station = await this.$store.getters.stationById(stationId)
-          console.log(this.station)
+          // console.log(this.station)
           if (this.station.songs && this.station.songs.length > 0) {
             // maybe remove after && after 11pm we dont delete anything
             this.getDominantColor(this.station.songs[0].imgUrl)

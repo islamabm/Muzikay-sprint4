@@ -5,12 +5,13 @@
     </div>
     <div class="playlist-info">
       <h3 class="playlist-title">{{ station.name }}</h3>
+
       <button
-        v-if="station.new"
         class="remove-button"
         @click="$emit('removed')"
+        v-if="station.createdBy.fullname === 'guest'"
       >
-        X
+        x
       </button>
       <!-- <button class="remove-button" @click="removeStation('remove')">x</button> -->
     </div>
