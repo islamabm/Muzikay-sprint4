@@ -28,9 +28,7 @@
       object-fit: cover;
       border-radius: 5px;
       margin-inline-end: 24px;
-
     }
-
 
     .station-info {
       display: flex;
@@ -60,7 +58,7 @@
         font-size: 0.9rem;
         color: $clr3;
         width: 100%;
-        margin-block-start: 8px; 
+        margin-block-start: 8px;
         margin-block-end: 0;
       }
 
@@ -83,19 +81,17 @@
   }
 }
 
-
 .songs-list-details {
   list-style: none;
   padding: 0;
   margin: 0;
   width: 100%;
-  
+
   li {
     display: flex;
     align-items: center;
     padding: 12px 0;
     border-bottom: 1px solid rgba($clr2, 0.1);
-    
 
     &:last-child {
       border-bottom: none;
@@ -107,7 +103,6 @@
       text-align: center;
       font-size: 14px;
       color: rgba($clr3, 0.6);
-      
     }
 
     .song-img {
@@ -142,3 +137,5 @@
     }
   }
 }
+// .deafult-image:hover {
+// }

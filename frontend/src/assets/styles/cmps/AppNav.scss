@@ -9,21 +9,16 @@ nav {
   min-height: 100vh;
   height: 100%;
 
+  a {
+    width: 100px;
+  }
+
   .sticky-nav {
     position: sticky;
     width: 100%;
     top: 0;
     z-index: 2;
     padding: 25px 16px;
-
-    &::after {
-      content: '';
-      display: block;
-      width: calc(100% - 32px);
-      height: 1px;
-      background-color: rgba($clr6, 0.2);
-      margin: 16px auto 0;
-    }
   }
   .logo-container {
     display: flex;
@@ -36,6 +31,7 @@ nav {
       margin-inline-end: 8px;
       font-family: Circular-book;
     }
+
 
     span {
       font-size: 22px;
@@ -55,14 +51,12 @@ nav {
   .liked-create-nav {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* add this line to align items to the start of the flex container */
+    justify-content: flex-start; 
 
-    width: 100%;
   }
 
   .main-nav {
     margin-block-end: 16px;
-    width: 300px;
 
     .home-nav {
       display: flex;
@@ -93,6 +87,21 @@ nav {
     margin-block-end: 16px;
   }
 
+  .liked-songs {
+    position: relative; 
+     &::after {
+      content: '';
+      position: absolute; 
+      bottom: -15px; 
+      left: 0; 
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: rgba($clr6, 0.2);
+    }
+  }
+  
+
   a {
     display: flex;
     align-items: center;
@@ -113,3 +122,18 @@ nav {
   }
 }
 
+.plus-sign {
+  color: $clr8; 
+  background-color: #b3b3b3; 
+  padding: 5px;
+  border-radius: 2px;
+  margin-inline-end: 10px;
+}
+
+.heart-icon {
+  background: linear-gradient(to bottom right, #1201a7, #d2cfcf);
+  padding: 5px;
+  color: #b3b3b3;
+  border-radius: 2px;
+  margin-inline-end: 10px;
+}

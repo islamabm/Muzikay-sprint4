@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import gStations from '../../data/station.json'
 // import { userService } from './user.service.js'
-const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyA7mUfwc8_dAf8qblavJOThFcYsKufDt38&q=`
+const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBpcXHlaM0mzq7pKpRQzm_kMlUqZH8XohM&q=`
 const STORAGE_KEY = 'station'
 const SEARCH_KEY = 'videosDB'
 const USER_KEY = 'userStationDB'
@@ -119,7 +119,7 @@ function createNewStation(name) {
         txt: '',
       },
     ],
-    new: true,
+    desc: '',
   }
 
   const stations = utilService.loadFromStorage(STORAGE_KEY)

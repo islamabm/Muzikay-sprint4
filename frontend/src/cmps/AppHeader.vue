@@ -6,6 +6,21 @@
     <div class="page-navigation">
       <RouterLink to="#">&#60;</RouterLink>
       <RouterLink to="#">&#62;</RouterLink>
+      <div v-if="isSearchRoute" class="header-search-container">
+        <form class="header-form">
+          <input
+            class="header-input"
+            type="search"
+            placeholder="What do you want to listen to?"
+            autofocus
+          />
+        </form>
+        <div class="svg-header-container">
+          <span class="svg-header-span">
+            <i class="header-search-icon" v-html="getSvg('searchIcon')"></i>
+          </span>
+        </div>
+      </div>
     </div>
 
     <div class="login-signup">
@@ -15,6 +30,7 @@
   </header>
 </template>
 <script>
+import svgService from '../services/SVG.service.js'
 export default {
   //Note: this header will take the color of the station's img.
   data() {
@@ -34,12 +50,20 @@ export default {
         1
       )
     },
+    getSvg(iconName) {
+      return svgService.getSpotifySvg(iconName)
+    },
   },
   mounted() {
     window.addEventListener('scroll', this.updateHeaderOpacity)
   },
   beforeDestroy() {
     window.removeEventListener('scroll', this.updateHeaderOpacity)
+  },
+  computed: {
+    isSearchRoute() {
+      return this.$route.path === '/station/search'
+    },
   },
 }
 </script>

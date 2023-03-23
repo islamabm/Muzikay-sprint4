@@ -27,24 +27,39 @@
       <!-- <RouterLink to="/station/modal"> Modal</RouterLink> -->
 
       <div class="liked-create-nav">
-        <a @click="createPlayList">Create Playlist</a>
+        <a @click="createPlayList">
+          <div>
+            <font-awesome-icon class="plus-sign" :icon="['fas', 'plus']" />
+          </div>
+          Create Playlist
+        </a>
 
-        <RouterLink to="/station/like">Liked songs</RouterLink>
+        <RouterLink class="liked-songs" to="/station/like">
+          <font-awesome-icon class="heart-icon" :icon="['fas', 'heart']" />
+          Liked songs
+        </RouterLink>
       </div>
-    </div>
 
-    <ul class="clean-list">
-      <li v-for="playlist in userStations" :key="playlist._id">
-        <RouterLink :to="`/station/${playlist._id}`">{{
-          playlist.name
-        }}</RouterLink>
-      </li>
-    </ul>
+      <article class="clean-list user-stations">
+        <article v-for="playlist in userStations" :key="playlist._id">
+          <RouterLink :to="`/station/${playlist._id}`">{{
+            playlist.name
+          }}</RouterLink>
+        </article>
+      </article>
+    </div>
   </nav>
 </template>
 <script>
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
+
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faPlus, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faPlus, faHeart)
+
 export default {
   data() {
     return {
@@ -64,7 +79,6 @@ export default {
         playlistName
         // playlistName
       ) // Pass the name as a second argument
-      console.log(station)
       // const newPlaylist = { _id: station._id, name: playlistName }
       this.userStations.push(station)
       this.$router.push(`/station/${station._id}`)
@@ -75,5 +89,11 @@ export default {
       return this.$store.getters.getUserStations
     },
   },
+  components: {
+    FontAwesomeIcon
+  }
 }
 </script>
+<style>
+
+</style>
