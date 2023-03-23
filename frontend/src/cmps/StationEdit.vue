@@ -3,7 +3,7 @@
     <section class="edit-details-section">
       <div class="edit-details-header">
         <h3>Edit details</h3>
-        <button class="btn-close-modal" @click="showModal = false">x</button>
+        <button class="btn-close-modal" @click="closeModal">x</button>
       </div>
       <div class="edit-details-img">
         <label class="cover-img" @drop.prevent="handleFile" @dragover.prevent>
@@ -14,7 +14,7 @@
         <div class="edit-details-inputs">
           <input
             class="edit-name"
-            @input="stationInput"
+            @blur="stationInput"
             id="name"
             type="text"
             v-model="station.name"
@@ -22,7 +22,7 @@
           />
           <textarea
             class="edit-description"
-            @input="stationInput"
+            @blur="stationInput"
             id="description"
             rows="4"
             v-model="station.description"
@@ -49,17 +49,15 @@ export default {
     }
   },
   methods: {
-   async stationInput() { // how to change it to async function?
-      let editedStation = {...this.station}
-      await this.$store
-        .dispatch({ type: 'editstation', station: editedStation })
-        try {
-          showSuccessMsg('station edited')
-
-        }
-        catch (err) {
-          showErrorMsg('Cannot edit station', err)
-        }
+    async stationInput() {
+      let editedStation = { ...this.station }
+      await this.$store.dispatch({ type: 'editstation', station: editedStation })
+      try {
+        showSuccessMsg('station edited')
+      } catch (err) {
+        showErrorMsg('Cannot edit station', err)
+      }
+      this.$emit('close')
     },
 
     async handleFile(ev) {
@@ -82,6 +80,9 @@ export default {
       } finally {
         this.loading = false // clear the loading flag once the upload is complete
       }
+    },
+    closeModal() {
+      this.$emit('update:showModal', false)
     },
   },
 

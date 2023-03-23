@@ -51,7 +51,7 @@
     </section> -->
   </section>
   <section v-if="showModal">
-    <StationEdit :showModal="showModal"></StationEdit>
+    <StationEdit :showModal="showModal" @close="showModal = false"></StationEdit>
     <button @click="toggleModal">x</button>
   </section>
 </template>
@@ -75,27 +75,36 @@ export default {
   methods: {
     // need to be fixed - permisson to photos?
 
-    updateHeaderBackgroundColor(color) {
-      this.$refs.stationDetailsHeader.style.backgroundColor = `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`
-    },
+    updateBodyBackgroundColor(color) {
+  const gradient = `linear-gradient(to bottom, ${color.rgba}, #000)`
+  document.body.style.backgroundImage = gradient
+  this.$refs.stationDetailsHeader.style.backgroundColor = color.rgb
+},
+
+
+
     async getDominantColor(imageSrc) {
-      const fac = new FastAverageColor()
-      const img = new Image()
-      img.crossOrigin = 'Anonymous'
+  const fac = new FastAverageColor()
+  const img = new Image()
+  img.crossOrigin = 'Anonymous'
 
-      // Prefix the image URL with the CORS proxy URL
-      const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/'
-      img.src = corsProxyUrl + imageSrc
+  // Replace the CORS Anywhere proxy URL with a different one
+  const corsProxyUrl = 'https://api.codetabs.com/v1/proxy?quest='
+  img.src = corsProxyUrl + encodeURIComponent(imageSrc)
 
-      img.onload = async () => {
-        try {
-          const color = await fac.getColorAsync(img)
-          this.updateHeaderBackgroundColor(color)
-        } catch (e) {
-          console.error(e)
-        }
-      }
-    },
+  img.onload = async () => {
+  console.log('Image loaded')
+  try {
+    const color = await fac.getColorAsync(img)
+console.log('inside try' ,color)
+this.updateBodyBackgroundColor(color)
+
+  } catch (e) {
+    console.error(e)
+  }
+}
+},
+
     async removeSong(songId, stationId) {
       try {
         // const station = this.stations.find((s) => s._id === stationId)
@@ -153,6 +162,9 @@ export default {
   components: {
     StationEdit,
     Search,
+  },
+  beforeUnmount() {
+    document.body.style.background = '#181818'
   },
 }
 </script>
