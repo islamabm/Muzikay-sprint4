@@ -1,7 +1,7 @@
 <template>
     <div>
       <YouTube hidden
-        :src="`https://www.youtube.com/watch?v=4x1ckzoywqY`" 
+        :src="`https://www.youtube.com/watch?v=${station? station.songs[0].id : 'ITm2605EBUg'}`" 
         @ready="onReady"
         @state-change="onStateChange"
         ref="youtube"/>
@@ -25,11 +25,12 @@
   
   <script>
   import YouTube from 'vue3-youtube'
-  
+  import {stationService} from '../services/station.service.local'
+
   export default {
-    props: {
-      station: Object, // supossed to get station._id to the youtube search
-    },
+    // props: {
+    //   station: Object, // supossed to get station._id to the youtube search
+    // },
     components: {
       YouTube,
     },
@@ -39,6 +40,7 @@
         currentTime: 0,
         isPlaying: false,
         intervalId: null,
+        station: null,
       }
     },
     methods: {
@@ -80,5 +82,21 @@
         return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`
       },
     },
-  }
+    watch: {
+    '$route.params': {
+      async handler() {
+        const { stationId } = this.$route.params
+        try {
+          const station = await stationService.getById(stationId)
+          this.station = station
+          console.log(station);
+        }
+        catch (err) {
+          console.log(err);
+        }
+      },
+      immediate: true,
+    },
+  },
+}
   </script>
