@@ -1,21 +1,26 @@
 <template>
   <section v-if="station" class="station-details">
     <section ref="stationDetailsHeader" class="station-details-header">
-      <img v-if="station.songs && station.songs.length > 0" :src="station.songs[0].imgUrl" />
-      <button><svg>🎵</svg></button>
+      <img
+        v-if="station.songs && station.songs.length > 0"
+        :src="station.songs[0].imgUrl"
+      />
+      <button v-else><svg>🎵</svg></button>
 
       <div class="station-info">
         <h1 class="playlist-word" @click="toggleModal">Playlist</h1>
         <h1 class="station-name">{{ station.name }}</h1>
 
-        <p class="station-description">
+        <p class="station-description" @click="toggleModal">
           Playlist Relax and indulge with beautiful piano pieces
         </p>
         <div v-if="station.songs">
           <div class="likes-count-logo">
             <i class="logo-green" v-html="getSvg('greenLogo')"></i>
             <span class="small-logo-word">Muzikay</span>
-            <span>6,950,331 likes</span>•<span>{{ songsCount }},</span>
+            <span @click="toggleModal">6,950,331 likes</span>•<span
+              >{{ songsCount }},</span
+            >
             <span>about 11 hr </span>
           </div>
         </div>
@@ -102,6 +107,7 @@ export default {
       }
     },
     toggleModal() {
+      console.log('alo')
       this.showModal = !this.showModal
     },
 
@@ -111,19 +117,19 @@ export default {
   },
   watch: {
     '$route.params': {
-     async handler() {
+      async handler() {
         const { stationId } = this.$route.params
-        const station = await stationService.getById(stationId)
         try {
+          const station = await stationService.getById(stationId)
           this.station = station
-          if (station.songs && station.songs.length > 0) { // maybe remove after && after 11pm we dont delete anything
+          if (station.songs && station.songs.length > 0) {
+            // maybe remove after && after 11pm we dont delete anything
             this.getDominantColor(station.songs[0].imgUrl)
+          }
+        } catch (err) {
+          console.log(err)
         }
-      }
-      catch (err) {
-        console.log(err);
-      }
-    },
+      },
       immediate: true,
     },
   },
