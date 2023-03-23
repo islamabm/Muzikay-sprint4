@@ -24,7 +24,7 @@ export default {
   props: [],
   data() {
     return {
-      station: nul
+      station: null
     }
   },
   created() {
