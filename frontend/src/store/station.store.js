@@ -19,6 +19,9 @@ export const stationStore = {
     songs({ stations }) {
       return stations.songs
     },
+    stationById(stationId){
+
+    }
   },
   mutations: {
     setStations(state, { stations }) {

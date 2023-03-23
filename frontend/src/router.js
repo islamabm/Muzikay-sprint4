@@ -8,6 +8,7 @@ import Signup from './views/Signup.vue'
 import Login from './views/Login.vue'
 import StationDetails from './views/StationDetails.vue'
 import StationCollection from './views/StationCollection.vue'
+// import Modal from '../src/cmps/Modal.vue'
 
 const routes = [
   {
@@ -31,6 +32,11 @@ const routes = [
         name: 'collection',
         component: StationCollection,
       },
+      // {
+      //   path: '/station/modal',
+      //   name: 'modal',
+      //   component: Modal,
+      // },
       {
         path: '/station/search',
         name: 'search',

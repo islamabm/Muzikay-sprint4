@@ -1,7 +1,7 @@
 <template>
   <footer class="main-footer">
     <div v-if="station" class="footer-details">
-      <img class="footer-details-img" :src=" station[0].imgUrl">
+      <img class="footer-details-img" :src="station[0].imgUrl" />
       <h3>{{ station[0].title }}</h3>
       <button>💚</button>
       <button>🖼</button>
@@ -24,7 +24,7 @@ export default {
   props: [],
   data() {
     return {
-      station: null
+      station: null,
     }
   },
   created() {
@@ -33,15 +33,14 @@ export default {
   },
   watch: {
     '$route.params': {
-     async handler() {
+      async handler() {
         const { stationId } = this.$route.params
         const station = await stationService.getById(stationId)
         try {
           this.station = station.songs
           return this.station
-        }
-        catch (err) {
-          console.log(err);
+        } catch (err) {
+          console.log(err)
         }
       },
       immediate: true,
