@@ -105,7 +105,7 @@ function _createStations() {
         likedByUsers: ['{minimal-user}', '{minimal-user}'],
         songs: [
           {
-            id: 's1001',
+            id: 'MXI5Nuz6OHg',
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
             imgUrl:
@@ -114,7 +114,7 @@ function _createStations() {
             addedAt: 162521765262,
           },
           {
-            id: 's1002',
+            id: 'mUkfiLjooxs',
             title: "The JB's - Pass The Peas",
             url: 'youtube/song.mp4',
             imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
@@ -141,7 +141,7 @@ function _createStations() {
         likedByUsers: ['{minimal-user}', '{minimal-user}'],
         songs: [
           {
-            id: 's1003',
+            id: 'MXI5Nuz6OHg',
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
             imgUrl:
@@ -150,7 +150,7 @@ function _createStations() {
             addedAt: 162521765262,
           },
           {
-            id: 's1004',
+            id: 'mUkfiLjooxs',
             title: "The JB's - Pass The Peas",
             url: 'youtube/song.mp4',
             imgUrl: 'https://i.ytimg.com/vi/kgx4WGK0oNU/maxresdefault.jpg', //changed
@@ -177,7 +177,7 @@ function _createStations() {
         likedByUsers: ['{minimal-user}', '{minimal-user}'],
         songs: [
           {
-            id: 's1005',
+            id: 'MXI5Nuz6OHg',
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
             imgUrl:
@@ -186,7 +186,7 @@ function _createStations() {
             addedAt: 162521765262,
           },
           {
-            id: 's1006',
+            id: 'mUkfiLjooxs',
             title: "The JB's - Pass The Peas",
             url: 'youtube/song.mp4',
             imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
@@ -213,7 +213,7 @@ function _createStations() {
         likedByUsers: ['{minimal-user}', '{minimal-user}'],
         songs: [
           {
-            id: 's1007',
+            id: 'MXI5Nuz6OHg',
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
             imgUrl: 'https://i.ytimg.com/vi/4_iC0MyIykM/mqdefault.jpg',
@@ -221,7 +221,7 @@ function _createStations() {
             addedAt: 162521765262,
           },
           {
-            id: 's1008',
+            id: 'mUkfiLjooxs',
             title: "The JB's - Pass The Peas",
             url: 'youtube/song.mp4',
             imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
@@ -248,7 +248,7 @@ function _createStations() {
         likedByUsers: ['{minimal-user}', '{minimal-user}'],
         songs: [
           {
-            id: 's1009',
+            id: 'MXI5Nuz6OHg',
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
             imgUrl:
@@ -257,7 +257,7 @@ function _createStations() {
             addedAt: 162521765262,
           },
           {
-            id: 's1010',
+            id: 'mUkfiLjooxs',
             title: "The JB's - Pass The Peas",
             url: 'youtube/song.mp4',
             imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
@@ -284,7 +284,7 @@ function _createStations() {
         likedByUsers: ['{minimal-user}', '{minimal-user}'],
         songs: [
           {
-            id: 's1011',
+            id: 'MXI5Nuz6OHg',
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
             imgUrl:
@@ -293,7 +293,7 @@ function _createStations() {
             addedAt: 162521765262,
           },
           {
-            id: 's1012',
+            id: 'mUkfiLjooxs',
             title: "The JB's - Pass The Peas",
             url: 'youtube/song.mp4',
             imgUrl:
@@ -321,7 +321,7 @@ function _createStations() {
         likedByUsers: ['{minimal-user}', '{minimal-user}'],
         songs: [
           {
-            id: 's1013',
+            id: 'MXI5Nuz6OHg',
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
             imgUrl:
@@ -330,7 +330,7 @@ function _createStations() {
             addedAt: 162521765262,
           },
           {
-            id: 's1014',
+            id: 'mUkfiLjooxs',
             title: "The JB's - Pass The Peas",
             url: 'youtube/song.mp4',
             imgUrl:
@@ -358,7 +358,7 @@ function _createStations() {
         likedByUsers: ['{minimal-user}', '{minimal-user}'],
         songs: [
           {
-            id: 's1015',
+            id: 'MXI5Nuz6OHg',
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
             imgUrl:
@@ -367,7 +367,7 @@ function _createStations() {
             addedAt: 162521765262,
           },
           {
-            id: 's1017',
+            id: 'mUkfiLjooxs',
             title: "The JB's - Pass The Peas",
             url: 'youtube/song.mp4',
             imgUrl:
@@ -388,14 +388,14 @@ function _createStations() {
         name: 'Funky Monks',
         tags: ['Happy'],
         createdBy: {
-          _id: 'u101',
+          _id: 'MXI5Nuz6OHg',
           fullname: 'Puki Ben David',
           imgUrl: 'http://some-photo/',
         },
         likedByUsers: ['{minimal-user}', '{minimal-user}'],
         songs: [
           {
-            id: 's1018',
+            id: 'MXI5Nuz6OHg',
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
             imgUrl:
@@ -404,7 +404,7 @@ function _createStations() {
             addedAt: 162521765262,
           },
           {
-            id: 's1019',
+            id: 'mUkfiLjooxs',
             title: "The JB's - Pass The Peas",
             url: 'youtube/song.mp4',
             imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
@@ -424,14 +424,14 @@ function _createStations() {
         name: 'Funky Monks',
         tags: ['Happy'],
         createdBy: {
-          _id: 'u101',
+          _id: 'MXI5Nuz6OHg',
           fullname: 'Puki Ben David',
           imgUrl: 'http://some-photo/',
         },
         likedByUsers: ['{minimal-user}', '{minimal-user}'],
         songs: [
           {
-            id: 's1020',
+            id: 'sMXI5Nuz6OHg1020',
             title: 'The Meters - Cissy Strut',
             url: 'youtube/song.mp4',
             imgUrl:
@@ -440,7 +440,7 @@ function _createStations() {
             addedAt: 162521765262,
           },
           {
-            id: 's1021',
+            id: 'mUkfiLjooxs',
             title: "The JB's - Pass The Peas",
             url: 'youtube/song.mp4',
             imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',

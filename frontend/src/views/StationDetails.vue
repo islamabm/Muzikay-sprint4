@@ -129,8 +129,8 @@ this.updateBodyBackgroundColor(color)
       async handler() {
         const { stationId } = this.$route.params
         try {
-          // this.station = await stationService.getById(stationId)
-          this.station = await this.$store.getters.stationById(stationId)
+          this.station = await stationService.getById(stationId)
+          // this.station = await this.$store.getters.stationById(stationId)
           console.log(this.station)
           // if (this.station.songs && this.station.songs.length > 0) {
           // maybe remove after && after 11pm we dont delete anything

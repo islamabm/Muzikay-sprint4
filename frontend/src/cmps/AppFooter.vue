@@ -24,6 +24,7 @@ export default {
   data() {
     return {
       station: null,
+      currStation: null,
     }
   },
   created() {
@@ -33,12 +34,12 @@ export default {
     '$route.params': {
       async handler() {
         const { stationId } = this.$route.params
-        const station = await stationService.getById(stationId)
-        console.log(station)
         try {
-          this.station = station
-        } catch (err) {
-          console.log(err)
+          this.station = await this.$store.getters.stationById(stationId)
+          console.log(station.songs[0].id);
+        }
+        catch (err) {
+          console.log(err);
         }
       },
       immediate: true,
