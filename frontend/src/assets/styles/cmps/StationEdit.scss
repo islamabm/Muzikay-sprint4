@@ -1,13 +1,90 @@
-.image-edit {
-  height: 25%;
-}
-.modal {
-  border: 1px solid black;
-  width: 300px;
-  height: 300px;
+.backdrop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+}
+
+.playlist-edit-modal {
+  background-color: #282828;
+  padding: 20px;
+  border-radius: 5px;
+  width: 450px;
+  font-family: 'Circular-book';
+  
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+
+    h3 {
+      font-size: 24px;
+      font-weight: 600;
+      color: #ffffff;
+      font-family: 'Circular-book';
+    }
+
+    .btn-close-modal {
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: #ffffff;
+      cursor: pointer;
+    }
+  }
+
+  .modal-content {
+    display: flex;
+
+    .cover-image {
+      position: relative;
+      width: 50%;
+      height: 200px;
+      margin-right: 20px;
+
+      .image-edit {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .modal-body {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+
+      .edit-name,
+      .edit-description {
+        padding: 8px 12px;
+        margin-bottom: 15px;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        font-size: 14px;
+        color: #ffffff;
+        background-color: #333333;
+        width: 100%;
+        resize: none;
+      }
+
+      .btn-save-changes {
+        background-color: #ffffff;
+        color: #000000;
+        padding: 8px 20px;
+        font-size: 14px;
+        font-weight: 600;
+        border-radius: 25px;
+        cursor: pointer;
+        align-self: flex-end;
+      }
+    }
+  }
 }

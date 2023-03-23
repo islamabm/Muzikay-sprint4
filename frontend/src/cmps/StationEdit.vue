@@ -1,22 +1,38 @@
 <template>
-  <section class="modal">
-    
-    <label @drop.prevent="handleFile" @dragover.prevent>
-      <div v-if="loading" class="loader"></div>
-      <img class="image-edit" :src="img" alt="" />
-      <input type="file" @change="handleFile" hidden />
-    </label>
-
-    <input
-      @input="stationInput"
-      id="name"
-      type="text"
-      v-model="station.name"
-      :placeholder="station.name"
-    />
-    <button @click="stationInput">save</button>
-    <button @click="showModal = false">x</button>
-  </section>
+  <div class="backdrop">
+    <section class="playlist-edit-modal">
+      <div class="modal-header">
+        <h3>Edit details</h3>
+        <button class="btn-close-modal" @click="showModal = false">x</button>
+      </div>
+      <div class="modal-content">
+        <label class="cover-image" @drop.prevent="handleFile" @dragover.prevent>
+          <div v-if="loading" class="loader"></div>
+          <img class="image-edit" :src="img" alt="Playlist cover" />
+          <input type="file" @change="handleFile" hidden />
+        </label>
+        <div class="modal-body">
+          <input
+            class="edit-name"
+            @input="stationInput"
+            id="name"
+            type="text"
+            v-model="station.name"
+            :placeholder="station.name"
+          />
+          <textarea
+            class="edit-description"
+            @input="stationInput"
+            id="description"
+            rows="4"
+            v-model="station.description"
+            :placeholder="station.description"
+          ></textarea>
+          <button class="btn-save-changes" @click="stationInput">Save</button>
+        </div>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script>
