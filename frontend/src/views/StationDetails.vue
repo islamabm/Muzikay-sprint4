@@ -30,7 +30,6 @@
     </section>
 
     <div class="station-controls">
-
       <div class="btn-play-green" @click.stop="playStation"></div>
       <BubblingHeart @toggleLike="toggleHeaderLike" />
       <div class="btn-icons">
@@ -65,10 +64,13 @@
         <p class="posted-at">1 day ago</p>
 
         <div class="flex-end list-end">
-          
           <div class="like-song-icon">
-          <BubblingHeart :songIndex="idx" :liked="song.liked" @toggleLike="toggleSongLike" />
-        </div>
+            <BubblingHeart
+              :songIndex="idx"
+              :liked="song.liked"
+              @toggleLike="toggleSongLike"
+            />
+          </div>
           <p class="song-duration">1:40</p>
 
           <button
@@ -100,8 +102,6 @@ import { stationService } from '../services/station.service.local.js'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import MiniSearch from '../cmps/MiniSearch.vue'
 import BubblingHeart from '../cmps/BubblingHeart.vue'
-import nearestColor from 'nearest-color';
-
 
 export default {
   name: 'station-details',
@@ -126,17 +126,19 @@ export default {
       this.$refs.stationDetailsHeader.style.backgroundColor = color.rgb
     },
     toggleHeaderLike() {
-    this.liked = !this.liked
-    this.likeIconFillCls1 = this.liked ? 'green' : 'none'
-    this.likeIconFillCls2 = this.liked ? 'green' : '$clr11'
-  },
-  toggleSongLike(idx) {
-    const song = this.station.songs[idx]
-    song.liked = !song.liked
-    console.log(`Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`)
-    
-    // Add functionality
-  },
+      this.liked = !this.liked
+      this.likeIconFillCls1 = this.liked ? 'green' : 'none'
+      this.likeIconFillCls2 = this.liked ? 'green' : '$clr11'
+    },
+    toggleSongLike(idx) {
+      const song = this.station.songs[idx]
+      song.liked = !song.liked
+      console.log(
+        `Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`
+      )
+
+      // Add functionality
+    },
     toggleActiveTitle(idx) {
       if (this.activeTitle === idx) {
         this.activeTitle = null

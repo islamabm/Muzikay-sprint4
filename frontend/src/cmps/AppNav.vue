@@ -16,15 +16,14 @@
 
         <RouterLink to="/station/search">
           <i class="search-icon icons" v-html="getSvg('searchIcon')"></i>
-          Search</RouterLink
-        >
+          Search
+        </RouterLink>
 
         <RouterLink to="/station/library">
           <i class="library-icon icons" v-html="getSvg('libraryIcon')"></i>
-          Your Library</RouterLink
-        >
+          Your Library
+        </RouterLink>
       </div>
-      <!-- <RouterLink to="/station/modal"> Modal</RouterLink> -->
 
       <div class="liked-create-nav">
         <a @click="createPlayList">
@@ -40,8 +39,15 @@
         </RouterLink>
       </div>
 
-      <Container @drop="onDrop" class="clean-list user-stations">
-        <Draggable v-for="playlist in userStations" :key="playlist._id">
+      <Container
+        v-bind="$attrs"
+        v-on="$listeners"
+        class="clean-list user-stations"
+      >
+        <Draggable
+          v-for="(playlist, index) in userStations"
+          :key="playlist._id"
+        >
           <RouterLink :to="`/station/${playlist._id}`">{{
             playlist.name
           }}</RouterLink>
@@ -50,8 +56,8 @@
     </div>
   </nav>
 </template>
+
 <script>
-// import Vue from '/node_modules/.vite/deps/vue.js'
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
 import { Container, Draggable } from 'vue3-smooth-dnd'
@@ -64,16 +70,13 @@ library.add(faPlus, faHeart)
 export default {
   data() {
     return {
+      userStationsList: [],
       playlistCounter: 0,
-
-      // station: stationService.createNewStation(),
     }
   },
   methods: {
     onDrop(dropResult) {
-      console.log('Before drag and drop:', this.userStations)
-      this.userStations = this.applyDrag(this.userStations, dropResult)
-      console.log('After drag and drop:', this.userStations)
+      this.userStationsList = this.applyDrag(this.userStationsList, dropResult)
     },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult
@@ -96,13 +99,8 @@ export default {
     },
     createPlayList() {
       this.playlistCounter++
-      console.log(this.playlistCounter)
       const playlistName = `My Playlist #${this.playlistCounter}`
-      const station = stationService.createNewStation(
-        playlistName
-        // playlistName
-      ) // Pass the name as a second argument
-      // const newPlaylist = { _id: station._id, name: playlistName }
+      const station = stationService.createNewStation(playlistName)
       this.userStations.push(station)
       this.$router.push(`/station/${station._id}`)
     },
@@ -111,6 +109,9 @@ export default {
     userStations() {
       return this.$store.getters.getUserStations
     },
+  },
+  created() {
+    this.userStationsList = this.$store.getters.getUserStations
   },
   components: {
     FontAwesomeIcon,
