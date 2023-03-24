@@ -30,7 +30,6 @@
     </section>
 
     <div class="station-controls">
-
       <div class="btn-play-green" @click.stop="playStation"></div>
       <BubblingHeart @toggleLike="toggleHeaderLike" />
       <div class="btn-icons">
@@ -65,10 +64,13 @@
         <p class="posted-at">1 day ago</p>
 
         <div class="flex-end list-end">
-          
           <div class="like-song-icon">
-          <BubblingHeart :songIndex="idx" :liked="song.liked" @toggleLike="toggleSongLike" />
-        </div>
+            <BubblingHeart
+              :songIndex="idx"
+              :liked="song.liked"
+              @toggleLike="toggleSongLike"
+            />
+          </div>
           <p class="song-duration">1:40</p>
 
           <button
@@ -110,11 +112,7 @@ export default {
       activeTitle: null,
       counter: 0,
       dominantColor: null,
-      likeIconFill: '#FFF',
       liked: false,
-
-      likeIconFillCls1: 'none',
-      likeIconFillCls2: '$clr11',
     }
   },
   methods: {
@@ -124,17 +122,17 @@ export default {
       this.$refs.stationDetailsHeader.style.backgroundColor = color.rgb
     },
     toggleHeaderLike() {
-    this.liked = !this.liked
-    this.likeIconFillCls1 = this.liked ? 'green' : 'none'
-    this.likeIconFillCls2 = this.liked ? 'green' : '$clr11'
-  },
-  toggleSongLike(idx) {
-    const song = this.station.songs[idx]
-    song.liked = !song.liked
-    console.log(`Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`)
-    
-    // Add functionality
-  },
+      this.liked = !this.liked
+    },
+    toggleSongLike(idx) {
+      const song = this.station.songs[idx]
+      song.liked = !song.liked
+      console.log(
+        `Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`
+      )
+
+      // Add functionality
+    },
     toggleActiveTitle(idx) {
       if (this.activeTitle === idx) {
         this.activeTitle = null
@@ -254,12 +252,3 @@ export default {
   },
 }
 </script>
-
-
-
-      <!-- <i
-          class="like-icon"
-          @click="toggleHeaderLike"
-          :class="{ liked }"
-          v-html="getSvg('likeBtnOutline')"
-        ></i> -->
