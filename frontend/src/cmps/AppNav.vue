@@ -36,7 +36,7 @@
 
         <RouterLink class="liked-songs" to="/station/like">
           <font-awesome-icon class="heart-icon" :icon="['fas', 'heart']" />
-          Liked songs
+          Liked Songs
         </RouterLink>
       </div>
 
