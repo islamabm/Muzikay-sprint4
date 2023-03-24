@@ -8,9 +8,6 @@
     </div>
     <div class="footer-media-player"><MediaPlayer @songIdx="getSongIdx" /></div>
     <div class="footer-media-adjusments">
-      <button>🎤</button>
-      <button>orgenize</button>
-      <button>💻</button>
       <button>🔉</button>
     </div>
   </footer>

@@ -18,7 +18,7 @@
         <div class="edit-details-inputs">
           <input
             class="edit-name"
-            @blur="stationInput"
+            @input="stationInput"
             id="name"
             type="text"
             v-model="station.name"
@@ -26,7 +26,7 @@
           />
           <textarea
             class="edit-description"
-            @blur="stationInput"
+            @input="stationInput"
             id="description"
             rows="4"
             v-model="station.desc"
@@ -49,22 +49,23 @@ export default {
   },
   data() {
     return {
+      station: null,
       loading: false,
     }
   },
   methods: {
     async stationInput() {
       let editedStation = { ...this.station }
-      await this.$store.dispatch({
-        type: 'editstation',
-        station: editedStation,
-      })
       try {
+        await this.$store.dispatch({
+          type: 'editstation',
+          station: editedStation,
+        })
         showSuccessMsg('station edited')
       } catch (err) {
         showErrorMsg('Cannot edit station', err)
       }
-      this.$emit('close')
+      // this.$emit('close')
     },
 
     async handleFile(ev) {
@@ -97,7 +98,7 @@ export default {
       const stations = this.stations
       const station = stations.find((t) => t._id === stationId)
 
-      return station
+      return (this.station = station)
     },
     // img() {
     //   if (this.station.songs[0].imgUrl) {
