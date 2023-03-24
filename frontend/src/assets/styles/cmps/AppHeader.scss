@@ -7,10 +7,10 @@
   top: 0;
   height: 64px;
   z-index: 100;
-  // background-color: rgba($clr2, 0.4);
   padding: 0 16px;
   font-family: gotham;
   font-size: 1rem;
+
 
   .page-navigation,
   .login-signup {
@@ -90,43 +90,6 @@
   }
 }
 
-// header {
-//     background-color: $clr2;
-//     color: $clr3;
-//     padding: 10px;
-//     display: flex;
-//     justify-content: space-between;
-
-//     .loggedin-user {
-//         padding: 2px 8px;
-//         border-radius: 1em;
-//         align-self: flex-end;
-//         span{
-//             background-color: $clr2;
-//             padding: 4px;
-//             margin: 10px;
-//             border-radius: 50%;
-//         }
-//         img {
-//             width: 2em;
-//             height: 2em;
-//             border-radius: 50%;
-//         }
-//     }
-//     nav {
-//         background-color: $clr2;
-//         padding: 5px 0;
-//     }
-//     nav a:not(:first-child) {
-//         border-top: 1px solid $clr1;
-//         padding: 0 5px;
-//         margin: 10px;
-//     }
-//     nav .active {
-//         color: $clr1;
-//     }
-
-// }
 .header-input {
   margin-block: 0px;
   font-size: 0.8125rem;

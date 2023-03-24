@@ -8,13 +8,17 @@
       <div class="edit-details-img">
         <label class="cover-img" @drop.prevent="handleFile" @dragover.prevent>
           <div v-if="loading" class="loader"></div>
-          <img class="img-edit" :src="img" alt="Station cover" />
+          <img
+            src="src/assets/img/empty-img.png"
+            alt="Station cover"
+            class="img-edit"
+          />
           <input type="file" @change="handleFile" hidden />
         </label>
         <div class="edit-details-inputs">
           <input
             class="edit-name"
-            @blur="stationInput"
+            @input="stationInput"
             id="name"
             type="text"
             v-model="station.name"
@@ -22,7 +26,7 @@
           />
           <textarea
             class="edit-description"
-            @blur="stationInput"
+            @input="stationInput"
             id="description"
             rows="4"
             v-model="station.desc"
@@ -45,22 +49,23 @@ export default {
   },
   data() {
     return {
+      station: null,
       loading: false,
     }
   },
   methods: {
     async stationInput() {
       let editedStation = { ...this.station }
-      await this.$store.dispatch({
-        type: 'editstation',
-        station: editedStation,
-      })
       try {
+        await this.$store.dispatch({
+          type: 'editstation',
+          station: editedStation,
+        })
         showSuccessMsg('station edited')
       } catch (err) {
         showErrorMsg('Cannot edit station', err)
       }
-      this.$emit('close')
+      // this.$emit('close')
     },
 
     async handleFile(ev) {
@@ -93,13 +98,16 @@ export default {
       const stations = this.stations
       const station = stations.find((t) => t._id === stationId)
 
-      return station
+      return (this.station = station)
     },
-    img() {
-      return this.station.songs[0].imgUrl
-        ? this.station.songs[0].imgUrl
-        : 'src/assets/icons/drag-image.ico'
-    },
+    // img() {
+    //   if (this.station.songs[0].imgUrl) {
+    //     console.log(this.station.songs[0].imgUrl)
+    //   }
+    //   return this.station.songs[0].imgUrl
+    //     ? this.station.songs[0].imgUrl
+    //     : 'src/assets/img/empty-img.png'
+    // },
 
     stations() {
       return this.$store.getters.stations

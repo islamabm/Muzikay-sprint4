@@ -1,6 +1,6 @@
 <template>
   <section>
-    <form @submit.prevent="add">
+    <!-- <form @submit.prevent="add">
       <input type="text" v-model="search" />
       <button type="submit">search</button>
     </form>
@@ -12,7 +12,7 @@
           <button @click="addToPlaylist(video)">Add</button>
         </li>
       </ul>
-    </div>
+    </div> -->
 
     <h2 class="category-h2">Browse all</h2>
 
@@ -30,10 +30,9 @@
       <img src="../assets/img/‏‏mood.PNG" alt="" />
       <img src="../assets/img/‏‏indie.PNG" alt="" />
     </div>
-    
   </section>
 </template>
-<script>
+<!-- <script>
 import { stationService } from '../services/station.service.local'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 export default {
@@ -73,4 +72,4 @@ export default {
     },
   },
 }
-</script>
+</script> -->
