@@ -64,10 +64,7 @@
 
 
   <section v-if="showModal">
-    <StationEdit
-      :showModal="showModal"
-      @close="showModal = false"
-    ></StationEdit>
+    <StationEdit :showModal="showModal" @close="showModal = false" />
     <button @click="toggleModal">x</button>
   </section>
 </template>

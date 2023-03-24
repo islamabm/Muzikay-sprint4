@@ -11,6 +11,7 @@ export function getActionRemoveStation(stationId) {
 export const stationStore = {
   state: {
     stations: [],
+    userStations: [],
   },
   getters: {
     stations({ stations }) {
@@ -28,14 +29,6 @@ export const stationStore = {
       return userStations
       // }
     },
-    // stationById({ stations }, stationId) {
-    // console.log('before find', stations)
-    // const station = stations.find((s) => {
-    // s._id === stationId
-    // console.log('id', s._id)
-    // })
-    // console.log('after find', station)
-    // return station
     stationById: (state) => (id) => {
       console.log('Searching for station with id:', id)
       const foundStation = state.stations.find((station) => {
@@ -64,11 +57,13 @@ export const stationStore = {
       const idx = station.songs.findIndex((so) => so.id === songId)
       station.songs.splice(idx, 1)
     },
+    setUserStations(state, stations) {
+      state.userStations = stations
+    },
 
     editStation(state, { station }) {
       const idx = state.stations.findIndex((c) => c._id === station._id)
       state.stations.splice(idx, 1, station)
-      console.log(state.stations)
     },
     removeStation(state, { stationId }) {
       state.stations = state.stations.filter(

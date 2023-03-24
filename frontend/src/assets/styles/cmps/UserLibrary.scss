@@ -1,0 +1,16 @@
+.user-library-container {
+  display: flex;
+  gap: 15px;
+  border-radius: 10px;
+}
+
+.user-library-header {
+  margin-left: 50px;
+}
+
+.user-preview-section {
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+  padding: 1rem;
+}

@@ -2,7 +2,12 @@
   <section class="playlist-preview" @click="goToStationDetails">
     <div class="playlist-image">
       <img :src="station.songs[0].imgUrl" />
+<<<<<<< HEAD
       <div class="play-button" @click.stop="playStation"></div> 
+=======
+      <div class="play-button" @click.stop="playStation"></div>
+      <!-- Add this line for the play button -->
+>>>>>>> d1dcb05b68cbd1ff064e36a36458860dc6256a16
     </div>
     <div class="playlist-info">
       <h3 class="playlist-title">{{ station.name }}</h3>
@@ -10,7 +15,6 @@
     </div>
   </section>
 </template>
-
 
 <script>
 export default {
@@ -26,13 +30,11 @@ export default {
 }
 </script>
 
-
-
-      <!-- <button
+<!-- <button
         v-if="station.new"
         class="remove-button"
         @click="$emit('removed')"
       >
         X
       </button> -->
-      <!-- <button class="remove-button" @click="removeStation('remove')">x</button> -->
+<!-- <button class="remove-button" @click="removeStation('remove')">x</button> -->
