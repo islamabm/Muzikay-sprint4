@@ -7,6 +7,7 @@
         ref="youtube"/>
   
       <div class="control-buttons">
+        
         <button class="media-player-prev-song">
           <i class="home-icon icons" v-html="getSvg('shuffleBtnIcon')"></i>
         </button>
@@ -16,17 +17,18 @@
         </button>
 
         <button class="media-player-play" @click="playAudio()">
-          <i class="home-icon icons" v-html="getSvg(selectBtn)"></i></button>
+          <i class="home-icon icons" v-html="getSvg(selectBtn)"></i>
+        </button>
 
-          <button class="media-player-prev-song" @click="switchSong(1)">
-            <i class="home-icon icons" v-html="getSvg('nextSongBtnIcon')"></i>
-          </button>
-          <button class="media-player-prev-song">
-            <i class="home-icon icons" v-html="getSvg('repeatBtnIcone')"></i>
-          </button>
-          <!-- <button >🔁</button> -->
+        <button class="media-player-prev-song" @click="switchSong(1)">
+          <i class="home-icon icons" v-html="getSvg('nextSongBtnIcon')"></i>
+        </button>
+          
+        <button class="media-player-repeat-song">
+          <i class="home-icon icons" v-html="getSvg('repeatBtnIcone')"></i>
+        </button>
 
-        </div>
+      </div>
   
       <div class="music-bar">
         <span>{{ formatTime(currentTime) }}</span>
@@ -34,7 +36,7 @@
         <span>{{ formatTime(duration) }}</span>
       </div>
     </div>
-  </template>
+</template>
   <script>
   import YouTube from 'vue3-youtube'
   // import {stationService} from '../services/station.service.local'
@@ -58,10 +60,10 @@
     computed: {
       stationId() {
         if(this.currStation){
-          this.isPlaying = true
+          playAudio()
           return this.currStation.songs[this.songIdx].id
         } 
-        else return 'Oqtnee5Nqxw' 
+        else return '' 
       },
       selectBtn() {
         const btn = this.isPlaying ? 'pauseBtnIcon' : 'playBtnIcon'
@@ -84,7 +86,7 @@
           this.currentTime = this.$refs.youtube.getCurrentTime()
         }, 1000)
       },
-      // when something happens- Video has ended/Video is playing/Video is paused
+      // when something happens- Video has ended/Video
       // work but has alot of error msges 
       onStateChange(event) {
         if (event.data === 0) clearInterval(this.intervalId)

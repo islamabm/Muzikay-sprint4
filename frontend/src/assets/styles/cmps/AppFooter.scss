@@ -10,8 +10,8 @@
     padding: 10px;
     z-index: 1;
     border-top: $clr8; // does not work whyy Rania whyyy 😭
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
 
     .music-bar {
         display: flex;
@@ -31,13 +31,15 @@
             width: 56px;
             height: 56px;
         }
+        grid-column: 1;
     }
 
     .footer-media-adjusments {
         margin-top: 22px; // need to be rm
+        grid-column: 3;
     }
     .footer-media-player {
-        display: flex;
+        grid-column: 2;
     }
 }
 
