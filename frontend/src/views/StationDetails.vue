@@ -41,7 +41,6 @@
         ></i>
         <i class="options-icon" v-html="getSvg('optionsIcon')"></i>
       </div>
-<<<<<<< HEAD
       </div>  
 
       <div class="table-header">
@@ -54,10 +53,9 @@
 
 
 
-    <article v-if="station.songs" class="clean-list songs-list-details">
-      <article class="song-item" v-for="(song, idx) in station.songs" :key="idx">
-=======
-    </div>
+    <!-- <article v-if="station.songs" class="clean-list songs-list-details">
+      <article class="song-item" v-for="(song, idx) in station.songs" :key="idx"> -->
+    <!-- </div> -->
 
     <Container
       @drop="onDrop"
@@ -69,7 +67,6 @@
         v-for="(song, idx) in station.songs"
         :key="idx"
       >
->>>>>>> d25ef9e542ec5c6a5639ef81174aaa8c53c9f4cb
         <span>{{ idx + 1 }}</span>
         <img class="song-img" :src="song.imgUrl" />
         <p class="song-title">{{ song.title }}</p>
