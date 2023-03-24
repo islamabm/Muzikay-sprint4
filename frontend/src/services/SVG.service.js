@@ -20,7 +20,6 @@ const SpotifySvgs = {
   <path d="M287 414 c-4 -4 -7 -31 -7 -60 l0 -53 -57 -3 c-44 -2 -58 -7 -58 -18
   0 -11 14 -16 57 -18 l57 -3 3 -57 c2 -43 7 -57 18 -57 11 0 16 14 18 57 l3 57
   57 3 c43 2 57 7 57 18 0 11 -14 16 -57 18 l-57 3 -3 56 c-3 52 -14 73 -31 57z"/>
-<<<<<<< HEAD
 </svg>
 `,
 
@@ -30,12 +29,11 @@ likeBtnFilled: `<?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1
 
 optionsIcon: `<?xml version="1.0" ?><svg xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style></defs><g id="more"><circle class="cls-1" cx="16" cy="16" r="2"/><circle class="cls-1" cx="6" cy="16" r="2"/><circle class="cls-1" cx="26" cy="16" r="2"/></g></svg>`,
 
+durationIcon: `<?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg width="15" height="15" viewBox="0 0 141.732 141.732" enable-background="new 0 0 141.732 141.732" id="Livello_1" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Livello_5"><path d="M113.326,70.191c0-2.97-2.377-5.376-5.307-5.376H75.543V32.387v-0.001c0-2.98-2.418-5.397-5.396-5.397   c-2.98,0-5.398,2.417-5.398,5.397V70.17c0,2.981,2.418,5.398,5.398,5.398h37.875C110.949,75.568,113.326,73.161,113.326,70.191    M129.533,70.157c0,32.798-26.584,59.386-59.375,59.386c-32.793,0-59.375-26.588-59.375-59.386s26.582-59.386,59.375-59.386   C102.949,10.771,129.533,37.359,129.533,70.157 M140.314,70.157C140.314,31.41,108.904,0,70.158,0C31.41,0,0,31.41,0,70.157   s31.41,70.157,70.158,70.157C108.904,140.314,140.314,108.904,140.314,70.157"/></g><g id="Livello_1_1_"/></svg>`,
 
 
-=======
-  </svg>
-  `,
 
+//ITAY'S
   playBtnIcon: `<?xml version="1.0" encoding="utf-8"?><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 92.2 122.88" style="enable-background:new 0 0 92.2 122.88" xml:space="preserve"><style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd;}</style><g><polygon class="st0" points="92.2,60.97 0,122.88 0,0 92.2,60.97"/></g></svg>
   `,
   pauseBtnIcon: `<?xml version="1.0" encoding="utf-8"?><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 87.72 122.88" style="enable-background:new 0 0 87.72 122.88" xml:space="preserve"><style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd;}</style><g><path class="st0" d="M0,0h35.54v122.88l-35.54,0V0L0,0z M52.18,0h35.54v122.88l-35.54,0V0L52.18,0z"/></g></svg>`,
@@ -44,7 +42,6 @@ optionsIcon: `<?xml version="1.0" ?><svg xmlns="http://www.w3.org/2000/svg"><def
   shuffleBtnIcon: `<?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg height="512px" id="Layer_1" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M370.1,181.3H399v47.3l81-83.2L399,64v54h-28.9c-82.7,0-129.4,61.9-170.6,116.5c-37,49.1-69,95.4-120.6,95.4H32v63.3h46.9  c82.7,0,129.4-65.8,170.6-120.4C286.5,223.7,318.4,181.3,370.1,181.3z M153.2,217.5c3.5-4.6,7.1-9.3,10.7-14.1  c8.8-11.6,18-23.9,28-36.1c-29.6-27.9-65.3-48.5-113-48.5H32v63.3c0,0,13.3-0.6,46.9,0C111.4,182.8,131.8,196.2,153.2,217.5z   M399,330.4h-28.9c-31.5,0-55.7-15.8-78.2-39.3c-2.2,3-4.5,6-6.8,9c-9.9,13.1-20.5,27.2-32.2,41.1c30.4,29.9,67.2,52.5,117.2,52.5  H399V448l81-81.4l-81-83.2V330.4z"/></svg>`,
   // repeatBtnIcone: `<svg xmlns="http://www.w3.org/2000/svg" style="width: 40px;" fill="currentColor">
   // path "M 0 4.75 A 3.75 3.75 0 0 1 3.75 1 h 8.5 A 3.75 3.75 0 0 1 16 4.75 v 5 a 3.75 3.75 0 0 1 -3.75 3.75 H 9.81 l 1.018 1.018 a 0.75 0.75 0 1 1 -1.06 1.06 L 6.939 12.75 l 2.829 -2.828 a 0.75 0.75 0 1 1 1.06 1.06 L 9.811 12 h 2.439 a 2.25 2.25 0 0 0 2.25 -2.25 v -5 a 2.25 2.25 0 0 0 -2.25 -2.25 h -8.5 A 2.25 2.25 0 0 0 1.5 4.75 v 5 A 2.25 2.25 0 0 0 3.75 12 H 5 v 1.5 H 3.75 A 3.75 3.75 0 0 1 0 9.75 v -5 Z"`
->>>>>>> d1dcb05b68cbd1ff064e36a36458860dc6256a16
 }
 
 const KeepSvgs = {

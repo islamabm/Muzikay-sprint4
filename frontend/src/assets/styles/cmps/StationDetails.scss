@@ -176,6 +176,7 @@
   display: flex;
   gap: 4rem;
   align-items: center;
+  color: $clr11;
 
   .btn-icons {
     display: flex;
@@ -197,5 +198,33 @@
         fill: $clr6;
       }
     }
+  }
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  padding-inline:4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: $clr11;
+  position: relative; 
+  background-color: $clr2;
+  
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 2.5rem;
+    width: 95%;
+    height: 1px;
+    background-color: rgba($clr11, 0.1);
+    margin-block-end: 1rem;
+  }
+  
+  .duration-icon {
+    fill: $clr11;
   }
 }

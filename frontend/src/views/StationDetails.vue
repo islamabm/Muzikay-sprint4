@@ -37,9 +37,15 @@
         <i class="like-icon" v-html="getSvg(likeIconSvg)" :style="{ fill: likeIconFill }" @click="toggleLike"></i>
         <i class="options-icon" v-html="getSvg('optionsIcon')"></i>
       </div>
-        </div>  
+      </div>  
 
+      <div class="table-header">
+        <span>#Title</span>
+        <span>Album</span>
+        <span>Date added</span>
+        <span><i class="duration-icon" v-html="getSvg('durationIcon')"></i></span>
 
+      </div>
 
 
 
