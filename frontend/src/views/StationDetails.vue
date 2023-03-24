@@ -29,6 +29,10 @@
       </div>
     </section>
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> ac535b269e5d4f9edcbfa2804740f65a0db9db97
     <ul v-if="station.songs" class="clean-list songs-list-details">
       <li class="station" v-for="(song, idx) in station.songs" :key="idx">
         <span>{{ idx + 1 }}</span>
@@ -184,9 +188,9 @@ export default {
 }
 </script>
 
-  <!-- <Search /> -->
+<!-- <Search /> -->
 
-    <!-- <ul
+<!-- <ul
       v-if="station.songs"
       class="clean-list songs-list-details"
       @dragover.prevent
