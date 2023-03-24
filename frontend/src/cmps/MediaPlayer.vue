@@ -7,13 +7,26 @@
         ref="youtube"/>
   
       <div class="control-buttons">
-        <button >🔀</button>
-        <button @click="switchSong(-1)">👈</button>
-        <button @click="playAudio('play')">Play</button>
-        <button @click="playAudio('pause')">Pause</button>
-        <button @click="switchSong(1)">👉</button>
-        <button >🔁</button>
-      </div>
+        <button class="media-player-prev-song">
+          <i class="home-icon icons" v-html="getSvg('shuffleBtnIcon')"></i>
+        </button>
+
+        <button class="media-player-prev-song" @click="switchSong(-1)">
+          <i class="home-icon icons" v-html="getSvg('prevSongBtnIcon')"></i>
+        </button>
+
+        <button class="media-player-play" @click="playAudio()">
+          <i class="home-icon icons" v-html="getSvg(selectBtn)"></i></button>
+
+          <button class="media-player-prev-song" @click="switchSong(1)">
+            <i class="home-icon icons" v-html="getSvg('nextSongBtnIcon')"></i>
+          </button>
+          <button class="media-player-prev-song">
+            <i class="home-icon icons" v-html="getSvg('repeatBtnIcone')"></i>
+          </button>
+          <!-- <button >🔁</button> -->
+
+        </div>
   
       <div class="music-bar">
         <span>{{ formatTime(currentTime) }}</span>
@@ -25,7 +38,7 @@
   <script>
   import YouTube from 'vue3-youtube'
   // import {stationService} from '../services/station.service.local'
-
+  import SVGService from '../services/SVG.service'
   export default {
     name: ['MediaPlayer'],
     components: {
@@ -44,11 +57,21 @@
     },
     computed: {
       stationId() {
-        if(this.currStation) return this.currStation.songs[this.songIdx].id
+        if(this.currStation){
+          this.isPlaying = true
+          return this.currStation.songs[this.songIdx].id
+        } 
         else return 'Oqtnee5Nqxw' 
+      },
+      selectBtn() {
+        const btn = this.isPlaying ? 'pauseBtnIcon' : 'playBtnIcon'
+        return btn
       }
     },
     methods: {
+      getSvg(iconName) {
+      return SVGService.getSpotifySvg(iconName)
+    },
       // the function gets direction 1/-1 and switches the song by it.
       switchSong(num) {
         this.songIdx += num
@@ -57,8 +80,6 @@
       // when the video is ready
       onReady() {
         this.duration = this.$refs.youtube.getDuration()
-        this.$refs.youtube.playVideo()
-        this.isPlaying = true
         this.intervalId = setInterval(() => {
           this.currentTime = this.$refs.youtube.getCurrentTime()
         }, 1000)
@@ -66,22 +87,15 @@
       // when something happens- Video has ended/Video is playing/Video is paused
       // work but has alot of error msges 
       onStateChange(event) {
-        if (event.data === 0) {
-          clearInterval(this.intervalId)
-          this.isPlaying = false
-        } 
-        this.isPlaying = (event.data === 1) ? true : false 
+        if (event.data === 0) clearInterval(this.intervalId)
       },
-      // play/pause video >> will be with one button and do toggle
-      playAudio(action) {
-        if (action === 'play') {
-          this.$refs.youtube.playVideo()
-          this.isPlaying = true
-        } else {
-          this.$refs.youtube.pauseVideo()
-          this.isPlaying = false
-        }
-      },
+      // play/pause video 
+      playAudio() {
+        this.isPlaying = !this.isPlaying
+
+        if (this.isPlaying) this.$refs.youtube.playVideo()
+        else this.$refs.youtube.pauseVideo()
+        },
       // handel the time format by parameter - currentTime / duration
       formatTime(time) {
         const minutes = Math.floor(time / 60)

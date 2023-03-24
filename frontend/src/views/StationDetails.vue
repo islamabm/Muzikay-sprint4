@@ -28,10 +28,11 @@
         <div v-else>...</div>
       </div>
     </section>
-    <hr />
 
-    <MiniSearch />
-    <Search />
+<<<<<<< HEAD
+
+=======
+>>>>>>> ac535b269e5d4f9edcbfa2804740f65a0db9db97
     <ul v-if="station.songs" class="clean-list songs-list-details">
       <li class="station" v-for="(song, idx) in station.songs" :key="idx">
         <span>{{ idx + 1 }}</span>
@@ -46,6 +47,7 @@
         <p class="posted-at">1 day ago</p>
         <p class="song-duration">1:40</p>
       </li>
+      <MiniSearch />
     </ul>
 
     <section v-else class="empty-station-content">
@@ -182,3 +184,32 @@ export default {
   },
 }
 </script>
+
+<!-- <Search /> -->
+
+<!-- <ul
+      v-if="station.songs"
+      class="clean-list songs-list-details"
+      @dragover.prevent
+      @drop="onDrop"
+    >
+      <li
+        class="station"
+        v-for="(song, idx) in station.songs"
+        :key="idx"
+        draggable="true"
+        @dragstart="onDragStart(song, idx)"
+      >
+        <span>{{ idx + 1 }}</span>
+        <img class="song-img" :src="song.imgUrl" />
+        <p class="song-title">{{ song.title }}</p>
+        <button
+          @click="removeSong(song.videoId, station._id)"
+          v-if="station.createdBy.fullname === 'guest'"
+        >
+          x
+        </button>
+        <p class="posted-at">1 day ago</p>
+        <p class="song-duration">1:40</p>
+      </li>
+    </ul> -->

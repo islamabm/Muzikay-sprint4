@@ -1,0 +1,39 @@
+.media-player-play {
+    background-color: white;
+    border: none;
+    border-radius: 32px;
+    color: black;
+    height: 32px;
+    width: 32px;
+    justify-content: center;
+
+    i {
+        margin-inline-start: 2px;
+        margin-top: 50px;
+        fill: rgb(0, 0, 0);
+    }
+
+    svg {
+        height: 100%;
+        width: 100%;
+    }
+
+}
+
+.media-player-prev-song {
+    background-color: inherit;
+    height: 32px;
+    width: 32px;
+    padding: 0;
+    margin-bottom: 0;
+    i {
+        width: 50px;
+        height: 50px;
+    }
+    
+    svg {
+        height: 100%;
+        width: 100%;
+        fill: $clr3;
+    }
+}
