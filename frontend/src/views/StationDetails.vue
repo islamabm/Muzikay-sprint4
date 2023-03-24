@@ -100,6 +100,8 @@ import { stationService } from '../services/station.service.local.js'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import MiniSearch from '../cmps/MiniSearch.vue'
 import BubblingHeart from '../cmps/BubblingHeart.vue'
+import nearestColor from 'nearest-color';
+
 
 export default {
   name: 'station-details',
@@ -254,12 +256,3 @@ export default {
   },
 }
 </script>
-
-
-
-      <!-- <i
-          class="like-icon"
-          @click="toggleHeaderLike"
-          :class="{ liked }"
-          v-html="getSvg('likeBtnOutline')"
-        ></i> -->
