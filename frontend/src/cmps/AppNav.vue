@@ -90,10 +90,7 @@ export default {
     },
   },
   components: {
-    FontAwesomeIcon
-  }
+    FontAwesomeIcon,
+  },
 }
 </script>
-<style>
-
-</style>
