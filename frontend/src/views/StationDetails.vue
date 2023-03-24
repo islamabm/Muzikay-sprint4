@@ -29,36 +29,12 @@
       </div>
     </section>
 
-<<<<<<< HEAD
-    <ul v-if="station.songs" class="clean-list songs-list-details">
-      <li class="station" v-for="(song, idx) in station.songs" :key="idx">
-        <span>{{ idx + 1 }}</span>
-        <img class="song-img" :src="song.imgUrl" />
-        <p class="song-title">{{ song.title }}</p>
-        <button
-          @click="removeSong(song.videoId, station._id)"
-          v-if="station.createdBy.fullname === 'guest'"
-        >
-          x
-        </button>
-        <p class="posted-at">1 day ago</p>
-        <p class="song-duration">1:40</p>
-      </li>
-      <MiniSearch />
-    </ul>
-
-    <section v-else class="empty-station-content">
-      <button>x</button>
-      <div>
-        <h3>Let's find something for your playlist</h3>
-        <input type="text" placeholder="Search for songs or episodes" />
-=======
     <div class="station-controls">
+
       <div class="btn-play-green" @click.stop="playStation"></div>
       <BubblingHeart @toggleLike="toggleHeaderLike" />
       <div class="btn-icons">
         <i class="options-icon" v-html="getSvg('optionsIcon')"></i>
->>>>>>> ce6e59b8c19be7ee6ff81782c7039ebf62c85367
       </div>
     </div>
 
@@ -89,13 +65,10 @@
         <p class="posted-at">1 day ago</p>
 
         <div class="flex-end list-end">
+          
           <div class="like-song-icon">
-            <BubblingHeart
-              :songIndex="idx"
-              :liked="song.liked"
-              @toggleLike="toggleSongLike"
-            />
-          </div>
+          <BubblingHeart :songIndex="idx" :liked="song.liked" @toggleLike="toggleSongLike" />
+        </div>
           <p class="song-duration">1:40</p>
 
           <button
@@ -137,7 +110,11 @@ export default {
       activeTitle: null,
       counter: 0,
       dominantColor: null,
+      likeIconFill: '#FFF',
       liked: false,
+
+      likeIconFillCls1: 'none',
+      likeIconFillCls2: '$clr11',
     }
   },
   methods: {
@@ -147,17 +124,17 @@ export default {
       this.$refs.stationDetailsHeader.style.backgroundColor = color.rgb
     },
     toggleHeaderLike() {
-      this.liked = !this.liked
-    },
-    toggleSongLike(idx) {
-      const song = this.station.songs[idx]
-      song.liked = !song.liked
-      console.log(
-        `Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`
-      )
-
-      // Add functionality
-    },
+    this.liked = !this.liked
+    this.likeIconFillCls1 = this.liked ? 'green' : 'none'
+    this.likeIconFillCls2 = this.liked ? 'green' : '$clr11'
+  },
+  toggleSongLike(idx) {
+    const song = this.station.songs[idx]
+    song.liked = !song.liked
+    console.log(`Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`)
+    
+    // Add functionality
+  },
     toggleActiveTitle(idx) {
       if (this.activeTitle === idx) {
         this.activeTitle = null

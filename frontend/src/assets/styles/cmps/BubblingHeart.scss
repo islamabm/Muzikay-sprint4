@@ -53,8 +53,8 @@ input[type="checkbox"]:checked + label {
     outline: 25px solid #64d26d;
     height: 40px;
     width: 40px;
-    margin-inline-start: 3.6rem;
-    margin-block-start: 1rem;
+    margin-inline-start: 3rem;
+    margin-block-start: -0.6rem;
     animation: scalePulse 0.5s cubic-bezier(0.12, 1, 0.5, 1) forwards;
   }
   &::after {
