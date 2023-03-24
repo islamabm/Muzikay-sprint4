@@ -13,3 +13,25 @@
   margin-inline-start: 32px;
   font-family: Circular-book;
 }
+
+
+@media (max-width: $mobile-breakpoint) {
+    .category-container {
+      display: grid;
+      grid-template-columns: repeat(2,minmax(80px,200px));
+    }
+}
+
+@media (min-width: $narrow-breakpoint) {
+    .category-container {
+      display: grid;
+      grid-template-columns: repeat(3,minmax(80px,200px));
+    }
+}
+
+@media (min-width: $normal-breakpoint) {
+    .category-container {
+      display: grid;
+      grid-template-columns: repeat(5,minmax(80px,300px));
+    }
+}
