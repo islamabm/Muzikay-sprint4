@@ -79,7 +79,6 @@ export default {
         playlistName
         // playlistName
       ) // Pass the name as a second argument
-      console.log(station)
       // const newPlaylist = { _id: station._id, name: playlistName }
       this.userStations.push(station)
       this.$router.push(`/station/${station._id}`)

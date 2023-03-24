@@ -16,7 +16,6 @@
   .login-signup {
     display: flex;
     gap: 16px;
-
   }
 
   .page-navigation {
@@ -59,12 +58,12 @@
       }
     }
 
-    .btn-signup{
+    .btn-signup {
       display: flex;
       font-size: 1rem;
       background-color: transparent;
 
-      &:hover{
+      &:hover {
         transform: scale(1.05);
       }
     }
@@ -128,3 +127,60 @@
 //     }
 
 // }
+.header-input {
+  margin-block: 0px;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  border: 0;
+  border: none;
+  border-radius: 500px;
+  color: #000;
+  height: 40px;
+  padding: 6px 48px;
+  text-overflow: ellipsis;
+  width: 100%;
+  &:focus {
+    outline: none;
+    border: none;
+  }
+}
+
+.header-form {
+  width: 360px;
+}
+
+.header-search-container {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+  align-items: center;
+  display: flex;
+  gap: 16px;
+}
+.svg-header-container {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  bottom: 0;
+  display: flex;
+  left: 12px;
+  pointer-events: none;
+  position: absolute;
+  right: 12px;
+  top: 0;
+}
+
+.svg-header-span {
+  -webkit-box-flex: 1;
+  color: #121212;
+  flex: 1;
+  width: 24px;
+  height: 24px;
+  margin-left: 110px;
+}
+
+.header-search-icon {
+  fill: currentcolor;
+  display: block;
+}

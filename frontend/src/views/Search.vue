@@ -17,27 +17,24 @@
     <h2 class="category-h2">Browse all</h2>
 
     <div class="category-container">
-      <img src="../assets/img/‏‏podcusts.PNG" alt="">
-      <img src="../assets/img/‏‏live-events.PNG" alt="">
-      <img src="../assets/img/‏‏made-for-you.PNG" alt="">
-      <img src="../assets/img/‏‏new-releases.PNG" alt="">
-      <img src="../assets/img/pop.PNG" alt="">
-      <img src="../assets/img/‏‏hip-hop.PNG" alt="">
-      <img src="../assets/img/‏‏rock.PNG" alt="">
-      <img src="../assets/img/latin.PNG" alt="">
-      <img src="../assets/img/‏‏charts.PNG" alt="">
-      <img src="../assets/img/‏‏dance-electronic.PNG" alt="">
-      <img src="../assets/img/‏‏mood.PNG" alt="">
-      <img src="../assets/img/‏‏indie.PNG" alt="">
+      <img src="../assets/img/‏‏podcusts.PNG" alt="" />
+      <img src="../assets/img/‏‏live-events.PNG" alt="" />
+      <img src="../assets/img/‏‏made-for-you.PNG" alt="" />
+      <img src="../assets/img/‏‏new-releases.PNG" alt="" />
+      <img src="../assets/img/pop.PNG" alt="" />
+      <img src="../assets/img/‏‏hip-hop.PNG" alt="" />
+      <img src="../assets/img/‏‏rock.PNG" alt="" />
+      <img src="../assets/img/latin.PNG" alt="" />
+      <img src="../assets/img/‏‏charts.PNG" alt="" />
+      <img src="../assets/img/‏‏dance-electronic.PNG" alt="" />
+      <img src="../assets/img/‏‏mood.PNG" alt="" />
+      <img src="../assets/img/‏‏indie.PNG" alt="" />
     </div>
   </section>
-
-
-
 </template>
 <script>
 import { stationService } from '../services/station.service.local'
-
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 export default {
   data() {
     return {
@@ -49,9 +46,10 @@ export default {
     async add() {
       // this function makes a mess Tal help!
       this.videos = await stationService.getVideos(this.search)
+      console.log(this.videos[0])
     },
     async addToPlaylist(video) {
-      console.log('video',video);
+      console.log('video', video)
       const { stationId } = this.$route.params
       try {
         const station = this.stations.find((s) => s._id === stationId)
@@ -62,9 +60,9 @@ export default {
         //   video: video,
         //   station: station,
         // })
-        // showSuccessMsg('song added')
+        showSuccessMsg('song added')
       } catch (err) {
-        // showErrorMsg('Cannot add song', err)
+        showErrorMsg('Cannot add song', err)
       }
     },
   },
