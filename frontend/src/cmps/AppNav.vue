@@ -51,6 +51,7 @@
   </nav>
 </template>
 <script>
+// import Vue from '/node_modules/.vite/deps/vue.js'
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
 import { Container, Draggable } from 'vue3-smooth-dnd'
@@ -64,14 +65,15 @@ export default {
   data() {
     return {
       playlistCounter: 0,
-      userStations: [],
+
       // station: stationService.createNewStation(),
     }
   },
   methods: {
     onDrop(dropResult) {
-      console.log('onDrop called with dropResult:', dropResult)
+      console.log('Before drag and drop:', this.userStations)
       this.userStations = this.applyDrag(this.userStations, dropResult)
+      console.log('After drag and drop:', this.userStations)
     },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult

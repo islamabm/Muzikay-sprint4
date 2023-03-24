@@ -1,7 +1,10 @@
 <template>
   <footer class="main-footer">
     <div v-if="station" class="footer-details">
-      <img class="footer-details-img" :src="currStation.songs[currSongIdx].imgUrl" />
+      <img
+        class="footer-details-img"
+        :src="currStation.songs[currSongIdx].imgUrl"
+      />
       <h3>{{ station.songs[currSongIdx].title }}</h3>
       <button>💚</button>
       <button>🖼</button>
@@ -32,7 +35,7 @@ export default {
   methods: {
     getSongIdx(songIdx) {
       this.currSongIdx = songIdx
-    }
+    },
   },
   watch: {
     '$route.params': {
@@ -42,9 +45,8 @@ export default {
           this.station = await this.$store.getters.stationById(stationId)
           this.currStation = this.station
           // console.log(station.songs[0].id);
-        }
-        catch (err) {
-          console.log(err);
+        } catch (err) {
+          console.log(err)
           throw err
         }
       },
