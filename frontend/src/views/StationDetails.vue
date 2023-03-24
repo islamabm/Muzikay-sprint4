@@ -30,40 +30,55 @@
     </section>
 
     <div class="station-controls">
-      <div class="btn-play-green" @click.stop="playStation"></div>
 
+      <div class="btn-play-green" @click.stop="playStation"></div>
+      <BubblingHeart @toggleLike="toggleHeaderLike" />
       <div class="btn-icons">
-        <i
-          class="like-icon"
-          v-html="getSvg(likeIconSvg)"
-          :style="{ fill: likeIconFill }"
-          @click="toggleLike"
-        ></i>
         <i class="options-icon" v-html="getSvg('optionsIcon')"></i>
       </div>
     </div>
 
-    <Container
-      @drop="onDrop"
-      v-if="station.songs"
-      class="clean-list songs-list-details"
-    >
+    <div class="table-header">
+      <span>#Title</span>
+      <span>Album</span>
+      <span>Date added</span>
+      <span><i class="duration-icon" v-html="getSvg('durationIcon')"></i></span>
+    </div>
+
+    <Container @drop="onDrop" v-if="station.songs" class="songs-list-details">
       <Draggable
         class="song-item"
         v-for="(song, idx) in station.songs"
         :key="idx"
       >
-        <span>{{ idx + 1 }}</span>
-        <img class="song-img" :src="song.imgUrl" />
-        <p class="song-title">{{ song.title }}</p>
-        <button
-          @click="removeSong(song.videoId, station._id)"
-          v-if="(station.createdBy.fullname = 'guest')"
-        >
-          x
-        </button>
+        <div class="img-and-title">
+          <span>{{ idx + 1 }}</span>
+          <img class="song-img" :src="song.imgUrl" />
+          <p
+            class="song-title"
+            :class="{ active: activeTitle === idx }"
+            @click="toggleActiveTitle(idx)"
+          >
+            {{ song.title }}
+          </p>
+        </div>
         <p class="posted-at">1 day ago</p>
-        <p class="song-duration">1:40</p>
+
+        <div class="flex-end list-end">
+          
+          <div class="like-song-icon">
+          <BubblingHeart :songIndex="idx" :liked="song.liked" @toggleLike="toggleSongLike" />
+        </div>
+          <p class="song-duration">1:40</p>
+
+          <button
+            class="btn-remove-song"
+            @click="removeSong(song.videoId, station._id)"
+            v-if="(station.createdBy.fullname = 'guest')"
+          >
+            <i class="options-song-icon" v-html="getSvg('songOptionsIcon')"></i>
+          </button>
+        </div>
       </Draggable>
       <MiniSearch />
     </Container>
@@ -84,6 +99,7 @@ import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import MiniSearch from '../cmps/MiniSearch.vue'
+import BubblingHeart from '../cmps/BubblingHeart.vue'
 
 export default {
   name: 'station-details',
@@ -91,32 +107,45 @@ export default {
     return {
       station: null,
       showModal: '',
-
+      activeTitle: null,
       counter: 0,
       dominantColor: null,
-      isLiked: false,
       likeIconFill: '#FFF',
+      liked: false,
+
+      likeIconFillCls1: 'none',
+      likeIconFillCls2: '$clr11',
     }
   },
   methods: {
-    // need to be fixed - permisson to photos?
-
     updateBodyBackgroundColor(color) {
       const gradient = `linear-gradient(to bottom, ${color.rgba}, #000)`
       document.body.style.backgroundImage = gradient
       this.$refs.stationDetailsHeader.style.backgroundColor = color.rgb
     },
-    toggleLike() {
-      this.isLiked = !this.isLiked
-      this.likeIconFill = this.isLiked ? '#1ed760' : '#FFF'
+    toggleHeaderLike() {
+    this.liked = !this.liked
+    this.likeIconFillCls1 = this.liked ? 'green' : 'none'
+    this.likeIconFillCls2 = this.liked ? 'green' : '$clr11'
+  },
+  toggleSongLike(idx) {
+    const song = this.station.songs[idx]
+    song.liked = !song.liked
+    console.log(`Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`)
+    
+    // Add functionality
+  },
+    toggleActiveTitle(idx) {
+      if (this.activeTitle === idx) {
+        this.activeTitle = null
+      } else {
+        this.activeTitle = idx
+      }
     },
-
     async getDominantColor(imageSrc) {
       const fac = new FastAverageColor()
       const img = new Image()
       img.crossOrigin = 'Anonymous'
-
-      // Replace the CORS Anywhere proxy URL with a different one
       const corsProxyUrl = 'https://api.codetabs.com/v1/proxy?quest='
       img.src = corsProxyUrl + encodeURIComponent(imageSrc)
 
@@ -211,9 +240,6 @@ export default {
 
       return `My Playlist #${this.counter}`
     },
-    likeIconSvg() {
-      return this.isLiked ? 'likeBtnFilled' : 'likeBtnOutline'
-    },
   },
   components: {
     StationEdit,
@@ -221,9 +247,19 @@ export default {
     MiniSearch,
     Container,
     Draggable,
+    BubblingHeart,
   },
   beforeUnmount() {
     document.body.style.background = '#181818'
   },
 }
 </script>
+
+
+
+      <!-- <i
+          class="like-icon"
+          @click="toggleHeaderLike"
+          :class="{ liked }"
+          v-html="getSvg('likeBtnOutline')"
+        ></i> -->
