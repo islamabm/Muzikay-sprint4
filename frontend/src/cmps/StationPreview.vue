@@ -2,7 +2,7 @@
   <section class="playlist-preview" @click="goToStationDetails">
     <div class="playlist-image">
       <img :src="station.songs[0].imgUrl" />
-      <div class="play-button" @click.stop="playStation"></div> <!-- Add this line for the play button -->
+      <div class="play-button" @click.stop="playStation"></div> 
     </div>
     <div class="playlist-info">
       <h3 class="playlist-title">{{ station.name }}</h3>

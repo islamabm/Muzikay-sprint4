@@ -29,12 +29,22 @@
       </div>
     </section>
 
-<<<<<<< HEAD
+    <div class="station-controls">
 
-=======
->>>>>>> ac535b269e5d4f9edcbfa2804740f65a0db9db97
-    <ul v-if="station.songs" class="clean-list songs-list-details">
-      <li class="station" v-for="(song, idx) in station.songs" :key="idx">
+      <div class="btn-play-green" @click.stop="playStation"></div> 
+
+      <div class="btn-icons">
+        <i class="like-icon" v-html="getSvg(likeIconSvg)" :style="{ fill: likeIconFill }" @click="toggleLike"></i>
+        <i class="options-icon" v-html="getSvg('optionsIcon')"></i>
+      </div>
+        </div>  
+
+
+
+
+
+    <article v-if="station.songs" class="clean-list songs-list-details">
+      <article class="song-item" v-for="(song, idx) in station.songs" :key="idx">
         <span>{{ idx + 1 }}</span>
         <img class="song-img" :src="song.imgUrl" />
         <p class="song-title">{{ song.title }}</p>
@@ -46,18 +56,13 @@
         </button>
         <p class="posted-at">1 day ago</p>
         <p class="song-duration">1:40</p>
-      </li>
+      </article>
       <MiniSearch />
-    </ul>
+    </article>
 
-    <section v-else class="empty-station-content">
-      <button>x</button>
-      <div>
-        <h3>Let's find something for your playlist</h3>
-        <input type="text" placeholder="Search for songs or episodes" />
-      </div>
-    </section>
   </section>
+
+
   <section v-if="showModal">
     <StationEdit
       :showModal="showModal"
@@ -76,6 +81,7 @@ import { stationService } from '../services/station.service.local.js'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import MiniSearch from '../cmps/MiniSearch.vue'
 
+
 export default {
   name: 'station-details',
   data() {
@@ -84,6 +90,8 @@ export default {
       showModal: '',
       counter: 0,
       dominantColor: null,
+      isLiked: false,
+      likeIconFill: "#FFF",
     }
   },
   methods: {
@@ -93,6 +101,10 @@ export default {
       const gradient = `linear-gradient(to bottom, ${color.rgba}, #000)`
       document.body.style.backgroundImage = gradient
       this.$refs.stationDetailsHeader.style.backgroundColor = color.rgb
+    },
+    toggleLike() {
+      this.isLiked = !this.isLiked;
+      this.likeIconFill = this.isLiked ? "#1ed760" : "#FFF";
     },
 
     async getDominantColor(imageSrc) {
@@ -176,6 +188,9 @@ export default {
 
       return `My Playlist #${this.counter}`
     },
+    likeIconSvg() {
+    return this.isLiked ? 'likeBtnFilled' : 'likeBtnOutline';
+  },
   },
   components: {
     StationEdit,
@@ -187,6 +202,16 @@ export default {
   },
 }
 </script>
+
+
+
+    <!-- <section v-else class="empty-station-content">
+      <button>x</button>
+      <div>
+        <h3>Let's find something for your playlist</h3>
+        <input type="text" placeholder="Search for songs or episodes" />
+      </div>
+    </section> -->
 
 <!-- <Search /> -->
 
