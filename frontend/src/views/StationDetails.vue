@@ -31,7 +31,7 @@
     <hr />
 
     <MiniSearch />
-
+    <Search />
     <ul v-if="station.songs" class="clean-list songs-list-details">
       <li class="station" v-for="(song, idx) in station.songs" :key="idx">
         <span>{{ idx + 1 }}</span>
