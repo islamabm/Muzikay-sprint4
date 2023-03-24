@@ -40,20 +40,20 @@
         </RouterLink>
       </div>
 
-      <article class="clean-list user-stations">
-        <article v-for="playlist in userStations" :key="playlist._id">
+      <Container @drop="onDrop" class="clean-list user-stations">
+        <Draggable v-for="playlist in userStations" :key="playlist._id">
           <RouterLink :to="`/station/${playlist._id}`">{{
             playlist.name
           }}</RouterLink>
-        </article>
-      </article>
+        </Draggable>
+      </Container>
     </div>
   </nav>
 </template>
 <script>
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
-
+import { Container, Draggable } from 'vue3-smooth-dnd'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPlus, faHeart } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -64,10 +64,31 @@ export default {
   data() {
     return {
       playlistCounter: 0,
+      userStations: [],
       // station: stationService.createNewStation(),
     }
   },
   methods: {
+    onDrop(dropResult) {
+      console.log('onDrop called with dropResult:', dropResult)
+      this.userStations = this.applyDrag(this.userStations, dropResult)
+    },
+    applyDrag(arr, dragResult) {
+      const { removedIndex, addedIndex, payload } = dragResult
+
+      if (removedIndex === null && addedIndex === null) return arr
+      const result = [...arr]
+      let itemToAdd = payload
+
+      if (removedIndex !== null) {
+        itemToAdd = result.splice(removedIndex, 1)[0]
+      }
+      if (addedIndex !== null) {
+        result.splice(addedIndex, 0, itemToAdd)
+      }
+      return result
+    },
+
     getSvg(iconName) {
       return svgService.getSpotifySvg(iconName)
     },
@@ -91,6 +112,8 @@ export default {
   },
   components: {
     FontAwesomeIcon,
+    Container,
+    Draggable,
   },
 }
 </script>

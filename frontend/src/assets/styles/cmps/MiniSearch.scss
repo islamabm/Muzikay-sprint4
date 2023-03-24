@@ -1,29 +1,77 @@
 .mini-search-container {
-    margin-inline-start: 32px;
+  margin-inline-start: 32px;
 
-    input {
-        background-color: hsla(0,0%,100%,.1);
-        border: 0;
-        border-radius: 4px;
-        color: hsla(0,0%,100%,.7);
-        height: 40px;
-        padding: 8px 32px 8px 50px;
-        width: 93%;
-        background-size: 24px; /* set the size of the SVG image */
-    }
+  .deafult-sentance-search {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: 'Circular-book';
+  }
 
-    .header-search-container {
-        // display: flex;
-        position: relative;
+  input {
+    background-color: hsla(0, 0%, 100%, 0.1);
+    border: 0;
+    border-radius: 4px;
+    color: hsla(0, 0%, 100%, 0.7);
+    height: 40px;
+    padding: 8px 32px 8px 50px;
+    width: 93%;
+    background-size: 24px; /* set the size of the SVG image */
+  }
+
+  .header-search-container {
+    // display: flex;
+    position: relative;
+
+    .header-input {
+      width: 389px;
     }
-    span {
-        margin-bottom: 50px;
+    .header-input::placeholder {
+      color: rgba($clr6, 0.4);
+      font-size: 1rem;
+      font-weight: 700;
     }
-    .header-search-icon {
+  }
+  span {
+    margin-bottom: 50px;
+  }
+  .header-search-icon {
     width: 24px;
     height: 24px;
     position: absolute;
     top: 0;
     left: 3px;
-    }
+  }
+}
+
+.add-btn-song {
+  color: white;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  background-color: transparent;
+  border-radius: 500px;
+  cursor: pointer;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  transition-duration: 33ms;
+  vertical-align: middle;
+  transform: translate3d(0px, 0px, 0px);
+  padding-block: 3px;
+  padding-inline: 15px;
+  border: 1px solid #878787;
+  font-size: 0.875rem;
+  min-block-size: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    border-color: white;
+    scale: 1.03;
+  }
+}
+
+.add-songs-container:hover {
+  background-color: rgba($clr10, 0.4);
 }

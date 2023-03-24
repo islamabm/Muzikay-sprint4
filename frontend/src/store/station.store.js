@@ -51,8 +51,6 @@ export const stationStore = {
       state.stations = stations
     },
     removeSong(state, { songId, stationId }) {
-      console.log('mutataion', songId)
-      console.log('MUTATION', stationId)
       const station = state.stations.find((s) => s._id === stationId)
       const idx = station.songs.findIndex((so) => so.id === songId)
       station.songs.splice(idx, 1)
@@ -60,10 +58,12 @@ export const stationStore = {
     setUserStations(state, stations) {
       state.userStations = stations
     },
-
     editStation(state, { station }) {
+      console.log(state.stations)
+      console.log(station)
       const idx = state.stations.findIndex((c) => c._id === station._id)
       state.stations.splice(idx, 1, station)
+      console.log(station)
     },
     removeStation(state, { stationId }) {
       state.stations = state.stations.filter(
