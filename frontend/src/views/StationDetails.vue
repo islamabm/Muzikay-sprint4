@@ -29,31 +29,46 @@
       </div>
     </section>
 
-    <ul v-if="station.songs" class="clean-list songs-list-details">
-      <li class="station" v-for="(song, idx) in station.songs" :key="idx">
+    <div class="station-controls">
+      <div class="btn-play-green" @click.stop="playStation"></div>
+
+      <div class="btn-icons">
+        <i
+          class="like-icon"
+          v-html="getSvg(likeIconSvg)"
+          :style="{ fill: likeIconFill }"
+          @click="toggleLike"
+        ></i>
+        <i class="options-icon" v-html="getSvg('optionsIcon')"></i>
+      </div>
+    </div>
+
+    <Container
+      @drop="onDrop"
+      v-if="station.songs"
+      class="clean-list songs-list-details"
+    >
+      <Draggable
+        class="song-item"
+        v-for="(song, idx) in station.songs"
+        :key="idx"
+      >
         <span>{{ idx + 1 }}</span>
         <img class="song-img" :src="song.imgUrl" />
         <p class="song-title">{{ song.title }}</p>
         <button
           @click="removeSong(song.videoId, station._id)"
-          v-if="station.createdBy.fullname === 'guest'"
+          v-if="(station.createdBy.fullname = 'guest')"
         >
           x
         </button>
         <p class="posted-at">1 day ago</p>
         <p class="song-duration">1:40</p>
-      </li>
+      </Draggable>
       <MiniSearch />
-    </ul>
-
-    <section v-else class="empty-station-content">
-      <button>x</button>
-      <div>
-        <h3>Let's find something for your playlist</h3>
-        <input type="text" placeholder="Search for songs or episodes" />
-      </div>
-    </section>
+    </Container>
   </section>
+
   <section v-if="showModal">
     <StationEdit :showModal="showModal" @close="showModal = false" />
     <button @click="toggleModal">x</button>
@@ -61,6 +76,7 @@
 </template>
 
 <script>
+import { Container, Draggable } from 'vue3-smooth-dnd'
 import { FastAverageColor } from 'fast-average-color'
 import StationEdit from '../cmps/StationEdit.vue'
 import Search from './Search.vue'
@@ -75,8 +91,11 @@ export default {
     return {
       station: null,
       showModal: '',
+
       counter: 0,
       dominantColor: null,
+      isLiked: false,
+      likeIconFill: '#FFF',
     }
   },
   methods: {
@@ -86,6 +105,10 @@ export default {
       const gradient = `linear-gradient(to bottom, ${color.rgba}, #000)`
       document.body.style.backgroundImage = gradient
       this.$refs.stationDetailsHeader.style.backgroundColor = color.rgb
+    },
+    toggleLike() {
+      this.isLiked = !this.isLiked
+      this.likeIconFill = this.isLiked ? '#1ed760' : '#FFF'
     },
 
     async getDominantColor(imageSrc) {
@@ -107,6 +130,25 @@ export default {
           console.error(e)
         }
       }
+    },
+    onDrop(dropResult) {
+      console.log(this.station)
+      this.station.songs = this.applyDrag(this.station.songs, dropResult)
+    },
+    applyDrag(arr, dragResult) {
+      const { removedIndex, addedIndex, payload } = dragResult
+
+      if (removedIndex === null && addedIndex === null) return arr
+      const result = [...arr]
+      let itemToAdd = payload
+
+      if (removedIndex !== null) {
+        itemToAdd = result.splice(removedIndex, 1)[0]
+      }
+      if (addedIndex !== null) {
+        result.splice(addedIndex, 0, itemToAdd)
+      }
+      return result
     },
 
     async removeSong(songId, stationId) {
@@ -169,43 +211,19 @@ export default {
 
       return `My Playlist #${this.counter}`
     },
+    likeIconSvg() {
+      return this.isLiked ? 'likeBtnFilled' : 'likeBtnOutline'
+    },
   },
   components: {
     StationEdit,
     Search,
     MiniSearch,
+    Container,
+    Draggable,
   },
   beforeUnmount() {
     document.body.style.background = '#181818'
   },
 }
 </script>
-
-<!-- <Search /> -->
-
-<!-- <ul
-      v-if="station.songs"
-      class="clean-list songs-list-details"
-      @dragover.prevent
-      @drop="onDrop"
-    >
-      <li
-        class="station"
-        v-for="(song, idx) in station.songs"
-        :key="idx"
-        draggable="true"
-        @dragstart="onDragStart(song, idx)"
-      >
-        <span>{{ idx + 1 }}</span>
-        <img class="song-img" :src="song.imgUrl" />
-        <p class="song-title">{{ song.title }}</p>
-        <button
-          @click="removeSong(song.videoId, station._id)"
-          v-if="station.createdBy.fullname === 'guest'"
-        >
-          x
-        </button>
-        <p class="posted-at">1 day ago</p>
-        <p class="song-duration">1:40</p>
-      </li>
-    </ul> -->
