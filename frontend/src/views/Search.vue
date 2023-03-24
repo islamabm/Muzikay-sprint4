@@ -14,7 +14,7 @@
       </ul>
     </div>
 
-    <h2 class="category-h2">Browse all</h2>
+    <!-- <h2 class="category-h2">Browse all</h2>
 
     <div class="category-container">
       <img src="../assets/img/‏‏podcusts.PNG" alt="" />
@@ -29,7 +29,7 @@
       <img src="../assets/img/‏‏dance-electronic.PNG" alt="" />
       <img src="../assets/img/‏‏mood.PNG" alt="" />
       <img src="../assets/img/‏‏indie.PNG" alt="" />
-    </div>
+    </div> -->
   </section>
 </template>
 <script>
