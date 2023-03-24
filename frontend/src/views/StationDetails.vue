@@ -29,12 +29,7 @@
       </div>
     </section>
 
-<<<<<<< HEAD
 
-=======
-    <MiniSearch />
-    <!-- <Search /> -->
->>>>>>> d8d5325b139bc72909b020a0a5e84d75eb503a7d
     <ul v-if="station.songs" class="clean-list songs-list-details">
       <li class="station" v-for="(song, idx) in station.songs" :key="idx">
         <span>{{ idx + 1 }}</span>
@@ -190,9 +185,9 @@ export default {
 }
 </script>
 
-  <!-- <Search /> -->
+<!-- <Search /> -->
 
-    <!-- <ul
+<!-- <ul
       v-if="station.songs"
       class="clean-list songs-list-details"
       @dragover.prevent
