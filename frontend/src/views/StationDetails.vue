@@ -29,37 +29,12 @@
       </div>
     </section>
 
-<<<<<<< HEAD
-    <ul v-if="station.songs" class="clean-list songs-list-details">
-      <li class="station" v-for="(song, idx) in station.songs" :key="idx">
-        <span>{{ idx + 1 }}</span>
-        <img class="song-img" :src="song.imgUrl" />
-        <p class="song-title">{{ song.title }}</p>
-        <button
-          @click="removeSong(song.videoId, station._id)"
-          v-if="station.createdBy.fullname === 'guest'"
-        >
-          x
-        </button>
-        <p class="posted-at">1 day ago</p>
-        <p class="song-duration">1:40</p>
-      </li>
-      <MiniSearch />
-    </ul>
-
-    <section v-else class="empty-station-content">
-      <button>x</button>
-      <div>
-        <h3>Let's find something for your playlist</h3>
-        <input type="text" placeholder="Search for songs or episodes" />
-=======
     <div class="station-controls">
 
       <div class="btn-play-green" @click.stop="playStation"></div>
       <BubblingHeart @toggleLike="toggleHeaderLike" />
       <div class="btn-icons">
         <i class="options-icon" v-html="getSvg('optionsIcon')"></i>
->>>>>>> ce6e59b8c19be7ee6ff81782c7039ebf62c85367
       </div>
     </div>
 
