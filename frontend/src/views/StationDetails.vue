@@ -100,7 +100,6 @@ import { stationService } from '../services/station.service.local.js'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import MiniSearch from '../cmps/MiniSearch.vue'
 import BubblingHeart from '../cmps/BubblingHeart.vue'
-import nearestColor from 'nearest-color';
 
 
 export default {
