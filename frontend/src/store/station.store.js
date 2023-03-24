@@ -30,17 +30,17 @@ export const stationStore = {
       // }
     },
     stationById: (state) => (id) => {
-      console.log('Searching for station with id:', id)
+      // console.log('Searching for station with id:', id)
       const foundStation = state.stations.find((station) => {
-        console.log(
-          'Comparing with station:',
-          station,
-          'with _id:',
-          station._id
-        )
+        // console.log(
+        //   'Comparing with station:',
+        //   station,
+        //   'with _id:',
+        //   station._id
+        // )
         return station._id === id
       })
-      console.log('Found station:', foundStation)
+      // console.log('Found station:', foundStation)
       return foundStation
     },
 

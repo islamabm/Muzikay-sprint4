@@ -1,6 +1,6 @@
 <template>
     <div>
-      <YouTube hidden
+      <YouTube class="youtube-player"
         :src="`https://www.youtube.com/watch?v=${stationId}`" 
         @ready="onReady"
         @state-change="onStateChange"
@@ -39,7 +39,6 @@
 </template>
   <script>
   import YouTube from 'vue3-youtube'
-  // import {stationService} from '../services/station.service.local'
   import SVGService from '../services/SVG.service'
   export default {
     name: ['MediaPlayer'],
@@ -59,11 +58,14 @@
     },
     computed: {
       stationId() {
+        console.log('ma ze hazain haze');
         if(this.currStation){
-          playAudio()
+          // playAudio()
+          this.isPlaying = true
+          console.log('got here with' , this.currStation.songs[this.songIdx].id);
           return this.currStation.songs[this.songIdx].id
         } 
-        else return '' 
+        else return 'z0jwCUr42Qw' 
       },
       selectBtn() {
         const btn = this.isPlaying ? 'pauseBtnIcon' : 'playBtnIcon'
@@ -74,7 +76,7 @@
       getSvg(iconName) {
       return SVGService.getSpotifySvg(iconName)
     },
-      // the function gets direction 1/-1 and switches the song by it.
+      // the function gets direction 1/-1 and switches the song by it
       switchSong(num) {
         this.songIdx += num
         this.$emit('songIdx' , this.songIdx)
@@ -82,6 +84,7 @@
       // when the video is ready
       onReady() {
         this.duration = this.$refs.youtube.getDuration()
+        console.log('on ready curr station',this.currStation);
         this.intervalId = setInterval(() => {
           this.currentTime = this.$refs.youtube.getCurrentTime()
         }, 1000)
@@ -89,12 +92,15 @@
       // when something happens- Video has ended/Video
       // work but has alot of error msges 
       onStateChange(event) {
-        if (event.data === 0) clearInterval(this.intervalId)
+        console.log('kusemek');
+        if (event.data === 0){
+          this.songIdx++
+          clearInterval(this.intervalId)
+        } 
       },
       // play/pause video 
       playAudio() {
         this.isPlaying = !this.isPlaying
-
         if (this.isPlaying) this.$refs.youtube.playVideo()
         else this.$refs.youtube.pauseVideo()
         },
@@ -108,10 +114,11 @@
     watch: {
     '$route.params': {
       async handler() {
-        const { stationId } = this.$route.params
         try {
+          const { stationId } = this.$route.params
           this.station = await this.$store.getters.stationById(stationId)
           this.currStation = this.station
+          console.log('curr station from param',this.currStation);
         }
         catch (err) {
           console.log(err,'cannot get id from route params');

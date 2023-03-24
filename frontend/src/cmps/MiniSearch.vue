@@ -28,9 +28,11 @@
       v-for="(video, idx) in videos"
       :key="idx"
     >
+    <div class="mini-search-preview">
       <span>{{ idx + 1 }}</span>
       <img class="song-img" :src="video.url" />
       <p class="song-title">{{ video.title }}</p>
+    </div>
       <button class="add-btn-song" @click="addToPlaylist(video)">Add</button>
     </Draggable>
   </Container>
