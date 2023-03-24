@@ -8,7 +8,11 @@
       <div class="edit-details-img">
         <label class="cover-img" @drop.prevent="handleFile" @dragover.prevent>
           <div v-if="loading" class="loader"></div>
-          <img class="img-edit" :src="img" alt="Station cover" />
+          <img
+            src="src/assets/img/empty-img.png"
+            alt="Station cover"
+            class="img-edit"
+          />
           <input type="file" @change="handleFile" hidden />
         </label>
         <div class="edit-details-inputs">
@@ -95,11 +99,14 @@ export default {
 
       return station
     },
-    img() {
-      return this.station.songs[0].imgUrl
-        ? this.station.songs[0].imgUrl
-        : 'src/assets/icons/drag-image.ico'
-    },
+    // img() {
+    //   if (this.station.songs[0].imgUrl) {
+    //     console.log(this.station.songs[0].imgUrl)
+    //   }
+    //   return this.station.songs[0].imgUrl
+    //     ? this.station.songs[0].imgUrl
+    //     : 'src/assets/img/empty-img.png'
+    // },
 
     stations() {
       return this.$store.getters.stations
