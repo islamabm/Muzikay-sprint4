@@ -44,10 +44,7 @@
         v-on="$listeners"
         class="clean-list user-stations"
       >
-        <Draggable
-          v-for="(playlist, index) in userStations"
-          :key="playlist._id"
-        >
+        <Draggable v-for="(playlist, index) in userStations" :key="index">
           <RouterLink :to="`/station/${playlist._id}`">{{
             playlist.name
           }}</RouterLink>
@@ -82,15 +79,16 @@ export default {
       const { removedIndex, addedIndex, payload } = dragResult
 
       if (removedIndex === null && addedIndex === null) return arr
-      const result = [...arr]
-      let itemToAdd = payload
 
-      if (removedIndex !== null) {
-        itemToAdd = result.splice(removedIndex, 1)[0]
-      }
-      if (addedIndex !== null) {
+      const result = [...arr]
+      const itemToAdd = result.splice(removedIndex, 1)[0]
+
+      if (addedIndex === null) {
+        result.push(itemToAdd)
+      } else {
         result.splice(addedIndex, 0, itemToAdd)
       }
+
       return result
     },
 

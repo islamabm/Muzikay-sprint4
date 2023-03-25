@@ -1,45 +1,44 @@
 .main-footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    padding: 0 10px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding: 0 10px;
+  width: 100%;
+  background-color: $clr1;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  z-index: 1;
+  border-top: 1px solid $clr8;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  .music-bar {
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
     width: 100%;
-    background-color: $clr1;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    z-index: 1;
-    border-top: $clr8; // does not work whyy Rania whyyy 😭
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-
-    .music-bar {
-        display: flex;
-        gap: 8px;
-        justify-content: space-between;
-        width: 100%;
-    }
-    .footer-details {
-        display: flex;
-        justify-content: space-between;
-        padding: 0 16px; // need to be rm
-        h3 {
-            margin-top: 22px; // need to be rm
-        }
-
-        img {
-            width: 56px;
-            height: 56px;
-        }
-        grid-column: 1;
+  }
+  .footer-details {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px; // need to be rm
+    h3 {
+      margin-top: 22px; // need to be rm
     }
 
-    .footer-media-adjusments {
-        margin-top: 22px; // need to be rm
-        grid-column: 3;
+    img {
+      width: 56px;
+      height: 56px;
     }
-    .footer-media-player {
-        grid-column: 2;
-    }
+    grid-column: 1;
+  }
+
+  .footer-media-adjusments {
+    margin-top: 22px; // need to be rm
+    grid-column: 3;
+  }
+  .footer-media-player {
+    grid-column: 2;
+  }
 }
-
