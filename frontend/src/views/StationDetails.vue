@@ -1,89 +1,102 @@
 <template>
   <section v-if="station" class="station-details">
-    <section ref="stationDetailsHeader" class="station-details-header">
-      <img
-        v-if="station.songs && station.songs.length > 0"
-        :src="station.songs[0].imgUrl"
-      />
-      <img class="deafult-image" v-else src="../assets/img/empty-img.png" />
+    <section class="station-details-header">
+      <div ref="stationDetailsHeader" class="header-content">
+        <img
+          v-if="station.songs && station.songs.length > 0"
+          :src="station.songs[0].imgUrl"
+        />
+        <img
+          class="deafult-image"
+          @click="toggleModal"
+          v-else
+          src="../assets/img/empty-img.png"
+        />
 
-      <div class="station-info">
-        <h1 class="playlist-word" @click="toggleModal">Playlist</h1>
-        <h1 class="station-name">{{ station.name }}</h1>
+        <div class="station-info">
+          <h1 class="playlist-word" @click="toggleModal">Playlist</h1>
+          <h1 class="station-name" @click="toggleModal">{{ station.name }}</h1>
 
-        <p class="station-description" @click="toggleModal">
-          Playlist Relax and indulge with beautiful piano pieces
-        </p>
-        <div v-if="station.songs">
-          <div class="likes-count-logo">
-            <i class="logo-green" v-html="getSvg('greenLogo')"></i>
-            <span class="small-logo-word">Muzikay</span>
-            <span @click="toggleModal">6,950,331 likes</span>•<span
-              >{{ songsCount }},</span
-            >
+          <p class="station-description" @click="toggleModal">
+            Playlist Relax and indulge with beautiful piano pieces
+          </p>
+          <div v-if="station.songs">
+            <div class="likes-count-logo">
+              <i class="logo-green" v-html="getSvg('greenLogo')"></i>
+              <span class="small-logo-word">Muzikay</span>
+              <span @click="toggleModal">6,950,331 likes</span>•<span
+                >{{ songsCount }},</span
+              >
 
-            <span>about 11 hr </span>
+              <span>about 11 hr </span>
+            </div>
           </div>
+          <div v-else>...</div>
         </div>
-        <div v-else>...</div>
+      </div>
+      <div class="station-controls">
+        <div class="btn-play-green" @click.stop="playStation"></div>
+        <BubblingHeart @toggleLike="toggleHeaderLike" />
+        <div class="btn-icons">
+          <i class="options-icon" v-html="getSvg('optionsIcon')"></i>
+        </div>
       </div>
     </section>
 
-    <div class="station-controls">
-      <div class="btn-play-green" @click.stop="playStation"></div>
-      <BubblingHeart @toggleLike="toggleHeaderLike" />
-      <div class="btn-icons">
-        <i class="options-icon" v-html="getSvg('optionsIcon')"></i>
+    <section ref="bottomHalf">
+
+      <div class="table-header">
+        <span>#Title</span>
+        <span>Album</span>
+        <span>Date added</span>
+        <span
+          ><i class="duration-icon" v-html="getSvg('durationIcon')"></i
+        ></span>
       </div>
-    </div>
 
-    <div class="table-header">
-      <span>#Title</span>
-      <span>Album</span>
-      <span>Date added</span>
-      <span><i class="duration-icon" v-html="getSvg('durationIcon')"></i></span>
-    </div>
-
-    <Container @drop="onDrop" v-if="station.songs" class="songs-list-details">
-      <Draggable
-        class="song-item"
-        v-for="(song, idx) in station.songs"
-        :key="idx"
-      >
-        <div class="img-and-title">
-          <span>{{ idx + 1 }}</span>
-          <img class="song-img" :src="song.imgUrl" />
-          <p
-            class="song-title"
-            :class="{ active: activeTitle === idx }"
-            @click="toggleActiveTitle(idx)"
-          >
-            {{ song.title }}
-          </p>
-        </div>
-        <p class="posted-at">1 day ago</p>
-
-        <div class="flex-end list-end">
-          <div class="like-song-icon">
-            <BubblingHeart
-              :songIndex="idx"
-              :liked="song.liked"
-              @toggleLike="toggleSongLike"
-            />
+      <Container @drop="onDrop" v-if="station.songs" class="songs-list-details">
+        <Draggable
+          class="song-item"
+          v-for="(song, idx) in station.songs"
+          :key="idx"
+        >
+          <div class="img-and-title">
+            <span>{{ idx + 1 }}</span>
+            <img class="song-img" :src="song.imgUrl" />
+            <p
+              class="song-title"
+              :class="{ active: activeTitle === idx }"
+              @click="toggleActiveTitle(idx)"
+            >
+              {{ song.title }}
+            </p>
           </div>
-          <p class="song-duration">1:40</p>
+          <p class="posted-at">1 day ago</p>
 
-          <button
-            class="btn-remove-song"
-            @click="removeSong(song.videoId, station._id)"
-            
-          >
-            <i class="options-song-icon" v-html="getSvg('songOptionsIcon')"></i>
-          </button>
-        </div>
-      </Draggable>
-      <MiniSearch />
-    </Container>
+          <div class="flex-end list-end">
+            <div class="like-song-icon">
+              <BubblingHeart
+                :songIndex="idx"
+                :liked="song.liked"
+                @toggleLike="toggleSongLike"
+              />
+            </div>
+            <p class="song-duration">1:40</p>
+
+            <button
+              class="btn-remove-song"
+              @click="removeSong(song.videoId, station._id)"
+            >
+              <i
+                class="options-song-icon"
+                v-html="getSvg('songOptionsIcon')"
+              ></i>
+            </button>
+          </div>
+        </Draggable>
+        <MiniSearch />
+      </Container>
+    </section>
   </section>
 
   <section v-if="showModal">
@@ -121,10 +134,15 @@ export default {
   },
   methods: {
     updateBodyBackgroundColor(color) {
-      const gradient = `linear-gradient(to bottom, ${color.rgba}, #000)`
+      const darkColor = `${color.rgba.slice(0, -1)}, 0.1)`
+      const gradient = `linear-gradient(to bottom, ${color.rgba}, #212120)`
+      const darkGradient = `linear-gradient(to bottom, ${darkColor} 0%, #000 100%)`;
+
       document.body.style.backgroundImage = gradient
-      this.$refs.stationDetailsHeader.style.backgroundColor = color.rgb
+      this.$refs.stationDetailsHeader.style.backgroundImage = gradient
+      this.$refs.bottomHalf.style.backgroundImage = darkGradient
     },
+
     toggleHeaderLike() {
       this.liked = !this.liked
       this.likeIconFillCls1 = this.liked ? 'green' : 'none'
@@ -247,7 +265,6 @@ export default {
     station() {
       return this.$store.getters.station
     },
-
 
     stationCount() {
       //computed can't do this
