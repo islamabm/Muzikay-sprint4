@@ -4,8 +4,16 @@
     v-bind:style="{ backgroundColor: `rgba(10,10,10, ${headerOpacity})` }"
   >
     <div class="page-navigation">
-      <RouterLink to="#">&#60;</RouterLink>
-      <RouterLink to="#">&#62;</RouterLink>
+      <a title="Go back" href="#" @click="goBack" :class="backLinkClass"
+        >&#60;</a
+      >
+      <a
+        title="Go forward"
+        href="#"
+        @click="goForward"
+        :class="forwardLinkClass"
+        >&#62;</a
+      >
       <div v-if="isSearchRoute" class="header-search-container">
         <form class="header-form">
           <input
@@ -50,6 +58,12 @@ export default {
         1
       )
     },
+    goBack() {
+      window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
+    },
+    goForward() {
+      this.$router.go(-1)
+    },
     getSvg(iconName) {
       return svgService.getSpotifySvg(iconName)
     },
@@ -63,6 +77,14 @@ export default {
   computed: {
     isSearchRoute() {
       return this.$route.path === '/station/search'
+    },
+    backLinkClass() {
+      return window.history.length > 1 ? 'pointer-cursor' : 'default-cursor'
+    },
+    forwardLinkClass() {
+      return this.$router.currentRoute.name === 'last-page'
+        ? 'default-cursor'
+        : 'pointer-cursor'
     },
   },
 }

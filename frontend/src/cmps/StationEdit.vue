@@ -8,25 +8,18 @@
       <div class="edit-details-img">
         <label class="cover-img" @drop.prevent="handleFile" @dragover.prevent>
           <div v-if="loading" class="loader"></div>
-          <img
-            src="src/assets/img/empty-img.png"
-            alt="Station cover"
-            class="img-edit"
-          />
+          <img :src="imgSrc" alt="Station cover" class="img-edit" />
           <input type="file" @change="handleFile" hidden />
         </label>
         <div class="edit-details-inputs">
           <input
             class="edit-name"
-            @input="stationInput"
             id="name"
             type="text"
             v-model="station.name"
             :placeholder="station.name"
           />
           <textarea
-            class="edit-description"
-            @input="stationInput"
             id="description"
             rows="4"
             v-model="station.desc"
@@ -104,6 +97,12 @@ export default {
       const station = stations.find((t) => t._id === stationId)
 
       return (this.station = station)
+    },
+    imgSrc() {
+      if (this.station && this.station.songs) {
+        return this.station.songs[0].imgUrl || 'src/assets/img/empty-img.png'
+      }
+      return 'src/assets/img/empty-img.png'
     },
     // img() {
     //   if (this.station.songs[0].imgUrl) {

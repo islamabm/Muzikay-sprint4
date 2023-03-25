@@ -1,12 +1,12 @@
 // import { stationService } from '../services/station.service.local'
 import { stationService } from '../services/station.service.local.js'
-
-export function getActionRemoveStation(stationId) {
-  return {
-    type: 'removeStation',
-    stationId,
-  }
-}
+import { storageService } from '../services/async-storage.service.js'
+// export function getActionRemoveStation(stationId) {
+//   return {
+//     type: 'removeStation',
+//     stationId,
+//   }
+// }
 
 export const stationStore = {
   state: {
@@ -51,9 +51,14 @@ export const stationStore = {
       state.stations = stations
     },
     removeSong(state, { songId, stationId }) {
-      const station = state.stations.find((s) => s._id === stationId)
-      const idx = station.songs.findIndex((so) => so.id === songId)
-      station.songs.splice(idx, 1)
+      console.log('mutation', songId)
+      console.log('mutation', stationId)
+      const stationIdx = state.stations.findIndex((s) => s._id === stationId)
+      // console.log(station)
+      const station = state.stations[stationIdx]
+      const songIdx = station.songs.findIndex((so) => so.id === songId)
+      console.log(songIdx)
+      station.songs.splice(songIdx, 1)
     },
     setUserStations(state, stations) {
       state.userStations = stations
@@ -65,11 +70,14 @@ export const stationStore = {
       state.stations.splice(idx, 1, station)
       console.log(station)
     },
-    removeStation(state, { stationId }) {
-      state.stations = state.stations.filter(
-        (station) => station._id !== stationId
-      )
+    removeStation(state, { id }) {
+      const idx = state.stations.findIndex((s) => s._id === id)
+      state.stations.splice(idx, 1)
     },
+    //   removeToy(state, { id }) {
+    //     const idx = state.toys.findIndex(toy => toy._id === id)
+    //     state.toys.splice(idx, 1)
+    // },
   },
   actions: {
     async loadStations(context) {
@@ -81,10 +89,11 @@ export const stationStore = {
         throw err
       }
     },
-    async removeStation(context, { stationId }) {
+    async removeStation(commit, { id }) {
       try {
-        await stationService.remove(stationId)
-        context.commit(getActionRemoveStation(stationId))
+        const res = await stationService.remove(id)
+        commit({ type: 'removeStation', id })
+        return res
       } catch (err) {
         console.log('stationStore: Error in removeStation', err)
         throw err
@@ -100,6 +109,18 @@ export const stationStore = {
         throw err
       }
     },
+    // async removeSong({ commit }, { songId, stationId }) {
+    //   try {
+    //     console.log('store', songId)
+    //     console.log('store', stationId)
+    //     commit({ type: 'removeSong', songId, stationId })
+    //     await storageService.remove(songId, stationId)
+    //   } catch (err) {
+    //     // console.log(err)
+    //     console.log('Could Not delete song')
+    //     throw err
+    //   }
+    // },
     async removeSong({ commit }, { songId, stationId }) {
       try {
         console.log('store', songId)
@@ -112,6 +133,7 @@ export const stationStore = {
         throw err
       }
     },
+
     async addSong({ commit }, { video, station }) {
       console.log('video from store', video)
       console.log('station from store', station)

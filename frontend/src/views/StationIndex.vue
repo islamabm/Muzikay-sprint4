@@ -3,16 +3,22 @@
     <AppHeader />
     <AppNav />
     <UserMsg />
-    <AppFooter />
-    <RouterView />
+    <div class="footer-container">
+      <AppFooter />
+      <MobileNav />
+    </div>
+    <RouterView class="router-view" />
   </section>
 </template>
+
+
 
 <script>
 import AppHeader from '../cmps/AppHeader.vue'
 import UserMsg from '../cmps/UserMsg.vue'
 import AppNav from '../cmps/AppNav.vue'
 import AppFooter from '../cmps/AppFooter.vue'
+import MobileNav from '../cmps/MobileNav.vue'
 
 export default {
   name: '',
@@ -31,6 +37,7 @@ export default {
     UserMsg,
     AppHeader,
     AppFooter,
+    MobileNav,
   },
 }
 </script>

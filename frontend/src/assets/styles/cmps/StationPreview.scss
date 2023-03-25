@@ -105,3 +105,37 @@
   }
 }
 
+
+
+@media screen and (max-width: $narrow-breakpoint) {
+  .playlist-preview {
+    width: 180px;
+    padding: 0.8rem 0.8rem 0;
+
+    .playlist-image {
+      width: 150px;
+      height: 150px;
+    }
+
+    .playlist-info {
+      .playlist-title {
+        font-size: 12px;
+      }
+
+      .station-description-preview {
+        font-size: 0.75rem;
+      }
+    }
+  }
+
+  .play-button {
+    bottom: 80px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+
+    &:before {
+      border-width: 7px 0 7px 12px;
+    }
+  }
+}
