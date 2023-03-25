@@ -7,11 +7,15 @@
       />
       <h3>{{ station.songs[currSongIdx].title }}</h3>
       <button class="like-song-icon"><BubblingHeart/></button>
-      <!-- <button>🖼</button> -->
     </div>
     <div class="footer-media-player"><MediaPlayer @songIdx="getSongIdx" /></div>
     <div class="footer-media-adjusments">
-      <button>🔉</button>
+      <button class="media-player-repeat-song">
+          <i class="speaker" v-html="getSvg('speakerBtnIcon')"></i>
+          <div class="speaker-bar">
+            <div class="speaker-bar-fill"></div>
+          </div>
+        </button>
     </div>
   </footer>
 </template>
@@ -19,7 +23,8 @@
 <script>
 import MediaPlayer from './MediaPlayer.vue'
 import BubblingHeart from './BubblingHeart.vue'
-// import { stationService } from '../services/station.service.local'
+import SVGService from '../services/SVG.service'
+
 export default {
   name: 'AppFooter',
   emits: ['songIdx'],
@@ -33,6 +38,9 @@ export default {
   methods: {
     getSongIdx(songIdx) {
       this.currSongIdx = songIdx
+    },
+    getSvg(iconName) {
+      return SVGService.getSpotifySvg(iconName)
     },
   },
   watch: {

@@ -9,7 +9,7 @@
       <div class="control-buttons">
         
         <button class="media-player-prev-song">
-          <i class="home-icon icons" v-html="getSvg('shuffleBtnIcon')"></i>
+          <i class="shuffle" v-html="getSvg('shuffleBtnIcon')"></i>
         </button>
 
         <button class="media-player-prev-song" @click="switchSong(-1)">
@@ -17,7 +17,8 @@
         </button>
 
         <button class="media-player-play" @click="playAudio()">
-          <i class="home-icon icons" v-html="getSvg(selectBtn)"></i>
+          <i class="pause" v-if="this.isPlaying" v-html="getSvg('pauseBtnIcon')"></i>
+          <i class="home-icon icons" v-else v-html="getSvg('playBtnIcon')"></i>
         </button>
 
         <button class="media-player-prev-song" @click="switchSong(1)">
@@ -32,7 +33,9 @@
   
       <div class="music-bar">
         <span>{{ formatTime(currentTime) }}</span>
-        <div class="progress-bar"></div>
+        <div class="progress-bar">
+          <div class="progress-bar-fill" :style="{ width: progressBarWidth + '%' }"></div>
+        </div>
         <span>{{ formatTime(duration) }}</span>
       </div>
     </div>
@@ -59,7 +62,6 @@
     computed: {
       stationId() {
         if(this.currStation){
-          // playAudio()
           this.isPlaying = true
           console.log('got here with' , this.currStation.songs[this.songIdx].id);
           return this.currStation.songs[this.songIdx].id
@@ -69,6 +71,13 @@
       selectBtn() {
         const btn = this.isPlaying ? 'pauseBtnIcon' : 'playBtnIcon'
         return btn
+      },
+      progressBarWidth() {
+        if (!this.duration || !this.currentTime) return
+        
+        const progressBarWidth = (this.currentTime / this.duration) * 100
+        return progressBarWidth
+
       }
     },
     methods: {

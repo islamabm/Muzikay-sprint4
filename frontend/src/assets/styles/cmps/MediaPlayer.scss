@@ -1,5 +1,5 @@
 .media-player-play {
-    background-color: white;
+    background-color: $clr10;
     border: none;
     border-radius: 32px;
     color: black;
@@ -17,6 +17,9 @@
         height: 100%;
         width: 100%;
     }
+    .pause {
+        margin-inline-start: 0.5px;
+    }
 
 }
 
@@ -26,6 +29,7 @@
     width: 32px;
     padding: 0;
     margin-bottom: 0;
+    margin-top: 7px;
     i {
         width: 50px;
         height: 50px;
@@ -34,25 +38,36 @@
     svg {
         height: 77%;
         width: 77%;
-        fill: $clr3;
+        fill: $clr10;
+    }
+
+    .shuffle {
+        display: block;
+        width: 32px;
+        height: 32px;
+        margin-top: 2px;
+        margin-left: 6px;
     }
 }
 
 .control-buttons {
     display: flex;
     justify-content: center;
+    gap: 6px;
+    margin-right: 10px;
 }
 
 .media-player-repeat-song {
     margin: 0;
     padding: 0;
+    margin-top: 3px;
     i {
         width: 32px;
         height: 40px;
     }
     svg {
         margin-top: 8px;
-        fill: $clr3;
+        fill: $clr10;
         width: 100%;
         height: 32px;
     }
@@ -60,4 +75,28 @@
 
 .youtube-player {
     display: none;
+}
+
+.footer-media-adjusments {
+    display: flex;
+}
+
+.music-bar {
+    color: $clr11;
+    font-size: small;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.progress-bar {
+    margin-top: 9px;
+    width: 100%;
+    height: 4px;
+    background-color: $clr10;
+    border-radius: 20px;
+
+    .progress-bar-fill {
+        width: 0%;
+        height: 100%;
+        background-color: $clrGreen;
+    }
 }
