@@ -7,6 +7,10 @@
           :src="station.songs[0].imgUrl"
         />
         <img
+          v-else-if="station.name === 'Liked songs'"
+          src="../assets/img/empty-img.png"
+        />
+        <img
           class="deafult-image"
           @click="toggleModal"
           v-else
@@ -44,7 +48,6 @@
           <i class="options-icon" v-html="getSvg('optionsIcon')"></i>
         </div>
       </div>
-
       <div class="table-header">
         <span>#Title</span>
         <span>Album</span>
@@ -80,6 +83,7 @@
                 :liked="song.liked"
                 @toggleLike="toggleSongLike"
               />
+              <!-- @addLikeToSong="addSongToLikedSongs(song)" -->
             </div>
             <p class="song-duration">1:40</p>
             <!-- @click="removeSong(song.videoId, station._id)" -->
@@ -126,6 +130,7 @@ import StationEdit from '../cmps/StationEdit.vue'
 import Search from './Search.vue'
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
+import { userService } from '../services/user.service.local.js'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import MiniSearch from '../cmps/MiniSearch.vue'
 import BubblingHeart from '../cmps/BubblingHeart.vue'
@@ -166,6 +171,14 @@ export default {
       this.$refs.stationDetailsHeader.style.backgroundImage = gradient
       this.$refs.bottomHalf.style.backgroundImage = darkGradient
     },
+    // addSongToLikedSongs(song) {
+    //   const user = userService.getLoggedinUser()
+    //   console.log(song)
+    //   console.log(user)
+    //   console.log('hi')
+    //   // user.likedSongs.songs.push(song)
+    //   // console.log(user.likedSongs.songs)
+    // },
 
     toggleSongLike(idx) {
       const song = this.station.songs[idx]
@@ -174,7 +187,7 @@ export default {
         `Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`
       )
 
-      // Add functionality
+      //   // Add functionality
     },
     toggleActiveTitle(idx) {
       if (this.activeTitle === idx) {

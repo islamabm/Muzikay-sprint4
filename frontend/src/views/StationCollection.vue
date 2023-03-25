@@ -8,6 +8,7 @@
 import StationsList from '../cmps/StationList.vue'
 
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import { userService } from '../services/user.service.local.js'
 // import { getActionRemoveStation } from '../store/station.store'
 export default {
   computed: {
@@ -32,6 +33,9 @@ export default {
     // removeToy(toyId) {
     //   this.$store.dispatch({ type: 'removeToy', id: toyId })
     // },
+  },
+  created() {
+    userService.login()
   },
   components: {
     StationsList,

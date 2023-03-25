@@ -5,15 +5,17 @@ export const userService = {
   login,
   getLoggedinUser,
 }
-login()
+
 function login() {
+  console.log('hi,login')
   const user = {
     fullName: 'guest',
     likedStations: [],
     likedSongs: null,
   }
   storageService.store(USER_KEY, user)
-  return user
+
+  //   return user
 }
 function getLoggedinUser() {
   return storageService.load(USER_KEY) || login()

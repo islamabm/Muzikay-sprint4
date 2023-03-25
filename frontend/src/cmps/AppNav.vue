@@ -47,11 +47,9 @@
           Create Playlist
         </a>
 
-        <RouterLink
-          class="liked-songs"
-          to="/station/like"
-          :class="{ active: $route.path === '/station/like' }"
-        >
+        <RouterLink class="liked-songs" @click="onClickLikedSongs">
+          <!-- to="/station/like"
+          :class="{ active: $route.path === '/station/like' }" -->
           <font-awesome-icon class="heart-icon" :icon="['fas', 'heart']" />
           Liked Songs
         </RouterLink>
@@ -131,6 +129,11 @@ export default {
       const playlistName = `My Playlist #${this.playlistCounter}`
       const station = stationService.createNewStation(playlistName)
       this.userStations.push(station)
+      this.$router.push(`/station/${station._id}`)
+    },
+    onClickLikedSongs() {
+      const station = stationService.createNewStation('Liked songs')
+      console.log(station)
       this.$router.push(`/station/${station._id}`)
     },
   },
