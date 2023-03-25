@@ -21,6 +21,7 @@ export const stationStore = {
     songs({ stations }) {
       return stations.songs
     },
+
     station({ stations, currStationId }) {
       const station = stations.find((s) => s._id === currStationId)
       console.log('store getters', station)

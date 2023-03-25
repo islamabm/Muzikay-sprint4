@@ -2,7 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 import Search from './views/Search.vue'
 import UserLibrary from './views/UserLibrary.vue'
-import LikedSongs from './views/LikedSongs.vue'
+// import LikedSongs from './views/LikedSongs.vue'
 import StationIndex from './views/StationIndex.vue'
 import Signup from './views/Signup.vue'
 import Login from './views/Login.vue'
@@ -51,11 +51,11 @@ const routes = [
         name: 'Library',
         component: UserLibrary,
       },
-      {
-        path: '/station/like',
-        name: 'like',
-        component: LikedSongs,
-      },
+      // {
+      //   path: '/station/like',
+      //   name: 'like',
+      //   component: LikedSongs,
+      // },
       {
         path: '/station/:stationId',
         name: 'station-details',

@@ -9,11 +9,10 @@
       "fullname": "system",
       "imgUrl": "http://some-photo/"
     },
-    "likedByUsers": ["{minimal-user}", "{minimal-user}"],
+    "likedByUsers": ["guest"],
     "songs": [
       {
         "id": "MXI5Nuz6OHg",
-        "isLiked": "false",
         "title": "The Meters - Cissy Strut",
         "url": "youtube/song.mp4",
         "imgUrl": "https://www.artmajeur.com/medias/standard/t/e/tetiana-tiplova/artwork/15377710_39-1.jpg",
@@ -22,7 +21,7 @@
       },
       {
         "id": "mUkfiLjooxs",
-        "isLiked": "false",
+
         "title": "The JBs - Pass The Peas",
         "url": "youtube/song.mp4",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
@@ -68,7 +67,6 @@
     ]
   },
 
-
   {
     "_id": "101",
     "name": "Funky Monks",
@@ -83,7 +81,7 @@
     "songs": [
       {
         "id": "MXI5Nuz6OHg",
-        "isLiked": "false",
+
         "title": "The Meters - Cissy Strut",
         "url": "youtube/song.mp4",
         "imgUrl": "https://cms-assets.tutsplus.com/cdn-cgi/image/width=360/uploads/users/114/posts/34296/final_image/Final-image.jpg",
@@ -92,7 +90,7 @@
       },
       {
         "id": "mUkfiLjooxs",
-        "isLiked": "false",
+
         "title": "The JBs - Pass The Peas",
         "url": "youtube/song.mp4",
         "imgUrl": "https://i.ytimg.com/vi/kgx4WGK0oNU/maxresdefault.jpg",
@@ -162,11 +160,11 @@
       "fullname": "system",
       "imgUrl": "http://some-photo/"
     },
-    "likedByUsers": ["{minimal-user}", "{minimal-user}"],
+    "likedByUsers": ["guest"],
     "songs": [
       {
         "id": "MXI5Nuz6OHg",
-        "isLiked": "false",
+
         "title": "The Meters - Cissy Strut",
         "url": "youtube/song.mp4",
         "imgUrl": "https://i.scdn.co/image/ab67616d0000b27319e9d00ec40455f230a217ad",
@@ -175,7 +173,7 @@
       },
       {
         "id": "mUkfiLjooxs",
-        "isLiked": "false",
+
         "title": "The JBs - Pass The Peas",
         "url": "youtube/song.mp4",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
@@ -235,7 +233,6 @@
       }
     ]
   },
-
 
   {
     "_id": "103",
@@ -247,11 +244,11 @@
       "fullname": "system",
       "imgUrl": "http://some-photo/"
     },
-    "likedByUsers": ["{minimal-user}", "{minimal-user}"],
+    "likedByUsers": ["guest"],
     "songs": [
       {
         "id": "MXI5Nuz6OHg",
-        "isLiked": "false",
+
         "title": "The Meters - Cissy Strut",
         "url": "youtube/song.mp4",
         "imgUrl": "https://www.gannett-cdn.com/presto/2022/04/25/NA36/52c13c83-e999-47a3-8e68-8ae6f789cc27-Willie_Nelson_A_Beautiful_Time_Album_Cover.jpeg",
@@ -260,7 +257,7 @@
       },
       {
         "id": "mUkfiLjooxs",
-        "isLiked": "false",
+
         "title": "The JBs - Pass The Peas",
         "url": "youtube/song.mp4",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
@@ -320,7 +317,6 @@
       }
     ]
   },
-
 
   {
     "_id": "104",
@@ -336,7 +332,7 @@
     "songs": [
       {
         "id": "MXI5Nuz6OHg",
-        "isLiked": "false",
+
         "title": "The Meters - Cissy Strut",
         "url": "youtube/song.mp4",
         "imgUrl": "https://classicsdujour.com/wp-content/uploads/2020/02/sgt-pepper-album-cover.jpg",
@@ -345,7 +341,7 @@
       },
       {
         "id": "mUkfiLjooxs",
-        "isLiked": "false",
+
         "title": "The JBs - Pass The Peas",
         "url": "youtube/song.mp4",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
@@ -405,7 +401,6 @@
       }
     ]
   },
-
 
   {
     "_id": "105",
@@ -417,11 +412,11 @@
       "fullname": "system",
       "imgUrl": "http://some-photo/"
     },
-    "likedByUsers": ["{minimal-user}", "{minimal-user}"],
+    "likedByUsers": ["guest"],
     "songs": [
       {
         "id": "MXI5Nuz6OHg",
-        "isLiked": "false",
+
         "title": "The Meters - Cissy Strut",
         "url": "youtube/song.mp4",
         "imgUrl": "https://metalodyssey.files.wordpress.com/2015/05/iron-maiden-seventh-son-of-a-seventh-son-promo-album-cover-pic-1988-339988immo.jpg",
@@ -430,7 +425,7 @@
       },
       {
         "id": "mUkfiLjooxs",
-        "isLiked": "false",
+
         "title": "The JBs - Pass The Peas",
         "url": "youtube/song.mp4",
         "imgUrl": "https://cdn10.phillymag.com/wp-content/uploads/sites/3/2020/09/monthly-playlist.jpg",
@@ -490,7 +485,6 @@
       }
     ]
   },
-
 
   {
     "_id": "106",
@@ -502,11 +496,11 @@
       "fullname": "Puki Ben David",
       "imgUrl": "http://some-photo/"
     },
-    "likedByUsers": ["{minimal-user}", "{minimal-user}"],
+    "likedByUsers": ["guest"],
     "songs": [
       {
         "id": "MXI5Nuz6OHg",
-        "isLiked": "false",
+
         "title": "The Meters - Cissy Strut",
         "url": "youtube/song.mp4",
         "imgUrl": "https://upload.wikimedia.org/wikipedia/en/3/3c/Queen_Hot_Space.png",
@@ -515,7 +509,7 @@
       },
       {
         "id": "mUkfiLjooxs",
-        "isLiked": "false",
+
         "title": "The JBs - Pass The Peas",
         "url": "youtube/song.mp4",
         "imgUrl": "https://cdn10.phillymag.com/wp-content/uploads/sites/3/2020/09/monthly-playlist.jpg",
@@ -530,8 +524,6 @@
       }
     ]
   },
-
-
 
   {
     "_id": "107",
@@ -547,7 +539,7 @@
     "songs": [
       {
         "id": "MXI5Nuz6OHg",
-        "isLiked": "false",
+
         "title": "The Meters - Cissy Strut",
         "url": "youtube/song.mp4",
         "imgUrl": "https://preview.redd.it/what-if-they-surprise-us-and-they-release-it-with-this-v0-zj793afx4joa1.jpg?auto=webp&s=da3a6dbba5c2cb0be9f6d3842636c9c9c359c28e",
@@ -556,7 +548,7 @@
       },
       {
         "id": "mUkfiLjooxs",
-        "isLiked": "false",
+
         "title": "The JBs - Pass The Peas",
         "url": "youtube/song.mp4",
         "imgUrl": "https://cdn10.phillymag.com/wp-content/uploads/sites/3/2020/09/monthly-playlist.jpg",
@@ -572,7 +564,6 @@
     ]
   },
 
-
   {
     "_id": "108",
     "name": "Funky Monks",
@@ -587,7 +578,7 @@
     "songs": [
       {
         "id": "MXI5Nuz6OHg",
-        "isLiked": "false",
+
         "title": "The Meters - Cissy Strut",
         "url": "youtube/song.mp4",
         "imgUrl": "https://i.scdn.co/image/ab67616d00001e0276206bd8de3a477aafd7ba83",
@@ -596,7 +587,7 @@
       },
       {
         "id": "mUkfiLjooxs",
-        "isLiked": "false",
+
         "title": "The JBs - Pass The Peas",
         "url": "youtube/song.mp4",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",
@@ -671,8 +662,6 @@
       }
     ]
   },
-
-
   {
     "_id": "110",
     "name": "Funky Monks",
@@ -687,7 +676,6 @@
     "songs": [
       {
         "id": "MXI5Nuz6OHg",
-        "isLiked": "false",
         "title": "The Meters - Cissy Strut",
         "url": "youtube/song.mp4",
         "imgUrl": "https://img.lovepik.com/photo/40104/8108.jpg_wh860.jpg",
@@ -696,7 +684,7 @@
       },
       {
         "id": "mUkfiLjooxs",
-        "isLiked": "false",
+
         "title": "The JBs - Pass The Peas",
         "url": "youtube/song.mp4",
         "imgUrl": "https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg",

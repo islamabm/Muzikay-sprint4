@@ -248,6 +248,7 @@ export default {
       return this.$store.getters.station
     },
 
+
     stationCount() {
       //computed can't do this
       this.counter++

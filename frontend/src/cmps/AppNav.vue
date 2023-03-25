@@ -35,10 +35,10 @@
           Create Playlist
         </a>
 
-        <RouterLink class="liked-songs" to="/station/like">
+        <a class="liked-songs">
           <font-awesome-icon class="heart-icon" :icon="['fas', 'heart']" />
           Liked Songs
-        </RouterLink>
+        </a>
       </div>
 
       <Container
