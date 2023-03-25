@@ -83,6 +83,7 @@
                 :liked="song.liked"
                 @toggleLike="toggleSongLike"
               />
+              <!-- @addLikeToSong="addSongToLikedSongs(song)" -->
             </div>
             <p class="song-duration">1:40</p>
 
@@ -146,27 +147,30 @@ export default {
       this.$refs.stationDetailsHeader.style.backgroundImage = gradient
       this.$refs.bottomHalf.style.backgroundImage = darkGradient
     },
-    addSongToLikedSongs(song) {
-      // const user = userService.getLoggedinUser()
-      // console.log(user)
-      console.log('hi')
-    },
+    // addSongToLikedSongs(song) {
+    //   const user = userService.getLoggedinUser()
+    //   console.log(song)
+    //   console.log(user)
+    //   console.log('hi')
+    //   // user.likedSongs.songs.push(song)
+    //   // console.log(user.likedSongs.songs)
+    // },
 
     toggleHeaderLike() {
-      console.log('hi')
+      // console.log('hi')
       this.liked = !this.liked
       this.likeIconFillCls1 = this.liked ? 'green' : 'none'
       this.likeIconFillCls2 = this.liked ? 'green' : '$clr11'
     },
-    toggleSongLike(idx) {
-      const song = this.station.songs[idx]
-      song.liked = !song.liked
-      console.log(
-        `Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`
-      )
+    // toggleSongLike(idx) {
+    //   const song = this.station.songs[idx]
+    //   song.liked = !song.liked
+    //   console.log(
+    //     `Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`
+    //   )
 
-      // Add functionality
-    },
+    //   // Add functionality
+    // },
     toggleActiveTitle(idx) {
       if (this.activeTitle === idx) {
         this.activeTitle = null
