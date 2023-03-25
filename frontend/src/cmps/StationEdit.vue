@@ -32,7 +32,12 @@
             v-model="station.desc"
             placeholder="add an optional description"
           ></textarea>
-          <button class="btn-save-changes" @click="stationInput">Save</button>
+          <button
+            class="btn-save-changes"
+            @click="stationInput, $emit('close')"
+          >
+            Save
+          </button>
         </div>
       </div>
     </section>
