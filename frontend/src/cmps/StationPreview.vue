@@ -1,5 +1,5 @@
 <template>
-  <section class="playlist-preview" @click="goToStationDetails">
+  <section class="playlist-preview" @click="setStation(station._id)">
     <div class="playlist-image">
       <img :src="station.songs[0].imgUrl" />
       <div class="play-button" @click.stop="playStation"></div>
@@ -20,8 +20,12 @@ export default {
     station: Object,
   },
   methods: {
-    goToStationDetails() {
-      this.$router.push(`/station/${this.station._id}`)
+    // goToStationDetails() {
+    //   this.$router.push(`/station/${this.station._id}`)
+    // },
+    setStation(stationId) {
+      this.$store.commit({ type: 'setCurrStation', stationId })
+      this.$router.push(`/station/${stationId}`)
     },
   },
 }

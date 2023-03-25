@@ -5,7 +5,7 @@ nav {
   background-color: $clr2;
   font-family: gotham;
   font-size: 0.875rem;
-  font-weight: 700;
+  font-weight: 400;
   min-height: 100vh;
   height: 100%;
 
@@ -46,7 +46,6 @@ nav {
       }
     }
   }
-
   .main-nav,
   .liked-create-nav {
     display: flex;
@@ -106,13 +105,14 @@ nav {
     display: flex;
     align-items: center;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13.5px;
     color: $clr3;
     padding: 8px 0 8px 5px;
     width: 100%;
 
     &:hover {
       color: $clr6;
+      text-decoration: none;
     }
 
     &.active {

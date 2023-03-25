@@ -1,6 +1,6 @@
 .station-details {
   font-family: 'Roboto-Regular';
-  width: 100%;
+  width: calc(100vw - 300px);
 
   &-header {
     position: relative;
@@ -9,7 +9,7 @@
     padding: 24px;
     background-color: $clr1;
     border-radius: 5px;
-    width: 100%;
+    width: calc(100vw - 300px);
 
     .likes-count-logo {
       display: flex;
@@ -264,3 +264,6 @@
 }
 
 
+.vibrant-color {
+  filter: saturate(150%);
+}
