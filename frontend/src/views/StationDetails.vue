@@ -5,7 +5,15 @@
         v-if="station.songs && station.songs.length > 0"
         :src="station.songs[0].imgUrl"
       />
-      <img class="deafult-image" v-else src="../assets/img/empty-img.png" />
+      <img
+        v-else-if="station.name === 'Liked songs'"
+        src="../assets/img/empty-img.png"
+      />
+      <img
+        class="deafult-image"
+        v-else
+        src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
+      />
 
       <div class="station-info">
         <h1 class="playlist-word" @click="toggleModal">Playlist</h1>
@@ -69,6 +77,7 @@
               :songIndex="idx"
               :liked="song.liked"
               @toggleLike="toggleSongLike"
+              @addLikeToSong="addSongToLikedSongs(song)"
             />
           </div>
           <p class="song-duration">1:40</p>
@@ -99,6 +108,7 @@ import StationEdit from '../cmps/StationEdit.vue'
 import Search from './Search.vue'
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
+import { userService } from '../services/user.service.local.js'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import MiniSearch from '../cmps/MiniSearch.vue'
 import BubblingHeart from '../cmps/BubblingHeart.vue'
@@ -125,7 +135,13 @@ export default {
       document.body.style.backgroundImage = gradient
       this.$refs.stationDetailsHeader.style.backgroundColor = color.rgb
     },
+    addSongToLikedSongs(song) {
+      // const user = userService.getLoggedinUser()
+      // console.log(user)
+      console.log('hi')
+    },
     toggleHeaderLike() {
+      console.log('hi')
       this.liked = !this.liked
       this.likeIconFillCls1 = this.liked ? 'green' : 'none'
       this.likeIconFillCls2 = this.liked ? 'green' : '$clr11'
@@ -247,7 +263,6 @@ export default {
     station() {
       return this.$store.getters.station
     },
-
 
     stationCount() {
       //computed can't do this

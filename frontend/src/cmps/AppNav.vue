@@ -35,7 +35,7 @@
           Create Playlist
         </a>
 
-        <a class="liked-songs">
+        <a class="liked-songs" @click="onClickLikedSongs">
           <font-awesome-icon class="heart-icon" :icon="['fas', 'heart']" />
           Liked Songs
         </a>
@@ -104,6 +104,11 @@ export default {
       const playlistName = `My Playlist #${this.playlistCounter}`
       const station = stationService.createNewStation(playlistName)
       this.userStations.push(station)
+      this.$router.push(`/station/${station._id}`)
+    },
+    onClickLikedSongs() {
+      const station = stationService.createNewStation('Liked songs')
+      console.log(station)
       this.$router.push(`/station/${station._id}`)
     },
   },
