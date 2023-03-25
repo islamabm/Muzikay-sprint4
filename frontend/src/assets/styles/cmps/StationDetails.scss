@@ -184,7 +184,7 @@
       margin-block-start: -5px;
     }
 
-    .btn-remove-song {
+    .btn-open-modal {
       background-color: transparent;
       margin-top: -5px;
       .options-song-icon {
@@ -232,6 +232,7 @@
   gap: 2rem;
   color: $clr11;
   margin-block-end: 1rem;
+  
 
   .btn-icons {
     display: flex;
@@ -277,6 +278,50 @@
   }
 }
 
-// .vibrant-color {
-//   filter: saturate(150%);
-// }
+//SONG OPTIONS MODAL
+.modal-container {
+  position: relative;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  position: fixed;
+  background-color: #282828;
+  border-radius: 8px;
+  padding: 10px;
+  width: 200px;
+  top: 45%;
+  left:85%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  z-index: 20;
+
+  .modal-options {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      padding: 10px 15px;
+      font-size: 14px;
+      color: #b3b3b3;
+      cursor: pointer;
+      &:hover {
+        background-color: #404040;
+        color: #ffffff;
+      }
+    }
+  }
+}
+
+.btn-open-modal {
+  position: relative;
+
+  .modal-content {
+    bottom: calc(100% + 10px);
+    left: 0;
+    transform: translateY(100%);
+  }
+}

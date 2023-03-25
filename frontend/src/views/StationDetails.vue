@@ -87,20 +87,34 @@
               <!-- @addLikeToSong="addSongToLikedSongs(song)" -->
             </div>
             <p class="song-duration">1:40</p>
-
-            <button
-              class="btn-remove-song"
-              @click="removeSong(song.videoId, station._id)"
-            >
-              <i
-                class="options-song-icon"
-                v-html="getSvg('songOptionsIcon')"
-              ></i>
-            </button>
+            <!-- @click="removeSong(song.videoId, station._id)" -->
+            <div>
+              <button
+                class="btn-open-modal"
+                @click="toggleSongModal(song, idx)"
+              >
+                <i
+                  class="options-song-icon"
+                  v-html="getSvg('songOptionsIcon')"
+                ></i>
+              </button>
+            </div>
           </div>
         </Draggable>
         <MiniSearch />
       </Container>
+
+      <div v-if="showSongModal" @click.self="toggleSongModal(null, null)">
+        <div class="modal-content">
+          <ul class="modal-options">
+            <li @click="addToPlaylist(selectedSong, selectedIndex)">
+              Add to playlist
+            </li>
+            <li @click="removeSong(selectedSong, selectedIndex)">Remove</li>
+          </ul>
+        </div>
+      </div>
+      
     </section>
   </section>
 
@@ -128,32 +142,32 @@ export default {
   data() {
     return {
       // station: null,
+      showSongModal: false,
       showModal: '',
       activeTitle: null,
       counter: 0,
       dominantColor: null,
       likeIconFill: '#FFF',
       liked: false,
+      selectedSong: null,
+      selectedIndex: null,
     }
   },
   methods: {
     updateBodyBackgroundColor(color) {
       console.log(color)
-      const darkColor = `${color.rgba.slice(0, -2)} 0)`
-      console.log(darkColor)
 
       const darkShade = {
         ...color,
-        rgba: `rgba(${Math.round(color.value[0] * 0.4)}, ${Math.round(
-          color.value[1] * 0.4
-        )}, ${Math.round(color.value[2] * 0.4)}, 0.9)`,
+        rgba: `rgba(${Math.round(color.value[0] * 0.07)}, ${Math.round(
+          color.value[1] * 0.07
+        )}, ${Math.round(color.value[2] * 0.07)}, 0.7)`,
       }
 
       console.log('shade', darkShade)
 
-      const gradient = `linear-gradient(to bottom, ${color.rgba}, #1a1a19)`
+      const gradient = `linear-gradient(to bottom, ${color.rgba}, ${darkShade.rgba})`
       const darkGradient = `linear-gradient(to bottom, ${darkShade.rgba}, #000)`
-      console.log('gradient dark', darkGradient)
 
       document.body.style.backgroundImage = gradient
       this.$refs.stationDetailsHeader.style.backgroundImage = gradient
@@ -245,12 +259,21 @@ export default {
         showErrorMsg('Cannot remove song')
       }
     },
+    addToPlaylist(song, idx) {
+      console.log('Adding song:', song, 'at index:', idx)
+    },
     toggleModal() {
       if (this.station.createdBy.fullname === 'guest') {
         this.showModal = !this.showModal
       } else {
         console.log('not user data')
       }
+    },
+    toggleSongModal(song, idx) {
+      console.log('toggled song modal')
+      this.selectedSong = song
+      this.selectedIndex = idx
+      this.showSongModal = !this.showSongModal
     },
 
     getSvg(iconName) {

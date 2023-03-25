@@ -11,19 +11,20 @@
   font-family: gotham;
   font-size: 1rem;
 
-
   .page-navigation,
   .login-signup {
     display: flex;
     gap: 16px;
-    position:fixed;
+    position: fixed;
     right: 1rem;
   }
 
   .page-navigation {
-    position:fixed;
+    position: fixed;
     left: 300px;
+
     a {
+      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -34,13 +35,38 @@
       height: 32px;
       border-radius: 50%;
       background-color: rgba($clr2, 0.4);
+      padding: 17px;
 
       &:hover {
         background-color: rgba($clr6, 0.4);
-        cursor: not-allowed;
+        cursor: pointer;
+  
+        &::after {
+          border-color: $clr6;
+        }
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        border: solid $clr3;
+        border-width: 0 2px 2px 0;
+        display: inline-block;
+        padding: 4.2px;
+        top: 35%;
+        left: 35%;
       }
     }
+
+    .left-arrow-icon::after {
+      transform: rotate(135deg);
+    }
+
+    .right-arrow-icon::after {
+      transform: rotate(-45deg);
+    }
   }
+
   @media screen and (max-width: $narrow-breakpoint) {
     .page-navigation {
       left: 1rem;
