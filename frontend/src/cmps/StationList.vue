@@ -7,10 +7,7 @@
     <h1 class="category-tag">{{ tag }}</h1>
     <div class="station-list">
       <article class="station" v-for="station in stationTag" :key="station._id">
-        <StationPreview
-          :station="station"
-          @removed="$emit('removed', station._id)"
-        />
+        <StationPreview :station="station" @removeStation="removeStation" />
       </article>
     </div>
   </section>

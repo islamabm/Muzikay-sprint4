@@ -12,6 +12,10 @@ import StationCollection from './views/StationCollection.vue'
 
 const routes = [
   {
+    path: '/',
+    redirect: '/station/collection',
+  },
+  {
     path: '/signup',
     name: 'signup',
     component: Signup,

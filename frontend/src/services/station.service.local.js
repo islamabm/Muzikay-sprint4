@@ -67,10 +67,8 @@ function removeSong(songId, stationId) {
   const station = stations[stationIdx]
   const songIdx = station.songs.findIndex((so) => so._id === songId)
   station.songs.splice(songIdx, 1)
-  console.log(station)
   stations[stationIdx] = station // Update the station in the stations array
   utilService.saveToStorage(STORAGE_KEY, stations)
-  console.log(stations)
 }
 function getVideos(keyword) {
   if (gSearchCache[keyword]) {
