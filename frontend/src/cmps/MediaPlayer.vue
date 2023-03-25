@@ -104,6 +104,7 @@
         if (event.data === 0){
           this.songIdx++
           clearInterval(this.intervalId)
+          this.formatTime(1)
         } 
       },
       // play/pause video 

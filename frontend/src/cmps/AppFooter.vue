@@ -5,9 +5,15 @@
         class="footer-details-img"
         :src="currStation.songs[currSongIdx].imgUrl"
       />
-      <h3>{{ station.songs[currSongIdx].title }}</h3>
-      <!-- <button class="like-song-icon"><BubblingHeart/></button> -->
+      <h3 class="footer-details-title">{{ station.songs[currSongIdx].title }}</h3>
+      <button class="like-song-icon">
+        <BubblingHeart
+              :songIndex="this.currSongIdx"
+              :liked="this.currStation.songs[this.currSongIdx].liked"
+              @toggleLike="toggleSongLike"/>
+      </button>
     </div>
+    
     <div class="footer-media-player"><MediaPlayer @songIdx="getSongIdx" /></div>
         
     <div class="footer-media-adjusments">
@@ -16,7 +22,7 @@
         <div class="speaker-bar-fill"></div>
       </div>
     </div>
-    
+
   </footer>
 </template>
 
@@ -35,12 +41,33 @@ export default {
       currSongIdx: 0,
     }
   },
+  computed : {
+    setStation(stationId) {
+      this.$store.commit({ type: 'setCurrStation', stationId })
+      this.$router.push(`/station/${stationId}`)
+    },
+    // station() {
+    //   return this.$store.getters.station
+    // },
+
+
+  },
   methods: {
     getSongIdx(songIdx) {
       this.currSongIdx = songIdx
     },
     getSvg(iconName) {
       return SVGService.getSpotifySvg(iconName)
+    },
+    toggleSongLike(idx) {
+      const song = this.station.songs[idx]
+      console.log(song);
+      console.log('liked');
+      // song.liked = !song.liked
+      // console.log(
+      //   `Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`
+      // )
+      // Add functionality
     },
   },
   watch: {
