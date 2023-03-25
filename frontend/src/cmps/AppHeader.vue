@@ -4,16 +4,20 @@
     v-bind:style="{ backgroundColor: `rgba(10,10,10, ${headerOpacity})` }"
   >
     <div class="page-navigation">
-      <a title="Go back" href="#" @click="goBack" :class="backLinkClass"
-        >&#60;</a
-      >
       <a
+        class="left-arrow-icon"
+        title="Go back"
+        href="#"
+        @click="goBack"
+        :class="backLinkClass"
+      ></a>
+      <a
+        class="right-arrow-icon"
         title="Go forward"
         href="#"
         @click="goForward"
         :class="forwardLinkClass"
-        >&#62;</a
-      >
+      ></a>
       <div v-if="isSearchRoute" class="header-search-container">
         <form class="header-form">
           <input
