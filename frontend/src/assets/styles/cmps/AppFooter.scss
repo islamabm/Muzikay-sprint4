@@ -11,8 +11,7 @@
   z-index: 1;
   border-top: 1px solid $clr8;
   display: grid;
-  // grid-template-columns: repeat(3, 1fr);
-  grid-template-columns: 395px 1fr 385px;
+  grid-template-columns: 395px 1fr 388px;
 
   .music-bar {
     display: flex;
@@ -22,60 +21,31 @@
   }
   .footer-details {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    // justify-content: space-between;
     padding: 0 16px; // need to be rm
     h3 {
       margin-top: 22px; // need to be rm
+      margin-inline-start: 10px;
     }
 
     img {
       width: 56px;
       height: 56px;
     }
+    .heart-svg {
+      margin-left: 60px;
+      width: 40px;
+      margin-top: 5px;
+    }    
+
     grid-column: 1;
   }
-
-  // .footer-media-adjusments {
-  //   margin-top: 22px; // need to be rm
-  //   grid-column: 3;
-  //   display: flex;
-  //   width: 100%;
-
-  //   .speaker {
-  //     display: block;
-  //     fill: #ffffff;
-  //     width: 15px;
-  //     margin-inline-start: 270px;
-  //     svg {
-  //       fill: $clr1;
-  //       stroke: $clr11;
-  //       stroke-width: 15;
-  //     }
-  //   }
-    
-  //   .speaker-bar {
-  //     margin-bottom: 9px;
-  //     width: 20%;
-  //     height: 4px;
-  //     background-color: $clr10;
-  //   }
-    
-  //   .speaker-bar-fill {
-  //     height: 4px;
-  //     border-radius: 20px;
-  //     width: 5%;
-  //     margin-top: 12px;
-  //     margin-inline-start: 8px;
-  //     background-color: $clr11;
-  //   }
-
-  // }
 
   .footer-media-adjusments {
     margin-top: 22px;
     grid-column: 3;
     display: flex;
-    width: 100%;
   
     .speaker {
       display: block;
@@ -111,6 +81,10 @@
 
   .footer-media-player {
     grid-column: 2;
+  }
+
+  .footer-details-title {
+    font-family: Circular-book;
   }
 
   @media screen and (max-width: $narrow-breakpoint) {
