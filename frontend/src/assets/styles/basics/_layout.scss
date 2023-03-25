@@ -1,41 +1,96 @@
 .main-layout {
-    display: grid;
-    grid-template-columns: 270px 1fr;
-    grid-template-rows: 60px 1fr;
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  grid-template-rows: 60px 1fr;
+  grid-template-areas:
+    'nav header'
+    'nav content';
+  height: auto;
+
+  // Header component
+  & > header {
+    grid-area: header;
+  }
+
+  // Nav component
+  & > nav {
+    grid-area: nav;
+  }
+
+  // Main content
+  & > router-view,
+  & > .router-view {
+    grid-area: content;
+    background-color: $clr1;
+  }
+
+  // UserMsg component
+  & > user-msg,
+  & > .user-msg {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+  //Footer Area
+  .footer-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
+
+  // MobileNav component
+  & > .footer-container > mobile-nav,
+  & > .footer-container > .mobile-nav {
+    display: none;
+  }
+
+  @media screen and (max-width: $narrow-breakpoint) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 60px 1fr auto auto;
     grid-template-areas:
-      "nav header"
-      "nav content";
-    height: auto;
-  
-    // Header component
-    & > header {
-      grid-area: header;
-    }
-  
-    // Nav component
+      'header'
+      'content'
+      'footer'
+      'mobilenav';
+
     & > nav {
-      grid-area: nav;
+      display: none;
     }
-  
+
+    & > header {
+      width: 100vw;
+      padding-inline-end: 2rem;
+    }
+
     // Main content
     & > router-view,
     & > .router-view {
       grid-area: content;
-      background-color: $clr1;
+      margin-block-end: 200px;
+      padding: 1rem;
     }
-  
-    // UserMsg component
-    & > user-msg,
-    & > .user-msg {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1000;
+
+    & > app-footer,
+    & > .app-footer {
+      grid-area: footer;
+    }
+
+    // MobileNav component
+    & > mobile-nav,
+    & > .mobile-nav {
+      display: none;
+      grid-area: mobilenav;
+    }
+
+    & > .footer-container > mobile-nav,
+    & > .footer-container > .mobile-nav {
+      display: flex;
     }
   }
-  
-
-
+}
 
 // .container {
 //     max-width: 1500px;
@@ -55,19 +110,19 @@
 //     }
 
 //     @include for-narrow-layout {
-//         grid-template-columns: 
+//         grid-template-columns:
 //             minmax(20px, 1fr)
 //             minmax(auto, $mobile-breakpoint)
 //             minmax(20px, 1fr);
 //     }
 //     @include for-normal-layout {
-//         grid-template-columns: 
+//         grid-template-columns:
 //             minmax(20px, 1fr)
 //             minmax(auto, $narrow-breakpoint)
 //             minmax(20px, 1fr);
 //     }
 //     @include for-wide-layout {
-//         grid-template-columns: 
+//         grid-template-columns:
 //             minmax(20px, 1fr)
 //             minmax(auto, $normal-breakpoint)
 //             minmax(20px, 1fr);

@@ -41,4 +41,8 @@
   .footer-media-player {
     grid-column: 2;
   }
+
+  @media screen and (max-width: $narrow-breakpoint) {
+    bottom: 60px;
+  }
 }
