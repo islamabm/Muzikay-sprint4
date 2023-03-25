@@ -21,17 +21,30 @@
       grid-template-columns: repeat(2,minmax(80px,200px));
     }
 }
-
-@media (min-width: $narrow-breakpoint) {
+@media (min-width: 451px ) {
     .category-container {
       display: grid;
       grid-template-columns: repeat(3,minmax(80px,200px));
     }
 }
 
+@media (min-width: $narrow-breakpoint) {
+    .category-container {
+      display: grid;
+      grid-template-columns: repeat(3,minmax(80px,200px));
+    }
+    .media-player-play {
+      // border: none;
+      background-color: inherit;
+      svg {
+        fill: white;
+      }
+    }
+}
+
 @media (min-width: $normal-breakpoint) {
     .category-container {
       display: grid;
-      grid-template-columns: repeat(5,minmax(80px,300px));
+      grid-template-columns: repeat(6,minmax(100px,1fr));
     }
 }

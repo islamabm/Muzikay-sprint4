@@ -3,18 +3,18 @@
     <div v-if="station" class="footer-details">
       <img
         class="footer-details-img"
-        :src="currStation.songs[currSongIdx].imgUrl"
+        :src="this.station.songs[currSongIdx].imgUrl"
       />
-      <h3 class="footer-details-title">{{ station.songs[currSongIdx].title }}</h3>
+      <h3 class="footer-details-title">{{ this.station.songs[currSongIdx].title }}</h3>
       <button class="like-song-icon">
         <BubblingHeart
               :songIndex="this.currSongIdx"
-              :liked="this.currStation.songs[this.currSongIdx].liked"
+              :liked="this.station.songs[this.currSongIdx].liked"
               @toggleLike="toggleSongLike"/>
       </button>
     </div>
     
-    <div class="footer-media-player"><MediaPlayer @songIdx="getSongIdx" /></div>
+    <div class="footer-media-player"><MediaPlayer :station="this.station" @songIdx="getSongIdx" /></div>
         
     <div class="footer-media-adjusments">
       <i class="speaker" v-html="getSvg('speakerBtnIcon')"></i>
@@ -37,20 +37,16 @@ export default {
   data() {
     return {
       station: null,
-      currStation: null,
       currSongIdx: 0,
     }
   },
   computed : {
-    setStation(stationId) {
-      this.$store.commit({ type: 'setCurrStation', stationId })
-      this.$router.push(`/station/${stationId}`)
+    setStation() {
+      this.$store.commit({ type: 'setCurrStation', stationId: this.stationId })
     },
-    // station() {
-    //   return this.$store.getters.station
-    // },
-
-
+    station() {
+      return this.$store.getters.station
+    },
   },
   methods: {
     getSongIdx(songIdx) {
@@ -60,7 +56,7 @@ export default {
       return SVGService.getSpotifySvg(iconName)
     },
     toggleSongLike(idx) {
-      const song = this.station.songs[idx]
+      // const song = this.station.songs[idx]
       console.log(song);
       console.log('liked');
       // song.liked = !song.liked
@@ -76,8 +72,7 @@ export default {
         const { stationId } = this.$route.params
         try {
           this.station = await this.$store.getters.stationById(stationId)
-          this.currStation = this.station
-          // console.log(station.songs[0].id);
+          console.log(this.station);
         } catch (err) {
           console.log(err)
           throw err
