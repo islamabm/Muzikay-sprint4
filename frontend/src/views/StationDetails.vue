@@ -38,6 +38,9 @@
           <div v-else>...</div>
         </div>
       </div>
+    </section>
+
+    <section ref="bottomHalf">
       <div class="station-controls">
         <div class="btn-play-green" @click.stop="playStation"></div>
         <BubblingHeart @toggleLike="toggleHeaderLike" />
@@ -45,9 +48,6 @@
           <i class="options-icon" v-html="getSvg('optionsIcon')"></i>
         </div>
       </div>
-    </section>
-
-    <section ref="bottomHalf">
       <div class="table-header">
         <span>#Title</span>
         <span>Album</span>
@@ -132,16 +132,26 @@ export default {
       dominantColor: null,
       likeIconFill: '#FFF',
       liked: false,
-
-      likeIconFillCls1: 'none',
-      likeIconFillCls2: '$clr11',
     }
   },
   methods: {
     updateBodyBackgroundColor(color) {
-      const darkColor = `${color.rgba.slice(0, -1)}, 0.1)`
-      const gradient = `linear-gradient(to bottom, ${color.rgba}, #212120)`
-      const darkGradient = `linear-gradient(to bottom, ${darkColor} 0%, #000 100%)`
+      console.log(color)
+      const darkColor = `${color.rgba.slice(0, -2)} 0)`
+      console.log(darkColor)
+
+      const darkShade = {
+        ...color,
+        rgba: `rgba(${Math.round(color.value[0] * 0.4)}, ${Math.round(
+          color.value[1] * 0.4
+        )}, ${Math.round(color.value[2] * 0.4)}, 0.9)`,
+      }
+
+      console.log('shade', darkShade)
+
+      const gradient = `linear-gradient(to bottom, ${color.rgba}, #1a1a19)`
+      const darkGradient = `linear-gradient(to bottom, ${darkShade.rgba}, #000)`
+      console.log('gradient dark', darkGradient)
 
       document.body.style.backgroundImage = gradient
       this.$refs.stationDetailsHeader.style.backgroundImage = gradient
@@ -156,21 +166,15 @@ export default {
     //   // console.log(user.likedSongs.songs)
     // },
 
-    toggleHeaderLike() {
-      // console.log('hi')
-      this.liked = !this.liked
-      this.likeIconFillCls1 = this.liked ? 'green' : 'none'
-      this.likeIconFillCls2 = this.liked ? 'green' : '$clr11'
-    },
-    // toggleSongLike(idx) {
-    //   const song = this.station.songs[idx]
-    //   song.liked = !song.liked
-    //   console.log(
-    //     `Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`
-    //   )
+    toggleSongLike(idx) {
+      const song = this.station.songs[idx]
+      song.liked = !song.liked
+      console.log(
+        `Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`
+      )
 
-    //   // Add functionality
-    // },
+      //   // Add functionality
+    },
     toggleActiveTitle(idx) {
       if (this.activeTitle === idx) {
         this.activeTitle = null
