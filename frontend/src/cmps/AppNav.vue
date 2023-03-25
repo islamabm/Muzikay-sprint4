@@ -1,7 +1,7 @@
 <template>
   <nav class="nav-content">
     <div class="sticky-nav">
-      <div class="logo-container">
+      <div class="logo-container" @click="$router.push('/station/collection')">
         <i class="logo" v-html="getSvg('whiteLogo')"></i>
         <span>Muzikay<span class="trademark">®</span></span>
       </div>
@@ -9,18 +9,30 @@
       <div class="nav-media-stayers">
         <div class="main-nav">
           <div class="home-nav">
-            <RouterLink to="/station/collection">
+            <RouterLink
+              to="/station/collection"
+              exact
+              :class="{ active: $route.path === '/station/collection' }"
+            >
               <i class="home-icon icons" v-html="getSvg('homeIcon')"></i>
               Home
             </RouterLink>
           </div>
 
-          <RouterLink to="/station/search">
+          <RouterLink
+            to="/station/search"
+            exact
+            :class="{ active: $route.path === '/station/search' }"
+          >
             <i class="search-icon icons" v-html="getSvg('searchIcon')"></i>
             Search
           </RouterLink>
 
-          <RouterLink to="/station/library">
+          <RouterLink
+            to="/station/library"
+            exact
+            :class="{ active: $route.path === '/station/library' }"
+          >
             <i class="library-icon icons" v-html="getSvg('libraryIcon')"></i>
             Your Library
           </RouterLink>
@@ -28,17 +40,21 @@
       </div>
 
       <div class="liked-create-nav">
-        <a @click="createPlayList">
-          <div>
+        <a @click="createPlayList" class="btn">
+          <div class="btn">
             <font-awesome-icon class="plus-sign" :icon="['fas', 'plus']" />
           </div>
           Create Playlist
         </a>
 
-        <a class="liked-songs" @click="onClickLikedSongs">
+        <RouterLink
+          class="liked-songs"
+          to="/station/like"
+          :class="{ active: $route.path === '/station/like' }"
+        >
           <font-awesome-icon class="heart-icon" :icon="['fas', 'heart']" />
           Liked Songs
-        </a>
+        </RouterLink>
       </div>
 
       <Container
@@ -47,7 +63,12 @@
         class="clean-list user-stations"
       >
         <Draggable v-for="(playlist, index) in userStations" :key="index">
-          <div @click="setStation(playlist._id)">{{ playlist.name }}</div>
+          <div
+            :class="{ active: playlist._id === activePlaylistId }"
+            @click="setStation(playlist._id)"
+          >
+            {{ playlist.name }}
+          </div>
         </Draggable>
       </Container>
     </div>
@@ -69,6 +90,7 @@ export default {
     return {
       userStationsList: [],
       playlistCounter: 0,
+      activePlaylistId: null,
     }
   },
   methods: {
@@ -91,7 +113,12 @@ export default {
 
       return result
     },
+    // setStation(stationId) {
+    //   this.$store.commit({ type: 'setCurrStation', stationId })
+    //   this.$router.push(`/station/${stationId}`)
+    // },
     setStation(stationId) {
+      this.activePlaylistId = stationId
       this.$store.commit({ type: 'setCurrStation', stationId })
       this.$router.push(`/station/${stationId}`)
     },

@@ -1,15 +1,15 @@
 .station-details {
   font-family: 'Roboto-Regular';
-  width: 100%;
+  // width: calc(100vw - 300px);
 
   &-header {
-    position: relative;
+    position: relaaptive;
     display: flex;
     align-items: center;
     padding: 24px;
     background-color: $clr1;
     border-radius: 5px;
-    width: 100%;
+    // width: calc(100vw - 300px);
 
     .likes-count-logo {
       display: flex;
@@ -24,10 +24,10 @@
     }
 
     img {
-      width: 17%;
-      height: 17%;
+      width: 240px;
+      height: 240px;
       object-fit: cover;
-      border-radius: 5px;
+      border-radius: 1px;
       margin-inline-end: 24px;
     }
 
@@ -85,6 +85,7 @@
 .songs-list-details {
   display: flex;
   flex-direction: column;
+  margin-block-end: 100px;
 
   svg {
     height: 30px;
@@ -100,8 +101,13 @@
     &:hover {
       background-color: rgba($clr10, 0.2);
     }
-
-    .img-and-title,
+  .img-and-title {
+    width: 370px;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    text-align: start;
+  }
     .list-end {
       display: flex;
       justify-content: center;
@@ -136,9 +142,7 @@
     .song-title {
       font-size: 0.9rem;
       font-weight: 600;
-      text-align: center;
       color: $clr6;
-      margin-right: 1rem;
       font-family: Roboto-Regular;
 
       &:hover {
@@ -154,7 +158,6 @@
       font-size: 0.8rem;
       color: rgba($clr3, 0.6);
       margin-inline-start: 15%;
-      text-align: end;
     }
 
     .song-duration {
@@ -265,3 +268,6 @@
 }
 
 
+// .vibrant-color {
+//   filter: saturate(150%);
+// }

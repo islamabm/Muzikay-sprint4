@@ -5,7 +5,7 @@ nav {
   background-color: $clr2;
   font-family: gotham;
   font-size: 0.875rem;
-  font-weight: 700;
+  font-weight: 400;
   min-height: 100vh;
   height: 100%;
 
@@ -19,11 +19,25 @@ nav {
     top: 0;
     z-index: 2;
     padding: 25px 16px;
+
+    .user-stations {
+      font-family: Circular-light;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.5px; /* added letter spacing */
+      color: $clr11;
+      display:flex;
+      flex-direction: column;
+      padding:10px;
+      gap: 0.5rem;
+    }
+    
   }
   .logo-container {
     display: flex;
     align-items: center;
     margin-block-end: 25px;
+    cursor: pointer;
 
     .logo {
       width: 42px;
@@ -46,7 +60,6 @@ nav {
       }
     }
   }
-
   .main-nav,
   .liked-create-nav {
     display: flex;
@@ -106,13 +119,14 @@ nav {
     display: flex;
     align-items: center;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13.5px;
     color: $clr3;
     padding: 8px 0 8px 5px;
     width: 100%;
 
     &:hover {
       color: $clr6;
+      text-decoration: none;
     }
 
     &.active {
@@ -146,3 +160,4 @@ nav {
 //   }
 
 // }
+
