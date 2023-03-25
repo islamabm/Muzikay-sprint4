@@ -9,42 +9,30 @@
       <div class="nav-media-stayers">
         <div class="main-nav">
           <div class="home-nav">
-<<<<<<< HEAD
             <RouterLink
               to="/station/collection"
               exact
               :class="{ active: $route.path === '/station/collection' }"
             >
-=======
-            <RouterLink to="/station/collection">
->>>>>>> 59360f058ff4f3a603e7dbeae52f3b5e0f32e161
               <i class="home-icon icons" v-html="getSvg('homeIcon')"></i>
               Home
             </RouterLink>
           </div>
 
-<<<<<<< HEAD
           <RouterLink
             to="/station/search"
             exact
             :class="{ active: $route.path === '/station/search' }"
           >
-=======
-          <RouterLink to="/station/search">
->>>>>>> 59360f058ff4f3a603e7dbeae52f3b5e0f32e161
             <i class="search-icon icons" v-html="getSvg('searchIcon')"></i>
             Search
           </RouterLink>
 
-<<<<<<< HEAD
           <RouterLink
             to="/station/library"
             exact
             :class="{ active: $route.path === '/station/library' }"
           >
-=======
-          <RouterLink to="/station/library">
->>>>>>> 59360f058ff4f3a603e7dbeae52f3b5e0f32e161
             <i class="library-icon icons" v-html="getSvg('libraryIcon')"></i>
             Your Library
           </RouterLink>
@@ -59,15 +47,11 @@
           Create Playlist
         </a>
 
-<<<<<<< HEAD
-        <RouterLink
+        <a
           class="liked-songs"
           to="/station/like"
           :class="{ active: $route.path === '/station/like' }"
         >
-=======
-        <a class="liked-songs">
->>>>>>> 59360f058ff4f3a603e7dbeae52f3b5e0f32e161
           <font-awesome-icon class="heart-icon" :icon="['fas', 'heart']" />
           Liked Songs
         </a>
