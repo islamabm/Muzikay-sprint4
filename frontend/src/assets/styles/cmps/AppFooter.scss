@@ -35,38 +35,80 @@
     grid-column: 1;
   }
 
-  .footer-media-adjusments {
-    margin-top: 22px; // need to be rm
-    grid-column: 3;
+  // .footer-media-adjusments {
+  //   margin-top: 22px; // need to be rm
+  //   grid-column: 3;
+  //   display: flex;
+  //   width: 100%;
 
+  //   .speaker {
+  //     display: block;
+  //     fill: #ffffff;
+  //     width: 15px;
+  //     margin-inline-start: 270px;
+  //     svg {
+  //       fill: $clr1;
+  //       stroke: $clr11;
+  //       stroke-width: 15;
+  //     }
+  //   }
+    
+  //   .speaker-bar {
+  //     margin-bottom: 9px;
+  //     width: 20%;
+  //     height: 4px;
+  //     background-color: $clr10;
+  //   }
+    
+  //   .speaker-bar-fill {
+  //     height: 4px;
+  //     border-radius: 20px;
+  //     width: 5%;
+  //     margin-top: 12px;
+  //     margin-inline-start: 8px;
+  //     background-color: $clr11;
+  //   }
+
+  // }
+
+  .footer-media-adjusments {
+    margin-top: 22px;
+    grid-column: 3;
+    display: flex;
+    width: 100%;
+  
     .speaker {
       display: block;
-      fill: #ffffff;
       width: 15px;
-      margin-inline-start: 175px;
+      margin-inline-start: 270px;
       svg {
         fill: $clr1;
         stroke: $clr11;
         stroke-width: 15;
       }
     }
-
   
-  .speaker-bar {
-      margin-bottom: 9px;
-      width: 20%;
+    .speaker-bar {
+      width: 30%;
       height: 4px;
+      margin-inline-start: 8px;
+      margin-top: 12.5px;
       background-color: $clr10;
+      position: relative;
       border-radius: 20px;
+    }
   
-      .speaker-bar-fill {
-          width: 0%;
-          height: 100%;
-          background-color: $clrGreen;
-      }
+    .speaker-bar-fill {
+      height: 4px;
+      border-radius: 20px;
+      width: 5%;      
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-color: $clr6;
+    }
   }
 
-  }
   .footer-media-player {
     grid-column: 2;
   }
