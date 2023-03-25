@@ -16,9 +16,13 @@
   .login-signup {
     display: flex;
     gap: 16px;
+    position:fixed;
+    right: 1rem;
   }
 
   .page-navigation {
+    position:fixed;
+    left: 300px;
     a {
       display: flex;
       justify-content: center;
@@ -35,6 +39,11 @@
         background-color: rgba($clr6, 0.4);
         cursor: not-allowed;
       }
+    }
+  }
+  @media screen and (max-width: $narrow-breakpoint) {
+    .page-navigation {
+      left: 1rem;
     }
   }
 
