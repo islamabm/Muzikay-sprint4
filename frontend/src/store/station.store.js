@@ -11,6 +11,7 @@ import { storageService } from '../services/async-storage.service.js'
 export const stationStore = {
   state: {
     stations: [],
+    currStationId: null,
     userStations: [],
   },
   getters: {
@@ -19,6 +20,12 @@ export const stationStore = {
     },
     songs({ stations }) {
       return stations.songs
+    },
+
+    station({ stations, currStationId }) {
+      const station = stations.find((s) => s._id === currStationId)
+      console.log('store getters', station)
+      return station
     },
     getUserStations({ stations }) {
       const userStations = stations.filter(
@@ -50,6 +57,9 @@ export const stationStore = {
     setStations(state, { stations }) {
       state.stations = stations
     },
+    setCurrStation(state, { stationId }) {
+      state.currStationId = stationId
+    },
     removeSong(state, { songId, stationId }) {
       console.log('mutation', songId)
       console.log('mutation', stationId)
@@ -59,6 +69,7 @@ export const stationStore = {
       const songIdx = station.songs.findIndex((so) => so.id === songId)
       console.log(songIdx)
       station.songs.splice(songIdx, 1)
+      state.stations[stationIdx] = station
     },
     setUserStations(state, stations) {
       state.userStations = stations

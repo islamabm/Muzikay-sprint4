@@ -83,6 +83,34 @@ function getVideos(keyword) {
   })
 }
 
+function getUserStation() {
+  const likedSongsStation = {
+    _id: utilService.makeId(),
+    name: 'likedSongs',
+    tags: [],
+    createdBy: {
+      _id: '',
+      fullname: 'guest',
+      imgUrl: '',
+    },
+    likedByUsers: [],
+    songs: [],
+    msgs: [
+      {
+        id: '',
+        from: '',
+        txt: '',
+      },
+    ],
+    desc: '',
+  }
+  const stations = utilService.loadFromStorage(STORAGE_KEY)
+  stations.push(likedSongsStation)
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(stations))
+
+  return likedSongsStation
+}
+
 function _prepareData(item) {
   return {
     videoId: item.id.videoId,
