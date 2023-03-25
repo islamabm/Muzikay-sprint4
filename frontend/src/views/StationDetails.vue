@@ -76,7 +76,7 @@
           <button
             class="btn-remove-song"
             @click="removeSong(song.videoId, station._id)"
-            v-if="station.createdBy.fullname === 'guest'"
+            v-if="(station.createdBy.fullname = 'guest')"
           >
             <i class="options-song-icon" v-html="getSvg('songOptionsIcon')"></i>
           </button>
@@ -121,6 +121,7 @@ export default {
   },
   methods: {
     updateBodyBackgroundColor(color) {
+      console.log(color)
       const gradient = `linear-gradient(to bottom, ${color.rgba}, #000)`
       document.body.style.backgroundImage = gradient
       this.$refs.stationDetailsHeader.style.backgroundColor = color.rgb
@@ -183,19 +184,12 @@ export default {
       }
       return result
     },
-    // async removeMsg(msgId) {
-    //   try {
-    //    await this.$store.dispatch({ type: 'removeMsg' , toyId: this.toy._id, msgId})
-    //    this.$emit('loadToy')
-    //   } catch {
-    //     console.log('Could Not delete msg');
-    //   }
-    // },
 
     async removeSong(songId, stationId) {
       console.log('atationDetails', songId)
       console.log('stationDetails', stationId)
       try {
+        // const station = this.stations.find((s) => s._id === stationId)
         await this.$store.dispatch({ type: 'removeSong', songId, stationId })
         showSuccessMsg('song removed')
       } catch (err) {

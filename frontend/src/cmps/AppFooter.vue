@@ -6,7 +6,7 @@
         :src="currStation.songs[currSongIdx].imgUrl"
       />
       <h3>{{ station.songs[currSongIdx].title }}</h3>
-      <button class="like-song-icon"><BubblingHeart/></button>
+      <!-- <button class="like-song-icon"><BubblingHeart/></button> -->
     </div>
     <div class="footer-media-player"><MediaPlayer @songIdx="getSongIdx" /></div>
         
