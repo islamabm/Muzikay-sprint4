@@ -76,7 +76,7 @@
           <button
             class="btn-remove-song"
             @click="removeSong(song.videoId, station._id)"
-            v-if="station.createdBy.fullname === 'guest'"
+            
           >
             <i class="options-song-icon" v-html="getSvg('songOptionsIcon')"></i>
           </button>

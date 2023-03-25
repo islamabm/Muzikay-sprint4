@@ -43,6 +43,11 @@
   }
 }
 
+.active {
+  color: $clr6;
+  font-weight: bold;
+}
+
 // Media helpers
 
 .square-ratio {

@@ -19,11 +19,25 @@ nav {
     top: 0;
     z-index: 2;
     padding: 25px 16px;
+
+    .user-stations {
+      font-family: Circular-light;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.5px; /* added letter spacing */
+      color: $clr11;
+      display:flex;
+      flex-direction: column;
+      padding:10px;
+      gap: 0.5rem;
+    }
+    
   }
   .logo-container {
     display: flex;
     align-items: center;
     margin-block-end: 25px;
+    cursor: pointer;
 
     .logo {
       width: 42px;
@@ -146,3 +160,4 @@ nav {
 //   }
 
 // }
+

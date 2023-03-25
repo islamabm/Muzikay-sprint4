@@ -1,7 +1,7 @@
 <template>
   <nav class="nav-content">
     <div class="sticky-nav">
-      <div class="logo-container">
+      <div class="logo-container" @click="$router.push('/station/collection')">
         <i class="logo" v-html="getSvg('whiteLogo')"></i>
         <span>Muzikay<span class="trademark">®</span></span>
       </div>
@@ -40,21 +40,21 @@
       </div>
 
       <div class="liked-create-nav">
-        <a @click="createPlayList">
-          <div>
+        <a @click="createPlayList" class="btn">
+          <div class="btn">
             <font-awesome-icon class="plus-sign" :icon="['fas', 'plus']" />
           </div>
           Create Playlist
         </a>
 
-        <a
+        <RouterLink
           class="liked-songs"
           to="/station/like"
           :class="{ active: $route.path === '/station/like' }"
         >
           <font-awesome-icon class="heart-icon" :icon="['fas', 'heart']" />
           Liked Songs
-        </a>
+        </RouterLink>
       </div>
 
       <Container
@@ -63,7 +63,12 @@
         class="clean-list user-stations"
       >
         <Draggable v-for="(playlist, index) in userStations" :key="index">
-          <div @click="setStation(playlist._id)">{{ playlist.name }}</div>
+          <div
+            :class="{ active: playlist._id === activePlaylistId }"
+            @click="setStation(playlist._id)"
+          >
+            {{ playlist.name }}
+          </div>
         </Draggable>
       </Container>
     </div>
@@ -85,6 +90,7 @@ export default {
     return {
       userStationsList: [],
       playlistCounter: 0,
+      activePlaylistId: null,
     }
   },
   methods: {
@@ -107,7 +113,12 @@ export default {
 
       return result
     },
+    // setStation(stationId) {
+    //   this.$store.commit({ type: 'setCurrStation', stationId })
+    //   this.$router.push(`/station/${stationId}`)
+    // },
     setStation(stationId) {
+      this.activePlaylistId = stationId
       this.$store.commit({ type: 'setCurrStation', stationId })
       this.$router.push(`/station/${stationId}`)
     },
