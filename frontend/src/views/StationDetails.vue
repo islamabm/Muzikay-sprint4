@@ -1,89 +1,120 @@
 <template>
   <section v-if="station" class="station-details">
-    <section ref="stationDetailsHeader" class="station-details-header">
-      <img
-        v-if="station.songs && station.songs.length > 0"
-        :src="station.songs[0].imgUrl"
-      />
-      <img class="deafult-image" v-else src="../assets/img/empty-img.png" />
+    <section class="station-details-header">
+      <div ref="stationDetailsHeader" class="header-content">
+        <img
+          v-if="station.songs && station.songs.length > 0"
+          :src="station.songs[0].imgUrl"
+        />
+        <img
+          v-else-if="station.name === 'Liked songs'"
+          src="../assets/img/empty-img.png"
+        />
+        <img
+          class="deafult-image"
+          @click="toggleModal"
+          v-else
+          src="../assets/img/empty-img.png"
+        />
 
-      <div class="station-info">
-        <h1 class="playlist-word" @click="toggleModal">Playlist</h1>
-        <h1 class="station-name">{{ station.name }}</h1>
+        <div class="station-info">
+          <h1 class="playlist-word" @click="toggleModal">Playlist</h1>
+          <h1 class="station-name" @click="toggleModal">{{ station.name }}</h1>
 
-        <p class="station-description" @click="toggleModal">
-          Playlist Relax and indulge with beautiful piano pieces
-        </p>
-        <div v-if="station.songs">
-          <div class="likes-count-logo">
-            <i class="logo-green" v-html="getSvg('greenLogo')"></i>
-            <span class="small-logo-word">Muzikay</span>
-            <span @click="toggleModal">6,950,331 likes</span>•<span
-              >{{ songsCount }},</span
-            >
+          <p class="station-description" @click="toggleModal">
+            Playlist Relax and indulge with beautiful piano pieces
+          </p>
+          <div v-if="station.songs">
+            <div class="likes-count-logo">
+              <i class="logo-green" v-html="getSvg('greenLogo')"></i>
+              <span class="small-logo-word">Muzikay</span>
+              <span @click="toggleModal">6,950,331 likes</span>•<span
+                >{{ songsCount }},</span
+              >
 
-            <span>about 11 hr </span>
+              <span>about 11 hr </span>
+            </div>
           </div>
+          <div v-else>...</div>
         </div>
-        <div v-else>...</div>
       </div>
     </section>
 
-    <div class="station-controls">
-      <div class="btn-play-green" @click.stop="playStation"></div>
-      <BubblingHeart @toggleLike="toggleHeaderLike" />
-      <div class="btn-icons">
-        <i class="options-icon" v-html="getSvg('optionsIcon')"></i>
+    <section ref="bottomHalf">
+      <div class="station-controls">
+        <div class="btn-play-green" @click.stop="playStation"></div>
+        <BubblingHeart @toggleLike="toggleHeaderLike" />
+        <div class="btn-icons">
+          <i class="options-icon" v-html="getSvg('optionsIcon')"></i>
+        </div>
       </div>
-    </div>
+      <div class="table-header">
+        <span>#Title</span>
+        <span>Album</span>
+        <span>Date added</span>
+        <span
+          ><i class="duration-icon" v-html="getSvg('durationIcon')"></i
+        ></span>
+      </div>
 
-    <div class="table-header">
-      <span>#Title</span>
-      <span>Album</span>
-      <span>Date added</span>
-      <span><i class="duration-icon" v-html="getSvg('durationIcon')"></i></span>
-    </div>
-
-    <Container @drop="onDrop" v-if="station.songs" class="songs-list-details">
-      <Draggable
-        class="song-item"
-        v-for="(song, idx) in station.songs"
-        :key="idx"
-      >
-        <div class="img-and-title">
-          <span>{{ idx + 1 }}</span>
-          <img class="song-img" :src="song.imgUrl" />
-          <p
-            class="song-title"
-            :class="{ active: activeTitle === idx }"
-            @click="toggleActiveTitle(idx)"
-          >
-            {{ song.title }}
-          </p>
-        </div>
-        <p class="posted-at">1 day ago</p>
-
-        <div class="flex-end list-end">
-          <div class="like-song-icon">
-            <BubblingHeart
-              :songIndex="idx"
-              :liked="song.liked"
-              @toggleLike="toggleSongLike"
-            />
+      <Container @drop="onDrop" v-if="station.songs" class="songs-list-details">
+        <Draggable
+          class="song-item"
+          v-for="(song, idx) in station.songs"
+          :key="idx"
+        >
+          <div class="img-and-title">
+            <span>{{ idx + 1 }}</span>
+            <img class="song-img" :src="song.imgUrl" />
+            <p
+              class="song-title"
+              :class="{ active: activeTitle === idx }"
+              @click="toggleActiveTitle(idx)"
+            >
+              {{ song.title }}
+            </p>
           </div>
-          <p class="song-duration">1:40</p>
+          <p class="posted-at">1 day ago</p>
 
-          <button
-            class="btn-remove-song"
-            @click="removeSong(song.videoId, station._id)"
-            
-          >
-            <i class="options-song-icon" v-html="getSvg('songOptionsIcon')"></i>
-          </button>
+          <div class="flex-end list-end">
+            <div class="like-song-icon">
+              <BubblingHeart
+                :songIndex="idx"
+                :liked="song.liked"
+                @toggleLike="toggleSongLike"
+              />
+              <!-- @addLikeToSong="addSongToLikedSongs(song)" -->
+            </div>
+            <p class="song-duration">1:40</p>
+            <!-- @click="removeSong(song.videoId, station._id)" -->
+            <div>
+              <button
+                class="btn-open-modal"
+                @click="toggleSongModal(song, idx)"
+              >
+                <i
+                  class="options-song-icon"
+                  v-html="getSvg('songOptionsIcon')"
+                ></i>
+              </button>
+            </div>
+          </div>
+        </Draggable>
+        <MiniSearch />
+      </Container>
+
+      <div v-if="showSongModal" @click.self="toggleSongModal(null, null)">
+        <div class="modal-content">
+          <ul class="modal-options">
+            <li @click="addToPlaylist(selectedSong, selectedIndex)">
+              Add to playlist
+            </li>
+            <li @click="removeSong(selectedSong, selectedIndex)">Remove</li>
+          </ul>
         </div>
-      </Draggable>
-      <MiniSearch />
-    </Container>
+      </div>
+      
+    </section>
   </section>
 
   <section v-if="showModal">
@@ -99,6 +130,7 @@ import StationEdit from '../cmps/StationEdit.vue'
 import Search from './Search.vue'
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
+import { userService } from '../services/user.service.local.js'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import MiniSearch from '../cmps/MiniSearch.vue'
 import BubblingHeart from '../cmps/BubblingHeart.vue'
@@ -108,28 +140,46 @@ export default {
   data() {
     return {
       // station: null,
+      showSongModal: false,
       showModal: '',
       activeTitle: null,
       counter: 0,
       dominantColor: null,
       likeIconFill: '#FFF',
       liked: false,
-
-      likeIconFillCls1: 'none',
-      likeIconFillCls2: '$clr11',
+      selectedSong: null,
+      selectedIndex: null,
     }
   },
   methods: {
     updateBodyBackgroundColor(color) {
-      const gradient = `linear-gradient(to bottom, ${color.rgba}, #000)`
+      console.log(color)
+
+      const darkShade = {
+        ...color,
+        rgba: `rgba(${Math.round(color.value[0] * 0.07)}, ${Math.round(
+          color.value[1] * 0.07
+        )}, ${Math.round(color.value[2] * 0.07)}, 0.7)`,
+      }
+
+      console.log('shade', darkShade)
+
+      const gradient = `linear-gradient(to bottom, ${color.rgba}, ${darkShade.rgba})`
+      const darkGradient = `linear-gradient(to bottom, ${darkShade.rgba}, #000)`
+
       document.body.style.backgroundImage = gradient
-      this.$refs.stationDetailsHeader.style.backgroundColor = color.rgb
+      this.$refs.stationDetailsHeader.style.backgroundImage = gradient
+      this.$refs.bottomHalf.style.backgroundImage = darkGradient
     },
-    toggleHeaderLike() {
-      this.liked = !this.liked
-      this.likeIconFillCls1 = this.liked ? 'green' : 'none'
-      this.likeIconFillCls2 = this.liked ? 'green' : '$clr11'
-    },
+    // addSongToLikedSongs(song) {
+    //   const user = userService.getLoggedinUser()
+    //   console.log(song)
+    //   console.log(user)
+    //   console.log('hi')
+    //   // user.likedSongs.songs.push(song)
+    //   // console.log(user.likedSongs.songs)
+    // },
+
     toggleSongLike(idx) {
       const song = this.station.songs[idx]
       song.liked = !song.liked
@@ -137,7 +187,7 @@ export default {
         `Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`
       )
 
-      // Add functionality
+      //   // Add functionality
     },
     toggleActiveTitle(idx) {
       if (this.activeTitle === idx) {
@@ -203,12 +253,21 @@ export default {
         showErrorMsg('Cannot remove song')
       }
     },
+    addToPlaylist(song, idx) {
+      console.log('Adding song:', song, 'at index:', idx)
+    },
     toggleModal() {
       if (this.station.createdBy.fullname === 'guest') {
         this.showModal = !this.showModal
       } else {
         console.log('not user data')
       }
+    },
+    toggleSongModal(song, idx) {
+      console.log('toggled song modal')
+      this.selectedSong = song
+      this.selectedIndex = idx
+      this.showSongModal = !this.showSongModal
     },
 
     getSvg(iconName) {
@@ -247,7 +306,6 @@ export default {
     station() {
       return this.$store.getters.station
     },
-
 
     stationCount() {
       //computed can't do this

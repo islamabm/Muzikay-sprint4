@@ -1,14 +1,23 @@
 .station-details {
   font-family: 'Roboto-Regular';
+ 
   // width: calc(100vw - 300px);
-
-  &-header {
-    position: relaaptive;
+  .header-content {
+    width: 100%;
     display: flex;
     align-items: center;
     padding: 24px;
     background-color: $clr1;
-    border-radius: 5px;
+    padding-block-end: 2rem;
+    
+  }
+  &-header {
+    // position: relaaptive;
+    // display: flex;
+    // align-items: center;
+    // padding: 24px;
+    // background-color: $clr1;
+    // border-radius: 5px;
     // width: calc(100vw - 300px);
 
     .likes-count-logo {
@@ -29,6 +38,7 @@
       object-fit: cover;
       border-radius: 1px;
       margin-inline-end: 24px;
+      cursor: pointer;
     }
 
     .station-info {
@@ -53,6 +63,7 @@
         color: $clr6;
         margin-block-end: 8px;
         font-family: 'Circular-book';
+        cursor: pointer;
       }
 
       .station-description {
@@ -61,6 +72,7 @@
         width: 100%;
         margin-block-start: 8px;
         margin-block-end: 0;
+        cursor: pointer;
       }
 
       .small-logo-word {
@@ -101,13 +113,13 @@
     &:hover {
       background-color: rgba($clr10, 0.2);
     }
-  .img-and-title {
-    width: 370px;
-    display: flex;
-    justify-content: start;
-    align-items: start;
-    text-align: start;
-  }
+    .img-and-title {
+      width: 370px;
+      display: flex;
+      justify-content: start;
+      align-items: start;
+      text-align: start;
+    }
     .list-end {
       display: flex;
       justify-content: center;
@@ -168,11 +180,11 @@
       cursor: default;
     }
 
-    .like-song-icon{
+    .like-song-icon {
       margin-block-start: -5px;
     }
 
-    .btn-remove-song {
+    .btn-open-modal {
       background-color: transparent;
       margin-top: -5px;
       .options-song-icon {
@@ -182,7 +194,6 @@
     }
   }
 }
-
 
 .btn-play-green {
   background-color: $clrGreen;
@@ -218,26 +229,26 @@
 .station-controls {
   display: flex;
   align-items: center;
-  gap:2rem;
+  gap: 2rem;
   color: $clr11;
   margin-block-end: 1rem;
+  
 
   .btn-icons {
     display: flex;
-    padding:10px;
-    
-    }
-    .options-icon {
-      fill: $clr11;
-      width: 20px;
-      height: 30px;
-      cursor: pointer;
-      margin-inline-start: 1.2rem;
+    padding: 10px;
+  }
+  .options-icon {
+    fill: $clr11;
+    width: 20px;
+    height: 30px;
+    cursor: pointer;
+    margin-inline-start: 1.2rem;
 
-      &:hover {
-        fill: $clr6;
-      }
+    &:hover {
+      fill: $clr6;
     }
+  }
 }
 
 .table-header {
@@ -267,7 +278,50 @@
   }
 }
 
+//SONG OPTIONS MODAL
+.modal-container {
+  position: relative;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-// .vibrant-color {
-//   filter: saturate(150%);
-// }
+.modal-content {
+  position: fixed;
+  background-color: #282828;
+  border-radius: 8px;
+  padding: 10px;
+  width: 200px;
+  top: 45%;
+  left:85%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  z-index: 20;
+
+  .modal-options {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      padding: 10px 15px;
+      font-size: 14px;
+      color: #b3b3b3;
+      cursor: pointer;
+      &:hover {
+        background-color: #404040;
+        color: #ffffff;
+      }
+    }
+  }
+}
+
+.btn-open-modal {
+  position: relative;
+
+  .modal-content {
+    bottom: calc(100% + 10px);
+    left: 0;
+    transform: translateY(100%);
+  }
+}

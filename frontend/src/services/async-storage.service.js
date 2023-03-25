@@ -77,6 +77,7 @@ function _makeId(length = 5) {
 }
 
 function store(key, val) {
+  console.log('hi')
   localStorage[key] = JSON.stringify(val)
 }
 

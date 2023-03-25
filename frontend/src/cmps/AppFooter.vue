@@ -22,7 +22,6 @@
         <div class="speaker-bar-fill"></div>
       </div>
     </div>
-
   </footer>
 </template>
 

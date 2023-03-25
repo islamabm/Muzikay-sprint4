@@ -1,32 +1,11 @@
-// .station-list-container {
-//   .station-list {
-//     display: grid;
-//     grid-template-columns: repeat(5, minmax(0, 1fr));
-//     min-width: 390px;
-//     gap: 1rem;
-//     padding: 1rem;
-//     // overflow-y: hidden; //show them in show-all
-//   }
-//   .category-tag {
-//     margin-inline-start: 3rem;
-//     font-size: 1.5rem;
-//     &:hover {
-//         text-decoration: underline;
-//         cursor: pointer;
-//     }
-//   }
-// }
-
-// // Tablet view
-// @media screen and (max-width: $normal-breakpoint) and (min-width: $narrow-breakpoint) {
-//   .station-list-container {
-//     .station-list {
-//       grid-template-columns: repeat(4, minmax(0, 1fr));
-//     }
-//   }
-// }
-
 .station-list-container {
+
+     &:last-child {
+      padding-block-end: 4rem;
+      @media (max-width: $narrow-breakpoint) {
+        padding-block-end: 0;
+      }
+    }
   .station-list {
     display: flex;
     gap: 1.5rem;
@@ -34,7 +13,9 @@
     align-items: center;
     justify-content: center;
     padding-block-end: 4rem;
-    
+    @media (max-width: $narrow-breakpoint) {
+      padding-block-end: 1rem;
+    }
   }
   .category-tag {
     width: max-content;
@@ -47,3 +28,4 @@
     }
   }
 }
+
