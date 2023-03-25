@@ -107,7 +107,7 @@ export default {
   name: 'station-details',
   data() {
     return {
-      station: null,
+      // station: null,
       showModal: '',
       activeTitle: null,
       counter: 0,
@@ -243,6 +243,9 @@ export default {
     },
     stations() {
       return this.$store.getters.stations
+    },
+    station() {
+      return this.$store.getters.station
     },
 
     stationCount() {
