@@ -1,10 +1,12 @@
 <template>
-  <nav>
+  <nav class="nav-content">
     <div class="sticky-nav">
       <div class="logo-container">
         <i class="logo" v-html="getSvg('whiteLogo')"></i>
         <span>Muzikay<span class="trademark">®</span></span>
       </div>
+
+    <div class="nav-media-stayers">
 
       <div class="main-nav">
         <div class="home-nav">
@@ -24,6 +26,8 @@
           Your Library
         </RouterLink>
       </div>
+      
+    </div>  
 
       <div class="liked-create-nav">
         <a @click="createPlayList">

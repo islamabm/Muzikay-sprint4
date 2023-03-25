@@ -6,8 +6,8 @@
         :src="currStation.songs[currSongIdx].imgUrl"
       />
       <h3>{{ station.songs[currSongIdx].title }}</h3>
-      <button>💚</button>
-      <button>🖼</button>
+      <button class="like-song-icon"><BubblingHeart/></button>
+      <!-- <button>🖼</button> -->
     </div>
     <div class="footer-media-player"><MediaPlayer @songIdx="getSongIdx" /></div>
     <div class="footer-media-adjusments">
@@ -18,6 +18,7 @@
 
 <script>
 import MediaPlayer from './MediaPlayer.vue'
+import BubblingHeart from './BubblingHeart.vue'
 // import { stationService } from '../services/station.service.local'
 export default {
   name: 'AppFooter',
@@ -52,6 +53,7 @@ export default {
   },
   components: {
     MediaPlayer,
+    BubblingHeart,
   },
 }
 </script>

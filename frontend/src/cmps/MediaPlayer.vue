@@ -58,7 +58,6 @@
     },
     computed: {
       stationId() {
-        console.log('ma ze hazain haze');
         if(this.currStation){
           // playAudio()
           this.isPlaying = true
@@ -83,8 +82,8 @@
       },
       // when the video is ready
       onReady() {
+        console.log('im ready');
         this.duration = this.$refs.youtube.getDuration()
-        console.log('on ready curr station',this.currStation);
         this.intervalId = setInterval(() => {
           this.currentTime = this.$refs.youtube.getCurrentTime()
         }, 1000)
@@ -92,7 +91,7 @@
       // when something happens- Video has ended/Video
       // work but has alot of error msges 
       onStateChange(event) {
-        console.log('kusemek');
+        // if(!this.station) clearInterval(this.intervalId) // why doent it gets ready? 
         if (event.data === 0){
           this.songIdx++
           clearInterval(this.intervalId)
