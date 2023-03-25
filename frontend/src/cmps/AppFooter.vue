@@ -9,14 +9,14 @@
       <button class="like-song-icon"><BubblingHeart/></button>
     </div>
     <div class="footer-media-player"><MediaPlayer @songIdx="getSongIdx" /></div>
+        
     <div class="footer-media-adjusments">
-      <button class="media-player-repeat-song">
-          <i class="speaker" v-html="getSvg('speakerBtnIcon')"></i>
-          <div class="speaker-bar">
-            <div class="speaker-bar-fill"></div>
-          </div>
-        </button>
+      <i class="speaker" v-html="getSvg('speakerBtnIcon')"></i>
+      <div class="speaker-bar">
+        <div class="speaker-bar-fill"></div>
+      </div>
     </div>
+    
   </footer>
 </template>
 
