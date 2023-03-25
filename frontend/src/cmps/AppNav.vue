@@ -47,12 +47,10 @@
           Create Playlist
         </a>
 
-        <RouterLink class="liked-songs" @click="onClickLikedSongs">
-          <!-- to="/station/like"
-          :class="{ active: $route.path === '/station/like' }" -->
+        <a class="liked-songs" @click="onClickLikedSong">
           <font-awesome-icon class="heart-icon" :icon="['fas', 'heart']" />
           Liked Songs
-        </RouterLink>
+        </a>
       </div>
 
       <Container
@@ -74,11 +72,17 @@
 </template>
 
 <script>
+import { utilService } from '../services/util.service'
+import { userService } from '../services/user.service.local.js'
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
 import { Container, Draggable } from 'vue3-smooth-dnd'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPlus, faHeart } from '@fortawesome/free-solid-svg-icons'
+import {
+  faPlus,
+  faHeart,
+  faCommentDollar,
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(faPlus, faHeart)
@@ -131,9 +135,19 @@ export default {
       this.userStations.push(station)
       this.$router.push(`/station/${station._id}`)
     },
-    onClickLikedSongs() {
+    onClickLikedSong() {
+      let user = userService.getLoggedinUser()
+      console.log(user)
+
       const station = stationService.createNewStation('Liked songs')
       console.log(station)
+      console.log(user)
+
+      user = station
+      console.log(user)
+      // Save updated user object to local storage
+      utilService.saveToStorage('loggedinUser', user)
+
       this.$router.push(`/station/${station._id}`)
     },
   },

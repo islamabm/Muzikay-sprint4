@@ -8,7 +8,7 @@
         />
         <img
           v-else-if="station.name === 'Liked songs'"
-          src="../assets/img/empty-img.png"
+          src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
         />
         <img
           class="deafult-image"
@@ -82,6 +82,7 @@
                 :songIndex="idx"
                 :liked="song.liked"
                 @toggleLike="toggleSongLike"
+                @addLikeToSong="addSongToLikedSongs(song)"
               />
               <!-- @addLikeToSong="addSongToLikedSongs(song)" -->
             </div>
@@ -110,6 +111,7 @@
 </template>
 
 <script>
+import { utilService } from '../services/util.service'
 import { Container, Draggable } from 'vue3-smooth-dnd'
 import { FastAverageColor } from 'fast-average-color'
 import StationEdit from '../cmps/StationEdit.vue'
@@ -157,24 +159,26 @@ export default {
       this.$refs.stationDetailsHeader.style.backgroundImage = gradient
       this.$refs.bottomHalf.style.backgroundImage = darkGradient
     },
-    // addSongToLikedSongs(song) {
-    //   const user = userService.getLoggedinUser()
-    //   console.log(song)
-    //   console.log(user)
-    //   console.log('hi')
-    //   // user.likedSongs.songs.push(song)
-    //   // console.log(user.likedSongs.songs)
-    // },
+    addSongToLikedSongs(song) {
+      const station = userService.getLoggedinUser()
+      console.log(station)
+      console.log(song)
 
-    toggleSongLike(idx) {
-      const song = this.station.songs[idx]
-      song.liked = !song.liked
-      console.log(
-        `Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`
-      )
+      console.log('hi')
 
-      //   // Add functionality
+      station.songs.push(song)
+      utilService.saveToStorage('loggedinUser', station)
     },
+
+    // toggleSongLike(idx) {
+    //   const song = this.station.songs[idx]
+    //   song.liked = !song.liked
+    //   console.log(
+    //     `Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`
+    //   )
+
+    //   //   // Add functionality
+    // },
     toggleActiveTitle(idx) {
       if (this.activeTitle === idx) {
         this.activeTitle = null
@@ -202,7 +206,9 @@ export default {
     },
     onDrop(dropResult) {
       console.log(this.station)
-      this.station.songs = this.applyDrag(this.station.songs, dropResult)
+      const station = JSON.parse(JSON.stringify(this.station))
+      station.songs = this.applyDrag(station.songs, dropResult)
+      this.$store.commit({ type: 'editStation', station })
     },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult
