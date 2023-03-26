@@ -146,10 +146,10 @@
     <StationEdit :showModal="showModal" @close="showModal = false" />
     <button @click="toggleModal">x</button>
   </section>
-  <!-- <section class="confirm-modal">
+  <!-- <section v-if="show" class="confirm-modal">
     <h1>Already added</h1>
     <p>This is already in your 'My Playlist #7'playlist.</p>
-    <button @click="addSong">Add anyway</button>
+    <button @click="addToSelectedStation">Add anyway</button>
     <button @click="dontAdd">Don't add</button>
   </section> -->
 </template>
@@ -183,6 +183,7 @@ export default {
       selectedSong: null,
       selectedIndex: null,
       showStationsSubMenu: false,
+      // show: false,
     }
   },
   methods: {
@@ -320,6 +321,10 @@ export default {
       }
     },
     async addToSelectedStation(song, station) {
+      // const stations = utilService.loadFromStorage('station')
+      // const stat = stations.find((s) => s._id === station._id)
+      // const isIn = stat.songs.includes(song)
+      // if (!isIn) {
       try {
         await this.$store.dispatch({
           type: 'addToStation',
@@ -333,7 +338,12 @@ export default {
       } finally {
         this.showSongModal = false
         this.showStationsSubMenu = false
+        // this.show = false
       }
+
+      // else {
+      //   console.log('is in')
+      // }
     },
     toggleModal() {
       if (this.station.createdBy.fullname === 'guest') {
