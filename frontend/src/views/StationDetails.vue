@@ -79,14 +79,14 @@
             </p>
           </div>
           <p class="posted-at">1 day ago</p>
-
+          <!-- @toggleLike="toggleSongLike" -->
           <div class="flex-end list-end">
             <div class="like-song-icon">
               <BubblingHeart
-                v-show="currDraggableIdx === idx && hover"
+                class="hover-effect"
                 :songIndex="idx"
                 :liked="song.liked"
-                @toggleLike="toggleSongLike"
+
                 @addLikeToSong="addSongToLikedSongs(song)"
               />
             </div>
@@ -97,8 +97,8 @@
                 @click="toggleSongModal(song, idx)"
               >
                 <i
-                  v-show="currDraggableIdx === idx && hover"
-                  class="options-song-icon"
+                
+                  class="options-song-icon hover-effect"
                   v-html="getSvg('songOptionsIcon')"
                 ></i>
               </button>
@@ -106,12 +106,23 @@
           </div>
         </Draggable>
       </Container>
-        <MiniSearch />
+      <MiniSearch />
 
       <div v-if="showSongModal" @click.self="toggleSongModal(null, null)">
         <div class="modal-content">
           <ul class="modal-options">
-            <li @click="addToPlaylist(selectedSong)">Add to playlist</li>
+            <li @click="openStationSelection">Add to playlist</li>
+            <div v-show="showStationsSubMenu">
+              <ul class="stations-sub-menu">
+                <li
+                  v-for="station in userStations"
+                  :key="station.id"
+                  @click="addToSelectedStation(selectedSong, station)"
+                >
+                  {{ station.name }}
+                </li>
+              </ul>
+            </div>
             <li
               v-if="station.createdBy.fullname === 'guest'"
               @click="removeSong(selectedSong, selectedIndex)"
@@ -158,6 +169,7 @@ export default {
       currDraggableIdx: null,
       selectedSong: null,
       selectedIndex: null,
+      showStationsSubMenu: false,
     }
   },
   methods: {
@@ -197,6 +209,10 @@ export default {
       station.songs.push(song)
       utilService.saveToStorage('loggedinUser', station)
     },
+    openStationSelection() {
+      console.log('opened')
+    this.showStationsSubMenu = !this.showStationsSubMenu;
+  },
 
     // toggleSongLike(idx) {
     //   const song = this.station.songs[idx]
@@ -290,6 +306,22 @@ export default {
         this.showSongModal = false
       }
     },
+    async addToSelectedStation(song, station) {
+    try {
+      await this.$store.dispatch({
+        type: 'addToPlaylist',
+        song,
+        station,
+      });
+      showSuccessMsg('added to playlist');
+    } catch (err) {
+      console.log(err);
+      showErrorMsg('Cannot add to playlist');
+    } finally {
+      this.showSongModal = false;
+      this.showStationsSubMenu = false;
+    }
+  },
     toggleModal() {
       if (this.station.createdBy.fullname === 'guest') {
         this.showModal = !this.showModal
@@ -329,6 +361,9 @@ export default {
     },
   },
   computed: {
+    userStations() {
+      return this.$store.getters.getUserStations
+    },
     songsCount() {
       //this 'songs' word should be dynamic, in case we might wanna translate it
       const count = this.station.songs.length
