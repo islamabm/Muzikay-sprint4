@@ -86,9 +86,9 @@
                 class="hover-effect"
                 :songIndex="idx"
                 :liked="song.liked"
-
                 @addLikeToSong="addSongToLikedSongs(song)"
               />
+              <!-- @toggleLike="toggleSongLike" -->
             </div>
             <p class="song-duration">1:40</p>
             <div>
@@ -97,7 +97,6 @@
                 @click="toggleSongModal(song, idx)"
               >
                 <i
-                
                   class="options-song-icon hover-effect"
                   v-html="getSvg('songOptionsIcon')"
                 ></i>
@@ -211,8 +210,8 @@ export default {
     },
     openStationSelection() {
       console.log('opened')
-    this.showStationsSubMenu = !this.showStationsSubMenu;
-  },
+      this.showStationsSubMenu = !this.showStationsSubMenu
+    },
 
     // toggleSongLike(idx) {
     //   const song = this.station.songs[idx]
@@ -307,6 +306,7 @@ export default {
       }
     },
     async addToSelectedStation(song, station) {
+<<<<<<< HEAD
     try {
       await this.$store.dispatch({
         type: 'addToStation',
@@ -322,6 +322,23 @@ export default {
       this.showStationsSubMenu = false;
     }
   },
+=======
+      try {
+        await this.$store.dispatch({
+          type: 'addToPlaylist',
+          song,
+          station,
+        })
+        showSuccessMsg('added to playlist')
+      } catch (err) {
+        console.log(err)
+        showErrorMsg('Cannot add to playlist')
+      } finally {
+        this.showSongModal = false
+        this.showStationsSubMenu = false
+      }
+    },
+>>>>>>> 36f1a5d484515458ff7caaff0cb421fb2896f9a5
     toggleModal() {
       if (this.station.createdBy.fullname === 'guest') {
         this.showModal = !this.showModal
@@ -378,13 +395,20 @@ export default {
     station() {
       return this.$store.getters.station
     },
-
     stationCount() {
       //computed can't do this
       this.counter++
 
       return `My Playlist #${this.counter}`
     },
+    // handelLongText() {
+    //   let longSongs = this.station.songs.filter(s => s.title.length > 25)
+    //   const song = longSongs.map(s => s.title.slice(0,25) + '...')
+    //   console.log(song);
+    //   // this.station.push(song)
+
+    //   return song
+    // }
   },
   components: {
     StationEdit,
