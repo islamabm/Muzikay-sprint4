@@ -5,7 +5,6 @@
         class="footer-details-img"
         :src="station.songs[currSongIdx].imgUrl"
       />
-
       <h3 class="footer-details-title">
         {{ station.songs[currSongIdx].title }}
       </h3>
@@ -43,6 +42,9 @@ export default {
     return {
       // station: null,
       currSongIdx: 0,
+
+      hover: false,
+      showModal: false,
     }
   },
   computed: {
