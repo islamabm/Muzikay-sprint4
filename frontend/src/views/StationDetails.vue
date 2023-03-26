@@ -61,8 +61,8 @@
 
       <Container @drop="onDrop" v-if="station.songs" class="songs-list-details">
         <Draggable
-          @mouseleave="hover = false"
-          @mouseover="hover = true"
+          @mouseover="currDraggableIdx = idx"
+          @mouseleave="currDraggableIdx = null"
           class="song-item"
           v-for="(song, idx) in station.songs"
           :key="idx"
@@ -83,7 +83,7 @@
           <div class="flex-end list-end">
             <div class="like-song-icon">
               <BubblingHeart
-                v-if="hover"
+                v-show="currDraggableIdx === idx && hover"
                 :songIndex="idx"
                 :liked="song.liked"
                 @toggleLike="toggleSongLike"
@@ -97,6 +97,7 @@
                 @click="toggleSongModal(song, idx)"
               >
                 <i
+                  v-show="currDraggableIdx === idx && hover"
                   class="options-song-icon"
                   v-html="getSvg('songOptionsIcon')"
                 ></i>
@@ -146,7 +147,6 @@ export default {
   name: 'station-details',
   data() {
     return {
-      hover: false,
       // station: null,
       showSongModal: false,
       showModal: '',
@@ -155,6 +155,7 @@ export default {
       dominantColor: null,
       likeIconFill: '#FFF',
       liked: false,
+      currDraggableIdx: null,
       selectedSong: null,
       selectedIndex: null,
     }
@@ -252,14 +253,6 @@ export default {
       }
       return result
     },
-    // async removeMsg(msgId) {
-    //   try {
-    //    await this.$store.dispatch({ type: 'removeMsg' , toyId: this.toy._id, msgId})
-    //    this.$emit('loadToy')
-    //   } catch {
-    //     console.log('Could Not delete msg');
-    //   }
-    // },
 
     async removeSong(songId, stationId) {
       console.log('atationDetails', songId)
@@ -340,6 +333,9 @@ export default {
       //this 'songs' word should be dynamic, in case we might wanna translate it
       const count = this.station.songs.length
       return `${count} Songs`
+    },
+    hover() {
+      return this.currDraggableIdx !== null
     },
     stations() {
       return this.$store.getters.stations
