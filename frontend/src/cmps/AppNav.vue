@@ -10,37 +10,43 @@
         <div class="main-nav">
           <div class="home-nav">
             <RouterLink
-              to="/station/collection"
-              exact
-              :class="{ active: $route.path === '/station/collection' }"
-            >
-              <i class="home-icon icons" v-html="getSvg('homeIcon')"></i>
-              Home
-            </RouterLink>
+    to="/station/collection"
+    exact
+    :class="{ active: $route.path === '/station/collection' }"
+    @click="toggleHomeIcon"
+  >
+    <i class="home-icon icons" v-if="$route.path === '/station/collection'" v-html="getSvg('homeIconActive')"></i>
+    <i class="home-icon icons" v-else v-html="getSvg('homeIcon')"></i>
+    Home
+  </RouterLink>
           </div>
 
           <RouterLink
-            to="/station/search"
-            exact
-            :class="{ active: $route.path === '/station/search' }"
-          >
-            <i class="search-icon icons" v-html="getSvg('searchIcon')"></i>
-            Search
-          </RouterLink>
+    to="/station/search"
+    exact
+    :class="{ active: $route.path === '/station/search' }"
+    @click="toggleSearchIcon"
+  >
+    <i class="search-icon icons" v-if="$route.path === '/station/search'" v-html="getSvg('searchIconActive')"></i>
+    <i class="search-icon icons" v-else v-html="getSvg('searchIcon')"></i>
+    Search
+  </RouterLink>
 
-          <RouterLink
-            to="/station/library"
-            exact
-            :class="{ active: $route.path === '/station/library' }"
-          >
-            <i class="library-icon icons" v-html="getSvg('libraryIcon')"></i>
-            Your Library
-          </RouterLink>
+  <RouterLink
+    to="/station/library"
+    exact
+    :class="{ active: $route.path === '/station/library' }"
+    @click="toggleLibraryIcon"
+  >
+    <i class="library-icon icons" v-if="$route.path === '/station/library'" v-html="getSvg('libraryIconActive')"></i>
+    <i class="library-icon icons" v-else v-html="getSvg('libraryIcon')"></i>
+    Your Library
+  </RouterLink>
         </div>
       </div>
 
       <div class="liked-create-nav">
-        <a @click="createStation" class="btn">
+        <a @click="createStation" class="create-container">
           <div class="btn">
             <font-awesome-icon class="plus-sign" :icon="['fas', 'plus']" />
           </div>
@@ -94,6 +100,9 @@ export default {
       userStationsList: [],
       stationCounter: 0,
       activeStationId: null,
+      searchIcon: 'searchIcon',
+      homeIcon: 'homeIcon',
+      libraryIcon: 'libraryIcon',
     }
   },
   methods: {
@@ -134,6 +143,15 @@ export default {
 
     getSvg(iconName) {
       return svgService.getSpotifySvg(iconName)
+    },
+    toggleSearchIcon() {
+      this.searchIcon = this.searchIcon === 'searchIcon' ? 'searchIconActive' : 'searchIcon';
+    },
+    toggleHomeIcon() {
+      this.homeIcon = this.homeIcon === 'homeIcon' ? 'homeIconActive' : 'homeIcon';
+    },
+    toggleLibraryIcon() {
+      this.libraryIcon = this.libraryIcon === 'libraryIcon' ? 'libraryIconActive' : 'libraryIcon';
     },
     createStation() {
       this.stationCounter++
