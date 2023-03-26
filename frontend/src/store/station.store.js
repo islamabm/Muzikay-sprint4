@@ -75,9 +75,18 @@ export const stationStore = {
       state.userStations = stations
     },
     editStation(state, { station }) {
-      console.log(state.stations)
-      console.log(station)
       const idx = state.stations.findIndex((c) => c._id === station._id)
+      state.stations.splice(idx, 1, station)
+      console.log(station)
+    },
+    editUserStation(state, { station }) {
+      const idx = state.userStations.findIndex((c) => c._id === station._id)
+      state.userStations.splice(idx, 1, station)
+      console.log(station)
+    },
+    editPlaylist(state, { station }) {
+      console.log(station)
+      const idx = state.stations.findIndex((c) => c.name === station.name)
       state.stations.splice(idx, 1, station)
       console.log(station)
     },
@@ -144,7 +153,6 @@ export const stationStore = {
         throw err
       }
     },
-
     async addSong({ commit }, { video, station }) {
       console.log('video from store', video)
       console.log('station from store', station)
@@ -157,6 +165,20 @@ export const stationStore = {
         )
         console.log('This is the updated station: ', updatedStation)
         commit({ type: 'editStation', station: updatedStation })
+      } catch (err) {
+        console.error('Cannot add song', err)
+        throw err
+      }
+    },
+    async addToPlaylist({ commit }, { song, station }) {
+      console.log('actions', song)
+      console.log('actions', station)
+      try {
+        const updatedStation = await stationService.addSongToPlaylist(
+          song,
+          station
+        )
+        commit({ type: 'editPlaylist', station: updatedStation })
       } catch (err) {
         console.error('Cannot add song', err)
         throw err

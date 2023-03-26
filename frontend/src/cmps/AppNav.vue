@@ -99,6 +99,12 @@ export default {
     onDrop(dropResult) {
       this.userStationsList = this.applyDrag(this.userStationsList, dropResult)
     },
+    // onDrop(dropResult) {
+    //   console.log(this.station)
+    //   const station = JSON.parse(JSON.stringify(this.station))
+    //   station.songs = this.applyDrag(station.songs, dropResult)
+    //   this.$store.commit({ type: 'editStation', station })
+    // },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult
 

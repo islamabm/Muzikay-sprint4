@@ -107,14 +107,16 @@
       <div v-if="showSongModal" @click.self="toggleSongModal(null, null)">
         <div class="modal-content">
           <ul class="modal-options">
-            <li @click="addToPlaylist(selectedSong, selectedIndex)">
-              Add to playlist
+            <li @click="addToPlaylist(selectedSong)">Add to playlist</li>
+            <li
+              v-if="station.createdBy.fullname === 'guest'"
+              @click="removeSong(selectedSong, selectedIndex)"
+            >
+              Remove
             </li>
-            <li @click="removeSong(selectedSong, selectedIndex)">Remove</li>
           </ul>
         </div>
       </div>
-      
     </section>
   </section>
 
@@ -175,7 +177,7 @@ export default {
     },
     addSongToLikedSongs(song) {
       const station = userService.getLoggedinUser()
-      console.log(station)
+      console.log('stationDetails', station)
       console.log(song)
 
       console.log('hi')
@@ -252,15 +254,37 @@ export default {
       console.log('atationDetails', songId)
       console.log('stationDetails', stationId)
       try {
-        await this.$store.dispatch({ type: 'removeSong', songId, stationId })
+        await this.$store.dispatch({
+          type: 'removeSong',
+          songId,
+          stationId: this.station._id,
+        })
         showSuccessMsg('song removed')
       } catch (err) {
         console.log(err)
         showErrorMsg('Cannot remove song')
+      } finally {
+        this.showSongModal = false
       }
     },
-    addToPlaylist(song, idx) {
-      console.log('Adding song:', song, 'at index:', idx)
+    async addToPlaylist(song) {
+      const stationName = prompt('station?')
+      try {
+        const station = this.stations.find((s) => s.name === stationName)
+        console.log('stationDetails', song)
+        console.log('stationDetails', stationName)
+        await this.$store.dispatch({
+          type: 'addToPlaylist',
+          song,
+          station,
+        })
+        showSuccessMsg('added to playlist')
+      } catch (err) {
+        console.log(err)
+        showErrorMsg('Cannot added to playlist')
+      } finally {
+        this.showSongModal = false
+      }
     },
     toggleModal() {
       if (this.station.createdBy.fullname === 'guest') {
