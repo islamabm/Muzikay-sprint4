@@ -142,10 +142,12 @@ export default {
       this.$router.push(`/station/${station._id}`)
     },
     onClickLikedSong() {
+      
       let user = userService.getLoggedinUser()
       console.log(user)
-
-      const station = stationService.createNewStation('Liked songs')
+      
+      const station = (user.name !== 'Liked songs' ) ? stationService.createNewStation('Liked songs')
+       : utilService.loadFromStorage('loggedinUser')
       console.log(station)
       console.log(user)
 
