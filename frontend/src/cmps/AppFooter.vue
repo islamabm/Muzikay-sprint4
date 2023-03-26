@@ -3,18 +3,18 @@
     <div v-if="station" class="footer-details">
       <img
         class="footer-details-img"
-        :src="this.station.songs[currSongIdx].imgUrl"
+        :src="station.songs[currSongIdx].imgUrl"
       />
-      <h3 class="footer-details-title">{{ this.station.songs[currSongIdx].title }}</h3>
+      <h3 class="footer-details-title">{{ station.songs[currSongIdx].title }}</h3>
       <button class="like-song-icon">
         <BubblingHeart
-              :songIndex="this.currSongIdx"
-              :liked="this.station.songs[this.currSongIdx].liked"
+              :songIndex="currSongIdx"
+              :liked="station.songs[currSongIdx].liked"
               @toggleLike="toggleSongLike"/>
       </button>
     </div>
     
-    <div class="footer-media-player"><MediaPlayer :station="this.station" @songIdx="getSongIdx" /></div>
+    <div class="footer-media-player"><MediaPlayer :station="station" @songIdx="getSongIdx" /></div>
         
     <div class="footer-media-adjusments">
       <i class="speaker" v-html="getSvg('speakerBtnIcon')"></i>
@@ -35,14 +35,14 @@ export default {
   emits: ['songIdx'],
   data() {
     return {
-      station: null,
+      // station: null,
       currSongIdx: 0,
     }
   },
   computed : {
-    setStation() {
-      this.$store.commit({ type: 'setCurrStation', stationId: this.stationId })
-    },
+    // setStation() {
+    //   this.$store.commit({ type: 'setCurrStation', stationId: this.stationId })
+    // },
     station() {
       return this.$store.getters.station
     },
@@ -65,21 +65,21 @@ export default {
       // Add functionality
     },
   },
-  watch: {
-    '$route.params': {
-      async handler() {
-        const { stationId } = this.$route.params
-        try {
-          this.station = await this.$store.getters.stationById(stationId)
-          console.log(this.station);
-        } catch (err) {
-          console.log(err)
-          throw err
-        }
-      },
-      immediate: true,
-    },
-  },
+  // watch: {
+  //   '$route.params': {
+  //     async handler() {
+  //       const { stationId } = this.$route.params
+  //       try {
+  //         this.station = await this.$store.getters.stationById(stationId)
+  //         console.log(this.station);
+  //       } catch (err) {
+  //         console.log(err)
+  //         throw err
+  //       }
+  //     },
+  //     immediate: true,
+  //   },
+  // },
   components: {
     MediaPlayer,
     BubblingHeart,

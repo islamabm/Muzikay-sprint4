@@ -46,8 +46,9 @@
   export default {
     name: ['MediaPlayer'],
     props: {
-      station: String,
+      station: Object,
     },
+    emits: ['songIdx'],
     components: {
       YouTube,
     },
@@ -57,8 +58,6 @@
         currentTime: 0,
         isPlaying: false,
         intervalId: null,
-        // station: null,
-        currStation: null,
         songIdx: 0,
       }
     },
@@ -66,7 +65,6 @@
       putStationId() {
         console.log('no station');
         if(this.station){
-          this.isPlaying = true
           // console.log('got here with' , this.currStation.songs[this.songIdx].id);
           console.log(this.station.songs[this.songIdx].id);
           return this.station.songs[this.songIdx].id
@@ -89,6 +87,7 @@
       switchSong(num) {
         this.songIdx += num
         this.$emit('songIdx' , this.songIdx)
+       this.putStationId()
       },
       // when the video is ready
       onReady() {
@@ -105,7 +104,7 @@
         if (event.data === 0){
           this.songIdx++
           clearInterval(this.intervalId)
-          this.formatTime(1)
+          this.formatTime(this.duration)
         } 
       },
       // play/pause video 
@@ -121,22 +120,5 @@
         return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`
       },
     },
-  //   watch: {
-  //   '$route.params': {
-  //     async handler() {
-  //       try {
-  //         const { stationId } = this.$route.params
-  //         this.station = await this.$store.getters.stationById(stationId)
-  //         this.currStation = this.station
-  //         console.log('curr station from param',this.currStation);
-  //       }
-  //       catch (err) {
-  //         console.log(err,'cannot get id from route params');
-  //         throw err
-  //       }
-  //     },
-  //     immediate: true,
-  //   },
-  // },
 }
   </script>
