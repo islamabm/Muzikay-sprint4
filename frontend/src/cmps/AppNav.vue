@@ -60,6 +60,7 @@
       >
         <Draggable v-for="(station, index) in userStations" :key="index">
           <div
+            class="station-nav-hover"
             :class="{ active: station._id === activeStationId }"
             @click="setStation(station._id)"
           >
@@ -142,11 +143,12 @@ export default {
       this.$router.push(`/station/${station._id}`)
     },
     onClickLikedSong() {
-      
       let user = userService.getLoggedinUser()
-      
-      const station = (user.name !== 'Liked songs' ) ? stationService.createNewStation('Liked songs')
-       : utilService.loadFromStorage('loggedinUser')
+
+      const station =
+        user.name !== 'Liked songs'
+          ? stationService.createNewStation('Liked songs')
+          : utilService.loadFromStorage('loggedinUser')
 
       user = station
       utilService.saveToStorage('loggedinUser', user)
