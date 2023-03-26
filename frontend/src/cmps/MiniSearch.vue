@@ -26,7 +26,7 @@
     group-name="cols"
     @drop="onDrop"
     v-if="search"
-    class="songs-list-details"
+    class="search-results"
     :shouldAcceptDrop="
       (e, payload) => e.groupName === 'col-items' && !payload.loading
     "
@@ -37,9 +37,9 @@
       :key="idx"
     >
       <div class="mini-search-preview">
-        <span>{{ idx + 1 }}</span>
         <img class="song-img" :src="video.url" />
-        <p class="song-title">{{ video.title }}</p>
+
+        <p class="search-song-title">{{ video.title }}</p>
       </div>
       <button class="add-btn-song" @click="addToStation(video)">Add</button>
     </Draggable>

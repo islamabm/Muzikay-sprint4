@@ -5,8 +5,13 @@
         <img
           @click="toggleModal"
           v-if="station.songs && station.songs.length > 0"
-          :src="station.songs[0].imgUrl"
+          :src="
+            station.songs[0].imgUrl
+              ? station.songs[0].imgUrl
+              : station.songs[0].url
+          "
         />
+
         <img
           @click="toggleModal"
           v-else-if="station.name === 'Liked songs'"
@@ -79,7 +84,8 @@
         >
           <div class="img-and-title">
             <span>{{ idx + 1 }}</span>
-            <img class="song-img" :src="song.imgUrl" />
+            <img v-if="song.videoId" class="song-img" :src="song.url" />
+            <img v-else class="song-img" :src="song.imgUrl" />
             <p
               class="song-title"
               :class="{ active: activeTitle === idx }"
@@ -93,7 +99,7 @@
           <div class="flex-end list-end">
             <div class="like-song-icon">
               <BubblingHeart
-                class="hover-effect"
+                class="hover-effect heart-song"
                 :songIndex="idx"
                 :liked="song.liked"
                 @addLikeToSong="addSongToLikedSongs(song)"
