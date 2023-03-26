@@ -1,23 +1,47 @@
 .mobile-nav {
-    display: none;
-    width: 100%;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: $clr2;
-    padding: 12px 0;
+  display: none;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: $clr2;
+  padding: 1.1rem;
+  // padding-bottom: 20px;
 
-    .router-link {
-      height: 40px;
-      width: 40px;
+  .router-link {
+    height: 40px;
+    width: 40px;
+    padding: 10px;
+  }
+
+  svg {
+    fill: $clr11;
+    width: 25px;
+    height: 25px;
+    
+  }
+
+  .icons {
+    position: relative;
+    &:hover {
+      svg {
+        fill: $clr6;
+      }
     }
-    svg {
-        fill:$clr11
-    }
-    .icons {
-    &:active {
-       svg {
-          fill: $clr6; 
-        }
   }
 }
+.activeLink {
+  svg {
+    fill: $clr6;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-70%);
+    width: 30px;
+    height: 2px;
+    background-color: $clr6;
+    border-radius: 2px;
+  }
 }
