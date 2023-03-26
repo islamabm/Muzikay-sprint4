@@ -20,7 +20,6 @@
   height: 385px;
   font-family: 'Circular-book';
   margin-top: 18px;
-  
 
   .edit-details-header {
     display: flex;
@@ -44,12 +43,12 @@
       cursor: pointer;
       float: right;
       position: absolute;
-      right: 16%;
+      right: 33%;
       top: 28%;
     }
   }
 
-  .edit-details-img{
+  .edit-details-img {
     display: flex;
 
     .cover-img {
@@ -58,7 +57,7 @@
       width: 50%;
       height: 200px;
       margin-right: 20px;
-      
+
       .img-edit {
         margin-left: 15px;
         padding: 5px;

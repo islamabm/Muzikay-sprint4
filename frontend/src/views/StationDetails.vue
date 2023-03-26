@@ -46,7 +46,7 @@
       <div class="station-controls">
         <div class="btn-play-green" @click.stop="playStation"></div>
         <BubblingHeart @toggleLike="toggleHeaderLike" />
-        <div class="btn-icons">
+        <div class="btn-icons" @click="removeStation(station._id)">
           <i class="options-icon" v-html="getSvg('optionsIcon')"></i>
         </div>
       </div>
@@ -117,7 +117,7 @@
               <ul class="stations-sub-menu">
                 <li
                   v-for="station in userStations"
-                  :key="station.id"
+                  :key="station._id"
                   @click="addToSelectedStation(selectedSong, station)"
                 >
                   {{ station.name }}
@@ -338,6 +338,14 @@ export default {
       // else {
       //   console.log('is in')
       // }
+    },
+    async removeStation(stationId) {
+      try {
+        await this.$store.dispatch({ type: 'removeStation', stationId })
+        showSuccessMsg('Station removed')
+      } catch (err) {
+        showErrorMsg('Cannot remove station')
+      }
     },
     toggleModal() {
       if (this.station.createdBy.fullname === 'guest') {

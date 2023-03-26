@@ -40,7 +40,10 @@ function getById(stationId) {
 }
 
 async function remove(stationId) {
-  await storageService.remove(STORAGE_KEY, stationId)
+  console.log('service', stationId)
+  const station = await storageService.remove(STORAGE_KEY, stationId)
+  console.log(station)
+  return station
 }
 
 async function save(station) {

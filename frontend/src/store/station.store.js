@@ -31,23 +31,15 @@ export const stationStore = {
       const userStations = stations.filter(
         (s) => s.createdBy.fullname === 'guest'
       )
-      // if (userStations) {
-      //   console.log(userStations)
+
       return userStations
       // }
     },
     stationById: (state) => (id) => {
-      // console.log('Searching for station with id:', id)
       const foundStation = state.stations.find((station) => {
-        // console.log(
-        //   'Comparing with station:',
-        //   station,
-        //   'with _id:',
-        //   station._id
-        // )
         return station._id === id
       })
-      // console.log('Found station:', foundStation)
+
       return foundStation
     },
 
@@ -59,6 +51,12 @@ export const stationStore = {
     },
     setCurrStation(state, { stationId }) {
       state.currStationId = stationId
+    },
+    setCurrStation(state, { stationId }) {
+      state.currStationId = stationId
+    },
+    setCurrUserStation(state, { stationId }) {
+      state.currUserStationId = stationId
     },
     removeSong(state, { songId, stationId }) {
       console.log('mutation', songId)
@@ -77,27 +75,21 @@ export const stationStore = {
     editStation(state, { station }) {
       const idx = state.stations.findIndex((c) => c._id === station._id)
       state.stations.splice(idx, 1, station)
-      console.log(station)
     },
     editUserStation(state, { station }) {
       const idx = state.userStations.findIndex((c) => c._id === station._id)
       state.userStations.splice(idx, 1, station)
-      console.log(station)
     },
-    editStation(state, { station }) {
-      console.log(station)
-      const idx = state.stations.findIndex((c) => c.name === station.name)
-      state.stations.splice(idx, 1, station)
-      console.log(station)
+
+    removeStation(state, { stationId }) {
+      state.stations = state.stations.filter((st) => st._id !== stationId)
     },
-    removeStation(state, { id }) {
-      const idx = state.stations.findIndex((s) => s._id === id)
-      state.stations.splice(idx, 1)
+    createStation(state, { station }) {
+      state.userStations.push(station)
+      state.stations.push(station)
+      this.$router.push(`/station/${station._id}`)
+      console.log(StationName)
     },
-    //   removeToy(state, { id }) {
-    //     const idx = state.toys.findIndex(toy => toy._id === id)
-    //     state.toys.splice(idx, 1)
-    // },
   },
   actions: {
     async loadStations(context) {
@@ -109,13 +101,14 @@ export const stationStore = {
         throw err
       }
     },
-    async removeStation(commit, { id }) {
+    async removeStation({ commit }, { stationId }) {
+      console.log('stationId', stationId)
       try {
-        const res = await stationService.remove(id)
-        commit({ type: 'removeStation', id })
-        return res
+        console.log('stationId', stationId)
+        await stationService.remove(stationId)
+        commit({ type: 'removeStation', stationId })
       } catch (err) {
-        console.log('stationStore: Error in removeStation', err)
+        console.log('stationStore: Error in ', err)
         throw err
       }
     },
@@ -129,18 +122,16 @@ export const stationStore = {
         throw err
       }
     },
-    // async removeSong({ commit }, { songId, stationId }) {
-    //   try {
-    //     console.log('store', songId)
-    //     console.log('store', stationId)
-    //     commit({ type: 'removeSong', songId, stationId })
-    //     await storageService.remove(songId, stationId)
-    //   } catch (err) {
-    //     // console.log(err)
-    //     console.log('Could Not delete song')
-    //     throw err
-    //   }
-    // },
+    async createStation({ commit }, { StationName }) {
+      try {
+        const station = await stationService.createNewStation(StationName)
+        commit({ type: 'createStation', station })
+      } catch (err) {
+        // console.log(err)
+        console.log('Could Not delete song')
+        throw err
+      }
+    },
     async removeSong({ commit }, { songId, stationId }) {
       try {
         console.log('store', songId)

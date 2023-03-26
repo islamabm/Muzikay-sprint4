@@ -91,7 +91,6 @@ library.add(faPlus, faHeart)
 export default {
   data() {
     return {
-      userStationsList: [],
       stationCounter: 0,
       activeStationId: null,
     }
@@ -135,13 +134,30 @@ export default {
     getSvg(iconName) {
       return svgService.getSpotifySvg(iconName)
     },
-    createStation() {
+    async createStation() {
+      // async removeStation(stationId) {
       this.stationCounter++
       const StationName = `My Playlist #${this.stationCounter}`
-      const station = stationService.createNewStation(StationName)
-      this.userStations.push(station)
-      this.$router.push(`/station/${station._id}`)
+      try {
+        await this.$store.dispatch({ type: 'createStation', StationName })
+        // showSuccessMsg('Station removed')
+        // this.$store.commit({
+        //   type: 'setCurrUserStation',
+        //   stationId: station._id,
+        // })
+        // this.$router.push(`/station/${station._id}`)
+      } catch (err) {
+        console.log(err)
+        // showErrorMsg('Cannot remove station')
+      }
+      // const station = stationService.createNewStation(StationName)
+      // console.log(this.userStations)
+      // this.userStations.push(station)
+      // console.log(this.userStations)
+      // const stationId = station._id
+      // this.$router.push(`/station/${station._id}`)
     },
+
     onClickLikedSong() {
       let user = userService.getLoggedinUser()
 
@@ -161,9 +177,10 @@ export default {
       return this.$store.getters.getUserStations
     },
   },
-  created() {
-    this.userStationsList = this.$store.getters.getUserStations
-  },
+  // created() {
+  //   console.log(this.userStations)
+  //   this.userStationsList = this.$store.getters.getUserStations
+  // },
   components: {
     FontAwesomeIcon,
     Container,

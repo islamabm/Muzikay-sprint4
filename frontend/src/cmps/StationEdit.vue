@@ -20,7 +20,7 @@
             :placeholder="station.name"
           />
           <textarea
-          class="edit-text-area"
+            class="edit-text-area"
             id="description"
             rows="4"
             v-model="station.desc"
