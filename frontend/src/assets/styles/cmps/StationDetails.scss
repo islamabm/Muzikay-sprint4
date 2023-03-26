@@ -117,6 +117,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 12px;
+    
 
     &:hover {
       background-color: rgba($clr10, 0.2);
@@ -379,4 +380,12 @@
       }
     }
   }
+}
+
+.hover-effect {
+  opacity: 0;
+}
+
+.song-item:hover .hover-effect {
+  opacity: 1;
 }

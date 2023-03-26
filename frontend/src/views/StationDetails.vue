@@ -83,7 +83,7 @@
           <div class="flex-end list-end">
             <div class="like-song-icon">
               <BubblingHeart
-                v-show="currDraggableIdx === idx && hover"
+                class="hover-effect"
                 :songIndex="idx"
                 :liked="song.liked"
 
@@ -97,8 +97,8 @@
                 @click="toggleSongModal(song, idx)"
               >
                 <i
-                  v-show="currDraggableIdx === idx && hover"
-                  class="options-song-icon"
+                
+                  class="options-song-icon hover-effect"
                   v-html="getSvg('songOptionsIcon')"
                 ></i>
               </button>
