@@ -33,7 +33,7 @@
       <img class="song-img" :src="video.url" />
       <p class="song-title">{{ video.title }}</p>
     </div>
-      <button class="add-btn-song" @click="addToPlaylist(video)">Add</button>
+      <button class="add-btn-song" @click="addToStation(video)">Add</button>
     </Draggable>
   </Container>
 </template>
@@ -80,7 +80,7 @@ export default {
       this.videos = await stationService.getVideos(this.search)
       console.log(this.videos[0])
     },
-    async addToPlaylist(video) {
+    async addToStation(video) {
       console.log('video', video)
       const { stationId } = this.$route.params
       try {

@@ -21,7 +21,7 @@ export const stationService = {
   createNewStation,
   addSongToStation,
   removeSong,
-  addSongToPlaylist,
+  addSongToStation: addSongToUserStation,
   // addStationMsg,
 }
 window.cs = stationService
@@ -166,7 +166,7 @@ async function addSongToStation(video, station) {
   const savedStation = await save(updatedStation)
   return savedStation
 }
-async function addSongToPlaylist(song, station) {
+async function addSongToUserStation(song, station) {
   if (!station) {
     throw new Error('Station parameter is undefined')
   }

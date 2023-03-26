@@ -1,11 +1,11 @@
 <template>
-  <section class="playlist-preview" @click="setStation(station._id)">
-    <div class="playlist-image">
+  <section class="station-preview" @click="setStation(station._id)">
+    <div class="station-image">
       <img :src="station.songs[0].imgUrl" />
       <div class="play-button" @click.stop="playStation"></div>
     </div>
-    <div class="playlist-info">
-      <h3 class="playlist-title">{{ station.name }}</h3>
+    <div class="station-info">
+      <h3 class="station-title">{{ station.name }}</h3>
       <p class="station-description-preview">{{ station.description }}</p>
     </div>
     <button hidden @click="$emit('removeStation', station._id)">x</button>

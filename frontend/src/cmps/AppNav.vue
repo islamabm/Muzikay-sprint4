@@ -40,7 +40,7 @@
       </div>
 
       <div class="liked-create-nav">
-        <a @click="createPlayList" class="btn">
+        <a @click="createStation" class="btn">
           <div class="btn">
             <font-awesome-icon class="plus-sign" :icon="['fas', 'plus']" />
           </div>
@@ -58,12 +58,12 @@
         v-on="$listeners"
         class="clean-list user-stations"
       >
-        <Draggable v-for="(playlist, index) in userStations" :key="index">
+        <Draggable v-for="(station, index) in userStations" :key="index">
           <div
-            :class="{ active: playlist._id === activePlaylistId }"
-            @click="setStation(playlist._id)"
+            :class="{ active: station._id === activeStationId }"
+            @click="setStation(station._id)"
           >
-            {{ playlist.name }}
+            {{ station.name }}
           </div>
         </Draggable>
       </Container>
@@ -91,8 +91,8 @@ export default {
   data() {
     return {
       userStationsList: [],
-      playlistCounter: 0,
-      activePlaylistId: null,
+      stationCounter: 0,
+      activeStationId: null,
     }
   },
   methods: {
@@ -126,7 +126,7 @@ export default {
     //   this.$router.push(`/station/${stationId}`)
     // },
     setStation(stationId) {
-      this.activePlaylistId = stationId
+      this.activeStationId = stationId
       this.$store.commit({ type: 'setCurrStation', stationId })
       this.$router.push(`/station/${stationId}`)
     },
@@ -134,26 +134,21 @@ export default {
     getSvg(iconName) {
       return svgService.getSpotifySvg(iconName)
     },
-    createPlayList() {
-      this.playlistCounter++
-      const playlistName = `My Playlist #${this.playlistCounter}`
-      const station = stationService.createNewStation(playlistName)
+    createStation() {
+      this.stationCounter++
+      const StationName = `My Playlist #${this.stationCounter}`
+      const station = stationService.createNewStation(StationName)
       this.userStations.push(station)
       this.$router.push(`/station/${station._id}`)
     },
     onClickLikedSong() {
       
       let user = userService.getLoggedinUser()
-      console.log(user)
       
       const station = (user.name !== 'Liked songs' ) ? stationService.createNewStation('Liked songs')
        : utilService.loadFromStorage('loggedinUser')
-      console.log(station)
-      console.log(user)
 
       user = station
-      console.log(user)
-      // Save updated user object to local storage
       utilService.saveToStorage('loggedinUser', user)
 
       this.$router.push(`/station/${station._id}`)

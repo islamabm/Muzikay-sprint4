@@ -287,14 +287,14 @@ export default {
         this.showSongModal = false
       }
     },
-    async addToPlaylist(song) {
+    async addToStation(song) {
       const stationName = prompt('station?')
       try {
         const station = this.stations.find((s) => s.name === stationName)
         console.log('stationDetails', song)
         console.log('stationDetails', stationName)
         await this.$store.dispatch({
-          type: 'addToPlaylist',
+          type: 'addToStation',
           song,
           station,
         })
@@ -309,7 +309,7 @@ export default {
     async addToSelectedStation(song, station) {
     try {
       await this.$store.dispatch({
-        type: 'addToPlaylist',
+        type: 'addToStation',
         song,
         station,
       });

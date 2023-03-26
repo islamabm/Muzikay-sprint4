@@ -122,6 +122,9 @@ export default {
       this.$emit('toggleLike', this.songIndex)
       this.$emit('addLikeToSong')
     },
+    toggleHeaderLike() {
+      console.log('toggle like')
+    }
   },
 }
 </script>

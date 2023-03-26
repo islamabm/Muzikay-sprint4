@@ -1,4 +1,4 @@
-.playlist-preview {
+.station-preview {
   position: relative;
   border-radius: 7px;;
   display: flex;
@@ -30,7 +30,7 @@
     }
   }
 
-  .playlist-image {
+  .station-image {
     width: 190px;
     height: 190px;
     border-radius: 8px;
@@ -43,7 +43,7 @@
     }
   }
 
-  .playlist-info {
+  .station-info {
     display: flex;
     min-height: 62px;
     flex-direction: column;
@@ -51,12 +51,12 @@
     align-items: start;
     margin-block-start: 1.2rem;
 
-    .playlist-title,
+    .station-title,
     .station-description-preview {
       font-family: Circular-book;
     }
 
-    .playlist-title {
+    .station-title {
       font-size: 14px;
       font-weight: 700;
       color: $clr6;
@@ -111,17 +111,17 @@
 
 
 @media screen and (max-width: $narrow-breakpoint) {
-  .playlist-preview {
+  .station-preview {
     width: 180px;
     padding: 0.8rem 0.8rem 0;
 
-    .playlist-image {
+    .station-image {
       width: 150px;
       height: 150px;
     }
 
-    .playlist-info {
-      .playlist-title {
+    .station-info {
+      .station-title {
         font-size: 12px;
       }
 
