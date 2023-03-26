@@ -3,12 +3,12 @@
     <section class="station-details-header">
       <div ref="stationDetailsHeader" class="header-content">
         <img
-        @click="toggleModal"
+          @click="toggleModal"
           v-if="station.songs && station.songs.length > 0"
           :src="station.songs[0].imgUrl"
         />
         <img
-        @click="toggleModal"
+          @click="toggleModal"
           v-else-if="station.name === 'Liked songs'"
           src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
         />
@@ -140,6 +140,12 @@
     <StationEdit :showModal="showModal" @close="showModal = false" />
     <button @click="toggleModal">x</button>
   </section>
+  <!-- <section class="confirm-modal">
+    <h1>Already added</h1>
+    <p>This is already in your 'My Playlist #7'playlist.</p>
+    <button @click="addSong">Add anyway</button>
+    <button @click="dontAdd">Don't add</button>
+  </section> -->
 </template>
 
 <script>
@@ -308,21 +314,21 @@ export default {
       }
     },
     async addToSelectedStation(song, station) {
-    try {
-      await this.$store.dispatch({
-        type: 'addToStation',
-        song,
-        station,
-      });
-      showSuccessMsg('added to playlist');
-    } catch (err) {
-      console.log(err);
-      showErrorMsg('Cannot add to playlist');
-    } finally {
-      this.showSongModal = false;
-      this.showStationsSubMenu = false;
-    }
-  },
+      try {
+        await this.$store.dispatch({
+          type: 'addToStation',
+          song,
+          station,
+        })
+        showSuccessMsg('added to playlist')
+      } catch (err) {
+        console.log(err)
+        showErrorMsg('Cannot add to playlist')
+      } finally {
+        this.showSongModal = false
+        this.showStationsSubMenu = false
+      }
+    },
     toggleModal() {
       if (this.station.createdBy.fullname === 'guest') {
         this.showModal = !this.showModal
