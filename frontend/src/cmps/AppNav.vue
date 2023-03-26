@@ -54,11 +54,12 @@
       </div>
 
       <Container
+        @drop="onDrop"
         v-bind="$attrs"
         v-on="$listeners"
         class="clean-list user-stations"
       >
-        <Draggable v-for="(station, index) in userStations" :key="index">
+        <Draggable v-for="(station, index) in userStationsData" :key="index">
           <div
             class="station-nav-hover"
             :class="{ active: station._id === activeStationId }"
@@ -91,21 +92,19 @@ library.add(faPlus, faHeart)
 export default {
   data() {
     return {
+      userStationsData: [],
       stationCounter: 0,
       activeStationId: null,
     }
   },
   methods: {
     onDrop(dropResult) {
-      this.userStationsList = this.applyDrag(this.userStationsList, dropResult)
+      this.userStationsData = this.applyDrag(this.userStationsData, dropResult)
+      this.$store.commit('setUserStations', this.userStationsData)
     },
-    // onDrop(dropResult) {
-    //   console.log(this.station)
-    //   const station = JSON.parse(JSON.stringify(this.station))
-    //   station.songs = this.applyDrag(station.songs, dropResult)
-    //   this.$store.commit({ type: 'editStation', station })
-    // },
+
     applyDrag(arr, dragResult) {
+      console.log('hi')
       const { removedIndex, addedIndex, payload } = dragResult
 
       if (removedIndex === null && addedIndex === null) return arr
@@ -176,6 +175,9 @@ export default {
     userStations() {
       return this.$store.getters.getUserStations
     },
+  },
+  created() {
+    this.userStationsData = this.userStations
   },
   // created() {
   //   console.log(this.userStations)

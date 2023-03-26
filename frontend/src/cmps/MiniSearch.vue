@@ -22,17 +22,25 @@
       </form>
     </div>
   </div>
-  <Container @drop="onDrop" v-if="search" class="songs-list-details">
+  <Container
+    group-name="cols"
+    @drop="onDrop"
+    v-if="search"
+    class="songs-list-details"
+    :shouldAcceptDrop="
+      (e, payload) => e.groupName === 'col-items' && !payload.loading
+    "
+  >
     <Draggable
       class="add-songs-container song-item"
       v-for="(video, idx) in videos"
       :key="idx"
     >
-    <div class="mini-search-preview">
-      <span>{{ idx + 1 }}</span>
-      <img class="song-img" :src="video.url" />
-      <p class="song-title">{{ video.title }}</p>
-    </div>
+      <div class="mini-search-preview">
+        <span>{{ idx + 1 }}</span>
+        <img class="song-img" :src="video.url" />
+        <p class="song-title">{{ video.title }}</p>
+      </div>
       <button class="add-btn-song" @click="addToStation(video)">Add</button>
     </Draggable>
   </Container>

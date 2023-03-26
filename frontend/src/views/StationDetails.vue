@@ -61,7 +61,15 @@
         </div>
       </div>
 
-      <Container @drop="onDrop" v-if="station.songs" class="songs-list-details">
+      <Container
+        :groupName="'col-items'"
+        @drop="onDrop"
+        v-if="station.songs"
+        class="songs-list-details"
+        :shouldAcceptDrop="
+          (e, payload) => e.groupName === 'songs-list' && !payload.loading
+        "
+      >
         <Draggable
           @mouseover="currDraggableIdx = idx"
           @mouseleave="currDraggableIdx = null"
@@ -363,6 +371,29 @@ export default {
 
     getSvg(iconName) {
       return svgService.getSpotifySvg(iconName)
+    },
+    onSongDrop(columnId, dropResult) {
+      // check if element where ADDED or REMOVED in current collumn
+      if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
+        const scene = Object.assign({}, this.scene)
+        const column = scene.children.filter((p) => p.id === columnId)[0]
+        const itemIndex = scene.children.indexOf(column)
+        const newColumn = Object.assign({}, column)
+
+        // check if element was ADDED in current column
+        if (dropResult.removedIndex == null && dropResult.addedIndex >= 0) {
+          // your action / api call
+          dropResult.payload.loading = true
+          // simulate api call
+          setTimeout(function () {
+            dropResult.payload.loading = false
+          }, Math.random() * 5000 + 1000)
+        }
+
+        newColumn.children = applyDrag(newColumn.children, dropResult)
+        scene.children.splice(itemIndex, 1, newColumn)
+        this.scene = scene
+      }
     },
   },
   watch: {
