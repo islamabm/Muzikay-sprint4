@@ -21,36 +21,26 @@
       <MediaPlayer :station="station" @songIdx="getSongIdx" />
     </div>
 
-    <div class="footer-media-adjusments">
-      <i class="speaker" v-html="getSvg('speakerBtnIcon')"></i>
-      <div class="speaker-bar">
-        <div class="speaker-bar-fill"></div>
-      </div>
-    </div>
   </footer>
 </template>
 
 <script>
 import MediaPlayer from './MediaPlayer.vue'
 import BubblingHeart from './BubblingHeart.vue'
-import SVGService from '../services/SVG.service'
+// import SVGService from '../services/SVG.service'
 
 export default {
   name: 'AppFooter',
   emits: ['songIdx'],
   data() {
     return {
-      // station: null,
       currSongIdx: 0,
-
+      // speakerLevel: 50,
       hover: false,
       showModal: false,
     }
   },
   computed: {
-    // setStation() {
-    //   this.$store.commit({ type: 'setCurrStation', stationId: this.stationId })
-    // },
     station() {
       return this.$store.getters.station
     },
@@ -72,22 +62,11 @@ export default {
       // )
       // Add functionality
     },
+    // setSpeakerLevel(level) {
+    // this.speakerLevel = level
+    // },
   },
-  // watch: {
-  //   '$route.params': {
-  //     async handler() {
-  //       const { stationId } = this.$route.params
-  //       try {
-  //         this.station = await this.$store.getters.stationById(stationId)
-  //         console.log(this.station);
-  //       } catch (err) {
-  //         console.log(err)
-  //         throw err
-  //       }
-  //     },
-  //     immediate: true,
-  //   },
-  // },
+
   components: {
     MediaPlayer,
     BubblingHeart,

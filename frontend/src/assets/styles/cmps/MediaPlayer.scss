@@ -90,6 +90,8 @@
 
 .footer-media-adjusments {
     display: flex;
+    align-items: center;
+    margin: 0;
 }
 
 .music-bar {
@@ -113,4 +115,22 @@
     }
 }
 
+  .footer-media-adjusments {
+    // margin-top: 22px;
+    // margin-left: 700px;
+    // grid-column: 3;
+    height: 8px;
+    .speaker {
+        display: block;
+        svg {
+            fill: $clr1;
+            stroke: $clr11;
+            stroke-width: 15;
+            width: 15px;
+        }
+    }
+    input {
+      height: 5px;
+    }
+  }
 
