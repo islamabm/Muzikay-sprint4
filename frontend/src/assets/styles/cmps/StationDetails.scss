@@ -117,13 +117,11 @@
     align-items: center;
     justify-content: space-between;
     padding: 12px;
-    
-   
 
     &:hover {
       background-color: rgba($clr10, 0.2);
     }
-    
+
     .img-and-title {
       width: 370px;
       display: flex;
@@ -183,7 +181,6 @@
       margin-inline-start: 25%;
       width: max-content;
       white-space: nowrap;
-      
     }
     @media screen and (min-width: 1600px) {
       .posted-at {
@@ -195,8 +192,6 @@
         margin-inline-start: 29%;
       }
     }
-
-
 
     .song-duration {
       font-size: 0.8rem;
@@ -219,8 +214,6 @@
       }
     }
   }
-
-  
 }
 
 .btn-play-green {
@@ -281,14 +274,14 @@
 .table-header {
   display: flex;
   justify-content: space-between;
-  gap:4rem;
+  gap: 4rem;
   padding-bottom: 1.6rem;
   margin-inline: 3.5rem;
   font-size: 0.9rem;
   font-weight: 600;
   color: $clr11;
   position: relative;
-  
+
   &::after {
     content: '';
     position: absolute;
@@ -335,14 +328,14 @@
 
 .modal-content {
   position: fixed;
-  background-color: #282828;
+  background-color: $clr8;
   border-radius: 8px;
   padding: 10px;
   width: 200px;
   top: 45%;
   left: 85%;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-  z-index: 20;
+  box-shadow: 0 4px 6px rgba($clr2, 0.1), 0 1px 3px rgba($clr2, 0.08);
+  z-index: 10;
 
   .modal-options {
     list-style-type: none;
@@ -352,22 +345,38 @@
     li {
       padding: 10px 15px;
       font-size: 14px;
-      color: #b3b3b3;
+      color: $clr3;
       cursor: pointer;
       &:hover {
-        background-color: #404040;
-        color: #ffffff;
+        background-color: $clr12;
+        color: $clr6;
       }
     }
-  }
-}
+    .stations-sub-menu {
+      background-color: $clr8;
+      border-radius: 8px;
+      list-style: none;
+      border-radius: 4px;
+      position: absolute;
+      z-index: 30;
+      top: 0;
+      right: 100%;
+      width: 200px;
+      height: max-content;
+      padding: 10px;
+      box-shadow: 0 4px 6px rgba($clr2, 0.1), 0 1px 3px rgba($clr2, 0.08);
 
-.btn-open-modal {
-  position: relative;
+      li {
+        padding: 10px 15px;
+        font-size: 14px;
+        color: $clr3;
+        cursor: pointer;
 
-  .modal-content {
-    bottom: calc(100% + 10px);
-    left: 0;
-    transform: translateY(100%);
+        &:hover {
+          background-color: $clr12;
+          color: $clr6;
+        }
+      }
+    }
   }
 }
