@@ -3,10 +3,12 @@
     <section class="station-details-header">
       <div ref="stationDetailsHeader" class="header-content">
         <img
+        @click="toggleModal"
           v-if="station.songs && station.songs.length > 0"
           :src="station.songs[0].imgUrl"
         />
         <img
+        @click="toggleModal"
           v-else-if="station.name === 'Liked songs'"
           src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
         />
