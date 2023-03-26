@@ -306,7 +306,6 @@ export default {
       }
     },
     async addToSelectedStation(song, station) {
-<<<<<<< HEAD
     try {
       await this.$store.dispatch({
         type: 'addToStation',
@@ -322,23 +321,6 @@ export default {
       this.showStationsSubMenu = false;
     }
   },
-=======
-      try {
-        await this.$store.dispatch({
-          type: 'addToPlaylist',
-          song,
-          station,
-        })
-        showSuccessMsg('added to playlist')
-      } catch (err) {
-        console.log(err)
-        showErrorMsg('Cannot add to playlist')
-      } finally {
-        this.showSongModal = false
-        this.showStationsSubMenu = false
-      }
-    },
->>>>>>> 36f1a5d484515458ff7caaff0cb421fb2896f9a5
     toggleModal() {
       if (this.station.createdBy.fullname === 'guest') {
         this.showModal = !this.showModal
