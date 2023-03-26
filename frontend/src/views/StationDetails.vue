@@ -103,8 +103,8 @@
             </div>
           </div>
         </Draggable>
-        <MiniSearch />
       </Container>
+        <MiniSearch />
 
       <div v-if="showSongModal" @click.self="toggleSongModal(null, null)">
         <div class="modal-content">
