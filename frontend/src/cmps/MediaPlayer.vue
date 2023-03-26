@@ -37,10 +37,11 @@
 
     <div class="music-bar">
       <span>{{ formatTime(currentTime) }}</span>
-      <div class="progress-bar">
+      <div class="progress-bar" @click="findProgress($event)" ref="progressBar">
         <div
           class="progress-bar-fill"
           :style="{ width: progressBarWidth + '%' }"
+          ref="progressBarFill"
         ></div>
       </div>
       <span>{{ formatTime(duration) }}</span>
@@ -106,7 +107,6 @@ export default {
     // work but has alot of error msges
     onStateChange(event) {
       if (event.data === 1) this.isPlaying = true
-      // if(!this.station) clearInterval(this.intervalId) // why doent it gets ready?
       if (event.data === 0) {
         this.songIdx++
         clearInterval(this.intervalId)
@@ -124,6 +124,26 @@ export default {
       const minutes = Math.floor(time / 60)
       const seconds = Math.floor(time % 60)
       return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`
+    },
+    // find and navigate by click to any part of the song
+    findProgress(ev) {
+      const progressBar = this.$refs.progressBar
+      const progressBarFill = this.$refs.progressBarFill
+
+      // calculate the position of the click on the progress bar
+      const progressBarWidth = progressBar.offsetWidth
+      const clickedPosition = ev.pageX - progressBar.offsetLeft
+      const progressPercentage = clickedPosition / progressBarWidth
+
+      // calculate the time to seek to
+      const newTime = this.duration * progressPercentage
+
+      // update the current time and seek to the new time
+      this.currentTime = newTime
+      this.$refs.youtube.seekTo(newTime)
+
+      // update the width of the progress bar fill
+      progressBarFill.style.width = progressPercentage * 100 + '%'
     },
   },
 }
