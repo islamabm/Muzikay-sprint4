@@ -1,6 +1,6 @@
 .station-details {
   font-family: 'Roboto-Regular';
- 
+
   // width: calc(100vw - 300px);
   .header-content {
     width: 100%;
@@ -9,7 +9,6 @@
     padding: 24px;
     background-color: $clr1;
     padding-block-end: 2rem;
-    
   }
   &-header {
     // position: relaaptive;
@@ -97,7 +96,16 @@
 .songs-list-details {
   display: flex;
   flex-direction: column;
-  margin-block-end: 100px;
+  margin-block-end: 70px;
+  min-height: 20vh;
+  // &::after {
+  //   content: "";
+  //   display: block;
+  //   width: 95%;
+  //   margin-inline-start: 1rem;
+  //   border-bottom: 1px solid rgba($clr11, 0.2);
+  //   margin-top: 12px;
+  // }
 
   svg {
     height: 30px;
@@ -109,10 +117,13 @@
     align-items: center;
     justify-content: space-between;
     padding: 12px;
+    
+   
 
     &:hover {
       background-color: rgba($clr10, 0.2);
     }
+    
     .img-and-title {
       width: 370px;
       display: flex;
@@ -169,8 +180,23 @@
     .posted-at {
       font-size: 0.8rem;
       color: rgba($clr3, 0.6);
-      margin-inline-start: 15%;
+      margin-inline-start: 25%;
+      width: max-content;
+      white-space: nowrap;
+      
     }
+    @media screen and (min-width: 1600px) {
+      .posted-at {
+        margin-inline-start: 27%;
+      }
+    }
+    @media screen and (min-width: 1800px) {
+      .posted-at {
+        margin-inline-start: 29%;
+      }
+    }
+
+
 
     .song-duration {
       font-size: 0.8rem;
@@ -193,6 +219,8 @@
       }
     }
   }
+
+  
 }
 
 .btn-play-green {
@@ -232,7 +260,6 @@
   gap: 2rem;
   color: $clr11;
   margin-block-end: 1rem;
-  
 
   .btn-icons {
     display: flex;
@@ -254,27 +281,46 @@
 .table-header {
   display: flex;
   justify-content: space-between;
+  gap:4rem;
   padding-bottom: 1.6rem;
-  padding-inline: 4rem;
+  margin-inline: 3.5rem;
   font-size: 0.9rem;
   font-weight: 600;
   color: $clr11;
   position: relative;
-  // background-color: $clr2;
-
+  
   &::after {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 2.5rem;
-    width: 95%;
+    width: 100%;
     height: 1px;
-    background-color: rgba($clr11, 0.1);
+    background-color: rgba($clr11, 0.05);
     margin-block-end: 1rem;
+  }
+  .title-container,
+  span,
+  div {
+    display: flex;
+    align-items: center;
+  }
+
+  .title-container {
+    flex: 3;
+    gap: 1rem;
+  }
+
+  span:nth-child(2) {
+    flex: 2;
+  }
+
+  div:nth-child(3) {
+    flex: 2;
   }
 
   .duration-icon {
     fill: $clr11;
+    margin-inline-end: 1.3rem;
   }
 }
 
@@ -294,7 +340,7 @@
   padding: 10px;
   width: 200px;
   top: 45%;
-  left:85%;
+  left: 85%;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
   z-index: 20;
 

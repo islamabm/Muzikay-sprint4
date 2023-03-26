@@ -49,16 +49,20 @@
         </div>
       </div>
       <div class="table-header">
-        <span>#Title</span>
+        <span class="title-container"><span>#</span>Title</span>
         <span>Album</span>
-        <span>Date added</span>
-        <span
-          ><i class="duration-icon" v-html="getSvg('durationIcon')"></i
-        ></span>
+        <div>
+          <span>Date added</span>
+        </div>
+        <div>
+          <i class="duration-icon" v-html="getSvg('durationIcon')"></i>
+        </div>
       </div>
 
       <Container @drop="onDrop" v-if="station.songs" class="songs-list-details">
         <Draggable
+          @mouseleave="hover = false"
+          @mouseover="hover = true"
           class="song-item"
           v-for="(song, idx) in station.songs"
           :key="idx"
@@ -79,15 +83,14 @@
           <div class="flex-end list-end">
             <div class="like-song-icon">
               <BubblingHeart
+                v-if="hover"
                 :songIndex="idx"
                 :liked="song.liked"
                 @toggleLike="toggleSongLike"
                 @addLikeToSong="addSongToLikedSongs(song)"
               />
-              <!-- @addLikeToSong="addSongToLikedSongs(song)" -->
             </div>
             <p class="song-duration">1:40</p>
-            <!-- @click="removeSong(song.videoId, station._id)" -->
             <div>
               <button
                 class="btn-open-modal"
@@ -101,8 +104,8 @@
             </div>
           </div>
         </Draggable>
-        <MiniSearch />
       </Container>
+        <MiniSearch />
 
       <div v-if="showSongModal" @click.self="toggleSongModal(null, null)">
         <div class="modal-content">
@@ -143,6 +146,7 @@ export default {
   name: 'station-details',
   data() {
     return {
+      hover: false,
       // station: null,
       showSongModal: false,
       showModal: '',
@@ -166,9 +170,16 @@ export default {
         )}, ${Math.round(color.value[2] * 0.07)}, 0.7)`,
       }
 
+      const headerShade = {
+        ...color,
+        rgba: `rgba(${Math.round(color.value[0] * 0.4)}, ${Math.round(
+          color.value[1] * 0.4
+        )}, ${Math.round(color.value[2] * 0.4)}, 0.7)`,
+      }
+
       console.log('shade', darkShade)
 
-      const gradient = `linear-gradient(to bottom, ${color.rgba}, ${darkShade.rgba})`
+      const gradient = `linear-gradient(to bottom, ${color.rgba}, ${headerShade.rgba})`
       const darkGradient = `linear-gradient(to bottom, ${darkShade.rgba}, #000)`
 
       document.body.style.backgroundImage = gradient

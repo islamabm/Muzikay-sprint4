@@ -1,6 +1,6 @@
 <template>
   <section class="user-preview-section">
-    <h1 class="user-library-header">PlayLists</h1>
+    <h1 class="user-library-header">Playlists</h1>
     <Container @drop="onDrop" class="user-library-container">
       <Draggable
         class="station"

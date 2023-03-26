@@ -13,15 +13,18 @@
 // }
 
 .alert {
-  background-color: rgb(37, 137, 196);
+  background-color: #0d72ea;
   width: 300px;
   padding: 1em;
-  height: 50px;
+  height: 45px;
   position: fixed;
-  bottom: 120px;
-  left: 50%;
+  bottom: 100px;
+  left: 40%;
   border-radius: 15px;
-  line-height: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 0px;
   text-align: center;
   //   right: 0;
   //   &.alert-success {

@@ -6,6 +6,7 @@
         :src="station.songs[0].imgUrl"
         alt="Playlist Image"
       /> -->
+      <div class="play-button" @click.stop="playStation"></div>
       <img src="../assets/img/empty-img.png" alt="Default Image" />
     </div>
     <div class="playlist-info">
