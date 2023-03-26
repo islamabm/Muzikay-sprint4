@@ -1,5 +1,5 @@
 .station-details {
-  font-family: 'Roboto-Regular';
+ 
 
   // width: calc(100vw - 300px);
   .header-content {
@@ -45,6 +45,7 @@
       flex-direction: column;
       justify-content: center;
       font-family: 'Roboto-Regular';
+      margin-block-start: 2rem;
 
       .playlist-word {
         font-size: 0.9rem;
@@ -56,7 +57,7 @@
       }
 
       .station-name {
-        font-size: 4.5rem;
+        font-size: 6rem;
         width: 100%;
         font-weight: 900;
         color: $clr6;
@@ -98,14 +99,6 @@
   flex-direction: column;
   margin-block-end: 70px;
   min-height: 20vh;
-  // &::after {
-  //   content: "";
-  //   display: block;
-  //   width: 95%;
-  //   margin-inline-start: 1rem;
-  //   border-bottom: 1px solid rgba($clr11, 0.2);
-  //   margin-top: 12px;
-  // }
 
   svg {
     height: 30px;
@@ -142,11 +135,10 @@
     .img-and-title {
       width: 370px;
       display: flex;
-      justify-content: start;
-      align-items: start;
-      text-align: start;
+      
+
     }
-  
+
     .list-end {
       display: flex;
       justify-content: center;
@@ -161,7 +153,7 @@
     }
   
     span {
-      width: 40px;
+      width: 25%;
       text-align: center;
       font-size: 14px;
       color: rgba($clr3, 0.6);
@@ -172,15 +164,25 @@
       width: 40px;
       height: 40px;
       object-fit: cover;
-      border-radius: 5px;
-      margin-right: 1rem;
+      border-radius: 2px;
+      transform: translate(-50%);
+    }
+    @media (max-width: $narrow-breakpoint) {
+      .song-img {
+        transform: translate(7%);
+        margin-inline-end: 1.5rem;
+      }
     }
   
     .song-title {
-      font-size: 0.9rem;
-      font-weight: 600;
+      font-size: 0.95rem;
+      font-weight: 400;
       color: $clr6;
-      font-family: Roboto-Regular;
+      font-family: Circular-book;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 65%;
   
       &:hover {
         text-decoration: underline;
@@ -197,6 +199,7 @@
       margin-inline-start: 25%;
       width: max-content;
       white-space: nowrap;
+      transform: translateY(1%);
     }
   
     @media screen and (min-width: 1600px) {
@@ -213,13 +216,16 @@
     .song-duration {
       font-size: 0.8rem;
       color: rgba($clr3, 0.6);
-      width: 40px;
+      width: 35px; 
+
       transform: translateX(100%);
       cursor: default;
     }
   
     .like-song-icon {
-      margin-block-start: -5px;
+      margin-block-start: -8px;
+      margin-inline-start: 10px;
+      transform: translate(10%, -4%);
     }
   
     .btn-open-modal {
@@ -290,13 +296,14 @@
 }
 
 .table-header {
+  font-family: Circular-medium;
   display: flex;
   justify-content: space-between;
   gap: 4rem;
   padding-bottom: 1.6rem;
   margin-inline: 3.5rem;
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 400;
   color: $clr11;
   position: relative;
 
@@ -314,6 +321,7 @@
   div {
     display: flex;
     align-items: center;
+    
   }
 
   .title-container {

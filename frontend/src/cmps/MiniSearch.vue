@@ -22,16 +22,16 @@
       </form>
     </div>
   </div>
-  <Container @drop="onDrop" v-if="search" class="songs-list-details">
+  <Container @drop="onDrop" v-if="search" class="search-results">
     <Draggable
       class="add-songs-container song-item"
       v-for="(video, idx) in videos"
       :key="idx"
     >
     <div class="mini-search-preview">
-      <span>{{ idx + 1 }}</span>
       <img class="song-img" :src="video.url" />
-      <p class="song-title">{{ video.title }}</p>
+
+      <p class="search-song-title">{{ video.title }}</p>
     </div>
       <button class="add-btn-song" @click="addToStation(video)">Add</button>
     </Draggable>
