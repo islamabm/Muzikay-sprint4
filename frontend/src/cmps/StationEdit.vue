@@ -24,7 +24,7 @@
             id="description"
             rows="4"
             v-model="station.desc"
-            placeholder="add an optional description"
+            placeholder="Add an optional description"
           ></textarea>
           <button
             class="btn-save-changes"
