@@ -11,7 +11,7 @@
   z-index: 1;
   border-top: 1px solid $clr8;
   display: grid;
-  grid-template-columns: 395px 1fr 388px;
+  grid-template-columns: 395px minmax(500px, 1fr) 388px;
 
   .music-bar {
     display: flex;
@@ -79,15 +79,84 @@
     }
   }
 
+  .footer-data {
+    display: flex;
+  }
+
   .footer-media-player {
     grid-column: 2;
   }
-
+  
   .footer-details-title {
     font-family: Circular-book;
   }
-
+  
   @media screen and (max-width: $narrow-breakpoint) {
     bottom: 60px;
+    height: max-content;
+    padding: 0;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 1fr;
+    .control-buttons > *:not(.media-player-play) {
+        display: none;
+    }
+    .music-bar > *{
+      display: none;
+    }
+    .footer-media-adjusments {
+      display: none;
+    }
+    .footer-details {
+      grid-column: 1;
+      img {
+        width: 35px;
+        height: 35px;
+        border-radius: 4px;
+      }
+    }
+    .like-song-icon {
+      margin-left: 290px;
+      margin-bottom: 10px;
+    }
+    .media-player-play {
+      margin-top: 24px;
+      border: none;
+      background-color: inherit;
+      svg {
+        fill: white;
+      }
+    }
+    // :not(.progress-bar,.progress-bar-fill) // find a way to implement this.
+  //   .progress-bar {
+  //     // margin-top: 9px;
+  //     position: absolute;
+  //     bottom: 0 ;
+  //     width: 100%;
+  //     height: 4px;
+  //     background-color: $clr10;
+  //     border-radius: 20px;
+  //     grid-column: 1/-1;
+  //     .progress-bar-fill {
+  //       width: 0%;
+  //       height: 100%;
+  //       background-color: $clr6;
+  //       border-radius: 20px;
+  //       grid-column: 1/-1;
+  //     }
+  // }
+
   }
+
+  @media screen and (min-width: 750px) {
+    .media-player-play {
+      margin-top: 6px;
+      border: none;
+      background-color: white;
+      svg {
+        fill: rgb(0, 0, 0);
+      }
+    }
+  }
+
 }
