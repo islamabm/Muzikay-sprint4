@@ -383,9 +383,14 @@ export default {
 
       return `My Playlist #${this.counter}`
     },
-    handelLongText() {
-      // if (this.song.title.length >)
-    },
+    // handelLongText() {
+    //   let longSongs = this.station.songs.filter(s => s.title.length > 25)
+    //   const song = longSongs.map(s => s.title.slice(0,25) + '...')
+    //   console.log(song);
+    //   // this.station.push(song)
+
+    //   return song
+    // }
   },
   components: {
     StationEdit,
