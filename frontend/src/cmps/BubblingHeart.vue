@@ -120,7 +120,7 @@ export default {
   methods: {
     toggleLike() {
       this.$emit('toggleLike', this.songIndex)
-      // this.$emit('addLikeToSong')
+      this.$emit('addLikeToSong')
     },
   },
 }

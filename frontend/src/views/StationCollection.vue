@@ -34,9 +34,6 @@ export default {
     //   this.$store.dispatch({ type: 'removeToy', id: toyId })
     // },
   },
-  created() {
-    userService.login()
-  },
   components: {
     StationsList,
   },

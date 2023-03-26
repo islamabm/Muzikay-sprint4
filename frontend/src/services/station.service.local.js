@@ -7,7 +7,7 @@ import gStations from '../../data/station.json'
 const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBpcXHlaM0mzq7pKpRQzm_kMlUqZH8XohM&q=`
 const STORAGE_KEY = 'station'
 const SEARCH_KEY = 'videosDB'
-const USER_KEY = 'userStationDB'
+// const USER_KEY = 'userStationDB'
 let gSearchCache = utilService.loadFromStorage(SEARCH_KEY) || {}
 _createStations()
 // createUserStations()
@@ -21,6 +21,7 @@ export const stationService = {
   createNewStation,
   addSongToStation,
   removeSong,
+  addSongToPlaylist,
   // addStationMsg,
 }
 window.cs = stationService
@@ -163,5 +164,16 @@ async function addSongToStation(video, station) {
   }
   const updatedStation = { ...station, songs: [...station.songs, video] }
   const savedStation = await save(updatedStation)
+  return savedStation
+}
+async function addSongToPlaylist(song, station) {
+  if (!station) {
+    throw new Error('Station parameter is undefined')
+  }
+
+  const updatedSongs = [...station.songs, song]
+  const updatedStation = { ...station, songs: updatedSongs }
+  const savedStation = await save(updatedStation)
+  console.log(savedStation)
   return savedStation
 }
