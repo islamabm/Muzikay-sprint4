@@ -343,13 +343,15 @@ export default {
     station() {
       return this.$store.getters.station
     },
-
     stationCount() {
       //computed can't do this
       this.counter++
 
       return `My Playlist #${this.counter}`
     },
+    handelLongText() {
+      // if (this.song.title.length >)
+    }
   },
   components: {
     StationEdit,
