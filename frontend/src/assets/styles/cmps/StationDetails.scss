@@ -117,12 +117,28 @@
     align-items: center;
     justify-content: space-between;
     padding: 12px;
-    
-
+  
     &:hover {
       background-color: rgba($clr10, 0.2);
+      
+      span {
+        &::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%) rotate(180deg);
+          width: 0;
+          height: 0;
+          border-top: 6px solid transparent;
+          border-bottom: 6px solid transparent;
+          border-right: 10px solid $clr3;
+        }
+        
+        color: transparent;
+      }
     }
-
+  
     .img-and-title {
       width: 370px;
       display: flex;
@@ -130,29 +146,28 @@
       align-items: start;
       text-align: start;
     }
+  
     .list-end {
       display: flex;
       justify-content: center;
       align-items: center;
       cursor: pointer;
-    }
-
-    .list-end {
       gap: 30px;
     }
-
+  
     .song-info {
       display: flex;
       align-items: center;
     }
-
+  
     span {
       width: 40px;
       text-align: center;
       font-size: 14px;
       color: rgba($clr3, 0.6);
+      position: relative;
     }
-
+  
     .song-img {
       width: 40px;
       height: 40px;
@@ -160,22 +175,22 @@
       border-radius: 5px;
       margin-right: 1rem;
     }
-
+  
     .song-title {
       font-size: 0.9rem;
       font-weight: 600;
       color: $clr6;
       font-family: Roboto-Regular;
-
+  
       &:hover {
         text-decoration: underline;
-
+  
         &:active {
           color: $clrGreen;
         }
       }
     }
-
+  
     .posted-at {
       font-size: 0.8rem;
       color: rgba($clr3, 0.6);
@@ -183,6 +198,7 @@
       width: max-content;
       white-space: nowrap;
     }
+  
     @media screen and (min-width: 1600px) {
       .posted-at {
         margin-inline-start: 27%;
@@ -193,7 +209,7 @@
         margin-inline-start: 29%;
       }
     }
-
+  
     .song-duration {
       font-size: 0.8rem;
       color: rgba($clr3, 0.6);
@@ -201,20 +217,21 @@
       transform: translateX(100%);
       cursor: default;
     }
-
+  
     .like-song-icon {
       margin-block-start: -5px;
     }
-
+  
     .btn-open-modal {
       background-color: transparent;
       margin-top: -5px;
+      
       .options-song-icon {
         fill: $clr11;
         cursor: pointer;
       }
     }
-  }
+  }  
 }
 
 .btn-play-green {
@@ -391,3 +408,4 @@
 .song-item:hover .hover-effect {
   opacity: 1;
 }
+
