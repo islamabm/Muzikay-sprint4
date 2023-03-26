@@ -87,7 +87,8 @@
       switchSong(num) {
         this.songIdx += num
         this.$emit('songIdx' , this.songIdx)
-       this.putStationId()
+        this.putStationId()
+        this.formatTime(this.duration)
       },
       // when the video is ready
       onReady() {
