@@ -65,8 +65,6 @@
       putStationId() {
         console.log('no station');
         if(this.station){
-          // console.log('got here with' , this.currStation.songs[this.songIdx].id);
-          console.log(this.station.songs[this.songIdx].id);
           return this.station.songs[this.songIdx].id
         } 
         else return 'z0jwCUr42Qw' 
@@ -88,13 +86,13 @@
         this.songIdx += num
         this.$emit('songIdx' , this.songIdx)
         this.putStationId()
+        this.duration = this.$refs.youtube.getDuration()
         this.formatTime(this.duration)
       },
       // when the video is ready
       onReady() {
         console.log('im ready');
         this.duration = this.$refs.youtube.getDuration()
-        this.isPlaying = true
         this.intervalId = setInterval(() => {
           this.currentTime = this.$refs.youtube.getCurrentTime()
         }, 1000)
