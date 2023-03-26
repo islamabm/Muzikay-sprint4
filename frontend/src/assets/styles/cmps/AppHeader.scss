@@ -114,8 +114,7 @@
       padding-block: 8px;
       padding-inline: 32px;
       vertical-align: baseline;
-      font-weight: 700;
-
+      
       &:hover {
         background-color: $clr3;
         color: $clr2;
@@ -128,7 +127,6 @@
 .header-input {
   margin-block: 0px;
   font-size: 0.8125rem;
-  font-weight: 400;
   border: 0;
   border: none;
   border-radius: 500px;
@@ -137,6 +135,11 @@
   padding: 6px 48px;
   text-overflow: ellipsis;
   width: 100%;
+  font-family: Circular-book;
+  font-weight: 100;
+  display: flex;  
+  align-items: center;
+  
   &:focus {
     outline: none;
     border: none;
@@ -149,7 +152,7 @@
 
 .header-search-container {
   border: 0;
-  margin: 0;
+  margin-bottom: 2px;
   padding: 0;
   vertical-align: baseline;
   align-items: center;
@@ -162,7 +165,7 @@
   align-items: center;
   bottom: 0;
   display: flex;
-  left: 12px;
+  left: 0;
   pointer-events: none;
   position: absolute;
   right: 12px;
