@@ -5,17 +5,23 @@
         class="footer-details-img"
         :src="station.songs[currSongIdx].imgUrl"
       />
-      <h3 class="footer-details-title">{{ station.songs[currSongIdx].title }}</h3>
+
+      <h3 class="footer-details-title">
+        {{ station.songs[currSongIdx].title }}
+      </h3>
       <button class="like-song-icon">
         <BubblingHeart
-              :songIndex="currSongIdx"
-              :liked="station.songs[currSongIdx].liked"
-              @toggleLike="toggleSongLike"/>
+          :songIndex="currSongIdx"
+          :liked="station.songs[currSongIdx].liked"
+          @toggleLike="toggleSongLike"
+        />
       </button>
     </div>
-    
-    <div class="footer-media-player"><MediaPlayer :station="station" @songIdx="getSongIdx" /></div>
-        
+
+    <div class="footer-media-player">
+      <MediaPlayer :station="station" @songIdx="getSongIdx" />
+    </div>
+
     <div class="footer-media-adjusments">
       <i class="speaker" v-html="getSvg('speakerBtnIcon')"></i>
       <div class="speaker-bar">
@@ -39,7 +45,7 @@ export default {
       currSongIdx: 0,
     }
   },
-  computed : {
+  computed: {
     // setStation() {
     //   this.$store.commit({ type: 'setCurrStation', stationId: this.stationId })
     // },
@@ -56,8 +62,8 @@ export default {
     },
     toggleSongLike(idx) {
       // const song = this.station.songs[idx]
-      console.log(song);
-      console.log('liked');
+      console.log(song)
+      console.log('liked')
       // song.liked = !song.liked
       // console.log(
       //   `Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`

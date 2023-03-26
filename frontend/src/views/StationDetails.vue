@@ -86,9 +86,9 @@
                 v-show="currDraggableIdx === idx && hover"
                 :songIndex="idx"
                 :liked="song.liked"
-                @toggleLike="toggleSongLike"
                 @addLikeToSong="addSongToLikedSongs(song)"
               />
+              <!-- @toggleLike="toggleSongLike" -->
             </div>
             <p class="song-duration">1:40</p>
             <div>
@@ -106,7 +106,7 @@
           </div>
         </Draggable>
       </Container>
-        <MiniSearch />
+      <MiniSearch />
 
       <div v-if="showSongModal" @click.self="toggleSongModal(null, null)">
         <div class="modal-content">
