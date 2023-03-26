@@ -86,9 +86,9 @@
                 class="hover-effect"
                 :songIndex="idx"
                 :liked="song.liked"
-
                 @addLikeToSong="addSongToLikedSongs(song)"
               />
+              <!-- @toggleLike="toggleSongLike" -->
             </div>
             <p class="song-duration">1:40</p>
             <div>
@@ -97,7 +97,6 @@
                 @click="toggleSongModal(song, idx)"
               >
                 <i
-                
                   class="options-song-icon hover-effect"
                   v-html="getSvg('songOptionsIcon')"
                 ></i>
@@ -211,8 +210,8 @@ export default {
     },
     openStationSelection() {
       console.log('opened')
-    this.showStationsSubMenu = !this.showStationsSubMenu;
-  },
+      this.showStationsSubMenu = !this.showStationsSubMenu
+    },
 
     // toggleSongLike(idx) {
     //   const song = this.station.songs[idx]
@@ -307,21 +306,21 @@ export default {
       }
     },
     async addToSelectedStation(song, station) {
-    try {
-      await this.$store.dispatch({
-        type: 'addToPlaylist',
-        song,
-        station,
-      });
-      showSuccessMsg('added to playlist');
-    } catch (err) {
-      console.log(err);
-      showErrorMsg('Cannot add to playlist');
-    } finally {
-      this.showSongModal = false;
-      this.showStationsSubMenu = false;
-    }
-  },
+      try {
+        await this.$store.dispatch({
+          type: 'addToPlaylist',
+          song,
+          station,
+        })
+        showSuccessMsg('added to playlist')
+      } catch (err) {
+        console.log(err)
+        showErrorMsg('Cannot add to playlist')
+      } finally {
+        this.showSongModal = false
+        this.showStationsSubMenu = false
+      }
+    },
     toggleModal() {
       if (this.station.createdBy.fullname === 'guest') {
         this.showModal = !this.showModal
