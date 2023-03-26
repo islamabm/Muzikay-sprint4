@@ -88,7 +88,7 @@
                 :liked="song.liked"
                 @addLikeToSong="addSongToLikedSongs(song)"
               />
-              <!-- @toggleLike="toggleSongLike" -->
+              <!-- @toggleLikgit ngLike" -->
             </div>
             <p class="song-duration">1:40</p>
             <div>
