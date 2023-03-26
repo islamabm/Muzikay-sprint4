@@ -59,6 +59,8 @@
 
       <Container @drop="onDrop" v-if="station.songs" class="songs-list-details">
         <Draggable
+          @mouseleave="hover = false"
+          @mouseover="hover = true"
           class="song-item"
           v-for="(song, idx) in station.songs"
           :key="idx"
@@ -79,15 +81,14 @@
           <div class="flex-end list-end">
             <div class="like-song-icon">
               <BubblingHeart
+                v-if="hover"
                 :songIndex="idx"
                 :liked="song.liked"
                 @toggleLike="toggleSongLike"
                 @addLikeToSong="addSongToLikedSongs(song)"
               />
-              <!-- @addLikeToSong="addSongToLikedSongs(song)" -->
             </div>
             <p class="song-duration">1:40</p>
-            <!-- @click="removeSong(song.videoId, station._id)" -->
             <div>
               <button
                 class="btn-open-modal"
@@ -143,6 +144,7 @@ export default {
   name: 'station-details',
   data() {
     return {
+      hover: false,
       // station: null,
       showSongModal: false,
       showModal: '',
