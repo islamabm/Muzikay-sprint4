@@ -93,6 +93,7 @@
       onReady() {
         console.log('im ready');
         this.duration = this.$refs.youtube.getDuration()
+        this.isPlaying = true
         this.intervalId = setInterval(() => {
           this.currentTime = this.$refs.youtube.getCurrentTime()
         }, 1000)
