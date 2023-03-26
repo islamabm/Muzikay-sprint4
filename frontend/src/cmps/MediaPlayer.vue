@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="media-player">
       <YouTube class="youtube-player"
         :src="`https://www.youtube.com/watch?v=${putStationId}`" 
         @ready="onReady"
@@ -39,15 +39,25 @@
         <span>{{ formatTime(duration) }}</span>
       </div>
     </div>
+
+    <div class="footer-media-adjusments">
+      <i class="speaker" v-html="getSvg('speakerBtnIcon')"></i>
+      <input type="range" class="speaker-bar" min="0" max="100" step="10" id="volume-bar" v-model="volume">
+    </div>
+
 </template>
   <script>
-  import { ref } from 'vue';
-import YouTube from 'vue3-youtube'
+
+  import YouTube from 'vue3-youtube'
   import SVGService from '../services/SVG.service'
   export default {
     name: ['MediaPlayer'],
     props: {
       station: Object,
+      speakerLevel: {
+        type: Number,
+        default: 80,
+      } 
     },
     emits: ['songIdx'],
     components: {
@@ -59,6 +69,7 @@ import YouTube from 'vue3-youtube'
         currentTime: 0,
         isPlaying: false,
         intervalId: null,
+        volume: 50,
         songIdx: 0,
       }
     },
@@ -81,7 +92,7 @@ import YouTube from 'vue3-youtube'
     methods: {
       getSvg(iconName) {
       return SVGService.getSpotifySvg(iconName)
-    },
+      },
       // the function gets direction 1/-1 and switches the song by it
       switchSong(num) {
         this.songIdx += num
@@ -105,15 +116,22 @@ import YouTube from 'vue3-youtube'
         if (event.data === 0){
           this.songIdx++
           clearInterval(this.intervalId)
-          this.formatTime(this.duration)
+          this.currentTime = 0
         } 
       },
       // play/pause video 
       playAudio() {
         this.isPlaying = !this.isPlaying
-        if (this.isPlaying) this.$refs.youtube.playVideo()
-        else this.$refs.youtube.pauseVideo()
-        },
+        if (this.isPlaying) {
+          this.$refs.youtube.playVideo()
+          player.setVolume(this.speakerLevel) // Set the volume when starting to play
+        } else {
+          this.$refs.youtube.pauseVideo()
+        }
+      },
+      changeSound(songIdx) {
+        this.station.songs[songIdx]
+      },
       // handel the time format by parameter - currentTime / duration
       formatTime(time) {
         const minutes = Math.floor(time / 60)
@@ -139,7 +157,15 @@ import YouTube from 'vue3-youtube'
 
         // update the width of the progress bar fill
         progressBarFill.style.width = progressPercentage * 100 + '%'
-      }
+      },
+      setSpeakerLevel(level) {
+      this.$emit('update:speaker-level', level)
+      },
+    },
+    watch : {
+      volume(newVolume) {
+            this.$refs.youtube.setVolume(newVolume);
+      },
     },
 }
   </script>

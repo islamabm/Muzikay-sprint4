@@ -11,7 +11,7 @@
   z-index: 1;
   border-top: 1px solid $clr8;
   display: grid;
-  grid-template-columns: 395px minmax(500px, 1fr) 388px;
+  grid-template-columns: 395px minmax(400px, 1fr);
 
   .music-bar {
     display: flex;
@@ -22,8 +22,8 @@
   .footer-details {
     display: flex;
     align-items: center;
-    // justify-content: space-between;
-    padding: 0 16px; // need to be rm
+    padding: 0 1px; 
+    font-size: 12px;
     h3 {
       margin-top: 22px; // need to be rm
       margin-inline-start: 10px;
@@ -50,32 +50,11 @@
     .speaker {
       display: block;
       width: 15px;
-      margin-inline-start: 270px;
       svg {
         fill: $clr1;
         stroke: $clr11;
         stroke-width: 15;
       }
-    }
-  
-    .speaker-bar {
-      width: 30%;
-      height: 4px;
-      margin-inline-start: 8px;
-      margin-top: 12.5px;
-      background-color: $clr10;
-      position: relative;
-      border-radius: 20px;
-    }
-  
-    .speaker-bar-fill {
-      height: 4px;
-      border-radius: 20px;
-      width: 5%;      
-      position: absolute;
-      left: 0;
-      top: 0;
-      background-color: $clr6;
     }
   }
 
@@ -85,6 +64,8 @@
 
   .footer-media-player {
     grid-column: 2;
+    max-width: 568px;
+    margin-left: 72px;
   }
   
   .footer-details-title {
@@ -148,7 +129,7 @@
 
   }
 
-  @media screen and (min-width: 750px) {
+  @media screen and (min-width: $normal-breakpoint) {
     .media-player-play {
       margin-top: 6px;
       border: none;
