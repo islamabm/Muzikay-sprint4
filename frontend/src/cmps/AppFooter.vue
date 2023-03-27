@@ -20,7 +20,6 @@
         />
       </button>
     </div>
-
     <div class="footer-media-player">
       <MediaPlayer :station="station" @songIdx="getSongIdx" />
     </div>
