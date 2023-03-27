@@ -192,7 +192,7 @@ export default {
         ...color,
         rgba: `rgba(${Math.round(color.value[0] * 0.07)}, ${Math.round(
           color.value[1] * 0.07
-        )}, ${Math.round(color.value[2] * 0.07)}, 0.7)`,
+        )}, ${Math.round(color.value[2] * 0.07)}, 0.5)`,
       }
 
       const headerShade = {
@@ -205,7 +205,8 @@ export default {
       console.log('shade', darkShade)
 
       const gradient = `linear-gradient(to bottom, ${color.rgba}, ${headerShade.rgba})`
-      const darkGradient = `linear-gradient(to bottom, ${darkShade.rgba}, #000)`
+      const darkGradient = `linear-gradient(to bottom, ${darkShade.rgba} 0%, rgba(0, 0, 0, 1) 60%)`;
+
 
       document.body.style.backgroundImage = gradient
       this.$refs.stationDetailsHeader.style.backgroundImage = gradient
