@@ -151,18 +151,24 @@ nav {
     color: $clr3;
     padding: 8px 0 8px 5px;
     width: 100%;
-
+  
     &:hover {
       color: $clr6;
       text-decoration: none;
+      svg {
+        fill: $clr6; /* change the fill of the SVG on hover */
+      }
     }
-
+  
     &.active {
       color: $clr6;
       font-weight: bold;
+      svg {
+        fill: $clr6; /* change the fill of the SVG when active */
+      }
     }
   }
-}
+}  
 
 .plus-sign {
   color: $clr8;
@@ -191,3 +197,4 @@ nav {
 .station-nav-hover:hover {
   color: $clr6;
 }
+
