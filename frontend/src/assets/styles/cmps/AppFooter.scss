@@ -34,7 +34,11 @@
       height: 56px;
     }
     .heart-svg {
-      margin-left: 60px;
+      svg{
+        height: 30px;
+        width: 30px;
+      }
+      margin-left: em(60px);
       width: 40px;
       margin-top: 5px;
     }    
@@ -87,61 +91,63 @@
     height: max-content;
     padding: 0;
     border-radius: 8px;
-    display: grid;
+
     grid-template-columns: 1fr;
+    grid-template-rows: 50px 15px;
+
     .control-buttons > *:not(.media-player-play) {
+      display: none;
+    }
+    .music-bar {
+      display: grid;
+
+      .current-time {
         display: none;
+      }
     }
-    .music-bar > *{
+    .footer-media-player {
       display: none;
     }
-    .footer-media-adjusments {
-      display: none;
+    .progress-bar {
+      display: block;
+      grid-row: 2;
+      // grid-column: 1;
+      background-color: aqua;
+    }
+    .progress-bar-fill {
+      display: block;
+      grid-row: 2;
+      // grid-column: 1;
+      background-color: aqua;
     }
     .footer-details {
-      grid-column: 1;
+      grid-row: 1;    
+      .heart-svg {
+        margin-left: em(350px);
+        width: 40px;
+        margin-top: 5px;
+      }   
+
       img {
         width: 35px;
         height: 35px;
         border-radius: 4px;
       }
     }
-    .like-song-icon {
-      margin-left: 290px;
-      margin-bottom: 10px;
-    }
     .media-player-play {
-      margin-top: 24px;
+      // margin-top: 24px;
       border: none;
       background-color: inherit;
       svg {
+        width: 30px;
+        height: 30px;
         fill: white;
       }
     }
-    // :not(.progress-bar,.progress-bar-fill) // find a way to implement this.
-  //   .progress-bar {
-  //     // margin-top: 9px;
-  //     position: absolute;
-  //     bottom: 0 ;
-  //     width: 100%;
-  //     height: 4px;
-  //     background-color: $clr10;
-  //     border-radius: 20px;
-  //     grid-column: 1/-1;
-  //     .progress-bar-fill {
-  //       width: 0%;
-  //       height: 100%;
-  //       background-color: $clr6;
-  //       border-radius: 20px;
-  //       grid-column: 1/-1;
-  //     }
-  // }
-
   }
 
   @media screen and (min-width: $normal-breakpoint) {
     .media-player-play {
-      margin-top: 6px;
       border: none;
       background-color: white;
       svg {
@@ -151,7 +157,3 @@
   }
 
 }
-
-//Speaker: 
-
-
