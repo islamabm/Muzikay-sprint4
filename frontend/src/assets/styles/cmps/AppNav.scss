@@ -75,14 +75,17 @@ nav {
     margin-block-end: 16px;
 
     a{
-      gap: 7px;
+      gap: 6px;
+      font-family: Circular-medium;
+      font-size:0.9rem;
+      svg{
+        margin-block-start:-2px;
+      }
     }
 
     .home-nav {
       display: flex;
-      align-items: center;
-      justify-content: center;
-  
+      align-items: end;
     }
 
     .home-icon {
@@ -109,7 +112,7 @@ nav {
     margin-block-end: 16px;
     align-items: center;
     text-align: center;
-    gap: 2px;
+    gap: 1.4px;
     .create-container {
       display: flex;
       align-items: center;
@@ -151,7 +154,9 @@ nav {
     color: $clr3;
     padding: 8px 0 8px 5px;
     width: 100%;
-  
+    svg {
+      line-height: 5px;
+    }
     &:hover {
       color: $clr6;
       text-decoration: none;
