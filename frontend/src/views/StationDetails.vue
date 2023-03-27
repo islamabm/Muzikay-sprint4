@@ -285,7 +285,7 @@ export default {
     },
 
     async removeSong(songId, stationId) {
-      console.log('atationDetails', songId)
+      console.log('satationDetails', songId)
       console.log('stationDetails', stationId)
       try {
         await this.$store.dispatch({
