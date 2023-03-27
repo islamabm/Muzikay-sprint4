@@ -86,25 +86,26 @@ nav {
     }
 
     .home-icon {
-      width: 25px;
-      height: 25px;
+      width: 24px;
+      height: 24px;
       margin-inline-end: 10px;
-      fill: $clr6;
+      fill: $clr11;
     }
     .search-icon {
-      width: 25px;
-      height: 25px;
+      width: 24px;
+      height: 24px;
       margin-inline-end: 10px;
       fill: $clr6;
     }
     .library-icon {
-      fill: $clr6;
+      fill: $clr11;
       margin-inline-end: 10px;
-      width: 25px;
-      height: 25px;
+      width: 24px;
+      height: 24px;
     }
   }
   .liked-create-nav {
+    margin-block-start: 20px;
     margin-block-end: 16px;
     align-items: center;
     text-align: center;
