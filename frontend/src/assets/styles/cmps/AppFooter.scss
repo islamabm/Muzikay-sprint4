@@ -46,14 +46,16 @@
     margin-top: 22px;
     margin-inline-start: 9rem;
     display: flex;
-  
+    
     .speaker {
       display: block;
       width: 15px;
       svg {
+        width: 20px;
+        // margin-inline-end: 10px;
+        margin-top: 6px;
         fill: $clr1;
         stroke: $clr11;
-        stroke-width: 15;
       }
     }
   }
