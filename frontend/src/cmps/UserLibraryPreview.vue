@@ -1,13 +1,23 @@
 <template>
   <section v-if="station" class="station-preview">
     <div class="station-image">
-      <!-- <img
-        v-if="station.songs && station.songs[0].imgUrl"
-        :src="station.songs[0].imgUrl"
-        alt="Playlist Image"
-      /> -->
+      <img
+          @click="toggleModal"
+          v-if="station.songs && station.songs.length > 0"
+          :src="
+            station.songs[0].imgUrl
+              ? station.songs[0].imgUrl
+              : station.songs[0].url
+          "
+        />
+        <img
+          class="deafult-image"
+          @click="toggleModal"
+          v-else
+          src="../assets/img/empty-img.png"
+        />
+        
       <div class="play-button" @click.stop="playStation"></div>
-      <img src="../assets/img/empty-img.png" alt="Default Image" />
     </div>
     <div class="station-info">
       <h3 class="station-title">{{ station.name }}</h3>
