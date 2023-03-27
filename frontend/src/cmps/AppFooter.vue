@@ -3,12 +3,16 @@
     <div v-if="station" class="footer-details">
       <img
         class="footer-details-img"
-        :src="station.songs[currSongIdx].imgUrl"
+        :src="
+            station.songs[0].imgUrl
+              ? station.songs[0].imgUrl
+              : station.songs[0].url
+          "
       />
       <h3 class="footer-details-title">
         {{ station.songs[currSongIdx].title }}
       </h3>
-      <button class="like-song-icon">
+      <button class="footer-like">
         <BubblingHeart
           :songIndex="currSongIdx"
           :liked="station.songs[currSongIdx].liked"

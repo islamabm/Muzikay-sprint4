@@ -1,11 +1,11 @@
 <template>
-    <div class="media-player">
-      <YouTube class="youtube-player"
-        :src="`https://www.youtube.com/watch?v=${putSongId}`" 
-        @ready="onReady"
-        @state-change="onStateChange"
-        ref="youtube"/>
+  <YouTube class="youtube-player"
+  :src="`https://www.youtube.com/watch?v=${putSongId}`" 
+  @ready="onReady"
+  @state-change="onStateChange"
+  ref="youtube"/>
   
+  <div class="media-player">
       <div class="control-buttons">
         
         <button class="media-player-prev-song" @click="ShuffleSong()">
@@ -31,11 +31,11 @@
       </div>
   
       <div class="music-bar">
-        <span>{{ formatTime(currentTime) }}</span>
+        <span class="current-time">{{ formatTime(currentTime) }}</span>
         <div class="progress-bar" @click="findProgress($event)" ref="progressBar">
           <div class="progress-bar-fill" :style="{ width: progressBarWidth + '%' }" ref="progressBarFill"></div>
         </div>
-        <span>{{ formatTime(duration) }}</span>
+        <span class="current-time">{{ formatTime(duration) }}</span>
       </div>
     </div>
 
@@ -86,13 +86,12 @@
           if (this.isRepeatOn) { 
             return this.station.songs[this.songIdx].id
           } else { // if repeat is off, play the default song
-          return 'z0jwCUr42Qw' 
+          return 'IXdNnw99-Ic' 
         }
       }
       },
       toggleSvgIcone() {
         let icon  
-
         if(this.volume > 80) icon = 'speakerFullBtnIcon'
         else if (this.volume >= 10) icon = 'speakerMediumBtnIcon'
         else icon = 'speakerMuteBtnIcon'
