@@ -126,7 +126,7 @@
                 <li
                   v-for="station in userStations"
                   :key="station._id"
-                  @click="addToSelectedStation(selectedSong, this.station)"
+                  @click="addToSelectedStation(selectedSong, station)"
                 >
                   {{ station.name }}
                 </li>
@@ -201,9 +201,6 @@ export default {
   name: 'station-details',
   data() {
     return {
-      // station: null,
-      // modalX: 0,
-      // modalY: 0,
       showAddSongModal: false,
       showSongModal: false,
       showModal: '',
@@ -217,7 +214,6 @@ export default {
       selectedSong: null,
       selectedIndex: null,
       showStationsSubMenu: false,
-      // show: false,
     }
   },
   methods: {
