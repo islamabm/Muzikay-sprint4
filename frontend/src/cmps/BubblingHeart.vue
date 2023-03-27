@@ -124,7 +124,7 @@ export default {
     },
     toggleHeaderLike() {
       console.log('toggle like')
-    }
+    },
   },
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <section class="stations-app">
-    <StationsList :stations="stations" />
+    <StationsList :stations="stations" @removeStation="removeStation" />
   </section>
 </template>
 
@@ -21,6 +21,15 @@ export default {
   },
 
   methods: {
+    async removeStation(stationId) {
+      try {
+        await this.$store.dispatch({ type: 'removeStation', id: stationId })
+        showSuccessMsg('Station removed')
+      } catch (err) {
+        console.log(err)
+        showErrorMsg('Cannot remove station')
+      }
+    },
     // removeToy(toyId) {
     //   this.$store.dispatch({ type: 'removeToy', id: toyId })
     // },

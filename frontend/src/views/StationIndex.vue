@@ -11,8 +11,6 @@
   </section>
 </template>
 
-
-
 <script>
 import AppHeader from '../cmps/AppHeader.vue'
 import UserMsg from '../cmps/UserMsg.vue'

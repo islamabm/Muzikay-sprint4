@@ -44,6 +44,7 @@
 <script>
 import svgService from '../services/SVG.service.js'
 export default {
+  name: 'AppHeader',
   //Note: this header will take the color of the station's img.
   data() {
     return {

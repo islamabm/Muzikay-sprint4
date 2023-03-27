@@ -79,13 +79,8 @@
         </a>
       </div>
 
-      <Container
-        @drop="onDrop"
-        v-bind="$attrs"
-        v-on="$listeners"
-        class="clean-list user-stations"
-      >
-        <Draggable v-for="(station, index) in userStationsData" :key="index">
+      <Container @drop="onDrop" class="clean-list user-stations">
+        <Draggable v-for="(station, index) in userStations" :key="index">
           <div
             class="station-nav-hover"
             :class="{ active: station._id === activeStationId }"
@@ -116,9 +111,10 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 library.add(faPlus, faHeart)
 
 export default {
+  name: 'AppNav',
   data() {
     return {
-      userStationsData: [],
+      // userStationsData: [],
       stationCounter: 0,
       activeStationId: null,
       searchIcon: 'searchIcon',
@@ -128,8 +124,8 @@ export default {
   },
   methods: {
     onDrop(dropResult) {
-      this.userStationsData = this.applyDrag(this.userStationsData, dropResult)
-      this.$store.commit('setUserStations', this.userStationsData)
+      // this.userStationsData = this.applyDrag(this.userStationsData, dropResult)
+      // this.$store.commit('setUserStations', this.userStationsData)
     },
 
     applyDrag(arr, dragResult) {
@@ -175,26 +171,14 @@ export default {
         this.libraryIcon === 'libraryIcon' ? 'libraryIconActive' : 'libraryIcon'
     },
     async createStation() {
-      this.stationCounter++
-      const StationName = `My Playlist #${this.stationCounter}`
       try {
+        this.stationCounter++
+        const StationName = `My Playlist #${this.stationCounter}`
+
         await this.$store.dispatch({ type: 'createStation', StationName })
-        // showSuccessMsg('Station removed')
-        // this.$store.commit({
-        //   type: 'setCurrUserStation',
-        //   stationId: station._id,
-        // })
-        // this.$router.push(`/station/${station._id}`)
       } catch (err) {
-        console.log(err)
-        // showErrorMsg('Cannot remove station')
+        console.log('err')
       }
-      // const station = stationService.createNewStation(StationName)
-      // console.log(this.userStations)
-      // this.userStations.push(station)
-      // console.log(this.userStations)
-      // const stationId = station._id
-      // this.$router.push(`/station/${station._id}`)
     },
 
     onClickLikedSong() {
@@ -207,7 +191,6 @@ export default {
 
       user = station
       utilService.saveToStorage('loggedinUser', user)
-
       this.$router.push(`/station/${station._id}`)
     },
   },
@@ -215,14 +198,10 @@ export default {
     userStations() {
       return this.$store.getters.getUserStations
     },
+    // userStationsData() {
+    //   return (this.userStationsData = this.userStations)
+    // },
   },
-  created() {
-    this.userStationsData = this.userStations
-  },
-  // created() {
-  //   console.log(this.userStations)
-  //   this.userStationsList = this.$store.getters.getUserStations
-  // },
   components: {
     FontAwesomeIcon,
     Container,

@@ -22,15 +22,7 @@
       </form>
     </div>
   </div>
-  <Container
-    group-name="cols"
-    @drop="onDrop"
-    v-if="search"
-    class="search-results"
-    :shouldAcceptDrop="
-      (e, payload) => e.groupName === 'col-items' && !payload.loading
-    "
-  >
+  <Container @drop="onDrop" v-if="search" class="search-results">
     <Draggable
       class="add-songs-container song-item"
       v-for="(video, idx) in videos"

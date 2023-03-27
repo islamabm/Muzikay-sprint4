@@ -24,7 +24,6 @@ export const stationStore = {
 
     station({ stations, currStationId }) {
       const station = stations.find((s) => s._id === currStationId)
-      console.log('store getters', station)
       return station
     },
     getUserStations({ stations }) {
@@ -65,7 +64,7 @@ export const stationStore = {
       // console.log(station)
       const station = state.stations[stationIdx]
       const songIdx = station.songs.findIndex((so) => so.id === songId)
-      console.log(songIdx)
+
       station.songs.splice(songIdx, 1)
       state.stations[stationIdx] = station
     },
@@ -125,7 +124,9 @@ export const stationStore = {
     async createStation({ commit }, { StationName }) {
       try {
         const station = await stationService.createNewStation(StationName)
+
         commit({ type: 'createStation', station })
+        this.$router.push(`/station/${station._id}`)
       } catch (err) {
         // console.log(err)
         console.log('Could Not delete song')

@@ -66,15 +66,7 @@
         </div>
       </div>
 
-      <Container
-        :groupName="'col-items'"
-        @drop="onDrop"
-        v-if="station.songs"
-        class="songs-list-details"
-        :shouldAcceptDrop="
-          (e, payload) => e.groupName === 'songs-list' && !payload.loading
-        "
-      >
+      <Container @drop="onDrop" v-if="station.songs" class="songs-list-details">
         <Draggable
           @mouseover="currDraggableIdx = idx"
           @mouseleave="currDraggableIdx = null"
@@ -110,6 +102,7 @@
             <div>
               <button
                 class="btn-open-modal"
+                ref="songButtons"
                 @click="toggleSongModal(song, idx)"
               >
                 <i
@@ -125,6 +118,7 @@
 
       <div v-if="showSongModal" @click.self="toggleSongModal(null, null)">
         <div class="modal-content">
+          <!-- :style="{ left: modalX + 'px', top: modalY + 'px' }" -->
           <ul class="modal-options">
             <li @click="openStationSelection">Add to playlist</li>
             <div v-show="showStationsSubMenu">
@@ -140,7 +134,7 @@
             </div>
             <li
               v-if="station.createdBy.fullname === 'guest'"
-              @click="removeSong(selectedSong, selectedIndex)"
+              @click="removeSong(selectedSong)"
             >
               Remove
             </li>
@@ -154,12 +148,6 @@
     <StationEdit :showModal="showModal" @close="showModal = false" />
     <button @click="toggleModal">x</button>
   </section>
-  <!-- <section v-if="show" class="confirm-modal">
-    <h1>Already added</h1>
-    <p>This is already in your 'My Playlist #7'playlist.</p>
-    <button @click="addToSelectedStation">Add anyway</button>
-    <button @click="dontAdd">Don't add</button>
-  </section> -->
 </template>
 
 <script>
@@ -180,6 +168,8 @@ export default {
   data() {
     return {
       // station: null,
+      // modalX: 0,
+      // modalY: 0,
       showSongModal: false,
       showModal: '',
       activeTitle: null,
@@ -292,9 +282,9 @@ export default {
       return result
     },
 
-    async removeSong(songId, stationId) {
+    async removeSong(songId) {
       console.log('atationDetails', songId)
-      console.log('stationDetails', stationId)
+
       try {
         await this.$store.dispatch({
           type: 'removeSong',
@@ -369,6 +359,14 @@ export default {
       }
     },
     toggleSongModal(song, idx) {
+      // const buttonEl = this.$refs.songButtons[idx]
+      // // Get the x and y coordinates of the button in the screen
+      // const rect = buttonEl.getBoundingClientRect()
+      // this.modalX = rect.left + window.scrollX
+      // this.modalY = rect.top + window.scrollY
+      // console.log(this.modalX)
+      // console.log(this.modalY)
+
       console.log('toggled song modal')
       this.selectedSong = song
       this.selectedIndex = idx
@@ -378,29 +376,29 @@ export default {
     getSvg(iconName) {
       return svgService.getSpotifySvg(iconName)
     },
-    onSongDrop(columnId, dropResult) {
-      // check if element where ADDED or REMOVED in current collumn
-      if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
-        const scene = Object.assign({}, this.scene)
-        const column = scene.children.filter((p) => p.id === columnId)[0]
-        const itemIndex = scene.children.indexOf(column)
-        const newColumn = Object.assign({}, column)
+    // onSongDrop(columnId, dropResult) {
+    //   // check if element where ADDED or REMOVED in current collumn
+    //   if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
+    //     const scene = Object.assign({}, this.scene)
+    //     const column = scene.children.filter((p) => p.id === columnId)[0]
+    //     const itemIndex = scene.children.indexOf(column)
+    //     const newColumn = Object.assign({}, column)
 
-        // check if element was ADDED in current column
-        if (dropResult.removedIndex == null && dropResult.addedIndex >= 0) {
-          // your action / api call
-          dropResult.payload.loading = true
-          // simulate api call
-          setTimeout(function () {
-            dropResult.payload.loading = false
-          }, Math.random() * 5000 + 1000)
-        }
+    //     // check if element was ADDED in current column
+    //     if (dropResult.removedIndex == null && dropResult.addedIndex >= 0) {
+    //       // your action / api call
+    //       dropResult.payload.loading = true
+    //       // simulate api call
+    //       setTimeout(function () {
+    //         dropResult.payload.loading = false
+    //       }, Math.random() * 5000 + 1000)
+    //     }
 
-        newColumn.children = applyDrag(newColumn.children, dropResult)
-        scene.children.splice(itemIndex, 1, newColumn)
-        this.scene = scene
-      }
-    },
+    //     newColumn.children = applyDrag(newColumn.children, dropResult)
+    //     scene.children.splice(itemIndex, 1, newColumn)
+    //     this.scene = scene
+    //   }
+    // },
   },
   watch: {
     '$route.params': {
