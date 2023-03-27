@@ -126,7 +126,7 @@
                 <li
                   v-for="station in userStations"
                   :key="station._id"
-                  @click="addToSelectedStation(selectedSong, this.station)"
+                  @click="addToSelectedStation(selectedSong, station)"
                 >
                   {{ station.name }}
                 </li>
@@ -201,9 +201,6 @@ export default {
   name: 'station-details',
   data() {
     return {
-      // station: null,
-      // modalX: 0,
-      // modalY: 0,
       showAddSongModal: false,
       showSongModal: false,
       showModal: '',
@@ -217,7 +214,6 @@ export default {
       selectedSong: null,
       selectedIndex: null,
       showStationsSubMenu: false,
-      // show: false,
     }
   },
   methods: {
@@ -248,8 +244,7 @@ export default {
       console.log('shade', darkShade)
 
       const gradient = `linear-gradient(to bottom, ${color.rgba}, ${headerShade.rgba})`
-      const darkGradient = `linear-gradient(to bottom, ${darkShade.rgba} 0%, rgba(0, 0, 0, 1) 30%)`;
-
+      const darkGradient = `linear-gradient(to bottom, ${darkShade.rgba} 0%, rgba(0, 0, 0, 1) 30%)`
 
       document.body.style.backgroundImage = gradient
       this.$refs.stationDetailsHeader.style.backgroundImage = gradient
@@ -362,6 +357,32 @@ export default {
     //     this.showSongModal = false
     //   }
     // },
+    // async check(song, station) {
+    //   try {
+    //     await this.$store.dispatch({
+    //       type: 'checkIfIn',
+    //       song,
+    //       station,
+    //     })
+    //     showSuccessMsg('added to playlist')
+    //   } catch (err) {
+    //     console.log(err)
+    //     showErrorMsg('Cannot add to playlist')
+    //   }
+    // },
+
+    // async check(song, station) {
+    //   try {
+    //     await this.$store.dispatch({
+    //       type: 'checkSong',
+    //       song,
+    //       station,
+    //     })
+    //     showSuccessMsg('added to playlist')
+    //   } catch (err) {
+    //     console.log(err)
+    //     showErrorMsg('Cannot add to playlist')
+    //   }
     async addToSelectedStation(song, station) {
       // const stations = utilService.loadFromStorage('station')
       // const stat = stations.find((s) => s._id === station._id)
@@ -382,10 +403,6 @@ export default {
         this.showStationsSubMenu = false
         // this.show = false
       }
-
-      // else {
-      //   console.log('is in')
-      // }
     },
     async removeStation() {
       this.showDeleteModal = false

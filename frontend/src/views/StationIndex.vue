@@ -23,6 +23,7 @@ export default {
   props: [],
   created() {
     this.$store.dispatch({ type: 'loadStations' })
+    this.$store.dispatch({ type: 'loadSearchStations' })
   },
   data() {
     return {}

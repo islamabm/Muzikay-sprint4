@@ -1,0 +1,82 @@
+[
+  {
+    "img": "https://i.scdn.co/image/ab67706f000000027ea4d505212b9de1f72c5112",
+    "title": "Pop",
+    "color": "#E13300"
+  },
+  {
+    "img": "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe",
+    "title": "Latin",
+    "color": "#7358FF"
+  },
+  {
+    "img": "https://i.scdn.co/image/567158eb895ad26718a814345af0fc43ee785ec5",
+    "title": "Rock",
+    "color": "#1E3264"
+  },
+  {
+    "img": "https://concerts.spotifycdn.com/images/live-events_category-image.jpg",
+    "title": "Mood",
+    "color": "#E8115B"
+  },
+  {
+    "img": "https://i.scdn.co/image/ab67fb8200005cafa862ab80dd85682b37c4e768",
+    "title": "Workout",
+    "color": "#148A08"
+  },
+  {
+    "img": "https://i.scdn.co/image/ab67fb8200005caf7e11c8413dc33c00740579c1",
+    "title": "Indie",
+    "color": "#BC5900"
+  },
+  {
+    "img": "https://i.scdn.co/image/ab67fb8200005cafae7e69beb88f16969641b53e",
+    "title": "Discover",
+    "color": "#E91429"
+  },
+  {
+    "img": "https://i.scdn.co/image/ab67fb8200005cafa59f90c077c9f618fd0dde30",
+    "title": "Country",
+    "color": "#E1118C"
+  },
+  {
+    "img": "https://charts-images.scdn.co/assets/locale_en/regional/weekly/region_global_default.jpg",
+    "title": "Podcasts",
+    "color": "#8D67AB"
+  },
+  {
+    "img": "https://i.scdn.co/image/ab67fb8200005cafdfdaac1cf9574a196ca25196",
+    "title": "Live Events",
+    "color": "#D84000"
+  },
+  {
+    "img": "https://i.scdn.co/image/ab67fb8200005caf271f9d895003c5f5561c1354",
+    "title": "Made For You",
+    "color": "#E13300"
+  },
+  {
+    "img": "https://i.scdn.co/image/ab67fb8200005cafa1a252e3a815b65778d8c2aa",
+    "title": "New releases",
+    "color": "#7358FF"
+  },
+  {
+    "img": "https://i.scdn.co/image/ab67706f000000029249b35f23fb596b6f006a15",
+    "title": "Hip Hop",
+    "color": "#1E3264"
+  },
+  {
+    "img": "https://i.scdn.co/image/ab67fb8200005cafc0d2222b4c6441930e1a386e",
+    "title": "K-pop",
+    "color": "#148A08"
+  },
+  {
+    "img": "https://i.scdn.co/image/ab67fb8200005caf47e942f5bea637f4f4760170",
+    "title": "Chill",
+    "color": "#E1118C"
+  },
+  {
+    "img": "https://i.scdn.co/image/ab67fb8200005caf013ee3c983e6f60bf28bad5a",
+    "title": "Sleep",
+    "color": "#BC5900"
+  }
+]

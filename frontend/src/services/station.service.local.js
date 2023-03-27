@@ -3,18 +3,22 @@ import { utilService } from './util.service.js'
 import axios from 'axios'
 
 import gStations from '../../data/station.json'
+import gSearchStations from '../../data/search.json'
 // import { userService } from './user.service.js'
 const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBpcXHlaM0mzq7pKpRQzm_kMlUqZH8XohM&q=`
 const STORAGE_KEY = 'station'
 const SEARCH_KEY = 'videosDB'
+const SEARCH_STATIONS_KEY = 'searchDB'
 // const USER_KEY = 'userStationDB'
 let gSearchCache = utilService.loadFromStorage(SEARCH_KEY) || {}
 _createStations()
+_createSearchStations()
 // createUserStations()
 export const stationService = {
   query,
   getById,
   save,
+  querySearch,
   remove,
   getEmptyStation,
   getVideos,
@@ -28,6 +32,15 @@ window.cs = stationService
 
 async function query(filterBy = { name: '' }) {
   var stations = await storageService.query(STORAGE_KEY)
+  if (filterBy.name) {
+    const regex = new RegExp(filterBy.name, 'i')
+    stations = stations.filter((station) => regex.test(station.name))
+  }
+  return stations
+}
+
+async function querySearch(filterBy = { name: '' }) {
+  var stations = await storageService.query(SEARCH_STATIONS_KEY)
   if (filterBy.name) {
     const regex = new RegExp(filterBy.name, 'i')
     stations = stations.filter((station) => regex.test(station.name))
@@ -127,6 +140,13 @@ function _createStations() {
   let stations = gStations
   if (!localStorage.getItem(STORAGE_KEY)) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(stations))
+  }
+}
+
+function _createSearchStations() {
+  let stations = gSearchStations
+  if (!localStorage.getItem(SEARCH_STATIONS_KEY)) {
+    localStorage.setItem(SEARCH_STATIONS_KEY, JSON.stringify(stations))
   }
 }
 

@@ -1,14 +1,35 @@
-.category-container {
+.categories-container {
   display: grid;
+
+  padding-inline: 1.5em;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 20px;
-  padding: 0 30px;
   border-radius: 10px;
+  .category-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    height: 190px;
+  }
   img {
-    width: 100%;
+    transform: rotate(25deg) translate(18%, -2%);
+    position: absolute;
+
+    bottom: 0;
+    right: 0;
+    height: 100px;
+    width: 100px;
+  }
+  h2 {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 1em;
+    font-family: Circular-book;
   }
 }
 
+<<<<<<< HEAD
 .category-h2 {
   margin-inline-start: rem(32px);
   margin-block-start: rem(24px);
@@ -16,4 +37,8 @@
   font-size: 1.5rem;
 
   font-family: Circular-book;
+=======
+.search-header {
+  padding-inline: 1rem 0;
+>>>>>>> 4ee3c38794c20f823debb9d45a4a1f6a8516aabc
 }

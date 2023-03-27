@@ -5,6 +5,7 @@
         <h3>Edit details</h3>
         <button class="btn-close-modal" @click="$emit('close')">x</button>
       </div>
+      <!-- <form @submit.prevent="stationInput"> -->
       <div class="edit-details-img">
         <label class="cover-img" @drop.prevent="handleFile" @dragover.prevent>
           <div v-if="loading" class="loader"></div>
