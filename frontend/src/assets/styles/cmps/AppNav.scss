@@ -75,40 +75,44 @@ nav {
     margin-block-end: 16px;
 
     a{
-      gap: 7px;
+      gap: 6px;
+      font-family: Circular-medium;
+      font-size:0.9rem;
+      svg{
+        margin-block-start:-2px;
+      }
     }
 
     .home-nav {
       display: flex;
-      align-items: center;
-      justify-content: center;
-  
+      align-items: end;
     }
 
     .home-icon {
-      width: 25px;
-      height: 25px;
+      width: 24px;
+      height: 24px;
       margin-inline-end: 10px;
-      fill: $clr6;
+      fill: $clr11;
     }
     .search-icon {
-      width: 25px;
-      height: 25px;
+      width: 24px;
+      height: 24px;
       margin-inline-end: 10px;
       fill: $clr6;
     }
     .library-icon {
-      fill: $clr6;
+      fill: $clr11;
       margin-inline-end: 10px;
-      width: 25px;
-      height: 25px;
+      width: 24px;
+      height: 24px;
     }
   }
   .liked-create-nav {
+    margin-block-start: 20px;
     margin-block-end: 16px;
     align-items: center;
     text-align: center;
-    gap: 2px;
+    gap: 1.4px;
     .create-container {
       display: flex;
       align-items: center;
@@ -150,18 +154,26 @@ nav {
     color: $clr3;
     padding: 8px 0 8px 5px;
     width: 100%;
-
+    svg {
+      line-height: 5px;
+    }
     &:hover {
       color: $clr6;
       text-decoration: none;
+      svg {
+        fill: $clr6; 
+      }
     }
-
+  
     &.active {
       color: $clr6;
       font-weight: bold;
+      svg {
+        fill: $clr6; 
+      }
     }
   }
-}
+}  
 
 .plus-sign {
   color: $clr8;
@@ -190,3 +202,4 @@ nav {
 .station-nav-hover:hover {
   color: $clr6;
 }
+
