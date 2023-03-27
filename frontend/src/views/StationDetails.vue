@@ -29,7 +29,7 @@
           <h1 class="station-name" @click="toggleModal">{{ station.name }}</h1>
 
           <p class="station-description" @click="toggleModal">
-            Playlist Relax and indulge with beautiful piano pieces
+            {{ station.description }}
           </p>
           <div v-if="station.songs">
             <div class="likes-count-logo">
@@ -51,7 +51,7 @@
       <div class="station-controls">
         <div class="btn-play-green" @click.stop="playStation"></div>
         <BubblingHeart @toggleLike="toggleHeaderLike" />
-        <div class="btn-icons" @click="removeStation(station._id)">
+        <div class="btn-icons" @click="showDeleteModel">
           <i class="options-icon" v-html="getSvg('optionsIcon')"></i>
         </div>
       </div>
@@ -126,7 +126,7 @@
                 <li
                   v-for="station in userStations"
                   :key="station._id"
-                  @click="addToSelectedStation(selectedSong, station)"
+                  @click="addToSelectedStation(selectedSong, this.station)"
                 >
                   {{ station.name }}
                 </li>
@@ -148,6 +148,40 @@
     <StationEdit :showModal="showModal" @close="showModal = false" />
     <button @click="toggleModal">x</button>
   </section>
+
+  <section v-if="showDeleteModal" class="delete-modal-backdrop">
+    <div class="delete-modal">
+      <h1>Delete from Library?</h1>
+      <p>
+        This will delete <span>{{ stationDeleteMsg }} </span> from Your Library.
+      </p>
+      <div class="delete-modla-btns">
+        <button class="delete-modal-cancle-btn" @click="cancle">Cancel</button>
+        <button class="delete-modal-delete-btn" @click="removeStation">
+          Delete
+        </button>
+      </div>
+    </div>
+  </section>
+  <!-- <section v-if="showAddSongModal" class="delete-modal-backdrop">
+    <div class="delete-modal">
+      <h1>Delete from Library?</h1>
+      <p>
+        This will delete <span>{{ stationDeleteMsg }} </span> from Your Library.
+      </p>
+      <div class="delete-modla-btns">
+        <button
+          class="delete-modal-cancle-btn"
+          @click="addToSelectedStation(selectedSong, this.station)"
+        >
+          Add anyway
+        </button>
+        <button class="delete-modal-delete-btn" @click="cancle">
+          Dont add
+        </button>
+      </div>
+    </div>
+  </section> -->
 </template>
 
 <script>
@@ -170,12 +204,14 @@ export default {
       // station: null,
       // modalX: 0,
       // modalY: 0,
+      showAddSongModal: false,
       showSongModal: false,
       showModal: '',
       activeTitle: null,
       counter: 0,
       dominantColor: null,
       likeIconFill: '#FFF',
+      showDeleteModal: false,
       liked: false,
       currDraggableIdx: null,
       selectedSong: null,
@@ -185,6 +221,13 @@ export default {
     }
   },
   methods: {
+    showDeleteModel() {
+      this.showDeleteModal = true
+    },
+
+    cancle() {
+      this.showDeleteModal = false
+    },
     updateBodyBackgroundColor(color) {
       console.log(color)
 
@@ -299,25 +342,25 @@ export default {
         this.showSongModal = false
       }
     },
-    async addToStation(song) {
-      const stationName = prompt('station?')
-      try {
-        const station = this.stations.find((s) => s.name === stationName)
-        console.log('stationDetails', song)
-        console.log('stationDetails', stationName)
-        await this.$store.dispatch({
-          type: 'addToStation',
-          song,
-          station,
-        })
-        showSuccessMsg('added to playlist')
-      } catch (err) {
-        console.log(err)
-        showErrorMsg('Cannot added to playlist')
-      } finally {
-        this.showSongModal = false
-      }
-    },
+    // async addToStation(song) {
+    //   const stationName = prompt('station?')
+    //   try {
+    //     const station = this.stations.find((s) => s.name === stationName)
+    //     console.log('stationDetails', song)
+    //     console.log('stationDetails', stationName)
+    //     await this.$store.dispatch({
+    //       type: 'addToStation',
+    //       song,
+    //       station,
+    //     })
+    //     showSuccessMsg('added to playlist')
+    //   } catch (err) {
+    //     console.log(err)
+    //     showErrorMsg('Cannot added to playlist')
+    //   } finally {
+    //     this.showSongModal = false
+    //   }
+    // },
     async addToSelectedStation(song, station) {
       // const stations = utilService.loadFromStorage('station')
       // const stat = stations.find((s) => s._id === station._id)
@@ -343,9 +386,13 @@ export default {
       //   console.log('is in')
       // }
     },
-    async removeStation(stationId) {
+    async removeStation() {
+      this.showDeleteModal = false
       try {
-        await this.$store.dispatch({ type: 'removeStation', stationId })
+        await this.$store.dispatch({
+          type: 'removeStation',
+          stationId: this.station._id,
+        })
         showSuccessMsg('Station removed')
       } catch (err) {
         showErrorMsg('Cannot remove station')
@@ -421,6 +468,9 @@ export default {
     },
   },
   computed: {
+    stationDeleteMsg() {
+      return this.station.name
+    },
     userStations() {
       return this.$store.getters.getUserStations
     },
