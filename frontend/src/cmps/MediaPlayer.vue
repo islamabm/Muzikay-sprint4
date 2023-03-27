@@ -14,7 +14,7 @@
         <button class="media-player-prev-song" @click="switchSong(-1)">
           <i class="home-icon icons" v-html="getSvg('prevSongBtnIcon')"></i>
         </button>
-
+        
         <button class="media-player-play" @click="playAudio()">
           <i class="pause" v-if="this.isPlaying" v-html="getSvg('pauseBtnIcon')"></i>
           <i class="home-icon icons" v-else v-html="getSvg('playBtnIcon')"></i>
