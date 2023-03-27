@@ -23,7 +23,7 @@
             class="edit-text-area"
             id="description"
             rows="4"
-            v-model="station.desc"
+            v-model="station.description"
             placeholder="Add an optional description"
           ></textarea>
           <button

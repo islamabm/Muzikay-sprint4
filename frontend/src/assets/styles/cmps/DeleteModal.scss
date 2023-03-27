@@ -1,0 +1,94 @@
+.delete-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-modal {
+  background-color: white;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: start;
+  width: 420px;
+  height: 204px;
+
+  button {
+    color: #000000;
+    &:hover {
+      scale: 1.05;
+    }
+  }
+  .delete-modal-delete-btn {
+    box-sizing: border-box;
+    position: relative;
+    background-color: #1ed760;
+    cursor: pointer;
+    display: flex;
+    border-radius: 500px;
+    font-size: inherit;
+    min-block-size: 48px;
+    align-items: center;
+    font-weight: 700;
+    justify-content: center;
+    padding-block: 8px;
+    padding-inline: 32px;
+  }
+  .delete-modal-cancle-btn {
+    font-size: 1rem;
+    font-weight: 700;
+    background-color: transparent;
+    border: 0px;
+    border-radius: 500px;
+    cursor: pointer;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-transform: none;
+    transition-duration: 33ms;
+    transition-property: background-color, border-color, color, box-shadow,
+      filter, transform;
+    vertical-align: middle;
+    transform: translate3d(0px, 0px, 0px);
+    min-inline-size: 0px;
+    padding-block: 8px;
+    min-block-size: 48px;
+    padding-inline: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: Circular-book;
+    color: #000000;
+    padding: 15px;
+    margin-bottom: 0;
+  }
+  p {
+    font-size: 0.875rem;
+    color: black;
+    font-family: Circular-book;
+    margin-inline-start: 1em;
+    margin-top: 0;
+    span {
+      font-weight: bold;
+    }
+  }
+}
+.delete-modla-btns {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  margin-block-start: 24px;
+  width: 100%;
+}
