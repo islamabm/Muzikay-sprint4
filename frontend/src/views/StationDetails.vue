@@ -357,6 +357,20 @@ export default {
     //     this.showSongModal = false
     //   }
     // },
+    // async check(song, station) {
+    //   try {
+    //     await this.$store.dispatch({
+    //       type: 'checkIfIn',
+    //       song,
+    //       station,
+    //     })
+    //     showSuccessMsg('added to playlist')
+    //   } catch (err) {
+    //     console.log(err)
+    //     showErrorMsg('Cannot add to playlist')
+    //   }
+    // },
+
     async addToSelectedStation(song, station) {
       // const stations = utilService.loadFromStorage('station')
       // const stat = stations.find((s) => s._id === station._id)
