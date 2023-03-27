@@ -106,6 +106,7 @@ export const stationStore = {
         console.log('stationId', stationId)
         await stationService.remove(stationId)
         commit({ type: 'removeStation', stationId })
+        this.$router.push(`/station/${state.station[stationId - 1]}`)
       } catch (err) {
         console.log('stationStore: Error in ', err)
         throw err
