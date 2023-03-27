@@ -1,5 +1,6 @@
 .station-details {
   // width: calc(100vw - 300px);
+  
   .header-content {
     width: 100%;
     display: flex;
@@ -98,7 +99,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 12px;
-
+    font-family: Circular-medium;
     &:hover {
       background-color: rgba($clr10, 0.2);
 
@@ -164,6 +165,7 @@
       font-size: 0.95rem;
       font-weight: 400;
       color: $clr6;
+      transform: translate(-15%,30%);
       font-family: Circular-book;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -186,6 +188,7 @@
       width: max-content;
       white-space: nowrap;
       transform: translateY(1%);
+      
     }
 
     @media screen and (min-width: 1600px) {
@@ -203,7 +206,7 @@
       font-size: 0.8rem;
       color: rgba($clr3, 0.6);
       width: 35px;
-
+      font-family: Circular-medium;
       transform: translateX(100%);
       cursor: default;
     }
