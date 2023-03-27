@@ -11,12 +11,16 @@ import { storageService } from '../services/async-storage.service.js'
 export const stationStore = {
   state: {
     stations: [],
+    searchStations: [],
     currStationId: null,
     userStations: [],
   },
   getters: {
     stations({ stations }) {
       return stations
+    },
+    searchStations({ searchStations }) {
+      return searchStations
     },
     songs({ stations }) {
       return stations.songs
@@ -47,6 +51,9 @@ export const stationStore = {
   mutations: {
     setStations(state, { stations }) {
       state.stations = stations
+    },
+    setSearchStations(state, { stations }) {
+      state.searchStations = stations
     },
     setCurrStation(state, { stationId }) {
       state.currStationId = stationId
@@ -100,6 +107,16 @@ export const stationStore = {
         throw err
       }
     },
+    async loadSearchStations(context) {
+      try {
+        const stations = await stationService.querySearch()
+        context.commit({ type: 'setSearchStations', stations })
+      } catch (err) {
+        console.log('stationStore: Error in loadStations', err)
+        throw err
+      }
+    },
+
     async removeStation({ commit }, { stationId }) {
       console.log('stationId', stationId)
       try {
