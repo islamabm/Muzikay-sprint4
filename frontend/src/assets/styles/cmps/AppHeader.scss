@@ -8,9 +8,7 @@
   height: 64px;
   z-index: 100;
   padding: 0 16px;
-  font-family: gotham;
-  font-weight: 600;
-  font-size: 1rem;
+  font-family: Circular-medium;
 
   .page-navigation,
   .login-signup {
@@ -110,6 +108,7 @@
       min-block-size: 48px;
       background-color: $clr6;
       font-size: 1rem;
+      font-weight: 500;
       display: flex;
       border-radius: 500px;
       padding-block: 8px;
@@ -118,8 +117,8 @@
       vertical-align: baseline;
       
       &:hover {
-        background-color: $clr3;
         color: $clr2;
+        font-weight: 600;
         transform: scale(1.05);
       }
     }
