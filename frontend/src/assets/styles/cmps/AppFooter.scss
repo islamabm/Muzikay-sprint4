@@ -11,7 +11,7 @@
   z-index: 1;
   border-top: 1px solid $clr8;
   display: grid;
-  grid-template-columns: 395px minmax(400px, 1fr);
+  grid-template-columns: 395px minmax(400px, 1fr) 300px;
 
   .music-bar {
     display: flex;
