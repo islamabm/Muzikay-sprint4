@@ -1,5 +1,10 @@
 <template>
   <footer class="main-footer">
+
+    <div class="footer-media-player">
+      <MediaPlayer :station="station" @songIdx="getSongIdx" />
+    </div>
+    
     <div v-if="station" class="footer-details">
       <img
         class="footer-details-img"
@@ -21,17 +26,12 @@
       </button>
     </div>
 
-    <div class="footer-media-player">
-      <MediaPlayer :station="station" @songIdx="getSongIdx" />
-    </div>
-
   </footer>
 </template>
 
 <script>
 import MediaPlayer from './MediaPlayer.vue'
 import BubblingHeart from './BubblingHeart.vue'
-// import SVGService from '../services/SVG.service'
 
 export default {
   name: 'AppFooter',
@@ -39,7 +39,6 @@ export default {
   data() {
     return {
       currSongIdx: 0,
-      // speakerLevel: 50,
       hover: false,
       showModal: false,
     }
@@ -56,6 +55,7 @@ export default {
     getSvg(iconName) {
       return SVGService.getSpotifySvg(iconName)
     },
+    // Add functionality
     toggleSongLike(idx) {
       // const song = this.station.songs[idx]
       console.log(song)
@@ -64,11 +64,8 @@ export default {
       // console.log(
       //   `Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`
       // )
-      // Add functionality
+
     },
-    // setSpeakerLevel(level) {
-    // this.speakerLevel = level
-    // },
   },
 
   components: {
