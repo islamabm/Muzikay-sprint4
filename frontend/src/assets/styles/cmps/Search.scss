@@ -10,8 +10,8 @@
 }
 
 .category-h2 {
-  margin-inline-start: 32px;
-  margin-block-start: 3rem;
+  margin-inline-start: rem(32px);
+  margin-block-start: rem(24px);
   padding: 1rem 0;
   font-size: 1.5rem;
 
@@ -23,7 +23,7 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(80px, 200px));
     img {
-      width: 230px;
+      width: rm(230px);
     }
   }
 }
@@ -52,21 +52,21 @@
 @media (min-width: 1032px) {
   .category-container {
     display: grid;
-    padding-left: 28px;
-    grid-row-gap: 18px;
-    grid-column-gap: 30px;
+    padding-left: rem(28px);
+    grid-row-gap: rem(18px);
+    grid-column-gap: rem(30px);
     grid-template-columns: repeat(4, minmax(100px, 1fr));
     img {
-      width: 220px;
+      width: rm(220px);
     }
   }
 }
 @media (min-width: 1291px) {
   .category-container {
     display: grid;
-    gap: 45px;
+    gap: rem(45px);
     img {
-      width: 185px;
+      width: rm(185px);
     }
     grid-template-columns: repeat(6, minmax(100px, 1fr));
   }

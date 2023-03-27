@@ -11,13 +11,13 @@
   z-index: 1;
   border-top: 1px solid $clr8;
   display: grid;
-  grid-template-columns: 395px minmax(400px, 1fr);
+  grid-template-columns: 395px minmax(400px, 1fr) 300px;
 
   .music-bar {
     display: flex;
     gap: 8px;
     justify-content: space-between;
-    width: 100%;
+    width: 540px;
   }
   .footer-details {
     display: flex;
@@ -44,7 +44,7 @@
 
   .footer-media-adjusments {
     margin-top: 22px;
-    grid-column: 3;
+    margin-inline-start: 9rem;
     display: flex;
   
     .speaker {
@@ -64,12 +64,20 @@
 
   .footer-media-player {
     grid-column: 2;
-    max-width: 568px;
-    margin-left: 72px;
+    display: flex;
+    justify-content: space-between;
+    gap:8rem;
+    padding-inline-end: 3rem;
+    padding-inline-start: 10%;
+    align-items: center;
   }
   
   .footer-details-title {
     font-family: Circular-book;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 65%;
   }
   
   @media screen and (max-width: $narrow-breakpoint) {
@@ -141,3 +149,7 @@
   }
 
 }
+
+//Speaker: 
+
+

@@ -8,7 +8,7 @@
   
       <div class="control-buttons">
         
-        <button class="media-player-prev-song">
+        <button class="media-player-prev-song" @click="ShuffleSong()">
           <i class="shuffle" v-html="getSvg('shuffleBtnIcon')"></i>
         </button>
 
@@ -25,7 +25,7 @@
           <i class="home-icon icons" v-html="getSvg('nextSongBtnIcon')"></i>
         </button>
           
-        <button class="media-player-repeat-song">
+        <button class="media-player-repeat-song" @click="repeatSong(songIdx)">
           <i class="home-icon icons" v-html="getSvg('repeatBtnIcone')"></i>
         </button>
 
@@ -71,41 +71,90 @@
         intervalId: null,
         volume: 50,
         songIdx: 0,
+        shuffledSongs: [],
+        isShuffleOn: false,
+        isRepeatOn: false,
       }
     },
     computed: {
       putStationId() {
-        console.log('no station');
-        if(this.station){
+        if (this.isShuffleOn) {
+          return this.station.songs[this.shuffledSongs[this.songIdx]].id
+        } else if (this.station) {
           return this.station.songs[this.songIdx].id
-        } 
-        else return 'z0jwCUr42Qw' 
+        } else {
+          // dosent work check why.//
+
+          if (this.isRepeatOn) { // if repeat is on, play the same song again
+          return this.station.songs[this.songIdx].id
+          } else { // if repeat is off, play the default song
+          return 'z0jwCUr42Qw' 
+        }
+      }
       },
       progressBarWidth() {
         if (!this.duration || !this.currentTime) return
-        
         const progressBarWidth = (this.currentTime / this.duration) * 100
         return progressBarWidth
-
-      }
+      },
     },
     methods: {
       getSvg(iconName) {
       return SVGService.getSpotifySvg(iconName)
       },
+      repeatSong(idx) {
+        if(this.isRepeatOn){
+          console.log('idx',idx);
+          console.log('is repeat on - true');
+          this.songIdx = idx
+        } 
+        else{
+          console.log('is repeat on - false');
+          this.isRepeatOn = true          
+        } 
+      },
+      // this function uses algorithem to do a new array with random songs 
+      ShuffleSong() {
+        this.isShuffleOn = !this.isShuffleOn
+        if (this.isShuffleOn) {
+        // shuffle the array of song indexes
+        let currentIndex = this.station.songs.length
+        let randomIndex
+        let temporaryValue
+        let shuffledIndexes = [...Array(currentIndex).keys()]
+
+        while (0 !== currentIndex) {
+        // pick a remaining element
+        randomIndex = Math.floor(Math.random() * currentIndex)
+        currentIndex--
+
+        // swap with current element
+        temporaryValue = shuffledIndexes[currentIndex]
+        shuffledIndexes[currentIndex] = shuffledIndexes[randomIndex]
+        shuffledIndexes[randomIndex] = temporaryValue
+      }
+      // update the shuffledSongs array with the shuffled indexes
+      this.shuffledSongs = shuffledIndexes
+      } else {
+      this.shuffledSongs = []
+      }
+    },
       // the function gets direction 1/-1 and switches the song by it
       switchSong(num) {
         this.songIdx += num
         this.$emit('songIdx' , this.songIdx)
         this.putStationId()
+        this.intervalId = setInterval(() => {
+          this.currentTime = this.$refs.youtube.getCurrentTime()
+        }, 1000)
         this.duration = this.$refs.youtube.getDuration()
         this.formatTime(this.duration)
       },
       // when the video is ready
       onReady() {
         console.log('im ready');
-        this.duration = this.$refs.youtube.getDuration()
         this.intervalId = setInterval(() => {
+          this.duration = this.$refs.youtube.getDuration()
           this.currentTime = this.$refs.youtube.getCurrentTime()
         }, 1000)
       },
@@ -114,9 +163,9 @@
       onStateChange(event) {
         if (event.data === 1) this.isPlaying = true
         if (event.data === 0){
-          this.songIdx++
           clearInterval(this.intervalId)
           this.currentTime = 0
+          this.songIdx++
         } 
       },
       // play/pause video 
