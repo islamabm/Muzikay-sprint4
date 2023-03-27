@@ -125,16 +125,21 @@
         svg {
             fill: $clr1;
             stroke: $clr11;
-            stroke-width: 15;
             width: 15px;
         }
     }
     input {
       height: 5px;
+      margin-inline-start: 7px;
     }
   }
 
-.clicked {
-    fill: $clrGreen;
+.button-active {
+    svg {
+        fill: $clrGreen;
+    }
+    svg:hover {
+        fill: $clrGreen;
+    }
 }
 

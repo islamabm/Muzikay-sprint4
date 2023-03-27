@@ -1,7 +1,7 @@
 <template>
     <div class="media-player">
       <YouTube class="youtube-player"
-        :src="`https://www.youtube.com/watch?v=${putStationId}`" 
+        :src="`https://www.youtube.com/watch?v=${putSongId}`" 
         @ready="onReady"
         @state-change="onStateChange"
         ref="youtube"/>
@@ -9,9 +9,8 @@
       <div class="control-buttons">
         
         <button class="media-player-prev-song" @click="ShuffleSong()">
-          <i class="shuffle" v-html="getSvg('shuffleBtnIcon')"></i>
+          <i class="shuffle" :class="{ 'button-active': isShuffleOn }" v-html="getSvg('shuffleBtnIcon')"></i>
         </button>
-
         <button class="media-player-prev-song" @click="switchSong(-1)">
           <i class="home-icon icons" v-html="getSvg('prevSongBtnIcon')"></i>
         </button>
@@ -26,7 +25,7 @@
         </button>
           
         <button class="media-player-repeat-song" @click="repeatSong(songIdx)">
-          <i class="home-icon icons" v-html="getSvg('repeatBtnIcone')"></i>
+          <i class="home-icon icons" :class="{ 'button-active': isRepeatOn }" v-html="getSvg('repeatBtnIcone')"></i>
         </button>
 
       </div>
@@ -41,7 +40,7 @@
     </div>
 
     <div class="footer-media-adjusments">
-      <i class="speaker" v-html="getSvg('speakerBtnIcon')"></i>
+      <i class="speaker" v-html="getSvg(toggleSvgIcone)"></i>
       <input type="range" class="speaker-bar" min="0" max="100" step="10" id="volume-bar" v-model="volume">
     </div>
 
@@ -65,32 +64,39 @@
     },
     data() {
       return {
-        duration: 0,
-        currentTime: 0,
-        isPlaying: false,
-        intervalId: null,
         volume: 50,
         songIdx: 0,
+        duration: 0,
+        currentTime: 0,
+        intervalId: null,
+        isPlaying: false,
+        isRepeatOn: false,
         shuffledSongs: [],
         isShuffleOn: false,
-        isRepeatOn: false,
+        speakerSvg: '',
       }
     },
     computed: {
-      putStationId() {
+      putSongId() {
         if (this.isShuffleOn) {
           return this.station.songs[this.shuffledSongs[this.songIdx]].id
         } else if (this.station) {
           return this.station.songs[this.songIdx].id
         } else {
-          // dosent work check why.//
-
-          if (this.isRepeatOn) { // if repeat is on, play the same song again
-          return this.station.songs[this.songIdx].id
+          if (this.isRepeatOn) { 
+            return this.station.songs[this.songIdx].id
           } else { // if repeat is off, play the default song
           return 'z0jwCUr42Qw' 
         }
       }
+      },
+      toggleSvgIcone() {
+        let icon  
+
+        if(this.volume > 80) icon = 'speakerFullBtnIcon'
+        else if (this.volume >= 10) icon = 'speakerMediumBtnIcon'
+        else icon = 'speakerMuteBtnIcon'
+        return icon 
       },
       progressBarWidth() {
         if (!this.duration || !this.currentTime) return
@@ -103,19 +109,16 @@
       return SVGService.getSpotifySvg(iconName)
       },
       repeatSong(idx) {
+        this.isRepeatOn = !this.isRepeatOn
         if(this.isRepeatOn){
-          console.log('idx',idx);
-          console.log('is repeat on - true');
           this.songIdx = idx
-        } 
-        else{
-          console.log('is repeat on - false');
-          this.isRepeatOn = true          
-        } 
+        }
+        else this.songIdx++ 
       },
-      // this function uses algorithem to do a new array with random songs 
+      //  does algorithem to do a new array with random songs 
       ShuffleSong() {
         this.isShuffleOn = !this.isShuffleOn
+        console.log(this.isShuffleOn);
         if (this.isShuffleOn) {
         // shuffle the array of song indexes
         let currentIndex = this.station.songs.length
@@ -127,7 +130,6 @@
         // pick a remaining element
         randomIndex = Math.floor(Math.random() * currentIndex)
         currentIndex--
-
         // swap with current element
         temporaryValue = shuffledIndexes[currentIndex]
         shuffledIndexes[currentIndex] = shuffledIndexes[randomIndex]
@@ -143,7 +145,7 @@
       switchSong(num) {
         this.songIdx += num
         this.$emit('songIdx' , this.songIdx)
-        this.putStationId()
+        this.putSongId()
         this.intervalId = setInterval(() => {
           this.currentTime = this.$refs.youtube.getCurrentTime()
         }, 1000)
@@ -153,8 +155,8 @@
       // when the video is ready
       onReady() {
         console.log('im ready');
+        this.duration = this.$refs.youtube.getDuration()
         this.intervalId = setInterval(() => {
-          this.duration = this.$refs.youtube.getDuration()
           this.currentTime = this.$refs.youtube.getCurrentTime()
         }, 1000)
       },
