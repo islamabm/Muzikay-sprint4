@@ -24,11 +24,11 @@ nav {
       font-family: Circular-light;
       font-weight: 600;
       font-size: 14px;
-      letter-spacing: 0.5px; /* added letter spacing */
+      letter-spacing: 0.5px; 
       color: $clr11;
       display: flex;
       flex-direction: column;
-      padding: 10px;
+      padding: 10px 0 0 4px;
       gap: 0.5rem;
     }
   }
@@ -95,6 +95,22 @@ nav {
   }
   .liked-create-nav {
     margin-block-end: 16px;
+    align-items: center;
+    text-align: center;
+    gap: 2px;
+    .create-container {
+      display: flex;
+      align-items: center;
+      text-align: center;
+      line-height: 10px;
+      &:hover .plus-sign {
+        background-color: $clr6;
+      }
+      .plus-sign {
+        padding: 5.5px;
+      }
+    }
+    
   }
 
   .liked-songs {
@@ -108,6 +124,10 @@ nav {
       width: 100%;
       height: 1px;
       background-color: rgba($clr6, 0.2);
+    }
+    &:hover .heart-icon {
+      background: linear-gradient(to bottom right, #1904d2, #c1c0c0);
+      color: $clr6;
     }
   }
 
@@ -135,17 +155,17 @@ nav {
 .plus-sign {
   color: $clr8;
   background-color: #b3b3b3;
-  padding: 5px;
   border-radius: 2px;
   margin-inline-end: 10px;
 }
 
 .heart-icon {
-  background: linear-gradient(to bottom right, #1201a7, #d2cfcf);
+  background: linear-gradient(to bottom right, #0e017d, #b4b0b0);
   padding: 5px;
   color: #b3b3b3;
   border-radius: 2px;
   margin-inline-end: 10px;
+  background: linear-gradient(to bottom right, #1303a4, #c1c0c0);
 }
 
 // @media (max-width: $mobile-breakpoint) {

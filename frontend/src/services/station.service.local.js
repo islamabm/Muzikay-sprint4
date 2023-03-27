@@ -116,7 +116,7 @@ function _prepareData(item) {
   return {
     videoId: item.id.videoId,
     title: item.snippet.title,
-    url: `https://www.youtube.com/embed/${item.id.videoId}`, // Changed from 'item.snippet.thumbnails.default.url'
+    url: item.snippet.thumbnails.default.url,
   }
 }
 
