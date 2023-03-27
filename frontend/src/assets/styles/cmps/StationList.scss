@@ -1,25 +1,28 @@
 .station-list-container {
-
-     &:last-child {
-      padding-block-end: 4rem;
-      @media (max-width: $narrow-breakpoint) {
-        padding-block-end: 0;
-      }
+  &:last-child {
+    padding-block-end: 4rem;
+    @media (max-width: $narrow-breakpoint) {
+      padding-block-end: 0;
     }
+  }
   .station-list {
-    display: flex;
-    gap: 1.5rem;
-    padding-inline: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    border-radius: 10px;
+    padding-inline: 2rem;
     align-items: center;
     justify-content: center;
     padding-block-end: 4rem;
+    overflow-x: auto;
     @media (max-width: $narrow-breakpoint) {
       padding-block-end: 1rem;
     }
   }
   .category-tag {
     width: max-content;
-    margin-inline-start: 1.3rem;
+    margin-inline-start: 1.5rem;
+    margin-block-end: 2rem;
     font-size: 1.5rem;
     font-family: Circular-book;
     &:hover {
@@ -29,3 +32,35 @@
   }
 }
 
+
+/* Narrow screens */
+@media (max-width: $narrow-breakpoint) {
+  .station-list-container {
+    .station-list {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      padding-block-end: 2rem;
+      gap: 10px;
+      overflow-x: scroll;
+    }
+    .category-tag {
+      font-size: 1.3rem;
+      margin-inline-start: 0.8rem;
+    }
+  }
+}
+
+/* Mobile screens */
+@media (max-width: $mobile-breakpoint) {
+  .station-list-container {
+    .station-list {
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      padding-block-end: 1rem;
+      gap: 8px;
+      overflow-x: scroll;
+    }
+    .category-tag {
+      font-size: 1.2rem;
+      margin-inline-start: 0.5rem;
+    }
+  }
+}

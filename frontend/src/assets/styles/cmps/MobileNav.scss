@@ -4,13 +4,17 @@
   justify-content: space-evenly;
   align-items: center;
   background-color: $clr2;
-  padding: 1.1rem;
+  padding-inline: 1.1rem;
+  padding-bottom: 1.1rem;
   // padding-bottom: 20px;
 
   .router-link {
     height: 40px;
     width: 40px;
     padding: 10px;
+    font-size: 0.5rem;
+    color: $clr6;
+    text-decoration: none;;
   }
 
   svg {
@@ -29,17 +33,52 @@
     }
   }
 }
-.activeLink {
+.activeLibrary {
   svg {
     fill: $clr6;
   }
   &::after {
     content: "";
     position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-70%);
-    width: 30px;
+
+    left: 55%;
+    transform: translateX(290%);
+    width: 31px;
+    height: 2px;
+    background-color: $clr6;
+    border-radius: 2px;
+  }
+  
+}
+
+.activeSearch {
+  svg {
+    fill: $clr6;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+  
+    left: 55%;
+    transform: translateX(-115%);
+    width: 31px;
+    height: 2px;
+    background-color: $clr6;
+    border-radius: 2px;
+  }
+}
+
+.activeHome {
+  svg {
+    fill: $clr6;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0px;
+    left: 55%;
+    transform: translateX(-515%);
+    width: 31px;
     height: 2px;
     background-color: $clr6;
     border-radius: 2px;

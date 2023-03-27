@@ -22,7 +22,6 @@ export default {
       type: Array,
     },
   },
-  emits: ['removed'],
   computed: {
     categorizedStations() {
       return this.stations.reduce((acc, station) => {

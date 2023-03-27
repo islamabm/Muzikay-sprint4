@@ -80,6 +80,7 @@
       padding: 6px 16px;
       margin-inline-start: 8px;
       border: 1px solid transparent;
+      
 
       &:hover {
         color: $clr6;
@@ -112,7 +113,6 @@
       border-radius: 500px;
       padding-block: 8px;
       padding-inline: 32px;
-      margin-inline-end: 1.7rem;
       vertical-align: baseline;
       
       &:hover {
@@ -121,8 +121,21 @@
         transform: scale(1.05);
       }
     }
+    
   }
 }
+@media screen and (max-width: $narrow-breakpoint) {
+    .btn-login {
+        margin-inline-end: 1rem;
+  }
+}
+@media screen and (min-width: $normal-breakpoint) {
+    .btn-login {
+      margin-inline-end: 1rem;
+  }
+}
+
+
 
 .header-input {
   margin-block: 0px;
@@ -185,3 +198,5 @@
   fill: currentcolor;
   display: block;
 }
+
+

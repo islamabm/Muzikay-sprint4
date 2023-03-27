@@ -8,24 +8,24 @@
   <div class="media-player">
       <div class="control-buttons">
         
-        <button class="media-player-prev-song" @click="ShuffleSong()">
+        <button class="media-player-prev-song hiding" @click="ShuffleSong()">
           <i class="shuffle" :class="{ 'button-active': isShuffleOn }" v-html="getSvg('shuffleBtnIcon')"></i>
         </button>
-        <button class="media-player-prev-song" @click="switchSong(-1)">
-          <i class="home-icon icons" v-html="getSvg('prevSongBtnIcon')"></i>
+        <button class="media-player-prev-song hiding" @click="switchSong(-1)">
+          <i  v-html="getSvg('prevSongBtnIcon')"></i>
         </button>
         
         <button class="media-player-play" @click="playAudio()">
           <i class="pause" v-if="this.isPlaying" v-html="getSvg('pauseBtnIcon')"></i>
-          <i class="home-icon icons" v-else v-html="getSvg('playBtnIcon')"></i>
+          <i  v-else v-html="getSvg('playBtnIcon')"></i>
         </button>
 
-        <button class="media-player-prev-song" @click="switchSong(1)">
-          <i class="home-icon icons" v-html="getSvg('nextSongBtnIcon')"></i>
+        <button class="media-player-prev-song hiding" @click="switchSong(1)">
+          <i  v-html="getSvg('nextSongBtnIcon')"></i>
         </button>
           
-        <button class="media-player-repeat-song" @click="repeatSong(songIdx)">
-          <i class="home-icon icons" :class="{ 'button-active': isRepeatOn }" v-html="getSvg('repeatBtnIcone')"></i>
+        <button class="media-player-repeat-song hiding" @click="repeatSong(songIdx)">
+          <i  :class="{ 'button-active': isRepeatOn }" v-html="getSvg('repeatBtnIcone')"></i>
         </button>
 
       </div>
@@ -153,7 +153,7 @@
       },
       // when the video is ready
       onReady() {
-        console.log('im ready');
+        // console.log('im ready');
         this.duration = this.$refs.youtube.getDuration()
         this.intervalId = setInterval(() => {
           this.currentTime = this.$refs.youtube.getCurrentTime()
