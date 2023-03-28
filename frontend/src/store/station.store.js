@@ -102,6 +102,17 @@ export const stationStore = {
     },
   },
   actions: {
+    async addUserToSong({ commit }, { song }) {
+      try {
+        const updatedStation = await stationService.addUserToSong(song)
+        console.log('This is the updated station: ', updatedStation)
+        commit({ type: 'editStation', station: updatedStation })
+      } catch (err) {
+        console.error('Cannot add song', err)
+        throw err
+      }
+    },
+
     async loadStations(context) {
       if (userService.getLoggedinUser())
         try {

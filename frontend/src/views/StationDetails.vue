@@ -95,7 +95,7 @@
                 class="hover-effect heart-song"
                 :songIndex="idx"
                 :liked="song.liked"
-                @addLikeToSong="addSongToLikedSongs(song)"
+                @addLikeToSong="addUserToSong(song)"
               />
               <!-- @toggleLikgit ngLike" -->
             </div>
@@ -134,7 +134,7 @@
               </ul>
             </div>
             <li
-              v-if="station.createdBy.fullname === 'guest'"
+              v-if="station.createdBy.fullname !== 'system'"
               @click="removeSong(selectedSong)"
             >
               Remove
@@ -193,7 +193,7 @@ import StationEdit from '../cmps/StationEdit.vue'
 import Search from './Search.vue'
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
-import { userService } from '../services/user.service.local.js'
+import { userService } from '../services/user.service.js'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import MiniSearch from '../cmps/MiniSearch.vue'
 import BubblingHeart from '../cmps/BubblingHeart.vue'
@@ -251,15 +251,20 @@ export default {
       this.$refs.stationDetailsHeader.style.backgroundImage = gradient
       this.$refs.bottomHalf.style.backgroundImage = darkGradient
     },
-    addSongToLikedSongs(song) {
-      const station = userService.getLoggedinUser()
-      console.log('stationDetails', station)
-      console.log(song)
-
-      console.log('hi')
-
-      station.songs.push(song)
-      utilService.saveToStorage('loggedinUser', station)
+    async addUserToSong(song) {
+      // const user = userService.getLoggedinUser()
+      try {
+        await this.$store.dispatch({
+          type: 'addUserToSong',
+          song,
+        })
+        showSuccessMsg('song liked')
+      } catch (err) {
+        console.log(err)
+        showErrorMsg('remove from liked songs')
+      } finally {
+        this.showSongModal = false
+      }
     },
     openStationSelection() {
       console.log('opened')

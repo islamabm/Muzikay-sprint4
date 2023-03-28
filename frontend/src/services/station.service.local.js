@@ -101,33 +101,33 @@ function getVideos(keyword) {
   })
 }
 
-function getUserStation() {
-  const likedSongsStation = {
-    _id: utilService.makeId(),
-    name: 'likedSongs',
-    tags: [],
-    createdBy: {
-      _id: '',
-      fullname: 'guest',
-      imgUrl: '',
-    },
-    likedByUsers: [],
-    songs: [],
-    msgs: [
-      {
-        id: '',
-        from: '',
-        txt: '',
-      },
-    ],
-    desc: '',
-  }
-  const stations = utilService.loadFromStorage(STORAGE_KEY)
-  stations.push(likedSongsStation)
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(stations))
+// function getUserStation() {
+//   const likedSongsStation = {
+//     _id: utilService.makeId(),
+//     name: 'likedSongs',
+//     tags: [],
+//     createdBy: {
+//       _id: '',
+//       fullname: 'guest',
+//       imgUrl: '',
+//     },
+//     likedByUsers: [],
+//     songs: [],
+//     msgs: [
+//       {
+//         id: '',
+//         from: '',
+//         txt: '',
+//       },
+//     ],
+//     desc: '',
+//   }
+//   const stations = utilService.loadFromStorage(STORAGE_KEY)
+//   stations.push(likedSongsStation)
+//   localStorage.setItem(STORAGE_KEY, JSON.stringify(stations))
 
-  return likedSongsStation
-}
+//   return likedSongsStation
+// }
 
 function _prepareData(item) {
   return {
@@ -174,14 +174,14 @@ function createNewStation(name) {
     desc: '',
   }
 
-  // const stations = utilService.loadFromStorage(STORAGE_KEY)
-  // console.log(stations)
-  // stations.push(newStation)
+  const stations = utilService.loadFromStorage(STORAGE_KEY)
+  console.log(stations)
+  stations.push(newStation)
+  localStorage.setItem('station', JSON.stringify(stations))
 
-  // localStorage.setItem(STORAGE_KEY, JSON.stringify(stations))
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(stations))
   // loggedinUser.stations.push(newStation)
   const users = utilService.loadFromStorage('user')
-  console.log(users)
 
   const currUserIdx = users.findIndex((u) => u._id === loggedinUser._id)
   console.log(currUserIdx)
