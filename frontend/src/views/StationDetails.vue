@@ -247,6 +247,7 @@ export default {
           type: 'addUserToSong',
           song,
           userStation: station,
+          user: this.user,
         })
         showSuccessMsg('song liked')
       } catch (err) {

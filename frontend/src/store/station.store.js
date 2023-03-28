@@ -115,14 +115,12 @@ export const stationStore = {
     },
   },
   actions: {
-    async addUserToSong({ commit, rootGetters }, { song, userStation }) {
-      const loggedinUser = rootGetters.loggedinUser
-      console.log(loggedinUser)
+    async addUserToSong({ commit }, { song, userStation, user }) {
       try {
         const updatedStation = await stationService.addUserToSong(
           song,
           userStation,
-          loggedinUser
+          user
         )
 
         commit({ type: 'editStation', station: updatedStation })
