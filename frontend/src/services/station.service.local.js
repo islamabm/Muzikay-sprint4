@@ -27,6 +27,7 @@ export const stationService = {
   addSongToStation,
   removeSong,
   addSongToUserStation,
+  addUserToSong,
   // addStationMsg,
 }
 window.cs = stationService
@@ -184,16 +185,30 @@ function createNewStation(name) {
   const users = utilService.loadFromStorage('user')
 
   const currUserIdx = users.findIndex((u) => u._id === loggedinUser._id)
-  console.log(currUserIdx)
-  console.log(newStation)
+
   users[currUserIdx].stations.push(newStation)
   // users.push(currUser)
 
-  console.log('after users', users)
-  // console.log('after, logg', loggedinUser)
   localStorage.setItem('user', JSON.stringify(users))
 
   return newStation
+}
+
+async function addUserToSong(song, station, loggedinUser) {
+  if (!station) {
+    throw new Error('Station parameter is undefined')
+  }
+  // console.log('service add user to song', user.fullname)
+  // console.log(' before service add user to song', song.likedByUsers)
+  song.likedByUsers.push(loggedinUser.fullname)
+
+  // console.log(' after service add user to song', song.likedByUsers)
+  // console.log('this is the station before update', station)
+  const updatedStation = { ...station, songs: [...station.songs, song] }
+  console.log('this is the updated station', updatedStation)
+  const savedStation = await save(updatedStation)
+
+  return savedStation
 }
 
 async function addSongToStation(video, station) {
