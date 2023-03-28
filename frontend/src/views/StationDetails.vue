@@ -164,6 +164,21 @@
       </div>
     </div>
   </section>
+
+  <section v-if="showAreYouSureModal" class="delete-modal-backdrop">
+    <div class="delete-modal">
+      <h1>Already added</h1>
+      <p>
+        This is already in your <span>playlist</span>
+      </p>
+      <div class="delete-modla-btns">
+        <button class="delete-modal-cancle-btn" @click="addSongAnyway">Add anyway</button>
+        <button class="delete-modal-delete-btn" @click="dontAddSong">
+          Don't add
+        </button>
+      </div>
+    </div>
+  </section>
   <!-- <section v-if="showAddSongModal" class="delete-modal-backdrop">
     <div class="delete-modal">
       <h1>Delete from Library?</h1>
@@ -215,9 +230,13 @@ export default {
       selectedSong: null,
       selectedIndex: null,
       showStationsSubMenu: false,
+      showAreYouSureModal: false
     }
   },
   methods: {
+    dontAddSong() {
+      this.showAreYouSureModal = false
+    },
     showDeleteModel() {
       this.showDeleteModal = true
     },
@@ -390,25 +409,32 @@ export default {
     //     showErrorMsg('Cannot add to playlist')
     //   }
     async addToSelectedStation(song, station) {
-      // const stations = utilService.loadFromStorage('station')
-      // const stat = stations.find((s) => s._id === station._id)
-      // const isIn = stat.songs.includes(song)
-      // if (!isIn) {
-      try {
-        await this.$store.dispatch({
-          type: 'addToStation',
-          song,
-          station,
-        })
-        showSuccessMsg('added to playlist')
-      } catch (err) {
-        console.log(err)
-        showErrorMsg('Cannot add to playlist')
-      } finally {
-        this.showSongModal = false
-        this.showStationsSubMenu = false
-        // this.show = false
-      }
+      console.log('song', song)      
+      console.log('station', station)      
+      // const songAlreadyExist = this.stations.station.songs.find(s => s._id === song._id)
+      // console.log('songAlreadyExist', songAlreadyExist)
+      // console.log('station', station)
+      // if(songAlreadyExist) {
+      //   this.showAreYouSureModal = true
+      //   console.log('error msg');
+      // }else{
+
+        try {
+          await this.$store.dispatch({
+            type: 'addToStation',
+            song,
+            station,
+          })
+          showSuccessMsg('added to playlist')
+        } catch (err) {
+          console.log(err)
+          showErrorMsg('Cannot add to playlist')
+        } finally {
+          this.showSongModal = false
+          this.showStationsSubMenu = false
+          // this.show = false
+        }
+      // }  
     },
     async removeStation() {
       this.showDeleteModal = false
