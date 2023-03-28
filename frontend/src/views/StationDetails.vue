@@ -37,10 +37,14 @@
           </p>
           <div v-if="station.songs">
             <div class="likes-count-logo">
+              <div class="logo-container-header">
               <i class="logo-green" v-html="getSvg('greenLogo')"></i>
               <!-- <h1 v-if="user">{{ user.fullname }}</h1> -->
               <span class="small-logo-word">Muzikay</span>
-              <span @click="toggleModal">6,950,331 likes</span>•<span
+            </div>
+              <span class="likes-count" @click="toggleModal">6,950,331 likes</span>
+              <span class="dot">•</span>
+              <span
                 >{{ songsCount }},</span
               >
 
@@ -257,20 +261,12 @@ export default {
     }
   },
   methods: {
-<<<<<<< HEAD
-    handelYoutubeSong(song) {
-      eventBus.emit('youtube-song-details', song)
-    },
-    songDetails(song) {
-      eventBus.emit('song-details', song)
-=======
     handelYoutubeSong(video) {
       eventBus.emit('youtube-song-details', video)
     },
     songDetails(song) {
       if (!song.id) this.handelYoutubeSong(song)
       else eventBus.emit('song-details', song)
->>>>>>> 316fe65ef5a91d0a19c6dec5a5e8e7e226c911ef
     },
     dontAddSong() {
       this.showAreYouSureModal = false
@@ -458,29 +454,6 @@ export default {
     //     showErrorMsg('Cannot add to playlist')
     //   }
     async addToSelectedStation(song, station) {
-<<<<<<< HEAD
-      const songAlreadyExist = station.songs.find((s) => s.id === song.id)
-      //////////// need to pass an event while clicking an add anyway button/////////////
-      if (songAlreadyExist) {
-        this.showAreYouSureModal = true
-        console.log('yesssssssssssss')
-      } else {
-        try {
-          await this.$store.dispatch({
-            type: 'addToStation',
-            song,
-            station,
-          })
-          showSuccessMsg('added to playlist')
-        } catch (err) {
-          console.log(err)
-          showErrorMsg('Cannot add to playlist')
-        } finally {
-          this.showSongModal = false
-          this.showStationsSubMenu = false
-          this.show = false
-        }
-=======
       // const songAlreadyExist = station.songs.find((s) => s.id === song.id)
 
       // if (songAlreadyExist) {
@@ -503,7 +476,6 @@ export default {
         this.showSongModal = false
         this.showStationsSubMenu = false
         // this.show = false
->>>>>>> 316fe65ef5a91d0a19c6dec5a5e8e7e226c911ef
       }
     },
 
