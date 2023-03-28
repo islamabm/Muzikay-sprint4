@@ -18,8 +18,21 @@ export const stationStore = {
     searchStations: [],
     currStationId: null,
     userStations: [],
+    likedSongsData: [],
   },
   getters: {
+    // getUserLikedSongs({ stations }, userId) {
+    //   return stations.filter((s) => s.songs.filter(c.likedByUsers.filter()))
+    // },
+    getSongsLikedByUser({ stations }, username) {
+      return stations
+        .map((state) => state.songs)
+        .filter((s) => s.likedByUsers)
+        .includes(username)
+      //   .filter((name)=>name === userService.getLoggedinUser().fullname)
+      //    likedByUsers.includes('islam'))
+      // console.log(likedSongs)
+    },
     stations({ stations }) {
       return stations
     },
@@ -29,14 +42,21 @@ export const stationStore = {
     songs({ stations }) {
       return stations.songs
     },
-    // suerSongs({stations}){
-    //   // const LikedSongs = stations.songs.filter(())
-    // }
+    userLikedSongs({ stations }, userName) {
+      const a = stations.filter((state) =>
+        state.songs.filter((c) =>
+          c.likedByUsers.filter(l === userService.getLoggedinUser().fullname)
+        )
+      )
+      console.log(a)
+      // const LikedSongs = stations.songs.filter(())
+    },
 
     station({ stations, currStationId }) {
       const station = stations.find((s) => s._id === currStationId)
       return station
     },
+
     getUserStations(state) {
       const loggedinUser = userService.getLoggedinUser()
 
@@ -84,22 +104,23 @@ export const stationStore = {
     },
     // new
     updateSong(state, { song }) {
-      console.log("State stations:", state.stations);
-      console.log("Received song:", song);
-      
-      const stationIdx = state.stations.findIndex((s) => s._id === song.stationId);
-      console.log("Station index:", stationIdx);
-      
-      const station = state.stations[stationIdx];
-      console.log("Found station:", station);
-      
-      const songIdx = station.songs.findIndex((so) => so.id === song.id);
-      console.log("Song index:", songIdx);
-      
-      station.songs.splice(songIdx, 1, song);
-      state.stations[stationIdx] = station;
+      console.log('State stations:', state.stations)
+      console.log('Received song:', song)
+
+      const stationIdx = state.stations.findIndex(
+        (s) => s._id === song.stationId
+      )
+      console.log('Station index:', stationIdx)
+
+      const station = state.stations[stationIdx]
+      console.log('Found station:', station)
+
+      const songIdx = station.songs.findIndex((so) => so.id === song.id)
+      console.log('Song index:', songIdx)
+
+      station.songs.splice(songIdx, 1, song)
+      state.stations[stationIdx] = station
     },
-    
 
     setUserStations(state, stations) {
       state.userStations = stations
@@ -114,53 +135,40 @@ export const stationStore = {
     },
     removeStation(state, { stationId }) {
       state.stations = state.stations.filter((st) => st._id !== stationId)
+      this.$router.push('/')
     },
     createStation(state, { station }) {
-      if (station.name === 'Liked songs') {
-        if (station.songs) station.songs = likedSongs
-      } else station.songs = []
       state.userStations.push(station)
       state.stations.push(station)
     },
   },
   actions: {
     async addUserToSong({ commit, rootGetters }, { song, userStation }) {
-      const loggedinUser = rootGetters.loggedinUser;
-      console.log(loggedinUser);
+      const loggedinUser = rootGetters.loggedinUser
+      console.log(loggedinUser)
       try {
-        const { updatedSong, savedStation } = await stationService.addUserToSong(
-          song,
-          userStation,
-          loggedinUser
-        );
-    
-        
-        updatedSong.stationId = userStation._id;
-        
-      
-        commit({ type: 'updateSong', song: updatedSong });
-    
-       
-        return savedStation;
+        const { updatedSong, savedStation } =
+          await stationService.addUserToSong(song, userStation, loggedinUser)
+
+        updatedSong.stationId = userStation._id
+
+        commit({ type: 'updateSong', song: updatedSong })
+
+        return savedStation
       } catch (err) {
-        console.error('Cannot add song', err);
-        throw err;
+        console.error('Cannot add song', err)
+        throw err
       }
     },
-    
-    
-    
-    
 
     async loadStations(context) {
-      if (userService.getLoggedinUser())
-        try {
-          const stations = await stationService.query()
-          context.commit({ type: 'setStations', stations })
-        } catch (err) {
-          console.log('stationStore: Error in loadStations', err)
-          throw err
-        }
+      try {
+        const stations = await stationService.query()
+        context.commit({ type: 'setStations', stations })
+      } catch (err) {
+        console.log('stationStore: Error in loadStations', err)
+        throw err
+      }
     },
     async loadSearchStations(context) {
       try {
@@ -178,10 +186,12 @@ export const stationStore = {
         console.log('stationId', stationId)
         await stationService.remove(stationId)
         commit({ type: 'removeStation', stationId })
-        // this.$router.push(`/station/${state.station[stationId - 1]}`)
+        this.$router.push(`/`)
       } catch (err) {
         console.log('stationStore: Error in ', err)
         throw err
+      } finally {
+        this.$router.push('/')
       }
     },
 
@@ -198,6 +208,7 @@ export const stationStore = {
       try {
         const station = await stationService.createNewStation(StationName)
         commit({ type: 'createStation', station })
+        // return station
       } catch (err) {
         console.log('Could Not create station')
         throw err
@@ -226,11 +237,14 @@ export const stationStore = {
       }
     },
     async addToStation({ commit }, { song, station }) {
+      console.log('from the add to song song', song)
+      console.log('from the add to song station', station)
       try {
         const updatedStation = await stationService.addSongToStation(
           song,
           station
         )
+        console.log(updatedStation)
         commit({ type: 'editStation', station: updatedStation })
       } catch (err) {
         console.error('Cannot add song', err)

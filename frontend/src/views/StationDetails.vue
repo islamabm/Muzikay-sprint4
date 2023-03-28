@@ -421,31 +421,31 @@ export default {
     //     showErrorMsg('Cannot add to playlist')
     //   }
     async addToSelectedStation(song, station) {
-      const songAlreadyExist = station.songs.find(s => s.id === song.id)
+      // const songAlreadyExist = station.songs.find((s) => s.id === song.id)
 
-      if(songAlreadyExist) {
-        this.showAreYouSureModal = true
-        console.log('yesssssssssssss');
+      // if (songAlreadyExist) {
+      //   this.showAreYouSureModal = true
+      //   console.log('yesssssssssssss')
+      // } else {
+      console.log('station details song click', song)
+      console.log('station details playlist clicked', station)
+      try {
+        await this.$store.dispatch({
+          type: 'addToStation',
+          song,
+          station,
+        })
+        showSuccessMsg('added to playlist')
+      } catch (err) {
+        console.log(err)
+        showErrorMsg('Cannot add to playlist')
+      } finally {
+        this.showSongModal = false
+        this.showStationsSubMenu = false
+        // this.show = false
       }
-      else{
-
-        try {
-          await this.$store.dispatch({
-            type: 'addToStation',
-            song,
-            station,
-          })
-          showSuccessMsg('added to playlist')
-        } catch (err) {
-          console.log(err)
-          showErrorMsg('Cannot add to playlist')
-        } finally {
-          this.showSongModal = false
-          this.showStationsSubMenu = false
-          this.show = false
-        }
-      }  
     },
+
     async removeStation() {
       this.showDeleteModal = false
       try {
@@ -459,11 +459,11 @@ export default {
       }
     },
     toggleModal() {
-      if (this.station.createdBy.fullname === 'guest') {
-        this.showModal = !this.showModal
-      } else {
-        console.log('not user data')
-      }
+      // if (this.station.createdBy.fullname === 'guest') {
+      this.showModal = true
+      // } else {
+      // console.log('not user data')
+      // }
     },
     toggleSongModal(ev, song, idx) {
       const btn = ev.target

@@ -220,13 +220,13 @@ async function addUserToSong(song, station, loggedinUser) {
   return { updatedSong, savedStation }
 }
 
-async function addSongToStation(video, station) {
-  // console.log('video from addSongToStation', video)
-  // console.log('station from addSongToStation', station)
+async function addSongToStation(song, station) {
+  console.log('song from addSongToStation  servide', song)
+  console.log('station from addSongToStation service', station)
   if (!station) {
     throw new Error('Station parameter is undefined')
   }
-  const updatedStation = { ...station, songs: [...station.songs, video] }
+  const updatedStation = { ...station, songs: [...station.songs, song] }
   const savedStation = await save(updatedStation)
   return savedStation
 }

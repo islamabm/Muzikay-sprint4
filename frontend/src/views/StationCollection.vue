@@ -1,6 +1,6 @@
 <template>
   <section class="stations-app">
-    <StationsList :stations="stations"/>
+    <StationsList :stations="stations" />
   </section>
 </template>
 
@@ -16,6 +16,7 @@ export default {
       return this.$store.getters.loggedinUser
     },
     stations() {
+      console.log(this.$store.getters.stations)
       return this.$store.getters.stations
     },
   },
