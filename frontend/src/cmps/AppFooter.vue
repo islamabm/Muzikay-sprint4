@@ -9,9 +9,9 @@
       <img
         class="footer-details-img"
         :src="
-            station.songs[0].imgUrl
-              ? station.songs[0].imgUrl
-              : station.songs[0].url
+            station.songs[currSongIdx].imgUrl
+              ? station.songs[currSongIdx].imgUrl
+              : station.songs[currSongIdx].url
           "
       />
       <h3 class="footer-details-title">
@@ -32,6 +32,7 @@
 <script>
 import MediaPlayer from './MediaPlayer.vue'
 import BubblingHeart from './BubblingHeart.vue'
+import { eventBus } from "../services/event-bus.service.js"
 
 export default {
   name: 'AppFooter',
@@ -41,8 +42,25 @@ export default {
       currSongIdx: 0,
       hover: false,
       showModal: false,
+      song: null,
+      alive: false,
     }
   },
+  created() {
+      eventBus.on('song-details', (song) => {
+        // if(this.station){
+        //   this.station = song
+        // }else{
+          this.song = song
+          console.log(this.song);
+        // }
+        var delay = song.delay || 2000
+        this.alive = true
+        setTimeout(() => {
+          this.alive = false
+        },delay)
+      } )
+    },
   computed: {
     station() {
       return this.$store.getters.station

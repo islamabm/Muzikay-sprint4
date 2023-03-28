@@ -79,7 +79,7 @@
           v-for="(song, idx) in station.songs"
           :key="idx"
         >
-          <div class="img-and-title">
+          <div class="img-and-title" @click="songDetails(song)">
             <span>{{ idx + 1 }}</span>
             <img v-if="song.videoId" class="song-img" :src="song.url" />
             <img v-else class="song-img" :src="song.imgUrl" />
@@ -215,7 +215,11 @@ import Search from './Search.vue'
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
 import { userService } from '../services/user.service.js'
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+import {
+  eventBus,
+  showErrorMsg,
+  showSuccessMsg,
+} from '../services/event-bus.service.js'
 import MiniSearch from '../cmps/MiniSearch.vue'
 import BubblingHeart from '../cmps/BubblingHeart.vue'
 
@@ -243,6 +247,9 @@ export default {
     }
   },
   methods: {
+    songDetails(song) {
+      eventBus.emit('song-details', song)
+    },
     dontAddSong() {
       this.showAreYouSureModal = false
     },
