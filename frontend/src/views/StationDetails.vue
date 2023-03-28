@@ -119,7 +119,7 @@
           </div>
         </Draggable>
       </Container>
-      <MiniSearch />
+      <MiniSearch :handelYoutubeSong="handelYoutubeSong" />
 
       <div v-if="showSongModal" @click.self="toggleSongModal(null, null)">
         <div
@@ -247,6 +247,9 @@ export default {
     }
   },
   methods: {
+    handelYoutubeSong(song) {
+      eventBus.emit('youtube-song-details', song)
+    },
     songDetails(song) {
       eventBus.emit('song-details', song)
     },
