@@ -37,10 +37,14 @@
           </p>
           <div v-if="station.songs">
             <div class="likes-count-logo">
+              <div class="logo-container-header">
               <i class="logo-green" v-html="getSvg('greenLogo')"></i>
               <!-- <h1 v-if="user">{{ user.fullname }}</h1> -->
               <span class="small-logo-word">Muzikay</span>
-              <span @click="toggleModal">6,950,331 likes</span>•<span
+            </div>
+              <span class="likes-count" @click="toggleModal">6,950,331 likes</span>
+              <span class="dot">•</span>
+              <span
                 >{{ songsCount }},</span
               >
 
