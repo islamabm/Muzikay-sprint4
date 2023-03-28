@@ -253,7 +253,7 @@ export default {
       this.showDeleteModal = false
     },
     updateBodyBackgroundColor(color) {
-      console.log(color)
+      // console.log(color)
 
       const darkShade = {
         ...color,
@@ -269,7 +269,7 @@ export default {
         )}, ${Math.round(color.value[2] * 0.4)}, 0.7)`,
       }
 
-      console.log('shade', darkShade)
+      // console.log('shade', darkShade)
 
       const gradient = `linear-gradient(to bottom, ${color.rgba}, ${headerShade.rgba})`
       const darkGradient = `linear-gradient(to bottom, ${darkShade.rgba} 0%, rgba(0, 0, 0, 1) 30%)`
@@ -325,10 +325,10 @@ export default {
       img.src = corsProxyUrl + encodeURIComponent(imageSrc)
 
       img.onload = async () => {
-        console.log('Image loaded')
+        // console.log('Image loaded')
         try {
           const color = await fac.getColorAsync(img)
-          console.log('inside try', color)
+          // console.log('inside try', color)
           this.updateBodyBackgroundColor(color)
         } catch (e) {
           console.error(e)
