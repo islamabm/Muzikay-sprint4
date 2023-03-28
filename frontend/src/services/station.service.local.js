@@ -194,49 +194,33 @@ function createNewStation(name) {
   return newStation
 }
 
-<<<<<<< HEAD
 async function addUserToSong(song, station, loggedinUser) {
-  console.log('service station', station)
-  console.log('service song', song)
-  console.log('service user', loggedinUser)
+  console.log('service station', station);
+  console.log('service song', song);
+  console.log('service user', loggedinUser);
 
   if (!station) {
-    throw new Error('Station parameter is undefined')
+    throw new Error('Station parameter is undefined');
   }
 
   // Create a new song object with the updated likedByUsers array
   const updatedSong = {
     ...song,
-    stationId: station._id,
     likedByUsers: [...song.likedByUsers, loggedinUser.fullname],
-  }
+  };
 
   const updatedStation = {
     ...station,
-    songs: station.songs.map((s) => (s.id === song.id ? updatedSong : s)),
-  }
-  console.log('this is the updated station', updatedStation)
+    songs: station.songs.map(s => s.id === song.id ? updatedSong : s),
+  };
+  console.log('this is the updated station', updatedStation);
 
-  const savedStation = await save(updatedStation)
+  const savedStation = await save(updatedStation);
 
-  return { updatedSong, savedStation }
+  return { updatedSong, savedStation };
 }
 
-=======
-async function addUserToSong(song, station, user) {
-  if (!station) {
-    throw new Error('Station parameter is undefined')
-  }
-  const updatedSong = {
-    ...song,
-    likedByUsers: [...song.likedByUsers, user.fullname],
-  }
-  const updatedStation = { ...station, songs: [...station.songs, updatedSong] }
-  const savedStation = await save(updatedStation)
-  return savedStation
-}
 
->>>>>>> 52769aebae79a6a387e6e2fcadddb3756f50644d
 async function addSongToStation(video, station) {
   // console.log('video from addSongToStation', video)
   // console.log('station from addSongToStation', station)
