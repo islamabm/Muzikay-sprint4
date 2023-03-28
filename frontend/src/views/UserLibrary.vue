@@ -1,7 +1,7 @@
 <template>
   <section class="user-preview-section">
     <h1 class="user-library-header">Playlists</h1>
-    <Container @drop="onDrop" class="user-library-container">
+    <Container @drop="onDrop" class="user-library-grid">
       <Draggable
         class="station"
         v-for="station in userStationsData"

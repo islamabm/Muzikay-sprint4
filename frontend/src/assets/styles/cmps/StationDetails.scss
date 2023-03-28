@@ -1,5 +1,6 @@
 .station-details {
   // width: calc(100vw - 300px);
+  
   .header-content {
     width: 100%;
     display: flex;
@@ -8,85 +9,75 @@
     background-color: $clr1;
     padding-block-end: 1.5rem;
   }
-  &-header {
-    // position: relaaptive;
-    // display: flex;
-    // align-items: center;
-    // padding: 24px;
-    // background-color: $clr1;
-    // border-radius: 5px;
-    // width: calc(100vw - 300px);
+  .likes-count-logo {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
 
-    .likes-count-logo {
-      display: flex;
-      align-items: center;
-      gap: 3px;
+  .logo-green {
+    height: 24px;
+    width: 24px;
+    margin-inline-end: 5px;
+  }
+
+  img {
+    width: 240px;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 1px;
+    margin-inline-end: 24px;
+    cursor: pointer;
+  }
+
+  .station-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Roboto-Regular';
+    margin-block-start: 2rem;
+
+    .playlist-word {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: $clr6;
+      cursor: pointer;
+      margin-block-end: 1rem;
+      font-family: 'Circular-book';
     }
 
-    .logo-green {
-      height: 24px;
-      width: 24px;
-      margin-inline-end: 5px;
-    }
-
-    img {
-      width: 240px;
-      height: 240px;
-      object-fit: cover;
-      border-radius: 1px;
-      margin-inline-end: 24px;
+    .station-name {
+      font-size: 6rem;
+      width: 100%;
+      font-weight: 900;
+      color: $clr6;
+      margin-block-end: 8px;
+      font-family: 'Circular-book';
       cursor: pointer;
     }
 
-    .station-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      font-family: 'Roboto-Regular';
-      margin-block-start: 2rem;
+    .station-description {
+      font-size: 0.9rem;
+      color: $clr3;
+      width: 100%;
+      margin-block-start: 8px;
+      margin-block-end: 0;
+      cursor: pointer;
+    }
 
-      .playlist-word {
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: $clr6;
-        cursor: pointer;
-        margin-block-end: 1rem;
-        font-family: 'Circular-book';
-      }
+    .small-logo-word {
+      font-family: 'Circular-book';
+      line-height: 24px;
+      margin-inline-start: -5px;
+    }
 
-      .station-name {
-        font-size: 6rem;
-        width: 100%;
-        font-weight: 900;
-        color: $clr6;
-        margin-block-end: 8px;
-        font-family: 'Circular-book';
-        cursor: pointer;
-      }
+    span {
+      font-size: 14px;
+      color: $clr6;
+      margin-inline-end: 8px;
 
-      .station-description {
-        font-size: 0.9rem;
-        color: $clr3;
-        width: 100%;
-        margin-block-start: 8px;
-        margin-block-end: 0;
-        cursor: pointer;
-      }
-
-      .small-logo-word {
-        font-family: 'Circular-book';
-        line-height: 24px;
-        margin-inline-start: -5px;
-      }
-
-      span {
-        font-size: 14px;
-        color: $clr6;
-        margin-inline-end: 8px;
-
-        &:last-child {
-          margin-inline-end: 0;
-        }
+      &:last-child {
+        margin-inline-end: 0;
       }
     }
   }
@@ -108,7 +99,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 12px;
-
+    font-family: Circular-medium;
     &:hover {
       background-color: rgba($clr10, 0.2);
 
@@ -174,6 +165,7 @@
       font-size: 0.95rem;
       font-weight: 400;
       color: $clr6;
+      transform: translate(-15%,30%);
       font-family: Circular-book;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -196,6 +188,7 @@
       width: max-content;
       white-space: nowrap;
       transform: translateY(1%);
+      
     }
 
     @media screen and (min-width: 1600px) {
@@ -213,7 +206,7 @@
       font-size: 0.8rem;
       color: rgba($clr3, 0.6);
       width: 35px;
-
+      font-family: Circular-medium;
       transform: translateX(100%);
       cursor: default;
     }
@@ -416,4 +409,144 @@
 
 .song-item:hover .hover-effect {
   opacity: 1;
+}
+
+//SONG LIST MEDIA
+@media (max-width: $narrow-breakpoint) {
+  .songs-list-details {
+    margin-block-end: 40px;
+    min-height: 10vh;
+
+    .song-item {
+      padding: 8px;
+
+      .img-and-title {
+        width: 270px;
+      }
+
+      .song-img {
+        width: 30px;
+        height: 30px;
+      }
+
+      .song-title {
+        font-size: 0.9rem;
+        max-width: 55%;
+      }
+
+      .posted-at {
+        font-size: 0.7rem;
+        margin-inline-start: 20%;
+      }
+
+      .song-duration {
+        font-size: 0.7rem;
+        width: 25px;
+      }
+
+      .like-song-icon {
+        margin-inline-start: 5px;
+        transform: translate(10%, -10%);
+      }
+    }
+  }
+}
+
+//MOBILE song list
+@media (max-width: 500px) {
+  .songs-list-details {
+    .song-item {
+      padding: 2px;
+
+      .img-and-title {
+        width: 100%;
+        max-width: 220px;
+      }
+
+      .song-img {
+        width: 25px;
+        height: 25px;
+      }
+
+      .song-title {
+        font-size: 0.7rem;
+        max-width: 50%;
+      }
+
+      .posted-at {
+        opacity: 0;
+      }
+
+      .song-duration {
+        font-size: 0.7rem;
+        width: 35px;
+      }
+.list-end {
+  transform:translate(-18%);
+}
+      .btn-open-modal {
+        margin-left: auto;
+        margin-right: 0;
+        transform: translateX(10%);
+      }
+    }
+    .hover-effect {
+      opacity: 1;
+    }
+    .options-song-icon{
+      opacity: 0;
+    }
+  }
+}
+
+
+//HEADER
+@media (max-width: $narrow-breakpoint) {
+  .station-details {
+    .header-content {
+      padding: 16px;
+    }
+
+    img {
+      width: 180px;
+      height: 180px;
+      margin-inline-end: 16px;
+    }
+
+    .station-info {
+      margin-block-start: 1rem;
+
+      .playlist-word {
+        font-size: 0.8rem;
+        margin-block-end: 0.5rem;
+      }
+
+      .station-name {
+        font-size: 3.6rem;
+        margin-block-end: 4px;
+      }
+
+      .station-description {
+        font-size: 0.8rem;
+        margin-block-start: 4px;
+      }
+
+ .likes-count-logo{
+  opacity: 0;
+ }
+    }
+  }
+}
+
+
+@media (max-width: 500px) {
+  .table-header {
+    div:nth-child(3) {
+      opacity:0;
+    }
+    .album{
+      opacity:0;
+    }
+    
+  }
 }

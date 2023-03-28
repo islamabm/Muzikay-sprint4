@@ -12,9 +12,8 @@
 }
 
 .edit-details-section {
-  background-color: $clr4;
+  background-image: linear-gradient(to bottom, $clr8, $clr4);
   padding: 50px 25px;
-  // padding-right: 10px;
   border-radius: 10px;
   width: 530px;
   height: 385px;
@@ -27,11 +26,12 @@
     align-items: center;
 
     h3 {
-      margin-bottom: 18px;
+      margin-block-end:0.5rem;
+      padding-block-start: 0.5rem;
       position: absolute;
       font-size: 24px;
       font-weight: 600;
-      color: #ffffff;
+      color: $clr6;
       font-family: 'Circular-book';
     }
 
@@ -39,12 +39,12 @@
       background: none;
       border: none;
       font-size: 20px;
-      color: #ffffff;
+      color: $clr6;
       cursor: pointer;
       float: right;
       position: absolute;
       right: 33%;
-      top: 28%;
+      top: 27.6%;
     }
   }
 
@@ -81,34 +81,33 @@
         border-radius: 4px;
         font-size: 14px;
         color: #ffffff;
-        background-color: #333333;
+        background-color: $clr12;
         width: 280px;
         resize: none;
-      }
-      .edit-name:focus {
-        border: 1px solid green;
+        font-family: Circular-medium;
       }
       .edit-text-area {
         border: none;
-        background-color: #333333;
+        background-color: $clr12;
         height: 129px;
         border-radius: 6px;
         padding: 10px;
         font-size: 14.5px;
+        font-family: Circular-medium;
       }
 
       .btn-save-changes {
-        background-color: #ffffff;
-        color: #000000;
-        padding: 8px 20px;
+        background-color: $clr6;
+        color: $clr2;
+        padding: 10px 20px;
         font-size: 16px;
         font-weight: 600;
         border-radius: 25px;
         cursor: pointer;
         align-self: flex-end;
-        width: 90px;
+        width: 95px;
         height: 45px;
-        margin-top: 8px;
+        margin-block-start: 17px;
       }
     }
   }

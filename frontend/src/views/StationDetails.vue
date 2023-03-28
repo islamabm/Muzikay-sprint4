@@ -58,7 +58,7 @@
       </div>
       <div class="table-header">
         <span class="title-container"><span>#</span>Title</span>
-        <span>Album</span>
+        <span class="album">Album</span>
         <div>
           <span>Date added</span>
         </div>

@@ -1,6 +1,6 @@
 <template>
   <section class="stations-app">
-    <StationsList :stations="stations" @removeStation="removeStation" />
+    <StationsList :stations="stations"/>
   </section>
 </template>
 

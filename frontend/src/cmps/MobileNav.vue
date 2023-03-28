@@ -1,19 +1,58 @@
 <template>
   <article class="mobile-nav">
-    <RouterLink class="router-link" to="/station/collection">
-      <i class="home-icon icons" :class="{ activeLink: $route.path === '/station/collection' }" v-html="getSvg('homeIcon')"></i>
+    <RouterLink
+      to="/station/collection"
+      class="router-link"
+      exact
+      :class="{ activeHome: $route.path === '/station/collection' }"
+      @click="toggleHomeIcon"
+    >
+      <i
+        class="home-icon icons"
+        v-if="$route.path === '/station/collection'"
+        v-html="getSvg('homeIconActive')"
+      ></i>
+      <i class="home-icon icons" v-else v-html="getSvg('homeIcon')"></i>
+      Home
     </RouterLink>
 
-    <RouterLink class="router-link" to="/station/search">
-      <i class="search-icon icons" :class="{ activeLink: $route.path === '/station/search' }" v-html="getSvg('searchIcon')"></i>
+    <RouterLink
+      class="router-link"
+      to="/station/search"
+      exact
+      :class="{ activeSearch: $route.path === '/station/search' }"
+      @click="toggleSearchIcon"
+    >
+      <i
+        class="search-icon icons"
+        v-if="$route.path === '/station/search'"
+        v-html="getSvg('searchIconActive')"
+      ></i>
+      <i class="search-icon icons" v-else v-html="getSvg('searchIcon')"></i>
+      Search
     </RouterLink>
 
-    <RouterLink class="router-link" to="/station/library">
-      <i class="library-icon icons" :class="{ activeLink: $route.path === '/station/library' }" v-html="getSvg('libraryIcon')"></i>
-    </RouterLink>
+    <RouterLink
+    class="router-link"
+            to="/station/library"
+            exact
+            :class="{ activeLibrary: $route.path === '/station/library' }"
+            @click="toggleLibraryIcon"
+          >
+            <i
+              class="library-icon icons"
+              v-if="$route.path === '/station/library'"
+              v-html="getSvg('libraryIconActive')"
+            ></i>
+            <i
+              class="library-icon icons"
+              v-else
+              v-html="getSvg('libraryIcon')"
+            ></i>
+            Library
+          </RouterLink>
   </article>
 </template>
-
 
 <script>
 import svgService from '../services/SVG.service.js'
@@ -22,6 +61,18 @@ export default {
   methods: {
     getSvg(iconName) {
       return svgService.getSpotifySvg(iconName)
+    },
+    toggleHomeIcon() {
+      this.homeIcon =
+        this.homeIcon === 'homeIcon' ? 'homeIconActive' : 'homeIcon'
+    },
+    toggleSearchIcon() {
+      this.searchIcon =
+        this.searchIcon === 'searchIcon' ? 'searchIconActive' : 'searchIcon'
+    },
+    toggleLibraryIcon() {
+      this.libraryIcon =
+        this.libraryIcon === 'libraryIcon' ? 'libraryIconActive' : 'libraryIcon'
     },
   },
 }

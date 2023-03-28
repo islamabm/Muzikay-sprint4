@@ -1,9 +1,9 @@
 .categories-container {
   display: grid;
-
   padding-inline: 1.5em;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 20px;
+  margin-block-end: 120px;
   border-radius: 10px;
   .category-container {
     position: relative;
@@ -29,6 +29,6 @@
   }
 }
 
-.search-header {
-  padding-inline: 1rem 0;
-}
+// .search-header {
+//   padding-inline: 1rem 0;
+// }

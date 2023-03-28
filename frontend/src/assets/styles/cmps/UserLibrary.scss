@@ -13,8 +13,14 @@
 }
 
 .user-preview-section {
-  display: flex;
-  align-items: start;
-  flex-direction: column;
   padding: 1rem;
+  margin-block-end: 150px;
+}
+
+
+.user-library-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  border-radius: 10px;
 }
