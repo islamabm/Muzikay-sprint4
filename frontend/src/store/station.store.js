@@ -24,14 +24,16 @@ export const stationStore = {
     // getUserLikedSongs({ stations }, userId) {
     //   return stations.filter((s) => s.songs.filter(c.likedByUsers.filter()))
     // },
-    getSongsLikedByUser({ stations }, username) {
-      return stations
-        .map((state) => state.songs)
-        .filter((s) => s.likedByUsers)
-        .includes(username)
-      //   .filter((name)=>name === userService.getLoggedinUser().fullname)
-      //    likedByUsers.includes('islam'))
-      // console.log(likedSongs)
+    getSongsLikedByUser(state) {
+      return state.stations
+
+      //   .map((st) => st.songs)
+      //   .filter((s) => s.likedByUsers)
+      //   .includes(userService.getLoggedinUser().fullname)
+
+      // state.likedSongsData = userLikedSongs
+      // console.log(userLikedSongs)
+      // return userLikedSongs
     },
     stations({ stations }) {
       return stations
@@ -42,15 +44,15 @@ export const stationStore = {
     songs({ stations }) {
       return stations.songs
     },
-    userLikedSongs({ stations }, userName) {
-      const a = stations.filter((state) =>
-        state.songs.filter((c) =>
-          c.likedByUsers.filter(l === userService.getLoggedinUser().fullname)
-        )
-      )
-      console.log(a)
-      // const LikedSongs = stations.songs.filter(())
-    },
+    // userLikedSongs({ stations }, userName) {
+    //   const a = stations.filter((state) =>
+    //     state.songs.filter((c) =>
+    //       c.likedByUsers.filter(l === userService.getLoggedinUser().fullname)
+    //     )
+    //   )
+    //   console.log(a)
+    //   // const LikedSongs = stations.songs.filter(())
+    // },
 
     station({ stations, currStationId }) {
       const station = stations.find((s) => s._id === currStationId)
@@ -139,6 +141,7 @@ export const stationStore = {
     },
     createStation(state, { station }) {
       state.userStations.push(station)
+      console.log(userStations)
       state.stations.push(station)
     },
   },

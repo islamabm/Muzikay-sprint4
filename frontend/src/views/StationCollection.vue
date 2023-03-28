@@ -16,7 +16,6 @@ export default {
       return this.$store.getters.loggedinUser
     },
     stations() {
-      console.log(this.$store.getters.stations)
       return this.$store.getters.stations
     },
   },
@@ -34,6 +33,10 @@ export default {
     // removeToy(toyId) {
     //   this.$store.dispatch({ type: 'removeToy', id: toyId })
     // },
+  },
+  created() {
+    console.log(this.$store.getters.getSongsLikedByUser)
+    this.$store.getters.getSongsLikedByUser
   },
   components: {
     StationsList,
