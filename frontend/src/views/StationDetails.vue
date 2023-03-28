@@ -90,13 +90,19 @@
             >
               {{ song.title }}
             </p>
+
           </div>
+
+          <p class="song-album">
+            {{ song.album }}
+          </p>
+          
           <p class="posted-at">1 day ago</p>
           <!-- @toggleLike="toggleSongLike" -->
           <div class="flex-end list-end">
             <div class="like-song-icon">
               <BubblingHeart
-                class="hover-effect heart-song"
+              :class="['heart-song', heartClicked ? '' : 'hover-effect']"
                 :songIndex="idx"
                 :liked="song.liked"
                 @click="addUserToSong(song)"
@@ -119,6 +125,10 @@
           </div>
         </Draggable>
       </Container>
+
+
+
+
       <MiniSearch />
 
       <div v-if="showSongModal" @click.self="toggleSongModal(null, null)">
@@ -239,6 +249,7 @@ export default {
       selectedIndex: null,
       showStationsSubMenu: false,
       showAreYouSureModal: false,
+      heartClicked: false,
     }
   },
   methods: {
@@ -280,6 +291,7 @@ export default {
     },
 
     async addUserToSong(song) {
+      this.heartClicked = !this.heartClicked;
       const station = this.station
       try {
         const updatedStation = await this.$store.dispatch({
