@@ -90,22 +90,25 @@
             >
               {{ song.title }}
             </p>
-
           </div>
 
           <p class="song-album">
             {{ song.album }}
           </p>
-          
+
           <p class="posted-at">1 day ago</p>
           <!-- @toggleLike="toggleSongLike" -->
           <div class="flex-end list-end">
             <div class="like-song-icon">
               <BubblingHeart
-              :class="['heart-song', heartClicked ? '' : 'hover-effect']"
+                class="heart-song station-details-heart"
+                :class="{ 'hover-effect': clickedHeartIndex !== idx }"
                 :songIndex="idx"
                 :liked="song.liked"
-                @click="addUserToSong(song)"
+                @click="
+                  addUserToSong(song);
+                  onHeartClick(idx)
+                "
               />
               <!-- @toggleLikgit ngLike" -->
             </div>
@@ -125,15 +128,7 @@
           </div>
         </Draggable>
       </Container>
-<<<<<<< HEAD
-
-
-
-
-      <MiniSearch />
-=======
       <MiniSearch :handelYoutubeSong="handelYoutubeSong" />
->>>>>>> b1888fd14c8a27c5a254ad68a422e9058d156106
 
       <div v-if="showSongModal" @click.self="toggleSongModal(null, null)">
         <div
@@ -229,7 +224,11 @@ import Search from './Search.vue'
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
 import { userService } from '../services/user.service.js'
-import { eventBus, showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+import {
+  eventBus,
+  showErrorMsg,
+  showSuccessMsg,
+} from '../services/event-bus.service.js'
 import MiniSearch from '../cmps/MiniSearch.vue'
 import BubblingHeart from '../cmps/BubblingHeart.vue'
 
@@ -253,19 +252,16 @@ export default {
       selectedIndex: null,
       showStationsSubMenu: false,
       showAreYouSureModal: false,
-<<<<<<< HEAD
-      heartClicked: false,
-=======
       wantAnyWay: false,
->>>>>>> b1888fd14c8a27c5a254ad68a422e9058d156106
+      clickedHeartIndex: null,
     }
   },
   methods: {
     handelYoutubeSong(song) {
-      eventBus.emit('youtube-song-details',song)
+      eventBus.emit('youtube-song-details', song)
     },
     songDetails(song) {
-      eventBus.emit('song-details',song)
+      eventBus.emit('song-details', song)
     },
     dontAddSong() {
       this.showAreYouSureModal = false
@@ -305,7 +301,6 @@ export default {
     },
 
     async addUserToSong(song) {
-      this.heartClicked = !this.heartClicked;
       const station = this.station
       try {
         const updatedStation = await this.$store.dispatch({
@@ -341,6 +336,14 @@ export default {
         this.activeTitle = null
       } else {
         this.activeTitle = idx
+      }
+    },
+    onHeartClick(index) {
+
+      if (this.clickedHeartIndex === index) {
+        this.clickedHeartIndex = null
+      } else {
+        this.clickedHeartIndex = index
       }
     },
     async getDominantColor(imageSrc) {
@@ -446,14 +449,12 @@ export default {
     //     showErrorMsg('Cannot add to playlist')
     //   }
     async addToSelectedStation(song, station) {
-      const songAlreadyExist = station.songs.find(s => s.id === song.id)
+      const songAlreadyExist = station.songs.find((s) => s.id === song.id)
       //////////// need to pass an event while clicking an add anyway button/////////////
-      if(songAlreadyExist) {
+      if (songAlreadyExist) {
         this.showAreYouSureModal = true
-        console.log('yesssssssssssss');
-      }
-      else{
-
+        console.log('yesssssssssssss')
+      } else {
         try {
           await this.$store.dispatch({
             type: 'addToStation',
@@ -469,7 +470,7 @@ export default {
           this.showStationsSubMenu = false
           this.show = false
         }
-      }  
+      }
     },
     async removeStation() {
       this.showDeleteModal = false

@@ -580,6 +580,9 @@
     }
   }
 }
+.station-details-heart input[type="checkbox"]:checked + .label .heart-svg {
+  opacity: 1 !important;
+}
 .hover-effect {
   opacity: 0;
 }
