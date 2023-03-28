@@ -119,6 +119,60 @@
           </div>
         </Draggable>
       </Container>
+
+      <Container
+        @drop="onDrop"
+        v-if="station.songs && station.name === 'Liked songs'"
+        class="songs-list-details"
+      >
+        <Draggable
+          @mouseover="currDraggableIdx = idx"
+          @mouseleave="currDraggableIdx = null"
+          class="song-item"
+          v-for="(song, idx) in likedUserSongs"
+          :key="idx"
+        >
+          <div class="img-and-title" @click="songDetails(song)">
+            <span>{{ idx + 1 }}</span>
+            <img v-if="song.videoId" class="song-img" :src="song.url" />
+            <img v-else class="song-img" :src="song.imgUrl" />
+            <p
+              class="song-title"
+              :class="{ active: activeTitle === idx }"
+              @click="toggleActiveTitle(idx)"
+            >
+              {{ song.title }}
+            </p>
+          </div>
+          <p class="posted-at">1 day ago</p>
+          <!-- @toggleLike="toggleSongLike" -->
+          <div class="flex-end list-end">
+            <div class="like-song-icon">
+              <BubblingHeart
+                class="hover-effect heart-song"
+                :songIndex="idx"
+                :liked="song.liked"
+                @click="addUserToSong(song)"
+              />
+              <!-- @toggleLikgit ngLike" -->
+            </div>
+            <p class="song-duration">1:40</p>
+            <div>
+              <button
+                class="btn-open-modal"
+                ref="songButtons"
+                @click="toggleSongModal($event, song, idx)"
+              >
+                <i
+                  class="options-song-icon hover-effect"
+                  v-html="getSvg('songOptionsIcon')"
+                ></i>
+              </button>
+            </div>
+          </div>
+        </Draggable>
+      </Container>
+
       <MiniSearch :handelYoutubeSong="handelYoutubeSong" />
 
       <div v-if="showSongModal" @click.self="toggleSongModal(null, null)">
@@ -560,6 +614,9 @@ export default {
     },
     station() {
       return this.$store.getters.station
+    },
+    likedUserSongs() {
+      return this.$store.getters.getSongsLikedByUser
     },
     stationCount() {
       //computed can't do this

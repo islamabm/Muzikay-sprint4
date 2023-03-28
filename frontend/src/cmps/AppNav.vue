@@ -206,6 +206,9 @@ export default {
     userStations() {
       return this.$store.getters.getUserStations
     },
+    // stations() {
+    //   return this.$store.getters.stations
+    // },
     // userStationsData() {
     //   return (this.userStationsData = this.userStations)
     // },

@@ -21,19 +21,15 @@ export const stationStore = {
     likedSongsData: [],
   },
   getters: {
-    // getUserLikedSongs({ stations }, userId) {
-    //   return stations.filter((s) => s.songs.filter(c.likedByUsers.filter()))
-    // },
     getSongsLikedByUser(state) {
+      // const loggedInUser = userService.getLoggedinUser().fullname
       return state.stations
-
-      //   .map((st) => st.songs)
-      //   .filter((s) => s.likedByUsers)
-      //   .includes(userService.getLoggedinUser().fullname)
-
-      // state.likedSongsData = userLikedSongs
-      // console.log(userLikedSongs)
-      // return userLikedSongs
+        .filter((st) => st.likedByUsers.length > 0)
+        .flatMap((st) =>
+          st.songs.filter((song) =>
+            song.likedByUsers.includes(userService.getLoggedinUser().fullname)
+          )
+        )
     },
     stations({ stations }) {
       return stations
@@ -140,6 +136,7 @@ export const stationStore = {
       this.$router.push('/')
     },
     createStation(state, { station }) {
+      // if (station.name === 'Liked songs') station.songs = state.likedSongsData
       state.userStations.push(station)
       console.log(userStations)
       state.stations.push(station)
@@ -211,7 +208,7 @@ export const stationStore = {
       try {
         const station = await stationService.createNewStation(StationName)
         commit({ type: 'createStation', station })
-        // return station
+        return station
       } catch (err) {
         console.log('Could Not create station')
         throw err
