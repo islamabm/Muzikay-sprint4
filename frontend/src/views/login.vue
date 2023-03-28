@@ -19,7 +19,7 @@
         <li class="btn-li">
           <button type="button" class="spotify-login-facebook-btn spotify-btn">
             <span class="login-li-span">
-              <svg class="login-li-svg">f</svg>
+              <img class="fb-logo-img" src="./../assets/img/fb-icon.png"/>
               Continue With Facebook
             </span>
           </button>
@@ -27,19 +27,18 @@
         <li class="btn-li">
           <button type="button" class="spotify-login-apple-btn spotify-btn">
             <span class="login-li-span">
-              <svg class="login-li-svg">a</svg>
+              <img class="apple-logo-img" src="./../assets/img/apple.png"/>
               Continue With Apple
             </span>
           </button>
         </li>
         <li class="btn-li">
           <button type="button" class="spotify-login-google-btn spotify-btn">
+            <img
+              class="google-img"
+              src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png"
+            />
             <span class="login-li-span">
-              <img
-                class="google-img"
-                src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png"
-              />
-              <svg class="login-li-svg"></svg>
               Continue With Google
             </span>
           </button>
@@ -80,7 +79,7 @@
             <input type="checkbox" class="checkbox-input" />
             <span class="spotify-form-validitions-Remember">Remember me</span>
           </div>
-          <button type="submit" class="login-btn">Login</button>
+          <button type="submit" class="login-btn">LOG IN</button>
         </div>
         <hr />
       </form>

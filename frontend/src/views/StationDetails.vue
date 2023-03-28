@@ -37,10 +37,14 @@
           </p>
           <div v-if="station.songs">
             <div class="likes-count-logo">
+              <div class="logo-container-header">
               <i class="logo-green" v-html="getSvg('greenLogo')"></i>
               <!-- <h1 v-if="user">{{ user.fullname }}</h1> -->
               <span class="small-logo-word">Muzikay</span>
-              <span @click="toggleModal">6,950,331 likes</span>•<span
+            </div>
+              <span class="likes-count" @click="toggleModal">6,950,331 likes</span>
+              <span class="dot">•</span>
+              <span
                 >{{ songsCount }},</span
               >
 
@@ -91,15 +95,24 @@
               {{ song.title }}
             </p>
           </div>
+
+          <p class="song-album">
+            {{ song.album }}
+          </p>
+
           <p class="posted-at">1 day ago</p>
           <!-- @toggleLike="toggleSongLike" -->
           <div class="flex-end list-end">
             <div class="like-song-icon">
               <BubblingHeart
-                class="hover-effect heart-song"
+                class="heart-song station-details-heart"
+                :class="{ 'hover-effect': clickedHeartIndex !== idx }"
                 :songIndex="idx"
                 :liked="song.liked"
-                @click="addUserToSong(song)"
+                @click="
+                  addUserToSong(song);
+                  onHeartClick(idx)
+                "
               />
               <!-- @toggleLikgit ngLike" -->
             </div>
@@ -298,6 +311,7 @@ export default {
       showStationsSubMenu: false,
       showAreYouSureModal: false,
       wantAnyWay: false,
+      clickedHeartIndex: null,
     }
   },
   methods: {
@@ -381,6 +395,14 @@ export default {
         this.activeTitle = null
       } else {
         this.activeTitle = idx
+      }
+    },
+    onHeartClick(index) {
+
+      if (this.clickedHeartIndex === index) {
+        this.clickedHeartIndex = null
+      } else {
+        this.clickedHeartIndex = index
       }
     },
     async getDominantColor(imageSrc) {
