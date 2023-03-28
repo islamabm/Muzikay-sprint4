@@ -68,13 +68,19 @@
       <div class="liked-create-nav">
         <a @click="createStation" class="create-container">
           <div class="btn">
-            <font-awesome-icon class="plus-sign icons" :icon="['fas', 'plus']" />
+            <font-awesome-icon
+              class="plus-sign icons"
+              :icon="['fas', 'plus']"
+            />
           </div>
           Create Playlist
         </a>
 
         <a class="liked-songs" @click="onClickLikedSong">
-          <font-awesome-icon class="heart-icon icons" :icon="['fas', 'heart']" />
+          <font-awesome-icon
+            class="heart-icon icons"
+            :icon="['fas', 'heart']"
+          />
           Liked Songs
         </a>
       </div>
@@ -174,7 +180,6 @@ export default {
       try {
         this.stationCounter++
         const StationName = `My Playlist #${this.stationCounter}`
-
         await this.$store.dispatch({ type: 'createStation', StationName })
       } catch (err) {
         console.log('err')
@@ -202,6 +207,7 @@ export default {
     //   return (this.userStationsData = this.userStations)
     // },
   },
+
   components: {
     FontAwesomeIcon,
     Container,

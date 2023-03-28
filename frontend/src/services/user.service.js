@@ -1,9 +1,9 @@
-// import { storageService } from './async-storage.service'
+import { storageService } from './async-storage.service'
 // import { httpService } from './http.service'
 import { store } from '../store/store'
 // import { socketService, SOCKET_EVENT_USER_UPDATED, SOCKET_EMIT_USER_WATCH } from './socket.service'
 import { showSuccessMsg } from './event-bus.service'
-
+import { utilService } from './util.service'
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 
 export const userService = {
@@ -16,7 +16,7 @@ export const userService = {
   getById,
   remove,
   update,
-  changeScore,
+  //   changeScore,
 }
 
 window.userService = userService
@@ -66,15 +66,19 @@ async function login(userCred) {
   //   const user = await httpService.post('auth/login', userCred)
   //   if (user) {
   // socketService.login(user._id)
+
   return saveLocalUser(user)
   //   }
 }
 async function signup(userCred) {
+  console.log('service', userCred)
   //   userCred.score = 10000
   //   if (!userCred.imgUrl)
   //     userCred.imgUrl =
   //       'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
   const user = await storageService.post('user', userCred)
+  const users = utilService.loadFromStorage('user')
+  console.log(users)
   //   const user = await httpService.post('auth/signup', userCred)
   //   socketService.login(user._id)
   return saveLocalUser(user)
@@ -97,6 +101,7 @@ function saveLocalUser(user) {
   user = {
     _id: user._id,
     fullname: user.fullname,
+    stations: [],
     // imgUrl: user.imgUrl,
   }
   sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))

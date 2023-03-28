@@ -1,6 +1,10 @@
 // import { stationService } from '../services/station.service.local'
 import { stationService } from '../services/station.service.local.js'
 import { storageService } from '../services/async-storage.service.js'
+import { utilService } from '../services/util.service.js'
+import { userService } from '../services/user.service.js'
+// import { userStore } from './user.store.js'
+
 // export function getActionRemoveStation(stationId) {
 //   return {
 //     type: 'removeStation',
@@ -30,13 +34,18 @@ export const stationStore = {
       const station = stations.find((s) => s._id === currStationId)
       return station
     },
-    getUserStations({ stations }) {
-      const userStations = stations.filter(
-        (s) => s.createdBy.fullname === 'guest'
-      )
-
-      return userStations
-      // }
+    getUserStations(state) {
+      const loggedinUser = userService.getLoggedinUser()
+      console.log(loggedinUser)
+      console.log(state.stations)
+      if (loggedinUser) {
+        const userStations = state.stations.filter(
+          (s) => s.createdBy.fullname === loggedinUser.fullname
+        )
+        console.log('user stations stotre', userStations)
+        return userStations
+      }
+      return state.userStations
     },
     stationById: (state) => (id) => {
       const foundStation = state.stations.find((station) => {
@@ -65,13 +74,9 @@ export const stationStore = {
       state.currUserStationId = stationId
     },
     removeSong(state, { songId, stationId }) {
-      console.log('mutation', songId)
-      console.log('mutation', stationId)
       const stationIdx = state.stations.findIndex((s) => s._id === stationId)
-      // console.log(station)
       const station = state.stations[stationIdx]
       const songIdx = station.songs.findIndex((so) => so.id === songId)
-
       station.songs.splice(songIdx, 1)
       state.stations[stationIdx] = station
     },
@@ -92,20 +97,20 @@ export const stationStore = {
     },
     createStation(state, { station }) {
       state.userStations.push(station)
+      console.log(state.userStations)
       state.stations.push(station)
-      this.$router.push(`/station/${station._id}`)
-      console.log(StationName)
     },
   },
   actions: {
     async loadStations(context) {
-      try {
-        const stations = await stationService.query()
-        context.commit({ type: 'setStations', stations })
-      } catch (err) {
-        console.log('stationStore: Error in loadStations', err)
-        throw err
-      }
+      if (userService.getLoggedinUser())
+        try {
+          const stations = await stationService.query()
+          context.commit({ type: 'setStations', stations })
+        } catch (err) {
+          console.log('stationStore: Error in loadStations', err)
+          throw err
+        }
     },
     async loadSearchStations(context) {
       try {
@@ -140,14 +145,15 @@ export const stationStore = {
       }
     },
     async createStation({ commit }, { StationName }) {
+      console.log(StationName)
       try {
+        console.log(StationName)
         const station = await stationService.createNewStation(StationName)
-
+        console.log(station)
         commit({ type: 'createStation', station })
-        this.$router.push(`/station/${station._id}`)
+        // this.$router.push(`/station/${station._id}`)
       } catch (err) {
-        // console.log(err)
-        console.log('Could Not delete song')
+        console.log('Could Not create station')
         throw err
       }
     },

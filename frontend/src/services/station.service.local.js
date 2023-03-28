@@ -2,6 +2,7 @@ import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 import axios from 'axios'
 
+import { userService } from './user.service.js'
 import gStations from '../../data/station.json'
 import gSearchStations from '../../data/search.json'
 // import { userService } from './user.service.js'
@@ -151,13 +152,14 @@ function _createSearchStations() {
 }
 
 function createNewStation(name) {
+  const loggedinUser = userService.getLoggedinUser()
   const newStation = {
     _id: utilService.makeId(),
     name: name,
     tags: [],
     createdBy: {
-      _id: '',
-      fullname: 'guest',
+      _id: loggedinUser._id,
+      fullname: loggedinUser.fullname,
       imgUrl: '',
     },
     likedByUsers: [],
@@ -172,9 +174,24 @@ function createNewStation(name) {
     desc: '',
   }
 
-  const stations = utilService.loadFromStorage(STORAGE_KEY)
-  stations.push(newStation)
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(stations))
+  // const stations = utilService.loadFromStorage(STORAGE_KEY)
+  // console.log(stations)
+  // stations.push(newStation)
+
+  // localStorage.setItem(STORAGE_KEY, JSON.stringify(stations))
+  // loggedinUser.stations.push(newStation)
+  const users = utilService.loadFromStorage('user')
+  console.log(users)
+
+  const currUserIdx = users.findIndex((u) => u._id === loggedinUser._id)
+  console.log(currUserIdx)
+  console.log(newStation)
+  users[currUserIdx].stations.push(newStation)
+  // users.push(currUser)
+
+  console.log('after users', users)
+  // console.log('after, logg', loggedinUser)
+  localStorage.setItem('user', JSON.stringify(users))
 
   return newStation
 }

@@ -4,8 +4,9 @@ import Search from './views/Search.vue'
 import UserLibrary from './views/UserLibrary.vue'
 // import LikedSongs from './views/LikedSongs.vue'
 import StationIndex from './views/StationIndex.vue'
-import Signup from './views/Signup.vue'
-import Login from './views/Login.vue'
+// import Signup from './views/Signup.vue'
+// import Login from './views/Login.vue'
+import LoginSignup from './views/LoginSignup.vue'
 import StationDetails from './views/StationDetails.vue'
 import StationCollection from './views/StationCollection.vue'
 // import Modal from '../src/cmps/Modal.vue'
@@ -15,15 +16,15 @@ const routes = [
     path: '/',
     redirect: '/station/collection',
   },
-  {
-    path: '/signup',
-    name: 'signup',
-    component: Signup,
-  },
+  // {
+  //   path: '/signup',
+  //   name: 'signup',
+  //   component: Signup,
+  // },
   {
     path: '/login',
     name: 'login',
-    component: Login,
+    component: LoginSignup,
   },
   {
     path: '/station',
