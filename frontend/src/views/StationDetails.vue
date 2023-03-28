@@ -170,7 +170,6 @@
       </div>
     </div>
   </section>
-<<<<<<< HEAD
 
   <section v-if="showAreYouSureModal" class="delete-modal-backdrop">
     <div class="delete-modal">
@@ -205,8 +204,6 @@
       </div>
     </div>
   </section> -->
-=======
->>>>>>> f0a20a7303fde4e91ce1a135d38e0edf2de8cab1
 </template>
 
 <script>
@@ -241,7 +238,8 @@ export default {
       selectedSong: null,
       selectedIndex: null,
       showStationsSubMenu: false,
-      showAreYouSureModal: false
+      showAreYouSureModal: false,
+      wantAnyWay: false,
     }
   },
   methods: {
@@ -419,15 +417,13 @@ export default {
     //     showErrorMsg('Cannot add to playlist')
     //   }
     async addToSelectedStation(song, station) {
-      console.log('song', song)      
-      console.log('station', station)      
-      // const songAlreadyExist = this.stations.station.songs.find(s => s._id === song._id)
-      // console.log('songAlreadyExist', songAlreadyExist)
-      // console.log('station', station)
-      // if(songAlreadyExist) {
-      //   this.showAreYouSureModal = true
-      //   console.log('error msg');
-      // }else{
+      const songAlreadyExist = station.songs.find(s => s.id === song.id)
+
+      if(songAlreadyExist) {
+        this.showAreYouSureModal = true
+        console.log('yesssssssssssss');
+      }
+      else{
 
         try {
           await this.$store.dispatch({
@@ -442,9 +438,9 @@ export default {
         } finally {
           this.showSongModal = false
           this.showStationsSubMenu = false
-          // this.show = false
+          this.show = false
         }
-      // }  
+      }  
     },
     async removeStation() {
       this.showDeleteModal = false
@@ -470,8 +466,8 @@ export default {
       const buttonEl = this.$refs.songButtons[idx]
       // Get the x and y coordinates of the button in the screen
       const { left, top, height } = btn.getBoundingClientRect()
-      this.modalX = left
-      this.modalY = top + height + 10
+      this.modalX = left - 200
+      this.modalY = top + height - 60
 
       console.log('toggled song modal')
       this.selectedSong = song
