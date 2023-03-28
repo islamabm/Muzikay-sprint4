@@ -278,21 +278,24 @@ export default {
       this.$refs.stationDetailsHeader.style.backgroundImage = gradient
       this.$refs.bottomHalf.style.backgroundImage = darkGradient
     },
+
     async addUserToSong(song) {
       const station = this.station
       try {
-        await this.$store.dispatch({
+        const updatedStation = await this.$store.dispatch({
           type: 'addUserToSong',
           song,
           userStation: station,
           user: this.user,
         })
         showSuccessMsg('song liked')
+        this.$store.commit({ type: 'editStation', station: updatedStation })
       } catch (err) {
         console.log(err)
         showErrorMsg('remove from liked songs')
       }
     },
+
     openStationSelection() {
       console.log('opened')
       this.showStationsSubMenu = !this.showStationsSubMenu
