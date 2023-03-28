@@ -18,6 +18,7 @@ function createEventEmitter() {
 
 export const eventBus = createEventEmitter()
 
+
 export function showUserMsg(msg) {
     eventBus.emit('show-msg', msg)
 }
