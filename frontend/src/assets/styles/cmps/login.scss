@@ -1,10 +1,4 @@
-* {
-  box-sizing: border-box;
-}
 
-body {
-  margin: 0;
-}
 .spotify-login-page {
   height: 100vh;
   overflow-x: hidden;
@@ -16,6 +10,24 @@ body {
   margin-bottom: 10px;
   text-align: center;
   width: 100%;
+  color: $clr2;
+  .black-logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-block-end: 10px;
+  .black-logo {
+    display: block;
+    height: 45px;
+  }
+  span {
+    font-family: Circular-book;
+    font-weight: 900;
+    font-size: 1.5rem;
+    padding-inline-start: 5px;
+    transform: translateY(2px);
+  }
+}
 }
 .spotify-login-header-containt {
   height: 60px;

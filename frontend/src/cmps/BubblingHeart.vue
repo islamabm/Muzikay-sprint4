@@ -2,6 +2,7 @@
   <div class="bubbling-heart" :class="{ 'bubbling-heart--liked': liked }">
     <input
       type="checkbox"
+      class="heart-input"
       :id="'like-' + songIndex"
       :checked="liked"
       @click="toggleLike"

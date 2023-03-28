@@ -165,7 +165,7 @@
       font-size: 0.95rem;
       font-weight: 400;
       color: $clr6;
-      transform: translate(-15%,30%);
+      transform: translate(-17%,15%);
       font-family: Circular-book;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -214,12 +214,13 @@
     .like-song-icon {
       margin-block-start: -8px;
       margin-inline-start: 10px;
-      transform: translate(10%, -4%);
+      transform: translate(20%, -10%);
     }
 
     .btn-open-modal {
       background-color: transparent;
       margin-top: -5px;
+      border: none;
 
       .options-song-icon {
         fill: $clr11;
@@ -281,7 +282,10 @@
     height: 30px;
     cursor: pointer;
     margin-inline-start: 1.2rem;
-
+    svg {
+      width: 30px;
+      height: 30px;
+    }
     &:hover {
       fill: $clr6;
     }
@@ -446,7 +450,7 @@
 
       .like-song-icon {
         margin-inline-start: 5px;
-        transform: translate(10%, -10%);
+        transform: translate(10%, -7%);
       }
     }
   }
