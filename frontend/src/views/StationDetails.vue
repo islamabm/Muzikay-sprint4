@@ -288,8 +288,8 @@ export default {
           userStation: station,
           user: this.user,
         })
-        showSuccessMsg('song liked')
         this.$store.commit({ type: 'editStation', station: updatedStation })
+        showSuccessMsg('song liked')
       } catch (err) {
         console.log(err)
         showErrorMsg('remove from liked songs')
