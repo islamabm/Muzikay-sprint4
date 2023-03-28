@@ -30,12 +30,8 @@ export default {
         showErrorMsg('Cannot remove station')
       }
     },
-    // removeToy(toyId) {
-    //   this.$store.dispatch({ type: 'removeToy', id: toyId })
-    // },
   },
   created() {
-    console.log(this.$store.getters.getSongsLikedByUser)
     this.$store.getters.getSongsLikedByUser
   },
   components: {

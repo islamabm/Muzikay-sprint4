@@ -144,8 +144,6 @@ export default {
         return this.song.id
       }
       if (this.youtubeSong) {
-        console.log(this.youtubeSong)
-        console.log(this.youtubeSong.videoId)
         return this.youtubeSong.videoId
       }
       if (this.isShuffleOn) {
@@ -215,13 +213,14 @@ export default {
       // if(this.songIdx > 0 && this.songIdx < this.station.length){
       this.songIdx += num
       // }
-      this.$emit('songIdx', this.songIdx)
-      this.putSongId()
-      this.intervalId = setInterval(() => {
-        this.currentTime = this.$refs.youtube.getCurrentTime()
-      }, 1000)
-      this.duration = this.$refs.youtube.getDuration()
-      this.formatTime(this.duration)
+      // this.putSongId()
+      // this.intervalId = setInterval(() => {
+        //   this.currentTime = this.$refs.youtube.getCurrentTime()
+        // }, 1000)
+        this.duration = this.$refs.youtube.getDuration()
+        this.formatTime(this.duration)
+        
+        this.$emit('songIdx', this.songIdx)
     },
     // when the video is ready
     onReady() {
@@ -234,7 +233,13 @@ export default {
     // when something happens- Video has ended/Video
     // work but has alot of error msges
     onStateChange(event) {
-      if (event.data === 1) this.isPlaying = true
+      if (event.data === 1){
+        this.isPlaying = true
+        this.intervalId = setInterval(() => {
+          this.currentTime = this.$refs.youtube.getCurrentTime()
+        }, 1000)
+      } 
+      if(event.data === 2) clearInterval(this.intervalId)
       if (event.data === 0) {
         clearInterval(this.intervalId)
         this.currentTime = 0
