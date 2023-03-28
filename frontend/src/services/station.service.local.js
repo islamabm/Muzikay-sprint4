@@ -194,6 +194,7 @@ function createNewStation(name) {
   return newStation
 }
 
+<<<<<<< HEAD
 async function addUserToSong(song, station, loggedinUser) {
   console.log('service station', station)
   console.log('service song', song)
@@ -221,6 +222,21 @@ async function addUserToSong(song, station, loggedinUser) {
   return { updatedSong, savedStation }
 }
 
+=======
+async function addUserToSong(song, station, user) {
+  if (!station) {
+    throw new Error('Station parameter is undefined')
+  }
+  const updatedSong = {
+    ...song,
+    likedByUsers: [...song.likedByUsers, user.fullname],
+  }
+  const updatedStation = { ...station, songs: [...station.songs, updatedSong] }
+  const savedStation = await save(updatedStation)
+  return savedStation
+}
+
+>>>>>>> 52769aebae79a6a387e6e2fcadddb3756f50644d
 async function addSongToStation(video, station) {
   // console.log('video from addSongToStation', video)
   // console.log('station from addSongToStation', station)

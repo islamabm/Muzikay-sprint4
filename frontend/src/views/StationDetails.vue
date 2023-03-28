@@ -288,8 +288,8 @@ export default {
           userStation: station,
           user: this.user,
         })
-        showSuccessMsg('song liked')
         this.$store.commit({ type: 'editStation', station: updatedStation })
+        showSuccessMsg('song liked')
       } catch (err) {
         console.log(err)
         showErrorMsg('remove from liked songs')
@@ -471,8 +471,8 @@ export default {
       const buttonEl = this.$refs.songButtons[idx]
       // Get the x and y coordinates of the button in the screen
       const { left, top, height } = btn.getBoundingClientRect()
-      this.modalX = left
-      this.modalY = top + height + 10
+      this.modalX = left - 200
+      this.modalY = top + height - 60
 
       console.log('toggled song modal')
       this.selectedSong = song
