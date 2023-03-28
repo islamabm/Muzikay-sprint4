@@ -82,6 +82,25 @@ export const stationStore = {
       station.songs.splice(songIdx, 1)
       state.stations[stationIdx] = station
     },
+    // new
+    updateSong(state, { song }) {
+      console.log("State stations:", state.stations);
+      console.log("Received song:", song);
+      
+      const stationIdx = state.stations.findIndex((s) => s._id === song.stationId);
+      console.log("Station index:", stationIdx);
+      
+      const station = state.stations[stationIdx];
+      console.log("Found station:", station);
+      
+      const songIdx = station.songs.findIndex((so) => so.id === song.id);
+      console.log("Song index:", songIdx);
+      
+      station.songs.splice(songIdx, 1, song);
+      state.stations[stationIdx] = station;
+    },
+    
+
     setUserStations(state, stations) {
       state.userStations = stations
     },
@@ -105,20 +124,33 @@ export const stationStore = {
     },
   },
   actions: {
-    async addUserToSong({ commit }, { song, userStation, user }) {
+    async addUserToSong({ commit, rootGetters }, { song, userStation }) {
+      const loggedinUser = rootGetters.loggedinUser;
+      console.log(loggedinUser);
       try {
-        const updatedStation = await stationService.addUserToSong(
+        const { updatedSong, savedStation } = await stationService.addUserToSong(
           song,
           userStation,
-          user
-        )
-
-        commit({ type: 'editStation', station: updatedStation })
+          loggedinUser
+        );
+    
+        
+        updatedSong.stationId = userStation._id;
+        
+      
+        commit({ type: 'updateSong', song: updatedSong });
+    
+       
+        return savedStation;
       } catch (err) {
-        console.error('Cannot add song', err)
-        throw err
+        console.error('Cannot add song', err);
+        throw err;
       }
     },
+    
+    
+    
+    
 
     async loadStations(context) {
       if (userService.getLoggedinUser())
