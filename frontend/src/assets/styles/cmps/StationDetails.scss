@@ -1,6 +1,6 @@
 .station-details {
   // width: calc(100vw - 300px);
-  
+
   .header-content {
     width: 100%;
     display: flex;
@@ -165,7 +165,11 @@
       font-size: 0.95rem;
       font-weight: 400;
       color: $clr6;
+<<<<<<< HEAD
       transform: translate(-17%,15%);
+=======
+      transform: translate(-15%, 30%);
+>>>>>>> 3be0ba86c4d32f0d7d85883c925a857934479ab3
       font-family: Circular-book;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -188,7 +192,6 @@
       width: max-content;
       white-space: nowrap;
       transform: translateY(1%);
-      
     }
 
     @media screen and (min-width: 1600px) {
@@ -354,8 +357,8 @@
   border-radius: 8px;
   padding: 10px;
   width: 200px;
-  top: 45%;
-  left: 85%;
+  // top: 45%;
+  // left: 85%;
   box-shadow: 0 4px 6px rgba($clr2, 0.1), 0 1px 3px rgba($clr2, 0.08);
   z-index: 10;
   font-family: Circular-book;
@@ -485,9 +488,9 @@
         font-size: 0.7rem;
         width: 35px;
       }
-.list-end {
-  transform:translate(-18%);
-}
+      .list-end {
+        transform: translate(-18%);
+      }
       .btn-open-modal {
         margin-left: auto;
         margin-right: 0;
@@ -497,12 +500,11 @@
     .hover-effect {
       opacity: 1;
     }
-    .options-song-icon{
+    .options-song-icon {
       opacity: 0;
     }
   }
 }
-
 
 //HEADER
 @media (max-width: $narrow-breakpoint) {
@@ -535,22 +537,20 @@
         margin-block-start: 4px;
       }
 
- .likes-count-logo{
-  opacity: 0;
- }
+      .likes-count-logo {
+        opacity: 0;
+      }
     }
   }
 }
 
-
 @media (max-width: 500px) {
   .table-header {
     div:nth-child(3) {
-      opacity:0;
+      opacity: 0;
     }
-    .album{
-      opacity:0;
+    .album {
+      opacity: 0;
     }
-    
   }
 }

@@ -76,7 +76,7 @@
           Create Playlist
         </a>
 
-        <a class="liked-songs" @click="onClickLikedSong">
+        <a class="liked-songs" @click="showLikedSongs">
           <font-awesome-icon
             class="heart-icon icons"
             :icon="['fas', 'heart']"
@@ -101,10 +101,10 @@
 </template>
 
 <script>
-import { utilService } from '../services/util.service'
-import { userService } from '../services/user.service.local.js'
+// import { utilService } from '../services/util.service'
+// import { userService } from '../services/user.service.local.js'
 import svgService from '../services/SVG.service.js'
-import { stationService } from '../services/station.service.local.js'
+// import { stationService } from '../services/station.service.local.js'
 import { Container, Draggable } from 'vue3-smooth-dnd'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
@@ -180,23 +180,26 @@ export default {
       try {
         this.stationCounter++
         const StationName = `My Playlist #${this.stationCounter}`
-        await this.$store.dispatch({ type: 'createStation', StationName })
+        await this.$store.dispatch({
+          type: 'createStation',
+          StationName,
+        })
       } catch (err) {
         console.log('err')
       }
     },
 
-    onClickLikedSong() {
-      let user = userService.getLoggedinUser()
-
-      const station =
-        user.name !== 'Liked songs'
-          ? stationService.createNewStation('Liked songs')
-          : utilService.loadFromStorage('loggedinUser')
-
-      user = station
-      utilService.saveToStorage('loggedinUser', user)
-      this.$router.push(`/station/${station._id}`)
+    async showLikedSongs() {
+      // let user = userService.getLoggedinUser()
+      try {
+        const StationName = 'Liked songs'
+        await this.$store.dispatch({
+          type: 'createStation',
+          StationName,
+        })
+      } catch (err) {
+        console.log('err')
+      }
     },
   },
   computed: {
