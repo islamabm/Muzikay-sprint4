@@ -195,9 +195,9 @@ function createNewStation(name) {
 }
 
 async function addUserToSong(song, station, user) {
-  if (!station) {
-    throw new Error('Station parameter is undefined')
-  }
+  // if (!station) {
+  //   throw new Error('Station parameter is undefined')
+  // }
   const updatedSong = {
     ...song,
     likedByUsers: [...song.likedByUsers, user.fullname],

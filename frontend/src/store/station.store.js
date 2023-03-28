@@ -93,20 +93,10 @@ export const stationStore = {
       const idx = state.userStations.findIndex((c) => c._id === station._id)
       state.userStations.splice(idx, 1, station)
     },
-
     removeStation(state, { stationId }) {
       state.stations = state.stations.filter((st) => st._id !== stationId)
     },
     createStation(state, { station }) {
-      const likedSongs = state.stations.map((station) =>
-        station.songs.map((s) =>
-          s.likedByUsers.filter(
-            (n) => n === userService.getLoggedinUser().fullname
-          )
-        )
-      )
-      console.log(likedSongs)
-
       if (station.name === 'Liked songs') {
         if (station.songs) station.songs = likedSongs
       } else station.songs = []
@@ -156,7 +146,7 @@ export const stationStore = {
         console.log('stationId', stationId)
         await stationService.remove(stationId)
         commit({ type: 'removeStation', stationId })
-        this.$router.push(`/station/${state.station[stationId - 1]}`)
+        // this.$router.push(`/station/${state.station[stationId - 1]}`)
       } catch (err) {
         console.log('stationStore: Error in ', err)
         throw err
