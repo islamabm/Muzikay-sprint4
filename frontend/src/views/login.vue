@@ -1,12 +1,14 @@
 <template>
   <section class="spotify-login-page">
     <header class="spotify-login-header">
-      <div class="spotify-login-header-containt">
-        <img
-          class="spotify-img"
-          src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Black.png"
-        />
-      </div>
+      <div class="black-logo-container">
+          <img
+            class="black-logo"
+            src="./../assets/img/logo-black.png"
+            alt="Logo"
+          />
+          <span class="muzikay-logo">Muzikay</span>
+        </div>
     </header>
 
     <section class="spotify-login-user-content">

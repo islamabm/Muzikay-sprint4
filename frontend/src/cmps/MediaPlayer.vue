@@ -31,11 +31,11 @@
       </div>
   
       <div class="music-bar">
-        <span class="current-time">{{ formatTime(currentTime) }}</span>
+        <span class="current-time hiding">{{ formatTime(currentTime) }}</span>
         <div class="progress-bar" @click="findProgress($event)" ref="progressBar">
           <div class="progress-bar-fill" :style="{ width: progressBarWidth + '%' }" ref="progressBarFill"></div>
         </div>
-        <span class="current-time">{{ formatTime(duration) }}</span>
+        <span class="current-time hiding">{{ formatTime(duration) }}</span>
       </div>
     </div>
 

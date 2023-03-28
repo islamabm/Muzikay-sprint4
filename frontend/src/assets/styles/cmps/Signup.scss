@@ -1,21 +1,33 @@
 #signup-page {
-  max-width: 500px;
   margin: 0 auto;
   padding-bottom: 130px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: $clr6;
-
-
+  color: $clr2;
+  width: 95vw;
   .signup-header {
     margin-block-start: 20px;
   }
-  .spotify-logo {
+  .black-logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-block-end: 40px;
+  .black-logo {
     display: block;
-    height: 40px;
-    margin: 0 auto 40px;
+    height: 45px;
   }
+  span {
+    font-family: Circular-book;
+    font-weight: 900;
+    font-size: 1.5rem;
+    padding-inline-start: 5px;
+    transform: translateY(2px);
+  }
+}
+
 
   .btn-img {
     height: 24px;
@@ -23,19 +35,22 @@
   }
 
   h1 {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 700;
     text-align: center;
-    line-height: 2.25rem;
+    line-height: 1.5rem;
     letter-spacing: -0.04em;
-    margin-block-end: 3rem;
+    margin-block-end: 2.3rem;
+    color: $clr2;
+    font-family: Circular-medium;
   }
   .signup-email-h2 {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 1.125rem;
     padding-block-end: 20px;
     text-align: center;
     color: inherit;
+    font-family: Circular-book;
   }
   .social-btns {
     display: flex;
@@ -94,8 +109,9 @@
   .dates-field{
     display: flex;
     justify-content: space-between;
+    gap: 15px;
     #month {
-       width: 250px;
+       width: 200px;
     }
   }
 
@@ -108,7 +124,7 @@
     }
   }
   .separator {
-    width: 100%;
+    width: 40%;
     text-align: center;
     font-size: 1rem;
     line-height: 24px;
@@ -140,6 +156,7 @@
   }
 
   form {
+    width: 30%;
     .form-group {
       margin-bottom: 20px;
     }
@@ -148,17 +165,18 @@
       display: flex;
       gap: 20px;
       flex-wrap: wrap;
+      margin-inline-start: 20px;
     }
 
     .spotify-checks {
         display: flex;
         align-items: baseline;
+        margin-inline-start: 20px;
        
     }
     .spotify-checks label {
         display: flex;
         font-size: 14px;
-        font-weight: 600;
         margin-block-end: 15px;
         cursor: pointer;
       }
@@ -167,24 +185,30 @@
     .radio-container {
         display: flex;
         align-items: center;
+  
       }
       
       input[type='radio'] {
         width: 16px;
         height: 16px;
+        transform: translate(-25px);
         margin-block-end: 1rem;
         margin-inline-end: 10px;
         vertical-align: middle;
       }
+      label {
+        display: block;
+        font-size: 14px;
+        margin-block-end: 15px;
+      }
       
-
-    label {
-      display: block;
-      font-size: 14px;
-      font-weight: 600;
-      margin-block-end: 15px;
-    }
-
+.label-light {
+  font-weight: 400;
+}
+.label-dark {
+  font-weight: 600;
+  transform: translate(2px);
+}
     .square-inputs{
       display: block;
       padding: 0.8rem;
@@ -193,8 +217,8 @@
       font-weight: 400;
       inline-size: 100%;
       margin-block: 0px;
-      box-shadow: inset 0 0 0 1px #3e3d3d;
-      border: 1px solid #ddd;
+      box-shadow: inset 0 0 0 1px rgba($clr5,0.4);
+      border: 0.5px solid rgba($clr3,0.1);
       border-radius: 4px;
       &:focus {
         border-color: #1877f2;
@@ -220,6 +244,7 @@
       display: inline-block;
       margin-right: 5px;
       vertical-align: middle;
+      transform: translate(-25px);
     }
 
     .terms-link,
@@ -261,3 +286,54 @@
     }
   }
 }
+
+
+.signup-section {
+  width: 100%;
+  background-color: white;
+   font-family: Circular-book;
+   padding-block-start: 1.1rem;
+}
+
+
+
+@media (max-width: $mobile-breakpoint) {
+  #signup-page {
+    transform: scale(0.5); // Adjust this value depending on the desired scaling ratio
+    transform-origin: top left;
+    width: 500px;
+    height: 120vh;
+    align-items: center;
+    margin-inline-start: 50%;
+  //  transform: translateX(2%);
+  }
+
+  .signup-section {
+    padding: 1.1rem;
+    box-sizing: border-box;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+   
+  }
+
+  #signup-page form {
+    width: 100%;
+    padding: 0 1rem; // Add horizontal padding to the form
+    box-sizing: border-box;
+  }
+    button[type='submit'] {
+   transform: translate(-30px);
+  }
+  #signup-page .dates-field {
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+
+    #month {
+      width: auto;
+      max-width: 150px; // Adjust this value based on the desired width
+    }
+  }
+}
+

@@ -42,7 +42,7 @@ input[type="checkbox"] + label {
   }
 }
 
-input[type="checkbox"]:checked + label {
+.heart-input:checked + label {
   cursor: pointer;
   &::before,
   &::after {

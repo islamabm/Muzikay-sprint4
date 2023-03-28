@@ -4,7 +4,11 @@
       <div ref="stationDetailsHeader" class="header-content">
         <img
           @click="toggleModal"
-          v-if="station.songs && station.songs.length > 0"
+          v-if="
+            station.songs &&
+            station.songs.length > 0 &&
+            station.name !== 'Liked songs'
+          "
           :src="
             station.songs[0].imgUrl
               ? station.songs[0].imgUrl
@@ -34,7 +38,7 @@
           <div v-if="station.songs">
             <div class="likes-count-logo">
               <i class="logo-green" v-html="getSvg('greenLogo')"></i>
-              <h1 v-if="user">{{ user.fullname }}</h1>
+              <!-- <h1 v-if="user">{{ user.fullname }}</h1> -->
               <span class="small-logo-word">Muzikay</span>
               <span @click="toggleModal">6,950,331 likes</span>•<span
                 >{{ songsCount }},</span
@@ -95,7 +99,7 @@
                 class="hover-effect heart-song"
                 :songIndex="idx"
                 :liked="song.liked"
-                @addLikeToSong="addUserToSong(song)"
+                @click="addUserToSong(song)"
               />
               <!-- @toggleLikgit ngLike" -->
             </div>
@@ -104,7 +108,7 @@
               <button
                 class="btn-open-modal"
                 ref="songButtons"
-                @click="toggleSongModal(song, idx)"
+                @click="toggleSongModal($event, song, idx)"
               >
                 <i
                   class="options-song-icon hover-effect"
@@ -118,8 +122,10 @@
       <MiniSearch />
 
       <div v-if="showSongModal" @click.self="toggleSongModal(null, null)">
-        <div class="modal-content">
-          <!-- :style="{ left: modalX + 'px', top: modalY + 'px' }" -->
+        <div
+          class="modal-content"
+          :style="{ left: modalX + 'px', top: modalY + 'px' }"
+        >
           <ul class="modal-options">
             <li @click="openStationSelection">Add to playlist</li>
             <div v-show="showStationsSubMenu">
@@ -164,6 +170,7 @@
       </div>
     </div>
   </section>
+<<<<<<< HEAD
 
   <section v-if="showAreYouSureModal" class="delete-modal-backdrop">
     <div class="delete-modal">
@@ -198,6 +205,8 @@
       </div>
     </div>
   </section> -->
+=======
+>>>>>>> f0a20a7303fde4e91ce1a135d38e0edf2de8cab1
 </template>
 
 <script>
@@ -217,6 +226,8 @@ export default {
   name: 'station-details',
   data() {
     return {
+      modalX: 0,
+      modalY: 0,
       showAddSongModal: false,
       showSongModal: false,
       showModal: '',
@@ -271,18 +282,17 @@ export default {
       this.$refs.bottomHalf.style.backgroundImage = darkGradient
     },
     async addUserToSong(song) {
-      // const user = userService.getLoggedinUser()
+      const station = this.station
       try {
         await this.$store.dispatch({
           type: 'addUserToSong',
           song,
+          userStation: station,
         })
         showSuccessMsg('song liked')
       } catch (err) {
         console.log(err)
         showErrorMsg('remove from liked songs')
-      } finally {
-        this.showSongModal = false
       }
     },
     openStationSelection() {
@@ -455,14 +465,13 @@ export default {
         console.log('not user data')
       }
     },
-    toggleSongModal(song, idx) {
-      // const buttonEl = this.$refs.songButtons[idx]
-      // // Get the x and y coordinates of the button in the screen
-      // const rect = buttonEl.getBoundingClientRect()
-      // this.modalX = rect.left + window.scrollX
-      // this.modalY = rect.top + window.scrollY
-      // console.log(this.modalX)
-      // console.log(this.modalY)
+    toggleSongModal(ev, song, idx) {
+      const btn = ev.target
+      const buttonEl = this.$refs.songButtons[idx]
+      // Get the x and y coordinates of the button in the screen
+      const { left, top, height } = btn.getBoundingClientRect()
+      this.modalX = left
+      this.modalY = top + height + 10
 
       console.log('toggled song modal')
       this.selectedSong = song
