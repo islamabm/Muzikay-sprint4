@@ -91,6 +91,7 @@
         isShuffleOn: false,
         speakerSvg: '',
         song: null,
+        youtubeSong: null,
       }
     },
     created() {
@@ -103,11 +104,23 @@
           this.alive = false
         },delay)
       } )
+      eventBus.on('youtube-song-details', (song) => {
+          this.youtubeSong = song
+          console.log(this.song);
+        var delay = song.delay || 2000
+        this.alive = true
+        setTimeout(() => {
+          this.alive = false
+        },delay)
+      } )
     },
     computed: {
       putSongId() {
         if(this.song) {
           return this.song.id
+        }
+        if(this.youtubeSong) {
+          return this.youtubeSong.videoId
         }
         if (this.isShuffleOn) {
           return this.station.songs[this.shuffledSongs[this.songIdx]].id
