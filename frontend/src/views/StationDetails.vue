@@ -174,11 +174,11 @@
   <section v-if="showAreYouSureModal" class="delete-modal-backdrop">
     <div class="delete-modal">
       <h1>Already added</h1>
-      <p>
-        This is already in your <span>playlist</span>
-      </p>
+      <p>This is already in your <span>playlist</span></p>
       <div class="delete-modla-btns">
-        <button class="delete-modal-cancle-btn" @click="addSongAnyway">Add anyway</button>
+        <button class="delete-modal-cancle-btn" @click="addSongAnyway">
+          Add anyway
+        </button>
         <button class="delete-modal-delete-btn" @click="dontAddSong">
           Don't add
         </button>
@@ -254,7 +254,7 @@ export default {
       this.showDeleteModal = false
     },
     updateBodyBackgroundColor(color) {
-      console.log(color)
+      // console.log(color)
 
       const darkShade = {
         ...color,
@@ -270,7 +270,7 @@ export default {
         )}, ${Math.round(color.value[2] * 0.4)}, 0.7)`,
       }
 
-      console.log('shade', darkShade)
+      // console.log('shade', darkShade)
 
       const gradient = `linear-gradient(to bottom, ${color.rgba}, ${headerShade.rgba})`
       const darkGradient = `linear-gradient(to bottom, ${darkShade.rgba} 0%, rgba(0, 0, 0, 1) 30%)`
@@ -279,20 +279,24 @@ export default {
       this.$refs.stationDetailsHeader.style.backgroundImage = gradient
       this.$refs.bottomHalf.style.backgroundImage = darkGradient
     },
+
     async addUserToSong(song) {
       const station = this.station
       try {
-        await this.$store.dispatch({
+        const updatedStation = await this.$store.dispatch({
           type: 'addUserToSong',
           song,
           userStation: station,
+          user: this.user,
         })
+        this.$store.commit({ type: 'editStation', station: updatedStation })
         showSuccessMsg('song liked')
       } catch (err) {
         console.log(err)
         showErrorMsg('remove from liked songs')
       }
     },
+
     openStationSelection() {
       console.log('opened')
       this.showStationsSubMenu = !this.showStationsSubMenu
@@ -322,10 +326,10 @@ export default {
       img.src = corsProxyUrl + encodeURIComponent(imageSrc)
 
       img.onload = async () => {
-        console.log('Image loaded')
+        // console.log('Image loaded')
         try {
           const color = await fac.getColorAsync(img)
-          console.log('inside try', color)
+          // console.log('inside try', color)
           this.updateBodyBackgroundColor(color)
         } catch (e) {
           console.error(e)
