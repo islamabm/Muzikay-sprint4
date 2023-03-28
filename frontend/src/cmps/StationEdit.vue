@@ -1,44 +1,39 @@
 <template>
   <div class="backdrop">
     <section class="edit-details-section">
-      <div class="edit-details-header">
-        <h3>Edit details</h3>
-        <button class="btn-close-modal" @click="$emit('close')">x</button>
-      </div>
-      <!-- <form @submit.prevent="stationInput"> -->
-      <div class="edit-details-img">
-        <label class="cover-img" @drop.prevent="handleFile" @dragover.prevent>
-          <div v-if="loading" class="loader"></div>
-          <img :src="imgSrc" alt="Station cover" class="img-edit" />
-          <input type="file" @change="handleFile" hidden />
-        </label>
-        <div class="edit-details-inputs">
-          <input
-            class="edit-name"
-            id="name"
-            type="text"
-            v-model="station.name"
-            :placeholder="station.name"
-          />
-          <textarea
-            class="edit-text-area"
-            id="description"
-            rows="4"
-            v-model="station.description"
-            placeholder="Add an optional description"
-          ></textarea>
-          <button
-            class="btn-save-changes"
-            @click="stationInput, $emit('close')"
-          >
-            Save
-          </button>
+      <form class="edit-details-form" @submit.prevent="stationInput">
+        <div class="edit-details-header">
+          <h3>Edit details</h3>
+          <button class="btn-close-modal" @click="$emit('close')">x</button>
         </div>
-      </div>
+        <div class="edit-details-img">
+          <label class="cover-img" @drop.prevent="handleFile" @dragover.prevent>
+            <div v-if="loading" class="loader"></div>
+            <img :src="imgSrc" alt="Station cover" class="img-edit" />
+            <input type="file" @change="handleFile" hidden />
+          </label>
+          <div class="edit-details-inputs">
+            <input
+              class="edit-name"
+              id="name"
+              type="text"
+              v-model="station.name"
+              :placeholder="station.name"
+            />
+            <textarea
+              class="edit-text-area"
+              id="description"
+              rows="4"
+              v-model="station.description"
+              placeholder="Add an optional description"
+            ></textarea>
+            <button class="btn-save-changes">Save</button>
+          </div>
+        </div>
+      </form>
     </section>
   </div>
 </template>
-
 <script>
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import { uploadImg } from '../services/upload.service.js'

@@ -190,9 +190,9 @@ export default {
     },
 
     async showLikedSongs() {
-      // let user = userService.getLoggedinUser()
+      // if (userService.getLoggedinUser())
+      const StationName = 'Liked songs'
       try {
-        const StationName = 'Liked songs'
         await this.$store.dispatch({
           type: 'createStation',
           StationName,

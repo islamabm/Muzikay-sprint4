@@ -1,18 +1,17 @@
 <template>
   <footer class="main-footer">
-
     <div class="footer-media-player">
       <MediaPlayer :station="station" @songIdx="getSongIdx" />
     </div>
-    
+
     <div v-if="station" class="footer-details">
       <img
         class="footer-details-img"
         :src="
-            station.songs[currSongIdx].imgUrl
-              ? station.songs[currSongIdx].imgUrl
-              : station.songs[currSongIdx].url
-          "
+          station.songs[currSongIdx].imgUrl
+            ? station.songs[currSongIdx].imgUrl
+            : station.songs[currSongIdx].url
+        "
       />
       <h3 class="footer-details-title">
         {{ station.songs[currSongIdx].title }}
@@ -26,13 +25,18 @@
       </button>
     </div>
 
+    <!-- <div class="playing">
+      <span class="playing__bar playing__bar1"></span>
+      <span class="playing__bar playing__bar2"></span>
+      <span class="playing__bar playing__bar3"></span>
+    </div> -->
   </footer>
 </template>
 
 <script>
 import MediaPlayer from './MediaPlayer.vue'
 import BubblingHeart from './BubblingHeart.vue'
-import { eventBus } from "../services/event-bus.service.js"
+import { eventBus } from '../services/event-bus.service.js'
 
 export default {
   name: 'AppFooter',
@@ -47,20 +51,20 @@ export default {
     }
   },
   created() {
-      eventBus.on('song-details', (song) => {
-        // if(this.station){
-        //   this.station = song
-        // }else{
-          this.song = song
-          console.log(this.song);
-        // }
-        var delay = song.delay || 2000
-        this.alive = true
-        setTimeout(() => {
-          this.alive = false
-        },delay)
-      } )
-    },
+    eventBus.on('song-details', (song) => {
+      // if(this.station){
+      //   this.station = song
+      // }else{
+      this.song = song
+      console.log(this.song)
+      // }
+      var delay = song.delay || 2000
+      this.alive = true
+      setTimeout(() => {
+        this.alive = false
+      }, delay)
+    })
+  },
   computed: {
     station() {
       return this.$store.getters.station
@@ -82,7 +86,6 @@ export default {
       // console.log(
       //   `Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`
       // )
-
     },
   },
 

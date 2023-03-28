@@ -1,6 +1,6 @@
 <template>
   <section class="stations-app">
-    <StationsList :stations="stations"/>
+    <StationsList :stations="stations" />
   </section>
 </template>
 
@@ -30,9 +30,9 @@ export default {
         showErrorMsg('Cannot remove station')
       }
     },
-    // removeToy(toyId) {
-    //   this.$store.dispatch({ type: 'removeToy', id: toyId })
-    // },
+  },
+  created() {
+    this.$store.getters.getSongsLikedByUser
   },
   components: {
     StationsList,

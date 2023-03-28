@@ -28,7 +28,7 @@
       v-for="(video, idx) in videos"
       :key="idx"
     >
-      <div class="mini-search-preview" @click="songDetails(song)">
+      <div class="mini-search-preview" @click="songDetails(video)">
         <img class="song-img" :src="video.url" />
 
         <p class="search-song-title">{{ video.title }}</p>
@@ -55,8 +55,8 @@ export default {
     }
   },
   methods: {
-    songDetails(song){
-      this.$emit('handelYoutubeSong' , song)
+    songDetails(video) {
+      this.$emit('handelYoutubeSong', video)
     },
     onDrop(dropResult) {
       this.videos = this.applyDrag(this.videos, dropResult)
