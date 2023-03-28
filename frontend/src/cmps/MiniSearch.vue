@@ -28,7 +28,7 @@
       v-for="(video, idx) in videos"
       :key="idx"
     >
-      <div class="mini-search-preview">
+      <div class="mini-search-preview" @click="songDetails(song)">
         <img class="song-img" :src="video.url" />
 
         <p class="search-song-title">{{ video.title }}</p>
@@ -46,6 +46,7 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 export default {
   name: '',
   props: [],
+  emits: ['handelYoutubeSong'],
   created() {},
   data() {
     return {
@@ -54,6 +55,9 @@ export default {
     }
   },
   methods: {
+    songDetails(song){
+      this.$emit('handelYoutubeSong' , song)
+    },
     onDrop(dropResult) {
       this.videos = this.applyDrag(this.videos, dropResult)
     },

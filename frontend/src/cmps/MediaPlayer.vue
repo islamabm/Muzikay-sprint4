@@ -41,14 +41,30 @@
 
     <div class="footer-media-adjusments">
       <i class="speaker" v-html="getSvg(toggleSvgIcone)"></i>
-      <input type="range" class="speaker-bar" min="0" max="100" step="10" id="volume-bar" v-model="volume">
+      <input type="range" class="speaker-bar prog" min="0" max="100" step="10" id="volume-bar" v-model="volume">
     </div>
+
+    <!-- 
+    <div class="progress-container">
+      <i class="speaker" v-html="getSvg(toggleSvgIcone)"></i>
+    <progress class="prog progress-bar" :value="volume" max="100"></progress>
+    </div>
+    
+    <div class="progress-container">
+    <progress class="prog progress-bar" type="progress" :value="currTime" min="0"
+    :max="duration"></progress>
+    <input class="prog input-bar timestamp" id="fontController" type="range"
+    @input="setTimestamp" :value="currTime" min="0" :max="duration" />
+    </div> -->
+
 
 </template>
   <script>
 
   import YouTube from 'vue3-youtube'
   import SVGService from '../services/SVG.service'
+  import { eventBus } from '../services/event-bus.service'
+
   export default {
     name: ['MediaPlayer'],
     props: {
@@ -74,10 +90,38 @@
         shuffledSongs: [],
         isShuffleOn: false,
         speakerSvg: '',
+        song: null,
+        youtubeSong: null,
       }
+    },
+    created() {
+      eventBus.on('song-details', (song) => {
+          this.song = song
+          console.log(this.song);
+        var delay = song.delay || 2000
+        this.alive = true
+        setTimeout(() => {
+          this.alive = false
+        },delay)
+      } )
+      eventBus.on('youtube-song-details', (song) => {
+          this.youtubeSong = song
+          console.log(this.song);
+        var delay = song.delay || 2000
+        this.alive = true
+        setTimeout(() => {
+          this.alive = false
+        },delay)
+      } )
     },
     computed: {
       putSongId() {
+        if(this.song) {
+          return this.song.id
+        }
+        if(this.youtubeSong) {
+          return this.youtubeSong.videoId
+        }
         if (this.isShuffleOn) {
           return this.station.songs[this.shuffledSongs[this.songIdx]].id
         } else if (this.station) {
@@ -142,7 +186,9 @@
     },
       // the function gets direction 1/-1 and switches the song by it
       switchSong(num) {
-        this.songIdx += num
+        // if(this.songIdx > 0 && this.songIdx < this.station.length){
+          this.songIdx += num
+        // }
         this.$emit('songIdx' , this.songIdx)
         this.putSongId()
         this.intervalId = setInterval(() => {

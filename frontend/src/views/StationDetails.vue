@@ -79,7 +79,7 @@
           v-for="(song, idx) in station.songs"
           :key="idx"
         >
-          <div class="img-and-title">
+          <div class="img-and-title" @click="songDetails(song)">
             <span>{{ idx + 1 }}</span>
             <img v-if="song.videoId" class="song-img" :src="song.url" />
             <img v-else class="song-img" :src="song.imgUrl" />
@@ -125,11 +125,15 @@
           </div>
         </Draggable>
       </Container>
+<<<<<<< HEAD
 
 
 
 
       <MiniSearch />
+=======
+      <MiniSearch :handelYoutubeSong="handelYoutubeSong" />
+>>>>>>> b1888fd14c8a27c5a254ad68a422e9058d156106
 
       <div v-if="showSongModal" @click.self="toggleSongModal(null, null)">
         <div
@@ -225,7 +229,7 @@ import Search from './Search.vue'
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
 import { userService } from '../services/user.service.js'
-import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+import { eventBus, showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import MiniSearch from '../cmps/MiniSearch.vue'
 import BubblingHeart from '../cmps/BubblingHeart.vue'
 
@@ -249,10 +253,20 @@ export default {
       selectedIndex: null,
       showStationsSubMenu: false,
       showAreYouSureModal: false,
+<<<<<<< HEAD
       heartClicked: false,
+=======
+      wantAnyWay: false,
+>>>>>>> b1888fd14c8a27c5a254ad68a422e9058d156106
     }
   },
   methods: {
+    handelYoutubeSong(song) {
+      eventBus.emit('youtube-song-details',song)
+    },
+    songDetails(song) {
+      eventBus.emit('song-details',song)
+    },
     dontAddSong() {
       this.showAreYouSureModal = false
     },
@@ -432,32 +446,30 @@ export default {
     //     showErrorMsg('Cannot add to playlist')
     //   }
     async addToSelectedStation(song, station) {
-      console.log('song', song)
-      console.log('station', station)
-      // const songAlreadyExist = this.stations.station.songs.find(s => s._id === song._id)
-      // console.log('songAlreadyExist', songAlreadyExist)
-      // console.log('station', station)
-      // if(songAlreadyExist) {
-      //   this.showAreYouSureModal = true
-      //   console.log('error msg');
-      // }else{
-
-      try {
-        await this.$store.dispatch({
-          type: 'addToStation',
-          song,
-          station,
-        })
-        showSuccessMsg('added to playlist')
-      } catch (err) {
-        console.log(err)
-        showErrorMsg('Cannot add to playlist')
-      } finally {
-        this.showSongModal = false
-        this.showStationsSubMenu = false
-        // this.show = false
+      const songAlreadyExist = station.songs.find(s => s.id === song.id)
+      //////////// need to pass an event while clicking an add anyway button/////////////
+      if(songAlreadyExist) {
+        this.showAreYouSureModal = true
+        console.log('yesssssssssssss');
       }
-      // }
+      else{
+
+        try {
+          await this.$store.dispatch({
+            type: 'addToStation',
+            song,
+            station,
+          })
+          showSuccessMsg('added to playlist')
+        } catch (err) {
+          console.log(err)
+          showErrorMsg('Cannot add to playlist')
+        } finally {
+          this.showSongModal = false
+          this.showStationsSubMenu = false
+          this.show = false
+        }
+      }  
     },
     async removeStation() {
       this.showDeleteModal = false
