@@ -10,6 +10,7 @@
     overflow: hidden;
     border-radius: 10px;
     height: 190px;
+    cursor: pointer;
   }
   img {
     transform: rotate(25deg) translate(18%, -2%);
@@ -29,6 +30,10 @@
   }
 }
 
-// .search-header {
-//   padding-inline: 1rem 0;
-// }
+.search-header {
+  padding-inline: 2rem 0;
+  padding-block-end: 5px;
+  margin-block-start: 2.5rem;
+  font-family: Circular-book;
+  font-size: 1.5rem;
+}

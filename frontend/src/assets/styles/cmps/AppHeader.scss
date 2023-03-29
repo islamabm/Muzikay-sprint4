@@ -73,6 +73,7 @@
   }
 
   .login-signup {
+    margin-inline-end: 5px;
     a {
       align-items: center;
       text-decoration: none;
@@ -80,6 +81,7 @@
       color: $clr3;
       padding: 6px 16px;
       margin-inline-start: 8px;
+      margin-block-end: 12px;
       border: 1px solid transparent;
  margin-block-start:10px;
       
@@ -107,14 +109,14 @@
     .btn-login {
       position: relative;
       color: $clr2;
-      min-block-size: 48px;
+      min-block-size: 46px;
       background-color: $clr6;
       font-size: 1rem;
       font-weight: 500;
       display: flex;
       border-radius: 500px;
       padding-block: 8px;
-      padding-inline: 32px;
+      padding-inline: 30px;
       vertical-align: baseline;
       
       &:hover {

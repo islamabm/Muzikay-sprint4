@@ -110,7 +110,7 @@
                 :songIndex="idx"
                 :liked="song.liked"
                 @click="
-                  addUserToSong(song)
+                  addUserToSong(song),
                   onHeartClick(idx)
                 "
               />
