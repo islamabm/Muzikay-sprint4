@@ -18,7 +18,6 @@
           placeholder="Search for songs or episodes"
           autofocus
         />
-        <!-- <button type="submit">search</button> -->
       </form>
     </div>
   </div>

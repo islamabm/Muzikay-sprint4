@@ -19,8 +19,10 @@
         :class="forwardLinkClass"
       ></a>
       <div v-if="isSearchRoute" class="header-search-container">
-        <form class="header-form">
+        <form class="header-form" @submit.prevent="add">
           <input
+            @input="goSearch"
+            v-model="search"
             class="header-input"
             type="search"
             placeholder="What do you want to listen to?"
@@ -43,15 +45,21 @@
 </template>
 <script>
 import svgService from '../services/SVG.service.js'
+import { eventBus } from '../services/event-bus.service'
 export default {
   name: 'AppHeader',
   //Note: this header will take the color of the station's img.
   data() {
     return {
       headerOpacity: 0,
+      search: '',
     }
   },
   methods: {
+    goSearch() {
+      console.log(this.search)
+      eventBus.emit('handle-search', this.search)
+    },
     updateHeaderOpacity() {
       const scrollPosition =
         window.pageYOffset || document.documentElement.scrollTop

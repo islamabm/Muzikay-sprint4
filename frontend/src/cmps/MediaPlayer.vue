@@ -210,21 +210,20 @@ export default {
     },
     // the function gets direction 1/-1 and switches the song by it
     switchSong(num) {
-      if(this.songIdx > this.station.songs.length){
+      if (this.songIdx > this.station.songs.length) {
+        console.log(songIdx)
         this.songIdx = 0
         console.log('this.songIdx expected 0', this.songIdx)
-      } 
-      else if (this.songIdx <= 0){
+      } else if (this.songIdx <= 0) {
         this.songIdx = this.station.songs.length - 1
         console.log('this.songIdx expected length', this.songIdx)
-      } 
-      else this.songIdx += num
+      } else this.songIdx += num
       console.log('this.songIdx expected 1', this.songIdx)
 
-        this.duration = this.$refs.youtube.getDuration()
-        this.formatTime(this.duration)
-        
-        this.$emit('songIdx', this.songIdx)
+      this.duration = this.$refs.youtube.getDuration()
+      this.formatTime(this.duration)
+
+      this.$emit('songIdx', this.songIdx)
     },
     // when the video is ready
     onReady() {
@@ -237,13 +236,13 @@ export default {
     // when something happens- Video has ended/Video
     // work but has alot of error msges
     onStateChange(event) {
-      if (event.data === 1){
+      if (event.data === 1) {
         this.isPlaying = true
         this.intervalId = setInterval(() => {
           this.currentTime = this.$refs.youtube.getCurrentTime()
         }, 1000)
-      } 
-      if(event.data === 2) clearInterval(this.intervalId)
+      }
+      if (event.data === 2) clearInterval(this.intervalId)
       if (event.data === 0) {
         clearInterval(this.intervalId)
         this.currentTime = 0
