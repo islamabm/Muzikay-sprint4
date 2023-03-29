@@ -3,29 +3,29 @@
     <section class="station-details-header">
       <div ref="stationDetailsHeader" class="header-content">
         <img
-          @click="toggleModal"
-          v-if="
+        v-if="
             station.songs &&
             station.songs.length > 0 &&
             station.name !== 'Liked songs'
-          "
+            "
           :src="
             station.songs[0].imgUrl
-              ? station.songs[0].imgUrl
-              : station.songs[0].url
-          "
+            ? station.songs[0].imgUrl
+            : station.songs[0].url
+            "
+            @click="toggleModal"
         />
 
         <img
-          @click="toggleModal"
-          v-else-if="station.name === 'Liked songs'"
-          src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
+        v-else-if="station.name === 'Liked songs'"
+        src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
+        @click="toggleModal"
         />
         <img
           class="deafult-image"
-          @click="toggleModal"
           v-else
           src="../assets/img/empty-img.png"
+          @click="toggleModal"
         />
 
         <div class="station-info">
@@ -189,7 +189,6 @@
 
       <MiniSearch
         :handelYoutubeSong="handelYoutubeSong"
-        v-if="station.createdBy.fullname === 'system'"
       />
 
       <div v-if="showSongModal" @click.self="toggleSongModal(null, null)">
@@ -290,7 +289,7 @@ import {
   eventBus,
   showErrorMsg,
   showSuccessMsg,
-} from '../services/event-bus.service.js'
+} from '../services/event-bus.service'
 import MiniSearch from '../cmps/MiniSearch.vue'
 import BubblingHeart from '../cmps/BubblingHeart.vue'
 
