@@ -38,7 +38,7 @@
       &:hover {
         background-color: rgba($clr6, 0.4);
         cursor: pointer;
-  
+
         &::after {
           border-color: $clr6;
         }
@@ -53,17 +53,16 @@
         padding: 4px;
         top: 35%;
         left: 35%;
-
       }
     }
 
     .left-arrow-icon::after {
       transform: rotate(135deg) translate(-1px, -1px);
     }
-    
+
     .right-arrow-icon::after {
       transform: rotate(-45deg) translate(-2px, -2px);
-    }    
+    }
   }
 
   @media screen and (max-width: $narrow-breakpoint) {
@@ -83,8 +82,7 @@
       margin-inline-start: 8px;
       margin-block-end: 12px;
       border: 1px solid transparent;
- margin-block-start:10px;
-      
+      margin-block-start: 10px;
 
       &:hover {
         color: $clr6;
@@ -96,16 +94,35 @@
       }
     }
 
-    .btn-signup {
+    .btn-signup,
+    .btn-logout {
       display: flex;
+      justify-content: center;
+      align-items: center;
       font-size: 1rem;
       background-color: transparent;
+      cursor: pointer;
 
       &:hover {
         transform: scale(1.05);
       }
     }
-
+    .username-header {
+      min-block-size: 45px;
+      background-color: rgba($clr5, 0.4);
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 500px;
+      padding-block: 8px;
+      padding-inline: 20px;
+      margin-inline-end: 22px;
+      cursor: pointer;
+      &:hover{
+        background-color: rgba($clr3, 0.4);
+      }
+    }
     .btn-login {
       position: relative;
       color: $clr2;
@@ -118,28 +135,25 @@
       padding-block: 8px;
       padding-inline: 30px;
       vertical-align: baseline;
-      
+
       &:hover {
         color: $clr2;
         font-weight: 600;
         transform: scale(1.05);
       }
     }
-    
   }
 }
 @media screen and (max-width: $narrow-breakpoint) {
-    .btn-login {
-        margin-inline-end: 1rem;
+  .btn-login {
+    margin-inline-end: 1rem;
   }
 }
 @media screen and (min-width: $normal-breakpoint) {
-    .btn-login {
-      margin-inline-end: 1rem;
+  .btn-login {
+    margin-inline-end: 1rem;
   }
 }
-
-
 
 .header-input {
   margin-block: 0px;
@@ -154,9 +168,9 @@
   width: 100%;
   font-family: Circular-book;
   font-weight: 100;
-  display: flex;  
+  display: flex;
   align-items: center;
-  
+
   &:focus {
     outline: none;
     border: none;
@@ -202,5 +216,3 @@
   fill: currentcolor;
   display: block;
 }
-
-
