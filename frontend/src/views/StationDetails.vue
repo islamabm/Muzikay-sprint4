@@ -611,29 +611,7 @@ export default {
       return this.station.name
     },
     likedSongsUser() {
-      // return [
-      //   {
-      //     likedByUsers: [],
-      //     id: 'mu9OU_vzytU',
-      //     title: 'The Meters - Cissy Strut',
-      //     url: 'youtube/song.mp4',
-      //     imgUrl:
-      //       'https://img.freepik.com/premium-vector/rock-roll-music-seamless-pattern-background_688722-124.jpg?w=2000',
-      //     addedBy: '{minimal-user}',
-      //     addedAt: 162521765262,
-      //     album: 'Melancholy',
-      //   },
-      //   {
-      //     id: 'RjrA-slMoZ4',
-      //     likedByUsers: [],
-      //     title: 'The JBs - Pass The Peas',
-      //     url: 'youtube/song.mp4',
-      //     imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
-      //     addedBy: {},
-      //     album: 'Rock n Roll',
-      //   },
-      // ]
-      console.log(this.$store.getters.getSongsLikedByUser)
+      // console.log(this.$store.getters.getSongsLikedByUser)
       return this.$store.getters.getSongsLikedByUser
     },
     isLikedPageWanted() {

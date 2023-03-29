@@ -138,39 +138,38 @@ export default {
     })
   },
   computed: {
-    station(){
+    station() {
       return this.$store.getters.station
     },
     copyOfCurrIdx() {
       this.songIdx = this.currSongIdx
     },
-  putSongId() {
-    console.log('this.station', this.station)
-  if (this.songId) {
-    console.log('this.songId if 1', this.songId)
-    return this.songId
-  }
-  if (this.youtubeSong) {
-    console.log('this.youtubeSongId if 2', this.youtubeSongId)
-    return this.youtubeSong.videoId
-  }
-  if (this.station) {
-    console.log('this.station else 5', this.station )
-    if (this.isShuffleOn) {
-      console.log('this.isShuffleOn if 3', this.isShuffleOn)
-      return this.station.songs[this.shuffledSongs[this.songIdx]].id
-    } else if (this.isRepeatOn) {
-      console.log('this.repeatOn if 4', this.isRepeatOn)
-      return this.station.songs[this.songIdx].id
-    } else {
-      return this.station.songs[this.songIdx].id
-    }
-  } else {
-    console.log('mamash else')
-    // if repeat is off, play the default song
-    return 'IXdNnw99-Ic'
-  }
-},
+    putSongId() {
+      console.log('this.stationnnn', this.station)
+      if (this.songId) {
+        console.log('this.songId if 1', this.songId)
+        return this.songId
+      }
+      if (this.youtubeSong) {
+        return this.youtubeSong.videoId
+      }
+      if (this.station) {
+        console.log('this.station else 5', this.station)
+        if (this.isShuffleOn) {
+          console.log('this.isShuffleOn if 3', this.isShuffleOn)
+          return this.station.songs[this.shuffledSongs[this.songIdx]].id
+        } else if (this.isRepeatOn) {
+          console.log('this.repeatOn if 4', this.isRepeatOn)
+          return this.station.songs[this.songIdx].id
+        } else {
+          return this.station.songs[this.songIdx].id
+        }
+      } else {
+        console.log('mamash else')
+        // if repeat is off, play the default song
+        return 'IXdNnw99-Ic'
+      }
+    },
     toggleSvgIcone() {
       let icon
       if (this.volume > 80) icon = 'speakerFullBtnIcon'
@@ -226,7 +225,7 @@ export default {
       this.songIdx += num
       console.log('this.songIdx', this.songIdx)
       // if (this.songIdx > this.station.songs.length) {
-        //   console.log(songIdx)
+      //   console.log(songIdx)
       //   this.songIdx = 0
       //   console.log('this.songIdx expected 0', this.songIdx) // not works good
       // } else if (this.songIdx < 0) {
@@ -237,7 +236,6 @@ export default {
 
       this.duration = this.$refs.youtube.getDuration()
       this.formatTime(this.duration)
-
     },
     // when the video is ready
     onReady() {

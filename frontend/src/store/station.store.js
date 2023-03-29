@@ -22,16 +22,13 @@ export const stationStore = {
   },
   getters: {
     getSongsLikedByUser(state) {
-      return state.stations
-        .map((st) => st.songs)
-        .filter((c) => c.song.likedByUsers.lenght > 0)
-        .filter((st) =>
-          st.songs.filter(
-            (song) =>
-              song.likedByUsers.fullname ===
-              userService.getLoggedinUser().fullname
-          )
-        )
+      // Assuming loggedInUser is the ID of the user who is currently logged in
+      const likedSongs = state.stations.songs.filter((song) =>
+        song.likedByUsers.includes(userService.getLoggedinUser().fullname)
+      )
+
+      // The `likedSongs` array will contain all songs that have been liked by the logged-in user
+      console.log(likedSongs)
     },
     stations({ stations }) {
       return stations
@@ -140,7 +137,6 @@ export const stationStore = {
       this.$router.push('/')
     },
     createStation(state, { station }) {
-      // if (station.name === 'Liked songs') station.songs = state.likedSongsData
       state.userStations.push(station)
       console.log(userStations)
       state.stations.push(station)
