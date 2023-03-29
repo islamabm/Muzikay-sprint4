@@ -211,21 +211,11 @@ export default {
       if (this.songIdx > this.station.songs.length) {
         console.log(songIdx)
         this.songIdx = 0
-<<<<<<< HEAD
-        console.log('this.songIdx expected 0', this.songIdx)
+        console.log('this.songIdx expected 0', this.songIdx) // not works good
       } else if (this.songIdx <= 0) {
         this.songIdx = this.station.songs.length - 1
-        console.log('this.songIdx expected length', this.songIdx)
-      } else this.songIdx += num
-=======
-        console.log('this.songIdx expected 0', this.songIdx) // not works good
-      } 
-      else if (this.songIdx <= 0){
-        this.songIdx = this.station.songs.length - 1
         console.log('this.songIdx expected length', this.songIdx) // workes good
-      } 
-      else this.songIdx += num
->>>>>>> ca647203627e6da16db4edf693065bc3ba0acc90
+      } else this.songIdx += num
       console.log('this.songIdx expected 1', this.songIdx)
 
       this.duration = this.$refs.youtube.getDuration()

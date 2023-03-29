@@ -41,11 +41,11 @@ export default {
     }
   },
   methods: {
-    async add() {
-      // this function makes a mess Tal help!
-      this.videos = await stationService.getVideos(this.search)
-      console.log(this.videos[0])
-    },
+    // async add() {
+    //   // this function makes a mess Tal help!
+    //   this.videos = await stationService.getVideos(this.search)
+    //   console.log(this.videos[0])
+    // },
   },
   computed: {
     categories() {
@@ -66,6 +66,20 @@ export default {
         this.alive = false
       }, delay)
     })
+    // eventBus.on('get-videos', (search) => {
+    //   // if(this.station){
+    //   //   this.station = song
+    //   // }else{
+    //   this.videos = stationService.getVideos(this.search)
+    //   this.search = search
+    //   console.log(this.search)
+    //   // }
+    //   var delay = search.delay || 2000
+    //   this.alive = true
+    //   setTimeout(() => {
+    //     this.alive = false
+    //   }, delay)
+    // })
   },
 }
 </script>

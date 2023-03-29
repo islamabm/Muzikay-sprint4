@@ -60,6 +60,9 @@ export default {
       console.log(this.search)
       eventBus.emit('handle-search', this.search)
     },
+    add() {
+      eventBus.emit('get-videos')
+    },
     updateHeaderOpacity() {
       const scrollPosition =
         window.pageYOffset || document.documentElement.scrollTop

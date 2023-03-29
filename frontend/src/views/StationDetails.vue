@@ -38,15 +38,15 @@
           <div v-if="station.songs">
             <div class="likes-count-logo">
               <div class="logo-container-header">
-              <i class="logo-green" v-html="getSvg('greenLogo')"></i>
-              <!-- <h1 v-if="user">{{ user.fullname }}</h1> -->
-              <span class="small-logo-word">Muzikay</span>
-            </div>
-              <span class="likes-count" @click="toggleModal">6,950,331 likes</span>
-              <span class="dot">•</span>
-              <span
-                >{{ songsCount }},</span
+                <i class="logo-green" v-html="getSvg('greenLogo')"></i>
+                <!-- <h1 v-if="user">{{ user.fullname }}</h1> -->
+                <span class="small-logo-word">Muzikay</span>
+              </div>
+              <span class="likes-count" @click="toggleModal"
+                >6,950,331 likes</span
               >
+              <span class="dot">•</span>
+              <span>{{ songsCount }},</span>
 
               <span>about 11 hr </span>
             </div>
@@ -110,7 +110,7 @@
                 :songIndex="idx"
                 :liked="song.liked"
                 @click="
-                  addUserToSong(song);
+                  addUserToSong(song)
                   onHeartClick(idx)
                 "
               />
@@ -162,7 +162,8 @@
           <div class="flex-end list-end">
             <div class="like-song-icon">
               <BubblingHeart
-                class="hover-effect heart-song"
+                class="heart-song station-details-heart"
+                :class="{ 'hover-effect': clickedHeartIndex !== idx }"
                 :songIndex="idx"
                 :liked="song.liked"
                 @click="addUserToSong(song)"
@@ -186,7 +187,10 @@
         </Draggable>
       </Container>
 
-      <MiniSearch :handelYoutubeSong="handelYoutubeSong" />
+      <MiniSearch
+        :handelYoutubeSong="handelYoutubeSong"
+        v-if="station.createdBy.fullname === 'system'"
+      />
 
       <div v-if="showSongModal" @click.self="toggleSongModal(null, null)">
         <div
@@ -398,7 +402,6 @@ export default {
       }
     },
     onHeartClick(index) {
-
       if (this.clickedHeartIndex === index) {
         this.clickedHeartIndex = null
       } else {
