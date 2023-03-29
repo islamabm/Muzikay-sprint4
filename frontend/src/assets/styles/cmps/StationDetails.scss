@@ -1,5 +1,5 @@
 .station-details {
-  // width: calc(100vw - 300px);
+
 
   .header-content {
     width: 100%;
@@ -12,6 +12,7 @@
   .likes-count-logo {
     display: flex;
     align-items: center;
+    margin-block-start: 16px;
     gap: 5px;
     .dot {
       font-size: 1rem;
@@ -20,7 +21,7 @@
   }
   .logo-container-header {
     display: flex;
-    gap: 3px;
+    gap: 5px;
     margin-inline-end: 5px;
   }
   .logo-green {
@@ -71,7 +72,7 @@
       margin-block-start: 8px;
       margin-block-end: 0;
       cursor: pointer;
-      transform: translateY(-5px);
+      transform: translateY(3px);
     }
 
     .small-logo-word {
@@ -301,46 +302,6 @@
   }
 }
 
-//SONG LIST MEDIA
-// @media (max-width: $narrow-breakpoint) {
-//   .songs-list-details {
-//     margin-block-end: 40px;
-//     min-height: 10vh;
-
-//     .song-item {
-//       padding: 8px;
-
-//       .img-and-title {
-//         width: 270px;
-//       }
-
-//       .song-img {
-//         width: 30px;
-//         height: 30px;
-//       }
-
-//       .song-title {
-//         font-size: 0.9rem;
-//         max-width: 55%;
-//       }
-
-//       .posted-at {
-//         font-size: 0.7rem;
-//         margin-inline-start: 20%;
-//       }
-
-//       .song-duration {
-//         font-size: 0.7rem;
-//         width: 25px;
-//       }
-
-//       .like-song-icon {
-//         margin-inline-start: 5px;
-//         transform: translate(10%, -7%);
-//       }
-//     }
-//   }
-// }
 
 //MOBILE song list
 @media (max-width: $narrow-breakpoint) {

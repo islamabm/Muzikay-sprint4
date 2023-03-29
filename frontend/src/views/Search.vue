@@ -92,7 +92,7 @@ export default {
           song: this.song,
           station,
         })
-        showSuccessMsg('added to playlist')
+        showSuccessMsg('Added to playlist')
       } catch (err) {
         console.log(err)
         showErrorMsg('Cannot add to playlist')

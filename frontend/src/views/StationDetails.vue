@@ -362,10 +362,10 @@ export default {
           user: this.user,
         })
         this.$store.commit({ type: 'editStation', station: updatedStation })
-        showSuccessMsg('song liked')
+        showSuccessMsg('Song liked')
       } catch (err) {
         console.log(err)
-        showErrorMsg('remove from liked songs')
+        showErrorMsg('Remove from liked songs')
       }
     },
 
@@ -447,7 +447,7 @@ export default {
           songId,
           stationId: this.station._id,
         })
-        showSuccessMsg('song removed')
+        showSuccessMsg('Song removed')
       } catch (err) {
         console.log(err)
         showErrorMsg('Cannot remove song')
@@ -484,7 +484,7 @@ export default {
           song,
           station,
         })
-        showSuccessMsg('added to playlist')
+        showSuccessMsg('Added to playlist')
       } catch (err) {
         console.log(err)
         showErrorMsg('Cannot add to playlist')

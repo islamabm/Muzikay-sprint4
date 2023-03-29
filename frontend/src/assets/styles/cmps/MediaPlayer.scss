@@ -110,6 +110,10 @@
     height: 100%;
     background-color: $clr6;
     border-radius: 20px;
+
+    &:hover {
+      background-color: $clrGreen;
+    }
   }
 }
 
@@ -122,6 +126,10 @@
       stroke: $clr11;
       width: 15px;
     }
+  }
+  .speaker-bar {
+    height: 5px;
+    margin-inline-start: 7px;
   }
   .speaker-bar {
     height: 5px;
@@ -145,6 +153,40 @@
   svg:hover {
     fill: $clrGreen;
   }
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  input[type='range'] {
+    overflow: hidden;
+    width: 100px;
+    height: 4px;
+    -webkit-appearance: none;
+    background-color: #949494;
+    border-radius: 3px;
+  }
+  input[type='range']::-webkit-slider-thumb {
+    width: 10px;
+    -webkit-appearance: none;
+    height: 10px;
+    background-color: whitesmoke;
+    box-shadow: -80px 0 0 80px white;
+
+    &:hover {
+      box-shadow: -80px 0 0 80px $clrGreen;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+  }
+}
+input[type='range']::-moz-range-progress {
+  background-color: white;
+}
+
+input[type='range']::-moz-range-track {
+  background-color: #b7b7b7;
+}
+
+input[type='range']::-ms-fill-lower {
+  background-color: white;
 }
 
 .progress-container {
