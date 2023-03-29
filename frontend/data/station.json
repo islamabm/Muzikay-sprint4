@@ -809,25 +809,5 @@
         "txt": "Manish?"
       }
     ]
-  },
-  {
-    "_id": "likeduser123",
-    "name": "Liked songs",
-    "tags": ["Funk"],
-    "description": "Get ready to groove with the funkiest beats from Funky Monks!",
-    "createdBy": {
-      "_id": "u101",
-      "fullname": "baba",
-      "imgUrl": "http://some-photo/"
-    },
-    "likedByUsers": [],
-    "songs": [],
-    "msgs": [
-      {
-        "id": "m101",
-        "from": "{mini-user}",
-        "txt": "Manish?"
-      }
-    ]
   }
 ]
