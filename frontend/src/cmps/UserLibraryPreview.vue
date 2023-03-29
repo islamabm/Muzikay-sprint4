@@ -2,13 +2,13 @@
   <section v-if="station" class="station-preview">
     <div class="station-image">
       <img
-          @click="toggleModal"
-          v-if="station.songs && station.songs.length > 0"
-          :src="
+      v-if="station.songs && station.songs.length > 0"
+      :src="
             station.songs[0].imgUrl
-              ? station.songs[0].imgUrl
-              : station.songs[0].url
-          "
+            ? station.songs[0].imgUrl
+            : station.songs[0].url
+            "
+            @click="toggleModal"
         />
         <img
           class="deafult-image"

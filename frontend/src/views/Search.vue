@@ -26,18 +26,54 @@
 
         <p class="search-song-title">{{ video.title }}</p>
       </div>
-      <!-- <button class="add-btn-song" @click="addToStation(video)">Add</button> -->
+      <button
+        class="add-btn-song"
+        ref="songButtons"
+        @click="toggleSongModal($event, song, idx)"
+      >
+        Add
+      </button>
     </article>
+
+    <div v-if="showSongModal" @click.self="toggleSongModal(null, null)">
+      <div
+        class="modal-content"
+        :style="{ left: modalX + 'px', top: modalY + 'px' }"
+      >
+        <ul class="modal-options">
+          <li @click="openStationSelection">Add to playlist</li>
+          <div v-show="showStationsSubMenu">
+            <ul class="stations-sub-menu">
+              <li
+                v-for="station in userStations"
+                :key="station._id"
+                @click="addToSelectedStation(selectedSong, station)"
+              >
+                {{ station.name }}
+              </li>
+            </ul>
+          </div>
+        </ul>
+      </div>
+    </div>
   </section>
 </template>
 <script>
-import { eventBus } from '../services/event-bus.service'
+// import { eventBus } from '../services/event-bus.service'
+import { stationService } from '../services/station.service.local'
+import {
+  eventBus,
+  showErrorMsg,
+  showSuccessMsg,
+} from '../services/event-bus.service.js'
 export default {
   data() {
     return {
       videos: [],
       search: '',
       alive: false,
+      showSongModal: false,
+      showStationsSubMenu: false,
     }
   },
   methods: {
@@ -46,40 +82,71 @@ export default {
     //   this.videos = await stationService.getVideos(this.search)
     //   console.log(this.videos[0])
     // },
+    async addToSelectedStation(song, station) {
+      console.log('inside add to selected station')
+      // const songAlreadyExist = station.songs.find((s) => s.id === song.id)
+
+      // if (songAlreadyExist) {
+      //   this.showAreYouSureModal = true
+      //   console.log('yesssssssssssss')
+      // } else {
+      console.log('station details song click', song)
+      console.log('station details playlist clicked', station)
+      try {
+        await this.$store.dispatch({
+          type: 'addToStation',
+          song,
+          station,
+        })
+        showSuccessMsg('added to playlist')
+      } catch (err) {
+        console.log(err)
+        showErrorMsg('Cannot add to playlist')
+      } finally {
+        this.showSongModal = false
+        this.showStationsSubMenu = false
+        // this.show = false
+      }
+    },
+    toggleSongModal(ev, song, idx) {
+      const btn = ev.target
+      const buttonEl = this.$refs.songButtons[idx]
+      // Get the x and y coordinates of the button in the screen
+      const { left, top, height } = btn.getBoundingClientRect()
+      this.modalX = left - 200
+      this.modalY = top + height - 60
+
+      console.log('toggled song modal')
+      this.selectedSong = song
+      this.selectedIndex = idx
+      this.showSongModal = !this.showSongModal
+    },
+    openStationSelection() {
+      console.log('opened')
+      this.showStationsSubMenu = !this.showStationsSubMenu
+    },
   },
   computed: {
     categories() {
       return this.$store.getters.searchStations
     },
+    userStations() {
+      return this.$store.getters.getUserStations
+    },
   },
   created() {
-    eventBus.on('handle-search', (search) => {
-      // if(this.station){
-      //   this.station = song
-      // }else{
+    eventBus.on('handle-search', async (search) => {
       this.search = search
-      console.log(this.search)
-      // }
-      var delay = search.delay || 2000
       this.alive = true
-      setTimeout(() => {
+      setTimeout(async () => {
+        try {
+          this.videos = await stationService.getVideos(search)
+        } catch (error) {
+          console.error(error)
+        }
         this.alive = false
-      }, delay)
+      }, search.delay || 2000)
     })
-    // eventBus.on('get-videos', (search) => {
-    //   // if(this.station){
-    //   //   this.station = song
-    //   // }else{
-    //   this.videos = stationService.getVideos(this.search)
-    //   this.search = search
-    //   console.log(this.search)
-    //   // }
-    //   var delay = search.delay || 2000
-    //   this.alive = true
-    //   setTimeout(() => {
-    //     this.alive = false
-    //   }, delay)
-    // })
   },
 }
 </script>
