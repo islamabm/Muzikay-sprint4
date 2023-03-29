@@ -93,7 +93,7 @@ export default {
         //   video: video,
         //   station: station,
         // })
-        showSuccessMsg('song added')
+        showSuccessMsg('Song added')
       } catch (err) {
         showErrorMsg('Cannot add song', err)
       }

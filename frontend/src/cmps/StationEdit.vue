@@ -56,7 +56,7 @@ export default {
           type: 'editstation',
           station: editedStation,
         })
-        showSuccessMsg('station edited')
+        showSuccessMsg('Station edited')
       } catch (err) {
         showErrorMsg('Cannot edit station', err)
       }
