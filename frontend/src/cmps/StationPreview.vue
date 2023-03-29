@@ -1,6 +1,6 @@
 <template>
+  <!-- v-if="station.createdBy.fullname === 'system'" -->
   <section class="station-preview" @click="setStation(station._id)">
-    <!-- v-if="station.createdBy.fullname === 'system'" -->
     <div class="station-image">
       <img :src="station.songs[0].imgUrl" />
       <div class="play-button" @click.stop="playStation"></div>
