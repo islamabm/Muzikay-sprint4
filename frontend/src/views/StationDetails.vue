@@ -64,7 +64,7 @@
           <i class="options-icon" v-html="getSvg('optionsIcon')"></i>
         </div>
       </div>
-      <div v-if="station.songs.length" class="table-header">
+      <div class="table-header">
         <span class="title-container"><span>#</span>Title</span>
         <span class="album">Album</span>
         <div>
