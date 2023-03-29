@@ -70,6 +70,8 @@
     />
   </div>
 
+  <!-- dvir's stuff for the styling -->
+
   <!-- 
     <div class="progress-container">
       <i class="speaker" v-html="getSvg(toggleSvgIcone)"></i>
@@ -82,6 +84,7 @@
     <input class="prog input-bar timestamp" id="fontController" type="range"
     @input="setTimestamp" :value="currTime" min="0" :max="duration" />
     </div> -->
+
 </template>
 <script>
 import YouTube from 'vue3-youtube'
@@ -113,23 +116,22 @@ export default {
       shuffledSongs: [],
       isShuffleOn: false,
       speakerSvg: '',
-      song: null,
-      youtubeSong: null,
+      songId: null,
+      youtubeSongId: null,
     }
   },
   created() {
-    eventBus.on('song-details', (song) => {
-      this.song = song
-      var delay = song.delay || 2000
+    eventBus.on('song-id', (songId) => {
+      this.songId = songId
+      var delay = songId.delay || 2000
       this.alive = true
       setTimeout(() => {
         this.alive = false
       }, delay)
     })
-    eventBus.on('youtube-song-details', (video) => {
-      this.youtubeSong = video
-      console.log(video)
-      var delay = video.delay || 2000
+    eventBus.on('youtube-song-id', (videoId) => {
+      this.youtubeSongId = videoId
+      var delay = videoId.delay || 2000
       this.alive = true
       setTimeout(() => {
         this.alive = false
@@ -137,24 +139,31 @@ export default {
     })
   },
   computed: {
+    // supposed to be a switch case
     putSongId() {
-      if (this.song) {
-        return this.song.id
+      if (this.songId) {
+        console.log('this.songId if 1', this.songId)
+        return this.songId
       }
-      if (this.youtubeSong) {
-        return this.youtubeSong.videoId
+      if (this.youtubeSongId) {
+        console.log('this.youtubeSongId if 2', this.youtubeSongId)
+        return this.youtubeSongId
       }
       if (this.isShuffleOn) {
+        console.log('this.isShuffleOn if 3', this.isShuffleOn)
         return this.station.songs[this.shuffledSongs[this.songIdx]].id
-      } else if (this.station) {
+      } 
+      if (this.isRepeatOn) {
+        console.log('this.repeatOn if 4', this.isRepeatOn)
         return this.station.songs[this.songIdx].id
-      } else {
-        if (this.isRepeatOn) {
+      }
+      if (this.station) {
+          console.log('this.station else 5', this.station )
           return this.station.songs[this.songIdx].id
-        } else {
+      } else {
+          console.log('mamash else')
           // if repeat is off, play the default song
           return 'IXdNnw99-Ic'
-        }
       }
     },
     toggleSvgIcone() {
@@ -178,7 +187,7 @@ export default {
       this.isRepeatOn = !this.isRepeatOn
       if (this.isRepeatOn) {
         this.songIdx = idx
-      } else this.songIdx++
+      }
     },
     //  does algorithem to do a new array with random songs
     ShuffleSong() {
@@ -210,11 +219,11 @@ export default {
     switchSong(num) {
       if(this.songIdx > this.station.songs.length){
         this.songIdx = 0
-        console.log('this.songIdx expected 0', this.songIdx) // not works good
+        console.log('this.songIdx expected 0', this.songIdx) // doesnt works so good
       } 
       else if (this.songIdx <= 0){
         this.songIdx = this.station.songs.length - 1
-        console.log('this.songIdx expected length', this.songIdx) // workes good
+        console.log('this.songIdx expected length', this.songIdx) // works good
       } 
       else this.songIdx += num
       console.log('this.songIdx expected 1', this.songIdx)
@@ -222,7 +231,7 @@ export default {
         this.duration = this.$refs.youtube.getDuration()
         this.formatTime(this.duration)
         
-        this.$emit('songIdx', this.songIdx)
+        // this.$emit('songIdx', this.songIdx)
     },
     // when the video is ready
     onReady() {
@@ -232,7 +241,8 @@ export default {
         this.currentTime = this.$refs.youtube.getCurrentTime()
       }, 1000)
     },
-    // when something happens- Video has ended/Video 1=> is playing 2=> pause 0=> finished
+    // when something happens- Video has ended/Video 1=> is playing 2=> pause 0=> finished 3=> when passing forward or switching a song
+    // supposed to be a switch case
     onStateChange(event) {
       if (event.data === 1){
         this.isPlaying = true
@@ -241,10 +251,16 @@ export default {
         }, 1000)
       } 
       if(event.data === 2) clearInterval(this.intervalId)
-      if (event.data === 0) {
-        clearInterval(this.intervalId)
-        this.currentTime = 0
+      if(event.data === 0) {
+        this.isPlaying = true
         this.songIdx++
+        clearInterval(this.intervalId)
+      }
+      if(event.data === 3) {
+        this.isPlaying = true
+        this.currentTime = 0
+        this.duration = this.$refs.youtube.getDuration()
+        this.formatTime(this.duration)
       }
     },
     // play/pause video
