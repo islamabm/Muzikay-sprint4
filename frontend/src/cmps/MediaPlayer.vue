@@ -145,33 +145,6 @@ export default {
     copyOfCurrIdx() {
       this.songIdx = this.currSongIdx
     },
-    // supposed to be a switch case
-    // putSongId() {
-    //   if (this.songId) {
-    //     console.log('this.songId if 1', this.songId)
-    //     return this.songId
-    //   }
-    //   if (this.youtubeSong) {
-    //     console.log('this.youtubeSongId if 2', this.youtubeSongId)
-    //     return this.youtubeSong.videoId
-    //   }
-    //   if (this.isShuffleOn) {
-    //     console.log('this.isShuffleOn if 3', this.isShuffleOn)
-    //     return this.station.songs[this.shuffledSongs[this.songIdx]].id
-    //   } 
-    //   if (this.station) {
-    //     console.log('this.station else 5', this.station )
-    //     return this.station.songs[this.songIdx].id
-    //   }
-    //   else if (this.isRepeatOn) {
-    //     console.log('this.repeatOn if 4', this.isRepeatOn)
-    //     return this.station.songs[this.songIdx].id
-    //   } else {
-    //       console.log('mamash else')
-    //       // if repeat is off, play the default song
-    //       return 'IXdNnw99-Ic'
-    //   }
-    // },
   putSongId() {
     console.log('this.station', this.station)
   if (this.songId) {
