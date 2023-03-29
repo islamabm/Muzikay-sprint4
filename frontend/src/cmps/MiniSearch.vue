@@ -18,7 +18,6 @@
           placeholder="Search for songs or episodes"
           autofocus
         />
-        <!-- <button type="submit">search</button> -->
       </form>
     </div>
   </div>
@@ -85,11 +84,9 @@ export default {
       console.log(this.videos[0])
     },
     async addToStation(video) {
-      console.log('video', video)
       const { stationId } = this.$route.params
       try {
         const station = this.stations.find((s) => s._id === stationId)
-        console.log(station)
         await this.$store.dispatch({ type: 'addSong', video, station })
 
         //   type: 'addSong',

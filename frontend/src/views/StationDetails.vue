@@ -38,15 +38,15 @@
           <div v-if="station.songs">
             <div class="likes-count-logo">
               <div class="logo-container-header">
-              <i class="logo-green" v-html="getSvg('greenLogo')"></i>
-              <!-- <h1 v-if="user">{{ user.fullname }}</h1> -->
-              <span class="small-logo-word">Muzikay</span>
-            </div>
-              <span class="likes-count" @click="toggleModal">6,950,331 likes</span>
-              <span class="dot">•</span>
-              <span
-                >{{ songsCount }},</span
+                <i class="logo-green" v-html="getSvg('greenLogo')"></i>
+                <!-- <h1 v-if="user">{{ user.fullname }}</h1> -->
+                <span class="small-logo-word">Muzikay</span>
+              </div>
+              <span class="likes-count" @click="toggleModal"
+                >6,950,331 likes</span
               >
+              <span class="dot">•</span>
+              <span>{{ songsCount }},</span>
 
               <span>about 11 hr </span>
             </div>
@@ -110,7 +110,7 @@
                 :songIndex="idx"
                 :liked="song.liked"
                 @click="
-                  addUserToSong(song);
+                  addUserToSong(song)
                   onHeartClick(idx)
                 "
               />
@@ -132,7 +132,65 @@
           </div>
         </Draggable>
       </Container>
-      <MiniSearch :handelYoutubeSong="handelYoutubeSong" />
+
+      <Container
+        @drop="onDrop"
+        v-if="station.songs && station.name === 'Liked songs'"
+        class="songs-list-details"
+      >
+        <Draggable
+          @mouseover="currDraggableIdx = idx"
+          @mouseleave="currDraggableIdx = null"
+          class="song-item"
+          v-for="(song, idx) in likedUserSongs"
+          :key="idx"
+        >
+          <div class="img-and-title" @click="songDetails(song)">
+            <span>{{ idx + 1 }}</span>
+            <img v-if="song.videoId" class="song-img" :src="song.url" />
+            <img v-else class="song-img" :src="song.imgUrl" />
+            <p
+              class="song-title"
+              :class="{ active: activeTitle === idx }"
+              @click="toggleActiveTitle(idx)"
+            >
+              {{ song.title }}
+            </p>
+          </div>
+          <p class="posted-at">1 day ago</p>
+          <!-- @toggleLike="toggleSongLike" -->
+          <div class="flex-end list-end">
+            <div class="like-song-icon">
+              <BubblingHeart
+                class="heart-song station-details-heart"
+                :class="{ 'hover-effect': clickedHeartIndex !== idx }"
+                :songIndex="idx"
+                :liked="song.liked"
+                @click="addUserToSong(song)"
+              />
+              <!-- @toggleLikgit ngLike" -->
+            </div>
+            <p class="song-duration">1:40</p>
+            <div>
+              <button
+                class="btn-open-modal"
+                ref="songButtons"
+                @click="toggleSongModal($event, song, idx)"
+              >
+                <i
+                  class="options-song-icon hover-effect"
+                  v-html="getSvg('songOptionsIcon')"
+                ></i>
+              </button>
+            </div>
+          </div>
+        </Draggable>
+      </Container>
+
+      <MiniSearch
+        :handelYoutubeSong="handelYoutubeSong"
+        v-if="station.createdBy.fullname === 'system'"
+      />
 
       <div v-if="showSongModal" @click.self="toggleSongModal(null, null)">
         <div
@@ -344,7 +402,6 @@ export default {
       }
     },
     onHeartClick(index) {
-
       if (this.clickedHeartIndex === index) {
         this.clickedHeartIndex = null
       } else {
@@ -582,6 +639,9 @@ export default {
     },
     station() {
       return this.$store.getters.station
+    },
+    likedUserSongs() {
+      return this.$store.getters.getSongsLikedByUser
     },
     stationCount() {
       //computed can't do this
