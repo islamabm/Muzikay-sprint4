@@ -319,7 +319,7 @@ export default {
   },
   methods: {
     handelYoutubeSong(video) {
-      eventBus.emit('youtube-song-id', video.videoId)
+      eventBus.emit('youtube-song', video)
     },
     songDetails(song) {
       if (!song.id) this.handelYoutubeSong(song)
