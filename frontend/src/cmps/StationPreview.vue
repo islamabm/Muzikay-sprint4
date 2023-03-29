@@ -26,6 +26,16 @@ export default {
     setStation(stationId) {
       this.$store.commit({ type: 'setCurrStation', stationId })
       this.$router.push(`/station/${stationId}`)
+      // const alo = this.$store.getters.stations.map((t) => t.songs)
+      // console.log(alo)
+
+      // console.log(
+      //   alo.filter((c) => {
+      //     if (c.likedByUsers) {
+      //       c.likedByUsers
+      //     }
+      //   })
+      // )
     },
   },
 }

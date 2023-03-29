@@ -191,9 +191,9 @@ export default {
     },
 
     showLikedSongs() {
-      const id = 'likeduser123'
-      this.$store.commit({ type: 'setCurrStation', id })
-      this.$router.push(`/station/${id}`)
+      const stationId = 'likeduser123'
+      this.$store.commit({ type: 'setCurrStation', stationId })
+      this.$router.push(`/station/${stationId}`)
 
       // this.$store.dispatch({
       //         type: 'createStation',

@@ -84,7 +84,6 @@
     <input class="prog input-bar timestamp" id="fontController" type="range"
     @input="setTimestamp" :value="currTime" min="0" :max="duration" />
     </div> -->
-
 </template>
 <script>
 import YouTube from 'vue3-youtube'
@@ -117,7 +116,7 @@ export default {
       isShuffleOn: false,
       speakerSvg: '',
       songId: null,
-      youtubeSongId: null,
+      youtubeSong: null,
     }
   },
   created() {
@@ -129,9 +128,9 @@ export default {
         this.alive = false
       }, delay)
     })
-    eventBus.on('youtube-song-id', (videoId) => {
-      this.youtubeSongId = videoId
-      var delay = videoId.delay || 2000
+    eventBus.on('youtube-song', (video) => {
+      this.youtubeSong = video
+      var delay = video.delay || 2000
       this.alive = true
       setTimeout(() => {
         this.alive = false
@@ -145,25 +144,25 @@ export default {
         console.log('this.songId if 1', this.songId)
         return this.songId
       }
-      if (this.youtubeSongId) {
-        console.log('this.youtubeSongId if 2', this.youtubeSongId)
-        return this.youtubeSongId
+      if (this.youtubeSong) {
+        console.log('this.youtubeSong if 2', this.youtubeSong)
+        return this.youtubeSong.videoId
       }
       if (this.isShuffleOn) {
         console.log('this.isShuffleOn if 3', this.isShuffleOn)
         return this.station.songs[this.shuffledSongs[this.songIdx]].id
-      } 
+      }
       if (this.isRepeatOn) {
         console.log('this.repeatOn if 4', this.isRepeatOn)
         return this.station.songs[this.songIdx].id
       }
       if (this.station) {
-          console.log('this.station else 5', this.station )
-          return this.station.songs[this.songIdx].id
+        console.log('this.station else 5', this.station)
+        return this.station.songs[this.songIdx].id
       } else {
-          console.log('mamash else')
-          // if repeat is off, play the default song
-          return 'IXdNnw99-Ic'
+        console.log('mamash else')
+        // if repeat is off, play the default song
+        return 'IXdNnw99-Ic'
       }
     },
     toggleSvgIcone() {
@@ -248,14 +247,14 @@ export default {
         this.intervalId = setInterval(() => {
           this.currentTime = this.$refs.youtube.getCurrentTime()
         }, 1000)
-      } 
-      if(event.data === 2) clearInterval(this.intervalId)
-      if(event.data === 0) {
+      }
+      if (event.data === 2) clearInterval(this.intervalId)
+      if (event.data === 0) {
         this.isPlaying = true
         this.songIdx++
         clearInterval(this.intervalId)
       }
-      if(event.data === 3) {
+      if (event.data === 3) {
         this.isPlaying = true
         this.currentTime = 0
         this.duration = this.$refs.youtube.getDuration()

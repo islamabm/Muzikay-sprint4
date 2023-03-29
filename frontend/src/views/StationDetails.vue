@@ -129,13 +129,7 @@
           </div>
         </Draggable>
       </Container>
-      <Container
-        @drop="onDrop"
-        v-if="
-          station.songs && station._id === 'likeduser123' && isLikedPageWanted
-        "
-        class="songs-list-details"
-      >
+      <Container @drop="onDrop" v-if="station._id === 'likeduser123'">
         <Draggable
           class="song-item"
           v-for="(song, idx) in likedSongsUser"
@@ -154,12 +148,8 @@
             </p>
           </div>
 
-          <p class="song-album">
-            {{ song.album }}
-          </p>
-
           <p class="posted-at">1 day ago</p>
-          <!-- @toggleLike="toggleSongLike" -->
+
           <div class="flex-end list-end">
             <div class="like-song-icon">
               <BubblingHeart
@@ -169,7 +159,6 @@
                 :liked="song.liked"
                 @click="addUserToSong(song), onHeartClick(idx)"
               />
-              <!-- @toggleLikgit ngLike" -->
             </div>
             <p class="song-duration">1:40</p>
             <div>
@@ -187,10 +176,8 @@
           </div>
         </Draggable>
       </Container>
-      <MiniSearch
-        v-if="station.createdBy.fullname !== 'system'"
-        :handelYoutubeSong="handelYoutubeSong"
-      />
+      <MiniSearch :handelYoutubeSong="handelYoutubeSong" />
+      <!-- v-if="station.createdBy.fullname !== 'system'" -->
 
       <div v-if="showSongModal" @click.self="toggleSongModal(null, null)">
         <div
@@ -320,7 +307,7 @@ export default {
   },
   methods: {
     handelYoutubeSong(video) {
-      eventBus.emit('youtube-song-id', video.videoId)
+      eventBus.emit('youtube-song', video)
     },
     songDetails(song) {
       if (!song.id) this.handelYoutubeSong(song)
@@ -624,11 +611,34 @@ export default {
       return this.station.name
     },
     likedSongsUser() {
-      return ['h1', 'h2', 'h3']
-      // return this.$store.getters.getSongsLikedByUser
+      // return [
+      //   {
+      //     likedByUsers: [],
+      //     id: 'mu9OU_vzytU',
+      //     title: 'The Meters - Cissy Strut',
+      //     url: 'youtube/song.mp4',
+      //     imgUrl:
+      //       'https://img.freepik.com/premium-vector/rock-roll-music-seamless-pattern-background_688722-124.jpg?w=2000',
+      //     addedBy: '{minimal-user}',
+      //     addedAt: 162521765262,
+      //     album: 'Melancholy',
+      //   },
+      //   {
+      //     id: 'RjrA-slMoZ4',
+      //     likedByUsers: [],
+      //     title: 'The JBs - Pass The Peas',
+      //     url: 'youtube/song.mp4',
+      //     imgUrl: 'https://i.ytimg.com/vi/mUkfiLjooxs/mqdefault.jpg',
+      //     addedBy: {},
+      //     album: 'Rock n Roll',
+      //   },
+      // ]
+      console.log(this.$store.getters.getSongsLikedByUser)
+      return this.$store.getters.getSongsLikedByUser
     },
     isLikedPageWanted() {
-      return this.$route.path === '/station/likeduser123'
+      const id = 'likeduser123'
+      return this.$route.path === `/station/likeduser123`
     },
     userStations() {
       return this.$store.getters.getUserStations

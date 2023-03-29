@@ -22,12 +22,14 @@ export const stationStore = {
   },
   getters: {
     getSongsLikedByUser(state) {
-      console.log(state.stations)
       return state.stations
-        .filter((st) => st.likedByUsers.length > 0)
-        .flatMap((st) =>
-          st.songs.filter((song) =>
-            song.likedByUsers.includes(userService.getLoggedinUser().fullname)
+        .map((st) => st.songs)
+        .filter((c) => c.song.likedByUsers.lenght > 0)
+        .filter((st) =>
+          st.songs.filter(
+            (song) =>
+              song.likedByUsers.fullname ===
+              userService.getLoggedinUser().fullname
           )
         )
     },
@@ -85,7 +87,9 @@ export const stationStore = {
       state.searchStations = stations
     },
     setCurrStation(state, { stationId }) {
+      console.log(stationId)
       state.currStationId = stationId
+      console.log(state.currStationId)
     },
     setCurrUserStation(state, { stationId }) {
       state.currUserStationId = stationId

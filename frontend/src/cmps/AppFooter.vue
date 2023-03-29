@@ -1,15 +1,15 @@
 <template>
   <footer class="main-footer">
     <div class="footer-media-player">
-      <MediaPlayer :station="station"/>
+      <MediaPlayer :station="station" />
     </div>
 
     <div v-if="station" class="footer-details">
       <img
         class="footer-details-img"
-        :src=" currSong.imgUrl"
+        :src="currSong.imgUrl ? currSong.imgUrl : youtubeSong.url"
       />
-        <!-- :src="
+      <!-- :src="
           station.songs[currSongIdx].imgUrl
             ? station.songs[currSongIdx].imgUrl
             : station.songs[currSongIdx].url
@@ -27,7 +27,6 @@
         />
       </button>
     </div>
-
   </footer>
 </template>
 
@@ -46,14 +45,23 @@ export default {
       showModal: false,
       songId: null,
       alive: false,
+      youtubeSong: null,
     }
   },
   created() {
     eventBus.on('song-id', (songId) => {
-
       this.songId = songId
 
       var delay = songId.delay || 2000
+      this.alive = true
+      setTimeout(() => {
+        this.alive = false
+      }, delay)
+    })
+    eventBus.on('youtube-song', (video) => {
+      this.youtubeSong = video
+      console.log(this.youtubeSong)
+      var delay = video.delay || 2000
       this.alive = true
       setTimeout(() => {
         this.alive = false
@@ -65,11 +73,11 @@ export default {
       return this.$store.getters.station
     },
     currSong() {
-      return this.station.songs.find(s => s.id === this.songId)
+      return this.station.songs.find((s) => s.id === this.songId)
     },
     currSongIdx() {
-      return this.station.songs.findIndex(s => s.id === this.songId)
-    }
+      return this.station.songs.findIndex((s) => s.id === this.songId)
+    },
   },
   methods: {
     // getSongIdx(songIdx) {
