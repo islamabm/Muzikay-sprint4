@@ -36,7 +36,11 @@
         <i v-else v-html="getSvg('playBtnIcon')"></i>
       </button>
 
-      <button class="media-player-prev-song hiding" @click="switchSong(1)">
+      <button
+        title="Next"
+        class="next media-player-prev-song hiding"
+        @click="switchSong(1)"
+      >
         <i v-html="getSvg('nextSongBtnIcon')"></i>
       </button>
       <button

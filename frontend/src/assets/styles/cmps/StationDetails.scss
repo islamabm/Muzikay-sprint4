@@ -1,6 +1,4 @@
 .station-details {
-
-
   .header-content {
     width: 100%;
     display: flex;
@@ -303,7 +301,6 @@
     }
   }
 }
-
 
 //MOBILE song list
 @media (max-width: $narrow-breakpoint) {
@@ -611,4 +608,17 @@
   border-radius: 10px;
   top: -28%;
   left: 52.9%;
+}
+.next[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  background-color: $clr4;
+  height: 20px;
+  color: white;
+  line-height: 20px;
+  padding: 6px;
+  // width: 43px;
+  border-radius: 10px;
+  top: -28%;
+  left: 51.9%;
 }
