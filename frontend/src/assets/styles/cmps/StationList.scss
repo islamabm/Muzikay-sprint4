@@ -13,7 +13,7 @@
     padding-inline: 2rem;
     align-items: center;
     justify-content: center;
-    padding-block-end: 4rem;
+    padding-block-end: 2.05rem;
     overflow-x: auto;
     @media (max-width: $narrow-breakpoint) {
       padding-block-end: 1rem;
@@ -21,7 +21,7 @@
   }
   .category-tag {
     width: max-content;
-    margin-inline-start: 1.5rem;
+    margin-inline-start: 1.95rem;
     margin-block-end: 2rem;
     font-size: 1.5rem;
     font-family: Circular-book;
