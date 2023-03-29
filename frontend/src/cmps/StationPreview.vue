@@ -1,6 +1,6 @@
 <template>
+  <!-- v-if="station.createdBy.fullname === 'system'" -->
   <section
-    v-if="station.createdBy.fullname === 'system'"
     class="station-preview"
     @click="setStation(station._id)"
   >
