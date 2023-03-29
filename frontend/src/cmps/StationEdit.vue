@@ -101,14 +101,6 @@ export default {
       }
       return 'src/assets/img/empty-img.png'
     },
-    // img() {
-    //   if (this.station.songs[0].imgUrl) {
-    //     console.log(this.station.songs[0].imgUrl)
-    //   }
-    //   return this.station.songs[0].imgUrl
-    //     ? this.station.songs[0].imgUrl
-    //     : 'src/assets/img/empty-img.png'
-    // },
 
     stations() {
       return this.$store.getters.stations

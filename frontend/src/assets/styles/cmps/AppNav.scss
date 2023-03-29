@@ -24,7 +24,7 @@ nav {
       font-family: Circular-light;
       font-weight: 600;
       font-size: 14px;
-      letter-spacing: 0.5px; 
+      letter-spacing: 0.5px;
       color: $clr11;
       display: flex;
       flex-direction: column;
@@ -43,7 +43,6 @@ nav {
       width: 42px;
       height: 42px;
       margin-inline-end: 5px;
-      
     }
 
     span {
@@ -66,10 +65,10 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    a{
+    a {
       padding-inline: 0;
     }
-    .icons{
+    .icons {
       margin-inline-end: 1rem;
     }
   }
@@ -77,12 +76,12 @@ nav {
   .main-nav {
     margin-block-end: 16px;
 
-    a{
+    a {
       gap: 6px;
       font-family: Circular-medium;
-      font-size:0.9rem;
-      svg{
-        margin-block-start:-2px;
+      font-size: 0.9rem;
+      svg {
+        margin-block-start: -2px;
       }
     }
 
@@ -129,7 +128,6 @@ nav {
         padding: 5.5px;
       }
     }
-    
   }
 
   .liked-songs {
@@ -165,19 +163,19 @@ nav {
       color: $clr6;
       text-decoration: none;
       svg {
-        fill: $clr6; 
+        fill: $clr6;
       }
     }
-  
+
     &.active {
       color: $clr6;
       font-weight: bold;
       svg {
-        fill: $clr6; 
+        fill: $clr6;
       }
     }
   }
-}  
+}
 
 .plus-sign {
   color: $clr8;
@@ -207,3 +205,8 @@ nav {
   color: $clr6;
 }
 
+.create-container,
+.liked-songs,
+.station-nav-hover {
+  cursor: pointer;
+}

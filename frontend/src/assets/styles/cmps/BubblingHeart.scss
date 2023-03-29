@@ -1,13 +1,12 @@
 .heart-svg {
-    height: 80px;
-    width: 80px;
-    padding:0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-block-start: -5px;
-    margin-inline-start: 110px;
-
+  height: 80px;
+  width: 80px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-block-start: -5px;
+  margin-inline-start: 110px;
 }
 .label {
   width: 20px;
@@ -17,11 +16,11 @@ label {
   transform: translateX(-25px);
 }
 
-.bubbling-heart input[type="checkbox"] {
+.bubbling-heart input[type='checkbox'] {
   display: none;
 }
 
-input[type="checkbox"] + label {
+input[type='checkbox'] + label {
   position: relative;
   display: grid;
   place-content: center;
@@ -46,7 +45,7 @@ input[type="checkbox"] + label {
   cursor: pointer;
   &::before,
   &::after {
-    content: "";
+    content: '';
     display: grid;
     border-radius: 100%;
     position: absolute;
@@ -118,4 +117,7 @@ input[type="checkbox"] + label {
     transform: scale(1.1);
     opacity: 0;
   }
+}
+.bubbling-heart {
+  cursor: pointer;
 }

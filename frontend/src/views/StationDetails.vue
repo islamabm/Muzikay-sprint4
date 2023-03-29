@@ -57,14 +57,14 @@
     </section>
 
     <section ref="bottomHalf">
-      <div class="station-controls">
+      <div v-if="station.songs.length" class="station-controls">
         <div class="btn-play-green" @click.stop="playStation"></div>
         <BubblingHeart @toggleLike="toggleHeaderLike" />
         <div class="btn-icons" @click="showDeleteModel">
           <i class="options-icon" v-html="getSvg('optionsIcon')"></i>
         </div>
       </div>
-      <div class="table-header">
+      <div v-if="station.songs.length" class="table-header">
         <span class="title-container"><span>#</span>Title</span>
         <span class="album">Album</span>
         <div>
@@ -105,6 +105,7 @@
           <div class="flex-end list-end">
             <div class="like-song-icon">
               <BubblingHeart
+                title="heart"
                 class="heart-song station-details-heart"
                 :class="{ 'hover-effect': clickedHeartIndex !== idx }"
                 :songIndex="idx"
@@ -153,6 +154,7 @@
           <div class="flex-end list-end">
             <div class="like-song-icon">
               <BubblingHeart
+                title="heart"
                 class="heart-song station-details-heart"
                 :class="{ 'hover-effect': clickedHeartIndex !== idx }"
                 :songIndex="idx"
@@ -436,7 +438,8 @@ export default {
     },
 
     async removeSong(songId) {
-      console.log('atationDetails', songId)
+      console.log('station details function remove song', songId)
+      console.log('station details function remove song', this.station._id)
 
       try {
         await this.$store.dispatch({
@@ -471,41 +474,10 @@ export default {
     //     this.showSongModal = false
     //   }
     // },
-    // async check(song, station) {
-    //   try {
-    //     await this.$store.dispatch({
-    //       type: 'checkIfIn',
-    //       song,
-    //       station,
-    //     })
-    //     showSuccessMsg('added to playlist')
-    //   } catch (err) {
-    //     console.log(err)
-    //     showErrorMsg('Cannot add to playlist')
-    //   }
-    // },
 
-    // async check(song, station) {
-    //   try {
-    //     await this.$store.dispatch({
-    //       type: 'checkSong',
-    //       song,
-    //       station,
-    //     })
-    //     showSuccessMsg('added to playlist')
-    //   } catch (err) {
-    //     console.log(err)
-    //     showErrorMsg('Cannot add to playlist')
-    //   }
     async addToSelectedStation(song, station) {
-      // const songAlreadyExist = station.songs.find((s) => s.id === song.id)
-
-      // if (songAlreadyExist) {
-      //   this.showAreYouSureModal = true
-      //   console.log('yesssssssssssss')
-      // } else {
-      console.log('station details song click', song)
-      console.log('station details playlist clicked', station)
+      console.log('we are in the details in the add song', song)
+      console.log('we are in the details in the add song station', station)
       try {
         await this.$store.dispatch({
           type: 'addToStation',
@@ -559,29 +531,6 @@ export default {
     getSvg(iconName) {
       return svgService.getSpotifySvg(iconName)
     },
-    // onSongDrop(columnId, dropResult) {
-    //   // check if element where ADDED or REMOVED in current collumn
-    //   if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
-    //     const scene = Object.assign({}, this.scene)
-    //     const column = scene.children.filter((p) => p.id === columnId)[0]
-    //     const itemIndex = scene.children.indexOf(column)
-    //     const newColumn = Object.assign({}, column)
-
-    //     // check if element was ADDED in current column
-    //     if (dropResult.removedIndex == null && dropResult.addedIndex >= 0) {
-    //       // your action / api call
-    //       dropResult.payload.loading = true
-    //       // simulate api call
-    //       setTimeout(function () {
-    //         dropResult.payload.loading = false
-    //       }, Math.random() * 5000 + 1000)
-    //     }
-
-    //     newColumn.children = applyDrag(newColumn.children, dropResult)
-    //     scene.children.splice(itemIndex, 1, newColumn)
-    //     this.scene = scene
-    //   }
-    // },
   },
   watch: {
     '$route.params': {
@@ -611,11 +560,11 @@ export default {
       return this.station.name
     },
     likedSongsUser() {
+      return []
       // console.log(this.$store.getters.getSongsLikedByUser)
-      return this.$store.getters.getSongsLikedByUser
+      // return this.$store.getters.getSongsLikedByUser
     },
     isLikedPageWanted() {
-      const id = 'likeduser123'
       return this.$route.path === `/station/likeduser123`
     },
     userStations() {

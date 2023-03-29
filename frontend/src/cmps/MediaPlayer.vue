@@ -9,18 +9,25 @@
 
   <div class="media-player">
     <div class="control-buttons">
-      <button class="media-player-prev-song hiding" @click="ShuffleSong()">
+      <button
+        title="Enable shuffle"
+        class="shuffle media-player-prev-song hiding"
+        @click="ShuffleSong()"
+      >
         <i
-          class="shuffle"
           :class="{ 'button-active': isShuffleOn }"
           v-html="getSvg('shuffleBtnIcon')"
         ></i>
       </button>
-      <button class="media-player-prev-song hiding" @click="switchSong(-1)">
+      <button
+        title="Previous"
+        class="prev media-player-prev-song hiding"
+        @click="switchSong(-1)"
+      >
         <i v-html="getSvg('prevSongBtnIcon')"></i>
       </button>
 
-      <button class="media-player-play" @click="playAudio()">
+      <button title="Play" class="media-player-play" @click="playAudio()">
         <i
           class="pause"
           v-if="this.isPlaying"
@@ -32,8 +39,8 @@
       <button class="media-player-prev-song hiding" @click="switchSong(1)">
         <i v-html="getSvg('nextSongBtnIcon')"></i>
       </button>
-
       <button
+        title="Enable repeat"
         class="media-player-repeat-song hiding"
         @click="repeatSong(songIdx)"
       >

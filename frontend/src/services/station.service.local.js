@@ -6,7 +6,7 @@ import { userService } from './user.service.js'
 import gStations from '../../data/station.json'
 import gSearchStations from '../../data/search.json'
 // import { userService } from './user.service.js'
-const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBltnreSGH1kYyAD0yWXpVTGDWynrhtJag&q=`
+const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyAqzQlySCi__l0i-rt87fZOfbCN85Xj-CE&q=`
 const STORAGE_KEY = 'station'
 const SEARCH_KEY = 'videosDB'
 const SEARCH_STATIONS_KEY = 'searchDB'
@@ -86,7 +86,7 @@ function removeSong(songId, stationId) {
   const station = stations[stationIdx]
   const songIdx = station.songs.findIndex((so) => so._id === songId)
   station.songs.splice(songIdx, 1)
-  stations[stationIdx] = station // Update the station in the stations array
+  stations[stationIdx] = station
   utilService.saveToStorage(STORAGE_KEY, stations)
 }
 function getVideos(keyword) {
@@ -221,8 +221,6 @@ async function addUserToSong(song, station, loggedinUser) {
 }
 
 async function addSongToStation(song, station) {
-  console.log('song from addSongToStation  servide', song)
-  console.log('station from addSongToStation service', station)
   if (!station) {
     throw new Error('Station parameter is undefined')
   }

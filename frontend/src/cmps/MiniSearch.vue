@@ -84,15 +84,10 @@ export default {
       console.log(this.videos[0])
     },
     async addToStation(video) {
-      const { stationId } = this.$route.params
       try {
-        const station = this.stations.find((s) => s._id === stationId)
-        await this.$store.dispatch({ type: 'addSong', video, station })
-
-        //   type: 'addSong',
-        //   video: video,
-        //   station: station,
-        // })
+        const { stationId } = this.$route.params
+        // const station = this.stations.find((s) => s._id === stationId)
+        await this.$store.dispatch({ type: 'addSong', video, stationId })
         showSuccessMsg('song added')
       } catch (err) {
         showErrorMsg('Cannot add song', err)

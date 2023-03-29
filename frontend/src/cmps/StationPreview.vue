@@ -26,11 +26,9 @@ export default {
     setStation(stationId) {
       this.$store.commit({ type: 'setCurrStation', stationId })
       this.$router.push(`/station/${stationId}`)
-      const songs = this.$store.getters.stations
-        .filter((t) => t.songs)
-        .filter((s) => s.likedByUsers)
-        .filter((l) => l === 'jljujio')
-      console.log(songs)
+      const alo = this.$store.stations.songs.filter((song) =>
+        song.likedByUsers.includes(userService.getLoggedinUser().fullname)
+      )
     },
   },
 }

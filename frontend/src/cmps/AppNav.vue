@@ -181,6 +181,7 @@ export default {
       try {
         this.stationCounter++
         const StationName = `My Playlist #${this.stationCounter}`
+        console.log('station name in app nav', StationName)
         await this.$store.dispatch({
           type: 'createStation',
           StationName,

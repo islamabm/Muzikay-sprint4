@@ -809,5 +809,67 @@
         "txt": "Manish?"
       }
     ]
+  },
+  {
+    "_id": "106",
+    "name": "November Rain",
+    "fullname": "system",
+    "tags": ["Happy"],
+    "description": "From upbeat pop to cheerful indie, these happy songs are guaranteed to put a smile on your face.",
+    "createdBy": {
+      "_id": "u101",
+      "fullname": "Puki Ben David",
+      "imgUrl": "http://some-photo/"
+    },
+    "likedByUsers": ["guest"],
+    "songs": [
+      {
+        "id": "5qm8PH4xAss",
+        "likedByUsers": [],
+        "title": "The Meters - Cissy Strut",
+        "url": "youtube/song.mp4",
+        "imgUrl": "http://www.feelnumb.com/wp-content/uploads/2011/10/Use_Your_Illusions_I_Guns_N_Roses_Raphael_School_Of_Athens_Painting.jpg",
+        "addedBy": "{minimal-user}",
+        "addedAt": 162521765262,
+        "album": "Melancholy"
+      },
+      {
+        "id": "FxQTY-W6GIo",
+        "likedByUsers": [],
+        "title": "The JBs - Pass The Peas",
+        "url": "youtube/song.mp4",
+        "imgUrl": "https://cdn10.phillymag.com/wp-content/uploads/sites/3/2020/09/monthly-playlist.jpg",
+        "addedBy": {},
+        "album": "Evolve"
+      }
+    ],
+    "msgs": [
+      {
+        "id": "m101",
+        "from": "{mini-user}",
+        "txt": "Manish?"
+      }
+    ]
+  },
+  {
+    "_id": "likeduser123",
+    "name": "Liked songs",
+    "fullname": "system",
+    "tags": ["Happy"],
+    "description": "From upbeat pop to cheerful indie, these happy songs are guaranteed to put a smile on your face.",
+    "createdBy": {
+      "_id": "u101",
+      "fullname": "Puki Ben David",
+      "imgUrl": "http://some-photo/"
+    },
+    "likedByUsers": [],
+    "songs": [],
+    "msgs": [
+      {
+        "id": "m101",
+        "from": "{mini-user}",
+        "txt": "Manish?"
+      }
+    ]
   }
 ]

@@ -48,7 +48,7 @@
               <li
                 v-for="station in userStations"
                 :key="station._id"
-                @click="addToSelectedStation(selectedSong, station)"
+                @click="addSongToPlaylist(song, station)"
               >
                 {{ station.name }}
               </li>
@@ -75,7 +75,7 @@ export default {
       alive: false,
       showSongModal: false,
       showStationsSubMenu: false,
-      selectedSong: null,
+      song: null,
       selectedIndex: null,
     }
   },
@@ -85,21 +85,11 @@ export default {
     //   this.videos = await stationService.getVideos(this.search)
     //   console.log(this.videos[0])
     // },
-    async addToSelectedStation(song, station) {
-      console.log('song in search add', song)
-      console.log('inside add to selected station')
-      // const songAlreadyExist = station.songs.find((s) => s.id === song.id)
-
-      // if (songAlreadyExist) {
-      //   this.showAreYouSureModal = true
-      //   console.log('yesssssssssssss')
-      // } else {
-      console.log('station details song click', song)
-      console.log('station details playlist clicked', station)
+    async addSongToPlaylist(song, station) {
       try {
         await this.$store.dispatch({
-          type: 'addToStation',
-          song,
+          type: 'addVideoToStation',
+          song: this.song,
           station,
         })
         showSuccessMsg('added to playlist')
@@ -113,6 +103,7 @@ export default {
       }
     },
     toggleSongModal(ev, song, idx) {
+      this.song = this.videos[idx]
       console.log('song in modal search', song)
       const btn = ev.target
       const buttonEl = this.$refs.songButtons[idx]
