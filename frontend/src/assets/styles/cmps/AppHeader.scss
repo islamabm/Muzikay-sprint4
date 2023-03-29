@@ -58,12 +58,12 @@
     }
 
     .left-arrow-icon::after {
-      transform: rotate(135deg);
+      transform: rotate(135deg) translate(-1px, -1px);
     }
-
+    
     .right-arrow-icon::after {
-      transform: rotate(-45deg);
-    }
+      transform: rotate(-45deg) translate(-2px, -2px);
+    }    
   }
 
   @media screen and (max-width: $narrow-breakpoint) {
