@@ -15,6 +15,8 @@
       </article>
     </div>
   </section>
+
+
   <section v-else class="search-results">
     <article
       class="add-songs-container song-item"
@@ -74,6 +76,8 @@ export default {
       alive: false,
       showSongModal: false,
       showStationsSubMenu: false,
+      selectedSong: null,
+      selectedIndex: null,
     }
   },
   methods: {
@@ -83,6 +87,7 @@ export default {
     //   console.log(this.videos[0])
     // },
     async addToSelectedStation(song, station) {
+      console.log('song in search add', song)
       console.log('inside add to selected station')
       // const songAlreadyExist = station.songs.find((s) => s.id === song.id)
 
@@ -109,6 +114,7 @@ export default {
       }
     },
     toggleSongModal(ev, song, idx) {
+      console.log('song in modal search', song)
       const btn = ev.target
       const buttonEl = this.$refs.songButtons[idx]
       // Get the x and y coordinates of the button in the screen
