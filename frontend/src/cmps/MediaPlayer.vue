@@ -94,20 +94,19 @@ import { eventBus } from '../services/event-bus.service'
 export default {
   name: ['MediaPlayer'],
   props: {
-    station: Object,
+    // station: Object,
     speakerLevel: {
       type: Number,
       default: 80,
     },
+    currSongIdx: Number,
   },
-  emits: ['songIdx'],
   components: {
     YouTube,
   },
   data() {
     return {
       volume: 50,
-      songIdx: 0,
       duration: 0,
       currentTime: 0,
       intervalId: null,
@@ -117,7 +116,8 @@ export default {
       isShuffleOn: false,
       speakerSvg: '',
       songId: null,
-      youtubeSongId: null,
+      youtubeSong: null,
+      songIdx: 0,
     }
   },
   created() {
@@ -129,9 +129,9 @@ export default {
         this.alive = false
       }, delay)
     })
-    eventBus.on('youtube-song-id', (videoId) => {
-      this.youtubeSongId = videoId
-      var delay = videoId.delay || 2000
+    eventBus.on('youtube-song', (video) => {
+      this.youtubeSong = video
+      var delay = video.delay || 2000
       this.alive = true
       setTimeout(() => {
         this.alive = false
@@ -139,33 +139,66 @@ export default {
     })
   },
   computed: {
-    // supposed to be a switch case
-    putSongId() {
-      if (this.songId) {
-        console.log('this.songId if 1', this.songId)
-        return this.songId
-      }
-      if (this.youtubeSongId) {
-        console.log('this.youtubeSongId if 2', this.youtubeSongId)
-        return this.youtubeSongId
-      }
-      if (this.isShuffleOn) {
-        console.log('this.isShuffleOn if 3', this.isShuffleOn)
-        return this.station.songs[this.shuffledSongs[this.songIdx]].id
-      } 
-      if (this.isRepeatOn) {
-        console.log('this.repeatOn if 4', this.isRepeatOn)
-        return this.station.songs[this.songIdx].id
-      }
-      if (this.station) {
-          console.log('this.station else 5', this.station )
-          return this.station.songs[this.songIdx].id
-      } else {
-          console.log('mamash else')
-          // if repeat is off, play the default song
-          return 'IXdNnw99-Ic'
-      }
+    station(){
+      return this.$store.getters.station
     },
+    copyOfCurrIdx() {
+      this.songIdx = this.currSongIdx
+    },
+    // supposed to be a switch case
+    // putSongId() {
+    //   if (this.songId) {
+    //     console.log('this.songId if 1', this.songId)
+    //     return this.songId
+    //   }
+    //   if (this.youtubeSong) {
+    //     console.log('this.youtubeSongId if 2', this.youtubeSongId)
+    //     return this.youtubeSong.videoId
+    //   }
+    //   if (this.isShuffleOn) {
+    //     console.log('this.isShuffleOn if 3', this.isShuffleOn)
+    //     return this.station.songs[this.shuffledSongs[this.songIdx]].id
+    //   } 
+    //   if (this.station) {
+    //     console.log('this.station else 5', this.station )
+    //     return this.station.songs[this.songIdx].id
+    //   }
+    //   else if (this.isRepeatOn) {
+    //     console.log('this.repeatOn if 4', this.isRepeatOn)
+    //     return this.station.songs[this.songIdx].id
+    //   } else {
+    //       console.log('mamash else')
+    //       // if repeat is off, play the default song
+    //       return 'IXdNnw99-Ic'
+    //   }
+    // },
+  putSongId() {
+    console.log('this.station', this.station)
+  if (this.songId) {
+    console.log('this.songId if 1', this.songId)
+    return this.songId
+  }
+  if (this.youtubeSong) {
+    console.log('this.youtubeSongId if 2', this.youtubeSongId)
+    return this.youtubeSong.videoId
+  }
+  if (this.station) {
+    console.log('this.station else 5', this.station )
+    if (this.isShuffleOn) {
+      console.log('this.isShuffleOn if 3', this.isShuffleOn)
+      return this.station.songs[this.shuffledSongs[this.songIdx]].id
+    } else if (this.isRepeatOn) {
+      console.log('this.repeatOn if 4', this.isRepeatOn)
+      return this.station.songs[this.songIdx].id
+    } else {
+      return this.station.songs[this.songIdx].id
+    }
+  } else {
+    console.log('mamash else')
+    // if repeat is off, play the default song
+    return 'IXdNnw99-Ic'
+  }
+},
     toggleSvgIcone() {
       let icon
       if (this.volume > 80) icon = 'speakerFullBtnIcon'
@@ -217,20 +250,22 @@ export default {
     },
     // the function gets direction 1/-1 and switches the song by it
     switchSong(num) {
-      if (this.songIdx > this.station.songs.length) {
-        console.log(songIdx)
-        this.songIdx = 0
-        console.log('this.songIdx expected 0', this.songIdx) // not works good
-      } else if (this.songIdx <= 0) {
-        this.songIdx = this.station.songs.length - 1
-        console.log('this.songIdx expected length', this.songIdx) // workes good
-      } else this.songIdx += num
-      console.log('this.songIdx expected 1', this.songIdx)
+      console.log('this.songIdx', this.songIdx)
+      this.songIdx += num
+      console.log('this.songIdx', this.songIdx)
+      // if (this.songIdx > this.station.songs.length) {
+        //   console.log(songIdx)
+      //   this.songIdx = 0
+      //   console.log('this.songIdx expected 0', this.songIdx) // not works good
+      // } else if (this.songIdx < 0) {
+      //   this.songIdx = this.station.songs.length - 1
+      //   console.log('this.songIdx expected length', this.songIdx) // workes good
+      // } else 
+      // console.log('this.songIdx expected 1', this.songIdx)
 
       this.duration = this.$refs.youtube.getDuration()
       this.formatTime(this.duration)
 
-      this.$emit('songIdx', this.songIdx)
     },
     // when the video is ready
     onReady() {
