@@ -93,7 +93,9 @@
         font-weight: bold;
       }
     }
-
+    .btn-logout{
+      transform: translateY(2.5px);
+    }
     .btn-signup,
     .btn-logout {
       display: flex;
@@ -108,7 +110,6 @@
       }
     }
     .username-header {
-      min-block-size: 45px;
       background-color: rgba($clr5, 0.4);
       font-size: 0.9rem;
       display: flex;
@@ -116,8 +117,32 @@
       align-items: center;
       border-radius: 500px;
       padding-block: 8px;
-      padding-inline: 20px;
+      padding-inline-end: 25px;
+      padding-inline-start:10px;
       margin-inline-end: 22px;
+      height: 40px;
+      width: 100px;
+      transform: translateY(4px);
+      .user-circle {
+        background-color: gray;
+        align-self: end;
+        height: 25px;
+        width: 25px;
+        padding:10px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-inline-end: 10px;
+        .user-icon{
+          svg{
+            fill:$clr6;
+            height:15px;
+            width: 15px;
+            transform: translateY(2.5px);
+          }
+        }
+      }
       cursor: pointer;
       &:hover{
         background-color: rgba($clr3, 0.4);
