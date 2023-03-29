@@ -57,7 +57,7 @@
     </section>
 
     <section ref="bottomHalf">
-      <div v-if="station.songs.length" class="station-controls">
+      <div class="station-controls">
         <div class="btn-play-green" @click.stop="playStation"></div>
         <BubblingHeart @toggleLike="toggleHeaderLike" />
         <div class="btn-icons" @click="showDeleteModel">
