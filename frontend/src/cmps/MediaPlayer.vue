@@ -61,7 +61,7 @@
     <i class="speaker" v-html="getSvg(toggleSvgIcone)"></i>
     <input
       type="range"
-      class="speaker-bar prog"
+      class="speaker-bar"
       min="0"
       max="100"
       step="10"
