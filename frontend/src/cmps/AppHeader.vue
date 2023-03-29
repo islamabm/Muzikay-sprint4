@@ -39,7 +39,11 @@
 
     <div class="login-signup" v-if="loggedinUser">
       <button class="btn-logout" @click="logout">Log out</button>
-      <span class="username-header">{{ loggedinUser.fullname }}</span>
+      <span class="username-header">
+        <div class="user-circle">
+          <i class="user-icon" v-html="getSvg('userIcon')"></i>
+        </div>
+        {{ loggedinUser.fullname }}</span>
     </div>
     <div class="login-signup" v-else>
       <RouterLink class="btn-signup" to="/signup">Sign up</RouterLink>
