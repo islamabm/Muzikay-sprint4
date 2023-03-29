@@ -126,6 +126,7 @@ export default {
       searchIcon: 'searchIcon',
       homeIcon: 'homeIcon',
       libraryIcon: 'libraryIcon',
+      counter: 0,
     }
   },
   methods: {
@@ -189,19 +190,18 @@ export default {
       }
     },
 
-    async showLikedSongs() {
-      // if (userService.getLoggedinUser())
-      const StationName = 'Liked songs'
-      try {
-        await this.$store.dispatch({
-          type: 'createStation',
-          StationName,
-        })
-      } catch (err) {
-        console.log('err')
-      }
+    showLikedSongs() {
+      const id = 'likeduser123'
+      this.$store.commit({ type: 'setCurrStation', id })
+      this.$router.push(`/station/${id}`)
+
+      // this.$store.dispatch({
+      //         type: 'createStation',
+      //         StationName,
+      //       })
     },
   },
+
   computed: {
     userStations() {
       return this.$store.getters.getUserStations

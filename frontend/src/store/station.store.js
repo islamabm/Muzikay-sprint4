@@ -22,7 +22,7 @@ export const stationStore = {
   },
   getters: {
     getSongsLikedByUser(state) {
-      // const loggedInUser = userService.getLoggedinUser().fullname
+      console.log(state.stations)
       return state.stations
         .filter((st) => st.likedByUsers.length > 0)
         .flatMap((st) =>
@@ -87,9 +87,6 @@ export const stationStore = {
     setCurrStation(state, { stationId }) {
       state.currStationId = stationId
     },
-    setCurrStation(state, { stationId }) {
-      state.currStationId = stationId
-    },
     setCurrUserStation(state, { stationId }) {
       state.currUserStationId = stationId
     },
@@ -105,6 +102,8 @@ export const stationStore = {
       console.log('State stations:', state.stations)
       console.log('Received song:', song)
 
+      const st = state.stations.find((s) => s._id === 'likeduser123')
+      st.songs.push(song)
       const stationIdx = state.stations.findIndex(
         (s) => s._id === song.stationId
       )
@@ -205,6 +204,7 @@ export const stationStore = {
       }
     },
     async createStation({ commit }, { StationName }) {
+      console.log('from the store', StationName)
       try {
         const station = await stationService.createNewStation(StationName)
         commit({ type: 'createStation', station })

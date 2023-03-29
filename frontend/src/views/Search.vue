@@ -41,11 +41,11 @@ export default {
     }
   },
   methods: {
-    // async add() {
-    //   // this function makes a mess Tal help!
-    //   this.videos = await stationService.getVideos(this.search)
-    //   console.log(this.videos[0])
-    // },
+    async add() {
+      // this function makes a mess Tal help!
+      this.videos = await stationService.getVideos(this.search)
+      console.log(this.videos[0])
+    },
   },
   computed: {
     categories() {

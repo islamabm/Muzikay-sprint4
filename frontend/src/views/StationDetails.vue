@@ -7,7 +7,7 @@
           v-if="
             station.songs &&
             station.songs.length > 0 &&
-            station.name !== 'Liked songs'
+            station._id !== 'likeduser123'
           "
           :src="
             station.songs[0].imgUrl
@@ -18,7 +18,7 @@
 
         <img
           @click="toggleModal"
-          v-else-if="station.name === 'Liked songs'"
+          v-else-if="station._id === 'likeduser123'"
           src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
         />
         <img
@@ -109,10 +109,7 @@
                 :class="{ 'hover-effect': clickedHeartIndex !== idx }"
                 :songIndex="idx"
                 :liked="song.liked"
-                @click="
-                  addUserToSong(song)
-                  onHeartClick(idx)
-                "
+                @click="addUserToSong(song), onHeartClick(idx)"
               />
               <!-- @toggleLikgit ngLike" -->
             </div>
@@ -132,17 +129,16 @@
           </div>
         </Draggable>
       </Container>
-
       <Container
         @drop="onDrop"
-        v-if="station.songs && station.name === 'Liked songs'"
+        v-if="
+          station.songs && station._id === 'likeduser123' && isLikedPageWanted
+        "
         class="songs-list-details"
       >
         <Draggable
-          @mouseover="currDraggableIdx = idx"
-          @mouseleave="currDraggableIdx = null"
           class="song-item"
-          v-for="(song, idx) in likedUserSongs"
+          v-for="(song, idx) in likedSongsUser"
           :key="idx"
         >
           <div class="img-and-title" @click="songDetails(song)">
@@ -157,6 +153,11 @@
               {{ song.title }}
             </p>
           </div>
+
+          <p class="song-album">
+            {{ song.album }}
+          </p>
+
           <p class="posted-at">1 day ago</p>
           <!-- @toggleLike="toggleSongLike" -->
           <div class="flex-end list-end">
@@ -166,7 +167,7 @@
                 :class="{ 'hover-effect': clickedHeartIndex !== idx }"
                 :songIndex="idx"
                 :liked="song.liked"
-                @click="addUserToSong(song)"
+                @click="addUserToSong(song), onHeartClick(idx)"
               />
               <!-- @toggleLikgit ngLike" -->
             </div>
@@ -186,10 +187,9 @@
           </div>
         </Draggable>
       </Container>
-
       <MiniSearch
+        v-if="station.createdBy.fullname !== 'system'"
         :handelYoutubeSong="handelYoutubeSong"
-        v-if="station.createdBy.fullname === 'system'"
       />
 
       <div v-if="showSongModal" @click.self="toggleSongModal(null, null)">
@@ -623,6 +623,13 @@ export default {
     stationDeleteMsg() {
       return this.station.name
     },
+    likedSongsUser() {
+      return ['h1', 'h2', 'h3']
+      // return this.$store.getters.getSongsLikedByUser
+    },
+    isLikedPageWanted() {
+      return this.$route.path === '/station/likeduser123'
+    },
     userStations() {
       return this.$store.getters.getUserStations
     },
@@ -639,9 +646,6 @@ export default {
     },
     station() {
       return this.$store.getters.station
-    },
-    likedUserSongs() {
-      return this.$store.getters.getSongsLikedByUser
     },
     stationCount() {
       //computed can't do this

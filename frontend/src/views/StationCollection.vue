@@ -31,9 +31,6 @@ export default {
       }
     },
   },
-  created() {
-    this.$store.getters.getSongsLikedByUser
-  },
   components: {
     StationsList,
   },
