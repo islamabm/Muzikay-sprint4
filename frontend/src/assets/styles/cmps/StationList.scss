@@ -40,7 +40,7 @@
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
       padding-block-end: 2rem;
       gap: 10px;
-      overflow-x: scroll;
+      overflow:hidden;
     }
     .category-tag {
       font-size: 1.3rem;
@@ -55,8 +55,10 @@
     .station-list {
       grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
       padding-block-end: 1rem;
-      gap: 8px;
-      overflow-x: scroll;
+      gap: 2rem;
+      padding:1rem;
+      overflow:hidden;
+      transform: translate(-1rem);
     }
     .category-tag {
       font-size: 1.2rem;

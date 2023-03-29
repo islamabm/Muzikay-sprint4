@@ -350,7 +350,7 @@
 
       .img-and-title {
         width: 100%;
-        width: 220px;
+        width: 240px;
       }
 
       .song-img {
@@ -359,8 +359,9 @@
       }
 
       .song-title {
+        margin-inline-end: 1rem;
         font-size: 0.7rem;
-        max-width: 50%;
+        max-width: 60%;
       }
 
       .posted-at,
