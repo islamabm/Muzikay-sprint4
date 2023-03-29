@@ -97,6 +97,7 @@ align-items: center;
 .spotify-login-user-content-span {
   flex: 0.3 1 0%;
   align-self: center;
+  font-size: 0.9rem;
   text-align: center;
   line-height: 1px;
   font-weight: 700;
@@ -272,4 +273,116 @@ align-items: center;
 }
 .spotify-img {
   height: 50px;
+}
+
+
+
+
+
+
+@media (max-width: $narrow-breakpoint) {
+.spotify-login-page {
+font-size: 14px;
+}
+
+.spotify-login-user-content {
+width: 80%;
+padding: 5px;
+}
+
+.spotify-login-user-content-header {
+font-size: 18px;
+transform: translate(-0.2px);
+}
+
+.btns-container {
+column-gap: 10px;
+margin: 10px 0;
+transform: translate(-20px);
+}
+
+.spotify-btn {
+font-size: 14px;
+padding: 5px 15px;
+min-block-size: 30px;
+}
+
+.spotify-login-apple-btn {
+font-size: 14px;
+padding: 5px 15px;
+min-block-size: 30px;
+}
+
+.spotify-login-google-btn {
+font-size: 14px;
+padding: 5px 15px;
+min-block-size: 30px;
+}
+
+.spotify-login-facebook-btn {
+font-size: 14px;
+padding: 5px 15px;
+min-block-size: 30px;
+
+}
+
+.spotify-form-group {
+padding-bottom: 8px;
+}
+
+.login-form-labels {
+font-size: 14px;
+}
+
+.login-form-inputs {
+font-size: 14px;
+padding-inline: 10px;
+min-block-size: 30px;
+}
+
+.login-form-inputs:hover {
+box-shadow: inset 0 0 0 1px #000000;
+}
+
+.login-form-inputs:focus {
+box-shadow: inset 0 0 0 1px #000000;
+}
+
+.login-li-span {
+font-size: 12px;
+}
+
+.login-btn {
+font-size: 16px;
+padding: 8px 24px;
+}
+
+.login-page-h2 {
+font-size: 20px;
+}
+
+.spotify-login-signup-btn {
+font-size: 14px;
+}
+
+.spotify-form-validitions-password {
+font-size: 14px;
+}
+
+.spotify-form-forgot {
+font-size: 14px;
+}
+
+.spotify-login-user-content-span {
+font-size: 14px;
+}
+
+.checkbox-span-container {
+font-size: 14px;
+}
+
+.spotify-form-validitions-Remember {
+margin-inline-start: 0.2em;
+font-size: 14px;
+}
 }

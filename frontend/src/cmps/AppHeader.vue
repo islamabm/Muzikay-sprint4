@@ -37,7 +37,11 @@
       </div>
     </div>
 
-    <div class="login-signup">
+    <div class="login-signup" v-if="loggedinUser">
+      <button class="btn-logout" @click="logout">Log out</button>
+      <span class="username-header">{{ loggedinUser.fullname }}</span>
+    </div>
+    <div class="login-signup" v-else>
       <RouterLink class="btn-signup" to="/signup">Sign up</RouterLink>
       <RouterLink class="btn-login" to="/login">Log in</RouterLink>
     </div>
@@ -46,6 +50,7 @@
 <script>
 import svgService from '../services/SVG.service.js'
 import { eventBus } from '../services/event-bus.service'
+
 export default {
   name: 'AppHeader',
   //Note: this header will take the color of the station's img.
@@ -83,6 +88,10 @@ export default {
     getSvg(iconName) {
       return svgService.getSpotifySvg(iconName)
     },
+    logout() {
+      this.$store.dispatch({ type: 'logout' })
+      this.$router.push('/')
+    },
   },
   mounted() {
     window.addEventListener('scroll', this.updateHeaderOpacity)
@@ -101,6 +110,9 @@ export default {
       return this.$router.currentRoute.name === 'last-page'
         ? 'default-cursor'
         : 'pointer-cursor'
+    },
+    loggedinUser() {
+      return this.$store.getters.loggedinUser
     },
   },
 }

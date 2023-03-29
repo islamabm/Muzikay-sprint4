@@ -104,6 +104,7 @@ export const stationStore = {
 
       const st = state.stations.find((s) => s._id === 'likeduser123')
       st.songs.push(song)
+      console.log(st)
       const stationIdx = state.stations.findIndex(
         (s) => s._id === song.stationId
       )

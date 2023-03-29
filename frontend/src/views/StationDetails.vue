@@ -320,11 +320,11 @@ export default {
   },
   methods: {
     handelYoutubeSong(video) {
-      eventBus.emit('youtube-song-details', video)
+      eventBus.emit('youtube-song-id', video.videoId)
     },
     songDetails(song) {
       if (!song.id) this.handelYoutubeSong(song)
-      else eventBus.emit('song-details', song)
+      else eventBus.emit('song-id', song.id)
     },
     dontAddSong() {
       this.showAreYouSureModal = false
