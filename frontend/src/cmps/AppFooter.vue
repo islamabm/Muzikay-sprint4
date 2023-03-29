@@ -1,7 +1,7 @@
 <template>
   <footer class="main-footer">
     <div class="footer-media-player">
-      <MediaPlayer :station="station" />
+      <MediaPlayer :currSongIdx="currSongIdx" />
     </div>
 
     <div v-if="station" class="footer-details">
@@ -17,7 +17,7 @@
 
       <h3 class="footer-details-title">
         <!-- {{ station.songs[currSongIdx].title }} -->
-        {{ currSong.title }}
+        {{ currSong.title ? currSong.title : youtubeSong.title }}
       </h3>
       <button class="footer-like">
         <BubblingHeart
@@ -37,7 +37,6 @@ import { eventBus } from '../services/event-bus.service.js'
 
 export default {
   name: 'AppFooter',
-  emits: ['songIdx'],
   data() {
     return {
       // songIdx: 0,
@@ -51,7 +50,7 @@ export default {
   created() {
     eventBus.on('song-id', (songId) => {
       this.songId = songId
-
+      console.log('songId', songId)
       var delay = songId.delay || 2000
       this.alive = true
       setTimeout(() => {
@@ -76,6 +75,7 @@ export default {
       return this.station.songs.find((s) => s.id === this.songId)
     },
     currSongIdx() {
+      if (!this.station) return
       return this.station.songs.findIndex((s) => s.id === this.songId)
     },
   },

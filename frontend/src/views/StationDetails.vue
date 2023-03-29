@@ -3,7 +3,6 @@
     <section class="station-details-header">
       <div ref="stationDetailsHeader" class="header-content">
         <img
-          @click="toggleModal"
           v-if="
             station.songs &&
             station.songs.length > 0 &&
@@ -14,6 +13,7 @@
               ? station.songs[0].imgUrl
               : station.songs[0].url
           "
+          @click="toggleModal"
         />
 
         <img
@@ -23,9 +23,9 @@
         />
         <img
           class="deafult-image"
-          @click="toggleModal"
           v-else
           src="../assets/img/empty-img.png"
+          @click="toggleModal"
         />
 
         <div class="station-info">
@@ -176,8 +176,8 @@
           </div>
         </Draggable>
       </Container>
+
       <MiniSearch :handelYoutubeSong="handelYoutubeSong" />
-      <!-- v-if="station.createdBy.fullname !== 'system'" -->
 
       <div v-if="showSongModal" @click.self="toggleSongModal(null, null)">
         <div
@@ -277,7 +277,7 @@ import {
   eventBus,
   showErrorMsg,
   showSuccessMsg,
-} from '../services/event-bus.service.js'
+} from '../services/event-bus.service'
 import MiniSearch from '../cmps/MiniSearch.vue'
 import BubblingHeart from '../cmps/BubblingHeart.vue'
 
