@@ -13,7 +13,7 @@
         v-html="getSvg('homeIconActive')"
       ></i>
       <i class="home-icon icons" v-else v-html="getSvg('homeIcon')"></i>
-      Home
+      <span class="home-word">Home</span>
     </RouterLink>
 
     <RouterLink

@@ -13,7 +13,7 @@
 
     <section class="spotify-login-user-content">
       <p class="spotify-login-user-content-header">
-        To continue, log in to Spotify.
+        To continue, log in to Muzikay.
       </p>
       <ul class="btns-container">
         <li class="btn-li">
