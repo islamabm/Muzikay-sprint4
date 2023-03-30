@@ -13,6 +13,7 @@
   .page-navigation,
   .login-signup {
     display: flex;
+    align-items: center;
     gap: 16px;
     position: fixed;
     right: 1rem;
@@ -73,6 +74,7 @@
 
   .login-signup {
     margin-inline-end: 5px;
+    transform: translateY(-1px);
     a {
       align-items: center;
       text-decoration: none;

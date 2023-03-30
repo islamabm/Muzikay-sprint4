@@ -9,7 +9,9 @@
             station._id !== 'likeduser123'
           "
           :src="
-            station.songs[0].imgUrl
+            station.imgUrl
+              ? station.imgUrl
+              : station.songs[0].imgUrl
               ? station.songs[0].imgUrl
               : station.songs[0].url
           "
@@ -48,13 +50,13 @@
                 <!-- <h1 v-if="user">{{ user.fullname }}</h1> -->
                 <span class="small-logo-word">Muzikay</span>
               </div>
-              <span class="likes-count" @click="toggleModal"
+              <!-- <span class="likes-count" @click="toggleModal"
                 >6,950,331 likes</span
-              >
+              > -->
               <span class="dot">•</span>
-              <span>{{ songsCount }},</span>
+              <span class="songs-count">{{ songsCount }},</span>
 
-              <span>about 11 hr </span>
+              <span class="posted-at">about 11 hr </span>
             </div>
           </div>
           <div v-else>...</div>
@@ -106,7 +108,7 @@
               :class="{ active: activeTitle === idx }"
               @click="toggleActiveTitle(idx)"
             >
-              {{ song.title }}
+              {{ song.title }} - {{ song.artist }}
             </p>
           </div>
 
@@ -568,7 +570,11 @@ export default {
           // console.log(this.station)
           if (this.station.songs && this.station.songs.length > 0) {
             // maybe remove after && after 11pm we dont delete anything
-            this.getDominantColor(this.station.songs[0].imgUrl)
+            this.getDominantColor(
+              this.station.imgUrl
+                ? this.station.imgUrl
+                : this.station.songs[0].imgUrl
+            )
           }
         } catch (err) {
           console.log(err)

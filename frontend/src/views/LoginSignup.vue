@@ -18,15 +18,11 @@
             {{ user.fullname }}
           </option>
         </select>
-        <!-- <input type="text" v-model="loginCred.username" placeholder="User name" />
-        <input
-          type="text"
-          v-model="loginCred.password"
-          placeholder="Password"
-        /> -->
         <button>Login</button>
       </form>
-      <!-- <p class="mute">user1 or admin, pass:123</p> -->
+
+
+      
       <form @submit.prevent="doSignup">
         <h2>Signup</h2>
         <input
@@ -44,7 +40,6 @@
           v-model="signupCred.password"
           placeholder="Password"
         />
-        <!-- <ImgUploader @uploaded="onUploaded" /> -->
         <button>Signup</button>
       </form>
     </div>

@@ -31,6 +31,8 @@
         <img class="song-img" :src="video.url" />
 
         <p class="search-song-title">{{ video.title }}</p>
+        <p class="posted-at">{{ getTimeAgo(video.createdAt) }}</p>
+
       </div>
       <button class="add-btn-song" @click="addToStation(video)">Add</button>
     </Draggable>
@@ -101,6 +103,33 @@ export default {
         showErrorMsg('Cannot add song', err)
       }
     },
+    getTimeAgo(idx) {
+    const date = new Date(idx);
+    const timeDiff = Date.now() - date.getTime();
+    // the consts are defind according to milliseconds  
+    const second = 1000;
+    const minute = second * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
+    const month = day * 30;
+    const year = day * 365;
+
+  if (timeDiff < second) {
+    return 'just now';
+  } else if (timeDiff < minute) {
+    return Math.floor(timeDiff / second) + ' seconds ago';
+  } else if (timeDiff < hour) {
+    return Math.floor(timeDiff / minute) + ' minutes ago';
+  } else if (timeDiff < day) {
+    return Math.floor(timeDiff / hour) + ' hours ago';
+  } else if (timeDiff < month) {
+    return Math.floor(timeDiff / day) + ' days ago';
+  } else if (timeDiff < year) {
+    return Math.floor(timeDiff / month) + ' months ago';
+  } else {
+    return Math.floor(timeDiff / year) + ' years ago';
+  }
+    },
   },
   computed: {
     stations() {
@@ -109,6 +138,7 @@ export default {
     station() {
       this.$store.getters.station
     },
+    
   },
   components: {
     SVGService,
