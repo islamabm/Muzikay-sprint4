@@ -113,9 +113,7 @@ import {
   faCommentDollar,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
 library.add(faPlus, faHeart)
-
 export default {
   name: 'AppNav',
   data() {
@@ -134,22 +132,17 @@ export default {
       // this.userStationsData = this.applyDrag(this.userStationsData, dropResult)
       // this.$store.commit('setUserStations', this.userStationsData)
     },
-
     applyDrag(arr, dragResult) {
       console.log('hi')
       const { removedIndex, addedIndex, payload } = dragResult
-
       if (removedIndex === null && addedIndex === null) return arr
-
       const result = [...arr]
       const itemToAdd = result.splice(removedIndex, 1)[0]
-
       if (addedIndex === null) {
         result.push(itemToAdd)
       } else {
         result.splice(addedIndex, 0, itemToAdd)
       }
-
       return result
     },
     // setStation(stationId) {
@@ -161,7 +154,6 @@ export default {
       this.$store.commit({ type: 'setCurrStation', stationId })
       this.$router.push(`/station/${stationId}`)
     },
-
     getSvg(iconName) {
       return svgService.getSpotifySvg(iconName)
     },
@@ -190,19 +182,16 @@ export default {
         console.log('err')
       }
     },
-
     showLikedSongs() {
       const stationId = 'likeduser123'
       this.$store.commit({ type: 'setCurrStation', stationId })
       this.$router.push(`/station/${stationId}`)
-
       // this.$store.dispatch({
       //         type: 'createStation',
       //         StationName,
       //       })
     },
   },
-
   computed: {
     userStations() {
       return this.$store.getters.getUserStations
@@ -214,7 +203,6 @@ export default {
     //   return (this.userStationsData = this.userStations)
     // },
   },
-
   components: {
     FontAwesomeIcon,
     Container,
