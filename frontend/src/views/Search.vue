@@ -75,21 +75,19 @@ export default {
       alive: false,
       showSongModal: false,
       showStationsSubMenu: false,
-      song: null,
+      currSong: null,
       selectedIndex: null,
     }
   },
   methods: {
-    // async add() {
-    //   // this function makes a mess Tal help!
-    //   this.videos = await stationService.getVideos(this.search)
-    //   console.log(this.videos[0])
-    // },
     async addSongToPlaylist(song, station) {
+      console.log('hi')
+      console.log('song in search component', song)
+      console.log('station in search component', station)
       try {
         await this.$store.dispatch({
           type: 'addVideoToStation',
-          song: this.song,
+          song: this.currSong,
           station,
         })
         showSuccessMsg('Added to playlist')
@@ -103,7 +101,7 @@ export default {
       }
     },
     toggleSongModal(ev, song, idx) {
-      this.song = this.videos[idx]
+      this.currSong = this.videos[idx]
       console.log('song in modal search', song)
       const btn = ev.target
       const buttonEl = this.$refs.songButtons[idx]

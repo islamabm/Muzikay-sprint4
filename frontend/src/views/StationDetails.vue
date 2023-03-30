@@ -114,7 +114,7 @@
             {{ song.album }}
           </p>
 
-          <p class="posted-at">1 day ago</p>
+          <p class="posted-at">{{ getTimeAgo(idx) }}</p>
           <!-- @toggleLike="toggleSongLike" -->
           <div class="flex-end list-end">
             <div class="like-song-icon">
@@ -323,6 +323,22 @@ export default {
     }
   },
   methods: {
+    getTimeAgo(idx) {
+      const seconds = Math.floor((Date.now() - (idx * 1000)) / 1000);
+      if (seconds < 60) {
+        return `${seconds} second${seconds === 1 ? '' : 's'} ago`;
+      }
+      const minutes = Math.floor(seconds / 60);
+      if (minutes < 60) {
+        return `${minutes} minute${minutes === 1 ? '' : 's'} ago`;
+      }
+      const hours = Math.floor(minutes / 60);
+      if (hours < 24) {
+        return `${hours} hour${hours === 1 ? '' : 's'} ago`;
+      }
+      const days = Math.floor(hours / 24);
+      return `${days} day${days === 1 ? '' : 's'} ago`;
+    },
     handelYoutubeSong(video) {
       eventBus.emit('youtube-song', video)
     },
@@ -456,6 +472,7 @@ export default {
     },
 
     async removeSong(songId) {
+      this.showSongModal = false
       console.log('station details function remove song', songId)
       console.log('station details function remove song', this.station._id)
 
@@ -469,10 +486,18 @@ export default {
       } catch (err) {
         console.log(err)
         showErrorMsg('Cannot remove song')
-      } finally {
-        this.showSongModal = false
       }
     },
+    // removeSong(songId) {
+    //   console.log('station details function remove song', songId)
+    //   console.log('station details function remove song', this.station._id)
+
+    //   this.$store.dispatch({
+    //     type: 'removeSong',
+    //     songId,
+    //     stationId: this.station._id,
+    //   })
+    // },
     // async addToStation(song) {
     //   const stationName = prompt('station?')
     //   try {

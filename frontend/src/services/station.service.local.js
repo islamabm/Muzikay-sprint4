@@ -2,10 +2,11 @@ import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 import axios from 'axios'
 
-import { userService } from './user.service.js'
+
 import gStations from '../../data/station.json'
 import gSearchStations from '../../data/search.json'
-// import { userService } from './user.service.js'
+import { userService } from './user.service.js'
+
 const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyAqzQlySCi__l0i-rt87fZOfbCN85Xj-CE&q=`
 const STORAGE_KEY = 'station'
 const SEARCH_KEY = 'videosDB'
@@ -84,7 +85,7 @@ function removeSong(songId, stationId) {
   const stations = utilService.loadFromStorage(STORAGE_KEY)
   const stationIdx = stations.findIndex((s) => s._id === stationId)
   const station = stations[stationIdx]
-  const songIdx = station.songs.findIndex((so) => so._id === songId)
+  const songIdx = station.songs.findIndex((so) => so.id === songId)
   station.songs.splice(songIdx, 1)
   stations[stationIdx] = station
   utilService.saveToStorage(STORAGE_KEY, stations)
@@ -220,11 +221,11 @@ async function addUserToSong(song, station, loggedinUser) {
   return { updatedSong, savedStation }
 }
 
-async function addSongToStation(song, station) {
+async function addSongToStation(video, station) {
   if (!station) {
     throw new Error('Station parameter is undefined')
   }
-  const updatedStation = { ...station, songs: [...station.songs, song] }
+  const updatedStation = { ...station, songs: [...station.songs, video] }
   const savedStation = await save(updatedStation)
   return savedStation
 }

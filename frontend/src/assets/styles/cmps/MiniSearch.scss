@@ -46,8 +46,8 @@
     width: 24px;
     height: 24px;
     position: absolute;
-    top: 0;
-    left: 3px;
+    left: 16px;
+    top: 9px;
   }
 }
 
@@ -109,7 +109,7 @@ $highlight-color: #1db954;
   padding-inline: 20px;
   padding-block-end: 110px;
 
-  .song-item{
+  .song-item {
     height: 50px;
     margin-block: 0.3rem;
     padding: 1rem;
@@ -121,7 +121,6 @@ $highlight-color: #1db954;
   display: flex;
   align-items: center;
   justify-content: space-between;
-
 
   &:hover {
     background-color: $search-result-hover-bg;
@@ -146,7 +145,6 @@ $highlight-color: #1db954;
     border-radius: 2px;
     clip-path: polygon(13px 13px, 13px 52px, 52px 52px, 52px 13px);
   }
-  
 
   .search-song-title {
     color: $text-color;
