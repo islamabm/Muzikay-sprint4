@@ -3,15 +3,23 @@
     <section class="station-details-header">
       <div ref="stationDetailsHeader" class="header-content">
         <img
-          v-if="stationImageUrl"
-          :src="stationImageUrl"
+          v-if="
+            station.songs &&
+            station.songs.length > 0 &&
+            station._id !== 'likeduser123'
+          "
+          :src="
+            station.songs[0].imgUrl
+              ? station.songs[0].imgUrl
+              : station.songs[0].url
+          "
           @click="toggleModal"
         />
 
         <img
           @click="toggleModal"
           v-else-if="station._id === 'likeduser123'"
-          :src="station.imgUrl"
+          src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
         />
         <div class="icon-container" v-else>
           <i class="music-note" v-html="getSvg(currImgSvg)"></i>
