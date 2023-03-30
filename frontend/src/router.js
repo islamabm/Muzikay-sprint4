@@ -27,11 +27,7 @@ const routes = [
     name: 'login',
     component: Login,
   },
-  {
-    path: '/user/:id',
-    name: 'UserDetails',
-    component: UserDetails,
-  },  
+
   {
     path: '/station',
     name: 'Home',
@@ -60,7 +56,11 @@ const routes = [
         component: UserLibrary,
       },
   
-      
+      {
+        path: '/user/:id',
+        name: 'UserDetails',
+        component: UserDetails,
+      },  
       // {
       //   path: '/station/like',
       //   name: 'like',
