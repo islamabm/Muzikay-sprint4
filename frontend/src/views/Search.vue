@@ -8,7 +8,7 @@
         v-for="(category, idx) in categories"
         :key="idx"
       >
-        <article>
+        <article @click="fetchVideos(category.title)">
           <img :src="category.img" />
           <h2>{{ category.title }}</h2>
         </article>
@@ -80,6 +80,9 @@ export default {
     }
   },
   methods: {
+    fetchVideos(title) {
+      eventBus.emit('fetch-videos', title)
+    },
     async addSongToPlaylist(song, station) {
       console.log('hi')
       console.log('song in search component', song)
@@ -139,7 +142,8 @@ export default {
           console.error(error)
         }
         this.alive = false
-      }, search.delay || 2000)
+      },
+       search.delay || 2000)
     })
   },
 }

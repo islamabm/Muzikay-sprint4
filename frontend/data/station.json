@@ -828,700 +828,800 @@
         "title": "As It Was",
         "artist": "Harry Styles",
         "album": "As It Was",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273b46f74097655d7f353caab14"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273b46f74097655d7f353caab14",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Blinding Lights",
         "artist": "The Weeknd",
         "album": "After Hours",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2738863bc11d2aa12b54f5aeb36",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Someone You Loved",
         "artist": "Lewis Capaldi",
         "album": "Divinely Uninspired To A Hellish Extent",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273fc2101e6889d6ce9025f85f2"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273fc2101e6889d6ce9025f85f2",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "One Kiss (with Dua Lipa)",
         "artist": "Calvin Harris",
         "album": "One Kiss (with Dua Lipa)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273d09f96d82310d4d77c14c108"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273d09f96d82310d4d77c14c108",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Shivers",
         "artist": "Ed Sheeran",
         "album": "=",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273ef24c3fdbf856340d55cfeb2"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273ef24c3fdbf856340d55cfeb2",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Locked out of Heaven",
         "artist": "Bruno Mars",
         "album": "Unorthodox Jukebox",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273926f43e7cce571e62720fd46"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273926f43e7cce571e62720fd46",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Love On The Brain",
         "artist": "Rihanna",
         "album": "ANTI (Deluxe)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27333c6b920eabcf4c00d7a1093"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27333c6b920eabcf4c00d7a1093",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Say You Won't Let Go",
         "artist": "James Arthur",
         "album": "Back from the Edge",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27320beb61f61fcbeb33b10a9ab"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27320beb61f61fcbeb33b10a9ab",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Watermelon Sugar",
         "artist": "Harry Styles",
         "album": "Fine Line",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27377fdcfda6535601aff081b6a"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27377fdcfda6535601aff081b6a",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "There's Nothing Holdin' Me Back",
         "artist": "Shawn Mendes",
         "album": "Illuminate (Deluxe)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273ea3ef7697cfd5705b8f47521"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273ea3ef7697cfd5705b8f47521",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Viva La Vida",
         "artist": "Coldplay",
         "album": "Viva La Vida or Death and All His Friends",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273e21cc1db05580b6f2d2a3b6e"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273e21cc1db05580b6f2d2a3b6e",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Bad Habits",
         "artist": "Ed Sheeran",
         "album": "=",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273ef24c3fdbf856340d55cfeb2"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273ef24c3fdbf856340d55cfeb2",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Wake Me Up",
         "artist": "Avicii",
         "album": "True",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273e14f11f796cef9f9a82691a7"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273e14f11f796cef9f9a82691a7",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-03-02T09:50:57Z",
         "title": "Every Breath You Take",
         "artist": "The Police",
         "album": "Synchronicity (Remastered 2003)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273c8e97cafeb2acb85b21a777e"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273c8e97cafeb2acb85b21a777e",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Take on Me",
         "artist": "a-ha",
         "album": "Hunting High and Low",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273e8dd4db47e7177c63b0b7d53"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273e8dd4db47e7177c63b0b7d53",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Cold Heart - PNAU Remix",
         "artist": "Elton John",
         "album": "Cold Heart (PNAU Remix)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2739f5cce8304c42d3a5463fd23"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2739f5cce8304c42d3a5463fd23",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Thunder",
         "artist": "Imagine Dragons",
         "album": "Evolve",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2735675e83f707f1d7271e5cf8a"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2735675e83f707f1d7271e5cf8a",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "All of Me",
         "artist": "John Legend",
         "album": "Love In The Future (Expanded Edition)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27394c9217a398f5174757c0c78"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27394c9217a398f5174757c0c78",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Umbrella",
         "artist": "Rihanna",
         "album": "Good Girl Gone Bad: Reloaded",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273f9f27162ab1ed45b8d7a7e98"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273f9f27162ab1ed45b8d7a7e98",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Adore You",
         "artist": "Harry Styles",
         "album": "Fine Line",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27377fdcfda6535601aff081b6a"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27377fdcfda6535601aff081b6a",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Photograph",
         "artist": "Ed Sheeran",
         "album": "x (Deluxe Edition)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27313b3e37318a0c247b550bccd"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27313b3e37318a0c247b550bccd",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Treat You Better",
         "artist": "Shawn Mendes",
         "album": "Illuminate",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2731376b4b16f4bfcba02dc571b"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2731376b4b16f4bfcba02dc571b",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Something Just Like This",
         "artist": "The Chainsmokers",
         "album": "Memories...Do Not Open",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2730c13d3d5a503c84fcc60ae94"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2730c13d3d5a503c84fcc60ae94",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Livin' On A Prayer",
         "artist": "Bon Jovi",
         "album": "Slippery When Wet",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2731336b31b6a1799f0de5807ac"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2731336b31b6a1799f0de5807ac",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Shallow",
         "artist": "Lady Gaga",
         "album": "A Star Is Born Soundtrack",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273e2d156fdc691f57900134342"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273e2d156fdc691f57900134342",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Love Yourself",
         "artist": "Justin Bieber",
         "album": "Purpose (Deluxe)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273f46b9d202509a8f7384b90de"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273f46b9d202509a8f7384b90de",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Maps",
         "artist": "Maroon 5",
         "album": "V",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273442b53773d50e1b5369bb16c"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273442b53773d50e1b5369bb16c",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Before You Go",
         "artist": "Lewis Capaldi",
         "album": "Divinely Uninspired To A Hellish Extent (Extended Edition)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2737b9639babbe96e25071ec1d4"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2737b9639babbe96e25071ec1d4",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "A Sky Full of Stars",
         "artist": "Coldplay",
         "album": "Ghost Stories",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273f864bcdcc245f06831d17ae0"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273f864bcdcc245f06831d17ae0",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Stay With Me",
         "artist": "Sam Smith",
         "album": "In The Lonely Hour",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273b11bdc91cb9ac6b14f5c1dae"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273b11bdc91cb9ac6b14f5c1dae",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "The Motto",
         "artist": "Tiësto",
         "album": "The Motto",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2736b64f7a7e0e7af3d604ab41e"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2736b64f7a7e0e7af3d604ab41e",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Iris",
         "artist": "The Goo Goo Dolls",
         "album": "Dizzy up the Girl",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273eda9478c39a21e1cdc6609ca"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273eda9478c39a21e1cdc6609ca",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Closer",
         "artist": "The Chainsmokers",
         "album": "Closer",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273495ce6da9aeb159e94eaa453"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273495ce6da9aeb159e94eaa453",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Levitating (feat. DaBaby)",
         "artist": "Dua Lipa",
         "album": "Future Nostalgia",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273d4daf28d55fe4197ede848be"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273d4daf28d55fe4197ede848be",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "abcdefu",
         "artist": "GAYLE",
         "album": "abcdefu",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2732842f743ebd32235bceb43d3"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2732842f743ebd32235bceb43d3",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Falling",
         "artist": "Harry Styles",
         "album": "Fine Line",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27377fdcfda6535601aff081b6a"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27377fdcfda6535601aff081b6a",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Africa",
         "artist": "TOTO",
         "album": "Toto IV",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2734a052b99c042dc15f933145b"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2734a052b99c042dc15f933145b",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Too Good At Goodbyes",
         "artist": "Sam Smith",
         "album": "The Thrill Of It All (Special Edition)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273005cd7d0ae87b081601f6cca"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273005cd7d0ae87b081601f6cca",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Thinking out Loud",
         "artist": "Ed Sheeran",
         "album": "x (Deluxe Edition)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27313b3e37318a0c247b550bccd"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27313b3e37318a0c247b550bccd",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "This Is What You Came For",
         "artist": "Calvin Harris",
         "album": "This Is What You Came For",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273d9aa52355e062f5de060adbf"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273d9aa52355e062f5de060adbf",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Shut Up and Dance",
         "artist": "WALK THE MOON",
         "album": "TALKING IS HARD",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27343294cfa2688055c9d821bf3"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27343294cfa2688055c9d821bf3",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "My Universe",
         "artist": "Coldplay",
         "album": "My Universe",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273f60a9b7e2abafc38da31f575"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273f60a9b7e2abafc38da31f575",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Dancing Queen",
         "artist": "ABBA",
         "album": "Arrival",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27370f7a1b35d5165c85b95a0e0"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27370f7a1b35d5165c85b95a0e0",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Story of My Life",
         "artist": "One Direction",
         "album": "Midnight Memories (Deluxe)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2732f76b797c382bedcafdf45e1"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2732f76b797c382bedcafdf45e1",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Just the Way You Are",
         "artist": "Bruno Mars",
         "album": "Doo-Wops & Hooligans",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273f6b55ca93bd33211227b502b"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273f6b55ca93bd33211227b502b",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Happier",
         "artist": "Marshmello",
         "album": "Happier",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27304bfd5a5fd5aa6ca648f66aa"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27304bfd5a5fd5aa6ca648f66aa",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Uptown Funk (feat. Bruno Mars)",
         "artist": "Mark Ronson",
         "album": "Uptown Special",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273e419ccba0baa8bd3f3d7abf2"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273e419ccba0baa8bd3f3d7abf2",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Don't Start Now",
         "artist": "Dua Lipa",
         "album": "Future Nostalgia",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273bd26ede1ae69327010d49946"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273bd26ede1ae69327010d49946",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Sorry",
         "artist": "Justin Bieber",
         "album": "Purpose (Deluxe)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273f46b9d202509a8f7384b90de"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273f46b9d202509a8f7384b90de",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Hey, Soul Sister",
         "artist": "Train",
         "album": "Save Me, San Francisco (Golden Gate Edition)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2736ff8bc258e3ebc835ffe14ca"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2736ff8bc258e3ebc835ffe14ca",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "thank u, next",
         "artist": "Ariana Grande",
         "album": "thank u, next",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27356ac7b86e090f307e218e9c8"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27356ac7b86e090f307e218e9c8",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Whenever, Wherever",
         "artist": "Shakira",
         "album": "Laundry Service",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2731f400a1f4d821b00824cf58f"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2731f400a1f4d821b00824cf58f",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Summer Of '69",
         "artist": "Bryan Adams",
         "album": "Reckless (30th Anniversary / Deluxe Edition)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273cf1fee2a55e98e22bf358512"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273cf1fee2a55e98e22bf358512",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "I Wanna Dance with Somebody (Who Loves Me)",
         "artist": "Whitney Houston",
         "album": "Whitney",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273cc57e9b00b87dd0f6e868347"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273cc57e9b00b87dd0f6e868347",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Sugar",
         "artist": "Maroon 5",
         "album": "V",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273442b53773d50e1b5369bb16c"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273442b53773d50e1b5369bb16c",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Just Give Me a Reason (feat. Nate Ruess)",
         "artist": "P!nk",
         "album": "The Truth About Love",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2739d0f0d226987b449808e7b6f"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2739d0f0d226987b449808e7b6f",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Timber (feat. Ke$ha)",
         "artist": "Pitbull",
         "album": "Global Warming: Meltdown (Deluxe Version)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273f2486b438645e97b523e4f90"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273f2486b438645e97b523e4f90",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Mercy",
         "artist": "Shawn Mendes",
         "album": "Illuminate (Deluxe)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273ea3ef7697cfd5705b8f47521"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273ea3ef7697cfd5705b8f47521",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "TiK ToK",
         "artist": "Kesha",
         "album": "Animal (Expanded Edition)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2737a6339d6ddfd579f77559b3c"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2737a6339d6ddfd579f77559b3c",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "I Want It That Way",
         "artist": "Backstreet Boys",
         "album": "Millennium",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2732160c02bc56f192df0f4986b"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2732160c02bc56f192df0f4986b",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Stuck with U (with Justin Bieber)",
         "artist": "Ariana Grande",
         "album": "Stuck with U",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2732babb9dbd8f5146112f1bf86"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2732babb9dbd8f5146112f1bf86",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Set Fire to the Rain",
         "artist": "Adele",
         "album": "21",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2732118bf9b198b05a95ded6300"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2732118bf9b198b05a95ded6300",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Señorita",
         "artist": "Shawn Mendes",
         "album": "Shawn Mendes (Deluxe)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273c820f033bd82bef4355d1563"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273c820f033bd82bef4355d1563",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "High Hopes",
         "artist": "Panic! At The Disco",
         "album": "Pray for the Wicked",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273c5148520a59be191eea16989"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273c5148520a59be191eea16989",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "We Found Love",
         "artist": "Rihanna",
         "album": "Talk That Talk",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2731c5eacf6965d328c2c795cef"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2731c5eacf6965d328c2c795cef",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Sucker",
         "artist": "Jonas Brothers",
         "album": "Happiness Begins",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273de1a3a5eaa0c75bb18e7b597"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273de1a3a5eaa0c75bb18e7b597",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Happy - From \"Despicable Me 2\"",
         "artist": "Pharrell Williams",
         "album": "G I R L",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273e8107e6d9214baa81bb79bba"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273e8107e6d9214baa81bb79bba",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Chasing Cars",
         "artist": "Snow Patrol",
         "album": "Eyes Open",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2735da2756220da9b6f17924f8f"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2735da2756220da9b6f17924f8f",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Rude",
         "artist": "MAGIC!",
         "album": "Don't Kill the Magic",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273604f8ac39f15d287e251f193"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273604f8ac39f15d287e251f193",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Sweet but Psycho",
         "artist": "Ava Max",
         "album": "Heaven & Hell",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2739a95e89d24214b94de36ccf7"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2739a95e89d24214b94de36ccf7",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "New Rules",
         "artist": "Dua Lipa",
         "album": "Dua Lipa (Deluxe)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2736b915e407b70e121e06fe979"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2736b915e407b70e121e06fe979",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Bruises",
         "artist": "Lewis Capaldi",
         "album": "Divinely Uninspired To A Hellish Extent",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273fc2101e6889d6ce9025f85f2"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273fc2101e6889d6ce9025f85f2",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "What's Up?",
         "artist": "4 Non Blondes",
         "album": "Bigger, Better, Faster, More !",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273381371cb8ce680d0dc324600"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273381371cb8ce680d0dc324600",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Wannabe",
         "artist": "Spice Girls",
         "album": "Spice",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27363facc42e4a35eb3aa182b59"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27363facc42e4a35eb3aa182b59",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Rolling in the Deep",
         "artist": "Adele",
         "album": "21",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2732118bf9b198b05a95ded6300"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2732118bf9b198b05a95ded6300",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "This Love",
         "artist": "Maroon 5",
         "album": "Songs About Jane: 10th Anniversary Edition",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27392f2d790c6a97b195f66d51e"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27392f2d790c6a97b195f66d51e",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Dancing On My Own",
         "artist": "Calum Scott",
         "album": "Only Human (Deluxe)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273f2d671c22b70e01b78a618a8"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273f2d671c22b70e01b78a618a8",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Where Is The Love?",
         "artist": "Black Eyed Peas",
         "album": "Elephunk",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27329a42ba069a854c9078377b4"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27329a42ba069a854c9078377b4",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "7 Years",
         "artist": "Lukas Graham",
         "album": "Lukas Graham",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2732d94d0f04e9a58d1654b760b"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2732d94d0f04e9a58d1654b760b",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "I'm Yours",
         "artist": "Jason Mraz",
         "album": "We Sing. We Dance. We Steal Things.",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2730f2e51f7121539e221c51161"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2730f2e51f7121539e221c51161",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Everywhere - 2017 Remaster",
         "artist": "Fleetwood Mac",
         "album": "Tango In the Night (Deluxe Edition)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273aaba065944cd82a6f15c86b6"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273aaba065944cd82a6f15c86b6",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "The Middle",
         "artist": "Zedd",
         "album": "The Middle",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273fbe22d168a743b782a5e856a"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273fbe22d168a743b782a5e856a",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Royals",
         "artist": "Lorde",
         "album": "Pure Heroine",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273187331e276c898d39764cc98"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273187331e276c898d39764cc98",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Havana (feat. Young Thug)",
         "artist": "Camila Cabello",
         "album": "Camila",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2736eb0b9e73adcf04e4ed3eca4"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2736eb0b9e73adcf04e4ed3eca4",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Happier",
         "artist": "Ed Sheeran",
         "album": "÷ (Deluxe)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "She Will Be Loved - Radio Mix",
         "artist": "Maroon 5",
         "album": "Songs About Jane: 10th Anniversary Edition",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27392f2d790c6a97b195f66d51e"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27392f2d790c6a97b195f66d51e",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Budapest",
         "artist": "George Ezra",
         "album": "Wanted on Voyage (Expanded Edition)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273d6df3bccf3ec41ea2f76debc"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273d6df3bccf3ec41ea2f76debc",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Someone Like You",
         "artist": "Adele",
         "album": "21",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2732118bf9b198b05a95ded6300"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2732118bf9b198b05a95ded6300",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Drag Me Down",
         "artist": "One Direction",
         "album": "Made In The A.M. (Deluxe Edition)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273241e4fe75732c9c4b49b94c3"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273241e4fe75732c9c4b49b94c3",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Complicated",
         "artist": "Avril Lavigne",
         "album": "Let Go",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273f7ec724fbf97a30869d06240"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273f7ec724fbf97a30869d06240",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Girls Just Want to Have Fun",
         "artist": "Cyndi Lauper",
         "album": "She's So Unusual",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27352f532df7ba3269b0242fed9"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27352f532df7ba3269b0242fed9",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "This Town",
         "artist": "Niall Horan",
         "album": "Flicker (Deluxe)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2735bac234d5511248b248caf36"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2735bac234d5511248b248caf36",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "How to Save a Life",
         "artist": "The Fray",
         "album": "How To Save A Life",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27359b8b957f164ce660919f1f4"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27359b8b957f164ce660919f1f4",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "With Or Without You - Remastered",
         "artist": "U2",
         "album": "The Joshua Tree (Super Deluxe)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273b7bea3d01f04e6d0408d2afe"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273b7bea3d01f04e6d0408d2afe",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "IDGAF",
         "artist": "Dua Lipa",
         "album": "Dua Lipa (Deluxe)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2736b915e407b70e121e06fe979"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b2736b915e407b70e121e06fe979",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Wind Of Change",
         "artist": "Scorpions",
         "album": "Crazy World",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273787674b6a114f98cad6f834b"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273787674b6a114f98cad6f834b",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Uptown Girl",
         "artist": "Billy Joel",
         "album": "An Innocent Man",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273814cbc4746358a25c84c62e7"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273814cbc4746358a25c84c62e7",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "Wake Me Up Before You Go-Go",
         "artist": "Wham!",
         "album": "Make It Big",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273a2fc41b0dd6ce4f0d16a4c46"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b273a2fc41b0dd6ce4f0d16a4c46",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-02-08T14:33:43Z",
         "title": "I Don’t Wanna Live Forever (Fifty Shades Darker)",
         "artist": "ZAYN",
         "album": "reputation Stadium Tour Surprise Song Playlist",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27363d77f99117b28af9f656918"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27363d77f99117b28af9f656918",
+        "likedByUsers": []
       },
       {
         "addedAt": "2023-03-02T09:50:57Z",
         "title": "Should I Stay or Should I Go - Remastered",
         "artist": "The Clash",
         "album": "Combat Rock (Remastered)",
-        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27325a4df452a3c42ccc2e9288b"
+        "imgUrl": "https://i.scdn.co/image/ab67616d0000b27325a4df452a3c42ccc2e9288b",
+        "likedByUsers": []
       }
     ]
   },
@@ -1529,6 +1629,7 @@
     "_id": "likeduser123",
     "name": "Liked songs",
     "fullname": "system",
+    "imgUrl": "https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png",
     "tags": ["Happy"],
     "description": "From upbeat pop to cheerful indie, these happy songs are guaranteed to put a smile on your face.",
     "createdBy": {
@@ -1538,9 +1639,7 @@
     },
     "likedByUsers": [],
     "songs": [
-      {
-        "imgUrl": "https://archive.smashing.media/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/e2f9aa74-7587-4a30-b0c0-4df61d7ac308/43.jpg"
-      }
+  
     ],
     "msgs": [
       {
