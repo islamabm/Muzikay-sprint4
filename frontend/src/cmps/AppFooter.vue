@@ -1,7 +1,7 @@
 <template>
   <footer class="main-footer">
     <div class="footer-media-player">
-      <MediaPlayer :currSongIdx="currSongIdx" />
+      <MediaPlayer />
     </div>
 
     <div v-if="station" class="footer-details">

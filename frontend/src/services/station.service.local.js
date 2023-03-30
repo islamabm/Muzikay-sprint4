@@ -90,6 +90,7 @@ function removeSong(songId, stationId) {
   stations[stationIdx] = station
   utilService.saveToStorage(STORAGE_KEY, stations)
 }
+
 function getVideos(keyword) {
   if (gSearchCache[keyword]) {
     return Promise.resolve(gSearchCache[keyword])
