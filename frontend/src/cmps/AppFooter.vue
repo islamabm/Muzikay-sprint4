@@ -50,7 +50,7 @@ export default {
   created() {
     eventBus.on('song-details', (song) => {
       this.song = song
-      var delay = songId.delay || 2000
+      var delay = song.delay || 2000
       this.alive = true
       setTimeout(() => {
         this.alive = false
@@ -75,7 +75,7 @@ export default {
     },
     currSongIdx() {
       if (!this.station) return
-      return this.station.songs.findIndex((s) => s.id === this.songId)
+      return this.station.songs.findIndex((s) => s.id === this.song.id)
     },
   },
   methods: {
