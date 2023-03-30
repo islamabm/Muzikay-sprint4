@@ -58,17 +58,10 @@
 
     <section ref="bottomHalf">
       <div class="station-controls">
-<<<<<<< HEAD
-       
-        <div v-if="station.songs.length" class="btn-play-green" @click.stop="playStation"></div>
-        <BubblingHeart v-if="station.songs.length" @toggleLike="toggleHeaderLike" />
-      
-=======
         <div v-if="station.songs.length" class="no-songs-hide">
           <div class="btn-play-green" @click.stop="playStation"></div>
           <BubblingHeart @toggleLike="toggleHeaderLike" />
         </div>
->>>>>>> a898a85cb6e57b202cb5069a8b2a24fd0357f2f7
         <div class="btn-icons" @click="showDeleteModel">
           <i class="options-icon" v-html="getSvg('optionsIcon')"></i>
         </div>
@@ -109,7 +102,7 @@
             {{ song.album }}
           </p>
 
-          <p class="posted-at">1 day ago</p>
+          <p class="posted-at">{{ getTimeAgo(idx) }}</p>
           <!-- @toggleLike="toggleSongLike" -->
           <div class="flex-end list-end">
             <div class="like-song-icon">
@@ -317,6 +310,22 @@ export default {
     }
   },
   methods: {
+    getTimeAgo(idx) {
+      const seconds = Math.floor((Date.now() - (idx * 1000)) / 1000);
+      if (seconds < 60) {
+        return `${seconds} second${seconds === 1 ? '' : 's'} ago`;
+      }
+      const minutes = Math.floor(seconds / 60);
+      if (minutes < 60) {
+        return `${minutes} minute${minutes === 1 ? '' : 's'} ago`;
+      }
+      const hours = Math.floor(minutes / 60);
+      if (hours < 24) {
+        return `${hours} hour${hours === 1 ? '' : 's'} ago`;
+      }
+      const days = Math.floor(hours / 24);
+      return `${days} day${days === 1 ? '' : 's'} ago`;
+    },
     handelYoutubeSong(video) {
       eventBus.emit('youtube-song', video)
     },
