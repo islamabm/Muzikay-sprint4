@@ -163,7 +163,7 @@
             </p>
           </div>
 
-          <p class="posted-at">{{ getTimeAgo(song.createdAt) }}</p>
+          <p class="posted-at">1 day ago</p>
 
           <div class="flex-end list-end">
             <div class="like-song-icon">
@@ -323,23 +323,7 @@ export default {
     }
   },
   methods: {
-    getTimeAgo(idx) {
-
-      const seconds = Math.floor((Date.now() - (idx * 1000)) / 1000);
-      if (seconds < 60) {
-        return `${seconds} second${seconds === 1 ? '' : 's'} ago`;
-      }
-      const minutes = Math.floor(seconds / 60);
-      if (minutes < 60) {
-        return `${minutes} minute${minutes === 1 ? '' : 's'} ago`;
-      }
-      const hours = Math.floor(minutes / 60);
-      if (hours < 24) {
-        return `${hours} hour${hours === 1 ? '' : 's'} ago`;
-      }
-      const days = Math.floor(hours / 24);
-      return `${days} day${days === 1 ? '' : 's'} ago`;
-    },
+    
     handelYoutubeSong(video) {
       eventBus.emit('youtube-song', video)
     },
