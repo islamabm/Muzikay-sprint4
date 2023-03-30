@@ -299,7 +299,6 @@ import {
 } from '../services/event-bus.service'
 import MiniSearch from '../cmps/MiniSearch.vue'
 import BubblingHeart from '../cmps/BubblingHeart.vue'
-
 export default {
   name: 'station-details',
   data() {
@@ -330,7 +329,6 @@ export default {
       eventBus.emit('youtube-song', video)
     },
     songDetails(song) {
-      console.log('song in the media pleayer sheet itay code', song)
       eventBus.emit('song-details', song)
     },
     dontAddSong() {
@@ -339,32 +337,26 @@ export default {
     showDeleteModel() {
       this.showDeleteModal = true
     },
-
     cancle() {
       this.showDeleteModal = false
     },
     updateBodyBackgroundColor(color) {
       // console.log(color)
-
       const darkShade = {
         ...color,
         rgba: `rgba(${Math.round(color.value[0] * 0.07)}, ${Math.round(
           color.value[1] * 0.07
         )}, ${Math.round(color.value[2] * 0.07)}, 0.7)`,
       }
-
       const headerShade = {
         ...color,
         rgba: `rgba(${Math.round(color.value[0] * 0.4)}, ${Math.round(
           color.value[1] * 0.4
         )}, ${Math.round(color.value[2] * 0.4)}, 0.7)`,
       }
-
       // console.log('shade', darkShade)
-
       const gradient = `linear-gradient(to bottom, ${color.rgba}, ${headerShade.rgba})`
       const darkGradient = `linear-gradient(to bottom, ${darkShade.rgba} 0%, rgba(0, 0, 0, 1) 30%)`
-
       document.body.style.backgroundImage = gradient
       this.$refs.stationDetailsHeader.style.backgroundImage = gradient
       this.$refs.bottomHalf.style.backgroundImage = darkGradient
@@ -379,7 +371,6 @@ export default {
       const day = hour * 24
       const month = day * 30
       const year = day * 365
-
       if (timeDiff < second) {
         return 'just now'
       } else if (timeDiff < minute) {
@@ -402,7 +393,6 @@ export default {
         return years + (years === 1 ? ' year ago' : ' years ago')
       }
     },
-
     async addUserToSong(song) {
       const station = this.station
       try {
@@ -419,19 +409,16 @@ export default {
         showErrorMsg('Remove from liked songs')
       }
     },
-
     openStationSelection() {
       console.log('opened')
       this.showStationsSubMenu = !this.showStationsSubMenu
     },
-
     // toggleSongLike(idx) {
     //   const song = this.station.songs[idx]
     //   song.liked = !song.liked
     //   console.log(
     //     `Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`
     //   )
-
     //   //   // Add functionality
     // },
     toggleActiveTitle(idx) {
@@ -451,14 +438,12 @@ export default {
         this.clickedHeartIndex = index
       }
     },
-
     async getDominantColor(imageSrc) {
       const fac = new FastAverageColor()
       const img = new Image()
       img.crossOrigin = 'Anonymous'
       const corsProxyUrl = 'https://api.codetabs.com/v1/proxy?quest='
       img.src = corsProxyUrl + encodeURIComponent(imageSrc)
-
       img.onload = async () => {
         // console.log('Image loaded')
         try {
@@ -478,11 +463,9 @@ export default {
     },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult
-
       if (removedIndex === null && addedIndex === null) return arr
       const result = [...arr]
       let itemToAdd = payload
-
       if (removedIndex !== null) {
         itemToAdd = result.splice(removedIndex, 1)[0]
       }
@@ -491,7 +474,6 @@ export default {
       }
       return result
     },
-
     async removeSong(songId) {
       this.showSongModal = false
       console.log('station details function remove song', songId)
@@ -511,7 +493,6 @@ export default {
     // removeSong(songId) {
     //   console.log('station details function remove song', songId)
     //   console.log('station details function remove song', this.station._id)
-
     //   this.$store.dispatch({
     //     type: 'removeSong',
     //     songId,
@@ -537,7 +518,6 @@ export default {
     //     this.showSongModal = false
     //   }
     // },
-
     async addToSelectedStation(song, station) {
       console.log('we are in the details in the add song', song)
       console.log('we are in the details in the add song station', station)
@@ -557,7 +537,6 @@ export default {
         // this.show = false
       }
     },
-
     async removeStation() {
       this.showDeleteModal = false
       try {
@@ -584,13 +563,11 @@ export default {
       const { left, top, height } = btn.getBoundingClientRect()
       this.modalX = left - 200
       this.modalY = top + height - 60
-
       console.log('toggled song modal')
       this.selectedSong = song
       this.selectedIndex = idx
       this.showSongModal = !this.showSongModal
     },
-
     getSvg(iconName) {
       return svgService.getSpotifySvg(iconName)
     },
@@ -636,22 +613,6 @@ export default {
       const count = this.station.songs.length
       return `${count} Songs`
     },
-    getTimeAgo(idx) {
-      const seconds = Math.floor((Date.now() - idx * 1000) / 1000)
-      if (seconds < 60) {
-        return `${seconds} second${seconds === 1 ? '' : 's'} ago`
-      }
-      const minutes = Math.floor(seconds / 60)
-      if (minutes < 60) {
-        return `${minutes} minute${minutes === 1 ? '' : 's'} ago`
-      }
-      const hours = Math.floor(minutes / 60)
-      if (hours < 24) {
-        return `${hours} hour${hours === 1 ? '' : 's'} ago`
-      }
-      const days = Math.floor(hours / 24)
-      return `${days} day${days === 1 ? '' : 's'} ago`
-    },
     hover() {
       return this.currDraggableIdx !== null
     },
@@ -664,7 +625,6 @@ export default {
     stationCount() {
       //computed can't do this
       this.counter++
-
       return `My Playlist #${this.counter}`
     },
     stationImageUrl() {
@@ -678,13 +638,11 @@ export default {
         return this.station.imgUrl
       }
     },
-
     // handelLongText() {
     //   let longSongs = this.station.songs.filter(s => s.title.length > 25)
     //   const song = longSongs.map(s => s.title.slice(0,25) + '...')
     //   console.log(song);
     //   // this.station.push(song)
-
     //   return song
     // }
   },
