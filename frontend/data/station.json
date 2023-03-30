@@ -863,7 +863,11 @@
       "imgUrl": "http://some-photo/"
     },
     "likedByUsers": [],
-    "songs": [],
+    "songs": [
+      {
+        "imgUrl": "https://archive.smashing.media/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/e2f9aa74-7587-4a30-b0c0-4df61d7ac308/43.jpg"
+      }
+    ],
     "msgs": [
       {
         "id": "m101",

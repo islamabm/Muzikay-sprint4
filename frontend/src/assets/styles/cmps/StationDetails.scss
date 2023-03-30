@@ -36,7 +36,9 @@
     margin-inline-end: 24px;
     cursor: pointer;
   }
-
+.no-songs-hide{
+  display: flex;
+}
   .station-info {
     display: flex;
     flex-direction: column;

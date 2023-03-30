@@ -81,20 +81,6 @@
     />
   </div>
 
-  <!-- dvir's stuff for the styling -->
-
-  <!-- 
-    <div class="progress-container">
-      <i class="speaker" v-html="getSvg(toggleSvgIcone)"></i>
-    <progress class="prog progress-bar" :value="volume" max="100"></progress>
-    </div>
-    
-    <div class="progress-container">
-    <progress class="prog progress-bar" type="progress" :value="currTime" min="0"
-    :max="duration"></progress>
-    <input class="prog input-bar timestamp" id="fontController" type="range"
-    @input="setTimestamp" :value="currTime" min="0" :max="duration" />
-    </div> -->
 </template>
 <script>
 import YouTube from 'vue3-youtube'
