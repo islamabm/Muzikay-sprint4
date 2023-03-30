@@ -9,9 +9,9 @@
             station._id !== 'likeduser123'
           "
           :src="
-            station.songs[0].imgUrl
-              ? station.songs[0].imgUrl
-              : station.songs[0].url
+            station.imgUrl
+              ? station.imgUrl
+              : station.songs[0].imgUrl
           "
           @click="toggleModal"
         />
@@ -581,7 +581,11 @@ export default {
           // this.station = await this.$store.getters.stationById(stationId)
           // console.log(this.station)
           // maybe remove after && after 11pm we dont delete anything
-          this.getDominantColor(this.stationImageUrl)
+                  this.getDominantColor(
+              this.station.imgUrl
+                ? this.station.imgUrl
+                : this.station.songs[0].imgUrl
+            )
         } catch (err) {
           console.log(err)
         }
@@ -622,11 +626,11 @@ export default {
     station() {
       return this.$store.getters.station
     },
-    stationCount() {
-      //computed can't do this
-      this.counter++
-      return `My Playlist #${this.counter}`
-    },
+    // stationCount() {
+    //   //computed can't do this
+    //   this.counter++
+    //   return `My Playlist #${this.counter}`
+    // },
     stationImageUrl() {
       if (this.station._id !== 'likeduser123') {
         return this.station.imgUrl
