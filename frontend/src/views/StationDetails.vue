@@ -3,25 +3,15 @@
     <section class="station-details-header">
       <div ref="stationDetailsHeader" class="header-content">
         <img
-          v-if="
-            station.songs &&
-            station.songs.length > 0 &&
-            station._id !== 'likeduser123'
-          "
-          :src="
-            station.imgUrl
-              ? station.imgUrl
-              : station.songs[0].imgUrl
-              ? station.songs[0].imgUrl
-              : station.songs[0].url
-          "
+          v-if="stationImageUrl"
+          :src="stationImageUrl"
           @click="toggleModal"
         />
 
         <img
           @click="toggleModal"
           v-else-if="station._id === 'likeduser123'"
-          src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
+          :src="station.imgUrl"
         />
         <div class="icon-container" v-else>
           <i class="music-note" v-html="getSvg(currImgSvg)"></i>
@@ -121,14 +111,14 @@
           <div class="flex-end list-end">
             <div class="like-song-icon">
               <BubblingHeart
-  ref="heart"
-  title="heart"
-  class="heart-song station-details-heart"
-  :class="{ 'hover-effect': clickedHeartIndex !== idx }"
-  :songIndex="idx"
-  :liked="song.liked"
-  @click="addUserToSong(song), onHeartClick(idx)"
-/>
+                ref="heart"
+                title="heart"
+                class="heart-song station-details-heart"
+                :class="{ 'hover-effect': clickedHeartIndex !== idx }"
+                :songIndex="idx"
+                :liked="song.liked"
+                @click="addUserToSong(song), onHeartClick(idx)"
+              />
 
               <!-- @toggleLikgit ngLike" -->
             </div>
@@ -148,6 +138,7 @@
           </div>
         </Draggable>
       </Container>
+
       <Container @drop="onDrop" v-if="station._id === 'likeduser123'">
         <Draggable
           class="song-item"
@@ -157,7 +148,7 @@
           <div class="img-and-title" @click="songDetails(song)">
             <span>{{ idx + 1 }}</span>
             <img v-if="song.videoId" class="song-img" :src="song.url" />
-            <img v-else class="song-img" :src="song.imgUrl" />
+
             <p
               class="song-title"
               :class="{ active: activeTitle === idx }"
@@ -370,39 +361,38 @@ export default {
       this.$refs.bottomHalf.style.backgroundImage = darkGradient
     },
     getTimeAgo(idx) {
-  const date = new Date(idx);
-  const timeDiff = Date.now() - date.getTime();
-  // the consts are defind according to milliseconds  
-  const second = 1000;
-  const minute = second * 60;
-  const hour = minute * 60;
-  const day = hour * 24;
-  const month = day * 30;
-  const year = day * 365;
+      const date = new Date(idx)
+      const timeDiff = Date.now() - date.getTime()
+      // the consts are defind according to milliseconds
+      const second = 1000
+      const minute = second * 60
+      const hour = minute * 60
+      const day = hour * 24
+      const month = day * 30
+      const year = day * 365
 
-  if (timeDiff < second) {
-    return 'just now';
-  } else if (timeDiff < minute) {
-    const seconds = Math.floor(timeDiff / second);
-    return seconds + (seconds === 1 ? ' second ago' : ' seconds ago');
-  } else if (timeDiff < hour) {
-    const minutes = Math.floor(timeDiff / minute);
-    return minutes + (minutes === 1 ? ' minute ago' : ' minutes ago');
-  } else if (timeDiff < day) {
-    const hours = Math.floor(timeDiff / hour);
-    return hours + (hours === 1 ? ' hour ago' : ' hours ago');
-  } else if (timeDiff < month) {
-    const days = Math.floor(timeDiff / day);
-    return days + (days === 1 ? ' day ago' : ' days ago');
-  } else if (timeDiff < year) {
-    const months = Math.floor(timeDiff / month);
-    return months + (months === 1 ? ' month ago' : ' months ago');
-  } else {
-    const years = Math.floor(timeDiff / year);
-    return years + (years === 1 ? ' year ago' : ' years ago');
-  }
-},
-
+      if (timeDiff < second) {
+        return 'just now'
+      } else if (timeDiff < minute) {
+        const seconds = Math.floor(timeDiff / second)
+        return seconds + (seconds === 1 ? ' second ago' : ' seconds ago')
+      } else if (timeDiff < hour) {
+        const minutes = Math.floor(timeDiff / minute)
+        return minutes + (minutes === 1 ? ' minute ago' : ' minutes ago')
+      } else if (timeDiff < day) {
+        const hours = Math.floor(timeDiff / hour)
+        return hours + (hours === 1 ? ' hour ago' : ' hours ago')
+      } else if (timeDiff < month) {
+        const days = Math.floor(timeDiff / day)
+        return days + (days === 1 ? ' day ago' : ' days ago')
+      } else if (timeDiff < year) {
+        const months = Math.floor(timeDiff / month)
+        return months + (months === 1 ? ' month ago' : ' months ago')
+      } else {
+        const years = Math.floor(timeDiff / year)
+        return years + (years === 1 ? ' year ago' : ' years ago')
+      }
+    },
 
     async addUserToSong(song) {
       const station = this.station
@@ -446,15 +436,12 @@ export default {
       this.currImgSvg = svg
     },
     onHeartClick(index) {
-  if (this.clickedHeartIndex === index) {
-    this.clickedHeartIndex = null;
-  } else {
-    this.clickedHeartIndex = index;
-  }
-  this.$nextTick(() => {
-    this.$refs.heart[index].classList.toggle("hover-effect");
-  });
-},
+      if (this.clickedHeartIndex === index) {
+        this.clickedHeartIndex = null
+      } else {
+        this.clickedHeartIndex = index
+      }
+    },
 
     async getDominantColor(imageSrc) {
       const fac = new FastAverageColor()
@@ -608,14 +595,8 @@ export default {
           this.station = await stationService.getById(stationId)
           // this.station = await this.$store.getters.stationById(stationId)
           // console.log(this.station)
-          if (this.station.songs && this.station.songs.length > 0) {
-            // maybe remove after && after 11pm we dont delete anything
-            this.getDominantColor(
-              this.station.imgUrl
-                ? this.station.imgUrl
-                : this.station.songs[0].imgUrl
-            )
-          }
+          // maybe remove after && after 11pm we dont delete anything
+          this.getDominantColor(this.stationImageUrl)
         } catch (err) {
           console.log(err)
         }
@@ -662,6 +643,18 @@ export default {
 
       return `My Playlist #${this.counter}`
     },
+    stationImageUrl() {
+      if (this.station._id !== 'likeduser123') {
+        return this.station.imgUrl
+          ? this.station.imgUrl
+          : this.station.songs[0].imgUrl
+          ? this.station.songs[0].imgUrl
+          : this.station.songs[0].url
+      } else {
+        return this.station.imgUrl
+      }
+    },
+
     // handelLongText() {
     //   let longSongs = this.station.songs.filter(s => s.title.length > 25)
     //   const song = longSongs.map(s => s.title.slice(0,25) + '...')
