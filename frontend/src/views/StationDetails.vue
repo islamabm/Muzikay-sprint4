@@ -116,18 +116,20 @@
             {{ song.album }}
           </p>
 
-          <p class="posted-at">1 day ago</p>
+          <p class="posted-at">{{ getTimeAgo(new Date(song.addedAt)) }}</p>
           <!-- @toggleLike="toggleSongLike" -->
           <div class="flex-end list-end">
             <div class="like-song-icon">
               <BubblingHeart
-                title="heart"
-                class="heart-song station-details-heart"
-                :class="{ 'hover-effect': clickedHeartIndex !== idx }"
-                :songIndex="idx"
-                :liked="song.liked"
-                @click="addUserToSong(song), onHeartClick(idx)"
-              />
+  ref="heart"
+  title="heart"
+  class="heart-song station-details-heart"
+  :class="{ 'hover-effect': clickedHeartIndex !== idx }"
+  :songIndex="idx"
+  :liked="song.liked"
+  @click="addUserToSong(song), onHeartClick(idx)"
+/>
+
               <!-- @toggleLikgit ngLike" -->
             </div>
             <p class="song-duration">1:40</p>
@@ -368,6 +370,40 @@ export default {
       this.$refs.stationDetailsHeader.style.backgroundImage = gradient
       this.$refs.bottomHalf.style.backgroundImage = darkGradient
     },
+    getTimeAgo(idx) {
+  const date = new Date(idx);
+  const timeDiff = Date.now() - date.getTime();
+  // the consts are defind according to milliseconds  
+  const second = 1000;
+  const minute = second * 60;
+  const hour = minute * 60;
+  const day = hour * 24;
+  const month = day * 30;
+  const year = day * 365;
+
+  if (timeDiff < second) {
+    return 'just now';
+  } else if (timeDiff < minute) {
+    const seconds = Math.floor(timeDiff / second);
+    return seconds + (seconds === 1 ? ' second ago' : ' seconds ago');
+  } else if (timeDiff < hour) {
+    const minutes = Math.floor(timeDiff / minute);
+    return minutes + (minutes === 1 ? ' minute ago' : ' minutes ago');
+  } else if (timeDiff < day) {
+    const hours = Math.floor(timeDiff / hour);
+    return hours + (hours === 1 ? ' hour ago' : ' hours ago');
+  } else if (timeDiff < month) {
+    const days = Math.floor(timeDiff / day);
+    return days + (days === 1 ? ' day ago' : ' days ago');
+  } else if (timeDiff < year) {
+    const months = Math.floor(timeDiff / month);
+    return months + (months === 1 ? ' month ago' : ' months ago');
+  } else {
+    const years = Math.floor(timeDiff / year);
+    return years + (years === 1 ? ' year ago' : ' years ago');
+  }
+},
+
 
     async addUserToSong(song) {
       const station = this.station
@@ -411,12 +447,16 @@ export default {
       this.currImgSvg = svg
     },
     onHeartClick(index) {
-      if (this.clickedHeartIndex === index) {
-        this.clickedHeartIndex = null
-      } else {
-        this.clickedHeartIndex = index
-      }
-    },
+  if (this.clickedHeartIndex === index) {
+    this.clickedHeartIndex = null;
+  } else {
+    this.clickedHeartIndex = index;
+  }
+  this.$nextTick(() => {
+    this.$refs.heart[index].classList.toggle("hover-effect");
+  });
+},
+
     async getDominantColor(imageSrc) {
       const fac = new FastAverageColor()
       const img = new Image()

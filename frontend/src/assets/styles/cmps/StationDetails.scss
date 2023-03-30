@@ -520,13 +520,15 @@
 .station-details-heart input[type='checkbox']:checked + .label .heart-svg {
   opacity: 1 !important;
 }
-.hover-effect {
+.hover-effect .heart-svg {
   opacity: 0;
 }
 
-.song-item:hover .hover-effect {
+.song-item:hover .hover-effect .heart-svg {
   opacity: 1;
 }
+
+
 
 //HEADER
 @media (max-width: $narrow-breakpoint) {
