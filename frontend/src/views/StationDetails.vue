@@ -21,18 +21,18 @@
           v-else-if="station._id === 'likeduser123'"
           src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
         />
-  <div class="icon-container" v-else>
-    <i class="music-note" v-html="getSvg(currImgSvg)"></i>
-    <img
-      class="default-image"
-      src="../assets/img/default.png"
-      @click="toggleModal"
-      v-show="station._id !== 'likeduser123'"
-      @mouseover="toggleImgSvg('editImgIcon')"
-      @mouseleave="toggleImgSvg('defaultImgIcon')"
-    />
-    <span v-if="currImgSvg === 'editImgIcon'">Choose photo</span>
-  </div>
+        <div class="icon-container" v-else>
+          <i class="music-note" v-html="getSvg(currImgSvg)"></i>
+          <img
+            class="default-image"
+            src="../assets/img/default.png"
+            @click="toggleModal"
+            v-show="station._id !== 'likeduser123'"
+            @mouseover="toggleImgSvg('editImgIcon')"
+            @mouseleave="toggleImgSvg('defaultImgIcon')"
+          />
+          <span v-if="currImgSvg === 'editImgIcon'">Choose photo</span>
+        </div>
 
         <div class="station-info">
           <h1 class="playlist-word" @click="toggleModal">Playlist</h1>
@@ -163,7 +163,7 @@
             </p>
           </div>
 
-          <p class="posted-at">{{ getTimeAgo(song.createdAt) }}</p>
+          <p class="posted-at">1 day ago</p>
 
           <div class="flex-end list-end">
             <div class="like-song-icon">
@@ -319,27 +319,10 @@ export default {
       showAreYouSureModal: false,
       wantAnyWay: false,
       clickedHeartIndex: null,
-      currImgSvg: 'defaultImgIcon'
+      currImgSvg: 'defaultImgIcon',
     }
   },
   methods: {
-    getTimeAgo(idx) {
-
-      const seconds = Math.floor((Date.now() - (idx * 1000)) / 1000);
-      if (seconds < 60) {
-        return `${seconds} second${seconds === 1 ? '' : 's'} ago`;
-      }
-      const minutes = Math.floor(seconds / 60);
-      if (minutes < 60) {
-        return `${minutes} minute${minutes === 1 ? '' : 's'} ago`;
-      }
-      const hours = Math.floor(minutes / 60);
-      if (hours < 24) {
-        return `${hours} hour${hours === 1 ? '' : 's'} ago`;
-      }
-      const days = Math.floor(hours / 24);
-      return `${days} day${days === 1 ? '' : 's'} ago`;
-    },
     handelYoutubeSong(video) {
       eventBus.emit('youtube-song', video)
     },
@@ -423,7 +406,7 @@ export default {
       }
     },
     toggleImgSvg(svg) {
-      this.currImgSvg = svg;
+      this.currImgSvg = svg
     },
     onHeartClick(index) {
       if (this.clickedHeartIndex === index) {
@@ -476,7 +459,6 @@ export default {
       this.showSongModal = false
       console.log('station details function remove song', songId)
       console.log('station details function remove song', this.station._id)
-
       try {
         await this.$store.dispatch({
           type: 'removeSong',
@@ -618,6 +600,22 @@ export default {
       //this 'songs' word should be dynamic, in case we might wanna translate it
       const count = this.station.songs.length
       return `${count} Songs`
+    },
+    getTimeAgo(idx) {
+      const seconds = Math.floor((Date.now() - idx * 1000) / 1000)
+      if (seconds < 60) {
+        return `${seconds} second${seconds === 1 ? '' : 's'} ago`
+      }
+      const minutes = Math.floor(seconds / 60)
+      if (minutes < 60) {
+        return `${minutes} minute${minutes === 1 ? '' : 's'} ago`
+      }
+      const hours = Math.floor(minutes / 60)
+      if (hours < 24) {
+        return `${hours} hour${hours === 1 ? '' : 's'} ago`
+      }
+      const days = Math.floor(hours / 24)
+      return `${days} day${days === 1 ? '' : 's'} ago`
     },
     hover() {
       return this.currDraggableIdx !== null

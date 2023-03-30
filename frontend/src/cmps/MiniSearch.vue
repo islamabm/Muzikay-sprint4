@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { eventBus } from '../services/event-bus.service'
 import { Container, Draggable } from 'vue3-smooth-dnd'
 import SVGService from '../services/SVG.service'
 import { stationService } from '../services/station.service.local'
@@ -46,7 +47,8 @@ export default {
   name: '',
   props: [],
   emits: ['handelYoutubeSong'],
-  created() {},
+  created() {
+  },
   data() {
     return {
       videos: [],
@@ -57,6 +59,7 @@ export default {
     songDetails(video) {
       this.$emit('handelYoutubeSong', video)
     },
+
     onDrop(dropResult) {
       this.videos = this.applyDrag(this.videos, dropResult)
     },
@@ -81,7 +84,6 @@ export default {
     async add() {
       // this function makes a mess Tal help!
       this.videos = await stationService.getVideos(this.search)
-      console.log(this.videos[0])
     },
     async addToStation(video) {
       console.log('add to song from api minisearch', video)

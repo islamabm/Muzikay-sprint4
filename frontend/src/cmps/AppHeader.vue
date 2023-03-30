@@ -43,7 +43,8 @@
         <div class="user-circle">
           <i class="user-icon" v-html="getSvg('userIcon')"></i>
         </div>
-        {{ loggedinUser.fullname }}</span>
+        {{ loggedinUser.fullname }}</span
+      >
     </div>
     <div class="login-signup" v-else>
       <RouterLink class="btn-signup" to="/signup">Sign up</RouterLink>
@@ -62,6 +63,7 @@ export default {
     return {
       headerOpacity: 0,
       search: '',
+      alive: false,
     }
   },
   methods: {
@@ -118,6 +120,18 @@ export default {
     loggedinUser() {
       return this.$store.getters.loggedinUser
     },
+  },
+  created() {
+    eventBus.on('fetch-videos', (title) => {
+      this.search = title
+      console.log(this.search)
+      console.log(title)
+      var delay = title.delay || 2000
+      this.alive = true
+      setTimeout(() => {
+        this.alive = false
+      }, delay)
+    })
   },
 }
 </script>
