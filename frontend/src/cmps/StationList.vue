@@ -6,7 +6,7 @@
   >
     <h1 class="category-tag">{{ tag }}</h1>
     <div class="station-list">
-      <article class="station" v-for="station in stationTag" :key="station._id">
+      <article class="station" v-for="(station, idx) in stationTag" :key="idx">
         <StationPreview :station="station" />
       </article>
     </div>

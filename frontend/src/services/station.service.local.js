@@ -1,7 +1,7 @@
 import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
+import { httpService } from './http.service.js'
 import axios from 'axios'
-
 
 import gStations from '../../data/station.json'
 import gSearchStations from '../../data/search.json'
@@ -13,7 +13,7 @@ const SEARCH_KEY = 'videosDB'
 const SEARCH_STATIONS_KEY = 'searchDB'
 // const USER_KEY = 'userStationDB'
 let gSearchCache = utilService.loadFromStorage(SEARCH_KEY) || {}
-_createStations()
+// _createStations()
 _createSearchStations()
 // createUserStations()
 export const stationService = {
@@ -33,46 +33,60 @@ export const stationService = {
 }
 window.cs = stationService
 
-async function query(filterBy = { name: '' }) {
-  var stations = await storageService.query(STORAGE_KEY)
-  if (filterBy.name) {
-    const regex = new RegExp(filterBy.name, 'i')
-    stations = stations.filter((station) => regex.test(station.name))
-  }
-  return stations
+async function query() {
+  return httpService.get(STORAGE_KEY)
+  // var stations = await storageService.query(STORAGE_KEY)
+  // if (filterBy.name) {
+  //   const regex = new RegExp(filterBy.name, 'i')
+  //   stations = stations.filter((station) => regex.test(station.name))
+  // }
+  // return stations
 }
 
-async function querySearch(filterBy = { name: '' }) {
+async function querySearch() {
   var stations = await storageService.query(SEARCH_STATIONS_KEY)
-  if (filterBy.name) {
-    const regex = new RegExp(filterBy.name, 'i')
-    stations = stations.filter((station) => regex.test(station.name))
-  }
+  // if (filterBy.name) {
+  //   const regex = new RegExp(filterBy.name, 'i')
+  //   stations = stations.filter((station) => regex.test(station.name))
+  // }
   return stations
 }
 
 function getById(stationId) {
-  return storageService.get(STORAGE_KEY, stationId)
+  return httpService.get(`station/${stationId}`)
+  // return storageService.get(STORAGE_KEY, stationId)
 }
 
 async function remove(stationId) {
-  console.log('service', stationId)
-  const station = await storageService.remove(STORAGE_KEY, stationId)
-  console.log(station)
-  return station
+  // console.log('service', stationId)
+  // const station = await storageService.remove(STORAGE_KEY, stationId)
+  // console.log(station)
+  // return station
+  return httpService.delete(`station/${stationId}`)
 }
 
 async function save(station) {
-  var savedStation
-  console.log('station', station)
+  // var savedStation
+  // console.log('station', station)
+  // if (station._id) {
+  //   savedStation = await storageService.put(STORAGE_KEY, station)
+  // } else {
+  //   // Later, owner is set by the backend
+  //   // station.owner = userService.getLoggedinUser()
+  //   savedStation = await storageService.post(STORAGE_KEY, station)
+  // }
+  // return savedStation
+  var savedstation
   if (station._id) {
-    savedStation = await storageService.put(STORAGE_KEY, station)
+    // savedstation = await storageService.put(STORAGE_KEY, station)
+    savedstation = await httpService.put(`station/${station._id}`, station)
   } else {
     // Later, owner is set by the backend
-    // station.owner = userService.getLoggedinUser()
-    savedStation = await storageService.post(STORAGE_KEY, station)
+    station.owner = userService.getLoggedinUser()
+    // savedstation = await storageService.post(STORAGE_KEY, station)
+    savedstation = await httpService.post('station', station)
   }
-  return savedStation
+  return savedstation
 }
 
 function getEmptyStation() {
@@ -97,41 +111,13 @@ function getVideos(keyword) {
   }
 
   return axios.get(gUrl + keyword).then((res) => {
-    console.log(res.data.items);
+    console.log(res.data.items)
     const videos = res.data.items.map((item) => _prepareData(item))
     gSearchCache = videos
     utilService.saveToStorage(SEARCH_KEY, gSearchCache)
     return videos
   })
 }
-
-// function getUserStation() {
-//   const likedSongsStation = {
-//     _id: utilService.makeId(),
-//     name: 'likedSongs',
-//     tags: [],
-//     createdBy: {
-//       _id: '',
-//       fullname: 'guest',
-//       imgUrl: '',
-//     },
-//     likedByUsers: [],
-//     songs: [],
-//     msgs: [
-//       {
-//         id: '',
-//         from: '',
-//         txt: '',
-//       },
-//     ],
-//     desc: '',
-//   }
-//   const stations = utilService.loadFromStorage(STORAGE_KEY)
-//   stations.push(likedSongsStation)
-//   localStorage.setItem(STORAGE_KEY, JSON.stringify(stations))
-
-//   return likedSongsStation
-// }
 
 function _prepareData(item) {
   return {
@@ -233,6 +219,7 @@ async function addSongToStation(video, station) {
   const savedStation = await save(updatedStation)
   return savedStation
 }
+
 async function addSongToUserStation(song, station) {
   if (!station) {
     throw new Error('Station parameter is undefined')
