@@ -102,7 +102,7 @@
             {{ song.album }}
           </p>
 
-          <p class="posted-at">{{ getTimeAgo(idx) }}</p>
+          <p class="posted-at">1 day ago</p>
           <!-- @toggleLike="toggleSongLike" -->
           <div class="flex-end list-end">
             <div class="like-song-icon">
@@ -151,7 +151,7 @@
             </p>
           </div>
 
-          <p class="posted-at">1 day ago</p>
+          <p class="posted-at">{{ getTimeAgo(song.createdAt) }}</p>
 
           <div class="flex-end list-end">
             <div class="like-song-icon">
@@ -311,6 +311,7 @@ export default {
   },
   methods: {
     getTimeAgo(idx) {
+
       const seconds = Math.floor((Date.now() - (idx * 1000)) / 1000);
       if (seconds < 60) {
         return `${seconds} second${seconds === 1 ? '' : 's'} ago`;

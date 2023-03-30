@@ -96,6 +96,7 @@ function getVideos(keyword) {
   }
 
   return axios.get(gUrl + keyword).then((res) => {
+    console.log(res.data.items);
     const videos = res.data.items.map((item) => _prepareData(item))
     gSearchCache = videos
     utilService.saveToStorage(SEARCH_KEY, gSearchCache)
@@ -136,6 +137,8 @@ function _prepareData(item) {
     videoId: item.id.videoId,
     title: item.snippet.title,
     url: item.snippet.thumbnails.default.url,
+    // duration: item.contentDetails.duration,
+    createdAt: item.snippet.publishedAt,
   }
 }
 
