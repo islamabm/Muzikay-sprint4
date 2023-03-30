@@ -58,17 +58,10 @@
 
     <section ref="bottomHalf">
       <div class="station-controls">
-<<<<<<< HEAD
        
         <div v-if="station.songs.length" class="btn-play-green" @click.stop="playStation"></div>
         <BubblingHeart v-if="station.songs.length" @toggleLike="toggleHeaderLike" />
       
-=======
-        <div v-if="station.songs.length" class="no-songs-hide">
-          <div class="btn-play-green" @click.stop="playStation"></div>
-          <BubblingHeart @toggleLike="toggleHeaderLike" />
-        </div>
->>>>>>> a898a85cb6e57b202cb5069a8b2a24fd0357f2f7
         <div class="btn-icons" @click="showDeleteModel">
           <i class="options-icon" v-html="getSvg('optionsIcon')"></i>
         </div>
