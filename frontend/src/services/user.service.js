@@ -73,9 +73,9 @@ async function login(userCred) {
 async function signup(userCred) {
   console.log('service', userCred)
   //   userCred.score = 10000
-  //   if (!userCred.imgUrl)
-  //     userCred.imgUrl =
-  //       'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
+    if (!userCred.imgUrl)
+      userCred.imgUrl =
+        'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
   const user = await storageService.post('user', userCred)
   const users = utilService.loadFromStorage('user')
   console.log(users)
@@ -102,7 +102,7 @@ function saveLocalUser(user) {
     _id: user._id,
     fullname: user.fullname,
     stations: [],
-    // imgUrl: user.imgUrl,
+    imgUrl: 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg',
   }
   sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
   return user
