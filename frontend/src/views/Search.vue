@@ -3,12 +3,13 @@
     <h2 class="search-header">Browse all</h2>
     <div class="categories-container">
       <article
+        @click="filterStationCategories(category.title)"
         class="category-container"
         :style="{ backgroundColor: category.color }"
         v-for="(category, idx) in categories"
         :key="idx"
       >
-        <article @click="fetchVideos(category.title)">
+        <article>
           <img :src="category.img" />
           <h2>{{ category.title }}</h2>
         </article>
@@ -122,6 +123,15 @@ export default {
       console.log('opened')
       this.showStationsSubMenu = !this.showStationsSubMenu
     },
+    filterStationCategories(categoryName) {
+  try {
+    console.log(categoryName);
+    this.$router.push(`/station/collection/${categoryName}`);
+  } catch (error) {
+    console.error(error);
+  }
+},
+
   },
   computed: {
     categories() {
@@ -142,8 +152,7 @@ export default {
           console.error(error)
         }
         this.alive = false
-      },
-       search.delay || 2000)
+      }, search.delay || 2000)
     })
   },
 }

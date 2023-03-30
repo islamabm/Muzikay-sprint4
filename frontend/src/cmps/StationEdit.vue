@@ -50,18 +50,19 @@ export default {
   },
   methods: {
     async stationInput() {
-      let editedStation = { ...this.station }
-      try {
-        await this.$store.dispatch({
-          type: 'editstation',
-          station: editedStation,
-        })
-        showSuccessMsg('Station edited')
-      } catch (err) {
-        showErrorMsg('Cannot edit station', err)
-      }
-      // this.$emit('close')
-    },
+  let editedStation = { ...this.station }
+  try {
+    await this.$store.dispatch({
+      type: 'editstation',
+      station: editedStation,
+    })
+    showSuccessMsg('Station edited')
+    this.$emit('close') // add this line to close the modal
+  } catch (err) {
+    showErrorMsg('Cannot edit station', err)
+  }
+},
+
 
     async handleFile(ev) {
       this.loading = true // set the loading flag to true

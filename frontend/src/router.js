@@ -33,10 +33,10 @@ const routes = [
 
     children: [
       {
-        path: '/station/collection',
-        name: 'collection',
+        path: '/station/collection/:category?',
         component: StationCollection,
       },
+      
       // {
       //   path: '/station/modal',
       //   name: 'modal',
@@ -52,6 +52,8 @@ const routes = [
         name: 'Library',
         component: UserLibrary,
       },
+  
+      
       // {
       //   path: '/station/like',
       //   name: 'like',
