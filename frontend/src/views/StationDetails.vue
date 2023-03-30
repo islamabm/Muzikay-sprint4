@@ -21,12 +21,8 @@
           v-else-if="station._id === 'likeduser123'"
           src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
         />
-        <img
-          class="deafult-image"
-          v-else
-          src="../assets/img/empty-img.png"
-          @click="toggleModal"
-        />
+        <img editImgIcon v-else class="deafult-image" @click="toggleModal" />
+        <!-- src="../assets/img/empty-img.png" -->
 
         <div class="station-info">
           <h1 class="playlist-word" @click="toggleModal">Playlist</h1>
@@ -440,6 +436,7 @@ export default {
     },
 
     async removeSong(songId) {
+      this.showSongModal = false
       console.log('station details function remove song', songId)
       console.log('station details function remove song', this.station._id)
 
@@ -453,10 +450,18 @@ export default {
       } catch (err) {
         console.log(err)
         showErrorMsg('Cannot remove song')
-      } finally {
-        this.showSongModal = false
       }
     },
+    // removeSong(songId) {
+    //   console.log('station details function remove song', songId)
+    //   console.log('station details function remove song', this.station._id)
+
+    //   this.$store.dispatch({
+    //     type: 'removeSong',
+    //     songId,
+    //     stationId: this.station._id,
+    //   })
+    // },
     // async addToStation(song) {
     //   const stationName = prompt('station?')
     //   try {
