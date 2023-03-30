@@ -1,7 +1,7 @@
 <template>
   <YouTube
-  class="youtube-player"
-  :src="`https://www.youtube.com/watch?q=${putSongName}`"
+    class="youtube-player"
+    :src="`https://www.youtube.com/watch?q=${putSongName}`"
     @ready="onReady"
     @state-change="onStateChange"
     ref="youtube"
@@ -69,7 +69,11 @@
   </div>
 
   <div class="footer-media-adjusments">
-    <i @click="toggleMute()" class="speaker" v-html="getSvg(toggleSvgIcone)"></i>
+    <i
+      @click="toggleMute()"
+      class="speaker"
+      v-html="getSvg(toggleSvgIcone)"
+    ></i>
     <input
       type="range"
       class="speaker-bar"
@@ -80,7 +84,6 @@
       v-model="volume"
     />
   </div>
-
 </template>
 <script>
 import YouTube from 'vue3-youtube'
@@ -113,18 +116,29 @@ export default {
       song: null,
       youtubeSong: null,
       songIdx: 0,
-      video: null,
     }
   },
   created() {
     eventBus.on('song-details', (song) => {
+      console.log('in the media player in the creates', song)
       this.song = song
-      var delay = song.delay || 2000
-      this.alive = true
-      setTimeout(() => {
-        this.alive = false
-      }, delay)
+      if (!this.song.id && !this.song.videoId) {
+        console.log('inside tal data')
+        setTimeout(async () => {
+          try {
+            console.log(this.song.title)
+            const videos = await stationService.getVideos(this.song.title)
+            console.log('before hazarzer console', videos)
+            this.song = videos[0]
+            console.log('from tal data itay console ', this.song)
+          } catch (error) {
+            console.error(error)
+          }
+          this.alive = false
+        }, song.delay || 2000)
+      }
     })
+
     eventBus.on('youtube-song', (video) => {
       this.youtubeSong = video
       var delay = video.delay || 2000
@@ -144,12 +158,11 @@ export default {
     putSongName() {
       console.log('this.stationnnn', this.station)
       if (this.song) {
-        if(!this.song.id){
-          add()
-          return this.video.id
+        if (this.song.id) {
+          // situation when we have a song from YouTube on our list-considered as a song
+          return this.song.id
         }
-        console.log('this.song if 1', this.song)
-        return this.song.id
+        return this.song.videoId
       }
       if (this.youtubeSong) {
         return this.youtubeSong.videoId
@@ -187,12 +200,13 @@ export default {
   methods: {
     async add() {
       const videos = await stationService.getVideos(this.song.title)
+      console.log('hi from get videos', videos)
       this.video = videos[0]
     },
 
     toggleMute() {
-     if(this.volume > 0) this.volume = 0
-     else this.volume = 50
+      if (this.volume > 0) this.volume = 0
+      else this.volume = 50
     },
     getSvg(iconName) {
       return SVGService.getSpotifySvg(iconName)

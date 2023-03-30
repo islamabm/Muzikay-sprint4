@@ -142,7 +142,8 @@ export default {
           console.error(error)
         }
         this.alive = false
-      }, search.delay || 2000)
+      },
+       search.delay || 2000)
     })
   },
 }

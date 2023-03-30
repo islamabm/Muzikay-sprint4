@@ -329,6 +329,7 @@ export default {
       eventBus.emit('youtube-song', video)
     },
     songDetails(song) {
+      console.log('song in the media pleayer sheet itay code', song)
       eventBus.emit('song-details', song)
     },
     dontAddSong() {
