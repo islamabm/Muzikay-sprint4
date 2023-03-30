@@ -102,15 +102,31 @@ export default {
       }
     },
     getTimeAgo(idx) {
-      const date = new Date(idx)
-      const timeDiff = Date.now() - date.getTime()
+    const date = new Date(idx);
+    const timeDiff = Date.now() - date.getTime();
+    // the consts are defind according to milliseconds  
+    const second = 1000;
+    const minute = second * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
+    const month = day * 30;
+    const year = day * 365;
 
-      if (timeDiff < 1000) return 'just now'
-       else if (timeDiff < 60000) return Math.floor(timeDiff / 1000) + ' seconds ago'
-       else if (timeDiff < 3600000) return Math.floor(timeDiff / 60000) + ' minutes ago'
-       else if (timeDiff < 86400000) return Math.floor(timeDiff / 3600000) + ' hours ago'
-       else return Math.floor(timeDiff / 86400000) + ' days ago'
-      
+  if (timeDiff < second) {
+    return 'just now';
+  } else if (timeDiff < minute) {
+    return Math.floor(timeDiff / second) + ' seconds ago';
+  } else if (timeDiff < hour) {
+    return Math.floor(timeDiff / minute) + ' minutes ago';
+  } else if (timeDiff < day) {
+    return Math.floor(timeDiff / hour) + ' hours ago';
+  } else if (timeDiff < month) {
+    return Math.floor(timeDiff / day) + ' days ago';
+  } else if (timeDiff < year) {
+    return Math.floor(timeDiff / month) + ' months ago';
+  } else {
+    return Math.floor(timeDiff / year) + ' years ago';
+  }
     },
   },
   computed: {
