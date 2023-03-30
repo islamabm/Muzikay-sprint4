@@ -84,14 +84,16 @@ export default {
       console.log(this.videos[0])
     },
     async addToStation(video) {
+      console.log('add to song from api minisearch', video)
       try {
+        const { stationId } = this.$route.params
         const station = this.stations.find((s) => s._id === stationId)
-        await this.$store.dispatch({ type: 'addSong', video, station })
 
-        //   type: 'addSong',
-        //   video: video,
-        //   station: station,
-        // })
+        await this.$store.dispatch({
+          type: 'addSong',
+          video,
+          station,
+        })
         showSuccessMsg('Song added')
       } catch (err) {
         showErrorMsg('Cannot add song', err)
@@ -101,6 +103,9 @@ export default {
   computed: {
     stations() {
       return this.$store.getters.stations
+    },
+    station() {
+      this.$store.getters.station
     },
   },
   components: {

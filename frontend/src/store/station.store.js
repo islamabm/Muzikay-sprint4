@@ -100,22 +100,15 @@ export const stationStore = {
     },
     // new
     updateSong(state, { song }) {
-      console.log('State stations:', state.stations)
-      console.log('Received song:', song)
-
       const st = state.stations.find((s) => s._id === 'likeduser123')
       st.songs.push(song)
       console.log(st)
       const stationIdx = state.stations.findIndex(
         (s) => s._id === song.stationId
       )
-      console.log('Station index:', stationIdx)
 
       const station = state.stations[stationIdx]
-      console.log('Found station:', station)
-
       const songIdx = station.songs.findIndex((so) => so.id === song.id)
-      console.log('Song index:', songIdx)
 
       station.songs.splice(songIdx, 1, song)
       state.stations[stationIdx] = station
@@ -128,7 +121,9 @@ export const stationStore = {
       const idx = state.stations.findIndex((c) => c._id === station._id)
       state.stations.splice(idx, 1, station)
     },
+
     editUserStation(state, { station }) {
+      console.log('station in the store mutation', station)
       const idx = state.userStations.findIndex((c) => c._id === station._id)
       state.userStations.splice(idx, 1, station)
     },
@@ -215,8 +210,6 @@ export const stationStore = {
       }
     },
     async removeSong({ commit }, { songId, stationId }) {
-      console.log('remove station from store ', songId)
-      console.log('remove station from store ', stationId)
       try {
         await stationService.removeSong(songId, stationId)
         commit({ type: 'removeSong', songId, stationId })
@@ -225,14 +218,17 @@ export const stationStore = {
         throw err
       }
     },
-    async addSong({ commit }, { video, stationId }) {
+    async addSong({ commit }, { video, station }) {
+      console.log('add song from api store actions', video)
+      console.log('add song from api store actions', station)
       try {
         const updatedStation = await stationService.addSongToStation(
           video,
-          stationId
+          station
         )
 
         commit({ type: 'editStation', station: updatedStation })
+        return updatedStation
       } catch (err) {
         console.error('Cannot add song', err)
         throw err
