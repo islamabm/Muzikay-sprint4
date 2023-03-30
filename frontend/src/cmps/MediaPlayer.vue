@@ -1,7 +1,7 @@
 <template>
   <YouTube
-    class="youtube-player"
-    :src="`https://www.youtube.com/watch?v=${putSongId}`"
+  class="youtube-player"
+  :src="`https://www.youtube.com/watch?q=${putSongName}`"
     @ready="onReady"
     @state-change="onStateChange"
     ref="youtube"
@@ -69,7 +69,7 @@
   </div>
 
   <div class="footer-media-adjusments">
-    <i class="speaker" v-html="getSvg(toggleSvgIcone)"></i>
+    <i @click="toggleMute()" class="speaker" v-html="getSvg(toggleSvgIcone)"></i>
     <input
       type="range"
       class="speaker-bar"
@@ -86,16 +86,15 @@
 import YouTube from 'vue3-youtube'
 import SVGService from '../services/SVG.service'
 import { eventBus } from '../services/event-bus.service'
+import { stationService } from '../services/station.service.local.js'
 
 export default {
   name: ['MediaPlayer'],
   props: {
-    // station: Object,
     speakerLevel: {
       type: Number,
       default: 80,
     },
-    currSongIdx: Number,
   },
   components: {
     YouTube,
@@ -111,15 +110,16 @@ export default {
       shuffledSongs: [],
       isShuffleOn: false,
       speakerSvg: '',
-      songId: null,
+      song: null,
       youtubeSong: null,
       songIdx: 0,
+      video: null,
     }
   },
   created() {
-    eventBus.on('song-id', (songId) => {
-      this.songId = songId
-      var delay = songId.delay || 2000
+    eventBus.on('song-details', (song) => {
+      this.song = song
+      var delay = song.delay || 2000
       this.alive = true
       setTimeout(() => {
         this.alive = false
@@ -138,14 +138,18 @@ export default {
     station() {
       return this.$store.getters.station
     },
-    copyOfCurrIdx() {
-      this.songIdx = this.currSongIdx
-    },
-    putSongId() {
+    // copyOfCurrIdx() {
+    //   this.songIdx = this.currSongIdx
+    // },
+    putSongName() {
       console.log('this.stationnnn', this.station)
-      if (this.songId) {
-        console.log('this.songId if 1', this.songId)
-        return this.songId
+      if (this.song) {
+        if(!this.song.id){
+          add()
+          return this.video.id
+        }
+        console.log('this.song if 1', this.song)
+        return this.song.id
       }
       if (this.youtubeSong) {
         return this.youtubeSong.videoId
@@ -181,6 +185,15 @@ export default {
     },
   },
   methods: {
+    async add() {
+      const videos = await stationService.getVideos(this.song.title)
+      this.video = videos[0]
+    },
+
+    toggleMute() {
+     if(this.volume > 0) this.volume = 0
+     else this.volume = 50
+    },
     getSvg(iconName) {
       return SVGService.getSpotifySvg(iconName)
     },
@@ -246,7 +259,7 @@ export default {
     // supposed to be a switch case
     onStateChange(event) {
       if (event.data === 1) {
-        this.isPlaying = true
+        // this.isPlaying = true
         this.intervalId = setInterval(() => {
           this.currentTime = this.$refs.youtube.getCurrentTime()
         }, 1000)
