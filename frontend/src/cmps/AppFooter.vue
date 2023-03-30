@@ -42,15 +42,14 @@ export default {
       // songIdx: 0,
       hover: false,
       showModal: false,
-      songId: null,
+      song: null,
       alive: false,
       youtubeSong: null,
     }
   },
   created() {
-    eventBus.on('song-id', (songId) => {
-      this.songId = songId
-      console.log('songId', songId)
+    eventBus.on('song-details', (song) => {
+      this.song = song
       var delay = songId.delay || 2000
       this.alive = true
       setTimeout(() => {
@@ -72,7 +71,7 @@ export default {
       return this.$store.getters.station
     },
     currSong() {
-      return this.station.songs.find((s) => s.id === this.songId)
+      return this.station.songs.find((s) => s.id === this.song.id)
     },
     currSongIdx() {
       if (!this.station) return
