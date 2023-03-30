@@ -1,5 +1,5 @@
 import { storageService } from './async-storage.service'
-// import { httpService } from './http.service'
+import { httpService } from './http.service'
 import { store } from '../store/store'
 // import { socketService, SOCKET_EVENT_USER_UPDATED, SOCKET_EMIT_USER_WATCH } from './socket.service'
 import { showSuccessMsg } from './event-bus.service'
@@ -22,8 +22,8 @@ export const userService = {
 window.userService = userService
 
 function getUsers() {
-  return storageService.query('user')
-  // return httpService.get(`user`)
+  // return storageService.query('user')
+  return httpService.get(`user`)
 }
 
 // function onUserUpdate(user) {
@@ -34,8 +34,8 @@ function getUsers() {
 // }
 
 async function getById(userId) {
-  const user = await storageService.get('user', userId)
-  // const user = await httpService.get(`user/${userId}`)
+  // const user = await storageService.get('user', userId)
+  const user = await httpService.get(`user/${userId}`)
 
   // socketService.emit(SOCKET_EMIT_USER_WATCH, userId)
   // socketService.off(SOCKET_EVENT_USER_UPDATED, onUserUpdate)
@@ -44,8 +44,8 @@ async function getById(userId) {
   return user
 }
 function remove(userId) {
-  return storageService.remove('user', userId)
-  // return httpService.delete(`user/${userId}`)
+  // return storageService.remove('user', userId)
+  return httpService.delete(`user/${userId}`)
 }
 
 async function update({ _id, score }) {
