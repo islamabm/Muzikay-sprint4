@@ -41,31 +41,32 @@
         <span>or</span>
       </div>
 
-      <h3 class="signup-email-h2">Sign up with your email address</h3>
+      <h3 class="signup-email-h2">Sign up with a new account</h3>
 
-      <form @submit.prevent="submitForm">
+      <form @submit.prevent="doSignup">
         <div class="form-group">
-          <label class="label-dark" for="email">What's your email?</label>
+          <label class="label-dark" for="email">What's your fullname?</label>
           <input
             class="square-inputs"
-            type="email"
+            type="text"
             id="email"
-            v-model="email"
-            placeholder="Enter your email."
+            v-model="signupCred.fullname"
+            placeholder="Your full name"
             required
           />
         </div>
 
         <div class="form-group">
-          <label class="label-dark" for="confirm-email">Confirm your email</label>
+          <label class="label-dark" for="confirm-email">Enter your username</label>
           <input
             class="square-inputs"
-            type="email"
+            type="text"
             id="confirm-email"
-            v-model="confirmEmail"
-            placeholder="Enter your email again."
+            v-model="signupCred.username"
+            placeholder="Username"
             required
           />
+          <small>This appears on your profile.</small>
         </div>
 
         <div class="form-group">
@@ -74,13 +75,13 @@
             class="square-inputs"
             type="password"
             id="password"
-            v-model="password"
-            placeholder="Create a password."
+          v-model="signupCred.password"
+          placeholder="Password"
             required
           />
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label class="label-dark" for="display-name">What should we call you?</label>
           <input
             class="square-inputs"
@@ -91,7 +92,7 @@
             required
           />
           <small>This appears on your profile.</small>
-        </div>
+        </div> -->
 
         <div class="form-group">
           <label class="label-dark" for="birthdate">What's your date of birth?</label>
@@ -106,13 +107,12 @@
                 min="1"
                 max="31"
                 placeholder="DD"
-                required
               />
             </div>
 
             <div class="title-date">
               <p>Month</p>
-              <select class="square-inputs" id="month" v-model="month" required>
+              <select class="square-inputs" id="month" v-model="month">
                 <option value="" disabled selected>MM</option>
                 <option value="1">January</option>
                 <option value="2">February</option>
@@ -139,7 +139,6 @@
                 min="1900"
                 max="2022"
                 placeholder="YYYY"
-                required
               />
             </div>
           </div>
@@ -234,22 +233,38 @@ export default {
   data() {
     return {
       //don't need all of this, but we'll see what we can do with it
-      email: '',
-      confirmEmail: '',
-      password: '',
-      displayName: '',
-      day: '',
-      month: '',
-      year: '',
-      gender: '',
-      newsAndOffers: false,
-      shareRegistrationData: false,
-      agreeTerms: false,
+      // email: '',
+      // confirmEmail: '',
+      // password: '',
+      // displayName: '',
+      // day: '',
+      // month: '',
+      // year: '',
+      // gender: '',
+      // newsAndOffers: false,
+      // shareRegistrationData: false,
+      // agreeTerms: false,
+      signupCred: {
+        username: '',
+        password: '',
+        fullname: '',
+        imgUrl: '',
+        stations: [],
+      },
     }
   },
   methods: {
-    submitForm() {
-      console.log('Form submitted')
+    async doSignup() {
+      if (
+        !this.signupCred.fullname ||
+        !this.signupCred.password ||
+        !this.signupCred.username
+      ) {
+        this.msg = 'Please fill up the form'
+        return
+      }
+      await this.$store.dispatch({ type: 'signup', userCred: this.signupCred })
+      this.$router.push('/station/collection')
     },
   },
 }

@@ -10,12 +10,17 @@
   .likes-count-logo {
     display: flex;
     align-items: center;
+    justify-self: baseline;
     margin-block-start: 16px;
     gap: 5px;
     .dot {
-      font-size: 1rem;
-      margin: 0;
+      font-size: 0.5rem;
+      margin-inline: 0;
+      transform: translate(-2px,1px);
     }
+  }
+  .songs-count{
+    margin-block-start: 1px;
   }
   .logo-container-header {
     display: flex;
@@ -43,7 +48,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    font-family: 'Roboto-Regular';
+    font-family: 'Circular-book';
     margin-block-start: 2rem;
 
     .playlist-word {
@@ -74,7 +79,11 @@
       cursor: pointer;
       transform: translateY(3px);
     }
-
+    .posted-at {
+      color: $clr11;
+      transform: translate(-7px,1.8px);
+      
+    }
     .small-logo-word {
       font-family: 'Circular-book';
       transform: translateY(2px);
