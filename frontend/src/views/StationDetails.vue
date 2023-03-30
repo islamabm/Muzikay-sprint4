@@ -21,12 +21,18 @@
           v-else-if="station._id === 'likeduser123'"
           src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
         />
-        <img
-          class="deafult-image"
-          v-else
-          src="../assets/img/empty-img.png"
-          @click="toggleModal"
-        />
+  <div class="icon-container" v-else>
+    <i class="music-note" v-html="getSvg(currImgSvg)"></i>
+    <img
+      class="default-image"
+      src="../assets/img/default.png"
+      @click="toggleModal"
+      v-show="station._id !== 'likeduser123'"
+      @mouseover="toggleImgSvg('editImgIcon')"
+      @mouseleave="toggleImgSvg('defaultImgIcon')"
+    />
+    <span v-if="currImgSvg === 'editImgIcon'">Choose photo</span>
+  </div>
 
         <div class="station-info">
           <h1 class="playlist-word" @click="toggleModal">Playlist</h1>
@@ -58,10 +64,16 @@
 
     <section ref="bottomHalf">
       <div class="station-controls">
-       
-        <div v-if="station.songs.length" class="btn-play-green" @click.stop="playStation"></div>
-        <BubblingHeart v-if="station.songs.length" @toggleLike="toggleHeaderLike" />
-      
+        <div
+          v-if="station.songs.length"
+          class="btn-play-green"
+          @click.stop="playStation"
+        ></div>
+        <BubblingHeart
+          v-if="station.songs.length"
+          @toggleLike="toggleHeaderLike"
+        />
+
         <div class="btn-icons" @click="showDeleteModel">
           <i class="options-icon" v-html="getSvg('optionsIcon')"></i>
         </div>
@@ -307,6 +319,7 @@ export default {
       showAreYouSureModal: false,
       wantAnyWay: false,
       clickedHeartIndex: null,
+      currImgSvg: 'defaultImgIcon'
     }
   },
   methods: {
@@ -391,6 +404,9 @@ export default {
       } else {
         this.activeTitle = idx
       }
+    },
+    toggleImgSvg(svg) {
+      this.currImgSvg = svg;
     },
     onHeartClick(index) {
       if (this.clickedHeartIndex === index) {

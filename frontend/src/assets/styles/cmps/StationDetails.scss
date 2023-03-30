@@ -622,3 +622,35 @@
   top: -28%;
   left: 51.9%;
 }
+
+
+//SVG DEFAULT IMG
+.station-details {
+  .icon-container {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    .music-note {
+      position: absolute;
+      z-index: 1;
+      stroke: #7F7F7F;
+      transform: translate(-10px,-5px);
+      fill: $clr6;
+      stroke: none;
+    }
+
+    .default-image {
+      position: relative;
+      z-index: 0;
+    }
+
+    span {
+      position: absolute;
+      left: 40%;
+      bottom: 25%;
+      transform: translateX(-40%);
+    }
+  }
+}

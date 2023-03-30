@@ -35,9 +35,10 @@ h6 {
 //     // padding: 5px;
 // }
 
-// img {
-//     width: 100%;
-// }
+img {
+  cursor: pointer;
+}
+
 
 p {
   margin: 0 0 1em;
@@ -51,22 +52,21 @@ a:hover {
   text-decoration: underline;
 }
 .btn {
-    cursor: pointer;
-  }
-  body::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
-  }
-  
-  body::-webkit-scrollbar-thumb {
-    background-color: rgba(68, 67, 67, 0.6);
-  }
-  
-  body::-webkit-scrollbar-track {
-    background-color: rgba($clr2,0.6);
-  }
-  
-  body::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(46, 46, 46, 0.6);
-  }
-  
+  cursor: pointer;
+}
+body::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgba(68, 67, 67, 0.6);
+}
+
+body::-webkit-scrollbar-track {
+  background-color: rgba($clr2, 0.6);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(46, 46, 46, 0.6);
+}
