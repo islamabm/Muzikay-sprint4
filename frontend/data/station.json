@@ -4,6 +4,7 @@
     "name": "Funky Monks",
     "tags": ["Funk"],
     "description": "Get ready to groove with the funkiest beats from Funky Monks!",
+    "imgUrl": "https://www.adobe.com/express/learn/blog/media_16b8661af5a86e0a9ffe834e6a74a5ae2c8217696.png?width=750&format=png&optimize=medium",
     "createdBy": {
       "_id": "u101",
       "fullname": "system",
@@ -83,6 +84,7 @@
     "name": "Metallica",
     "tags": ["Funk"],
     "description": "Discover the best of Funk music with Funky Monks and its soulful melodies.",
+    "imgUrl": "https://preview.redd.it/what-if-they-surprise-us-and-they-release-it-with-this-v0-zj793afx4joa1.jpg?auto=webp&s=da3a6dbba5c2cb0be9f6d3842636c9c9c359c28e",
     "createdBy": {
       "_id": "u101",
       "fullname": "system",
@@ -183,6 +185,7 @@
     "name": "Funky Monks",
     "tags": ["Funk"],
     "description": "Immerse yourself in the world of Funk music and let Funky Monks be your guide.",
+    "imgUrl": "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/tree-of-life-purple-cd-cover-art-design-template-7d5a3bb20f27956f77151355794f22a9_screen.jpg?ts=1617478980",
     "createdBy": {
       "_id": "u101",
       "fullname": "system",
@@ -282,6 +285,7 @@
     "name": "Funky Monks",
     "tags": ["Funk"],
     "description": "From The Meters to The JBs, Funky Monks has the perfect playlist for your Funk cravings.",
+    "imgUrl": "https://i.pinimg.com/originals/1b/c0/09/1bc0093f28353b9cd5c5df963316615d.jpg",
     "createdBy": {
       "_id": "u101",
       "fullname": "system",
@@ -379,6 +383,7 @@
     "_id": "104",
     "name": "Funky Monks",
     "tags": ["Funk"],
+    "imgUrl": "https://i.pinimg.com/236x/8a/a0/48/8aa048477da77f7e93f426df72ac583a--rap-album-covers-ego-tripping.jpg",
     "description": "Funky Monks: The ultimate destination for all the Funk lovers out there.",
     "createdBy": {
       "_id": "u101",
@@ -478,6 +483,7 @@
     "name": "Dark Side of the Moon",
     "tags": ["Happy"],
     "description": "Get ready to feel happy and uplifted with these catchy tunes that will have you humming along all day long!",
+    "imgUrl": "https://i.pinimg.com/originals/cf/4e/39/cf4e39655cd1a42361d5effac1cad989.jpg",
     "createdBy": {
       "_id": "u101",
       "fullname": "system",
@@ -576,6 +582,7 @@
     "name": "November Rain",
     "fullname": "system",
     "tags": ["Happy"],
+    "imgUrl": "http://www.feelnumb.com/wp-content/uploads/2011/10/Use_Your_Illusions_I_Guns_N_Roses_Raphael_School_Of_Athens_Painting.jpg",
     "description": "From upbeat pop to cheerful indie, these happy songs are guaranteed to put a smile on your face.",
     "createdBy": {
       "_id": "u101",
@@ -616,6 +623,7 @@
   {
     "_id": "107",
     "name": "Funky Monks",
+    "imgUrl": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f5075e19-2528-49f4-a6d9-7ba8b12df1e9/d5t1yhf-8ab7aa98-7917-4a1e-8956-4fc4c54de41e.jpg/v1/fill/w_1024,h_1024,q_75,strp/led_zeppelin_acrylic_painting_by_minorr_d5t1yhf-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2Y1MDc1ZTE5LTI1MjgtNDlmNC1hNmQ5LTdiYThiMTJkZjFlOVwvZDV0MXloZi04YWI3YWE5OC03OTE3LTRhMWUtODk1Ni00ZmM0YzU0ZGU0MWUuanBnIiwiaGVpZ2h0IjoiPD0xMDI0Iiwid2lkdGgiOiI8PTEwMjQifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uud2F0ZXJtYXJrIl0sIndtayI6eyJwYXRoIjoiXC93bVwvZjUwNzVlMTktMjUyOC00OWY0LWE2ZDktN2JhOGIxMmRmMWU5XC9taW5vcnItNC5wbmciLCJvcGFjaXR5Ijo5NSwicHJvcG9ydGlvbnMiOjAuNDUsImdyYXZpdHkiOiJjZW50ZXIifX0.wSNshtMKaQktJogwVhhnyhEKlrPt69HQ1Y3krRw0HJ8",
     "tags": ["Happy"],
     "description": "If you're feeling down, these happy songs will turn your mood around and make you feel like dancing.",
     "createdBy": {
@@ -659,6 +667,7 @@
     "name": "Funky Monks",
     "tags": ["Happy"],
     "description": "Filled with positive vibes and infectious melodies, these happy songs are perfect for any occasion.",
+    "imgUrl": "https://render.fineartamerica.com/images/rendered/default/poster/8/8/break/images/artworkimages/medium/3/the-beatles-abbey-road-50-deva-milano.jpg",
     "createdBy": {
       "_id": "u101",
       "fullname": "system",
@@ -774,6 +783,7 @@
     "_id": "110",
     "name": "Funky Monks",
     "tags": ["Happy"],
+    "imgUrl": "https://img.freepik.com/premium-vector/rock-roll-music-seamless-pattern-background_688722-124.jpg?w=2000",
     "description": "Whether you're having a bad day or just need a boost of happiness, these feel-good songs will do the trick.",
     "createdBy": {
       "_id": "u101",
@@ -812,7 +822,7 @@
   },
   {
     "_id": "224",
-    "name": "Songs to Sing in the Shower",
+    "name": "Sing in the Shower",
     "tags": ["Mood"],
     "imgUrl": "https://i.scdn.co/image/ab67706f00000003329e2c5d3104f8c6a1d16a34",
     "createdBy": {

@@ -4,9 +4,9 @@
       <img
       v-if="station.songs && station.songs.length > 0"
       :src="
-            station.songs[0].imgUrl
-            ? station.songs[0].imgUrl
-            : station.songs[0].url
+            station.imgUrl
+            ? station.imgUrl
+            : station.songs[0].imgUrl
             "
             @click="toggleModal"
         />

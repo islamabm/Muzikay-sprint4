@@ -1,22 +1,26 @@
 <template>
-  <section v-if="user">
-    <h1>User Details - {{ user.fullname }}</h1>
-    <h2 v-if="isMe">Its me</h2>
-    <h3>{{ user.username }} score: {{ user.score }}</h3>
-    <img style="max-width: 200px;" :src="user.imgUrl" />
-    <ul>
-      <li v-for="review in user.givenReviews" :key="review._id">
-        {{ review.txt }}
-        <RouterLink :to="`/user/${review.aboutUser._id}`">
-          About {{ review.aboutUser.fullname }}
-        </RouterLink>
-      </li>
-    </ul>
-
-    <details>
-      <summary>Full JSON</summary>
-      <pre>{{ user }}</pre>
-    </details>
+  <section v-if="user" class="user-profile">
+    <!-- <h1 class="greeting">Welcome, {{ user.fullname }}</h1> -->
+    <div class="user-details-container">
+      <img  class="user-profile-img" style="max-width: 200px;" :src="user.imgUrl" />
+      <div class="user-info">
+      <span class="profile-word">
+    Profile
+   </span>
+    <h3 class="user-username">{{ user.username }}</h3>
+    <span class="user-stations-count">24 Public Playlists</span>
+    <span class="dot">•</span>
+    <span class="following">7 following</span>
+  </div>
+  </div>
+      <!-- <article class="review-list">
+        <article v-for="review in user.givenReviews" :key="review._id">
+          {{ review.txt }}
+          <RouterLink :to="`/user/${review.aboutUser._id}`">
+            About {{ review.aboutUser.fullname }}
+          </RouterLink>
+        </article>
+      </article> -->
   </section>
 </template>
 

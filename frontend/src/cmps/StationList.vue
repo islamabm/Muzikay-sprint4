@@ -31,12 +31,16 @@ export default {
           }
           acc[tag].push(station)
         })
+        console.log("Categorized stations:", acc);
         return acc
       }, {})
     },
   },
   components: {
     StationPreview,
+  },
+  mounted() {
+    console.log("Stations:", this.stations);
   },
 }
 </script>

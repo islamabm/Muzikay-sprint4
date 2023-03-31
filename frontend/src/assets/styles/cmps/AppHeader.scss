@@ -145,6 +145,14 @@
           }
         }
       }
+      .user-image{
+        align-self: end;
+            height: 48px;
+            width: 48px;
+            padding:10px;
+            border-radius: 50%;
+            transform: translateY(12px);
+    }
       cursor: pointer;
       &:hover{
         background-color: rgba($clr3, 0.4);
