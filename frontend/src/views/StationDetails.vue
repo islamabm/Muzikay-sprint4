@@ -644,9 +644,9 @@ export default {
     Draggable,
     BubblingHeart,
   },
-  mounted() {
-    window.scrollTo(0, 0)
-  },
+  // mounted() {
+  //   window.scrollTo(0, 0)
+  // },
   beforeUnmount() {
     document.body.style.background = '#181818'
   },
