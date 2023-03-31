@@ -143,7 +143,7 @@
         </Draggable>
       </Container>
 
-      <Container @drop="onDrop" v-if="station.createdBy._id === 'likeduser123'">
+      <Container v-if="station.createdBy._id === 'likeduser123'">
         <Draggable
           class="song-item"
           v-for="(song, idx) in likedSongsUser"
@@ -438,10 +438,19 @@ export default {
       }
     },
     onDrop(dropResult) {
-      console.log(this.station)
-      const station = JSON.parse(JSON.stringify(this.station))
-      station.songs = this.applyDrag(station.songs, dropResult)
-      this.$store.commit({ type: 'editStation', station })
+      const { removedIndex, addedIndex, payload } = dropResult
+      const songs = [...this.station.songs]
+      if (removedIndex !== null) {
+        songs.splice(removedIndex, 1)
+      }
+      if (addedIndex !== null) {
+        songs.splice(addedIndex, 0, payload)
+      }
+      this.$store.commit({
+        type: 'updateSongOrder',
+        stationIndex: this.stationIndex,
+        songs,
+      })
     },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult
@@ -644,7 +653,7 @@ export default {
     document.body.style.background = '#181818'
   },
   mounted() {
-    window.scrollTo(0,0)
-  }
+    window.scrollTo(0, 0)
+  },
 }
 </script>

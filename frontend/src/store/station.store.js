@@ -1,6 +1,3 @@
-// import { stationService } from '../services/station.service.local'
-// import { storageService } from '../services/async-storage.service.js'
-// import { utilService } from '../services/util.service.js'
 import { userService } from '../services/user.service.js'
 import { stationService } from '../services/station.service.local.js'
 
@@ -68,6 +65,9 @@ export const stationStore = {
   mutations: {
     setStations(state, { stations }) {
       state.stations = stations
+    },
+    updateSongOrder(state, { stationIndex, songs }) {
+      state.stations[stationIndex].songs = songs
     },
     setAllStations(state, { stations }) {
       state.allStations = stations
