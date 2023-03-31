@@ -24,8 +24,9 @@ export default {
     station: Object,
   },
   methods: {
-    setStation(stationId) {
-      this.$store.dispatch({ type: 'setcurrStation', stationId })
+    async setStation(stationId) {
+      await this.$store.dispatch({ type: 'setcurrStation', stationId })
+
       // this.$store.commit({ type: 'setCurrStation', stationId })
       this.$router.push(`/station/${stationId}`)
     },
