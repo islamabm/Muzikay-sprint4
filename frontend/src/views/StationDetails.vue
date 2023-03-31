@@ -456,6 +456,7 @@ export default {
       }
       return result
     },
+    //Step 1
     async removeSong(songId) {
       console.log('station details function remove song', songId)
       console.log('station details function remove song', this.station._id)
@@ -613,8 +614,9 @@ export default {
       return this.$store.getters.stations
     },
     station() {
-      return this.$store.getters.station
-    },
+      const station = this.$store.getters.stationById(this.stationId)
+    return station ? station : this.$store.getters.station
+  },
     // stationCount() {
     //   //computed can't do this
     //   this.counter++
