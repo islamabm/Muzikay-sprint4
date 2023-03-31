@@ -73,23 +73,13 @@ async function login(userCred) {
 async function signup(userCred) {
   // console.log('service', userCred)
   //   userCred.score = 10000
-<<<<<<< HEAD
-  //   if (!userCred.imgUrl)
-  //     userCred.imgUrl =
-  //       'https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png'
-  // const user = await storageService.post('user', userCred)
-  // const users = utilService.loadFromStorage('user')
-  // console.log(users)
-  const user = await httpService.post('auth/signup', userCred)
-=======
     if (!userCred.imgUrl)
       userCred.imgUrl =
         'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
-  const user = await storageService.post('user', userCred)
-  const users = utilService.loadFromStorage('user')
-  console.log(users)
-  //   const user = await httpService.post('auth/signup', userCred)
->>>>>>> 74b67a6d6af29fa111713950bef3def93f51b4a7
+  // const user = await storageService.post('user', userCred)
+  // const users = utilService.loadFromStorage('user')
+  // console.log(users)
+    const user = await httpService.post('auth/signup', userCred)
   //   socketService.login(user._id)
   return saveLocalUser(user)
 }

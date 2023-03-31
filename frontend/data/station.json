@@ -811,12 +811,8 @@
     ]
   },
   {
-<<<<<<< HEAD
-    "name": "Songs to Sing in the Shower",
-=======
     "_id": "224",
     "name": "Sing in the Shower",
->>>>>>> 74b67a6d6af29fa111713950bef3def93f51b4a7
     "tags": ["Mood"],
     "imgUrl": "https://i.scdn.co/image/ab67706f00000003329e2c5d3104f8c6a1d16a34",
     "createdBy": {
