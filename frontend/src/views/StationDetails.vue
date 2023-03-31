@@ -647,5 +647,8 @@ export default {
   beforeUnmount() {
     document.body.style.background = '#181818'
   },
+  mounted() {
+    window.scrollTo(0,0)
+  }
 }
 </script>

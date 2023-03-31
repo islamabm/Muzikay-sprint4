@@ -33,6 +33,16 @@ export const stationService = {
 }
 window.cs = stationService
 
+function _getUrl(id = '') {
+  const BASE_URL =
+    process.env.NODE_ENV !== 'development'
+      ? '/station/collection'
+      : '//localhost:3030/station/collection'
+
+  return `${BASE_URL}/${id}`
+}
+
+
 async function query() {
   return httpService.get('station')
   // var stations = await storageService.query(STORAGE_KEY)

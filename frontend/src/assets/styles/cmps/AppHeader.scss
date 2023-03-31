@@ -183,6 +183,9 @@
   .btn-login {
     margin-inline-end: 1rem;
   }
+ .header .login-signup{
+  margin-inline-end: -5px;;
+ }
 }
 @media screen and (min-width: $normal-breakpoint) {
   .btn-login {
@@ -250,4 +253,15 @@
 .header-search-icon {
   fill: currentcolor;
   display: block;
+}
+
+
+@media only screen and (max-width: $narrow-breakpoint) {
+  .header-search-container {
+    width: 100%;
+    transform: translate(-80px , 50px);
+  }
+  .header-search-icon{
+   transform:translate(-95px, -1px)
+  }
 }
