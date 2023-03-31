@@ -1,7 +1,7 @@
 <template>
   <footer class="main-footer">
     <div class="footer-media-player">
-      <MediaPlayer />
+      <MediaPlayer @songFromYoutube="handelSearchSong" />
     </div>
 
     <div v-if="station" class="footer-details">
@@ -37,6 +37,7 @@ import { eventBus } from '../services/event-bus.service.js'
 
 export default {
   name: 'AppFooter',
+  emits: ['songFromYoutube'],
   data() {
     return {
       // songIdx: 0,
@@ -48,33 +49,24 @@ export default {
     }
   },
   created() {
-    try {
     eventBus.on('song-details', (song) => {
-    if(song.id) this.song = song
-    if(song.videoId) this.song.id = song.videoId
-    console.log('this.song - footer',this.song);
-    var delay = song.delay || 2000
-    this.alive = true
-    setTimeout(() => {
-      this.alive = false
-    }, delay)
-  })
-} catch (error) {
-  console.error(error)
-}
-eventBus.on('youtube-song', (video) => {
-  try {
-    this.youtubeSong = video
-    console.log(this.youtubeSong)
-    var delay = video.delay || 2000
-    this.alive = true
-    setTimeout(() => {
-      this.alive = false
-    }, delay)
-  } catch (error) {
-    console.error(error)
-  }
-})
+      if(song.id) this.song = song
+      if(song.videoId) this.song.id = song.videoId
+      var delay = song.delay || 2000
+      this.alive = true
+      setTimeout(() => {
+        this.alive = false
+      }, delay)
+    })
+    eventBus.on('youtube-song', (video) => {
+      this.youtubeSong = video
+      console.log(this.youtubeSong)
+      var delay = video.delay || 2000
+      this.alive = true
+      setTimeout(() => {
+        this.alive = false
+      }, delay)
+    })
   },
   computed: {
     station() {
@@ -82,20 +74,19 @@ eventBus.on('youtube-song', (video) => {
     },
     currSong() {
       if (!this.station) return
-      if(!this.song.id) {
-        return this.youtubeSong
-      }
+      if(!this.song.id) return
       return this.station.songs.find((s) => s.id === this.song.id)
     },
     currSongIdx() {
       if (!this.station) return
-      if(!this.song.id) return
-
       return this.station.songs.findIndex((s) => s.id === this.song.id)
     },
   },
   methods: {
 
+    handelSearchSong(song) {
+      this.song = song
+    },
     getSvg(iconName) {
       return SVGService.getSpotifySvg(iconName)
     },

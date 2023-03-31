@@ -111,7 +111,6 @@ export default {
   props: {
     songIndex: {
       type: Number,
-      required: true,
     },
     liked: {
       type: Boolean,
