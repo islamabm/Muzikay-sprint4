@@ -34,7 +34,7 @@ export const stationService = {
 window.cs = stationService
 
 async function query() {
-  return httpService.get(STORAGE_KEY)
+  return httpService.get('station')
   // var stations = await storageService.query(STORAGE_KEY)
   // if (filterBy.name) {
   //   const regex = new RegExp(filterBy.name, 'i')
@@ -76,17 +76,17 @@ async function save(station) {
   //   savedStation = await storageService.post(STORAGE_KEY, station)
   // }
   // return savedStation
-  var savedstation
-  if (station._id) {
-    // savedstation = await storageService.put(STORAGE_KEY, station)
-    savedstation = await httpService.put(`station/${station._id}`, station)
-  } else {
-    // Later, owner is set by the backend
-    station.owner = userService.getLoggedinUser()
-    // savedstation = await storageService.post(STORAGE_KEY, station)
-    savedstation = await httpService.post('station', station)
-  }
-  return savedstation
+  // var savedstation
+  // if (station._id) {
+  // savedstation = await storageService.put(STORAGE_KEY, station)
+  return httpService.put(`station/${station._id}`, station)
+  // } else {
+  // Later, owner is set by the backend
+  // station.owner = userService.getLoggedinUser()
+  // savedstation = await storageService.post(STORAGE_KEY, station)
+  // savedstation = await httpService.post('station', station)
+  // }
+  // return savedstation
 }
 
 function getEmptyStation() {
@@ -95,14 +95,15 @@ function getEmptyStation() {
   }
 }
 
-function removeSong(songId, stationId) {
-  const stations = utilService.loadFromStorage(STORAGE_KEY)
-  const stationIdx = stations.findIndex((s) => s._id === stationId)
-  const station = stations[stationIdx]
-  const songIdx = station.songs.findIndex((so) => so.id === songId)
-  station.songs.splice(songIdx, 1)
-  stations[stationIdx] = station
-  utilService.saveToStorage(STORAGE_KEY, stations)
+function removeSong(stationId, songId) {
+  return httpService.delete(`station/${stationId}/song/${songId}`)
+  // const stations = utilService.loadFromStorage(STORAGE_KEY)
+  // const stationIdx = stations.findIndex((s) => s._id === stationId)
+  // const station = stations[stationIdx]
+  // const songIdx = station.songs.findIndex((so) => so.id === songId)
+  // station.songs.splice(songIdx, 1)
+  // stations[stationIdx] = station
+  // utilService.saveToStorage(STORAGE_KEY, stations)
 }
 
 function getVideos(keyword) {
@@ -146,7 +147,7 @@ function _createSearchStations() {
 function createNewStation(name) {
   const loggedinUser = userService.getLoggedinUser()
   const newStation = {
-    _id: utilService.makeId(),
+    imgUrl: '',
     name: name,
     tags: [],
     createdBy: {
@@ -166,23 +167,27 @@ function createNewStation(name) {
     desc: '',
   }
 
-  const stations = utilService.loadFromStorage(STORAGE_KEY)
-  console.log(stations)
-  stations.push(newStation)
-  localStorage.setItem('station', JSON.stringify(stations))
+  // if (toy._id) {
+  //   return httpService.put(`toy/${toy._id}`, toy)
+  // }
+  return httpService.post('station', newStation)
 
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(stations))
-  // loggedinUser.stations.push(newStation)
-  const users = utilService.loadFromStorage('user')
+  // const stations = utilService.loadFromStorage(STORAGE_KEY)
+  // console.log(stations)
+  // stations.push(newStation)
+  // localStorage.setItem('station', JSON.stringify(stations))
 
-  const currUserIdx = users.findIndex((u) => u._id === loggedinUser._id)
+  // localStorage.setItem(STORAGE_KEY, JSON.stringify(stations))
 
-  users[currUserIdx].stations.push(newStation)
-  // users.push(currUser)
+  // const users = utilService.loadFromStorage('user')
 
-  localStorage.setItem('user', JSON.stringify(users))
+  // const currUserIdx = users.findIndex((u) => u._id === loggedinUser._id)
 
-  return newStation
+  // users[currUserIdx].stations.push(newStation)
+
+  // localStorage.setItem('user', JSON.stringify(users))
+
+  // return newStation
 }
 
 async function addUserToSong(song, station, loggedinUser) {
@@ -211,13 +216,14 @@ async function addUserToSong(song, station, loggedinUser) {
   return { updatedSong, savedStation }
 }
 
-async function addSongToStation(video, station) {
-  if (!station) {
-    throw new Error('Station parameter is undefined')
-  }
-  const updatedStation = { ...station, songs: [...station.songs, video] }
-  const savedStation = await save(updatedStation)
-  return savedStation
+async function addSongToStation(stationId, song) {
+  return httpService.post(`station/${stationId}/song`, { song })
+  // if (!station) {
+  //   throw new Error('Station parameter is undefined')
+  // }
+  // const updatedStation = { ...station, songs: [...station.songs, video] }
+  // const savedStation = await save(updatedStation)
+  // return savedStation
 }
 
 async function addSongToUserStation(song, station) {

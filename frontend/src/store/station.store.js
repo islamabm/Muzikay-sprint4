@@ -22,7 +22,6 @@ export const stationStore = {
   },
   getters: {
     getSongsLikedByUser(state) {
-      // Assuming loggedInUser is the ID of the user who is currently logged in
       return state.stations.songs.filter((song) =>
         song.likedByUsers.includes(userService.getLoggedinUser().fullname)
       )
@@ -81,14 +80,14 @@ export const stationStore = {
       state.searchStations = stations
     },
     setCurrStation(state, { stationId }) {
-      console.log(stationId)
       state.currStationId = stationId
-      console.log(state.currStationId)
     },
     setCurrUserStation(state, { stationId }) {
       state.currUserStationId = stationId
     },
-    removeSong(state, { songId, stationId }) {
+    removeSong(state, { stationId, songId }) {
+      console.log('remove song from mutation', songId)
+      console.log('remove song from mutation', stationId)
       const station = state.stations.find((s) => s._id === stationId)
       station.songs = station.songs.filter((st) => st.id !== songId)
       // state.stations = state.stations.filter((st) => st._id !== stationId)
@@ -127,13 +126,20 @@ export const stationStore = {
       const idx = state.userStations.findIndex((c) => c._id === station._id)
       state.userStations.splice(idx, 1, station)
     },
-    removeStation(state, { stationId }) {
-      state.stations = state.stations.filter((st) => st._id !== stationId)
-      this.$router.push('/')
+    removeStation(state, { id }) {
+      console.log('mutation', id)
+      state.stations = state.stations.filter((st) => st._id !== id)
     },
     createStation(state, { station }) {
       state.userStations.push(station)
       state.stations.push(station)
+    },
+    addSong(state, { stationId, newSong }) {
+      const station = state.stations.find(
+        (station) => station._id === stationId
+      )
+      if (!station.songs) station.songs = []
+      station.songs.push(newSong)
     },
   },
   actions: {
@@ -178,14 +184,11 @@ export const stationStore = {
       console.log('stationId', stationId)
       try {
         console.log('stationId', stationId)
-        await stationService.remove(stationId)
-        commit({ type: 'removeStation', stationId })
-        this.$router.push(`/`)
+        const id = await stationService.remove(stationId)
+        commit({ type: 'removeStation', id })
       } catch (err) {
         console.log('stationStore: Error in ', err)
         throw err
-      } finally {
-        this.$router.push('/')
       }
     },
 
@@ -195,6 +198,16 @@ export const stationStore = {
         commit({ type: 'editStation', station: savedStation })
       } catch (err) {
         console.error('Cannot edit station', err)
+        throw err
+      }
+    },
+    async setcurrStation({ commit }, { stationId }) {
+      try {
+        const id = await stationService.getById(stationId)
+        console.log(id)
+        commit({ type: 'setCurrStation', stationId })
+      } catch (err) {
+        console.log('Could Not create station')
         throw err
       }
     },
@@ -209,10 +222,12 @@ export const stationStore = {
         throw err
       }
     },
-    async removeSong({ commit }, { songId, stationId }) {
+    async removeSong({ commit }, { stationId, songId }) {
+      console.log('songid', songId)
+      console.log('stationid', stationId)
       try {
-        await stationService.removeSong(songId, stationId)
-        commit({ type: 'removeSong', songId, stationId })
+        await stationService.removeSong(stationId, songId)
+        commit({ type: 'removeSong', stationId, songId })
       } catch (err) {
         console.log('Could Not delete song')
         throw err
@@ -234,15 +249,14 @@ export const stationStore = {
         throw err
       }
     },
-    async addToStation({ commit }, { song, station }) {
+
+    async addToStation({ commit }, { song, stationId }) {
       console.log('song in store', song)
-      console.log('station i nstore', station)
+      console.log('station i nstore', stationId)
       try {
-        const updatedStation = await stationService.addSongToStation(
-          song,
-          station
-        )
-        commit({ type: 'editStation', station: updatedStation })
+        const newSong = await stationService.addSongToStation(stationId, song)
+        console.log('newSong in store', newSong)
+        commit({ type: 'addSong', stationId, newSong })
       } catch (err) {
         console.error('Cannot add song', err)
         throw err

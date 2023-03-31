@@ -1,6 +1,5 @@
 [
   {
-    "_id": "100",
     "name": "Funky Monks",
     "tags": ["Funk"],
     "description": "Get ready to groove with the funkiest beats from Funky Monks!",
@@ -80,7 +79,6 @@
   },
 
   {
-    "_id": "101",
     "name": "Metallica",
     "tags": ["Funk"],
     "description": "Discover the best of Funk music with Funky Monks and its soulful melodies.",
@@ -181,7 +179,6 @@
     ]
   },
   {
-    "_id": "102",
     "name": "Funky Monks",
     "tags": ["Funk"],
     "description": "Immerse yourself in the world of Funk music and let Funky Monks be your guide.",
@@ -281,7 +278,6 @@
   },
 
   {
-    "_id": "103",
     "name": "Funky Monks",
     "tags": ["Funk"],
     "description": "From The Meters to The JBs, Funky Monks has the perfect playlist for your Funk cravings.",
@@ -380,7 +376,6 @@
   },
 
   {
-    "_id": "104",
     "name": "Funky Monks",
     "tags": ["Funk"],
     "imgUrl": "https://i.pinimg.com/236x/8a/a0/48/8aa048477da77f7e93f426df72ac583a--rap-album-covers-ego-tripping.jpg",
@@ -479,7 +474,6 @@
   },
 
   {
-    "_id": "105",
     "name": "Dark Side of the Moon",
     "tags": ["Happy"],
     "description": "Get ready to feel happy and uplifted with these catchy tunes that will have you humming along all day long!",
@@ -578,7 +572,6 @@
   },
 
   {
-    "_id": "106",
     "name": "November Rain",
     "fullname": "system",
     "tags": ["Happy"],
@@ -621,7 +614,6 @@
   },
 
   {
-    "_id": "107",
     "name": "Funky Monks",
     "imgUrl": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f5075e19-2528-49f4-a6d9-7ba8b12df1e9/d5t1yhf-8ab7aa98-7917-4a1e-8956-4fc4c54de41e.jpg/v1/fill/w_1024,h_1024,q_75,strp/led_zeppelin_acrylic_painting_by_minorr_d5t1yhf-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2Y1MDc1ZTE5LTI1MjgtNDlmNC1hNmQ5LTdiYThiMTJkZjFlOVwvZDV0MXloZi04YWI3YWE5OC03OTE3LTRhMWUtODk1Ni00ZmM0YzU0ZGU0MWUuanBnIiwiaGVpZ2h0IjoiPD0xMDI0Iiwid2lkdGgiOiI8PTEwMjQifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uud2F0ZXJtYXJrIl0sIndtayI6eyJwYXRoIjoiXC93bVwvZjUwNzVlMTktMjUyOC00OWY0LWE2ZDktN2JhOGIxMmRmMWU5XC9taW5vcnItNC5wbmciLCJvcGFjaXR5Ijo5NSwicHJvcG9ydGlvbnMiOjAuNDUsImdyYXZpdHkiOiJjZW50ZXIifX0.wSNshtMKaQktJogwVhhnyhEKlrPt69HQ1Y3krRw0HJ8",
     "tags": ["Happy"],
@@ -663,7 +655,6 @@
   },
 
   {
-    "_id": "108",
     "name": "Funky Monks",
     "tags": ["Happy"],
     "description": "Filled with positive vibes and infectious melodies, these happy songs are perfect for any occasion.",
@@ -780,7 +771,6 @@
     ]
   },
   {
-    "_id": "110",
     "name": "Funky Monks",
     "tags": ["Happy"],
     "imgUrl": "https://img.freepik.com/premium-vector/rock-roll-music-seamless-pattern-background_688722-124.jpg?w=2000",
@@ -821,7 +811,6 @@
     ]
   },
   {
-    "_id": "224",
     "name": "Songs to Sing in the Shower",
     "tags": ["Mood"],
     "imgUrl": "https://i.scdn.co/image/ab67706f00000003329e2c5d3104f8c6a1d16a34",
@@ -1636,21 +1625,18 @@
     ]
   },
   {
-    "_id": "likeduser123",
     "name": "Liked songs",
     "fullname": "system",
     "imgUrl": "https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png",
     "tags": ["Happy"],
     "description": "From upbeat pop to cheerful indie, these happy songs are guaranteed to put a smile on your face.",
     "createdBy": {
-      "_id": "u101",
+      "_id": "likeduser123",
       "fullname": "Puki Ben David",
       "imgUrl": "http://some-photo/"
     },
     "likedByUsers": [],
-    "songs": [
-  
-    ],
+    "songs": [],
     "msgs": [
       {
         "id": "m101",

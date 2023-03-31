@@ -25,7 +25,8 @@ export default {
   },
   methods: {
     setStation(stationId) {
-      this.$store.commit({ type: 'setCurrStation', stationId })
+      this.$store.dispatch({ type: 'setcurrStation', stationId })
+      // this.$store.commit({ type: 'setCurrStation', stationId })
       this.$router.push(`/station/${stationId}`)
     },
   },

@@ -8,11 +8,7 @@
             station.songs.length > 0 &&
             station._id !== 'likeduser123'
           "
-          :src="
-            station.imgUrl
-              ? station.imgUrl
-              : station.songs[0].imgUrl
-          "
+          :src="station.imgUrl ? station.imgUrl : station.songs[0].imgUrl"
           @click="toggleModal"
         />
 
@@ -147,7 +143,7 @@
         </Draggable>
       </Container>
 
-      <Container @drop="onDrop" v-if="station._id === 'likeduser123'">
+      <Container @drop="onDrop" v-if="station.createdBy._id === 'likeduser123'">
         <Draggable
           class="song-item"
           v-for="(song, idx) in likedSongsUser"
@@ -210,7 +206,7 @@
                 <li
                   v-for="station in userStations"
                   :key="station._id"
-                  @click="addToSelectedStation(selectedSong, station)"
+                  @click="addToSelectedStation(station._id, selectedSong)"
                 >
                   {{ station.name }}
                 </li>
@@ -262,25 +258,6 @@
       </div>
     </div>
   </section>
-  <!-- <section v-if="showAddSongModal" class="delete-modal-backdrop">
-    <div class="delete-modal">
-      <h1>Delete from Library?</h1>
-      <p>
-        This will delete <span>{{ stationDeleteMsg }} </span> from Your Library.
-      </p>
-      <div class="delete-modla-btns">
-        <button
-          class="delete-modal-cancle-btn"
-          @click="addToSelectedStation(selectedSong, this.station)"
-        >
-          Add anyway
-        </button>
-        <button class="delete-modal-delete-btn" @click="cancle">
-          Dont add
-        </button>
-      </div>
-    </div>
-  </section> -->
 </template>
 
 <script>
@@ -474,15 +451,15 @@ export default {
       }
       return result
     },
-    async removeSong(songId) {
+    async removeSong(song) {
       this.showSongModal = false
-      console.log('station details function remove song', songId)
+      console.log('station details function remove song', song)
       console.log('station details function remove song', this.station._id)
       try {
         await this.$store.dispatch({
           type: 'removeSong',
-          songId,
           stationId: this.station._id,
+          songId: song.id,
         })
         showSuccessMsg('Song removed')
       } catch (err) {
@@ -518,14 +495,14 @@ export default {
     //     this.showSongModal = false
     //   }
     // },
-    async addToSelectedStation(song, station) {
+    async addToSelectedStation(stationId, song) {
       console.log('we are in the details in the add song', song)
-      console.log('we are in the details in the add song station', station)
+      console.log('we are in the details in the add song station', stationId)
       try {
         await this.$store.dispatch({
           type: 'addToStation',
+          stationId,
           song,
-          station,
         })
         showSuccessMsg('Added to playlist')
       } catch (err) {
@@ -577,15 +554,18 @@ export default {
       async handler() {
         const { stationId } = this.$route.params
         try {
+          if (!stationId) return
+          // this.$store.commit({ type: 'setCurrStation', stationId })
           this.station = await stationService.getById(stationId)
+          if (!this.station) return
           // this.station = await this.$store.getters.stationById(stationId)
           // console.log(this.station)
           // maybe remove after && after 11pm we dont delete anything
-                  this.getDominantColor(
-              this.station.imgUrl
-                ? this.station.imgUrl
-                : this.station.songs[0].imgUrl
-            )
+          this.getDominantColor(
+            this.station.imgUrl
+              ? this.station.imgUrl
+              : this.station.songs[0].imgUrl
+          )
         } catch (err) {
           console.log(err)
         }

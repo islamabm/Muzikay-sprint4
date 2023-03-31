@@ -71,6 +71,7 @@ export default {
       return this.$store.getters.station
     },
     currSong() {
+      if (!this.station) return
       return this.station.songs.find((s) => s.id === this.song.id)
     },
     currSongIdx() {
