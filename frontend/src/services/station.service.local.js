@@ -42,10 +42,6 @@ function _getUrl(id = '') {
   return `${BASE_URL}/${id}`
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> ce5dce4ca34a3038ca53c5cc57b5eaf0d56caf0e
 async function query() {
   return httpService.get('station')
   // var stations = await storageService.query(STORAGE_KEY)
