@@ -130,7 +130,7 @@ export default {
             const videos = await stationService.getVideos(this.song.title)
             console.log('before hazarzer console', videos)
             this.song = videos[0]
-            this.$emit('songFromYoutube',this.song)
+            // this.$emit('songFromYoutube',this.song)
             console.log('from tal data itay console ', this.song)
           } catch (error) {
             console.error(error)

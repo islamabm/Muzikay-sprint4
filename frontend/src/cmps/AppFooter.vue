@@ -1,7 +1,7 @@
 <template>
   <footer class="main-footer">
     <div class="footer-media-player">
-      <MediaPlayer @songFromYoutube="handelSearchSong" />
+      <MediaPlayer />
     </div>
 
     <div v-if="station" class="footer-details">
@@ -50,8 +50,8 @@ export default {
   },
   created() {
     eventBus.on('song-details', (song) => {
-      if(song.id) this.song = song
-      if(song.videoId) this.song.id = song.videoId
+      if (song.id) this.song = song
+      if (song.videoId) this.song.id = song.videoId
       var delay = song.delay || 2000
       this.alive = true
       setTimeout(() => {
@@ -74,7 +74,7 @@ export default {
     },
     currSong() {
       if (!this.station) return
-      if(!this.song.id) return
+      if (!this.song.id) return
       return this.station.songs.find((s) => s.id === this.song.id)
     },
     currSongIdx() {
@@ -83,17 +83,16 @@ export default {
     },
   },
   methods: {
-
-    handelSearchSong(song) {
-      this.song = song
-    },
+    // handelSearchSong(song) {
+    //   this.song = song
+    // },
     getSvg(iconName) {
       return SVGService.getSpotifySvg(iconName)
     },
     // Add functionality
     toggleSongLike(idx) {
       // const song = this.station.songs[idx]
-      console.log(song)
+
       console.log('liked')
       // song.liked = !song.liked
       // console.log(

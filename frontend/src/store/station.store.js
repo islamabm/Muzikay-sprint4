@@ -66,9 +66,7 @@ export const stationStore = {
     setStations(state, { stations }) {
       state.stations = stations
     },
-    updateSongOrder(state, { stationIndex, songs }) {
-      state.stations[stationIndex].songs = songs
-    },
+
     setAllStations(state, { stations }) {
       state.allStations = stations
     },
