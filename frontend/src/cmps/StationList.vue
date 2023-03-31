@@ -31,7 +31,6 @@ export default {
           }
           acc[tag].push(station)
         })
-        console.log("Categorized stations:", acc);
         return acc
       }, {})
     },
@@ -39,8 +38,8 @@ export default {
   components: {
     StationPreview,
   },
-  mounted() {
-    console.log("Stations:", this.stations);
-  },
+  // mounted() {
+  //   console.log("Stations:", this.stations);
+  // },
 }
 </script>
