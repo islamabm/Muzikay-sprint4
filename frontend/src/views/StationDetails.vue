@@ -277,6 +277,11 @@ import {
 import MiniSearch from '../cmps/MiniSearch.vue'
 import BubblingHeart from '../cmps/BubblingHeart.vue'
 export default {
+  props: {
+    stationId: {
+      type: String,
+    },
+  },
   name: 'station-details',
   emits: ['toggleHeaderLike'],
   data() {
@@ -645,8 +650,5 @@ export default {
   beforeUnmount() {
     document.body.style.background = '#181818'
   },
-  mounted() {
-    window.scrollTo(0,0)
-  }
 }
 </script>
