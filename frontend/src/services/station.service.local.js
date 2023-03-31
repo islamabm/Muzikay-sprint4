@@ -104,6 +104,7 @@ function getEmptyStation() {
   }
 }
 
+//Step3
 function removeSong(stationId, songId) {
   return httpService.delete(`station/${stationId}/song/${songId}`)
   // const stations = utilService.loadFromStorage(STORAGE_KEY)

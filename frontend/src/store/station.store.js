@@ -81,6 +81,7 @@ export const stationStore = {
     setCurrUserStation(state, { stationId }) {
       state.currUserStationId = stationId
     },
+    //Step 8
     removeSong(state, { stationId, removedId }) {
       console.log('remove song from mutation', stationId)
       const station = state.stations.find((s) => s._id === stationId)
@@ -220,10 +221,12 @@ export const stationStore = {
         throw err
       }
     },
+    //Step 2
     async removeSong({ commit }, { stationId, songId }) {
       console.log('songid', songId)
       console.log('stationid', stationId)
       try {
+        //from the backend
         const removedId = await stationService.removeSong(stationId, songId)
         commit({ type: 'removeSong', stationId, removedId })
       } catch (err) {

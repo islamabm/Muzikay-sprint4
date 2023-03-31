@@ -19,7 +19,7 @@ import AppFooter from '../cmps/AppFooter.vue'
 import MobileNav from '../cmps/MobileNav.vue'
 
 export default {
-  name: '',
+  name: 'StationIndex',
   props: [],
   created() {
     this.$store.dispatch({ type: 'loadStations' })

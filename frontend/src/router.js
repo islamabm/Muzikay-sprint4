@@ -70,6 +70,7 @@ const routes = [
         path: '/station/:stationId',
         name: 'station-details',
         component: StationDetails,
+        props: true 
       },
     ],
   },
