@@ -120,18 +120,12 @@ export default {
   },
   created() {
     eventBus.on('song-details', (song) => {
-      console.log('in the media player in the creates', song)
-      this.song = song
+      this.song = song 
       if (!this.song.id && !this.song.videoId) {
-        console.log('inside tal data')
         setTimeout(async () => {
           try {
-            console.log(this.song.title)
             const videos = await stationService.getVideos(this.song.title)
-            console.log('before hazarzer console', videos)
             this.song = videos[0]
-            this.$emit('songFromYoutube',this.song)
-            console.log('from tal data itay console ', this.song)
           } catch (error) {
             console.error(error)
           }
@@ -159,9 +153,9 @@ export default {
     putSongName() {
       if (this.song) {
         if (this.song.id) {
-          // situation when we have a song from YouTube on our list-considered as a song
           return this.song.id
         }
+        // situation when we have a song from YouTube on our list-considered as a song
         return this.song.videoId
       }
       if (this.youtubeSong) {
@@ -178,11 +172,8 @@ export default {
         } else {
           return this.station.songs[this.songIdx].id
         }
-      } else {
-        // console.log('mamash else')
-        // if repeat is off, play the default song
-        return 'IXdNnw99-Ic'
-      }
+      } else return 'IXdNnw99-Ic'
+      
     },
     toggleSvgIcone() {
       let icon
@@ -198,11 +189,11 @@ export default {
     },
   },
   methods: {
-    async add() {
-      const videos = await stationService.getVideos(this.song.title)
-      console.log('hi from get videos', videos)
-      this.video = videos[0]
-    },
+    // async add() {
+    //   const videos = await stationService.getVideos(this.song.title)
+    //   console.log('hi from get videos', videos)
+    //   this.video = videos[0]
+    // },
 
     toggleMute() {
       if (this.volume > 0) this.volume = 0
@@ -245,25 +236,12 @@ export default {
     },
     // the function gets direction 1/-1 and switches the song by it
     switchSong(num) {
-      console.log('this.songIdx', this.songIdx)
       this.songIdx += num
-      console.log('this.songIdx', this.songIdx)
-      // if (this.songIdx > this.station.songs.length) {
-      //   console.log(songIdx)
-      //   this.songIdx = 0
-      //   console.log('this.songIdx expected 0', this.songIdx) // not works good
-      // } else if (this.songIdx < 0) {
-      //   this.songIdx = this.station.songs.length - 1
-      //   console.log('this.songIdx expected length', this.songIdx) // workes good
-      // } else
-      // console.log('this.songIdx expected 1', this.songIdx)
-
       this.duration = this.$refs.youtube.getDuration()
       this.formatTime(this.duration)
     },
     // when the video is ready
     onReady() {
-      // console.log('im ready');
       this.duration = this.$refs.youtube.getDuration()
       this.intervalId = setInterval(() => {
         this.currentTime = this.$refs.youtube.getCurrentTime()
@@ -272,23 +250,22 @@ export default {
     // when something happens- Video has ended/Video 1=> is playing 2=> pause 0=> finished 3=> when passing forward or switching a song
     // supposed to be a switch case
     onStateChange(event) {
+      console.log('event',event);
       if (event.data === 1) {
-        // this.isPlaying = true
-        this.intervalId = setInterval(() => {
-          this.currentTime = this.$refs.youtube.getCurrentTime()
-        }, 1000)
+        this.isPlaying = false
+        this.playAudio()
       }
       if (event.data === 2) clearInterval(this.intervalId)
       if (event.data === 0) {
-        this.isPlaying = true
-        this.songIdx++
-        clearInterval(this.intervalId)
+        // this.isPlaying = true
+        this.switchSong(1)
       }
       if (event.data === 3) {
-        this.isPlaying = true
+        this.isPlaying = false
         this.currentTime = 0
-        this.duration = this.$refs.youtube.getDuration()
-        this.formatTime(this.duration)
+        this.playAudio()
+        this.switchSong(1)
+        this.playAudio()
       }
     },
     // play/pause video
@@ -296,9 +273,13 @@ export default {
       this.isPlaying = !this.isPlaying
       if (this.isPlaying) {
         this.$refs.youtube.playVideo()
+        this.intervalId = setInterval(() => {
+          this.currentTime = this.$refs.youtube.getCurrentTime()
+        }, 1000)
         player.setVolume(this.speakerLevel) // Set the volume when starting to play
       } else {
         this.$refs.youtube.pauseVideo()
+        clearInterval(this.intervalId)
       }
     },
     changeSound(songIdx) {
