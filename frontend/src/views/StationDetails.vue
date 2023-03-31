@@ -318,6 +318,7 @@ export default {
       eventBus.emit('youtube-song', video)
     },
     songDetails(song) {
+      console.log('details event bus', song)
       eventBus.emit('song-details', song)
     },
     dontAddSong() {

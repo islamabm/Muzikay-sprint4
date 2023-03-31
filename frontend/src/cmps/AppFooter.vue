@@ -4,13 +4,10 @@
       <MediaPlayer />
     </div>
     <div v-if="station" class="footer-details">
-      <img
-        class="footer-details-img"
-        :src="currSong.imgUrl ? currSong.imgUrl : youtubeSong.url"
-      />
+      <img class="footer-details-img" :src="url" />
 
       <h3 class="footer-details-title">
-        {{ currSong.title ? currSong.title : youtubeSong.title }}
+        {{ song.title ? song.title : youtubeSong.title }}
       </h3>
       <button class="footer-like">
         <BubblingHeart
@@ -45,13 +42,15 @@ export default {
   created() {
     eventBus.on('song-details', (song) => {
       if (song.id) return (this.song = song)
-      if (song.videoId) return (this.song.id = song.videoId)
+      if (song.videoId) return (this.song = song)
       var delay = song.delay || 2000
       setTimeout(async () => {
         try {
           const videos = await stationService.getVideos(song.title)
+          // console.log('itay maniak gadol', this.youtubeSong.url)
           console.log('videos', videos)
           this.youtubeSong = videos[0]
+          this.url = this.youtubeSong.url
           this.alive = true
         } catch (err) {
           console.error(err)
@@ -74,9 +73,18 @@ export default {
     station() {
       return this.$store.getters.station
     },
+    url() {
+      console.log('in the url')
+      if (!this.station) return
+      console.log('imgUrl', this.song.imgUrl)
+      if (this.song.imgUrl) return this.song.imgUrl
+      console.log('url', this.youtubeSong.url)
+      if (this.youtubeSong.url) return this.youtubeSong.url
+    },
     currSong() {
       if (!this.station) return
-      if (!this.song.id) return
+      if (!this.song.id && this.song.videoId) return this.song.videoId
+      if (!this.song.id && !this.song.videoId) return
       return this.station.songs.find((s) => s.id === this.song.id)
     },
     currSongIdx() {
