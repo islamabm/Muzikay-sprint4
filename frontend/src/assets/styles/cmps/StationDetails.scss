@@ -325,10 +325,18 @@
   background-color: $clr5; // change to a desired color for the scrollbar handle hover state
 }
 
+@media (max-width: 414px) {
+  .station-details {
+    max-height: 736px;
+    width:414px;
+    padding: 0;
+  }
+}
 
 //MOBILE song list
 @media (max-width: $narrow-breakpoint) {
   .songs-list-details {
+
     .song-item {
       padding: 2px;
 
