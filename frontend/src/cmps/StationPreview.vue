@@ -27,8 +27,8 @@ export default {
     async setStation(stationId) {
       await this.$store.dispatch({ type: 'setcurrStation', stationId })
 
-      // this.$store.commit({ type: 'setCurrStation', stationId })
       this.$router.push(`/station/${stationId}`)
+      // this.$store.commit({ type: 'setCurrStation', stationId })
     },
   },
 }

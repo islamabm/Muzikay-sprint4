@@ -24,17 +24,18 @@
   <Container @drop="onDrop" v-if="search" class="search-results">
     <Draggable
       class="add-songs-container song-item"
-      v-for="(video, idx) in videos"
+      v-for="(song, idx) in songs"
       :key="idx"
     >
-      <div class="mini-search-preview" @click="songDetails(video)">
-        <img class="song-img" :src="video.url" />
+      <div class="mini-search-preview" @click="songDetails(song)">
+        <img class="song-img" :src="song.url" />
 
-        <p class="search-song-title">{{ video.title }}</p>
-        <p class="posted-at">{{ getTimeAgo(video.createdAt) }}</p>
-
+        <p class="search-song-title">{{ song.title }}</p>
+        <p class="posted-at">{{ getTimeAgo(song.createdAt) }}</p>
       </div>
-      <button class="add-btn-song" @click="addToStation(video)">Add</button>
+      <button class="add-btn-song" @click="addVideo(station._id, song)">
+        Add
+      </button>
     </Draggable>
   </Container>
 </template>
@@ -49,21 +50,20 @@ export default {
   name: '',
   props: [],
   emits: ['handelYoutubeSong'],
-  created() {
-  },
+  created() {},
   data() {
     return {
-      videos: [],
+      songs: [],
       search: 'love',
     }
   },
   methods: {
-    songDetails(video) {
-      this.$emit('handelYoutubeSong', video)
+    songDetails(song) {
+      this.$emit('handelYoutubeSong', song)
     },
 
     onDrop(dropResult) {
-      this.videos = this.applyDrag(this.videos, dropResult)
+      this.songs = this.applyDrag(this.songs, dropResult)
     },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult
@@ -85,18 +85,14 @@ export default {
     },
     async add() {
       // this function makes a mess Tal help!
-      this.videos = await stationService.getVideos(this.search)
+      this.songs = await stationService.getVideos(this.search)
     },
-    async addToStation(video) {
-      console.log('add to song from api minisearch', video)
+    async addVideo(stationId, song) {
       try {
-        const { stationId } = this.$route.params
-        const station = this.stations.find((s) => s._id === stationId)
-
         await this.$store.dispatch({
-          type: 'addSong',
-          video,
-          station,
+          type: 'addToStation',
+          stationId,
+          song,
         })
         showSuccessMsg('Song added')
       } catch (err) {
@@ -104,31 +100,31 @@ export default {
       }
     },
     getTimeAgo(idx) {
-    const date = new Date(idx);
-    const timeDiff = Date.now() - date.getTime();
-    // the consts are defind according to milliseconds  
-    const second = 1000;
-    const minute = second * 60;
-    const hour = minute * 60;
-    const day = hour * 24;
-    const month = day * 30;
-    const year = day * 365;
+      const date = new Date(idx)
+      const timeDiff = Date.now() - date.getTime()
+      // the consts are defind according to milliseconds
+      const second = 1000
+      const minute = second * 60
+      const hour = minute * 60
+      const day = hour * 24
+      const month = day * 30
+      const year = day * 365
 
-  if (timeDiff < second) {
-    return 'just now';
-  } else if (timeDiff < minute) {
-    return Math.floor(timeDiff / second) + ' seconds ago';
-  } else if (timeDiff < hour) {
-    return Math.floor(timeDiff / minute) + ' minutes ago';
-  } else if (timeDiff < day) {
-    return Math.floor(timeDiff / hour) + ' hours ago';
-  } else if (timeDiff < month) {
-    return Math.floor(timeDiff / day) + ' days ago';
-  } else if (timeDiff < year) {
-    return Math.floor(timeDiff / month) + ' months ago';
-  } else {
-    return Math.floor(timeDiff / year) + ' years ago';
-  }
+      if (timeDiff < second) {
+        return 'just now'
+      } else if (timeDiff < minute) {
+        return Math.floor(timeDiff / second) + ' seconds ago'
+      } else if (timeDiff < hour) {
+        return Math.floor(timeDiff / minute) + ' minutes ago'
+      } else if (timeDiff < day) {
+        return Math.floor(timeDiff / hour) + ' hours ago'
+      } else if (timeDiff < month) {
+        return Math.floor(timeDiff / day) + ' days ago'
+      } else if (timeDiff < year) {
+        return Math.floor(timeDiff / month) + ' months ago'
+      } else {
+        return Math.floor(timeDiff / year) + ' years ago'
+      }
     },
   },
   computed: {
@@ -136,10 +132,10 @@ export default {
       return this.$store.getters.stations
     },
     station() {
-      this.$store.getters.station
+      return this.$store.getters.station
     },
-    
   },
+
   components: {
     SVGService,
     Container,

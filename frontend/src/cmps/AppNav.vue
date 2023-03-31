@@ -182,9 +182,12 @@ export default {
         console.log('err')
       }
     },
-    showLikedSongs() {
+    async showLikedSongs() {
+      console.log('hi')
+      console.log(this.$store.getters.getSongsLikedByUser)
       const stationId = 'likeduser123'
-      this.$store.commit({ type: 'setCurrStation', stationId })
+      await this.$store.dispatch({ type: 'setcurrStation', stationId })
+      // this.$store.commit({ type: 'setCurrStation', stationId })
       this.$router.push(`/station/${stationId}`)
       // this.$store.dispatch({
       //         type: 'createStation',
