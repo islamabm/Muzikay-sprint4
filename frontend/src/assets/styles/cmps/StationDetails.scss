@@ -287,7 +287,7 @@
       position: absolute;
       // height: 100px;
       max-height: 200px;
-      overflow: scroll;
+      overflow-y: scroll;
       z-index: 30;
       top: 0;
       right: 100%;
@@ -310,6 +310,21 @@
     }
   }
 }
+
+.stations-sub-menu::-webkit-scrollbar {
+  width: 8px;
+  background-color: $clr10; // change to a desired color for the scrollbar track
+}
+
+.stations-sub-menu::-webkit-scrollbar-thumb {
+  background-color: $clr6; // change to a desired color for the scrollbar handle
+  border-radius: 4px;
+}
+
+.stations-sub-menu::-webkit-scrollbar-thumb:hover {
+  background-color: $clr5; // change to a desired color for the scrollbar handle hover state
+}
+
 
 //MOBILE song list
 @media (max-width: $narrow-breakpoint) {
