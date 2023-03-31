@@ -73,6 +73,7 @@ async function login(userCred) {
 async function signup(userCred) {
   // console.log('service', userCred)
   //   userCred.score = 10000
+<<<<<<< HEAD
     if (!userCred.imgUrl)
       userCred.imgUrl =
         'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
@@ -80,6 +81,15 @@ async function signup(userCred) {
   // const users = utilService.loadFromStorage('user')
   // console.log(users)
     const user = await httpService.post('auth/signup', userCred)
+=======
+  if (!userCred.imgUrl)
+    userCred.imgUrl =
+      'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
+  // const user = await storageService.post('user', userCred)
+  // const users = utilService.loadFromStorage('user')
+  // console.log(users)
+  const user = await httpService.post('auth/signup', userCred)
+>>>>>>> da9c2dfd1752ba4004aa85d2a941c6a24f20918b
   //   socketService.login(user._id)
   return saveLocalUser(user)
 }
@@ -102,7 +112,8 @@ function saveLocalUser(user) {
     _id: user._id,
     fullname: user.fullname,
     stations: [],
-    imgUrl: 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg',
+    imgUrl:
+      'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg',
   }
   sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
   return user

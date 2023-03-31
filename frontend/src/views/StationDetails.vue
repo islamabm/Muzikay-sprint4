@@ -58,7 +58,7 @@
       </div>
     </section>
 
-    <section ref="bottomHalf">
+    <section v-if="station" ref="bottomHalf">
       <div class="station-controls">
         <div
           v-if="station.songs.length"
@@ -644,6 +644,9 @@ export default {
     Draggable,
     BubblingHeart,
   },
+  // mounted() {
+  //   window.scrollTo(0, 0)
+  // },
   beforeUnmount() {
     document.body.style.background = '#181818'
   },
