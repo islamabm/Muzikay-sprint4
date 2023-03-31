@@ -299,6 +299,7 @@ export default {
       wantAnyWay: false,
       clickedHeartIndex: null,
       currImgSvg: 'defaultImgIcon',
+      colorCache: {},
     }
   },
   methods: {
@@ -416,16 +417,21 @@ export default {
       }
     },
     async getDominantColor(imageSrc) {
+      const cachedColor = this.colorCache[imageSrc]
+      if (cachedColor) {
+        this.updateBodyBackgroundColor(cachedColor)
+        return
+      }
+
       const fac = new FastAverageColor()
       const img = new Image()
       img.crossOrigin = 'Anonymous'
       const corsProxyUrl = 'https://api.codetabs.com/v1/proxy?quest='
       img.src = corsProxyUrl + encodeURIComponent(imageSrc)
       img.onload = async () => {
-        // console.log('Image loaded')
         try {
           const color = await fac.getColorAsync(img)
-          // console.log('inside try', color)
+          this.colorCache[imageSrc] = color
           this.updateBodyBackgroundColor(color)
         } catch (e) {
           console.error(e)

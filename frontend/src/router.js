@@ -9,6 +9,7 @@ import Login from './views/Login.vue'
 import LoginSignup from './views/LoginSignup.vue'
 import StationDetails from './views/StationDetails.vue'
 import StationCollection from './views/StationCollection.vue'
+import UserDetails from './views/UserDetails.vue'
 // import Modal from '../src/cmps/Modal.vue'
 
 const routes = [
@@ -26,6 +27,7 @@ const routes = [
     name: 'login',
     component: Login,
   },
+
   {
     path: '/station',
     name: 'Home',
@@ -33,10 +35,11 @@ const routes = [
 
     children: [
       {
-        path: '/station/collection',
-        name: 'collection',
+        path: '/station/collection/:category?',
         component: StationCollection,
       },
+   
+      
       // {
       //   path: '/station/modal',
       //   name: 'modal',
@@ -52,6 +55,12 @@ const routes = [
         name: 'Library',
         component: UserLibrary,
       },
+  
+      {
+        path: '/user/:id',
+        name: 'UserDetails',
+        component: UserDetails,
+      },  
       // {
       //   path: '/station/like',
       //   name: 'like',

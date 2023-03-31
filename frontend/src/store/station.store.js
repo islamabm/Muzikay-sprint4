@@ -3,14 +3,6 @@ import { stationService } from '../services/station.service.local.js'
 import { storageService } from '../services/async-storage.service.js'
 import { utilService } from '../services/util.service.js'
 import { userService } from '../services/user.service.js'
-// import { userStore } from './user.store.js'
-
-// export function getActionRemoveStation(stationId) {
-//   return {
-//     type: 'removeStation',
-//     stationId,
-//   }
-// }
 
 export const stationStore = {
   state: {
@@ -26,6 +18,13 @@ export const stationStore = {
         song.likedByUsers.includes(userService.getLoggedinUser().fullname)
       )
     },
+ filteredStations: (state) => (category) => {
+    console.log('Category in Vuex getter:', category);
+    if (!category) return state.stations;
+    return state.stations.filter((station) =>
+      station.tags.includes(category)
+    );
+  },
     stations({ stations }) {
       return stations
     },
@@ -35,15 +34,6 @@ export const stationStore = {
     songs({ stations }) {
       return stations.songs
     },
-    // userLikedSongs({ stations }, userName) {
-    //   const a = stations.filter((state) =>
-    //     state.songs.filter((c) =>
-    //       c.likedByUsers.filter(l === userService.getLoggedinUser().fullname)
-    //     )
-    //   )
-    //   console.log(a)
-    //   // const LikedSongs = stations.songs.filter(())
-    // },
 
     station({ stations, currStationId }) {
       const station = stations.find((s) => s._id === currStationId)
@@ -75,6 +65,9 @@ export const stationStore = {
   mutations: {
     setStations(state, { stations }) {
       state.stations = stations
+    },
+    setAllStations(state, { stations }) {
+      state.allStations = stations
     },
     setSearchStations(state, { stations }) {
       state.searchStations = stations
@@ -164,12 +157,14 @@ export const stationStore = {
     async loadStations(context) {
       try {
         const stations = await stationService.query()
+        console.log('Fetched Stations:', stations) // Add this line
         context.commit({ type: 'setStations', stations })
       } catch (err) {
         console.log('stationStore: Error in loadStations', err)
         throw err
       }
     },
+    
     async loadSearchStations(context) {
       try {
         const stations = await stationService.querySearch()
@@ -262,20 +257,6 @@ export const stationStore = {
         throw err
       }
     },
-    // async addVideoToStation({ commit }, { song, station }) {
-    //   try {
-    //     const updatedStation = await stationService.addSongToStation(
-    //       song,
-    //       station
-    //     )
-    //     console.log(updatedStation)
-    //     commit({ type: 'editStation', station: updatedStation })
-    //   } catch (err) {
-    //     console.error('Cannot add song', err)
-    //     throw err
-    //   }
-    // },
-
     async updateStationSong(context, { stationId, newSong }) {
       try {
         const idx = context.state.stations.findIndex(
