@@ -68,7 +68,7 @@
 
   @media screen and (max-width: $narrow-breakpoint) {
     .page-navigation {
-      left: 1rem;
+      left: 2rem;
     }
   }
 
@@ -259,9 +259,11 @@
 @media only screen and (max-width: $narrow-breakpoint) {
   .header-search-container {
     width: 100%;
-    transform: translate(-80px , 50px);
+    transform: translate(-95px , 50px);
+    margin-block-start: 1rem;
   }
   .header-search-icon{
    transform:translate(-95px, -1px)
   }
 }
+
