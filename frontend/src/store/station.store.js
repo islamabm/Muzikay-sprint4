@@ -13,18 +13,16 @@ export const stationStore = {
     likedSongsData: [],
   },
   getters: {
-    getSongsLikedByUser(state) {
-      return state.stations.songs.filter((song) =>
-        song.likedByUsers.includes(userService.getLoggedinUser().fullname)
-      )
+    // getSongsLikedByUser(state) {
+    //   return state.stations.songs.filter((song) =>
+    //     song.likedByUsers.includes(userService.getLoggedinUser().fullname)
+    //   )
+    // },
+    filteredStations: (state) => (category) => {
+      console.log('Category in Vuex getter:', category)
+      if (!category) return state.stations
+      return state.stations.filter((station) => station.tags.includes(category))
     },
- filteredStations: (state) => (category) => {
-    console.log('Category in Vuex getter:', category);
-    if (!category) return state.stations;
-    return state.stations.filter((station) =>
-      station.tags.includes(category)
-    );
-  },
     stations({ stations }) {
       return stations
     },
@@ -78,11 +76,13 @@ export const stationStore = {
     setCurrUserStation(state, { stationId }) {
       state.currUserStationId = stationId
     },
-    removeSong(state, { stationId, songId }) {
-      console.log('remove song from mutation', songId)
+    removeSong(state, { stationId, removedId }) {
       console.log('remove song from mutation', stationId)
       const station = state.stations.find((s) => s._id === stationId)
-      station.songs = station.songs.filter((st) => st.id !== songId)
+      // station.songs = station.songs.filter((st) => st.id !== removedId)
+      const songIdx = station.songs.findIndex((s) => s.id === removedId)
+      station.songs.splice(songIdx, 1)
+
       // state.stations = state.stations.filter((st) => st._id !== stationId)
       // const stationIdx = state.stations.findIndex((s) => s._id === stationId)
       // const station = state.stations[stationIdx]
@@ -164,7 +164,7 @@ export const stationStore = {
         throw err
       }
     },
-    
+
     async loadSearchStations(context) {
       try {
         const stations = await stationService.querySearch()
@@ -221,8 +221,8 @@ export const stationStore = {
       console.log('songid', songId)
       console.log('stationid', stationId)
       try {
-        await stationService.removeSong(stationId, songId)
-        commit({ type: 'removeSong', stationId, songId })
+        const removedId = await stationService.removeSong(stationId, songId)
+        commit({ type: 'removeSong', stationId, removedId })
       } catch (err) {
         console.log('Could Not delete song')
         throw err

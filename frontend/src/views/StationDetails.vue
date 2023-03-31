@@ -14,7 +14,7 @@
 
         <img
           @click="toggleModal"
-          v-else-if="station._id === 'likeduser123'"
+          v-else-if="station.createdBy._id === 'likeduser123'"
           src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
         />
         <div class="icon-container" v-else>
@@ -23,7 +23,7 @@
             class="default-image"
             src="../assets/img/default.png"
             @click="toggleModal"
-            v-show="station._id !== 'likeduser123'"
+            v-show="station.createdBy._id !== 'likeduser123'"
             @mouseover="toggleImgSvg('editImgIcon')"
             @mouseleave="toggleImgSvg('defaultImgIcon')"
           />
@@ -172,8 +172,8 @@
                 :class="{ 'hover-effect': clickedHeartIndex !== idx }"
                 :songIndex="idx"
                 :liked="song.liked"
-                @click="addUserToSong(song), onHeartClick(idx)"
               />
+              <!-- @click="addUserToSong(station, song), onHeartClick(idx)" -->
             </div>
             <p class="song-duration">1:40</p>
             <div>
@@ -214,7 +214,7 @@
             </div>
             <li
               v-if="station.createdBy.fullname !== 'system'"
-              @click="removeSong(selectedSong)"
+              @click="removeSong(selectedSongId)"
             >
               Remove
             </li>
@@ -300,6 +300,7 @@ export default {
       clickedHeartIndex: null,
       currImgSvg: 'defaultImgIcon',
       colorCache: {},
+      selectedSongId: null,
     }
   },
   methods: {
@@ -372,19 +373,15 @@ export default {
       }
     },
     async addUserToSong(song) {
-      const station = this.station
       try {
         const updatedStation = await this.$store.dispatch({
           type: 'addUserToSong',
           song,
-          userStation: station,
-          user: this.user,
         })
         this.$store.commit({ type: 'editStation', station: updatedStation })
         showSuccessMsg('Song liked')
       } catch (err) {
         console.log(err)
-        showErrorMsg('Remove from liked songs')
       }
     },
     openStationSelection() {
@@ -457,20 +454,21 @@ export default {
       }
       return result
     },
-    async removeSong(song) {
-      this.showSongModal = false
-      console.log('station details function remove song', song)
+    async removeSong(songId) {
+      console.log('station details function remove song', songId)
       console.log('station details function remove song', this.station._id)
       try {
         await this.$store.dispatch({
           type: 'removeSong',
           stationId: this.station._id,
-          songId: song.id,
+          songId,
         })
         showSuccessMsg('Song removed')
       } catch (err) {
         console.log(err)
         showErrorMsg('Cannot remove song')
+      } finally {
+        this.showSongModal = false
       }
     },
     // removeSong(songId) {
@@ -522,6 +520,7 @@ export default {
     },
     async removeStation() {
       this.showDeleteModal = false
+      this.$router.push(`/station/collection`)
       try {
         await this.$store.dispatch({
           type: 'removeStation',
@@ -548,6 +547,7 @@ export default {
       this.modalY = top + height - 60
       console.log('toggled song modal')
       this.selectedSong = song
+      this.selectedSongId = song.id
       this.selectedIndex = idx
       this.showSongModal = !this.showSongModal
     },
@@ -588,9 +588,10 @@ export default {
       return this.station.name
     },
     likedSongsUser() {
-      return []
+      // return []
       // console.log(this.$store.getters.getSongsLikedByUser)
-      // return this.$store.getters.getSongsLikedByUser
+      console.log(this.$store.getters.getSongsLikedByUser)
+      return this.$store.getters.getSongsLikedByUser
     },
     isLikedPageWanted() {
       return this.$route.path === `/station/likeduser123`
@@ -617,17 +618,7 @@ export default {
     //   this.counter++
     //   return `My Playlist #${this.counter}`
     // },
-    stationImageUrl() {
-      if (this.station._id !== 'likeduser123') {
-        return this.station.imgUrl
-          ? this.station.imgUrl
-          : this.station.songs[0].imgUrl
-          ? this.station.songs[0].imgUrl
-          : this.station.songs[0].url
-      } else {
-        return this.station.imgUrl
-      }
-    },
+
     // handelLongText() {
     //   let longSongs = this.station.songs.filter(s => s.title.length > 25)
     //   const song = longSongs.map(s => s.title.slice(0,25) + '...')
@@ -644,9 +635,9 @@ export default {
     Draggable,
     BubblingHeart,
   },
-  // mounted() {
-  //   window.scrollTo(0, 0)
-  // },
+  mounted() {
+    window.scrollTo(0, 0)
+  },
   beforeUnmount() {
     document.body.style.background = '#181818'
   },

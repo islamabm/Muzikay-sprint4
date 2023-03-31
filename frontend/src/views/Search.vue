@@ -49,7 +49,7 @@
               <li
                 v-for="station in userStations"
                 :key="station._id"
-                @click="addSongToPlaylist(song, station)"
+                @click="addSongFromSearch(station._id, currSong)"
               >
                 {{ station.name }}
               </li>
@@ -84,15 +84,15 @@ export default {
     fetchVideos(title) {
       eventBus.emit('fetch-videos', title)
     },
-    async addSongToPlaylist(song, station) {
+    async addSongFromSearch(stationId, song) {
       console.log('hi')
       console.log('song in search component', song)
-      console.log('station in search component', station)
+      console.log('station in search component', stationId)
       try {
         await this.$store.dispatch({
-          type: 'addVideoToStation',
-          song: this.currSong,
-          station,
+          type: 'addToStation',
+          stationId,
+          song,
         })
         showSuccessMsg('Added to playlist')
       } catch (err) {
@@ -124,14 +124,13 @@ export default {
       this.showStationsSubMenu = !this.showStationsSubMenu
     },
     filterStationCategories(categoryName) {
-  try {
-    console.log(categoryName);
-    this.$router.push(`/station/collection/${categoryName}`);
-  } catch (error) {
-    console.error(error);
-  }
-},
-
+      try {
+        console.log(categoryName)
+        this.$router.push(`/station/collection/${categoryName}`)
+      } catch (error) {
+        console.error(error)
+      }
+    },
   },
   computed: {
     categories() {
