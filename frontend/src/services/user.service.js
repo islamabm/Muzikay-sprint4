@@ -102,7 +102,8 @@ function saveLocalUser(user) {
     _id: user._id,
     fullname: user.fullname,
     stations: [],
-    imgUrl: 'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg',
+    imgUrl:
+      'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg',
   }
   sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
   return user

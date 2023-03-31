@@ -19,7 +19,7 @@ export default {
       return this.$store.getters.filteredStations(this.category)
     },
     category() {
-    console.log('Current category:', this.$route.params.category);
+    // console.log('Current category:', this.$route.params.category);
     return this.$route.params.category;
   },
   },
@@ -49,8 +49,8 @@ export default {
       this.$store.commit('setAllStations', { stations: filteredStations })
     })
   },
-  mounted() {
-    console.log("Stations in parent component:", this.stations);
-  },
+  // mounted() {
+  //   // console.log("Stations in parent component:", this.stations);
+  // },
 }
 </script>

@@ -7,7 +7,7 @@
   >
     <div class="station-image">
       <img :src="station.imgUrl ? station.imgUrl : station.songs[0].imgUrl" />
-      <div class="play-button" @click.stop="playStation"></div>
+      <div class="play-button"></div>
     </div>
     <div class="station-info">
       <h3 class="station-title">{{ station.name }}</h3>
@@ -15,7 +15,7 @@
     </div>
   </section>
 </template>
-
+<!-- @click.stop="playStation"  need to activate at thr playbutton div - send event to the media player with the stationId--> 
 <script>
 export default {
   name: 'StationPreview',
@@ -24,8 +24,9 @@ export default {
     station: Object,
   },
   methods: {
-    setStation(stationId) {
-      this.$store.dispatch({ type: 'setcurrStation', stationId })
+    async setStation(stationId) {
+      await this.$store.dispatch({ type: 'setcurrStation', stationId })
+
       // this.$store.commit({ type: 'setCurrStation', stationId })
       this.$router.push(`/station/${stationId}`)
     },

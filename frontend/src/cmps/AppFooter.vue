@@ -48,23 +48,33 @@ export default {
     }
   },
   created() {
+    try {
     eventBus.on('song-details', (song) => {
-      this.song = song
-      var delay = song.delay || 2000
-      this.alive = true
-      setTimeout(() => {
-        this.alive = false
-      }, delay)
-    })
-    eventBus.on('youtube-song', (video) => {
-      this.youtubeSong = video
-      console.log(this.youtubeSong)
-      var delay = video.delay || 2000
-      this.alive = true
-      setTimeout(() => {
-        this.alive = false
-      }, delay)
-    })
+    if(song.id) this.song = song
+    if(song.videoId) this.song.id = song.videoId
+    console.log('this.song - footer',this.song);
+    var delay = song.delay || 2000
+    this.alive = true
+    setTimeout(() => {
+      this.alive = false
+    }, delay)
+  })
+} catch (error) {
+  console.error(error)
+}
+eventBus.on('youtube-song', (video) => {
+  try {
+    this.youtubeSong = video
+    console.log(this.youtubeSong)
+    var delay = video.delay || 2000
+    this.alive = true
+    setTimeout(() => {
+      this.alive = false
+    }, delay)
+  } catch (error) {
+    console.error(error)
+  }
+})
   },
   computed: {
     station() {
@@ -72,17 +82,20 @@ export default {
     },
     currSong() {
       if (!this.station) return
+      if(!this.song.id) {
+        return this.youtubeSong
+      }
       return this.station.songs.find((s) => s.id === this.song.id)
     },
     currSongIdx() {
       if (!this.station) return
+      if(!this.song.id) return
+
       return this.station.songs.findIndex((s) => s.id === this.song.id)
     },
   },
   methods: {
-    // getSongIdx(songIdx) {
-    //   this.songIdx = songIdx
-    // },
+
     getSvg(iconName) {
       return SVGService.getSpotifySvg(iconName)
     },
