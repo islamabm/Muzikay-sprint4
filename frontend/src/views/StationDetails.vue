@@ -1,5 +1,5 @@
 <template>
-  <section v-if="station" class="station-details">
+  <section v-bind="$attrs" v-if="station" class="station-details">
     <section class="station-details-header">
       <div ref="stationDetailsHeader" class="header-content">
         <img
@@ -283,6 +283,7 @@ export default {
     },
   },
   name: 'station-details',
+  inheritAttrs: false,
   emits: ['toggleHeaderLike'],
   data() {
     return {
@@ -575,11 +576,13 @@ export default {
           // this.station = await this.$store.getters.stationById(stationId)
           // console.log(this.station)
           // maybe remove after && after 11pm we dont delete anything
-          this.getDominantColor(
-            this.station.imgUrl
-              ? this.station.imgUrl
-              : this.station.songs[0].imgUrl
-          )
+          this.$nextTick(() => {
+            this.getDominantColor(
+              this.station.imgUrl
+                ? this.station.imgUrl
+                : this.station.songs[0].imgUrl
+            )
+          })
         } catch (err) {
           console.log(err)
         }
@@ -620,8 +623,9 @@ export default {
     },
     station() {
       const station = this.$store.getters.stationById(this.stationId)
-    return station ? station : this.$store.getters.station
-  },
+      return station ? station : this.$store.getters.station
+    },
+    
     // stationCount() {
     //   //computed can't do this
     //   this.counter++
@@ -646,6 +650,7 @@ export default {
   },
   mounted() {
     window.scrollTo(0, 0)
+    this.getDominantColor(this.imageSrc)
   },
   beforeUnmount() {
     document.body.style.background = '#181818'
