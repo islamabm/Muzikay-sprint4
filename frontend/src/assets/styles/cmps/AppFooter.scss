@@ -173,6 +173,11 @@
       grid-row: 1;
       grid-column: 1;
       text-align: center;
+      gap: 10px;
+      padding-inline: 10px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 260px;
       h3 {
         margin-top: 0;
         margin-bottom: 5px;
@@ -196,14 +201,15 @@
   padding: 6px;
 }
   .footer-like {
-    transform:translate(300%);
+    transform:translate(161px, -4px);
+   
   }
     .media-player .hiding {
       display: none;
     }
     .media-player-play{
       grid-row: 1;
-      transform: translate(170%);
+      transform: translate(55px);
       background-color: transparent;
       justify-content: center;
       align-items:center;

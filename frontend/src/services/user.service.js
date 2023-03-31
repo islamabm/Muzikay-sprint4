@@ -73,13 +73,13 @@ async function login(userCred) {
 async function signup(userCred) {
   // console.log('service', userCred)
   //   userCred.score = 10000
-  if (!userCred.imgUrl)
-    userCred.imgUrl =
-      'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
+    if (!userCred.imgUrl)
+      userCred.imgUrl =
+        'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
   // const user = await storageService.post('user', userCred)
   // const users = utilService.loadFromStorage('user')
   // console.log(users)
-  const user = await httpService.post('auth/signup', userCred)
+    const user = await httpService.post('auth/signup', userCred)
   //   socketService.login(user._id)
   return saveLocalUser(user)
 }

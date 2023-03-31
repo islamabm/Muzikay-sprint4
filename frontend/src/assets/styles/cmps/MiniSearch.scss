@@ -88,20 +88,6 @@
   display: flex;
 }
 
-// .search-results {
-//   display: flex;
-//   flex-direction: column;
-
-//   .song-item {
-//     display: flex;
-//   }
-// }
-
-$search-result-bg: #121212;
-$search-result-hover-bg: #282828;
-$text-color: #ffffff;
-$secondary-text-color: #b3b3b3;
-$highlight-color: #1db954;
 
 .search-results {
   display: flex;
@@ -115,6 +101,13 @@ $highlight-color: #1db954;
     padding: 1rem;
     padding-block: 1rem;
   }
+  .posted-at{
+    font-size:0.5rem;
+    transform: translate(10px, -2.5px);
+    color: $clr11;
+    display: flex;
+    text-align: cetner;
+  }
 }
 
 .add-songs-container {
@@ -123,7 +116,7 @@ $highlight-color: #1db954;
   justify-content: space-between;
 
   &:hover {
-    background-color: $search-result-hover-bg;
+    background-color: $clr8;
     border-radius: 10px;
   }
 }
@@ -133,7 +126,7 @@ $highlight-color: #1db954;
   align-items: center;
 
   span {
-    color: $secondary-text-color;
+    color: $clr3;
     font-size: 1rem;
     margin-inline-end: 1rem;
   }
@@ -147,7 +140,7 @@ $highlight-color: #1db954;
   }
 
   .search-song-title {
-    color: $text-color;
+    color: $clr6;
     font-size: 1rem;
     font-weight: 400;
     white-space: nowrap;
@@ -175,4 +168,87 @@ $highlight-color: #1db954;
   &:focus {
     outline: none;
   }
+}
+
+
+@media only screen and (max-width: $narrow-breakpoint) {
+  .mini-search-container {
+  margin-inline-start: 1rem;
+  margin-block-end: 1rem;
+  .deafult-sentance-search {
+    font-size: 1.2rem;
+  }
+
+  
+  input {
+    padding: 8px 24px 8px 40px;
+    margin-block-end: 2.5rem;
+    margin-inline-start: 5rem;
+  }
+  
+  }
+  .mini-search-preview {
+    width: 330px;
+  }
+  .add-btn-song {
+  font-size: 0.75rem;
+  padding-inline: 12px;
+  }
+  
+  .search-results {
+  padding-inline: 10px;
+  padding-block-end: 120px;
+  margin-block: 3rem;
+  width:440px;
+  .song-item {
+    height: 40px;
+    margin-block: 0.2rem;
+    padding: 0.8rem;
+    padding-block: 0.8rem;
+    width: 100%;
+   
+  }
+}
+
+.add-songs-container {
+&:hover {
+background-color: $clr8;
+border-radius: 5px;
+}
+}
+
+.mini-search-preview {
+span {
+font-size: 0.8rem;
+margin-inline-end: 0.8rem;
+}
+.song-img {
+  width: 50px;
+  height: 50px;
+}
+
+.search-song-title {
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 35%;
+  margin-inline-start: 6px;
+}
+.posted-at{
+  font-size:0.5rem;
+  margin-inline-start: 5px;
+  transform: translateY(-2.5px);
+  color: $clr11;
+}
+}
+
+.add-btn-song {
+font-size: 0.7rem;
+padding: 6px 12px;
+border-radius: 20px;
+&:hover {
+  transform: scale(1.08);
+}
+}
 }

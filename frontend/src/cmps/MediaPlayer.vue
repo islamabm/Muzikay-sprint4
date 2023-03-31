@@ -156,7 +156,6 @@ export default {
     //   this.songIdx = this.currSongIdx
     // },
     putSongName() {
-      console.log('this.stationnnn', this.station)
       if (this.song) {
         if (this.song.id) {
           // situation when we have a song from YouTube on our list-considered as a song
@@ -179,7 +178,7 @@ export default {
           return this.station.songs[this.songIdx].id
         }
       } else {
-        console.log('mamash else')
+        // console.log('mamash else')
         // if repeat is off, play the default song
         return 'IXdNnw99-Ic'
       }

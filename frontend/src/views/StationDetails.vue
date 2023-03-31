@@ -278,6 +278,7 @@ import MiniSearch from '../cmps/MiniSearch.vue'
 import BubblingHeart from '../cmps/BubblingHeart.vue'
 export default {
   name: 'station-details',
+  emits: ['toggleHeaderLike'],
   data() {
     return {
       modalX: 0,
@@ -304,6 +305,9 @@ export default {
     }
   },
   methods: {
+    toggleHeaderLike() {
+      console.log('need to do that function')
+    },
     handelYoutubeSong(video) {
       eventBus.emit('youtube-song', video)
     },
@@ -320,7 +324,6 @@ export default {
       this.showDeleteModal = false
     },
     updateBodyBackgroundColor(color) {
-      // console.log(color)
       const darkShade = {
         ...color,
         rgba: `rgba(${Math.round(color.value[0] * 0.07)}, ${Math.round(
@@ -333,7 +336,6 @@ export default {
           color.value[1] * 0.4
         )}, ${Math.round(color.value[2] * 0.4)}, 0.7)`,
       }
-      // console.log('shade', darkShade)
       const gradient = `linear-gradient(to bottom, ${color.rgba}, ${headerShade.rgba})`
       const darkGradient = `linear-gradient(to bottom, ${darkShade.rgba} 0%, rgba(0, 0, 0, 1) 30%)`
       document.body.style.backgroundImage = gradient
@@ -641,5 +643,8 @@ export default {
   beforeUnmount() {
     document.body.style.background = '#181818'
   },
+  mounted() {
+    window.scrollTo(0,0)
+  }
 }
 </script>

@@ -1,8 +1,8 @@
 // import { stationService } from '../services/station.service.local'
-import { stationService } from '../services/station.service.local.js'
-import { storageService } from '../services/async-storage.service.js'
-import { utilService } from '../services/util.service.js'
+// import { storageService } from '../services/async-storage.service.js'
+// import { utilService } from '../services/util.service.js'
 import { userService } from '../services/user.service.js'
+import { stationService } from '../services/station.service.local.js'
 
 export const stationStore = {
   state: {
@@ -20,6 +20,11 @@ export const stationStore = {
     // },
     filteredStations: (state) => (category) => {
       console.log('Category in Vuex getter:', category)
+      if (!category) return state.stations
+      return state.stations.filter((station) => station.tags.includes(category))
+    },
+    filteredStations: (state) => (category) => {
+      // console.log('Category in Vuex getter:', category);
       if (!category) return state.stations
       return state.stations.filter((station) => station.tags.includes(category))
     },
@@ -157,7 +162,6 @@ export const stationStore = {
     async loadStations(context) {
       try {
         const stations = await stationService.query()
-        console.log('Fetched Stations:', stations) // Add this line
         context.commit({ type: 'setStations', stations })
       } catch (err) {
         console.log('stationStore: Error in loadStations', err)
@@ -198,8 +202,7 @@ export const stationStore = {
     },
     async setcurrStation({ commit }, { stationId }) {
       try {
-        const id = await stationService.getById(stationId)
-        console.log(id)
+        await stationService.getById(stationId)
         commit({ type: 'setCurrStation', stationId })
       } catch (err) {
         console.log('Could Not create station')
@@ -229,8 +232,6 @@ export const stationStore = {
       }
     },
     async addSong({ commit }, { video, station }) {
-      console.log('add song from api store actions', video)
-      console.log('add song from api store actions', station)
       try {
         const updatedStation = await stationService.addSongToStation(
           video,
@@ -246,11 +247,8 @@ export const stationStore = {
     },
 
     async addToStation({ commit }, { song, stationId }) {
-      console.log('song in store', song)
-      console.log('station i nstore', stationId)
       try {
         const newSong = await stationService.addSongToStation(stationId, song)
-        console.log('newSong in store', newSong)
         commit({ type: 'addSong', stationId, newSong })
       } catch (err) {
         console.error('Cannot add song', err)
