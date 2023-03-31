@@ -444,6 +444,9 @@ export default {
     },
     onDrop(dropResult) {
       const { removedIndex, addedIndex, payload } = dropResult
+      console.log(removedIndex)
+      console.log(addedIndex)
+      console.log(payload)
       const songs = [...this.station.songs]
       if (removedIndex !== null) {
         songs.splice(removedIndex, 1)

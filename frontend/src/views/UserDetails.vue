@@ -1,43 +1,69 @@
 <template>
   <section v-if="user" class="user-profile">
-    <!-- <h1 class="greeting">Welcome, {{ user.fullname }}</h1> -->
     <div class="user-details-container">
-      <img  class="user-profile-img" style="max-width: 200px;" :src="user.imgUrl" />
+      <label class="cover-img" @drop.prevent="handleFile" @dragover.prevent>
+        <div v-if="loading" class="loader"></div>
+        <img
+          class="user-profile-img"
+          style="max-width: 200px"
+          :src="user.imgUrl"
+        />
+        <input type="file" @change="handleFile" hidden />
+      </label>
       <div class="user-info">
-      <span class="profile-word">
-    Profile
-   </span>
-    <h3 class="user-username">{{ user.username }}</h3>
-    <span class="user-stations-count">24 Public Playlists</span>
-    <span class="dot">•</span>
-    <span class="following">7 following</span>
-  </div>
-  </div>
-      <!-- <article class="review-list">
-        <article v-for="review in user.givenReviews" :key="review._id">
-          {{ review.txt }}
-          <RouterLink :to="`/user/${review.aboutUser._id}`">
-            About {{ review.aboutUser.fullname }}
-          </RouterLink>
-        </article>
-      </article> -->
+        <span class="profile-word"> Profile </span>
+        <h3 class="user-username">{{ user.username }}</h3>
+        <span class="user-stations-count">24 Public Playlists</span>
+        <span class="dot">•</span>
+        <span class="following">7 following</span>
+      </div>
+    </div>
   </section>
 </template>
 
 <script>
-
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
+import { uploadImg } from '../services/upload.service.js'
 export default {
-
+  data() {
+    return { loading: false }
+  },
   watch: {
     userId: {
       handler() {
-        if(this.userId){
-            this.$store.dispatch({ type: "loadAndWatchUser", userId: this.userId })
+        if (this.userId) {
+          this.$store.dispatch({
+            type: 'loadAndWatchUser',
+            userId: this.userId,
+          })
         }
       },
       immediate: true,
     },
   },
+  methods: {
+    async handleFile(ev) {
+      this.loading = true // set the loading flag to true
+
+      const file =
+        ev.type === 'change' ? ev.target.files[0] : ev.dataTransfer.files[0]
+
+      try {
+        const { url } = await uploadImg(file)
+        const newUser = { ...this.user, imgUrl: url }
+        await this.$store.dispatch({
+          type: 'updateUser',
+          user: newUser,
+        })
+        showSuccessMsg('Profile image updated')
+      } catch (err) {
+        showErrorMsg('Cannot update profile image', err)
+      } finally {
+        this.loading = false // clear the loading flag once the upload is complete
+      }
+    },
+  },
+
   computed: {
     user() {
       return this.$store.getters.watchedUser
