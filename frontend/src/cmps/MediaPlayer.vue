@@ -120,12 +120,15 @@ export default {
   },
   created() {
     eventBus.on('song-details', (song) => {
-      this.song = song 
+      this.song = song
       if (!this.song.id && !this.song.videoId) {
         setTimeout(async () => {
           try {
             const videos = await stationService.getVideos(this.song.title)
-            this.song = videos[0]
+            console.log('before hazarzer console', videos)
+            this.song = videos[1]
+            eventBus.emit('youtube-song',this.song)
+            console.log('from tal data itay console ', this.song)
           } catch (error) {
             console.error(error)
           }
@@ -173,7 +176,6 @@ export default {
           return this.station.songs[this.songIdx].id
         }
       } else return 'IXdNnw99-Ic'
-      
     },
     toggleSvgIcone() {
       let icon
@@ -250,7 +252,7 @@ export default {
     // when something happens- Video has ended/Video 1=> is playing 2=> pause 0=> finished 3=> when passing forward or switching a song
     // supposed to be a switch case
     onStateChange(event) {
-      console.log('event',event);
+      console.log('event', event)
       if (event.data === 1) {
         this.isPlaying = false
         this.playAudio()

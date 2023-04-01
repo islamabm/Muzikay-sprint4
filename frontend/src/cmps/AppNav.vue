@@ -118,7 +118,7 @@ export default {
   name: 'AppNav',
   data() {
     return {
-      // userStationsData: [],
+      userStationsData: [],
       stationCounter: 0,
       activeStationId: null,
       searchIcon: 'searchIcon',
@@ -129,9 +129,9 @@ export default {
   },
   methods: {
     onDrop(dropResult) {
-      // this.userStationsData = this.applyDrag(this.userStationsData, dropResult)
-      // this.$store.commit('setUserStations', this.userStationsData)
-    },
+    this.userStationsData = this.applyDrag(this.userStationsData, dropResult);
+    this.$store.commit('updateUserStations', this.userStationsData);
+  },
     applyDrag(arr, dragResult) {
       console.log('hi')
       const { removedIndex, addedIndex, payload } = dragResult
@@ -210,6 +210,14 @@ export default {
     FontAwesomeIcon,
     Container,
     Draggable,
+  },
+    watch: {
+    userStations: {
+      immediate: true,
+      handler(newValue) {
+        this.userStationsData = newValue;
+      },
+    },
   },
 }
 </script>
