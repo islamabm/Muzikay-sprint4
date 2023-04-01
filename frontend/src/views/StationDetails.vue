@@ -32,7 +32,9 @@
 
         <div class="station-info">
           <h1 class="playlist-word" @click="toggleModal">Playlist</h1>
-          <h1 class="station-name" @click="toggleModal">{{ station.name }}</h1>
+          <h1 :class="stationNameClass" @click="toggleModal">
+            {{ station.name }}
+          </h1>
 
           <p class="station-description" @click="toggleModal">
             {{ station.description }}
@@ -120,7 +122,6 @@
                 :liked="song.liked"
                 @click="addUserToSong(song), onHeartClick(idx)"
               />
-
             </div>
             <p class="song-duration">1:40</p>
             <div>
@@ -153,7 +154,7 @@
               class="song-title"
               v-bind:class="{ active: isActive }"
               @click="toggleActiveTitle(idx)"
-              >
+            >
               <!-- :class="{ active: activeTitle === idx }" -->
               {{ song.title }}
             </p>
@@ -306,8 +307,7 @@ export default {
     }
   },
   methods: {
-    toggleHeaderLike() {
-    },
+    toggleHeaderLike() {},
     handelYoutubeSong(video) {
       this.isActive = !this.isActive
       eventBus.emit('youtube-song', video)
@@ -471,7 +471,7 @@ export default {
         this.showSongModal = false
       }
     },
-    
+
     async addToSelectedStation(stationId, song) {
       console.log('we are in the details in the add song', song)
       console.log('we are in the details in the add song station', stationId)
@@ -575,13 +575,16 @@ export default {
       const station = this.$store.getters.stationById(this.stationId)
       return station ? station : this.$store.getters.station
     },
+    stationNameClass() {
+      const words = this.station.name.split(' ').length
+      return words <= 3 ? 'short-station-name' : 'long-station-name'
+    },
 
     // stationCount() {
     //   //computed can't do this
     //   this.counter++
     //   return `My Playlist #${this.counter}`
     // },
-
   },
   components: {
     StationEdit,
