@@ -98,11 +98,11 @@
             <img v-if="song.videoId" class="song-img" :src="song.url" />
             <img v-else class="song-img" :src="song.imgUrl" />
             <p
-              class="song-title"
-              v-bind:class="{ active: isActive }"
               @click="toggleActiveTitle(idx)"
-              >
-              <!-- :class="{ active: activeTitle === idx }" -->
+              class="song-title"
+              :class="{ 'active-song': activeTitle === idx }"
+            >
+              <!-- v-bind:class="{ 'active-song': isActive }" -->
               {{ song.title }} - {{ song.artist }}
             </p>
           </div>
@@ -153,10 +153,14 @@
 
             <p
               class="song-title"
-              v-bind:class="{ active: isActive }"
+              :class="{ 'active-song': activeTitle === idx }"
               @click="toggleActiveTitle(idx)"
             >
+<<<<<<< HEAD
               <!-- :class="{ active: activeTitle === idx }" -->
+=======
+              <!-- v-bind:class="{ isActive ? 'active-song' : active }" -->
+>>>>>>> 127ded61a8d51e3f980839caa293f49254391a41
               {{ song.title }}
             </p>
           </div>
@@ -171,8 +175,8 @@
                 :class="{ 'hover-effect': clickedHeartIndex !== idx }"
                 :songIndex="idx"
                 :liked="song.liked"
-                />
-              </div>
+              />
+            </div>
             <p class="song-duration">1:40</p>
             <div>
               <button
@@ -256,9 +260,11 @@
       </div>
     </div>
   </section>
+  <Chat :stationId="station._id" :msgHistory="station?.msgs || []" />
 </template>
 
 <script>
+import Chat from './Chat.vue'
 import { Container, Draggable } from 'vue3-smooth-dnd'
 import { FastAverageColor } from 'fast-average-color'
 import StationEdit from '../cmps/StationEdit.vue'
@@ -304,17 +310,17 @@ export default {
       currImgSvg: 'defaultImgIcon',
       colorCache: {},
       selectedSongId: null,
-      isActive: true,
+      activeClass: 'active-song',
+      inactiveClass: 'inactive-song',
     }
   },
   methods: {
     toggleHeaderLike() {},
     handelYoutubeSong(video) {
-      this.isActive = !this.isActive
       eventBus.emit('youtube-song', video)
     },
+
     songDetails(song) {
-      this.isActive = !this.isActive
       eventBus.emit('song-details', song)
     },
     dontAddSong() {
@@ -540,9 +546,13 @@ export default {
 },
 
   computed: {
+    songClass() {
+      return this.isActive ? this.activeClass : this.inactiveClass
+    },
     user() {
       return this.$store.getters.loggedinUser
     },
+
     stationDeleteMsg() {
       return this.station.name
     },
@@ -570,10 +580,19 @@ export default {
       const station = this.$store.getters.stationById(this.stationId)
       return station ? station : this.$store.getters.station
     },
+<<<<<<< HEAD
     stationNameClass() {
       const words = this.station.name.split(' ').length
       return words <= 3 ? 'short-station-name' : 'long-station-name'
     },
+=======
+
+    // stationCount() {
+    //   //computed can't do this
+    //   this.counter++
+    //   return `My Playlist #${this.counter}`
+    // },
+>>>>>>> 127ded61a8d51e3f980839caa293f49254391a41
   },
   components: {
     StationEdit,
@@ -582,6 +601,7 @@ export default {
     Container,
     Draggable,
     BubblingHeart,
+    Chat,
   },
   mounted() {
   window.scrollTo(0, 0)

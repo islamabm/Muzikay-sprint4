@@ -10,6 +10,10 @@
           {{ currSong.title }}
         </h3>
       </div>
+      <div class="footer-curr-song" v-else>
+        <img class="footer-details-img" :src="station.songs[0].imgUrl" alt="">
+        <h3 class="footer-details-title">{{ station.songs[0].title }}</h3>
+      </div>
 
       <button class="footer-like">
         <BubblingHeart />
