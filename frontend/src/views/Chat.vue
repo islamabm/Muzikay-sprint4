@@ -36,7 +36,10 @@ import {
   SOCKET_EMIT_SEND_MSG,
   SOCKET_EVENT_ADD_MSG,
   SOCKET_EMIT_SET_TOPIC,
+  // SOCKET_EVENT_USER_IS_TYPING,
+  // SOCKET_EMIT_USER_IS_TYPING,
 } from '../services/socket.service'
+// import { utilService } from '@/services/util-service.js'
 export default {
   data() {
     return {
@@ -50,6 +53,9 @@ export default {
     // socketService.setup()
     socketService.emit(SOCKET_EMIT_SET_TOPIC, this.topic)
     socketService.on(SOCKET_EVENT_ADD_MSG, this.addMsg)
+    // socketService.on(SOCKET_EVENT_USER_IS_TYPING, (username) => {
+    //   this.typingUser = username
+    // })
   },
   unmounted() {
     socketService.off(SOCKET_EVENT_ADD_MSG, this.addMsg)
@@ -67,8 +73,8 @@ export default {
       const user = userService.getLoggedinUser()
       const from = (user && user.fullname) || 'Guest'
       this.msg.from = from
-      socketService.emit(SOCKET_EMIT_SEND_MSG, this.msg)
-      this.msg = { from, txt: '' }
+      //   socketService.emit(SOCKET_EMIT_SEND_MSG, this.msg)
+      //   this.msg = { from, txt: '' }
     },
     changeTopic() {
       socketService.emit(SOCKET_EMIT_SET_TOPIC, this.topic)
