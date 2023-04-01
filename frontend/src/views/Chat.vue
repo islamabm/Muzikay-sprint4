@@ -1,82 +1,97 @@
 <template>
-  <div class="container">
-    <h1>About Us</h1>
-    <p>We like You</p>
+  <div class="chat-room-container">
+    <h2>Chat</h2>
     <h3 v-if="typingUser">{{ typingUser }} is typing...</h3>
-    <h2>Lets Chat About {{ topic }}</h2>
-    <label>
+    <div class="chat-list">
+      <p
+        v-for="(msg, idx) in [...msgHistory, ...msgs]"
+        :key="idx"
+        class="chat-msg"
+      >
+        {{ msg.username }}: {{ msg.txt }}
+      </p>
+    </div>
+    <div class="send-box flex">
       <input
-        type="radio"
-        value="Politics"
-        v-model="topic"
-        @change="changeTopic"
+        v-model="msgTxt"
+        @input="onType"
+        type="text"
+        placeholder="Write your message"
       />
-      Politics
-    </label>
-    <label>
-      <input type="radio" value="Love" v-model="topic" @change="changeTopic" />
-      Love
-    </label>
-    <ul>
-      <li v-for="(msg, idx) in msgs" :key="idx">
-        <span>{{ msg.from }}:</span>{{ msg.txt }}
-      </li>
-    </ul>
-    <hr />
-    <form @submit.prevent="sendMsg">
-      <input type="text" v-model="msg.txt" placeholder="Your msg" />
-      <button>Send</button>
-    </form>
+      <button @click="sendMsg" class="btn">Send</button>
+    </div>
   </div>
 </template>
 
 <script>
 import {
   socketService,
+  SOCKET_EMIT_SET_TOPIC,
   SOCKET_EMIT_SEND_MSG,
   SOCKET_EVENT_ADD_MSG,
-  SOCKET_EMIT_SET_TOPIC,
-  // SOCKET_EVENT_USER_IS_TYPING,
-  // SOCKET_EMIT_USER_IS_TYPING,
-} from '../services/socket.service'
-// import { utilService } from '@/services/util-service.js'
+  SOCKET_EVENT_USER_IS_TYPING,
+  SOCKET_EMIT_USER_IS_TYPING,
+} from '../services/socket.service.js'
+import { utilService } from '../services/util.service.js'
+
 export default {
+  name: 'chat',
+  props: {
+    stationId: String,
+    msgHistory: Array,
+  },
   data() {
     return {
-      msg: { from: 'Guest', txt: '' },
+      msgTxt: '',
       msgs: [],
-      topic: 'Love',
       typingUser: '',
     }
   },
   created() {
-    // socketService.setup()
-    socketService.emit(SOCKET_EMIT_SET_TOPIC, this.topic)
+    socketService.emit(SOCKET_EMIT_SET_TOPIC, this.stationId)
     socketService.on(SOCKET_EVENT_ADD_MSG, this.addMsg)
-    // socketService.on(SOCKET_EVENT_USER_IS_TYPING, (username) => {
-    //   this.typingUser = username
-    // })
+    socketService.on(SOCKET_EVENT_USER_IS_TYPING, (username) => {
+      this.typingUser = username
+    })
   },
-  unmounted() {
-    socketService.off(SOCKET_EVENT_ADD_MSG, this.addMsg)
-    // socketService.terminate()
+  computed: {
+    user() {
+      return this.$store.getters.loggedinUser
+    },
   },
   methods: {
     addMsg(msg) {
       this.msgs.push(msg)
     },
     sendMsg() {
-      console.log('Sending', this.msg)
-      // setTimeout(()=>this.addMsg({from: 'Dummy', txt: 'Yey'}), 2000)
-      const user = userService.getLoggedinUser()
-      const from = (user && user.fullname) || 'Guest'
-      this.msg.from = from
-      //   socketService.emit(SOCKET_EMIT_SEND_MSG, this.msg)
-      //   this.msg = { from, txt: '' }
+      const msg = {
+        txt: this.msgTxt,
+        username: this.user?.username || 'Guest',
+      }
+      this.addMsg(msg)
+      socketService.emit(SOCKET_EMIT_SEND_MSG, msg)
+      this.msgTxt = ''
     },
-    changeTopic() {
-      socketService.emit(SOCKET_EMIT_SET_TOPIC, this.topic)
+    onType() {
+      this.setTyping()
+      this.clearTyping()
     },
+    setTyping() {
+      socketService.emit(
+        SOCKET_EMIT_USER_IS_TYPING,
+        this.user?.username || 'Guest'
+      )
+    },
+    clearTyping: utilService.debounce(() => {
+      socketService.emit(SOCKET_EMIT_USER_IS_TYPING, '')
+    }),
   },
+
+  unmounted() {
+    socketService.off(SOCKET_EVENT_ADD_MSG, this.addMsg)
+    socketService.off(SOCKET_EVENT_USER_IS_TYPING)
+    // socketService.terminate()
+  },
+  created() {},
 }
 </script>

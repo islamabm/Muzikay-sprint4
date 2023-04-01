@@ -99,7 +99,7 @@
               class="song-title"
               v-bind:class="{ active: isActive }"
               @click="toggleActiveTitle(idx)"
-              >
+            >
               <!-- :class="{ active: activeTitle === idx }" -->
               {{ song.title }} - {{ song.artist }}
             </p>
@@ -121,7 +121,6 @@
                 :liked="song.liked"
                 @click="addUserToSong(song), onHeartClick(idx)"
               />
-
             </div>
             <p class="song-duration">1:40</p>
             <div>
@@ -154,7 +153,7 @@
               class="song-title"
               v-bind:class="{ active: isActive }"
               @click="toggleActiveTitle(idx)"
-              >
+            >
               <!-- :class="{ active: activeTitle === idx }" -->
               {{ song.title }}
             </p>
@@ -170,8 +169,8 @@
                 :class="{ 'hover-effect': clickedHeartIndex !== idx }"
                 :songIndex="idx"
                 :liked="song.liked"
-                />
-              </div>
+              />
+            </div>
             <p class="song-duration">1:40</p>
             <div>
               <button
@@ -255,9 +254,11 @@
       </div>
     </div>
   </section>
+  <Chat :stationId="station._id" :msgHistory="station?.msgs || []" />
 </template>
 
 <script>
+import Chat from './Chat.vue'
 import { Container, Draggable } from 'vue3-smooth-dnd'
 import { FastAverageColor } from 'fast-average-color'
 import StationEdit from '../cmps/StationEdit.vue'
@@ -307,12 +308,12 @@ export default {
     }
   },
   methods: {
-    toggleHeaderLike() {
-    },
+    toggleHeaderLike() {},
     handelYoutubeSong(video) {
       this.isActive = !this.isActive
       eventBus.emit('youtube-song', video)
     },
+
     songDetails(song) {
       this.isActive = !this.isActive
       eventBus.emit('song-details', song)
@@ -472,7 +473,7 @@ export default {
         this.showSongModal = false
       }
     },
-    
+
     async addToSelectedStation(stationId, song) {
       console.log('we are in the details in the add song', song)
       console.log('we are in the details in the add song station', stationId)
@@ -549,6 +550,7 @@ export default {
     user() {
       return this.$store.getters.loggedinUser
     },
+
     stationDeleteMsg() {
       return this.station.name
     },
@@ -582,7 +584,6 @@ export default {
     //   this.counter++
     //   return `My Playlist #${this.counter}`
     // },
-
   },
   components: {
     StationEdit,
@@ -591,6 +592,7 @@ export default {
     Container,
     Draggable,
     BubblingHeart,
+    Chat,
   },
   mounted() {
     window.scrollTo(0, 0)
