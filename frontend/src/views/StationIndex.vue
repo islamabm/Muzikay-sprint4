@@ -15,7 +15,7 @@
 import AppHeader from '../cmps/AppHeader.vue'
 import UserMsg from '../cmps/UserMsg.vue'
 import AppNav from '../cmps/AppNav.vue'
-import AppFooter from '../cmps/AppFooter.vue'
+import AppFooter from '../../src/cmps/AppFooter.vue'
 import MobileNav from '../cmps/MobileNav.vue'
 
 export default {

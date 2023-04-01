@@ -7,7 +7,7 @@ import gStations from '../../data/station.json'
 import gSearchStations from '../../data/search.json'
 import { userService } from './user.service.js'
 
-const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBAg_WCZIcfnn4Pn_EtFtXmum8Rmpi_5c8&q=`
+const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyDs7MPhI_cqfQsC1T52aIo-j9tkLc2rxLA&q=`
 const STORAGE_KEY = 'station'
 const SEARCH_KEY = 'videosDB'
 const SEARCH_STATIONS_KEY = 'searchDB'
@@ -53,6 +53,7 @@ async function query() {
 }
 
 async function querySearch() {
+  // return httpService.get('search')
   var stations = await storageService.query(SEARCH_STATIONS_KEY)
   // if (filterBy.name) {
   //   const regex = new RegExp(filterBy.name, 'i')
