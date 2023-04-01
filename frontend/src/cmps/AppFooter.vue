@@ -3,7 +3,6 @@
     <div class="footer-media-player">
       <MediaPlayer />
     </div>
-
     <div v-if="station" class="footer-details">
   <img class="footer-details-img" :src="getImageUrl" />
   <h3 class="footer-details-title">
@@ -26,6 +25,7 @@
 import MediaPlayer from './MediaPlayer.vue'
 import BubblingHeart from './BubblingHeart.vue'
 import { eventBus } from '../services/event-bus.service.js'
+import { stationService } from '../services/station.service.local'
 
 export default {
   name: 'AppFooter',
@@ -52,6 +52,7 @@ export default {
         }, delay)
       }
     })
+
     eventBus.on('youtube-song', (video) => {
       console.log('youtube-song event received:', video)
       this.youtubeSong = video
@@ -66,6 +67,14 @@ export default {
   computed: {
     station() {
       return this.$store.getters.station
+    },
+    url() {
+      console.log('in the url')
+      if (!this.station) return
+      console.log('imgUrl', this.song.imgUrl)
+      if (this.song.imgUrl) return this.song.imgUrl
+      console.log('url', this.youtubeSong.url)
+      if (this.youtubeSong.url) return this.youtubeSong.url
     },
     currSong() {
   if (!this.station) return null;

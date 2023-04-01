@@ -318,6 +318,7 @@ export default {
       eventBus.emit('youtube-song', video)
     },
     songDetails(song) {
+      console.log('details event bus', song)
       eventBus.emit('song-details', song)
     },
     dontAddSong() {
@@ -629,6 +630,7 @@ export default {
       const station = this.$store.getters.stationById(this.stationId)
       return station ? station : this.$store.getters.station
     },
+
     // stationCount() {
     //   //computed can't do this
     //   this.counter++
