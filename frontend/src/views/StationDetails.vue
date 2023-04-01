@@ -315,6 +315,7 @@ export default {
       console.log('need to do that function')
     },
     handelYoutubeSong(video) {
+      console.log('video', video)
       eventBus.emit('youtube-song', video)
     },
     songDetails(song) {
