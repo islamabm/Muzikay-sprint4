@@ -96,11 +96,11 @@
             <img v-if="song.videoId" class="song-img" :src="song.url" />
             <img v-else class="song-img" :src="song.imgUrl" />
             <p
-              class="song-title"
-              v-bind:class="{ active: isActive }"
               @click="toggleActiveTitle(idx)"
+              class="song-title"
+              :class="{ 'active-song': activeTitle === idx }"
             >
-              <!-- :class="{ active: activeTitle === idx }" -->
+              <!-- v-bind:class="{ 'active-song': isActive }" -->
               {{ song.title }} - {{ song.artist }}
             </p>
           </div>
@@ -151,10 +151,10 @@
 
             <p
               class="song-title"
-              v-bind:class="{ active: isActive }"
+              :class="{ 'active-song': activeTitle === idx }"
               @click="toggleActiveTitle(idx)"
             >
-              <!-- :class="{ active: activeTitle === idx }" -->
+              <!-- v-bind:class="{ isActive ? 'active-song' : active }" -->
               {{ song.title }}
             </p>
           </div>
@@ -304,18 +304,17 @@ export default {
       currImgSvg: 'defaultImgIcon',
       colorCache: {},
       selectedSongId: null,
-      isActive: true,
+      activeClass: 'active-song',
+      inactiveClass: 'inactive-song',
     }
   },
   methods: {
     toggleHeaderLike() {},
     handelYoutubeSong(video) {
-      this.isActive = !this.isActive
       eventBus.emit('youtube-song', video)
     },
 
     songDetails(song) {
-      this.isActive = !this.isActive
       eventBus.emit('song-details', song)
     },
     dontAddSong() {
@@ -547,6 +546,9 @@ export default {
     },
   },
   computed: {
+    songClass() {
+      return this.isActive ? this.activeClass : this.inactiveClass
+    },
     user() {
       return this.$store.getters.loggedinUser
     },
