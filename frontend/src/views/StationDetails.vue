@@ -99,9 +99,10 @@
             <img v-else class="song-img" :src="song.imgUrl" />
             <p
               class="song-title"
-              :class="{ active: activeTitle === idx }"
+              v-bind:class="{ active: isActive }"
               @click="toggleActiveTitle(idx)"
-            >
+              >
+              <!-- :class="{ active: activeTitle === idx }" -->
               {{ song.title }} - {{ song.artist }}
             </p>
           </div>
@@ -170,8 +171,8 @@
                 :class="{ 'hover-effect': clickedHeartIndex !== idx }"
                 :songIndex="idx"
                 :liked="song.liked"
-              />
-            </div>
+                />
+              </div>
             <p class="song-duration">1:40</p>
             <div>
               <button
@@ -303,7 +304,7 @@ export default {
       currImgSvg: 'defaultImgIcon',
       colorCache: {},
       selectedSongId: null,
-      isActive: false,
+      isActive: true,
     }
   },
   methods: {
