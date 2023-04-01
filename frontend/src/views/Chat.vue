@@ -29,23 +29,16 @@
 <script>
 import {
   socketService,
-  SOCKET_EMIT_SET_TOPIC,
   SOCKET_EMIT_SEND_MSG,
   SOCKET_EVENT_ADD_MSG,
-  SOCKET_EVENT_USER_IS_TYPING,
-  SOCKET_EMIT_USER_IS_TYPING,
-} from '../services/socket.service.js'
-import { utilService } from '../services/util.service.js'
-
+  SOCKET_EMIT_SET_TOPIC,
+} from '../services/socket.service'
 export default {
   name: 'chat',
-  props: {
-    stationId: String,
-    msgHistory: Array,
-  },
+
   data() {
     return {
-      msgTxt: '',
+      msg: { from: 'Guest', txt: '' },
       msgs: [],
       topics: [
         'General',
@@ -70,50 +63,32 @@ export default {
     }
   },
   created() {
-    socketService.emit(SOCKET_EMIT_SET_TOPIC, this.stationId)
+    // socketService.setup()
+    socketService.emit(SOCKET_EMIT_SET_TOPIC, this.topic)
     socketService.on(SOCKET_EVENT_ADD_MSG, this.addMsg)
-    socketService.on(SOCKET_EVENT_USER_IS_TYPING, (username) => {
-      this.typingUser = username
-    })
   },
-  computed: {
-    user() {
-      return this.$store.getters.loggedinUser
-    },
+  unmounted() {
+    socketService.off(SOCKET_EVENT_ADD_MSG, this.addMsg)
+    // socketService.terminate()
   },
   methods: {
     addMsg(msg) {
       this.msgs.push(msg)
     },
     sendMsg() {
-      const msg = {
-        txt: this.msgTxt,
-        username: this.user?.username || 'Guest',
-      }
-      this.addMsg(msg)
-      socketService.emit(SOCKET_EMIT_SEND_MSG, msg)
-      this.msgTxt = ''
+      console.log('Sending', this.msg)
+      // TODO: next line not needed after connecting to backend
+      // this.addMsg(this.msg)
+      // setTimeout(()=>this.addMsg({from: 'Dummy', txt: 'Yey'}), 2000)
+      const user = userService.getLoggedinUser()
+      const from = (user && user.fullname) || 'Guest'
+      this.msg.from = from
+      socketService.emit(SOCKET_EMIT_SEND_MSG, this.msg)
+      this.msg = { from, txt: '' }
     },
-    onType() {
-      this.setTyping()
-      this.clearTyping()
+    changeTopic() {
+      socketService.emit(SOCKET_EMIT_SET_TOPIC, this.topic)
     },
-    setTyping() {
-      socketService.emit(
-        SOCKET_EMIT_USER_IS_TYPING,
-        this.user?.username || 'Guest'
-      )
-    },
-    clearTyping: utilService.debounce(() => {
-      socketService.emit(SOCKET_EMIT_USER_IS_TYPING, '')
-    }),
   },
-
-  unmounted() {
-    socketService.off(SOCKET_EVENT_ADD_MSG, this.addMsg)
-    socketService.off(SOCKET_EVENT_USER_IS_TYPING)
-    // socketService.terminate()
-  },
-  created() {},
 }
 </script>

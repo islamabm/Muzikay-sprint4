@@ -256,11 +256,9 @@
       </div>
     </div>
   </section>
-  <Chat :stationId="station._id" :msgHistory="station?.msgs || []" />
 </template>
 
 <script>
-import Chat from './Chat.vue'
 import { Container, Draggable } from 'vue3-smooth-dnd'
 import { FastAverageColor } from 'fast-average-color'
 import StationEdit from '../cmps/StationEdit.vue'
@@ -531,15 +529,13 @@ export default {
 
         this.$nextTick(() => {
           this.getDominantColor(
-            newStation.imgUrl
-              ? newStation.imgUrl
-              : newStation.songs[0].imgUrl
+            newStation.imgUrl ? newStation.imgUrl : newStation.songs[0].imgUrl
           )
         })
       },
-      deep: true
-    }
-},
+      deep: true,
+    },
+  },
 
   computed: {
     songClass() {
@@ -588,55 +584,51 @@ export default {
     Container,
     Draggable,
     BubblingHeart,
-    Chat,
   },
   mounted() {
-  window.scrollTo(0, 0)
-  const { stationId } = this.$route.params
+    window.scrollTo(0, 0)
+    const { stationId } = this.$route.params
 
-  if (stationId) {
-    stationService.getById(stationId)
-      .then(station => {
-        if (!station) return
-        this.station = station
-        this.getDominantColor(
-          this.station.imgUrl
-        )
-      })
-      .catch(error => {
-        console.error('Error getting station:', error)
-      })
-  }
+    if (stationId) {
+      stationService
+        .getById(stationId)
+        .then((station) => {
+          if (!station) return
+          this.station = station
+          this.getDominantColor(this.station.imgUrl)
+        })
+        .catch((error) => {
+          console.error('Error getting station:', error)
+        })
+    }
 
-  this.$nextTick(() => {
-    this.getDominantColor(
-      this.station.imgUrl
-        ? this.station.imgUrl
-        : this.station.songs[0].imgUrl
-    )
-  })
-},
+    this.$nextTick(() => {
+      this.getDominantColor(
+        this.station.imgUrl ? this.station.imgUrl : this.station.songs[0].imgUrl
+      )
+    })
+  },
 
   beforeUnmount() {
     document.body.style.background = '#181818'
   },
   created() {
-  const { stationId } = this.$route.params
-  if (!stationId) return
-  stationService.getById(stationId)
-    .then(station => {
-      if (!station) return
-      this.station = station
-      this.getDominantColor(
-        this.station.imgUrl
-          ? this.station.imgUrl
-          : this.station.songs[0].imgUrl
-      )
-    })
-    .catch(error => {
-      console.error('Error getting station:', error)
-    })
-}
-
+    const { stationId } = this.$route.params
+    if (!stationId) return
+    stationService
+      .getById(stationId)
+      .then((station) => {
+        if (!station) return
+        this.station = station
+        this.getDominantColor(
+          this.station.imgUrl
+            ? this.station.imgUrl
+            : this.station.songs[0].imgUrl
+        )
+      })
+      .catch((error) => {
+        console.error('Error getting station:', error)
+      })
+  },
 }
 </script>
