@@ -38,14 +38,19 @@
     </div>
 
     <div class="login-signup" v-if="loggedinUser">
-  <button class="btn-logout" @click="logout">Log out</button>
-  <span class="username-header" @click="goToUserProfile">
-  <div v-if="!loggedinUser.imgUrl" class="user-circle">
-    <i class="user-icon" v-html="getSvg('userIcon')"></i>
-  </div>
-  <img v-else :src="loggedinUser.imgUrl" class="user-image" alt="User Profile Picture" />
-  {{ loggedinUser.fullname }}
-</span>
+      <button class="btn-logout" @click="logout">Log out</button>
+      <span class="username-header" @click="goToUserProfile">
+        <div v-if="!loggedinUser.imgUrl" class="user-circle">
+          <i class="user-icon" v-html="getSvg('userIcon')"></i>
+        </div>
+        <img
+          v-else
+          :src="loggedinUser.imgUrl"
+          class="user-image"
+          alt="User Profile Picture"
+        />
+        {{ loggedinUser.fullname }}
+      </span>
     </div>
     <div class="login-signup" v-else>
       <RouterLink class="btn-signup" to="/signup">Sign up</RouterLink>
@@ -69,8 +74,8 @@ export default {
   },
   methods: {
     goToUserProfile() {
-    this.$router.push(`/user/${this.loggedinUser._id}`);
-  },
+      this.$router.push(`/user/${this.loggedinUser._id}`)
+    },
     goSearch() {
       console.log(this.search)
       eventBus.emit('handle-search', this.search)
@@ -90,9 +95,15 @@ export default {
       )
     },
     goBack() {
-      window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
+      console.log(window.history.length)
+      if (window.history.length > 1) {
+        this.$router.go(-1)
+      } else {
+        return
+      }
     },
     goForward() {
+      console.log(this.$router.currentRoute.name === 'last-page')
       this.$router.go(-1)
     },
     getSvg(iconName) {
@@ -102,7 +113,6 @@ export default {
       this.$store.dispatch({ type: 'logout' })
       this.$router.push('/')
     },
-    
   },
   mounted() {
     window.addEventListener('scroll', this.updateHeaderOpacity)
@@ -115,11 +125,21 @@ export default {
       return this.$route.path === '/station/search'
     },
     backLinkClass() {
-      return window.history.length > 1 ? 'pointer-cursor' : 'default-cursor'
+      console.log(
+        'back class',
+        window.history.length >= 1 ? 'pointer-cursor' : 'not-allowed'
+      )
+      return window.history.length >= 1 ? 'pointer-cursor' : 'not-allowed'
     },
     forwardLinkClass() {
+      console.log(
+        'forward class',
+        this.$router.currentRoute.name === 'last-page'
+          ? 'not-allowed'
+          : 'pointer-cursor'
+      )
       return this.$router.currentRoute.name === 'last-page'
-        ? 'default-cursor'
+        ? 'not-allowed'
         : 'pointer-cursor'
     },
     loggedinUser() {
@@ -127,6 +147,7 @@ export default {
     },
   },
   created() {
+    console.log(window.history.length)
     eventBus.on('fetch-videos', (title) => {
       this.search = title
       console.log(this.search)

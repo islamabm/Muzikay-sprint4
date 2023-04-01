@@ -129,9 +129,9 @@ export default {
   },
   methods: {
     onDrop(dropResult) {
-    this.userStationsData = this.applyDrag(this.userStationsData, dropResult);
-    this.$store.commit('updateUserStations', this.userStationsData);
-  },
+      this.userStationsData = this.applyDrag(this.userStationsData, dropResult)
+      this.$store.commit('updateUserStations', this.userStationsData)
+    },
     applyDrag(arr, dragResult) {
       console.log('hi')
       const { removedIndex, addedIndex, payload } = dragResult
@@ -186,7 +186,12 @@ export default {
       console.log('hi')
       console.log(this.$store.getters.getSongsLikedByUser)
       const stationId = 'likeduser123'
-      await this.$store.dispatch({ type: 'setcurrStation', stationId })
+      const newStation = await this.$store.dispatch({
+        type: 'setcurrStation',
+        stationId,
+      })
+      console.log(newStation)
+      // socketService.emit('station-added', savedStation)
       // this.$store.commit({ type: 'setCurrStation', stationId })
       this.$router.push(`/station/${stationId}`)
       // this.$store.dispatch({
@@ -211,11 +216,11 @@ export default {
     Container,
     Draggable,
   },
-    watch: {
+  watch: {
     userStations: {
       immediate: true,
       handler(newValue) {
-        this.userStationsData = newValue;
+        this.userStationsData = newValue
       },
     },
   },
