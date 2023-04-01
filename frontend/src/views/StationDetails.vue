@@ -156,11 +156,7 @@
               :class="{ 'active-song': activeTitle === idx }"
               @click="toggleActiveTitle(idx)"
             >
-<<<<<<< HEAD
               <!-- :class="{ active: activeTitle === idx }" -->
-=======
-              <!-- v-bind:class="{ isActive ? 'active-song' : active }" -->
->>>>>>> 127ded61a8d51e3f980839caa293f49254391a41
               {{ song.title }}
             </p>
           </div>
@@ -580,19 +576,10 @@ export default {
       const station = this.$store.getters.stationById(this.stationId)
       return station ? station : this.$store.getters.station
     },
-<<<<<<< HEAD
     stationNameClass() {
       const words = this.station.name.split(' ').length
       return words <= 3 ? 'short-station-name' : 'long-station-name'
     },
-=======
-
-    // stationCount() {
-    //   //computed can't do this
-    //   this.counter++
-    //   return `My Playlist #${this.counter}`
-    // },
->>>>>>> 127ded61a8d51e3f980839caa293f49254391a41
   },
   components: {
     StationEdit,
