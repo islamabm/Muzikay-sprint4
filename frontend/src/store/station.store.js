@@ -66,7 +66,6 @@ export const stationStore = {
     setStations(state, { stations }) {
       state.stations = stations
     },
-
     setAllStations(state, { stations }) {
       state.allStations = stations
     },
@@ -113,6 +112,9 @@ export const stationStore = {
     setUserStations(state, stations) {
       state.userStations = stations
     },
+    updateUserStations(state, newStations) {
+      state.userStations = newStations;
+    },
     editStation(state, { station }) {
       const idx = state.stations.findIndex((c) => c._id === station._id)
       state.stations.splice(idx, 1, station)
@@ -137,6 +139,10 @@ export const stationStore = {
       )
       if (!station.songs) station.songs = []
       station.songs.push(newSong)
+    },
+    setStationSongs(state, { stationId, songs }) {
+      const station = state.stations.find(s => s._id === stationId)
+      station.songs = songs
     },
   },
   actions: {

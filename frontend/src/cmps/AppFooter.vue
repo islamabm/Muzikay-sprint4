@@ -3,49 +3,22 @@
     <div class="footer-media-player">
       <MediaPlayer />
     </div>
-
     <div v-if="station" class="footer-details">
-      <div v-if="!check">
-        <img class="footer-details-img" :src="youtubeSong.url" />
-        <h1>{{ youtubeSong.title }}</h1>
-        <!-- <button class="footer-like">
-          <BubblingHeart
-            :songIndex="currSongIdx"
-            :liked="station.songs[currSongIdx].liked"
-            @toggleLike="toggleSongLike"
-          />
-        </button> -->
-      </div>
-      <div v-else v-if="youtubeSong">
-        <img :src="youtubeSong.url" alt="shit bakod" />
-        <h3 class="footer-details-title">
-          {{ youtubeSong.title }}
-        </h3>
-      </div>
-      <!-- <div v-else>
-        <img class="footer-details-img" :src="song.imgUrl" />
-        <h1>{{ song.title }}</h1> -->
-      <!-- <button class="footer-like">
-          <BubblingHeart
-            :songIndex="currSongIdx"
-            :liked="station.songs[currSongIdx].liked"
-            @toggleLike="toggleSongLike"
-          />
-        </button> -->
-      <!-- </div> -->
-      <!-- <h3 class="footer-details-title">
-        {{ song.title }}
+      <img class="footer-details-img" :src="getImageUrl" />
+      <h3 class="footer-details-title">
+        {{ currSong.title || youtubeSong.title }}
       </h3>
       <button class="footer-like">
         <BubblingHeart
           :songIndex="currSongIdx"
-          :liked="station.songs[currSongIdx].liked"
+          :liked="currSong ? currSong.liked : false"
           @toggleLike="toggleSongLike"
         />
       </button>
     </div>
     <div v-if="check" class="footer-details">
-      <h1>kos ema shelkha</h1> -->
+      <h1>kos ema shelkha</h1>
+      -->
       <!-- <img
         class="footer-details-img"
         src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
@@ -77,20 +50,15 @@ export default {
   },
   created() {
     eventBus.on('song-details', (song) => {
-      if (song.id) {
-        return (this.song = song)
+      console.log('song-details event received:', song)
+      if (song.id || song.videoId) {
+        this.song = song.id ? song : { id: song.videoId }
+        var delay = song.delay || 2000
+        this.alive = true
+        setTimeout(() => {
+          this.alive = false
+        }, delay)
       }
-      this.check = true
-      console.log('there is no id')
-      console.log(this.$store.getters.stations)
-      this.youtubeSong = song
-      console.log(this.youtubeSong)
-
-      var delay = song.delay || 2000
-      this.alive = true
-      setTimeout(() => {
-        this.alive = false
-      }, delay)
     })
     // eventBus.on('song-details', (song) => {
     //   console.log(song)
@@ -114,6 +82,7 @@ export default {
     // })
 
     eventBus.on('youtube-song', (video) => {
+      console.log('youtube-song event received:', video)
       this.youtubeSong = video
       console.log(this.youtubeSong)
       var delay = video.delay || 2000
@@ -139,25 +108,65 @@ export default {
       if (this.youtubeSong.url) return this.youtubeSong.url
     },
     currSong() {
-      if (!this.station) return
-      if (!this.song.id && this.song.videoId) return this.song.videoId
-      if (!this.song.id && !this.song.videoId) return
-      return this.station.songs.find((s) => s.id === this.song.id)
-    },
-    currSongIdx() {
-      if (!this.station) return
-      return this.station.songs.findIndex((s) => s.id === this.song.id)
-    },
+  if (!this.station) return null;
+
+  if (this.song) {
+    const foundSong = this.station.songs.find((s) => s.id === this.song.id);
+    if (foundSong) {
+      console.log('currSong found:', foundSong);
+      return foundSong;
+    }
+  }
+
+  if (this.youtubeSong && this.youtubeSong.url) {
+    return this.youtubeSong;
+  }
+
+  return null;
+},
+
+currSongIdx() {
+  if (!this.station) return;
+  const foundIdx = this.station.songs.findIndex((s) => s.id === this.song.id);
+  console.log('currSongIdx:', foundIdx);
+  return foundIdx;
+},
+    //for youtube you need currSong.url
+    //for ours, you need currSong.imgUrl
+    async getImageUrl() {
+  if (this.currSong && this.currSong.imgUrl) {
+    console.log(this.currSong, 'that\'s the current song')
+    return this.currSong.imgUrl;
+  } else if (this.youtubeSong && this.youtubeSong.url) {
+    console.log(this.youtubeSong, 'this is youtube song');
+    try {
+      const response = await fetch(this.youtubeSong.url);
+      const html = await response.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const ogImageUrl = doc.querySelector('meta[property="og:image"]').getAttribute('content');
+      console.log(ogImageUrl, 'this is ogImageUrl');
+      return ogImageUrl;
+    } catch (err) {
+      console.error(err);
+      return 'https://howtodrawforkids.com/wp-content/uploads/2021/10/How-to-draw-a-Pig-Face-for-kindergarten.jpg';
+    }
+  } else {
+    return 'https://howtodrawforkids.com/wp-content/uploads/2021/10/How-to-draw-a-Pig-Face-for-kindergarten.jpg';
+  }
+},
+
   },
   methods: {
+    // handelSearchSong(song) {
+    //   this.song = song
+    // },
     getSvg(iconName) {
       return SVGService.getSpotifySvg(iconName)
     },
     // Add functionality
     toggleSongLike(idx) {
       // const song = this.station.songs[idx]
-
-      console.log('liked')
       // song.liked = !song.liked
       // console.log(
       //   `Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`
@@ -172,5 +181,14 @@ export default {
     MediaPlayer,
     BubblingHeart,
   },
+  watch: {
+  song(newValue, oldValue) {
+    console.log('song changed:', newValue);
+  },
+  youtubeSong(newValue, oldValue) {
+    console.log('youtubeSong changed:', newValue);
+  },
+},
+
 }
 </script>

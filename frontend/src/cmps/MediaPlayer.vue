@@ -125,7 +125,10 @@ export default {
         setTimeout(async () => {
           try {
             const videos = await stationService.getVideos(this.song.title)
-            this.song = videos[0]
+            console.log('before hazarzer console', videos)
+            this.song = videos[1]
+            eventBus.emit('youtube-song',this.song)
+            console.log('from tal data itay console ', this.song)
           } catch (error) {
             console.error(error)
           }

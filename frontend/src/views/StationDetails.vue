@@ -445,7 +445,14 @@ export default {
       }
     },
     onDrop(dropResult) {
-      this.station.songs = this.applyDrag(this.station.songs, dropResult)
+      const { removedIndex, addedIndex } = dropResult
+      if (removedIndex !== null || addedIndex !== null) {
+        const songs = this.applyDrag(this.station.songs, dropResult)
+        this.$store.commit('setStationSongs', {
+          stationId: this.station._id,
+          songs,
+        })
+      }
     },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult
