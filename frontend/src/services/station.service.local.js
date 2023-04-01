@@ -105,7 +105,6 @@ function getEmptyStation() {
   }
 }
 
-//Step3
 function removeSong(stationId, songId) {
   return httpService.delete(`station/${stationId}/song/${songId}`)
   // const stations = utilService.loadFromStorage(STORAGE_KEY)
@@ -123,7 +122,6 @@ function getVideos(keyword) {
   }
 
   return axios.get(gUrl + keyword).then((res) => {
-    console.log(res.data.items)
     const videos = res.data.items.map((item) => _prepareData(item))
     gSearchCache = videos
     utilService.saveToStorage(SEARCH_KEY, gSearchCache)
@@ -177,11 +175,10 @@ function createNewStation(name) {
     ],
     desc: '',
   }
-
-  // if (toy._id) {
-  //   return httpService.put(`toy/${toy._id}`, toy)
-  // }
+// working with backend
   return httpService.post('station', newStation)
+
+// working with local
 
   // const stations = utilService.loadFromStorage(STORAGE_KEY)
   // console.log(stations)
@@ -202,28 +199,19 @@ function createNewStation(name) {
 }
 
 async function addUserToSong(song, station, loggedinUser) {
-  console.log('service station', station)
-  console.log('service song', song)
-  console.log('service user', loggedinUser)
-
   if (!station) {
     throw new Error('Station parameter is undefined')
   }
-
   // Create a new song object with the updated likedByUsers array
   const updatedSong = {
     ...song,
     likedByUsers: [...song.likedByUsers, loggedinUser.fullname],
   }
-
   const updatedStation = {
     ...station,
     songs: station.songs.map((s) => (s.id === song.id ? updatedSong : s)),
   }
-  console.log('this is the updated station', updatedStation)
-
   const savedStation = await save(updatedStation)
-
   return { updatedSong, savedStation }
 }
 
@@ -244,6 +232,5 @@ async function addSongToUserStation(song, station) {
   const updatedSongs = [...station.songs, song]
   const updatedStation = { ...station, songs: updatedSongs }
   const savedStation = await save(updatedStation)
-  console.log(savedStation)
   return savedStation
 }

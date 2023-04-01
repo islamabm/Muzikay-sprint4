@@ -44,9 +44,7 @@
                 <!-- <h1 v-if="user">{{ user.fullname }}</h1> -->
                 <span class="small-logo-word">Muzikay</span>
               </div>
-              <!-- <span class="likes-count" @click="toggleModal"
-                >6,950,331 likes</span
-              > -->
+
               <span class="dot">•</span>
               <span class="songs-count">{{ songsCount }},</span>
 
@@ -99,9 +97,10 @@
             <img v-else class="song-img" :src="song.imgUrl" />
             <p
               class="song-title"
-              :class="{ active: activeTitle === idx }"
+              v-bind:class="{ active: isActive }"
               @click="toggleActiveTitle(idx)"
-            >
+              >
+              <!-- :class="{ active: activeTitle === idx }" -->
               {{ song.title }} - {{ song.artist }}
             </p>
           </div>
@@ -111,7 +110,6 @@
           </p>
 
           <p class="posted-at">{{ getTimeAgo(new Date(song.addedAt)) }}</p>
-          <!-- @toggleLike="toggleSongLike" -->
           <div class="flex-end list-end">
             <div class="like-song-icon">
               <BubblingHeart
@@ -124,7 +122,6 @@
                 @click="addUserToSong(song), onHeartClick(idx)"
               />
 
-              <!-- @toggleLikgit ngLike" -->
             </div>
             <p class="song-duration">1:40</p>
             <div>
@@ -155,9 +152,10 @@
 
             <p
               class="song-title"
-              :class="{ active: activeTitle === idx }"
+              v-bind:class="{ active: isActive }"
               @click="toggleActiveTitle(idx)"
-            >
+              >
+              <!-- :class="{ active: activeTitle === idx }" -->
               {{ song.title }}
             </p>
           </div>
@@ -172,9 +170,8 @@
                 :class="{ 'hover-effect': clickedHeartIndex !== idx }"
                 :songIndex="idx"
                 :liked="song.liked"
-              />
-              <!-- @click="addUserToSong(station, song), onHeartClick(idx)" -->
-            </div>
+                />
+              </div>
             <p class="song-duration">1:40</p>
             <div>
               <button
@@ -261,14 +258,12 @@
 </template>
 
 <script>
-import { utilService } from '../services/util.service'
 import { Container, Draggable } from 'vue3-smooth-dnd'
 import { FastAverageColor } from 'fast-average-color'
 import StationEdit from '../cmps/StationEdit.vue'
 import Search from './Search.vue'
 import svgService from '../services/SVG.service.js'
 import { stationService } from '../services/station.service.local.js'
-import { userService } from '../services/user.service.js'
 import {
   eventBus,
   showErrorMsg,
@@ -308,18 +303,18 @@ export default {
       currImgSvg: 'defaultImgIcon',
       colorCache: {},
       selectedSongId: null,
+      isActive: true,
     }
   },
   methods: {
     toggleHeaderLike() {
-      console.log('need to do that function')
     },
     handelYoutubeSong(video) {
-      console.log('video', video)
+      this.isActive = !this.isActive
       eventBus.emit('youtube-song', video)
     },
     songDetails(song) {
-      console.log('details event bus', song)
+      this.isActive = !this.isActive
       eventBus.emit('song-details', song)
     },
     dontAddSong() {
@@ -398,14 +393,6 @@ export default {
       console.log('opened')
       this.showStationsSubMenu = !this.showStationsSubMenu
     },
-    // toggleSongLike(idx) {
-    //   const song = this.station.songs[idx]
-    //   song.liked = !song.liked
-    //   console.log(
-    //     `Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`
-    //   )
-    //   //   // Add functionality
-    // },
     toggleActiveTitle(idx) {
       if (this.activeTitle === idx) {
         this.activeTitle = null
@@ -429,7 +416,6 @@ export default {
         this.updateBodyBackgroundColor(cachedColor)
         return
       }
-
       const fac = new FastAverageColor()
       const img = new Image()
       img.crossOrigin = 'Anonymous'
@@ -486,34 +472,7 @@ export default {
         this.showSongModal = false
       }
     },
-    // removeSong(songId) {
-    //   console.log('station details function remove song', songId)
-    //   console.log('station details function remove song', this.station._id)
-    //   this.$store.dispatch({
-    //     type: 'removeSong',
-    //     songId,
-    //     stationId: this.station._id,
-    //   })
-    // },
-    // async addToStation(song) {
-    //   const stationName = prompt('station?')
-    //   try {
-    //     const station = this.stations.find((s) => s.name === stationName)
-    //     console.log('stationDetails', song)
-    //     console.log('stationDetails', stationName)
-    //     await this.$store.dispatch({
-    //       type: 'addToStation',
-    //       song,
-    //       station,
-    //     })
-    //     showSuccessMsg('added to playlist')
-    //   } catch (err) {
-    //     console.log(err)
-    //     showErrorMsg('Cannot added to playlist')
-    //   } finally {
-    //     this.showSongModal = false
-    //   }
-    // },
+    
     async addToSelectedStation(stationId, song) {
       console.log('we are in the details in the add song', song)
       console.log('we are in the details in the add song station', stationId)
@@ -530,7 +489,6 @@ export default {
       } finally {
         this.showSongModal = false
         this.showStationsSubMenu = false
-        // this.show = false
       }
     },
     async removeStation() {
@@ -547,20 +505,14 @@ export default {
       }
     },
     toggleModal() {
-      // if (this.station.createdBy.fullname === 'guest') {
       this.showModal = true
-      // } else {
-      // console.log('not user data')
-      // }
     },
     toggleSongModal(ev, song, idx) {
       const btn = ev.target
-      const buttonEl = this.$refs.songButtons[idx]
       // Get the x and y coordinates of the button in the screen
       const { left, top, height } = btn.getBoundingClientRect()
       this.modalX = left - 200
       this.modalY = top + height - 60
-      console.log('toggled song modal')
       this.selectedSong = song
       this.selectedSongId = song.id
       this.selectedIndex = idx
@@ -576,12 +528,8 @@ export default {
         const { stationId } = this.$route.params
         try {
           if (!stationId) return
-          // this.$store.commit({ type: 'setCurrStation', stationId })
           this.station = await stationService.getById(stationId)
           if (!this.station) return
-          // this.station = await this.$store.getters.stationById(stationId)
-          // console.log(this.station)
-          // maybe remove after && after 11pm we dont delete anything
           this.$nextTick(() => {
             this.getDominantColor(
               this.station.imgUrl
@@ -605,9 +553,6 @@ export default {
       return this.station.name
     },
     likedSongsUser() {
-      // return []
-      // console.log(this.$store.getters.getSongsLikedByUser)
-      console.log(this.$store.getters.getSongsLikedByUser)
       return this.$store.getters.getSongsLikedByUser
     },
     isLikedPageWanted() {
@@ -638,13 +583,6 @@ export default {
     //   return `My Playlist #${this.counter}`
     // },
 
-    // handelLongText() {
-    //   let longSongs = this.station.songs.filter(s => s.title.length > 25)
-    //   const song = longSongs.map(s => s.title.slice(0,25) + '...')
-    //   console.log(song);
-    //   // this.station.push(song)
-    //   return song
-    // }
   },
   components: {
     StationEdit,

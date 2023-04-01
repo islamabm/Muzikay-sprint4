@@ -91,7 +91,6 @@ export default {
   computed: {
     station() {
       const { stationId } = this.$route.params
-      console.log(stationId)
       const stations = this.stations
       const station = stations.find((t) => t._id === stationId)
 

@@ -52,7 +52,6 @@ export const userStore = {
     },
     async signup({ commit }, { userCred }) {
       try {
-        console.log('store', userCred)
         const user = await userService.signup(userCred)
         commit({ type: 'setLoggedinUser', user })
         return user
@@ -71,7 +70,6 @@ export const userStore = {
       }
     },
     async loadUsers({ commit }) {
-      // TODO: loading
       try {
         const users = await userService.getUsers()
         commit({ type: 'setUsers', users })

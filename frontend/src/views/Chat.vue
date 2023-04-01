@@ -67,8 +67,6 @@ export default {
     },
     sendMsg() {
       console.log('Sending', this.msg)
-      // TODO: next line not needed after connecting to backend
-      // this.addMsg(this.msg)
       // setTimeout(()=>this.addMsg({from: 'Dummy', txt: 'Yey'}), 2000)
       const user = userService.getLoggedinUser()
       const from = (user && user.fullname) || 'Guest'
