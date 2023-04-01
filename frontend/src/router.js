@@ -10,6 +10,7 @@ import LoginSignup from './views/LoginSignup.vue'
 import StationDetails from './views/StationDetails.vue'
 import StationCollection from './views/StationCollection.vue'
 import UserDetails from './views/UserDetails.vue'
+import Chat from './views/Chat.vue'
 // import Modal from '../src/cmps/Modal.vue'
 
 const routes = [
@@ -38,8 +39,7 @@ const routes = [
         path: '/station/collection/:category?',
         component: StationCollection,
       },
-   
-      
+
       // {
       //   path: '/station/modal',
       //   name: 'modal',
@@ -51,16 +51,21 @@ const routes = [
         component: Search,
       },
       {
+        path: '/station/chat',
+        name: 'chat',
+        component: Chat,
+      },
+      {
         path: '/station/library',
         name: 'Library',
         component: UserLibrary,
       },
-  
+
       {
         path: '/user/:id',
         name: 'UserDetails',
         component: UserDetails,
-      },  
+      },
       // {
       //   path: '/station/like',
       //   name: 'like',
@@ -70,7 +75,7 @@ const routes = [
         path: '/station/:stationId',
         name: 'station-details',
         component: StationDetails,
-        props: true 
+        props: true,
       },
     ],
   },

@@ -2,6 +2,7 @@
   <div class="container">
     <h1>About Us</h1>
     <p>We like You</p>
+    <h3 v-if="typingUser">{{ typingUser }} is typing...</h3>
     <h2>Lets Chat About {{ topic }}</h2>
     <label>
       <input
@@ -42,6 +43,7 @@ export default {
       msg: { from: 'Guest', txt: '' },
       msgs: [],
       topic: 'Love',
+      typingUser: '',
     }
   },
   created() {

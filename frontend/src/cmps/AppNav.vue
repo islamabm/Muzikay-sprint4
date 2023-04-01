@@ -43,6 +43,7 @@
             ></i>
             Search
           </RouterLink>
+          <RouterLink to="/station/chat">chat</RouterLink>
 
           <RouterLink
             to="/station/library"

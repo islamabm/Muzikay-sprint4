@@ -4,10 +4,10 @@
       <MediaPlayer />
     </div>
     <div v-if="station" class="footer-details">
-      <div v-if="islamSong">
-        <img class="footer-details-img" :src="islamSong.url" />
+      <div v-if="currSong">
+        <img class="footer-details-img" :src="url" />
         <h3 class="footer-details-title">
-          {{ islamSong.title }}
+          {{ currSong.title }}
         </h3>
       </div>
 
@@ -39,15 +39,15 @@ export default {
       song: null,
       alive: false,
       youtubeSong: null,
-      islamSong: null,
+      currSong: null,
     }
   },
   created() {
     eventBus.on('song-details', (song) => {
       console.log('song-details event received:', song)
-      // if (song.id || song.videoId) {
-      //   this.song = song.id ? song : { id: song.videoId }
-      this.islamSong = song
+
+      this.currSong = song
+      console.log('song-details event received:', this.currSong)
       var delay = song.delay || 2000
       this.alive = true
       setTimeout(() => {
@@ -74,12 +74,7 @@ export default {
       return this.$store.getters.stations
     },
     url() {
-      console.log('in the url')
-      if (!this.station) return
-      console.log('imgUrl', this.song.imgUrl)
-      if (this.song.imgUrl) return this.song.imgUrl
-      console.log('url', this.youtubeSong.url)
-      if (this.youtubeSong.url) return this.youtubeSong.url
+      return this.currSong.imgUrl
     },
     // currSong() {
     // if (!this.station) return null;
