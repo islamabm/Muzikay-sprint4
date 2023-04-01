@@ -6,19 +6,26 @@
     <div v-if="station" class="footer-details">
       <img
         class="footer-details-img"
-        :src="currSong.imgUrl ? currSong.imgUrl : youtubeSong.url"
+        :src="song.imgUrl"
       />
 
       <h3 class="footer-details-title">
-        {{ currSong.title ? currSong.title : youtubeSong.title }}
+        {{ youtube.title }}
       </h3>
-      <button class="footer-like">
-        <BubblingHeart
+      <!-- <button class="footer-like"> -->
+        <!-- <BubblingHeart
           :songIndex="currSongIdx"
           :liked="station.songs[currSongIdx].liked"
           @toggleLike="toggleSongLike"
-        />
-      </button>
+        /> -->
+      <!-- </button> -->
+    </div>
+    <div v-else v-if="youtubeSong">
+      <img :src="youtubeSong.url" alt="shit bakod">
+      <h3 class="footer-details-title">
+        {{ youtubeSong.title }}
+      </h3>
+
     </div>
   </footer>
 </template>
@@ -46,17 +53,10 @@ export default {
       eventBus.on('song-details', (song) => {
       if(song.id) return this.song = song
       if(song.videoId) return this.song.id = song.videoId
+      this.youtubeSong = song
       var delay = song.delay || 2000
-      setTimeout(async () => {
-        try{
-          const videos = await stationService.getVideos(song.title)
-          console.log('videos', videos)
-          this.youtubeSong = videos[0]
-          this.alive = true
-        }
-        catch (err) {
-          console.error(err)
-        }
+      this.alive = true
+      setTimeout(() => {
           this.alive = false
         }, delay)})
 
