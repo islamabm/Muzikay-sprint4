@@ -1632,6 +1632,13 @@
         "imgUrl": "https://i.scdn.co/image/ab67616d0000b27325a4df452a3c42ccc2e9288b",
         "likedByUsers": []
       }
+    ],
+    "msgs": [
+      {
+        "id": "m101",
+        "from": "{mini-user}",
+        "txt": "Manish?"
+      }
     ]
   },
   {

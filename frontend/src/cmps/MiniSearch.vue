@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import { eventBus } from '../services/event-bus.service'
 import { Container, Draggable } from 'vue3-smooth-dnd'
 import SVGService from '../services/SVG.service'
 import { stationService } from '../services/station.service.local'

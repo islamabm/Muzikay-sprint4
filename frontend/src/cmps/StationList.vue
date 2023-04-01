@@ -38,8 +38,5 @@ export default {
   components: {
     StationPreview,
   },
-  // mounted() {
-  //   console.log("Stations:", this.stations);
-  // },
 }
 </script>

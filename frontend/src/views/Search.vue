@@ -61,7 +61,6 @@
   </section>
 </template>
 <script>
-// import { eventBus } from '../services/event-bus.service'
 import { stationService } from '../services/station.service.local'
 import {
   eventBus,
@@ -85,9 +84,6 @@ export default {
       eventBus.emit('fetch-videos', title)
     },
     async addSongFromSearch(stationId, song) {
-      console.log('hi')
-      console.log('song in search component', song)
-      console.log('station in search component', stationId)
       try {
         await this.$store.dispatch({
           type: 'addToStation',
@@ -101,31 +97,25 @@ export default {
       } finally {
         this.showSongModal = false
         this.showStationsSubMenu = false
-        // this.show = false
       }
     },
     toggleSongModal(ev, song, idx) {
       this.currSong = this.videos[idx]
-      console.log('song in modal search', song)
       const btn = ev.target
-      const buttonEl = this.$refs.songButtons[idx]
       // Get the x and y coordinates of the button in the screen
       const { left, top, height } = btn.getBoundingClientRect()
       this.modalX = left - 200
       this.modalY = top + height - 60
 
-      console.log('toggled song modal')
       this.selectedSong = song
       this.selectedIndex = idx
       this.showSongModal = !this.showSongModal
     },
     openStationSelection() {
-      console.log('opened')
       this.showStationsSubMenu = !this.showStationsSubMenu
     },
     filterStationCategories(categoryName) {
       try {
-        console.log(categoryName)
         this.$router.push(`/station/collection/${categoryName}`)
       } catch (error) {
         console.error(error)

@@ -8,8 +8,7 @@
 import StationsList from '../cmps/StationList.vue'
 import { eventBus } from '../services/event-bus.service.js'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
-import { userService } from '../services/user.service.local.js'
-// import { getActionRemoveStation } from '../store/station.store'
+
 export default {
   computed: {
     loggedInUser() {
@@ -19,7 +18,6 @@ export default {
       return this.$store.getters.filteredStations(this.category)
     },
     category() {
-    // console.log('Current category:', this.$route.params.category);
     return this.$route.params.category;
   },
   },
@@ -49,8 +47,5 @@ export default {
       this.$store.commit('setAllStations', { stations: filteredStations })
     })
   },
-  // mounted() {
-  //   // console.log("Stations in parent component:", this.stations);
-  // },
 }
 </script>

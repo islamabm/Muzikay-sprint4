@@ -20,6 +20,7 @@
               v-model="station.name"
               :placeholder="station.name"
             />
+
             <textarea
               class="edit-text-area"
               id="description"
@@ -27,6 +28,7 @@
               v-model="station.description"
               placeholder="Add an optional description"
             ></textarea>
+
             <button class="btn-save-changes">Save</button>
           </div>
         </div>
@@ -50,19 +52,18 @@ export default {
   },
   methods: {
     async stationInput() {
-  let editedStation = { ...this.station }
-  try {
-    await this.$store.dispatch({
-      type: 'editstation',
-      station: editedStation,
-    })
-    showSuccessMsg('Station edited')
-    this.$emit('close') // add this line to close the modal
-  } catch (err) {
-    showErrorMsg('Cannot edit station', err)
-  }
-},
-
+      let editedStation = { ...this.station }
+      try {
+        await this.$store.dispatch({
+          type: 'editstation',
+          station: editedStation,
+        })
+        showSuccessMsg('Station edited')
+        this.$emit('close') // add this line to close the modal
+      } catch (err) {
+        showErrorMsg('Cannot edit station', err)
+      }
+    },
 
     async handleFile(ev) {
       this.loading = true // set the loading flag to true
@@ -90,7 +91,6 @@ export default {
   computed: {
     station() {
       const { stationId } = this.$route.params
-      console.log(stationId)
       const stations = this.stations
       const station = stations.find((t) => t._id === stationId)
 

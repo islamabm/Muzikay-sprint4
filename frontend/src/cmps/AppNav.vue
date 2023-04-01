@@ -43,6 +43,7 @@
             ></i>
             Search
           </RouterLink>
+          <RouterLink to="/station/chat">chat</RouterLink>
 
           <RouterLink
             to="/station/library"
@@ -101,10 +102,7 @@
 </template>
 
 <script>
-// import { utilService } from '../services/util.service'
-// import { userService } from '../services/user.service.local.js'
 import svgService from '../services/SVG.service.js'
-// import { stationService } from '../services/station.service.local.js'
 import { Container, Draggable } from 'vue3-smooth-dnd'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
@@ -129,11 +127,10 @@ export default {
   },
   methods: {
     onDrop(dropResult) {
-    this.userStationsData = this.applyDrag(this.userStationsData, dropResult);
-    this.$store.commit('updateUserStations', this.userStationsData);
-  },
+      this.userStationsData = this.applyDrag(this.userStationsData, dropResult)
+      this.$store.commit('updateUserStations', this.userStationsData)
+    },
     applyDrag(arr, dragResult) {
-      console.log('hi')
       const { removedIndex, addedIndex, payload } = dragResult
       if (removedIndex === null && addedIndex === null) return arr
       const result = [...arr]
@@ -173,7 +170,6 @@ export default {
       try {
         this.stationCounter++
         const StationName = `My Playlist #${this.stationCounter}`
-        console.log('station name in app nav', StationName)
         await this.$store.dispatch({
           type: 'createStation',
           StationName,
@@ -183,10 +179,13 @@ export default {
       }
     },
     async showLikedSongs() {
-      console.log('hi')
-      console.log(this.$store.getters.getSongsLikedByUser)
       const stationId = 'likeduser123'
-      await this.$store.dispatch({ type: 'setcurrStation', stationId })
+      const newStation = await this.$store.dispatch({
+        type: 'setcurrStation',
+        stationId,
+      })
+      console.log(newStation)
+      // socketService.emit('station-added', savedStation)
       // this.$store.commit({ type: 'setCurrStation', stationId })
       this.$router.push(`/station/${stationId}`)
       // this.$store.dispatch({
@@ -211,11 +210,11 @@ export default {
     Container,
     Draggable,
   },
-    watch: {
+  watch: {
     userStations: {
       immediate: true,
       handler(newValue) {
-        this.userStationsData = newValue;
+        this.userStationsData = newValue
       },
     },
   },

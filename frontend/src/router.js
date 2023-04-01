@@ -2,15 +2,14 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 import Search from './views/Search.vue'
 import UserLibrary from './views/UserLibrary.vue'
-// import LikedSongs from './views/LikedSongs.vue'
 import StationIndex from './views/StationIndex.vue'
 import Signup from './views/Signup.vue'
 import Login from './views/Login.vue'
-import LoginSignup from './views/LoginSignup.vue'
+// import LoginSignup from './views/LoginSignup.vue'
 import StationDetails from './views/StationDetails.vue'
 import StationCollection from './views/StationCollection.vue'
 import UserDetails from './views/UserDetails.vue'
-// import Modal from '../src/cmps/Modal.vue'
+import Chat from './views/Chat.vue'
 
 const routes = [
   {
@@ -38,39 +37,32 @@ const routes = [
         path: '/station/collection/:category?',
         component: StationCollection,
       },
-   
-      
-      // {
-      //   path: '/station/modal',
-      //   name: 'modal',
-      //   component: Modal,
-      // },
       {
         path: '/station/search',
         name: 'search',
         component: Search,
       },
       {
+        path: '/station/chat',
+        name: 'chat',
+        component: Chat,
+      },
+      {
         path: '/station/library',
         name: 'Library',
         component: UserLibrary,
       },
-  
+
       {
         path: '/user/:id',
         name: 'UserDetails',
         component: UserDetails,
-      },  
-      // {
-      //   path: '/station/like',
-      //   name: 'like',
-      //   component: LikedSongs,
-      // },
+      },
       {
         path: '/station/:stationId',
         name: 'station-details',
         component: StationDetails,
-        props: true 
+        props: true,
       },
     ],
   },

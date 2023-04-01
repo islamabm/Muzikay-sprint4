@@ -125,10 +125,8 @@ export default {
         setTimeout(async () => {
           try {
             const videos = await stationService.getVideos(this.song.title)
-            console.log('before hazarzer console', videos)
             this.song = videos[1]
             eventBus.emit('youtube-song',this.song)
-            console.log('from tal data itay console ', this.song)
           } catch (error) {
             console.error(error)
           }
@@ -150,9 +148,6 @@ export default {
     station() {
       return this.$store.getters.station
     },
-    // copyOfCurrIdx() {
-    //   this.songIdx = this.currSongIdx
-    // },
     putSongName() {
       if (this.song) {
         if (this.song.id) {
@@ -165,12 +160,9 @@ export default {
         return this.youtubeSong.videoId
       }
       if (this.station) {
-        console.log('this.station else 5', this.station)
         if (this.isShuffleOn) {
-          console.log('this.isShuffleOn if 3', this.isShuffleOn)
           return this.station.songs[this.shuffledSongs[this.songIdx]].id
         } else if (this.isRepeatOn) {
-          console.log('this.repeatOn if 4', this.isRepeatOn)
           return this.station.songs[this.songIdx].id
         } else {
           return this.station.songs[this.songIdx].id
@@ -191,12 +183,6 @@ export default {
     },
   },
   methods: {
-    // async add() {
-    //   const videos = await stationService.getVideos(this.song.title)
-    //   console.log('hi from get videos', videos)
-    //   this.video = videos[0]
-    // },
-
     toggleMute() {
       if (this.volume > 0) this.volume = 0
       else this.volume = 50
@@ -213,7 +199,6 @@ export default {
     //  does algorithem to do a new array with random songs
     ShuffleSong() {
       this.isShuffleOn = !this.isShuffleOn
-      console.log(this.isShuffleOn)
       if (this.isShuffleOn) {
         // shuffle the array of song indexes
         let currentIndex = this.station.songs.length
@@ -255,6 +240,10 @@ export default {
       console.log('event', event)
       if (event.data === 1) {
         this.isPlaying = false
+        this.duration = this.$refs.youtube.getDuration()
+        this.intervalId = setInterval(() => {
+          this.currentTime = this.$refs.youtube.getCurrentTime()
+        }, 1000)
         this.playAudio()
       }
       if (event.data === 2) clearInterval(this.intervalId)
