@@ -523,28 +523,22 @@ export default {
     },
   },
   watch: {
-    '$route.params': {
-      async handler() {
-        const { stationId } = this.$route.params
-        try {
-          if (!stationId) return
-          this.station = await stationService.getById(stationId)
-          if (!this.station) return
-          this.$nextTick(() => {
-            this.getDominantColor(
-              this.station.imgUrl
-                ? this.station.imgUrl
-                : this.station.songs[0].imgUrl
-            )
-          })
-        } catch (err) {
-          console.log(err)
-        }
+    station: {
+      handler(newStation) {
+        if (!newStation) return
+
+        this.$nextTick(() => {
+          this.getDominantColor(
+            newStation.imgUrl
+              ? newStation.imgUrl
+              : newStation.songs[0].imgUrl
+          )
+        })
       },
-      deep: true,
-      immediate: true,
-    },
-  },
+      deep: true
+    }
+},
+
   computed: {
     user() {
       return this.$store.getters.loggedinUser
@@ -580,12 +574,6 @@ export default {
       const words = this.station.name.split(' ').length
       return words <= 3 ? 'short-station-name' : 'long-station-name'
     },
-
-    // stationCount() {
-    //   //computed can't do this
-    //   this.counter++
-    //   return `My Playlist #${this.counter}`
-    // },
   },
   components: {
     StationEdit,
@@ -596,11 +584,52 @@ export default {
     BubblingHeart,
   },
   mounted() {
-    window.scrollTo(0, 0)
-    this.getDominantColor(this.imageSrc)
-  },
+  window.scrollTo(0, 0)
+  const { stationId } = this.$route.params
+
+  if (stationId) {
+    stationService.getById(stationId)
+      .then(station => {
+        if (!station) return
+        this.station = station
+        this.getDominantColor(
+          this.station.imgUrl
+        )
+      })
+      .catch(error => {
+        console.error('Error getting station:', error)
+      })
+  }
+
+  this.$nextTick(() => {
+    this.getDominantColor(
+      this.station.imgUrl
+        ? this.station.imgUrl
+        : this.station.songs[0].imgUrl
+    )
+  })
+},
+
   beforeUnmount() {
     document.body.style.background = '#181818'
   },
+  created() {
+  const { stationId } = this.$route.params
+  if (!stationId) return
+  stationService.getById(stationId)
+    .then(station => {
+      if (!station) return
+      this.station = station
+      this.getDominantColor(
+        this.station.imgUrl
+          ? this.station.imgUrl
+          : this.station.songs[0].imgUrl
+      )
+    })
+    .catch(error => {
+      console.error('Error getting station:', error)
+    })
+}
+
 }
 </script>

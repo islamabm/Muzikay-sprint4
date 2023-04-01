@@ -105,7 +105,23 @@ export default {
     },
   },
   mounted() {
-    // console.log(this.$store.getters.stations)
+    eventBus.on('song-details', (song) => {
+      this.currSong = song
+      var delay = song.delay || 2000
+      this.alive = true
+      setTimeout(() => {
+        this.alive = false
+      }, delay)
+    })
+
+    eventBus.on('youtube-song', (video) => {
+      this.youtubeSong = video
+      var delay = video.delay || 2000
+      this.alive = true
+      setTimeout(() => {
+        this.alive = false
+      }, delay)
+    })
   },
 
   components: {

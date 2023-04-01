@@ -22,6 +22,7 @@
 
   .img-and-title-player{
     display:flex;
+    align-items: center;
   }
   .footer-details {
     grid-row: 2;
@@ -93,78 +94,7 @@
   }
   
 }
-  
-  // @media screen and (max-width: $narrow-breakpoint) {
-  //   bottom: 60px;
-  //   height: max-content;
-  //   padding: 0;
-  //   border-radius: 8px;
-
-  //   grid-template-columns: 1fr;
-  //   grid-template-rows: 50px 15px;
-
-  //   .control-buttons > *:not(.media-player-play) {
-  //     display: none;
-  //   }
-  //   .music-bar {
-  //     display: grid;
-
-  //     .current-time {
-  //       display: none;
-  //     }
-  //   }
-  //   .footer-media-player {
-  //     display: none;
-  //   }
-  //   .progress-bar {
-  //     display: block;
-  //     grid-row: 2;
-  //     // grid-column: 1;
-  //     background-color: aqua;
-  //   }
-  //   .progress-bar-fill {
-  //     display: block;
-  //     grid-row: 2;
-  //     // grid-column: 1;
-  //     background-color: aqua;
-  //   }
-  //   .footer-details {
-  //     grid-row: 1;    
-  //     .heart-svg {
-  //       margin-left: em(350px);
-  //       width: 40px;
-  //       margin-top: 5px;
-  //     }   
-
-  //     img {
-  //       width: 35px;
-  //       height: 35px;
-  //       border-radius: 4px;
-  //     }
-  //   }
-  //   .media-player-play {
-  //     // margin-top: 24px;
-  //     border: none;
-  //     background-color: inherit;
-  //     svg {
-  //       width: 30px;
-  //       height: 30px;
-  //       fill: white;
-  //     }
-  //   }
-  // }
-
-  // @media screen and (min-width: $normal-breakpoint) {
-  //   .media-player-play {
-  //     border: none;
-  //     background-color: white;
-  //     svg {
-  //       fill: rgb(0, 0, 0);
-  //     }
-  //   }
-  // }
-
-// }
+ 
 
 //RANIa
 @media only screen and (max-width: $narrow-breakpoint) {
@@ -181,7 +111,7 @@
       padding-inline: 10px;
       text-overflow: ellipsis;
       white-space: nowrap;
-      width: 260px;
+      width: 300px;
       h3 {
         margin-top: 0;
         margin-bottom: 5px;
@@ -205,7 +135,10 @@
   padding: 6px;
 }
   .footer-like {
-    transform:translate(117px, -4px);
+    // margin-inline-start: 172px;
+    transform: translateY(-3px);
+    margin-inline-start: 312px;
+    position:fixed;
    
   }
     .media-player .hiding {
@@ -213,7 +146,7 @@
     }
     .media-player-play{
       grid-row: 1;
-      transform: translate(50px);
+      transform: translate(15px);
       background-color: transparent;
       justify-content: center;
       align-items:center;
