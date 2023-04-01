@@ -4,8 +4,10 @@ import { userService } from './user.service'
 export const SOCKET_EVENT_ADD_MSG = 'chat-add-msg'
 export const SOCKET_EMIT_SEND_MSG = 'chat-send-msg'
 export const SOCKET_EMIT_SET_TOPIC = 'chat-set-topic'
-export const SOCKET_EVENT_USER_IS_TYPING = 'chat-user-is-typing'
-export const SOCKET_EMIT_USER_IS_TYPING = 'chat-set-user-is-typing'
+export const SOCKET_EMIT_USER_WATCH = 'user-watch'
+export const SOCKET_EVENT_USER_UPDATED = 'user-updated'
+export const SOCKET_EVENT_REVIEW_ADDED = 'review-added'
+export const SOCKET_EVENT_REVIEW_ABOUT_YOU = 'review-about-you'
 
 const SOCKET_EMIT_LOGIN = 'set-user-socket'
 const SOCKET_EMIT_LOGOUT = 'unset-user-socket'
@@ -15,7 +17,7 @@ export const socketService = createSocketService()
 // export const socketService = createDummySocketService()
 
 // for debugging from console
-window.socketService = socketService
+// window.socketService = socketService
 
 socketService.setup()
 
@@ -30,7 +32,6 @@ function createSocketService() {
       }, 500)
     },
     on(eventName, cb) {
-      console.log(socket)
       socket.on(eventName, cb)
     },
     off(eventName, cb = null) {
@@ -39,7 +40,6 @@ function createSocketService() {
       else socket.off(eventName, cb)
     },
     emit(eventName, data) {
-      if (!data) return
       data = JSON.parse(JSON.stringify(data))
       socket.emit(eventName, data)
     },
@@ -81,28 +81,15 @@ function createDummySocketService() {
         )
     },
     emit(eventName, data) {
-      var listeners = listenersMap[eventName]
-      if (eventName === SOCKET_EMIT_SEND_MSG) {
-        listeners = listenersMap[SOCKET_EVENT_ADD_MSG]
-      }
-
-      if (!listeners) return
-
-      listeners.forEach((listener) => {
+      if (!listenersMap[eventName]) return
+      listenersMap[eventName].forEach((listener) => {
         listener(data)
       })
     },
-    // Functions for easy testing of pushed data
-    testChatMsg() {
+    debugMsg() {
       this.emit(SOCKET_EVENT_ADD_MSG, {
         from: 'Someone',
         txt: 'Aha it worked!',
-      })
-    },
-    testUserUpdate() {
-      this.emit(SOCKET_EVENT_USER_UPDATED, {
-        ...userService.getLoggedinUser(),
-        score: 555,
       })
     },
   }
