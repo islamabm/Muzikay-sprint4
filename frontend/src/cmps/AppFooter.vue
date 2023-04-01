@@ -1,31 +1,23 @@
 <template>
   <footer class="main-footer">
     <div class="footer-media-player">
-      <MediaPlayer @songFromYoutube="handelSearchSong" />
+      <MediaPlayer />
     </div>
 
     <div v-if="station" class="footer-details">
-      <img
-        class="footer-details-img"
-        :src="currSong.imgUrl ? currSong.imgUrl : youtubeSong.url"
-      />
-      <!-- :src="
-          station.songs[currSongIdx].imgUrl
-            ? station.songs[currSongIdx].imgUrl
-            : station.songs[currSongIdx].url
-        " -->
+  <img class="footer-details-img" :src="getImageUrl" />
+  <h3 class="footer-details-title">
+    {{ currSong.title || youtubeSong.title }}
 
-      <h3 class="footer-details-title">
-        <!-- {{ station.songs[currSongIdx].title }} -->
-        {{ currSong.title ? currSong.title : youtubeSong.title }}
-      </h3>
-      <button class="footer-like">
-        <BubblingHeart
-          :songIndex="currSongIdx"
-          :liked="station.songs[currSongIdx].liked"
-          @toggleLike="toggleSongLike"
-        />
-      </button>
+
+  </h3>
+  <button class="footer-like">
+    <BubblingHeart
+      :songIndex="currSongIdx"
+      :liked="currSong ? currSong.liked : false"
+      @toggleLike="toggleSongLike"
+    />
+  </button>
     </div>
   </footer>
 </template>
@@ -50,15 +42,18 @@ export default {
   },
   created() {
     eventBus.on('song-details', (song) => {
-      if(song.id) this.song = song
-      if(song.videoId) this.song.id = song.videoId
-      var delay = song.delay || 2000
-      this.alive = true
-      setTimeout(() => {
-        this.alive = false
-      }, delay)
+      console.log('song-details event received:', song)
+      if (song.id || song.videoId) {
+        this.song = song.id ? song : { id: song.videoId }
+        var delay = song.delay || 2000
+        this.alive = true
+        setTimeout(() => {
+          this.alive = false
+        }, delay)
+      }
     })
     eventBus.on('youtube-song', (video) => {
+      console.log('youtube-song event received:', video)
       this.youtubeSong = video
       console.log(this.youtubeSong)
       var delay = video.delay || 2000
@@ -73,28 +68,65 @@ export default {
       return this.$store.getters.station
     },
     currSong() {
-      if (!this.station) return
-      if(!this.song.id) return
-      return this.station.songs.find((s) => s.id === this.song.id)
-    },
-    currSongIdx() {
-      if (!this.station) return
-      return this.station.songs.findIndex((s) => s.id === this.song.id)
-    },
+  if (!this.station) return null;
+
+  if (this.song) {
+    const foundSong = this.station.songs.find((s) => s.id === this.song.id);
+    if (foundSong) {
+      console.log('currSong found:', foundSong);
+      return foundSong;
+    }
+  }
+
+  if (this.youtubeSong && this.youtubeSong.url) {
+    return this.youtubeSong;
+  }
+
+  return null;
+},
+
+currSongIdx() {
+  if (!this.station) return;
+  const foundIdx = this.station.songs.findIndex((s) => s.id === this.song.id);
+  console.log('currSongIdx:', foundIdx);
+  return foundIdx;
+},
+    //for youtube you need currSong.url
+    //for ours, you need currSong.imgUrl
+    async getImageUrl() {
+  if (this.currSong && this.currSong.imgUrl) {
+    console.log(this.currSong, 'that\'s the current song')
+    return this.currSong.imgUrl;
+  } else if (this.youtubeSong && this.youtubeSong.url) {
+    console.log(this.youtubeSong, 'this is youtube song');
+    try {
+      const response = await fetch(this.youtubeSong.url);
+      const html = await response.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const ogImageUrl = doc.querySelector('meta[property="og:image"]').getAttribute('content');
+      console.log(ogImageUrl, 'this is ogImageUrl');
+      return ogImageUrl;
+    } catch (err) {
+      console.error(err);
+      return 'https://howtodrawforkids.com/wp-content/uploads/2021/10/How-to-draw-a-Pig-Face-for-kindergarten.jpg';
+    }
+  } else {
+    return 'https://howtodrawforkids.com/wp-content/uploads/2021/10/How-to-draw-a-Pig-Face-for-kindergarten.jpg';
+  }
+},
+
   },
   methods: {
-
-    handelSearchSong(song) {
-      this.song = song
-    },
+    // handelSearchSong(song) {
+    //   this.song = song
+    // },
     getSvg(iconName) {
       return SVGService.getSpotifySvg(iconName)
     },
     // Add functionality
     toggleSongLike(idx) {
       // const song = this.station.songs[idx]
-      console.log(song)
-      console.log('liked')
       // song.liked = !song.liked
       // console.log(
       //   `Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`
@@ -106,5 +138,14 @@ export default {
     MediaPlayer,
     BubblingHeart,
   },
+  watch: {
+  song(newValue, oldValue) {
+    console.log('song changed:', newValue);
+  },
+  youtubeSong(newValue, oldValue) {
+    console.log('youtubeSong changed:', newValue);
+  },
+},
+
 }
 </script>

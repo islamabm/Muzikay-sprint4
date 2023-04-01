@@ -444,22 +444,14 @@ export default {
       }
     },
     onDrop(dropResult) {
-      const { removedIndex, addedIndex, payload } = dropResult
-      console.log(removedIndex)
-      console.log(addedIndex)
-      console.log(payload)
-      const songs = [...this.station.songs]
-      if (removedIndex !== null) {
-        songs.splice(removedIndex, 1)
+      const { removedIndex, addedIndex } = dropResult
+      if (removedIndex !== null || addedIndex !== null) {
+        const songs = this.applyDrag(this.station.songs, dropResult)
+        this.$store.commit('setStationSongs', {
+          stationId: this.station._id,
+          songs,
+        })
       }
-      if (addedIndex !== null) {
-        songs.splice(addedIndex, 0, payload)
-      }
-      this.$store.commit({
-        type: 'updateSongOrder',
-        stationIndex: this.stationIndex,
-        songs,
-      })
     },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult
