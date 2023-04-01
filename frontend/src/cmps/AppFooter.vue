@@ -4,18 +4,19 @@
       <MediaPlayer />
     </div>
     <div v-if="station" class="footer-details">
-  <img class="footer-details-img" :src="getImageUrl" />
-  <h3 class="footer-details-title">
-    {{ currSong.title || youtubeSong.title }}
-
-
-  </h3>
-  <button class="footer-like">
+      <div v-if="youtubeSong">
+        <img class="footer-details-img" :src="youtubeSong.url" />
+        <h3 class="footer-details-title">
+          {{youtubeSong.title }}
+        </h3>
+      </div>
+  
+      <button class="footer-like">
     <BubblingHeart
-      :songIndex="currSongIdx"
-      :liked="currSong ? currSong.liked : false"
-      @toggleLike="toggleSongLike"
     />
+    <!-- :songIndex="currSongIdx" -->
+    <!-- :liked="currSong ? currSong.liked : false" -->
+    <!-- @toggleLike="toggleSongLike" -->
   </button>
     </div>
   </footer>
@@ -76,30 +77,30 @@ export default {
       console.log('url', this.youtubeSong.url)
       if (this.youtubeSong.url) return this.youtubeSong.url
     },
-    currSong() {
-  if (!this.station) return null;
+    // currSong() {
+  // if (!this.station) return null;
 
-  if (this.song) {
-    const foundSong = this.station.songs.find((s) => s.id === this.song.id);
-    if (foundSong) {
-      console.log('currSong found:', foundSong);
-      return foundSong;
-    }
-  }
+  // if (this.song) {
+    // const foundSong = this.station.songs.find((s) => s.id === this.song.id)
+    // if (foundSong) {
+      // console.log('curr/Song found:', foundSong);
+      // return foundSong;
+    // }
+  // }
 
-  if (this.youtubeSong && this.youtubeSong.url) {
-    return this.youtubeSong;
-  }
+  // if (this.youtubeSong && this.youtubeSong.url) {
+  //   return this.youtubeSong;
+  // }
 
-  return null;
-},
+  // return null;
+// },
 
-currSongIdx() {
-  if (!this.station) return;
-  const foundIdx = this.station.songs.findIndex((s) => s.id === this.song.id);
-  console.log('currSongIdx:', foundIdx);
-  return foundIdx;
-},
+// currSongIdx() {
+//   if (!this.station) return;
+//   const foundIdx = this.station.songs.findIndex((s) => s.id === this.song.id);
+//   console.log('currSongIdx:', foundIdx);
+//   return foundIdx;
+// },
     //for youtube you need currSong.url
     //for ours, you need currSong.imgUrl
     async getImageUrl() {
