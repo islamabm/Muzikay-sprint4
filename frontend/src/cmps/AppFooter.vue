@@ -4,7 +4,7 @@
       <MediaPlayer />
     </div>
     <div v-if="station" class="footer-details">
-      <div v-if="currSong">
+      <div class="img-and-title-player" v-if="currSong">
         <img class="footer-details-img" :src="url" />
         <h3 class="footer-details-title">
           {{ currSong.title }}
