@@ -10,18 +10,11 @@ export const stationStore = {
     likedSongsData: [],
   },
   getters: {
-    // getSongsLikedByUser(state) {
-    //   return state.stations.songs.filter((song) =>
-    //     song.likedByUsers.includes(userService.getLoggedinUser().fullname)
-    //   )
-    // },
     filteredStations: (state) => (category) => {
-      console.log('Category in Vuex getter:', category)
       if (!category) return state.stations
       return state.stations.filter((station) => station.tags.includes(category))
     },
     filteredStations: (state) => (category) => {
-      // console.log('Category in Vuex getter:', category);
       if (!category) return state.stations
       return state.stations.filter((station) => station.tags.includes(category))
     },
@@ -34,20 +27,16 @@ export const stationStore = {
     songs({ stations }) {
       return stations.songs
     },
-
     station({ stations, currStationId }) {
       const station = stations.find((s) => s._id === currStationId)
       return station
     },
-
     getUserStations(state) {
       const loggedinUser = userService.getLoggedinUser()
-
       if (loggedinUser) {
         const userStations = state.stations.filter(
           (s) => s.createdBy.fullname === loggedinUser.fullname
         )
-
         return userStations
       }
       return state.userStations
@@ -59,8 +48,6 @@ export const stationStore = {
 
       return foundStation
     },
-
-    // },
   },
   mutations: {
     setStations(state, { stations }) {
@@ -78,22 +65,12 @@ export const stationStore = {
     setCurrUserStation(state, { stationId }) {
       state.currUserStationId = stationId
     },
-    //Step 8
     removeSong(state, { stationId, removedId }) {
       console.log('remove song from mutation', stationId)
       const station = state.stations.find((s) => s._id === stationId)
-      // station.songs = station.songs.filter((st) => st.id !== removedId)
       const songIdx = station.songs.findIndex((s) => s.id === removedId)
       station.songs.splice(songIdx, 1)
-
-      // state.stations = state.stations.filter((st) => st._id !== stationId)
-      // const stationIdx = state.stations.findIndex((s) => s._id === stationId)
-      // const station = state.stations[stationIdx]
-      // const songIdx = station.songs.findIndex((so) => so.id === songId)
-      // station.songs.splice(songIdx, 1)
-      // state.stations[stationIdx] = station
     },
-    // new
     updateSong(state, { song }) {
       const st = state.stations.find((s) => s._id === 'likeduser123')
       st.songs.push(song)
@@ -121,12 +98,10 @@ export const stationStore = {
     },
 
     editUserStation(state, { station }) {
-      console.log('station in the store mutation', station)
       const idx = state.userStations.findIndex((c) => c._id === station._id)
       state.userStations.splice(idx, 1, station)
     },
     removeStation(state, { id }) {
-      console.log('mutation', id)
       state.stations = state.stations.filter((st) => st._id !== id)
     },
     createStation(state, { station }) {
@@ -148,7 +123,6 @@ export const stationStore = {
   actions: {
     async addUserToSong({ commit, rootGetters }, { song, userStation }) {
       const loggedinUser = rootGetters.loggedinUser
-      console.log(loggedinUser)
       try {
         const { updatedSong, savedStation } =
           await stationService.addUserToSong(song, userStation, loggedinUser)
@@ -185,9 +159,7 @@ export const stationStore = {
     },
 
     async removeStation({ commit }, { stationId }) {
-      console.log('stationId', stationId)
       try {
-        console.log('stationId', stationId)
         const id = await stationService.remove(stationId)
         commit({ type: 'removeStation', id })
       } catch (err) {
@@ -225,12 +197,10 @@ export const stationStore = {
         throw err
       }
     },
-    //Step 2
     async removeSong({ commit }, { stationId, songId }) {
       console.log('songid', songId)
       console.log('stationid', stationId)
       try {
-        //from the backend
         const removedId = await stationService.removeSong(stationId, songId)
         commit({ type: 'removeSong', stationId, removedId })
       } catch (err) {

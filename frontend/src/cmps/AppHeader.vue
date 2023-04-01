@@ -77,7 +77,6 @@ export default {
       this.$router.push(`/user/${this.loggedinUser._id}`)
     },
     goSearch() {
-      console.log(this.search)
       eventBus.emit('handle-search', this.search)
     },
     add() {
@@ -95,7 +94,6 @@ export default {
       )
     },
     goBack() {
-      console.log(window.history.length)
       if (window.history.length > 1) {
         this.$router.go(-1)
       } else {
@@ -103,7 +101,7 @@ export default {
       }
     },
     goForward() {
-      console.log(this.$router.currentRoute.name === 'last-page')
+      // console.log(this.$router.currentRoute.name === 'last-page')
       this.$router.go(-1)
     },
     getSvg(iconName) {
@@ -125,19 +123,19 @@ export default {
       return this.$route.path === '/station/search'
     },
     backLinkClass() {
-      console.log(
-        'back class',
-        window.history.length >= 1 ? 'pointer-cursor' : 'not-allowed'
-      )
+      // console.log(
+      //   'back class',
+      //   window.history.length >= 1 ? 'pointer-cursor' : 'not-allowed'
+      // )
       return window.history.length >= 1 ? 'pointer-cursor' : 'not-allowed'
     },
     forwardLinkClass() {
-      console.log(
-        'forward class',
-        this.$router.currentRoute.name === 'last-page'
-          ? 'not-allowed'
-          : 'pointer-cursor'
-      )
+      // console.log(
+      //   'forward class',
+      //   this.$router.currentRoute.name === 'last-page'
+      //     ? 'not-allowed'
+      //     : 'pointer-cursor'
+      // )
       return this.$router.currentRoute.name === 'last-page'
         ? 'not-allowed'
         : 'pointer-cursor'
@@ -147,11 +145,9 @@ export default {
     },
   },
   created() {
-    console.log(window.history.length)
+    // console.log(window.history.length)
     eventBus.on('fetch-videos', (title) => {
       this.search = title
-      console.log(this.search)
-      console.log(title)
       var delay = title.delay || 2000
       this.alive = true
       setTimeout(() => {

@@ -102,10 +102,7 @@
 </template>
 
 <script>
-// import { utilService } from '../services/util.service'
-// import { userService } from '../services/user.service.local.js'
 import svgService from '../services/SVG.service.js'
-// import { stationService } from '../services/station.service.local.js'
 import { Container, Draggable } from 'vue3-smooth-dnd'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
@@ -134,7 +131,6 @@ export default {
       this.$store.commit('updateUserStations', this.userStationsData)
     },
     applyDrag(arr, dragResult) {
-      console.log('hi')
       const { removedIndex, addedIndex, payload } = dragResult
       if (removedIndex === null && addedIndex === null) return arr
       const result = [...arr]
@@ -174,7 +170,6 @@ export default {
       try {
         this.stationCounter++
         const StationName = `My Playlist #${this.stationCounter}`
-        console.log('station name in app nav', StationName)
         await this.$store.dispatch({
           type: 'createStation',
           StationName,
@@ -184,8 +179,6 @@ export default {
       }
     },
     async showLikedSongs() {
-      console.log('hi')
-      console.log(this.$store.getters.getSongsLikedByUser)
       const stationId = 'likeduser123'
       const newStation = await this.$store.dispatch({
         type: 'setcurrStation',

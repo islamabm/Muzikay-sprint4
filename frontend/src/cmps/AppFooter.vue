@@ -25,15 +25,12 @@
 import MediaPlayer from './MediaPlayer.vue'
 import BubblingHeart from './BubblingHeart.vue'
 import { eventBus } from '../services/event-bus.service.js'
-import { stationService } from '../services/station.service.local'
-import { faL } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   name: 'AppFooter',
   emits: ['songFromYoutube'],
   data() {
     return {
-      // songIdx: 0,
       hover: false,
       showModal: false,
       song: null,
@@ -44,10 +41,7 @@ export default {
   },
   created() {
     eventBus.on('song-details', (song) => {
-      console.log('song-details event received:', song)
-
       this.currSong = song
-      console.log('song-details event received:', this.currSong)
       var delay = song.delay || 2000
       this.alive = true
       setTimeout(() => {
@@ -56,9 +50,7 @@ export default {
     })
 
     eventBus.on('youtube-song', (video) => {
-      console.log('youtube-song event received:', video)
       this.youtubeSong = video
-      console.log(this.youtubeSong)
       var delay = video.delay || 2000
       this.alive = true
       setTimeout(() => {
@@ -76,40 +68,10 @@ export default {
     url() {
       return this.currSong.imgUrl
     },
-    // currSong() {
-    // if (!this.station) return null;
-
-    // if (this.song) {
-    // const foundSong = this.station.songs.find((s) => s.id === this.song.id)
-    // if (foundSong) {
-    // console.log('curr/Song found:', foundSong);
-    // return foundSong;
-    // }
-    // }
-
-    // if (this.youtubeSong && this.youtubeSong.url) {
-    //   return this.youtubeSong;
-    // }
-
-    // return null;
-    // },
-
-    // currSongIdx() {
-    //   if (!this.station) return;
-    //   const foundIdx = this.station.songs.findIndex((s) => s.id === this.song.id);
-    //   console.log('currSongIdx:', foundIdx);
-    //   return foundIdx;
-    // },
-    //for youtube you need currSong.url
-    //for ours, you need currSong.imgUrl
     async getImageUrl() {
       if (this.currSong && this.currSong.imgUrl) {
-        console.log('helooooooooooooooooooo')
-        console.log(this.currSong, "that's the current song")
         return this.currSong.imgUrl
       } else if (this.youtubeSong && this.youtubeSong.url) {
-        console.log('helooooooooooooooooooo')
-        console.log(this.youtubeSong, 'this is youtube song')
         try {
           const response = await fetch(this.youtubeSong.url)
           const html = await response.text()
@@ -130,9 +92,6 @@ export default {
     },
   },
   methods: {
-    // handelSearchSong(song) {
-    //   this.song = song
-    // },
     getSvg(iconName) {
       return SVGService.getSpotifySvg(iconName)
     },
@@ -146,7 +105,7 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$store.getters.stations)
+    // console.log(this.$store.getters.stations)
   },
 
   components: {
@@ -154,12 +113,12 @@ export default {
     BubblingHeart,
   },
   watch: {
-    song(newValue, oldValue) {
-      console.log('song changed:', newValue)
-    },
-    youtubeSong(newValue, oldValue) {
-      console.log('youtubeSong changed:', newValue)
-    },
+    // song(newValue, oldValue) {
+    //   console.log('song changed:', newValue)
+    // },
+    // youtubeSong(newValue, oldValue) {
+    //   console.log('youtubeSong changed:', newValue)
+    // },
   },
 }
 </script>
