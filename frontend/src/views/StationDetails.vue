@@ -355,8 +355,6 @@ export default {
           color.value[1] * shadeLevel
         )}, ${Math.round(color.value[2] * shadeLevel)}, 0.7)`,
       }
-
-
     },
     getTimeAgo(idx) {
       const date = new Date(idx)
