@@ -371,14 +371,12 @@ export default {
       this.$refs.bottomHalf.style.backgroundImage = darkGradient
     },
     getShade(color, shadeLevel) {
-     return {
+      return {
         ...color,
         rgba: `rgba(${Math.round(color.value[0] * shadeLevel)}, ${Math.round(
           color.value[1] * shadeLevel
         )}, ${Math.round(color.value[2] * shadeLevel)}, 0.7)`,
       }
-
-
     },
     getTimeAgo(idx) {
       const date = new Date(idx)
@@ -590,10 +588,6 @@ export default {
     user() {
       return this.$store.getters.loggedinUser
     },
-    // isSongActive() {
-    //   return this.activeSongIndex !== -1
-    // },
-
     stationDeleteMsg() {
       return this.station.name
     },
