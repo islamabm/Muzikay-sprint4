@@ -125,17 +125,13 @@ export default {
       if (!this.song.id && !this.song.videoId) {
         setTimeout(async () => {
           try {
-            console.log(this.song);
+            console.log(this.song)
             const searchStr = `${this.song.artist} ${this.song.title}`
             console.log('searchStr', searchStr)
             const videos = await stationService.getVideos(searchStr)
             console.log('videos', videos)
             this.song = videos[1]
-<<<<<<< HEAD
             // eventBus.emit('youtube-song',this.song)
-=======
-            eventBus.emit('youtube-song', this.song)
->>>>>>> 9fb4b2f627d2298faa6ec99f365c1882e2900648
           } catch (error) {
             console.error(error)
           }
