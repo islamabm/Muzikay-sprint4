@@ -7,7 +7,7 @@ import gStations from '../../data/station.json'
 import gSearchStations from '../../data/search.json'
 import { userService } from './user.service.js'
 
-const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyAiWAAkKLeWcH6IUAWGK0R2N_4AAvKbVdQ&q=`
+const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBBAT37tNvJ2TCfmPB9R2U9gUo-Y8zxoqE&q=`
 const STORAGE_KEY = 'station'
 const SEARCH_KEY = 'videosDB'
 const SEARCH_STATIONS_KEY = 'searchDB'
@@ -76,27 +76,7 @@ async function remove(stationId) {
 }
 
 async function save(station) {
-  // var savedStation
-  // console.log('station', station)
-  // if (station._id) {
-  //   savedStation = await storageService.put(STORAGE_KEY, station)
-  // } else {
-  //   // Later, owner is set by the backend
-  //   // station.owner = userService.getLoggedinUser()
-  //   savedStation = await storageService.post(STORAGE_KEY, station)
-  // }
-  // return savedStation
-  // var savedstation
-  // if (station._id) {
-  // savedstation = await storageService.put(STORAGE_KEY, station)
   return httpService.put(`station/${station._id}`, station)
-  // } else {
-  // Later, owner is set by the backend
-  // station.owner = userService.getLoggedinUser()
-  // savedstation = await storageService.post(STORAGE_KEY, station)
-  // savedstation = await httpService.post('station', station)
-  // }
-  // return savedstation
 }
 
 function getEmptyStation() {
@@ -107,13 +87,6 @@ function getEmptyStation() {
 
 function removeSong(stationId, songId) {
   return httpService.delete(`station/${stationId}/song/${songId}`)
-  // const stations = utilService.loadFromStorage(STORAGE_KEY)
-  // const stationIdx = stations.findIndex((s) => s._id === stationId)
-  // const station = stations[stationIdx]
-  // const songIdx = station.songs.findIndex((so) => so.id === songId)
-  // station.songs.splice(songIdx, 1)
-  // stations[stationIdx] = station
-  // utilService.saveToStorage(STORAGE_KEY, stations)
 }
 
 function getVideos(keyword) {
@@ -123,6 +96,7 @@ function getVideos(keyword) {
 
   return axios.get(gUrl + keyword).then((res) => {
     const videos = res.data.items.map((item) => _prepareData(item))
+    console.log(videos)
     gSearchCache = videos
     utilService.saveToStorage(SEARCH_KEY, gSearchCache)
     return videos
@@ -134,7 +108,6 @@ function _prepareData(item) {
     videoId: item.id.videoId,
     title: item.snippet.title,
     url: item.snippet.thumbnails.default.url,
-    // duration: item.contentDetails.duration,
     createdAt: item.snippet.publishedAt,
   }
 }
@@ -175,10 +148,10 @@ function createNewStation(name) {
     ],
     desc: '',
   }
-// working with backend
+  // working with backend
   return httpService.post('station', newStation)
 
-// working with local
+  // working with local
 
   // const stations = utilService.loadFromStorage(STORAGE_KEY)
   // console.log(stations)

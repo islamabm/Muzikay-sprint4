@@ -103,6 +103,7 @@
 
 <script>
 import svgService from '../services/SVG.service.js'
+import { socketService } from '../services/socket.service.js'
 import { Container, Draggable } from 'vue3-smooth-dnd'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
@@ -170,21 +171,24 @@ export default {
       try {
         this.stationCounter++
         const StationName = `My Playlist #${this.stationCounter}`
-        await this.$store.dispatch({
+        const newStation = await this.$store.dispatch({
           type: 'createStation',
           StationName,
         })
+        console.log('hi')
+        console.log(newStation)
+        socketService.emit('station-added', newStation)
       } catch (err) {
         console.log('err')
       }
     },
     async showLikedSongs() {
       const stationId = 'likeduser123'
-      const newStation = await this.$store.dispatch({
+      await this.$store.dispatch({
         type: 'setcurrStation',
         stationId,
       })
-      console.log(newStation)
+
       // socketService.emit('station-added', savedStation)
       // this.$store.commit({ type: 'setCurrStation', stationId })
       this.$router.push(`/station/${stationId}`)
