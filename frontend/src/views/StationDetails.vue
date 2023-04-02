@@ -94,11 +94,27 @@
           :key="idx"
         >
           <div class="img-and-title" @click="songDetails(song)">
-            <span>{{ idx + 1 }}</span>
-            <img v-if="song.videoId" class="song-img" :src="song.url" />
-            <img v-else class="song-img" :src="song.imgUrl" />
+            <!-- :class="{ 'active-song': song.active }" -->
+            <img
+              v-show="activeSongIndex === idx"
+              class="song-animation-gif"
+              src="../assets/gif/animation.gif"
+            />
+            <span v-if="activeSongIndex !== idx">{{ idx + 1 }}</span>
+            <img
+              @click="changeSetuations(idx)"
+              v-if="song.videoId"
+              class="song-img"
+              :src="song.url"
+            />
+            <img
+              @click="changeSetuations(idx)"
+              v-else
+              class="song-img"
+              :src="song.imgUrl"
+            />
             <p
-              @click="toggleActiveTitle(idx)"
+              @click="toggleActiveTitle(idx), changeSetuations(idx)"
               class="song-title"
               :class="{ 'active-song': activeTitle === idx }"
             >
@@ -270,8 +286,10 @@ import {
   showErrorMsg,
   showSuccessMsg,
 } from '../services/event-bus.service'
+import { socketService } from '../services/socket.service'
 import MiniSearch from '../cmps/MiniSearch.vue'
 import BubblingHeart from '../cmps/BubblingHeart.vue'
+
 export default {
   props: {
     stationId: {
@@ -306,12 +324,27 @@ export default {
       selectedSongId: null,
       activeClass: 'active-song',
       inactiveClass: 'inactive-song',
+      currSongSelected: null,
+      activeSongIndex: null,
+      // running: true,
     }
   },
   methods: {
     toggleHeaderLike() {},
     handelYoutubeSong(video) {
       eventBus.emit('youtube-song', video)
+    },
+    changeSetuations(idx) {
+      this.activeSongIndex = idx
+      // this.running = true
+    },
+    formatDuration(duration) {
+      if (isNaN(duration)) {
+        return 'Loading...'
+      }
+      let minutes = Math.floor(duration / 60)
+      let seconds = Math.floor(duration % 60)
+      return `${minutes}:${seconds}`
     },
 
     songDetails(song) {
@@ -327,23 +360,25 @@ export default {
       this.showDeleteModal = false
     },
     updateBodyBackgroundColor(color) {
-      const darkShade = {
-        ...color,
-        rgba: `rgba(${Math.round(color.value[0] * 0.07)}, ${Math.round(
-          color.value[1] * 0.07
-        )}, ${Math.round(color.value[2] * 0.07)}, 0.7)`,
-      }
-      const headerShade = {
-        ...color,
-        rgba: `rgba(${Math.round(color.value[0] * 0.4)}, ${Math.round(
-          color.value[1] * 0.4
-        )}, ${Math.round(color.value[2] * 0.4)}, 0.7)`,
-      }
+      const darkShade = this.getShade(color, 0.07)
+      const headerShade = this.getShade(color, 0.4)
+
       const gradient = `linear-gradient(to bottom, ${color.rgba}, ${headerShade.rgba})`
       const darkGradient = `linear-gradient(to bottom, ${darkShade.rgba} 0%, rgba(0, 0, 0, 1) 30%)`
+
       document.body.style.backgroundImage = gradient
       this.$refs.stationDetailsHeader.style.backgroundImage = gradient
       this.$refs.bottomHalf.style.backgroundImage = darkGradient
+    },
+    getShade(color, shadeLevel) {
+     return {
+        ...color,
+        rgba: `rgba(${Math.round(color.value[0] * shadeLevel)}, ${Math.round(
+          color.value[1] * shadeLevel
+        )}, ${Math.round(color.value[2] * shadeLevel)}, 0.7)`,
+      }
+
+
     },
     getTimeAgo(idx) {
       const date = new Date(idx)
@@ -400,6 +435,7 @@ export default {
         this.activeTitle = idx
       }
     },
+
     toggleImgSvg(svg) {
       this.currImgSvg = svg
     },
@@ -431,15 +467,23 @@ export default {
         }
       }
     },
-    onDrop(dropResult) {
+    async onDrop(dropResult) {
       const { removedIndex, addedIndex } = dropResult
+      console.log('removedIndex', removedIndex)
+      console.log('addedIndex', addedIndex)
       if (removedIndex !== null || addedIndex !== null) {
         const songs = this.applyDrag(this.station.songs, dropResult)
-        this.$store.commit('setStationSongs', {
+        const obj = {
           stationId: this.station._id,
           songs,
-        })
+        }
+        this.$store.commit({ type: 'setStationSongs', obj })
+        this.station.songs = songs
       }
+      const station = this.stations.find((s) => s._id === this.station._id)
+      console.log(station)
+      await stationService.save(station)
+      console.log(station)
     },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult
@@ -464,6 +508,7 @@ export default {
           stationId: this.station._id,
           songId,
         })
+        // socketService.emit('update-station', id)
         showSuccessMsg('Song removed')
       } catch (err) {
         console.log(err)
@@ -541,9 +586,13 @@ export default {
     songClass() {
       return this.isActive ? this.activeClass : this.inactiveClass
     },
+
     user() {
       return this.$store.getters.loggedinUser
     },
+    // isSongActive() {
+    //   return this.activeSongIndex !== -1
+    // },
 
     stationDeleteMsg() {
       return this.station.name
@@ -632,3 +681,35 @@ export default {
   },
 }
 </script>
+<!-- const {google} = require('googleapis');
+const youtube = google.youtube({
+  version: 'v3',
+  auth: 'YOUR_API_KEY' // Replace with your API key
+});
+
+function getVideoDuration(videoId, callback) {
+  youtube.videos.list({
+    part: 'contentDetails',
+    id: videoId
+  }, function(err, response) {
+    if (err) {
+      console.error('Error retrieving video duration:', err);
+      return;
+    }
+
+    var duration = response.data.items[0].contentDetails.duration;
+    var durationInSeconds = parseDuration(duration);
+
+    callback(durationInSeconds);
+  });
+}
+
+function parseDuration(durationString) {
+  var match = durationString.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+
+  var hours = (parseInt(match[1]) || 0);
+  var minutes = (parseInt(match[2]) || 0);
+  var seconds = (parseInt(match[3]) || 0);
+
+  return (hours * 3600) + (minutes * 60) + seconds;
+} -->

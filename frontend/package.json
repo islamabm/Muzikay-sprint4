@@ -18,7 +18,11 @@
     "@fortawesome/vue-fontawesome": "^3.0.3",
     "axios": "^0.27.2",
     "googleapis": "^113.0.0",
+<<<<<<< HEAD
     "fast-average-color": "^9.3.0",
+=======
+    "howler": "^2.2.3",
+>>>>>>> 9fb4b2f627d2298faa6ec99f365c1882e2900648
     "sass": "^1.53.0",
     "socket.io-client": "^4.5.1",
     "vue": "^3.2.37",

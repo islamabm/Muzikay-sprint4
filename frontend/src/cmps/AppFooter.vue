@@ -3,14 +3,14 @@
     <div class="footer-media-player">
       <MediaPlayer />
     </div>
-    <div v-if="station" class="footer-details">
+    <div v-if="station" class="footer-details ">
       <div class="img-and-title-player" v-if="currSong">
         <img class="footer-details-img" :src="url" />
         <h3 class="footer-details-title">
           {{ currSong.title }}
         </h3>
       </div>
-      <div class="footer-curr-song" v-else>
+      <div class="img-and-title-player" v-else>
         <img class="footer-details-img" :src="station.songs[0].imgUrl" alt="">
         <h3 class="footer-details-title">{{ station.songs[0].title }}</h3>
       </div>

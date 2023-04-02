@@ -20,15 +20,15 @@
     width: 540px;
   }
 
-  .img-and-title-player{
-    display:flex;
+  .img-and-title-player {
+    display: flex;
     align-items: center;
   }
   .footer-details {
     grid-row: 2;
     display: flex;
     align-items: center;
-    padding: 0 1px; 
+    padding: 0 1px;
     font-size: 12px;
     h3 {
       margin-top: 22px; // need to be rm
@@ -38,7 +38,7 @@
     .footer-curr-song {
       display: flex;
       align-items: center;
-      padding: 0 1px; 
+      padding: 0 1px;
       font-size: 12px;
     }
     img {
@@ -46,14 +46,14 @@
       height: 56px;
     }
     .heart-svg {
-      svg{
+      svg {
         height: 30px;
         width: 30px;
       }
       margin-left: em(65px);
       width: 40px;
       transform: translateY(7px);
-    }    
+    }
 
     grid-column: 1;
   }
@@ -62,7 +62,7 @@
     margin-top: 22px;
     margin-inline-start: 9rem;
     display: flex;
-    
+
     .speaker {
       display: block;
       width: 15px;
@@ -85,12 +85,12 @@
     grid-column: 2;
     display: flex;
     justify-content: space-between;
-    gap:8rem;
+    gap: 8rem;
     padding-inline-end: 3rem;
     padding-inline-start: 10%;
     align-items: center;
   }
-  
+
   .footer-details-title {
     font-family: Circular-book;
     overflow: hidden;
@@ -98,16 +98,14 @@
     white-space: nowrap;
     max-width: 65%;
   }
-  
 }
- 
 
 //RANIa
 @media only screen and (max-width: $narrow-breakpoint) {
   .main-footer {
     grid-template-columns: 1fr;
     grid-template-rows: 3;
-    position:relative;
+    position: relative;
 
     .footer-details {
       grid-row: 1;
@@ -123,45 +121,42 @@
         margin-bottom: 5px;
       }
     }
-    .footer-media-player{
+    .footer-media-player {
       display: block;
-      grid-row:1;
+      grid-row: 1;
     }
     .footer-media-adjusments {
       opacity: 0;
       grid-column: 1;
       margin-top: 0;
-      margin-left: -170% ;
+      margin-left: -170%;
     }
 
-.music-bar{
-  position:absolute;
-  transform:translate(-60%);
-  width: 550px;
-  padding: 6px;
-}
-  .footer-like {
-    // margin-inline-start: 172px;
-    transform: translateY(-3px);
-    margin-inline-start: 312px;
-    position:fixed;
-   
-  }
+    .music-bar {
+      position: absolute;
+      transform: translate(-60%);
+      width: 550px;
+      padding: 6px;
+    }
+    .footer-like {
+      // margin-inline-start: 172px;
+      transform: translateY(-3px);
+      margin-inline-start: 312px;
+      position: fixed;
+    }
     .media-player .hiding {
       display: none;
     }
-    .media-player-play{
+    .media-player-play {
       grid-row: 1;
       transform: translate(15px);
       background-color: transparent;
       justify-content: center;
-      align-items:center;
+      align-items: center;
       margin-block-start: 1rem;
       svg {
-      fill: $clr6;
+        fill: $clr6;
       }
     }
   }
 }
-
-
