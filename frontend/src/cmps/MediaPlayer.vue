@@ -126,7 +126,7 @@ export default {
           try {
             const videos = await stationService.getVideos(this.song.title)
             this.song = videos[1]
-            eventBus.emit('youtube-song',this.song)
+            eventBus.emit('youtube-song', this.song)
           } catch (error) {
             console.error(error)
           }
@@ -230,6 +230,7 @@ export default {
     // when the video is ready
     onReady() {
       this.duration = this.$refs.youtube.getDuration()
+
       // this.intervalId = setInterval(() => {
       //   this.currentTime = this.$refs.youtube.getCurrentTime()
       // }, 1000)

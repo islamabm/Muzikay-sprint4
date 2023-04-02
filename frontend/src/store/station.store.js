@@ -53,8 +53,20 @@ export const stationStore = {
     setStations(state, { stations }) {
       state.stations = stations
     },
+    addUserStation(state, { station }) {
+      state.stations.unshift(station)
+    },
     setAllStations(state, { stations }) {
       state.allStations = stations
+    },
+    updateStationOnDrop(
+      state,
+      { stationId, remove, add, removeSong, addedSong }
+    ) {
+      const station = state.stations.find((s) => s._id === stationId)
+      station[remove] = addedSong
+      station[add] = removeSong
+      return station
     },
     setSearchStations(state, { stations }) {
       state.searchStations = stations
@@ -90,7 +102,7 @@ export const stationStore = {
       state.userStations = stations
     },
     updateUserStations(state, newStations) {
-      state.userStations = newStations;
+      state.userStations = newStations
     },
     editStation(state, { station }) {
       const idx = state.stations.findIndex((c) => c._id === station._id)
@@ -115,9 +127,10 @@ export const stationStore = {
       if (!station.songs) station.songs = []
       station.songs.push(newSong)
     },
-    setStationSongs(state, { stationId, songs }) {
-      const station = state.stations.find(s => s._id === stationId)
-      station.songs = songs
+    setStationSongs(state, { obj }) {
+      console.log('obj', obj)
+      const station = state.stations.find((s) => s._id === obj.stationId)
+      station.songs = obj.songs
     },
   },
   actions: {
@@ -161,6 +174,7 @@ export const stationStore = {
     async removeStation({ commit }, { stationId }) {
       try {
         const id = await stationService.remove(stationId)
+
         commit({ type: 'removeStation', id })
       } catch (err) {
         console.log('stationStore: Error in ', err)

@@ -94,6 +94,7 @@
           :key="idx"
         >
           <div class="img-and-title" @click="songDetails(song)">
+            <!-- <img class="song-animation-gif" src="../assets/gif/animation.gif" /> -->
             <span>{{ idx + 1 }}</span>
             <img v-if="song.videoId" class="song-img" :src="song.url" />
             <img v-else class="song-img" :src="song.imgUrl" />
@@ -270,8 +271,10 @@ import {
   showErrorMsg,
   showSuccessMsg,
 } from '../services/event-bus.service'
+import { socketService } from '../services/socket.service'
 import MiniSearch from '../cmps/MiniSearch.vue'
 import BubblingHeart from '../cmps/BubblingHeart.vue'
+
 export default {
   props: {
     stationId: {
@@ -312,6 +315,14 @@ export default {
     toggleHeaderLike() {},
     handelYoutubeSong(video) {
       eventBus.emit('youtube-song', video)
+    },
+    formatDuration(duration) {
+      if (isNaN(duration)) {
+        return 'Loading...'
+      }
+      let minutes = Math.floor(duration / 60)
+      let seconds = Math.floor(duration % 60)
+      return `${minutes}:${seconds}`
     },
 
     songDetails(song) {
@@ -431,15 +442,23 @@ export default {
         }
       }
     },
-    onDrop(dropResult) {
+    async onDrop(dropResult) {
       const { removedIndex, addedIndex } = dropResult
+      console.log('removedIndex', removedIndex)
+      console.log('addedIndex', addedIndex)
       if (removedIndex !== null || addedIndex !== null) {
         const songs = this.applyDrag(this.station.songs, dropResult)
-        this.$store.commit('setStationSongs', {
+        const obj = {
           stationId: this.station._id,
           songs,
-        })
+        }
+        this.$store.commit({ type: 'setStationSongs', obj })
+        this.station.songs = songs
       }
+      const station = this.stations.find((s) => s._id === this.station._id)
+      console.log(station)
+      await stationService.save(station)
+      console.log(station)
     },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult
@@ -464,6 +483,7 @@ export default {
           stationId: this.station._id,
           songId,
         })
+        // socketService.emit('update-station', id)
         showSuccessMsg('Song removed')
       } catch (err) {
         console.log(err)
@@ -541,6 +561,7 @@ export default {
     songClass() {
       return this.isActive ? this.activeClass : this.inactiveClass
     },
+
     user() {
       return this.$store.getters.loggedinUser
     },
@@ -632,3 +653,35 @@ export default {
   },
 }
 </script>
+<!-- const {google} = require('googleapis');
+const youtube = google.youtube({
+  version: 'v3',
+  auth: 'YOUR_API_KEY' // Replace with your API key
+});
+
+function getVideoDuration(videoId, callback) {
+  youtube.videos.list({
+    part: 'contentDetails',
+    id: videoId
+  }, function(err, response) {
+    if (err) {
+      console.error('Error retrieving video duration:', err);
+      return;
+    }
+
+    var duration = response.data.items[0].contentDetails.duration;
+    var durationInSeconds = parseDuration(duration);
+
+    callback(durationInSeconds);
+  });
+}
+
+function parseDuration(durationString) {
+  var match = durationString.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
+
+  var hours = (parseInt(match[1]) || 0);
+  var minutes = (parseInt(match[2]) || 0);
+  var seconds = (parseInt(match[3]) || 0);
+
+  return (hours * 3600) + (minutes * 60) + seconds;
+} -->
