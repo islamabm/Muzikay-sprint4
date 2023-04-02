@@ -426,7 +426,13 @@
     padding: 10px;
     padding-inline-start: 20px;
     max-width: 1250px;
-
+.song-animation-gif{
+  height:13px;
+  width:13px;
+  margin: 0;
+  padding:0;
+  transform:translate(2px)
+}
     &:hover {
       background-color: rgba($clr10, 0.2);
 
