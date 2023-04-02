@@ -1,28 +1,28 @@
 <template>
-  <div class="container">
-    <div class="header">
-      <h1 class="title">Chatify</h1>
-      <p class="subtitle">
+  <div class="chat-container">
+    <div class="chat-header">
+      <h1 class="chat-title">Chatify</h1>
+      <p class="chat-subtitle">
         Discuss your favorite music genres with others in real-time, discover
         new artists and expand your musical horizons with Chatify.
       </p>
     </div>
-    <h3 v-if="typingUser">{{ typingUser }} is typing...</h3>
-    <h2 v-if="topic === 'General'">Let's Talk About Music</h2>
-    <h2 v-else>Lets Talk About {{ topic }} Music</h2>
-    <label for="topic-select">Choose a topic:</label>
-    <select id="topic-select" v-model="topic" @change="changeTopic">
+    <h3 class="typing" v-if="typingUser">{{ typingUser }} is typing...</h3>
+    <h2 class="lets-talk" v-if="topic === 'General'">Let's Talk About Music</h2>
+    <h2 class="lets-talk" v-else>Lets Talk About {{ topic }} Music</h2>
+    <label class="chat-choose" for="topic-select">Choose a topic:</label>
+    <select class="select-topic" id="topic-select" v-model="topic" @change="changeTopic">
       <option v-for="t in topics" :value="t">{{ t }}</option>
     </select>
-    <ul>
-      <li v-for="(msg, idx) in msgs" :key="idx">
-        <span>{{ msg.from }}:</span>{{ msg.txt }}
+    <ul class="chat-msgs-container">
+      <li class="chat-msg" v-for="(msg, idx) in msgs" :key="idx">
+        <span class="chat-username">{{ msg.from }}:</span>{{ msg.txt }}
       </li>
     </ul>
-    <hr />
-    <form @submit.prevent="sendMsg">
-      <input type="text" v-model="msg.txt" placeholder="Your msg" />
-      <button>Send</button>
+    <form class="chat-form" @submit.prevent="sendMsg">
+      <input type="text" v-model="msg.txt" placeholder="Your msg" class="chat-input" />
+
+      <button class="chat-send">Send</button>
     </form>
   </div>
 </template>
