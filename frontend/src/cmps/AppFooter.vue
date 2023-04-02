@@ -52,7 +52,7 @@ export default {
         this.alive = false
       }, delay)
     })
-
+    
     eventBus.on('youtube-song', (video) => {
       this.youtubeSong = video
       var delay = video.delay || 2000
