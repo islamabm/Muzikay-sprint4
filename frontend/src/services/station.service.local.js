@@ -10,6 +10,7 @@ import { userService } from './user.service.js'
 const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyAiWAAkKLeWcH6IUAWGK0R2N_4AAvKbVdQ&q=`
 const STORAGE_KEY = 'station'
 const SEARCH_KEY = 'videosDB'
+const VIDEOS_KEY = 'videosIdDB'
 const SEARCH_STATIONS_KEY = 'searchDB'
 // const USER_KEY = 'userStationDB'
 let gSearchCache = utilService.loadFromStorage(SEARCH_KEY) || {}
@@ -43,6 +44,7 @@ function _getUrl(id = '') {
 }
 
 async function query() {
+  console.log('query');
   return httpService.get('station')
   // var stations = await storageService.query(STORAGE_KEY)
   // if (filterBy.name) {
@@ -120,11 +122,18 @@ function getVideos(keyword) {
   if (gSearchCache[keyword]) {
     return Promise.resolve(gSearchCache[keyword])
   }
+  let videosIds = utilService.loadFromStorage(VIDEOS_KEY) || []
+  console.log('keyword', keyword)
+  const existTitle = videosIds.find(video =>video.title.toLowerCase().includes(keyword.toLowerCase()))
+  console.log(existTitle)
 
   return axios.get(gUrl + keyword).then((res) => {
     const videos = res.data.items.map((item) => _prepareData(item))
     gSearchCache = videos
+    // console.log('gSearchCache', gSearchCache)
+    videosIds.push(videos[0])
     utilService.saveToStorage(SEARCH_KEY, gSearchCache)
+    utilService.saveToStorage(VIDEOS_KEY, videosIds)
     return videos
   })
 }
@@ -202,11 +211,13 @@ async function addUserToSong(song, station, loggedinUser) {
   if (!station) {
     throw new Error('Station parameter is undefined')
   }
+  console.log('before song', song)
   // Create a new song object with the updated likedByUsers array
   const updatedSong = {
     ...song,
     likedByUsers: [...song.likedByUsers, loggedinUser.fullname],
   }
+  console.log('after song', song)
   const updatedStation = {
     ...station,
     songs: station.songs.map((s) => (s.id === song.id ? updatedSong : s)),
