@@ -120,13 +120,22 @@ export default {
   },
   created() {
     eventBus.on('song-details', (song) => {
+      console.log('song', song)
       this.song = song
       if (!this.song.id && !this.song.videoId) {
         setTimeout(async () => {
           try {
-            const videos = await stationService.getVideos(this.song.title)
+            console.log(this.song);
+            const searchStr = `${this.song.artist} ${this.song.title}`
+            console.log('searchStr', searchStr)
+            const videos = await stationService.getVideos(searchStr)
+            console.log('videos', videos)
             this.song = videos[1]
+<<<<<<< HEAD
+            // eventBus.emit('youtube-song',this.song)
+=======
             eventBus.emit('youtube-song', this.song)
+>>>>>>> 9fb4b2f627d2298faa6ec99f365c1882e2900648
           } catch (error) {
             console.error(error)
           }
@@ -151,12 +160,15 @@ export default {
     putSongName() {
       if (this.song) {
         if (this.song.id) {
+          console.log('this.song.id', this.song.id)
           return this.song.id
         }
+        console.log('this.song', this.song)
         // situation when we have a song from YouTube on our list-considered as a song
         return this.song.videoId
       }
       if (this.youtubeSong) {
+        console.log('this.youtubeSong', this.youtubeSong)
         return this.youtubeSong.videoId
       }
       if (this.station) {
@@ -238,7 +250,6 @@ export default {
     // when something happens- Video has ended/Video 1=> is playing 2=> pause 0=> finished 3=> when passing forward or switching a song
     // supposed to be a switch case
     onStateChange(event) {
-      console.log('event', event)
       if (event.data === 1) {
         this.isPlaying = false
         this.duration = this.$refs.youtube.getDuration()
