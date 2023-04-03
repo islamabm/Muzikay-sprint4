@@ -140,7 +140,11 @@
                 @click="addUserToSong(song), onHeartClick(idx)"
               />
             </div>
+<<<<<<< HEAD
             <p class="song-duration">{{song.duration || '1:40'}}</p>
+=======
+            <p class="song-duration">{{ song.duration }}</p>
+>>>>>>> 1b538af3b59da5232aabc1a73213e0a3d8ccff1e
             <div>
               <button
                 class="btn-open-modal"
@@ -475,13 +479,12 @@ export default {
           stationId: this.station._id,
           songs,
         }
+
         this.$store.commit({ type: 'setStationSongs', obj })
-        this.station.songs = songs
+        socketService.emit('station-updated', obj)
+
+        // this.station.songs = songs
       }
-      const station = this.stations.find((s) => s._id === this.station._id)
-      console.log(station)
-      await stationService.save(station)
-      console.log(station)
     },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult
@@ -616,9 +619,16 @@ export default {
       return station ? station : this.$store.getters.station
     },
     stationNameClass() {
-      const words = this.station.name.split(' ').length
-      return words <= 3 ? 'short-station-name' : 'long-station-name'
-    },
+  const words = this.station.name.split(' ').length;
+  if (words <= 3) {
+    return 'short-station-name';
+  } else if (words <= 5) {
+    return 'long-station-name';
+  } else {
+    return 'huge-station-name';
+  }
+},
+
   },
   components: {
     StationEdit,

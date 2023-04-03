@@ -249,9 +249,15 @@ export default {
       if (event.data === 1) {
         this.isPlaying = false
         this.duration = this.$refs.youtube.getDuration()
+<<<<<<< HEAD
         // this.intervalId = setInterval(() => {
         //   this.currentTime = this.$refs.youtube.getCurrentTime()
         // }, 1000)
+=======
+        this.intervalId = setInterval(() => {
+          // this.currentTime = this.$refs.youtube.getCurrentTime()
+        }, 1000)
+>>>>>>> 1b538af3b59da5232aabc1a73213e0a3d8ccff1e
         this.playAudio()
       }
       if (event.data === 2)
@@ -273,9 +279,15 @@ export default {
       this.isPlaying = !this.isPlaying
       if (this.isPlaying) {
         this.$refs.youtube.playVideo()
+<<<<<<< HEAD
         // this.intervalId = setInterval(() => {
         //   this.currentTime = this.$refs.youtube.getCurrentTime()
         // }, 1000)
+=======
+        this.intervalId = setInterval(() => {
+          // this.currentTime = this.$refs.youtube.getCurrentTime()
+        }, 1000)
+>>>>>>> 1b538af3b59da5232aabc1a73213e0a3d8ccff1e
         player.setVolume(this.speakerLevel) // Set the volume when starting to play
       } else {
         this.$refs.youtube.pauseVideo()
