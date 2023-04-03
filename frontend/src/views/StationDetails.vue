@@ -616,9 +616,16 @@ export default {
       return station ? station : this.$store.getters.station
     },
     stationNameClass() {
-      const words = this.station.name.split(' ').length
-      return words <= 3 ? 'short-station-name' : 'long-station-name'
-    },
+  const words = this.station.name.split(' ').length;
+  if (words <= 3) {
+    return 'short-station-name';
+  } else if (words <= 5) {
+    return 'long-station-name';
+  } else {
+    return 'huge-station-name';
+  }
+},
+
   },
   components: {
     StationEdit,
