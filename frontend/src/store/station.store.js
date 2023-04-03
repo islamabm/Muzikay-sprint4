@@ -14,10 +14,6 @@ export const stationStore = {
       if (!category) return state.stations
       return state.stations.filter((station) => station.tags.includes(category))
     },
-    filteredStations: (state) => (category) => {
-      if (!category) return state.stations
-      return state.stations.filter((station) => station.tags.includes(category))
-    },
     stations({ stations }) {
       return stations
     },

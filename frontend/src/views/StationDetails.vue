@@ -50,7 +50,9 @@
               <span class="dot">•</span>
               <span class="songs-count">{{ songsCount }},</span>
 
-              <span class="posted-at">about 11 hr </span>
+              <span v-if="station.songs[0].duration" class="posted-at">{{ aboutCalc }}</span>
+              <span v-else class="posted-at">about 11 hr </span>
+
             </div>
           </div>
           <div v-else>...</div>
@@ -623,7 +625,12 @@ export default {
   } else {
     return 'huge-station-name';
   }
-},
+  },
+  aboutCalc() {
+      const about = this.station.songs.reduce((acc, s) => s.duration + acc, 0)
+      console.log('about calc', about)
+      return about
+  },
 
   },
   components: {

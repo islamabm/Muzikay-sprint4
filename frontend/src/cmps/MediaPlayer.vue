@@ -249,9 +249,7 @@ export default {
       if (event.data === 1) {
         this.isPlaying = false
         this.duration = this.$refs.youtube.getDuration()
-        // this.intervalId = setInterval(() => {
-        //   this.currentTime = this.$refs.youtube.getCurrentTime()
-        // }, 1000)
+
         this.playAudio()
       }
       if (event.data === 2)
@@ -276,7 +274,7 @@ export default {
         // this.intervalId = setInterval(() => {
         //   this.currentTime = this.$refs.youtube.getCurrentTime()
         // }, 1000)
-        player.setVolume(this.speakerLevel) // Set the volume when starting to play
+        this.$refs.youtube.setVolume(this.speakerLevel) // Set the volume when starting to play
       } else {
         this.$refs.youtube.pauseVideo()
         // clearInterval(this.intervalId)
