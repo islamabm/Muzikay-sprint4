@@ -249,12 +249,13 @@ export default {
       if (event.data === 1) {
         this.isPlaying = false
         this.duration = this.$refs.youtube.getDuration()
-        this.intervalId = setInterval(() => {
-          this.currentTime = this.$refs.youtube.getCurrentTime()
-        }, 1000)
+        // this.intervalId = setInterval(() => {
+        //   this.currentTime = this.$refs.youtube.getCurrentTime()
+        // }, 1000)
         this.playAudio()
       }
-      if (event.data === 2) clearInterval(this.intervalId)
+      if (event.data === 2)
+      //  clearInterval(this.intervalId)
       if (event.data === 0) {
         // this.isPlaying = true
         this.switchSong(1)
@@ -272,13 +273,13 @@ export default {
       this.isPlaying = !this.isPlaying
       if (this.isPlaying) {
         this.$refs.youtube.playVideo()
-        this.intervalId = setInterval(() => {
-          this.currentTime = this.$refs.youtube.getCurrentTime()
-        }, 1000)
+        // this.intervalId = setInterval(() => {
+        //   this.currentTime = this.$refs.youtube.getCurrentTime()
+        // }, 1000)
         player.setVolume(this.speakerLevel) // Set the volume when starting to play
       } else {
         this.$refs.youtube.pauseVideo()
-        clearInterval(this.intervalId)
+        // clearInterval(this.intervalId)
       }
     },
     changeSound(songIdx) {
