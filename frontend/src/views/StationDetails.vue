@@ -475,13 +475,12 @@ export default {
           stationId: this.station._id,
           songs,
         }
+
         this.$store.commit({ type: 'setStationSongs', obj })
-        this.station.songs = songs
+        socketService.emit('station-updated', obj)
+
+        // this.station.songs = songs
       }
-      const station = this.stations.find((s) => s._id === this.station._id)
-      console.log(station)
-      await stationService.save(station)
-      console.log(station)
     },
     applyDrag(arr, dragResult) {
       const { removedIndex, addedIndex, payload } = dragResult
