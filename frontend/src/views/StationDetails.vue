@@ -615,9 +615,16 @@ export default {
       return station ? station : this.$store.getters.station
     },
     stationNameClass() {
-      const words = this.station.name.split(' ').length
-      return words <= 3 ? 'short-station-name' : 'long-station-name'
-    },
+  const words = this.station.name.split(' ').length;
+  if (words <= 3) {
+    return 'short-station-name';
+  } else if (words <= 5) {
+    return 'long-station-name';
+  } else {
+    return 'huge-station-name';
+  }
+},
+
   },
   components: {
     StationEdit,
@@ -674,35 +681,3 @@ export default {
   },
 }
 </script>
-<!-- const {google} = require('googleapis');
-const youtube = google.youtube({
-  version: 'v3',
-  auth: 'YOUR_API_KEY' // Replace with your API key
-});
-
-function getVideoDuration(videoId, callback) {
-  youtube.videos.list({
-    part: 'contentDetails',
-    id: videoId
-  }, function(err, response) {
-    if (err) {
-      console.error('Error retrieving video duration:', err);
-      return;
-    }
-
-    var duration = response.data.items[0].contentDetails.duration;
-    var durationInSeconds = parseDuration(duration);
-
-    callback(durationInSeconds);
-  });
-}
-
-function parseDuration(durationString) {
-  var match = durationString.match(/PT(\d+H)?(\d+M)?(\d+S)?/);
-
-  var hours = (parseInt(match[1]) || 0);
-  var minutes = (parseInt(match[2]) || 0);
-  var seconds = (parseInt(match[3]) || 0);
-
-  return (hours * 3600) + (minutes * 60) + seconds;
-} -->
