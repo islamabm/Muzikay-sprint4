@@ -140,7 +140,7 @@
                 @click="addUserToSong(song), onHeartClick(idx)"
               />
             </div>
-            <p class="song-duration">1:40</p>
+            <p class="song-duration">{{ song.duration }}</p>
             <div>
               <button
                 class="btn-open-modal"
