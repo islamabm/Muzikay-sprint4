@@ -50,10 +50,16 @@
               <span class="dot">•</span>
               <span class="songs-count">{{ songsCount }},</span>
 
+<<<<<<< HEAD
               <!-- <span v-if="station.songs[0].duration" class="posted-at">{{
                 aboutCalc
               }}</span> -->
               <span class="posted-at">about 11 hr </span>
+=======
+              <span v-if="station.songs[0].duration" class="posted-at">{{ aboutCalc }}</span>
+              <span v-else class="posted-at">about 11 hr </span>
+
+>>>>>>> 36d4892825dba36a9a8b2114b8723f12855f33d6
             </div>
           </div>
           <div v-else>...</div>
@@ -677,6 +683,7 @@ export default {
       return station ? station : this.$store.getters.station
     },
     stationNameClass() {
+<<<<<<< HEAD
       const words = this.station.name.split(' ').length
       if (words <= 3) {
         return 'short-station-name'
@@ -686,6 +693,23 @@ export default {
         return 'huge-station-name'
       }
     },
+=======
+  const words = this.station.name.split(' ').length;
+  if (words <= 3) {
+    return 'short-station-name';
+  } else if (words <= 5) {
+    return 'long-station-name';
+  } else {
+    return 'huge-station-name';
+  }
+  },
+  aboutCalc() {
+      const about = this.station.songs.reduce((acc, s) => s.duration + acc, 0)
+      console.log('about calc', about)
+      return about
+  },
+
+>>>>>>> 36d4892825dba36a9a8b2114b8723f12855f33d6
   },
   components: {
     StationEdit,
