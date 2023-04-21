@@ -3,6 +3,11 @@
   src: url('/src/assets/fonts/CircularSpotifyText-Book.otf');
 }
 
+@font-face {
+  font-family: Circular-medium;
+  src: url('/src/assets/fonts/CircularSpotifyText-Medium.otf');
+}
+
 // Setup
 @import 'setup/variables';
 @import 'setup/functions';

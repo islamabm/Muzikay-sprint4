@@ -16,6 +16,7 @@
         <span class="user-stations-count">24 Public Playlists</span>
         <span class="dot">•</span>
         <span class="following">7 following</span>
+        <RouterLink to="/station/chat"> chat </RouterLink>
       </div>
     </div>
   </section>
