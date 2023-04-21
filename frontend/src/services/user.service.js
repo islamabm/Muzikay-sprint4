@@ -1,6 +1,6 @@
 import { storageService } from './async-storage.service'
 import { httpService } from './http.service'
-import { store } from '../store/store'
+
 // import { socketService, SOCKET_EVENT_USER_UPDATED, SOCKET_EMIT_USER_WATCH } from './socket.service'
 import { showSuccessMsg } from './event-bus.service'
 import { utilService } from './util.service'
@@ -48,18 +48,25 @@ function remove(userId) {
   return httpService.delete(`user/${userId}`)
 }
 
-async function update({ _id, score }) {
-  const user = await storageService.get('user', _id)
+async function update(song, user) {
+  console.log('song service', song)
+  console.log('user service', user)
+  // const user = await storageService.get('user', _id)
   // let user = getById(_id)
-  // user.score = score
-  await storageService.put('user', user)
+  console.log('user in service after back like', user)
+  // user.LikedSongs.push(song)
+  // await storageService.put('user', user)
+  console.log('user in service after back like', user)
 
-  // user = await httpService.put(`user/${user._id}`, user)
+  const savedUser = await httpService.put(`user/${user._id}`, user)
+  console.log('user in the service from the back', savedUser)
   // Handle case in which admin updates other user's details
-  //   if (getLoggedinUser()._id === user._id) saveLocalUser(user)
-  return user
+  if (getLoggedinUser()._id === savedUser._id) saveLocalUser(savedUser)
+  return savedUser
 }
-
+{
+  /* <input class="edit-name" id="name" type="text" v-model="transcript" /> */
+}
 async function login(userCred) {
   // const users = await storageService.query('user')
   // const user = users.find((user) => user.username === userCred.username)
@@ -71,15 +78,19 @@ async function login(userCred) {
   //   }
 }
 async function signup(userCred) {
+  console.log('userCred in the user service', userCred)
   // console.log('service', userCred)
   //   userCred.score = 10000
-    if (!userCred.imgUrl)
-      userCred.imgUrl =
-        'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
+  if (!userCred.imgUrl) {
+    userCred.imgUrl =
+      'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
+  }
+
   // const user = await storageService.post('user', userCred)
   // const users = utilService.loadFromStorage('user')
   // console.log(users)
-    const user = await httpService.post('auth/signup', userCred)
+  const user = await httpService.post('auth/signup', userCred)
+  console.log('user in user service', user)
   //   socketService.login(user._id)
   return saveLocalUser(user)
 }
@@ -104,6 +115,7 @@ function saveLocalUser(user) {
     stations: [],
     imgUrl:
       'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg',
+    LikedSongs: [],
   }
   sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(user))
   return user

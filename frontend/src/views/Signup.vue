@@ -57,7 +57,9 @@
         </div>
 
         <div class="form-group">
-          <label class="label-dark" for="confirm-email">Enter your username</label>
+          <label class="label-dark" for="confirm-email"
+            >Enter your username</label
+          >
           <input
             class="square-inputs"
             type="text"
@@ -75,8 +77,8 @@
             class="square-inputs"
             type="password"
             id="password"
-          v-model="signupCred.password"
-          placeholder="Password"
+            v-model="signupCred.password"
+            placeholder="Password"
             required
           />
         </div>
@@ -95,7 +97,9 @@
         </div> -->
 
         <div class="form-group">
-          <label class="label-dark" for="birthdate">What's your date of birth?</label>
+          <label class="label-dark" for="birthdate"
+            >What's your date of birth?</label
+          >
           <div class="dates-field">
             <div class="title-date">
               <p>Day</p>
@@ -145,7 +149,7 @@
         </div>
 
         <div class="form-group">
-          <label class="label-dark" >What's your gender?</label>
+          <label class="label-dark">What's your gender?</label>
           <div class="gender-container">
             <div class="radio-container">
               <input type="radio" id="male" value="male" v-model="gender" />
@@ -179,7 +183,9 @@
                 value="prefer-not-to-say"
                 v-model="gender"
               />
-              <label class="label-light" for="prefer-not-to-say">Prefer not to say</label>
+              <label class="label-light" for="prefer-not-to-say"
+                >Prefer not to say</label
+              >
             </div>
           </div>
         </div>
@@ -233,23 +239,24 @@ export default {
   data() {
     return {
       //don't need all of this, but we'll see what we can do with it
-      // email: '',
-      // confirmEmail: '',
-      // password: '',
-      // displayName: '',
-      // day: '',
-      // month: '',
-      // year: '',
-      // gender: '',
-      // newsAndOffers: false,
-      // shareRegistrationData: false,
-      // agreeTerms: false,
+      email: '',
+      confirmEmail: '',
+      password: '',
+      displayName: '',
+      day: '',
+      month: '',
+      year: '',
+      gender: '',
+      newsAndOffers: false,
+      shareRegistrationData: false,
+      agreeTerms: false,
       signupCred: {
         username: '',
         password: '',
         fullname: '',
         imgUrl: '',
         stations: [],
+        LikedSongs: [],
       },
     }
   },

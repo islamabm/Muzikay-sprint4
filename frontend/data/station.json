@@ -10,7 +10,7 @@
       "imgUrl": "http://some-photo/"
     },
     "likedByUsers": [],
-    
+
     "songs": [
       {
         "likedByUsers": [],
@@ -1653,6 +1653,27 @@
       "imgUrl": "http://some-photo/"
     },
     "likedByUsers": [],
+    "songs": [],
+    "msgs": [
+      {
+        "id": "m101",
+        "from": "{mini-user}",
+        "txt": "Manish?"
+      }
+    ]
+  },
+  {
+    "name": "Liked songs",
+    "tags": ["Funk"],
+    "description": "Get ready to groove with the funkiest beats from Funky Monks!",
+    "imgUrl": "https://www.adobe.com/express/learn/blog/media_16b8661af5a86e0a9ffe834e6a74a5ae2c8217696.png?width=750&format=png&optimize=medium",
+    "createdBy": {
+      "_id": "u101",
+      "fullname": "system",
+      "imgUrl": "http://some-photo/"
+    },
+    "likedByUsers": [],
+
     "songs": [],
     "msgs": [
       {

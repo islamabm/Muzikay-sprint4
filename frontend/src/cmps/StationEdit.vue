@@ -18,9 +18,8 @@
               id="name"
               type="text"
               v-model="station.name"
-              :placeholder="station.name"
             />
-
+            <!-- <Record :name="station.name" @transcript="station.name = $event" /> -->
             <textarea
               class="edit-text-area"
               id="description"
@@ -28,7 +27,6 @@
               v-model="station.description"
               placeholder="Add an optional description"
             ></textarea>
-
             <button class="btn-save-changes">Save</button>
           </div>
         </div>
@@ -39,6 +37,7 @@
 <script>
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import { uploadImg } from '../services/upload.service.js'
+import Record from './Record.vue'
 export default {
   name: 'StationEdit',
   props: {
@@ -46,20 +45,21 @@ export default {
   },
   data() {
     return {
-      station: null,
+      // station: null,
       loading: false,
     }
   },
   methods: {
     async stationInput() {
       let editedStation = { ...this.station }
+      console.log('editedStation', editedStation)
       try {
         await this.$store.dispatch({
           type: 'editstation',
           station: editedStation,
         })
         showSuccessMsg('Station edited')
-        this.$emit('close') // add this line to close the modal
+        // this.$emit('close') // add this line to close the modal
       } catch (err) {
         showErrorMsg('Cannot edit station', err)
       }
@@ -90,11 +90,8 @@ export default {
 
   computed: {
     station() {
-      const { stationId } = this.$route.params
-      const stations = this.stations
-      const station = stations.find((t) => t._id === stationId)
-
-      return (this.station = station)
+      const station = this.$store.getters.stationById(this.stationId)
+      return station ? station : this.$store.getters.station
     },
     imgSrc() {
       if (this.station && this.station.songs) {
@@ -106,6 +103,9 @@ export default {
     stations() {
       return this.$store.getters.stations
     },
+  },
+  components: {
+    Record,
   },
 }
 </script>

@@ -26,23 +26,22 @@
     font-size: 1.5rem;
     font-weight: 700;
     padding: 1em;
-    font-family: Circular-book;
+    font-family: circular-book;
   }
 }
-.search-results{
-  margin-block-start:2rem;
+.search-results {
+  margin-block-start: 2rem;
 }
 .search-header {
   padding-inline: 2rem 0;
   padding-block-end: 5px;
   margin-block-start: 2.5rem;
-  font-family: Circular-book;
+  font-family: circular-book;
   font-size: 1.5rem;
 }
-
 
 @media only screen and (max-width: $narrow-breakpoint) {
   .search-header {
     margin-block-start: 5rem;
   }
-  }
+}

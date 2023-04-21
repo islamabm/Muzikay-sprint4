@@ -1,42 +1,41 @@
 .user-profile {
-    font-family: Circular-book;
-    height: 45vh;
-    background: linear-gradient(to bottom, $clr13, $clr7);
-    padding-inline: 5rem;
-    color: $clr6;
-  
-    .user-details-container {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      margin-block-start: 4rem;
-      
-  
-      .user-profile-img {
-     
-        border-radius: 50%;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-  
-      .user-username {
-        font-size: 5rem;
-        font-weight: 700;
-        color: $clr6;
-        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-        font-family: Gotham;
-      }
+  font-family: circular-book;
+  height: 45vh;
+  background: linear-gradient(to bottom, $clr13, $clr7);
+  padding-inline: 5rem;
+  color: $clr6;
+
+  .user-details-container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-block-start: 4rem;
+
+    .user-profile-img {
+      border-radius: 50%;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-.profile-word{
+
+    .user-username {
+      font-size: 5rem;
+      font-weight: 700;
+      color: $clr6;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      font-family: Gotham;
+    }
+  }
+  .profile-word {
     font-size: 0.8rem;
     font-family: circular-book;
-}
-.user-stations-count, .following{
+  }
+  .user-stations-count,
+  .following {
     font-family: circular-book;
     font-size: 1rem;
     margin-inline-end: 0.5rem;
+  }
 }
-}
-    /* 
+/* 
 /
 .review-list {
 background-color: $clr3;

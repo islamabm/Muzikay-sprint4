@@ -15,19 +15,18 @@
     justify-content: center;
     align-items: center;
     margin-block-end: 40px;
-  .black-logo {
-    display: block;
-    height: 45px;
+    .black-logo {
+      display: block;
+      height: 45px;
+    }
+    span {
+      font-family: circular-book;
+      font-weight: 900;
+      font-size: 1.5rem;
+      padding-inline-start: 5px;
+      transform: translateY(2px);
+    }
   }
-  span {
-    font-family: Circular-book;
-    font-weight: 900;
-    font-size: 1.5rem;
-    padding-inline-start: 5px;
-    transform: translateY(2px);
-  }
-}
-
 
   .btn-img {
     height: 24px;
@@ -50,7 +49,7 @@
     padding-block-end: 20px;
     text-align: center;
     color: inherit;
-    font-family: Circular-book;
+    font-family: circular-book;
   }
   .social-btns {
     display: flex;
@@ -74,11 +73,11 @@
     cursor: pointer;
     margin-bottom: 10px;
     &:first-of-type {
-      background-color: #405A93;
+      background-color: #405a93;
       color: #ffffff;
       &:hover {
         transform: scale(1.04);
-        background-color: #384F81;
+        background-color: #384f81;
       }
     }
     &:last-of-type {
@@ -91,9 +90,9 @@
       }
     }
     &:focus {
-        outline: 2.5px solid #212121;
-        outline-offset: 4px;
-      }
+      outline: 2.5px solid #212121;
+      outline-offset: 4px;
+    }
   }
 
   .spotify-links {
@@ -102,16 +101,16 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-   font-size: 0.6875rem;
-   flex-wrap: wrap;
+    font-size: 0.6875rem;
+    flex-wrap: wrap;
   }
 
-  .dates-field{
+  .dates-field {
     display: flex;
     justify-content: space-between;
     gap: 15px;
     #month {
-       width: 200px;
+      width: 200px;
     }
   }
 
@@ -120,7 +119,7 @@
     flex-direction: column;
     justify-content: center;
     p {
-        font-size:1rem;
+      font-size: 1rem;
     }
   }
   .separator {
@@ -169,47 +168,44 @@
     }
 
     .spotify-checks {
-        display: flex;
-        align-items: baseline;
-        margin-inline-start: 20px;
-       
+      display: flex;
+      align-items: baseline;
+      margin-inline-start: 20px;
     }
     .spotify-checks label {
-        display: flex;
-        font-size: 14px;
-        margin-block-end: 15px;
-        cursor: pointer;
-      }
-      
+      display: flex;
+      font-size: 14px;
+      margin-block-end: 15px;
+      cursor: pointer;
+    }
 
     .radio-container {
-        display: flex;
-        align-items: center;
-  
-      }
-      
-      input[type='radio'] {
-        width: 16px;
-        height: 16px;
-        transform: translate(-25px);
-        margin-block-end: 1rem;
-        margin-inline-end: 10px;
-        vertical-align: middle;
-      }
-      label {
-        display: block;
-        font-size: 14px;
-        margin-block-end: 15px;
-      }
-      
-.label-light {
-  font-weight: 400;
-}
-.label-dark {
-  font-weight: 600;
-  transform: translate(2px);
-}
-    .square-inputs{
+      display: flex;
+      align-items: center;
+    }
+
+    input[type='radio'] {
+      width: 16px;
+      height: 16px;
+      transform: translate(-25px);
+      margin-block-end: 1rem;
+      margin-inline-end: 10px;
+      vertical-align: middle;
+    }
+    label {
+      display: block;
+      font-size: 14px;
+      margin-block-end: 15px;
+    }
+
+    .label-light {
+      font-weight: 400;
+    }
+    .label-dark {
+      font-weight: 600;
+      transform: translate(2px);
+    }
+    .square-inputs {
       display: block;
       padding: 0.8rem;
       width: 100%;
@@ -217,8 +213,8 @@
       font-weight: 400;
       inline-size: 100%;
       margin-block: 0px;
-      box-shadow: inset 0 0 0 1px rgba($clr5,0.4);
-      border: 0.5px solid rgba($clr3,0.1);
+      box-shadow: inset 0 0 0 1px rgba($clr5, 0.4);
+      border: 0.5px solid rgba($clr3, 0.1);
       border-radius: 4px;
       &:focus {
         border-color: #1877f2;
@@ -287,25 +283,24 @@
   }
 }
 
-
 .signup-section {
   width: 100%;
   background-color: white;
-   font-family: Circular-book;
-   padding-block-start: 1.1rem;
+  font-family: circular-book;
+  padding-block-start: 1.1rem;
 }
-
-
 
 @media (max-width: $mobile-breakpoint) {
   #signup-page {
-    transform: scale(0.5); // Adjust this value depending on the desired scaling ratio
+    transform: scale(
+      0.5
+    ); // Adjust this value depending on the desired scaling ratio
     transform-origin: top left;
     width: 500px;
     height: 120vh;
     align-items: center;
     margin-inline-start: 50%;
-  //  transform: translateX(2%);
+    //  transform: translateX(2%);
   }
 
   .signup-section {
@@ -314,7 +309,6 @@
     align-items: center;
     display: flex;
     justify-content: center;
-   
   }
 
   #signup-page form {
@@ -322,8 +316,8 @@
     padding: 0 1rem; // Add horizontal padding to the form
     box-sizing: border-box;
   }
-    button[type='submit'] {
-   transform: translate(-30px);
+  button[type='submit'] {
+    transform: translate(-30px);
   }
   #signup-page .dates-field {
     justify-content: center;
@@ -336,4 +330,3 @@
     }
   }
 }
-

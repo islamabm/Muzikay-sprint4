@@ -63,6 +63,7 @@
             ></i>
             Your Library
           </RouterLink>
+          <RouterLink to="/station/chat"> chat </RouterLink>
         </div>
       </div>
 
@@ -183,15 +184,29 @@ export default {
       }
     },
     async showLikedSongs() {
-      const stationId = 'likeduser123'
-      await this.$store.dispatch({
-        type: 'setcurrStation',
-        stationId,
-      })
+      try {
+        // this.stationCounter++
+        const StationName = 'Liked songs'
+        await this.$store.dispatch({
+          type: 'createStation',
+          StationName,
+        })
+        // console.log('hi')
+        // console.log(newStation)
+        // socketService.emit('station-added', newStation)
+      } catch (err) {
+        console.log('err')
+      }
+      // console.log(this.$store.getters.userSongs)
+      // const stationId = 'likeduser123'
+      // await this.$store.dispatch({
+      //   type: 'setcurrStation',
+      //   stationId,
+      // })
 
       // socketService.emit('station-added', savedStation)
       // this.$store.commit({ type: 'setCurrStation', stationId })
-      this.$router.push(`/station/${stationId}`)
+      // this.$router.push(`/station/${stationId}`)
       // this.$store.dispatch({
       //         type: 'createStation',
       //         StationName,

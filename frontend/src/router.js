@@ -42,6 +42,7 @@ const routes = [
         name: 'search',
         component: Search,
       },
+      
       {
         path: '/station/chat',
         name: 'chat',

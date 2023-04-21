@@ -6,10 +6,7 @@ export default defineConfig({
   plugins: [vue()],
 
   build: {
-    outDir: '../muzikay-backend/public',
-    emptyOutDir: true
-  }
-    // outDir: '../backend/public',
-    // emptyOutDir: true,
-  // },
+    outDir: '../backend/public',
+    emptyOutDir: true,
+  },
 })

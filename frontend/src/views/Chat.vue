@@ -7,11 +7,18 @@
         new artists and expand your musical horizons with Chatify.
       </p>
     </div>
+    <Record></Record>
+
     <h3 class="typing" v-if="typingUser">{{ typingUser }} is typing...</h3>
     <h2 class="lets-talk" v-if="topic === 'General'">Let's Talk About Music</h2>
     <h2 class="lets-talk" v-else>Lets Talk About {{ topic }} Music</h2>
     <label class="chat-choose" for="topic-select">Choose a topic:</label>
-    <select class="select-topic" id="topic-select" v-model="topic" @change="changeTopic">
+    <select
+      class="select-topic"
+      id="topic-select"
+      v-model="topic"
+      @change="changeTopic"
+    >
       <option v-for="t in topics" :value="t">{{ t }}</option>
     </select>
     <ul class="chat-msgs-container">
@@ -20,13 +27,19 @@
       </li>
     </ul>
     <form class="chat-form" @submit.prevent="sendMsg">
-      <input type="text" v-model="msg.txt" placeholder="Your msg" class="chat-input" />
+      <input
+        type="text"
+        v-model="msg.txt"
+        placeholder="Your msg"
+        class="chat-input"
+      />
 
       <button class="chat-send">Send</button>
     </form>
   </div>
 </template>
 <script>
+import Record from '../cmps/Record.vue'
 import {
   socketService,
   SOCKET_EMIT_SEND_MSG,
@@ -40,6 +53,7 @@ export default {
     return {
       msg: { from: 'Guest', txt: '' },
       msgs: [],
+
       topics: [
         'General',
         'Mood',
@@ -77,9 +91,6 @@ export default {
     },
     sendMsg() {
       console.log('Sending', this.msg)
-      // TODO: next line not needed after connecting to backend
-      // this.addMsg(this.msg)
-      // setTimeout(()=>this.addMsg({from: 'Dummy', txt: 'Yey'}), 2000)
       const user = userService.getLoggedinUser()
       const from = (user && user.fullname) || 'Guest'
       this.msg.from = from
@@ -90,5 +101,54 @@ export default {
       socketService.emit(SOCKET_EMIT_SET_TOPIC, this.topic)
     },
   },
+  components: {
+    Record,
+  },
 }
 </script>
+<!-- <template>
+  <div>
+    <div v-for="chatMessage in chatLog" :key="chatMessage.id">
+      <p>{{ chatMessage.userInput }}</p>
+      <p>{{ chatMessage.response }}</p>
+    </div>
+    <input v-model="userInput" />
+    <button @click="submitUserInput">Submit</button>
+  </div>
+</template>
+
+<script>
+// import { Configuration, OpenAIApi } from 'openai'
+
+export default {
+  data() {
+    return {
+      chatLog: [],
+      userInput: '',
+      OPEN_AI_API_KEY: 'sk - mVxOmRKndCLR5bG8zx8qT3BlbkFJfZahTh4ujg4HERDWCKfU',
+    }
+  },
+  methods: {
+    async submitUserInput() {
+      const openAi = new OpenAIApi(
+        new Configuration({
+          apiKey: process.env.this.OPEN_AI_API_KEY,
+        })
+      )
+
+      const response = await openAi.createChatCompletion({
+        model: 'gpt-3.5-turbo',
+        messages: [{ role: 'user', content: this.userInput }],
+      })
+
+      this.chatLog.push({
+        id: this.chatLog.length,
+        userInput: this.userInput,
+        response: response.data.choices[0].text,
+      })
+
+      this.userInput = ''
+    },
+  },
+}
+</script> -->

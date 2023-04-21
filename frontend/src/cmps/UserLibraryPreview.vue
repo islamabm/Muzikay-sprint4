@@ -1,22 +1,22 @@
 <template>
-  <section v-if="station" class="station-preview">
+  <section
+    v-if="station"
+    class="station-preview"
+    @click="showUserStationDetails(station._id)"
+  >
     <div class="station-image">
       <img
-      v-if="station.songs && station.songs.length > 0"
-      :src="
-            station.imgUrl
-            ? station.imgUrl
-            : station.songs[0].imgUrl
-            "
-            @click="toggleModal"
-        />
-        <img
-          class="deafult-image"
-          @click="toggleModal"
-          v-else
-          src="../assets/img/empty-img.png"
-        />
-        
+        v-if="station.songs && station.songs.length > 0"
+        :src="station.imgUrl ? station.imgUrl : station.songs[0].imgUrl"
+        @click="toggleModal"
+      />
+      <img
+        class="deafult-image"
+        @click="toggleModal"
+        v-else
+        src="../assets/img/empty-img.png"
+      />
+
       <div class="play-button" @click.stop="playStation"></div>
     </div>
     <div class="station-info">
@@ -36,7 +36,14 @@ export default {
   data() {
     return {}
   },
-  methods: {},
+  methods: {
+    async showUserStationDetails(stationId) {
+      await this.$store.dispatch({ type: 'setcurrStation', stationId })
+
+      this.$router.push(`/station/${stationId}`)
+      // this.$store.commit({ type: 'setCurrStation', stationId })
+    },
+  },
   watch: {},
   computed: {},
 }

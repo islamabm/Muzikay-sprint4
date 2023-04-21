@@ -46,7 +46,7 @@ import SVGService from '../services/SVG.service'
 import { stationService } from '../services/station.service.local'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 export default {
-  name: '',
+  name: 'MiniSearch',
   props: [],
   emits: ['handelYoutubeSong'],
   created() {},

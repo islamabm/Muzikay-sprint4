@@ -3,7 +3,7 @@
   overflow-x: hidden;
   background-color: $clr6;
   color: $clr2;
-  font-family: Circular-book;
+  font-family: circular-book;
 }
 .spotify-login-header {
   border-bottom: 1px solid rgb(217, 218, 220);
@@ -22,7 +22,7 @@
       height: 45px;
     }
     span {
-      font-family: Circular-book;
+      font-family: circular-book;
       font-weight: 900;
       font-size: 1.5rem;
       padding-inline-start: 5px;
@@ -66,9 +66,9 @@
   text-align: center;
   text-decoration: none;
   text-transform: none;
-display:flex;
-justify-content: center;
-align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding-block: 7px;
   padding-inline: 31px;
   position: relative;
@@ -112,12 +112,12 @@ align-items: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size:0.9rem;
+  font-size: 0.9rem;
   gap: 10px;
-  .apple-logo-img{
+  .apple-logo-img {
     width: 15px;
     height: 20px;
-    transform: translate(-15px)
+    transform: translate(-15px);
   }
   &:focus {
     outline: 3px solid #212121;
@@ -133,9 +133,9 @@ align-items: center;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  font-size:0.9rem;
+  font-size: 0.9rem;
 
-  .google-img{
+  .google-img {
     height: 20px;
     width: 20px;
     transform: translate(-2px);
@@ -155,8 +155,8 @@ align-items: center;
   align-items: center;
   justify-content: center;
   gap: 15px;
-  font-size:0.9rem;
-  .fb-logo-img{
+  font-size: 0.9rem;
+  .fb-logo-img {
     width: 20px;
     height: 20px;
     margin-inline-end: 2px;
@@ -201,7 +201,7 @@ align-items: center;
 }
 .login-btn {
   box-sizing: border-box;
-  font-size:1rem;
+  font-size: 1rem;
   position: relative;
   background-color: #1ed760;
   color: #000000;
@@ -275,114 +275,108 @@ align-items: center;
   height: 50px;
 }
 
-
-
-
-
-
 @media (max-width: $narrow-breakpoint) {
-.spotify-login-page {
-font-size: 14px;
-}
+  .spotify-login-page {
+    font-size: 14px;
+  }
 
-.spotify-login-user-content {
-width: 80%;
-padding: 5px;
-}
+  .spotify-login-user-content {
+    width: 80%;
+    padding: 5px;
+  }
 
-.spotify-login-user-content-header {
-font-size: 18px;
-transform: translate(-0.2px);
-}
+  .spotify-login-user-content-header {
+    font-size: 18px;
+    transform: translate(-0.2px);
+  }
 
-.btns-container {
-column-gap: 10px;
-margin: 10px 0;
-transform: translate(-20px);
-}
+  .btns-container {
+    column-gap: 10px;
+    margin: 10px 0;
+    transform: translate(-20px);
+  }
 
-.spotify-btn {
-font-size: 14px;
-padding: 5px 15px;
-min-block-size: 30px;
-}
+  .spotify-btn {
+    font-size: 14px;
+    padding: 5px 15px;
+    min-block-size: 30px;
+  }
 
-.spotify-login-apple-btn {
-font-size: 14px;
-padding: 5px 15px;
-min-block-size: 30px;
-}
+  .spotify-login-apple-btn {
+    font-size: 14px;
+    padding: 5px 15px;
+    min-block-size: 30px;
+  }
 
-.spotify-login-google-btn {
-font-size: 14px;
-padding: 5px 15px;
-min-block-size: 30px;
-}
+  .spotify-login-google-btn {
+    font-size: 14px;
+    padding: 5px 15px;
+    min-block-size: 30px;
+  }
 
-.spotify-login-facebook-btn {
-font-size: 14px;
-padding: 5px 15px;
-min-block-size: 30px;
+  .spotify-login-facebook-btn {
+    font-size: 14px;
+    padding: 5px 15px;
+    min-block-size: 30px;
+  }
 
-}
+  .spotify-form-group {
+    padding-bottom: 8px;
+  }
 
-.spotify-form-group {
-padding-bottom: 8px;
-}
+  .login-form-labels {
+    font-size: 14px;
+  }
 
-.login-form-labels {
-font-size: 14px;
-}
+  .login-form-inputs {
+    font-size: 14px;
+    padding-inline: 10px;
+    min-block-size: 30px;
+  }
 
-.login-form-inputs {
-font-size: 14px;
-padding-inline: 10px;
-min-block-size: 30px;
-}
+  .login-form-inputs:hover {
+    box-shadow: inset 0 0 0 1px #000000;
+  }
 
-.login-form-inputs:hover {
-box-shadow: inset 0 0 0 1px #000000;
-}
+  .login-form-inputs:focus {
+    box-shadow: inset 0 0 0 1px #000000;
+  }
 
-.login-form-inputs:focus {
-box-shadow: inset 0 0 0 1px #000000;
-}
+  .login-li-span {
+    font-size: 12px;
+  }
 
-.login-li-span {
-font-size: 12px;
-}
+  .login-btn {
+    font-size: 16px;
+    padding: 8px 24px;
+  }
 
-.login-btn {
-font-size: 16px;
-padding: 8px 24px;
-}
+  .login-page-h2 {
+    font-size: 20px;
+  }
 
-.login-page-h2 {
-font-size: 20px;
-}
+  .spotify-login-signup-btn {
+    font-size: 14px;
+  }
 
-.spotify-login-signup-btn {
-font-size: 14px;
-}
+  .spotify-form-validitions-password {
+    font-size: 14px;
+  }
 
-.spotify-form-validitions-password {
-font-size: 14px;
-}
+  .spotify-form-forgot {
+    font-size: 14px;
+  }
 
-.spotify-form-forgot {
-font-size: 14px;
-}
+  .spotify-login-user-content-span {
+    font-size: 14px;
+  }
 
-.spotify-login-user-content-span {
-font-size: 14px;
-}
+  .checkbox-span-container {
+    font-size: 14px;
+  }
 
-.checkbox-span-container {
-font-size: 14px;
-}
-
-.spotify-form-validitions-Remember {
-margin-inline-start: 0.2em;
-font-size: 14px;
-}
+  .spotify-form-validitions-Remember {
+    margin-inline-start: 0.2em;
+    font-size: 14px;
+  }
 }

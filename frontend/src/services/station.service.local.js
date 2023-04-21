@@ -7,7 +7,7 @@ import gStations from '../../data/station.json'
 import gSearchStations from '../../data/search.json'
 import { userService } from './user.service.js'
 
-const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyB-ZA8fLRD7Mpgw-250gDF_wEsOULk112Q&q=`
+const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyAorgKs5Ii12ehesHHey1M77ergDYWwwW0&q=`
 const STORAGE_KEY = 'station'
 const SEARCH_KEY = 'videosDB'
 const VIDEOS_KEY = 'videosIdDB'
@@ -44,7 +44,7 @@ function _getUrl(id = '') {
 }
 
 async function query() {
-  console.log('query');
+  console.log('query')
   return httpService.get('station')
   // var stations = await storageService.query(STORAGE_KEY)
   // if (filterBy.name) {
@@ -97,7 +97,9 @@ function getVideos(keyword) {
   }
   let videosIds = utilService.loadFromStorage(VIDEOS_KEY) || []
   console.log('keyword', keyword)
-  const existTitle = videosIds.find(video =>video.title.toLowerCase().includes(keyword.toLowerCase()))
+  const existTitle = videosIds.find((video) =>
+    video.title.toLowerCase().includes(keyword.toLowerCase())
+  )
   console.log(existTitle)
 
   return axios.get(gUrl + keyword).then((res) => {

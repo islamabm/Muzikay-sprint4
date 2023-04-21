@@ -6,7 +6,7 @@
           v-if="
             station.songs &&
             station.songs.length > 0 &&
-            station._id !== 'likeduser123'
+            station.name !== 'Liked songs'
           "
           :src="station.imgUrl ? station.imgUrl : station.songs[0].imgUrl"
           @click="toggleModal"
@@ -14,7 +14,7 @@
 
         <img
           @click="toggleModal"
-          v-else-if="station.createdBy._id === 'likeduser123'"
+          v-else-if="station.name === 'Liked songs'"
           src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
         />
         <div class="icon-container" v-else>
@@ -23,7 +23,7 @@
             class="default-image"
             src="../assets/img/default.png"
             @click="toggleModal"
-            v-show="station.createdBy._id !== 'likeduser123'"
+            v-show="station.name !== 'Liked songs'"
             @mouseover="toggleImgSvg('editImgIcon')"
             @mouseleave="toggleImgSvg('defaultImgIcon')"
           />
@@ -50,6 +50,9 @@
               <span class="dot">•</span>
               <span class="songs-count">{{ songsCount }},</span>
 
+              <!-- <span v-if="station.songs[0].duration" class="posted-at">{{
+                aboutCalc
+              }}</span> -->
               <span class="posted-at">about 11 hr </span>
             </div>
           </div>
@@ -85,7 +88,11 @@
         </div>
       </div>
 
-      <Container @drop="onDrop" v-if="station.songs" class="songs-list-details">
+      <Container
+        @drop="onDrop"
+        v-if="station.songs && station.name !== 'Liked songs'"
+        class="songs-list-details"
+      >
         <Draggable
           @mouseover="currDraggableIdx = idx"
           @mouseleave="currDraggableIdx = null"
@@ -137,10 +144,13 @@
                 :class="{ 'hover-effect': clickedHeartIndex !== idx }"
                 :songIndex="idx"
                 :liked="song.liked"
-                @click="addUserToSong(song), onHeartClick(idx)"
+                @click="addSongToUser(song), onHeartClick(idx)"
               />
             </div>
-            <p class="song-duration">{{ song.duration }}</p>
+            <p v-if="song.duration" class="song-duration">
+              {{ song.duration }}
+            </p>
+            <p v-else class="song-duration">1:40</p>
             <div>
               <button
                 class="btn-open-modal"
@@ -157,39 +167,68 @@
         </Draggable>
       </Container>
 
-      <Container v-if="station.createdBy._id === 'likeduser123'">
+      <Container
+        v-if="station.name === 'Liked songs'"
+        class="songs-list-details"
+      >
         <Draggable
+          @mouseover="currDraggableIdx = idx"
+          @mouseleave="currDraggableIdx = null"
           class="song-item"
           v-for="(song, idx) in likedSongsUser"
           :key="idx"
         >
           <div class="img-and-title" @click="songDetails(song)">
-            <span>{{ idx + 1 }}</span>
-            <img v-if="song.videoId" class="song-img" :src="song.url" />
-
+            <!-- :class="{ 'active-song': song.active }" -->
+            <img
+              v-show="activeSongIndex === idx"
+              class="song-animation-gif"
+              src="../assets/gif/animation.gif"
+            />
+            <span v-if="activeSongIndex !== idx">{{ idx + 1 }}</span>
+            <img
+              @click="changeSetuations(idx)"
+              v-if="song.videoId"
+              class="song-img"
+              :src="song.url"
+            />
+            <img
+              @click="changeSetuations(idx)"
+              v-else
+              class="song-img"
+              :src="song.imgUrl"
+            />
             <p
+              @click="toggleActiveTitle(idx), changeSetuations(idx)"
               class="song-title"
               :class="{ 'active-song': activeTitle === idx }"
-              @click="toggleActiveTitle(idx)"
             >
-              <!-- :class="{ active: activeTitle === idx }" -->
-              {{ song.title }}
+              <!-- v-bind:class="{ 'active-song': isActive }" -->
+              {{ song.title }} - {{ song.artist }}
             </p>
           </div>
 
-          <p class="posted-at">1 day ago</p>
+          <p class="song-album">
+            {{ song.album }}
+          </p>
 
+          <p class="posted-at">{{ getTimeAgo(new Date(song.addedAt)) }}</p>
           <div class="flex-end list-end">
             <div class="like-song-icon">
               <BubblingHeart
+                ref="heart"
                 title="heart"
                 class="heart-song station-details-heart"
                 :class="{ 'hover-effect': clickedHeartIndex !== idx }"
                 :songIndex="idx"
                 :liked="song.liked"
+                @click="addSongToUser(song), onHeartClick(idx)"
               />
             </div>
-            <p class="song-duration">1:40</p>
+            <p v-if="song.duration" class="song-duration">
+              {{ song.duration }}
+            </p>
+            <p v-else class="song-duration">1:40</p>
             <div>
               <button
                 class="btn-open-modal"
@@ -350,6 +389,9 @@ export default {
     songDetails(song) {
       eventBus.emit('song-details', song)
     },
+    songDetailss(song) {
+      eventBus.emit('song-detailss', song)
+    },
     dontAddSong() {
       this.showAreYouSureModal = false
     },
@@ -410,20 +452,21 @@ export default {
         return years + (years === 1 ? ' year ago' : ' years ago')
       }
     },
-    async addUserToSong(song) {
+    async addSongToUser(song) {
+      console.log(this.$store.getters.userSongs)
+      console.log('add user to song in the details', song)
       try {
-        const updatedStation = await this.$store.dispatch({
-          type: 'addUserToSong',
+        await this.$store.dispatch({
+          type: 'updateUser',
           song,
+          user: this.user,
         })
-        this.$store.commit({ type: 'editStation', station: updatedStation })
         showSuccessMsg('Song liked')
       } catch (err) {
         console.log(err)
       }
     },
     openStationSelection() {
-      console.log('opened')
       this.showStationsSubMenu = !this.showStationsSubMenu
     },
     toggleActiveTitle(idx) {
@@ -518,6 +561,15 @@ export default {
     async addToSelectedStation(stationId, song) {
       console.log('we are in the details in the add song', song)
       console.log('we are in the details in the add song station', stationId)
+
+      // Check if song is already in the station's playlist
+      const station = this.stations.find((s) => s._id === stationId)
+      const songExists = station.songs.some((item) => item._id === song._id)
+      if (songExists) {
+        console.log('Song already exists in station playlist')
+        return
+      }
+
       try {
         await this.$store.dispatch({
           type: 'addToStation',
@@ -583,6 +635,16 @@ export default {
     songClass() {
       return this.isActive ? this.activeClass : this.inactiveClass
     },
+    // aboutCalc() {
+    //   const about = this.station.songs.map((s) => s.duration.split(':'))
+    //   const minutes = about.reduce((acc, val) => {
+    //     const [mins, secs] = val.split(':').map(Number)
+    //     return acc + mins * 60 + secs
+    //   }, 0)
+
+    //   const totalHours = Math.floor(totalMinutes / 60)
+    //   console.log(`The total duration is ${totalHours} hours`)
+    // },
 
     user() {
       return this.$store.getters.loggedinUser
@@ -591,7 +653,7 @@ export default {
       return this.station.name
     },
     likedSongsUser() {
-      return this.$store.getters.getSongsLikedByUser
+      if (this.$store.getters.userSongs) return this.$store.getters.userSongs
     },
     isLikedPageWanted() {
       return this.$route.path === `/station/likeduser123`
@@ -615,16 +677,15 @@ export default {
       return station ? station : this.$store.getters.station
     },
     stationNameClass() {
-  const words = this.station.name.split(' ').length;
-  if (words <= 3) {
-    return 'short-station-name';
-  } else if (words <= 5) {
-    return 'long-station-name';
-  } else {
-    return 'huge-station-name';
-  }
-},
-
+      const words = this.station.name.split(' ').length
+      if (words <= 3) {
+        return 'short-station-name'
+      } else if (words <= 5) {
+        return 'long-station-name'
+      } else {
+        return 'huge-station-name'
+      }
+    },
   },
   components: {
     StationEdit,

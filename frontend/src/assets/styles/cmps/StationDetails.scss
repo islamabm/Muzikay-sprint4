@@ -49,7 +49,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    font-family: 'Circular-book';
+    font-family: 'circular-book';
 
     .playlist-word {
       font-size: 0.9rem;
@@ -57,20 +57,19 @@
       color: $clr6;
       cursor: pointer;
       margin-block-end: 1rem;
-      font-family: 'Circular-book';
+      font-family: 'circular-book';
     }
 
     .short-station-name {
       font-size: 6rem;
-      margin-block:  25px;
-
+      margin-block: 25px;
     }
-    
+
     .long-station-name {
       font-size: 5rem;
-      margin-block:  30px;
+      margin-block: 30px;
     }
-    
+
     .huge-station-name {
       font-size: 4rem;
     }
@@ -80,10 +79,9 @@
       font-weight: 900;
       color: $clr6;
       // transform: translateY(-5px);
-      font-family: Circular-book;
+      font-family: circular-book;
       cursor: pointer;
     }
-    
 
     .station-description {
       font-size: 0.9rem;
@@ -91,7 +89,7 @@
       width: 100%;
       margin-block-end: 0;
       cursor: pointer;
-      
+
       transform: translateY(3px);
     }
     .posted-at {
@@ -99,7 +97,7 @@
       transform: translate(-7px, 1.8px);
     }
     .small-logo-word {
-      font-family: 'Circular-book';
+      font-family: 'circular-book';
       transform: translateY(2px);
       margin-inline-start: -5px;
     }
@@ -276,7 +274,7 @@
   // left: 85%;
   box-shadow: 0 4px 6px rgba($clr2, 0.1), 0 1px 3px rgba($clr2, 0.08);
   z-index: 10;
-  font-family: Circular-book;
+  font-family: circular-book;
 
   .modal-options {
     list-style-type: none;
@@ -308,7 +306,7 @@
       width: 200px;
       padding: 10px;
       box-shadow: 0 4px 6px rgba($clr2, 0.1), 0 1px 3px rgba($clr2, 0.08);
-      font-family: Circular-book;
+      font-family: circular-book;
 
       li {
         padding: 10px 15px;
@@ -342,7 +340,7 @@
 @media (max-width: 414px) {
   .station-details {
     max-height: 736px;
-    width:414px;
+    width: 414px;
     padding: 0;
   }
 }
@@ -350,7 +348,6 @@
 //MOBILE song list
 @media (max-width: $narrow-breakpoint) {
   .songs-list-details {
-
     .song-item {
       padding: 2px;
 
@@ -430,13 +427,13 @@
     padding: 10px;
     padding-inline-start: 20px;
     max-width: 1250px;
-.song-animation-gif{
-  height:13px;
-  width:13px;
-  margin: 0;
-  padding:0;
-  transform:translate(2px)
-}
+    .song-animation-gif {
+      height: 13px;
+      width: 13px;
+      margin: 0;
+      padding: 0;
+      transform: translate(2px);
+    }
     &:hover {
       background-color: rgba($clr10, 0.2);
 
@@ -471,7 +468,7 @@
       // transform: translateX(-50%);
       margin: 0;
       text-align: start;
-      font-family: Circular-book;
+      font-family: circular-book;
       color: $clr11;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -512,7 +509,7 @@
       font-weight: 400;
       margin: 0;
       // color: $clr6;
-      font-family: Circular-book;
+      font-family: circular-book;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -645,10 +642,10 @@
       justify-content: center;
       text-align: center;
     }
-     
-  .station-name {
-    color:red;
-  }
+
+    .station-name {
+      color: red;
+    }
 
     img {
       width: 180px;

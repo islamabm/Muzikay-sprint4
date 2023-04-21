@@ -95,7 +95,7 @@
         font-weight: bold;
       }
     }
-    .btn-logout{
+    .btn-logout {
       transform: translateY(2.5px);
     }
     .btn-signup,
@@ -120,7 +120,7 @@
       border-radius: 500px;
       padding-block: 8px;
       padding-inline-end: 25px;
-      padding-inline-start:10px;
+      padding-inline-start: 10px;
       margin-inline-end: 22px;
       height: 40px;
       width: max-content;
@@ -130,31 +130,31 @@
         align-self: end;
         height: 25px;
         width: 25px;
-        padding:10px;
+        padding: 10px;
         border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
         margin-inline-end: 10px;
-        .user-icon{
-          svg{
-            fill:$clr6;
-            height:15px;
+        .user-icon {
+          svg {
+            fill: $clr6;
+            height: 15px;
             width: 15px;
             transform: translateY(2.5px);
           }
         }
       }
-      .user-image{
+      .user-image {
         align-self: end;
-            height: 48px;
-            width: 48px;
-            padding:10px;
-            border-radius: 50%;
-            transform: translateY(12px);
-    }
+        height: 48px;
+        width: 48px;
+        padding: 10px;
+        border-radius: 50%;
+        transform: translateY(12px);
+      }
       cursor: pointer;
-      &:hover{
+      &:hover {
         background-color: rgba($clr3, 0.4);
       }
     }
@@ -183,9 +183,9 @@
   .btn-login {
     margin-inline-end: 1rem;
   }
- .header .login-signup{
-  margin-inline-end: -5px;;
- }
+  .header .login-signup {
+    margin-inline-end: -5px;
+  }
 }
 @media screen and (min-width: $normal-breakpoint) {
   .btn-login {
@@ -204,7 +204,7 @@
   padding: 6px 48px;
   text-overflow: ellipsis;
   width: 100%;
-  font-family: Circular-book;
+  font-family: circular-book;
   font-weight: 100;
   display: flex;
   align-items: center;
@@ -255,15 +255,13 @@
   display: block;
 }
 
-
 @media only screen and (max-width: $narrow-breakpoint) {
   .header-search-container {
     width: 100%;
-    transform: translate(-95px , 50px);
+    transform: translate(-95px, 50px);
     margin-block-start: 1rem;
   }
-  .header-search-icon{
-   transform:translate(-95px, -1px)
+  .header-search-icon {
+    transform: translate(-95px, -1px);
   }
 }
-

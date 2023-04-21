@@ -20,6 +20,9 @@ export const userStore = {
     watchedUser({ watchedUser }) {
       return watchedUser
     },
+    userSongs({ loggedinUser }) {
+      return loggedinUser.LikedSongs
+    },
   },
   mutations: {
     setLoggedinUser(state, { user }) {
@@ -38,6 +41,12 @@ export const userStore = {
     setUserScore(state, { score }) {
       state.loggedinUser.score = score
     },
+    updateUser(state, { song, updatedUser }) {
+      console.log('mutationnnnnnn song', song)
+      console.log('mutationnnnnnn user', updatedUser)
+      state.loggedinUser.LikedSongs.push(song)
+      updatedUser.LikedSongs.push(song)
+    },
   },
   actions: {
     async login({ commit }, { userCred }) {
@@ -51,8 +60,10 @@ export const userStore = {
       }
     },
     async signup({ commit }, { userCred }) {
+      console.log('userCred in the store', userCred)
       try {
         const user = await userService.signup(userCred)
+        console.log('user in sign up user in store after', user)
         commit({ type: 'setLoggedinUser', user })
         return user
       } catch (err) {
@@ -96,10 +107,13 @@ export const userStore = {
         throw err
       }
     },
-    async updateUser({ commit }, { user }) {
+    async updateUser({ commit }, { song, user }) {
+      console.log('user in the store', user)
+      console.log('user in the store song', song)
       try {
-        user = await userService.update(user)
-        commit({ type: 'setUser', user })
+        const updatedUser = await userService.update(song, user)
+        console.log('user after update back in store', updatedUser)
+        commit({ type: 'updateUser', song, updatedUser })
       } catch (err) {
         console.log('userStore: Error in updateUser', err)
         throw err

@@ -14,10 +14,6 @@ export const stationStore = {
       if (!category) return state.stations
       return state.stations.filter((station) => station.tags.includes(category))
     },
-    filteredStations: (state) => (category) => {
-      if (!category) return state.stations
-      return state.stations.filter((station) => station.tags.includes(category))
-    },
     stations({ stations }) {
       return stations
     },
@@ -83,20 +79,20 @@ export const stationStore = {
       const songIdx = station.songs.findIndex((s) => s.id === removedId)
       station.songs.splice(songIdx, 1)
     },
-    updateSong(state, { song }) {
-      const st = state.stations.find((s) => s._id === 'likeduser123')
-      st.songs.push(song)
-      console.log(st)
-      const stationIdx = state.stations.findIndex(
-        (s) => s._id === song.stationId
-      )
+    // updateSong(state, { song }) {
+    //   const st = state.stations.find((s) => s._id === 'likeduser123')
+    //   st.songs.push(song)
+    //   console.log(st)
+    //   const stationIdx = state.stations.findIndex(
+    //     (s) => s._id === song.stationId
+    //   )
 
-      const station = state.stations[stationIdx]
-      const songIdx = station.songs.findIndex((so) => so.id === song.id)
+    //   const station = state.stations[stationIdx]
+    //   const songIdx = station.songs.findIndex((so) => so.id === song.id)
 
-      station.songs.splice(songIdx, 1, song)
-      state.stations[stationIdx] = station
-    },
+    //   station.songs.splice(songIdx, 1, song)
+    //   state.stations[stationIdx] = station
+    // },
 
     setUserStations(state, stations) {
       state.userStations = stations
@@ -134,22 +130,21 @@ export const stationStore = {
     },
   },
   actions: {
-    async addUserToSong({ commit, rootGetters }, { song, userStation }) {
-      const loggedinUser = rootGetters.loggedinUser
-      try {
-        const { updatedSong, savedStation } =
-          await stationService.addUserToSong(song, userStation, loggedinUser)
+    // async addSongToUser({ commit, rootGetters }, { song }) {
+    //   const loggedinUser = rootGetters.loggedinUser
+    //   console.log('loggedinUser', loggedinUser)
+    //   console.log('song', song)
+    //   try {
+    //     await stationService.addSongToUser(song, loggedinUser)
 
-        updatedSong.stationId = userStation._id
+    //     commit({ type: 'updateUser', song, user: loggedinUser })
 
-        commit({ type: 'updateSong', song: updatedSong })
-
-        return savedStation
-      } catch (err) {
-        console.error('Cannot add song', err)
-        throw err
-      }
-    },
+    //     return savedStation
+    //   } catch (err) {
+    //     console.error('Cannot add song', err)
+    //     throw err
+    //   }
+    // },
 
     async loadStations(context) {
       try {

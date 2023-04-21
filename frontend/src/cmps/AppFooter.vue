@@ -3,7 +3,7 @@
     <div class="footer-media-player">
       <MediaPlayer />
     </div>
-    <div v-if="station" class="footer-details ">
+    <div v-if="station" class="footer-details">
       <div class="img-and-title-player" v-if="currSong">
         <img class="footer-details-img" :src="url" />
         <h3 class="footer-details-title">
@@ -11,7 +11,7 @@
         </h3>
       </div>
       <div class="img-and-title-player" v-else>
-        <img class="footer-details-img" :src="station.songs[0].imgUrl" alt="">
+        <img class="footer-details-img" :src="station.songs[0].imgUrl" alt="" />
         <h3 class="footer-details-title">{{ station.songs[0].title }}</h3>
       </div>
 
@@ -52,7 +52,7 @@ export default {
         this.alive = false
       }, delay)
     })
-    
+
     eventBus.on('youtube-song', (video) => {
       this.youtubeSong = video
       var delay = video.delay || 2000
@@ -109,7 +109,7 @@ export default {
     },
   },
   mounted() {
-    eventBus.on('song-details', (song) => {
+    eventBus.on('song-detailss', (song) => {
       this.currSong = song
       var delay = song.delay || 2000
       this.alive = true
