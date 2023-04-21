@@ -239,13 +239,14 @@ export default {
     onReady() {
       this.duration = this.$refs.youtube.getDuration()
 
+      this.currentTime = this.$refs.youtube.getCurrentTime()
       // this.intervalId = setInterval(() => {
-      //   this.currentTime = this.$refs.youtube.getCurrentTime()
       // }, 1000)
     },
     // when something happens- Video has ended/Video 1=> is playing 2=> pause 0=> finished 3=> when passing forward or switching a song
     // supposed to be a switch case
     onStateChange(event) {
+      console.log('event', event)
       if (event.data === 1) {
         this.isPlaying = false
         this.duration = this.$refs.youtube.getDuration()
@@ -253,8 +254,9 @@ export default {
       }
       if (event.data === 2)
         if (event.data === 0) {
-          //  clearInterval(this.intervalId)
-          // this.isPlaying = true
+          clearInterval(this.intervalId)
+          this.isPlaying = true
+          this.playAudio()
           this.switchSong(1)
         }
       if (event.data === 3) {
@@ -262,7 +264,6 @@ export default {
         this.currentTime = 0
         this.playAudio()
         this.switchSong(1)
-        this.playAudio()
       }
     },
     // play/pause video
@@ -270,9 +271,9 @@ export default {
       this.isPlaying = !this.isPlaying
       if (this.isPlaying) {
         this.$refs.youtube.playVideo()
-        // this.intervalId = setInterval(() => {
-        //   this.currentTime = this.$refs.youtube.getCurrentTime()
-        // }, 1000)
+        this.intervalId = setInterval(() => {
+          this.currentTime = this.$refs.youtube.getCurrentTime()
+        }, 1000)
         this.$refs.youtube.setVolume(this.speakerLevel) // Set the volume when starting to play
       } else {
         this.$refs.youtube.pauseVideo()
