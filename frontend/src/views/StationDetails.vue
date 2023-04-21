@@ -568,12 +568,6 @@ export default {
       console.log('we are in the details in the add song station', stationId)
 
       // Check if song is already in the station's playlist
-      const station = this.stations.find((s) => s._id === stationId)
-      const songExists = station.songs.some((item) => item._id === song._id)
-      if (songExists) {
-        console.log('Song already exists in station playlist')
-        return
-      }
 
       try {
         await this.$store.dispatch({

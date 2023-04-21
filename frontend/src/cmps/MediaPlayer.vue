@@ -240,8 +240,7 @@ export default {
       this.duration = this.$refs.youtube.getDuration()
 
       this.currentTime = this.$refs.youtube.getCurrentTime()
-      // this.intervalId = setInterval(() => {
-      // }, 1000)
+      // this.intervalId = setInterval(() => {}, 1000)
     },
     // when something happens- Video has ended/Video 1=> is playing 2=> pause 0=> finished 3=> when passing forward or switching a song
     // supposed to be a switch case
