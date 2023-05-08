@@ -7,7 +7,7 @@
 
 You can view the app deployed on Render: https://muzikay.onrender.com/
 
-This is a Spotify-inspired music streaming web application built with **Vue.js**, **Vite**, **Vuex**, **SCSS**, **MongoDB**, **Node**, **HTML**, and different APIs such as **Vue3-Youtube** , **Smooth DnD**, **Fast Average Color**, etc. It was built as a final project for the **Coding Academy** boot camp by a team of 3 as part of a hackathon.
+This is a Spotify-inspired music streaming web application built with **Vue.js**, **Vite**, **Vuex**, **SCSS**, **MongoDB**, **Node**, **HTML**, and different APIs such as **Vue3-Youtube** , **Smooth DnD**, **Fast Average Color**, etc. It was built as a final project for **Coding Academy** bootcamp by a team of 3 as part of a hackathon.
 
 
 ![Responsivity](https://www.imagehost.at/images/2023/05/08/smartmockups_lhexldri-removebg-preview.png)
