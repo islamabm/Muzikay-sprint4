@@ -22,14 +22,15 @@ This is a Spotify-inspired music streaming web application built with **Vue.js**
 
 ### Home Page
 
-![Home Page on PC](https://i.ibb.co/728vB2H/Screenshot-2023-05-08-162908.png)
+<img src="https://i.ibb.co/728vB2H/Screenshot-2023-05-08-162908.png" alt="Home Page on PC" width="700">
+
 
 The homepage shows all the categories and playlists and allows the user to create new playlists.
 
 ### Playlists
 
 <div>
-  <img src="https://www.imagehost.at/images/2023/05/08/Screenshot-2023-05-08-163316.png" alt="Playlist on PC" width="800" style="margin-right: 20px;">
+  <img src="https://www.imagehost.at/images/2023/05/08/Screenshot-2023-05-08-163316.png" alt="Playlist on PC" width="600" style="margin-right: 20px;">
   <img src="https://www.imagehost.at/images/2023/05/08/Screenshot_2023-05-08_163425-removebg-preview.png" alt="Playlist on mobile" height="300">
 </div>
 
@@ -38,7 +39,7 @@ The playlist view shows all the songs in a playlist, allows the user to add new 
 
 ### Search
 
-![Search Page](https://i.ibb.co/T2gTj59/Screenshot-2023-05-08-163149.png)
+<img src="https://i.ibb.co/T2gTj59/Screenshot-2023-05-08-163149.png" alt="Search Page" width="700">
 
 The search page allows the user to search for songs or artists, and also allows them to choose a pre-made playlist by mood/need.
 
