@@ -7,16 +7,16 @@ import gStations from '../../data/station.json'
 import gSearchStations from '../../data/search.json'
 import { userService } from './user.service.js'
 
-const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyAorgKs5Ii12ehesHHey1M77ergDYWwwW0&q=`
+const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyDzUsWSpSbkuBk8EIbThWHpwkkK0zm6l6k&q=`
 const STORAGE_KEY = 'station'
 const SEARCH_KEY = 'videosDB'
 const VIDEOS_KEY = 'videosIdDB'
 const SEARCH_STATIONS_KEY = 'searchDB'
-// const USER_KEY = 'userStationDB'
+
 let gSearchCache = utilService.loadFromStorage(SEARCH_KEY) || {}
-// _createStations()
+
 _createSearchStations()
-// createUserStations()
+
 export const stationService = {
   query,
   getById,
@@ -30,7 +30,6 @@ export const stationService = {
   removeSong,
   addSongToUserStation,
   addUserToSong,
-  // addStationMsg,
 }
 window.cs = stationService
 

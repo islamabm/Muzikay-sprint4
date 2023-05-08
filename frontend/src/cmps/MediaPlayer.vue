@@ -231,10 +231,8 @@ export default {
     // supposed to be a switch case
     onStateChange(event) {
       // console.log('event', event)
+      console.log('event', event)
       if (event.data === 1) {
-        this.isPlaying = false
-        this.duration = this.$refs.youtube.getDuration()
-        this.playAudio()
       }
       if (event.data === 2)
         if (event.data === 0) {
