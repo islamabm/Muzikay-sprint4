@@ -1,4 +1,7 @@
-# Muzikay
+<h1 align="center">
+  <img src="https://cdn.freebiesupply.com/logos/large/2x/spotify-2-logo-png-transparent.png" alt="Spotify Logo" width="50" height="50" style="vertical-align: middle;"> Muzikay
+</h1>
+
 
 ## Demo
 
