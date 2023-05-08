@@ -15,7 +15,6 @@
     </div>
   </section>
 </template>
-<!-- @click.stop="playStation"  need to activate at thr playbutton div - send event to the media player with the stationId--> 
 <script>
 export default {
   name: 'StationPreview',

@@ -1,7 +1,7 @@
 <template>
   <footer class="main-footer">
     <div class="footer-media-player">
-      <MediaPlayer />
+      <MediaPlayer @songIdx="getSongIdx" />
     </div>
     <div v-if="station" class="footer-details">
       <div class="img-and-title-player" v-if="currSong">
@@ -32,36 +32,30 @@ import { eventBus } from '../services/event-bus.service.js'
 
 export default {
   name: 'AppFooter',
-  emits: ['songFromYoutube'],
+  emits: ['songFromYoutube','songIdx'],
   data() {
     return {
       hover: false,
       showModal: false,
       song: null,
       alive: false,
-      youtubeSong: null,
       currSong: null,
+      songIdx: 0,
     }
   },
-  created() {
-    eventBus.on('song-details', (song) => {
-      this.currSong = song
-      var delay = song.delay || 2000
-      this.alive = true
-      setTimeout(() => {
-        this.alive = false
-      }, delay)
-    })
-
-    eventBus.on('youtube-song', (video) => {
-      this.youtubeSong = video
-      var delay = video.delay || 2000
-      this.alive = true
-      setTimeout(() => {
-        this.alive = false
-      }, delay)
-    })
-  },
+  // created() {
+  //   eventBus.on('song-details', (songDetails) => {
+  //     const {song,idx} = songDetails
+  //     console.log('song', song)
+  //     this.currSong = song
+  //     this.songIdx = idx
+  //     var delay = songDetails.delay || 2000
+  //     this.alive = true
+  //     setTimeout(() => {
+  //       this.alive = false
+  //     }, delay)
+  //   })
+  // },
   computed: {
     station() {
       return this.$store.getters.station
@@ -96,6 +90,12 @@ export default {
     },
   },
   methods: {
+    getSongIdx(idx) {
+      console.log('idx', idx)
+      this.songIdx = idx++ // why do i need --?
+      this.currSong = this.station.songs[idx]
+      console.log('this.currSong', this.currSong)
+    },
     getSvg(iconName) {
       return SVGService.getSpotifySvg(iconName)
     },
@@ -118,27 +118,12 @@ export default {
       }, delay)
     })
 
-    eventBus.on('youtube-song', (video) => {
-      this.youtubeSong = video
-      var delay = video.delay || 2000
-      this.alive = true
-      setTimeout(() => {
-        this.alive = false
-      }, delay)
-    })
   },
 
   components: {
     MediaPlayer,
     BubblingHeart,
   },
-  watch: {
-    // song(newValue, oldValue) {
-    //   console.log('song changed:', newValue)
-    // },
-    // youtubeSong(newValue, oldValue) {
-    //   console.log('youtubeSong changed:', newValue)
-    // },
-  },
+
 }
 </script>

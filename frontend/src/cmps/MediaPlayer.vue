@@ -86,19 +86,20 @@
   </div>
 </template>
 <script>
-import YouTube from 'vue3-youtube'
-import SVGService from '../services/SVG.service'
-import { eventBus } from '../services/event-bus.service'
-import { stationService } from '../services/station.service.local.js'
+import YouTube from "vue3-youtube"
+import SVGService from "../services/SVG.service"
+import { eventBus } from "../services/event-bus.service"
+import { stationService } from "../services/station.service.local.js"
 
 export default {
-  name: ['MediaPlayer'],
+  name: "MediaPlayer",
   props: {
     speakerLevel: {
       type: Number,
       default: 80,
     },
   },
+  emits: ['songIdx'],
   components: {
     YouTube,
   },
@@ -112,41 +113,26 @@ export default {
       isRepeatOn: false,
       shuffledSongs: [],
       isShuffleOn: false,
-      speakerSvg: '',
+      speakerSvg: "",
       song: null,
-      youtubeSong: null,
       songIdx: 0,
     }
   },
   created() {
-    eventBus.on('song-details', (song) => {
-      console.log('song', song)
+    eventBus.on("song-details", async (currSong) => {
+      // console.log('song', song)
+      const { song, idx } = currSong
       this.song = song
-      if (!this.song.id && !this.song.videoId) {
-        setTimeout(async () => {
-          try {
-            console.log(this.song)
-            const searchStr = `${this.song.artist} ${this.song.title}`
-            console.log('searchStr', searchStr)
-            const videos = await stationService.getVideos(searchStr)
-            console.log('videos', videos)
-            this.song = videos[1]
-            // eventBus.emit('youtube-song',this.song)
-          } catch (error) {
-            console.error(error)
-          }
-          this.alive = false
-        }, song.delay || 2000)
-      }
-    })
+      this.songIdx = idx++
 
-    eventBus.on('youtube-song', (video) => {
-      this.youtubeSong = video
-      var delay = video.delay || 2000
-      this.alive = true
-      setTimeout(() => {
-        this.alive = false
-      }, delay)
+      try {
+        console.log(this.song)
+        const searchStr = `${this.song.artist} ${this.song.title}`
+        const videos = await stationService.getVideos(searchStr)
+        this.song = videos[0]
+      } catch (error) {
+        console.error(error)
+      }
     })
   },
   computed: {
@@ -155,17 +141,9 @@ export default {
     },
     putSongName() {
       if (this.song) {
-        if (this.song.id) {
-          console.log('this.song.id', this.song.id)
-          return this.song.id
-        }
-        console.log('this.song', this.song)
+        if (this.song.id) return this.song[this.songIdx].id
         // situation when we have a song from YouTube on our list-considered as a song
         return this.song.videoId
-      }
-      if (this.youtubeSong) {
-        console.log('this.youtubeSong', this.youtubeSong)
-        return this.youtubeSong.videoId
       }
       if (this.station) {
         if (this.isShuffleOn) {
@@ -175,13 +153,13 @@ export default {
         } else {
           return this.station.songs[this.songIdx].id
         }
-      } else return 'IXdNnw99-Ic'
+      } else return "IXdNnw99-Ic"
     },
     toggleSvgIcone() {
       let icon
-      if (this.volume > 80) icon = 'speakerFullBtnIcon'
-      else if (this.volume >= 10) icon = 'speakerMediumBtnIcon'
-      else icon = 'speakerMuteBtnIcon'
+      if (this.volume > 80) icon = "speakerFullBtnIcon"
+      else if (this.volume >= 10) icon = "speakerMediumBtnIcon"
+      else icon = "speakerMuteBtnIcon"
       return icon
     },
     progressBarWidth() {
@@ -230,23 +208,29 @@ export default {
       }
     },
     // the function gets direction 1/-1 and switches the song by it
-    switchSong(num) {
+    async switchSong(num) {
       this.songIdx += num
-      this.duration = this.$refs.youtube.getDuration()
-      this.formatTime(this.duration)
+      
+      const nextSong = this.station.songs[this.songIdx]
+      try {
+        const searchStr = `${nextSong.artist} ${nextSong.title}`
+        const videos = await stationService.getVideos(searchStr)
+        this.song = videos[0]
+        this.$emit('songIdx' , this.songIdx)
+      } catch (error) {
+        console.error(error)
+      }
     },
     // when the video is ready
     onReady() {
       this.duration = this.$refs.youtube.getDuration()
 
       this.currentTime = this.$refs.youtube.getCurrentTime()
-      // this.intervalId = setInterval(() => {
-      // }, 1000)
     },
     // when something happens- Video has ended/Video 1=> is playing 2=> pause 0=> finished 3=> when passing forward or switching a song
     // supposed to be a switch case
     onStateChange(event) {
-      console.log('event', event)
+      // console.log('event', event)
       if (event.data === 1) {
         this.isPlaying = false
         this.duration = this.$refs.youtube.getDuration()
@@ -257,13 +241,13 @@ export default {
           clearInterval(this.intervalId)
           this.isPlaying = true
           this.playAudio()
-          this.switchSong(1)
+          // this.switchSong(1)
         }
       if (event.data === 3) {
         this.isPlaying = false
         this.currentTime = 0
         this.playAudio()
-        this.switchSong(1)
+        // this.switchSong(1)
       }
     },
     // play/pause video
@@ -287,7 +271,7 @@ export default {
     formatTime(time) {
       const minutes = Math.floor(time / 60)
       const seconds = Math.floor(time % 60)
-      return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`
+      return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`
     },
     // find and navigate by click to any part of the song
     findProgress(ev) {
@@ -307,10 +291,10 @@ export default {
       this.$refs.youtube.seekTo(newTime)
 
       // update the width of the progress bar fill
-      progressBarFill.style.width = progressPercentage * 100 + '%'
+      progressBarFill.style.width = progressPercentage * 100 + "%"
     },
     setSpeakerLevel(level) {
-      this.$emit('update:speaker-level', level)
+      this.$emit("update:speaker-level", level)
     },
   },
   watch: {
