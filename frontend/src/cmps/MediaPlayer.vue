@@ -99,7 +99,7 @@ export default {
       default: 80,
     },
   },
-  emits: ['songIdx'],
+  emits: ['songDetails'],
   components: {
     YouTube,
   },
@@ -120,10 +120,10 @@ export default {
   },
   created() {
     eventBus.on("song-details", async (currSong) => {
-      // console.log('song', song)
       const { song, idx } = currSong
       this.song = song
-      this.songIdx = idx++
+      this.songIdx = idx + 1
+
 
       try {
         console.log(this.song)
@@ -153,7 +153,7 @@ export default {
         } else {
           return this.station.songs[this.songIdx].id
         }
-      } else return "IXdNnw99-Ic"
+      } else return "IXdNnw99-Ic" // default value
     },
     toggleSvgIcone() {
       let icon
@@ -209,14 +209,20 @@ export default {
     },
     // the function gets direction 1/-1 and switches the song by it
     async switchSong(num) {
-      this.songIdx += num
       
       const nextSong = this.station.songs[this.songIdx]
+      this.songIdx += num
       try {
         const searchStr = `${nextSong.artist} ${nextSong.title}`
         const videos = await stationService.getVideos(searchStr)
         this.song = videos[0]
-        this.$emit('songIdx' , this.songIdx)
+
+        const songDetails = {
+          song: this.song,
+          idx: this.songIdx
+        }
+        
+        this.$emit('songDetails' , songDetails)
       } catch (error) {
         console.error(error)
       }
@@ -230,8 +236,6 @@ export default {
     // when something happens- Video has ended/Video 1=> is playing 2=> pause 0=> finished 3=> when passing forward or switching a song
     // supposed to be a switch case
     onStateChange(event) {
-      // console.log('event', event)
-      console.log('event', event)
       if (event.data === 1) {
       }
       if (event.data === 2)
@@ -259,7 +263,6 @@ export default {
         this.$refs.youtube.setVolume(this.speakerLevel) // Set the volume when starting to play
       } else {
         this.$refs.youtube.pauseVideo()
-        // clearInterval(this.intervalId)
       }
     },
     changeSound(songIdx) {

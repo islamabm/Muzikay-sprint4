@@ -1,7 +1,7 @@
 <template>
   <footer class="main-footer">
     <div class="footer-media-player">
-      <MediaPlayer @songIdx="getSongIdx" />
+      <MediaPlayer @songDetails="getSongDetails" />
     </div>
     <div v-if="station" class="footer-details">
       <div class="img-and-title-player" v-if="currSong">
@@ -32,7 +32,7 @@ import { eventBus } from '../services/event-bus.service.js'
 
 export default {
   name: 'AppFooter',
-  emits: ['songFromYoutube','songIdx'],
+  emits: ['songFromYoutube','songDetails'],
   data() {
     return {
       hover: false,
@@ -90,11 +90,10 @@ export default {
     },
   },
   methods: {
-    getSongIdx(idx) {
-      console.log('idx', idx)
-      this.songIdx = idx++ // why do i need --?
-      this.currSong = this.station.songs[idx]
-      console.log('this.currSong', this.currSong)
+    getSongDetails(songDetails) {
+      const {idx,song} = songDetails
+      this.songIdx = idx
+      this.currSong = song
     },
     getSvg(iconName) {
       return SVGService.getSpotifySvg(iconName)
