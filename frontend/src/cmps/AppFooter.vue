@@ -28,7 +28,6 @@
 <script>
 import MediaPlayer from './MediaPlayer.vue'
 import BubblingHeart from './BubblingHeart.vue'
-import { eventBus } from '../services/event-bus.service.js'
 
 export default {
   name: 'AppFooter',
@@ -43,19 +42,6 @@ export default {
       songIdx: 0,
     }
   },
-  // created() {
-  //   eventBus.on('song-details', (songDetails) => {
-  //     const {song,idx} = songDetails
-  //     console.log('song', song)
-  //     this.currSong = song
-  //     this.songIdx = idx
-  //     var delay = songDetails.delay || 2000
-  //     this.alive = true
-  //     setTimeout(() => {
-  //       this.alive = false
-  //     }, delay)
-  //   })
-  // },
   computed: {
     station() {
       return this.$store.getters.station
