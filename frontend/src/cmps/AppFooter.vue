@@ -31,7 +31,7 @@ import BubblingHeart from './BubblingHeart.vue'
 
 export default {
   name: 'AppFooter',
-  emits: ['songFromYoutube','songDetails'],
+  emits: ['songFromYoutube', 'songDetails'],
   data() {
     return {
       hover: false,
@@ -50,9 +50,12 @@ export default {
       return this.$store.getters.stations
     },
     url() {
+      console.log('this.currSong', this.currSong)
+      console.log('this.currSong.imgUrl', this.currSong.imgUrl)
       return this.currSong.imgUrl
     },
     async getImageUrl() {
+      console.log('this.currSong', this.currSong.imgUrl)
       if (this.currSong && this.currSong.imgUrl) {
         return this.currSong.imgUrl
       } else if (this.youtubeSong && this.youtubeSong.url) {
@@ -77,9 +80,11 @@ export default {
   },
   methods: {
     getSongDetails(songDetails) {
-      const {idx,song} = songDetails
-      this.songIdx = idx
-      this.currSong = song
+      console.log('songDetails', songDetails)
+      const { idx } = songDetails
+      this.songIdx = idx - 1
+      // this.currSong = song
+      this.currSong = this.station.songs[this.songIdx]
     },
     getSvg(iconName) {
       return SVGService.getSpotifySvg(iconName)
@@ -93,22 +98,21 @@ export default {
       // )
     },
   },
-  mounted() {
-    eventBus.on('song-detailss', (song) => {
-      this.currSong = song
-      var delay = song.delay || 2000
-      this.alive = true
-      setTimeout(() => {
-        this.alive = false
-      }, delay)
-    })
+  // mounted() {
+  //   eventBus.on('song-detailss', (song) => {
+  //     this.currSong = song
+  //     var delay = song.delay || 2000
+  //     this.alive = true
+  //     setTimeout(() => {
+  //       this.alive = false
+  //     }, delay)
+  //   })
 
-  },
+  // },
 
   components: {
     MediaPlayer,
     BubblingHeart,
   },
-
 }
 </script>

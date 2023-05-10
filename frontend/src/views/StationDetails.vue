@@ -104,7 +104,7 @@
           v-for="(song, idx) in station.songs"
           :key="idx"
         >
-          <div class="img-and-title" @click="songDetails(song,idx)">
+          <div class="img-and-title" @click="songDetails(song, idx)">
             <!-- :class="{ 'active-song': song.active }" -->
             <img
               v-show="activeSongIndex === idx"
@@ -113,19 +113,19 @@
             />
             <span v-if="activeSongIndex !== idx">{{ idx + 1 }}</span>
             <img
-              @click="changeSetuations(idx)"
+              @click="changeStatus(idx)"
               v-if="song.videoId"
               class="song-img"
               :src="song.url"
             />
             <img
-              @click="changeSetuations(idx)"
+              @click="changeStatus(idx)"
               v-else
               class="song-img"
               :src="song.imgUrl"
             />
             <p
-              @click="toggleActiveTitle(idx), changeSetuations(idx)"
+              @click="toggleActiveTitle(idx), changeStatus(idx)"
               class="song-title"
               :class="{ 'active-song': activeTitle === idx }"
             >
@@ -182,7 +182,7 @@
           v-for="(song, idx) in likedSongsUser"
           :key="idx"
         >
-          <div class="img-and-title" @click="songDetails(song,idx)">
+          <div class="img-and-title" @click="songDetails(song, idx)">
             <!-- :class="{ 'active-song': song.active }" -->
             <img
               v-show="activeSongIndex === idx"
@@ -191,19 +191,19 @@
             />
             <span v-if="activeSongIndex !== idx">{{ idx + 1 }}</span>
             <img
-              @click="changeSetuations(idx)"
+              @click="changeStatus(idx)"
               v-if="song.videoId"
               class="song-img"
               :src="song.url"
             />
             <img
-              @click="changeSetuations(idx)"
+              @click="changeStatus(idx)"
               v-else
               class="song-img"
               :src="song.imgUrl"
             />
             <p
-              @click="toggleActiveTitle(idx), changeSetuations(idx)"
+              @click="toggleActiveTitle(idx), changeStatus(idx)"
               class="song-title"
               :class="{ 'active-song': activeTitle === idx }"
             >
@@ -377,9 +377,11 @@ export default {
     handelYoutubeSong(video) {
       eventBus.emit('youtube-song', video)
     },
-    changeSetuations(idx) {
+    changeStatus(idx) {
+      eventBus.on('song-idx', (songIdx) => (this.activeSongIndex = songIdx))
+
+      console.log('idx', idx)
       this.activeSongIndex = idx
-      // this.running = true
     },
     formatDuration(duration) {
       if (isNaN(duration)) {
@@ -389,10 +391,10 @@ export default {
       let seconds = Math.floor(duration % 60)
       return `${minutes}:${seconds}`
     },
-    songDetails(song,idx) {
+    songDetails(song, idx) {
       const currSong = {
         song,
-        idx
+        idx,
       }
       eventBus.emit('song-details', currSong)
     },
@@ -474,6 +476,7 @@ export default {
       this.showStationsSubMenu = !this.showStationsSubMenu
     },
     toggleActiveTitle(idx) {
+      eventBus.on('song-idx', (songIdx) => (this.activeTitle = songIdx))
       if (this.activeTitle === idx) {
         this.activeTitle = null
       } else {

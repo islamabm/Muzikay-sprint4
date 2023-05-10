@@ -117,7 +117,7 @@ function _prepareData(item) {
   return {
     videoId: item.id.videoId,
     title: item.snippet.title,
-    url: item.snippet.thumbnails.default.url,
+    imgUrl: item.snippet.thumbnails.default.url,
     createdAt: item.snippet.publishedAt,
   }
 }
