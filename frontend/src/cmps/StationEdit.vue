@@ -1,5 +1,6 @@
 <template>
   <div class="backdrop">
+    <Record @update-name="updateName" />
     <section class="edit-details-section">
       <form class="edit-details-form" @submit.prevent="stationInput">
         <div class="edit-details-header">
@@ -19,7 +20,6 @@
               type="text"
               v-model="station.name"
             />
-            <!-- <Record :name="station.name" @transcript="station.name = $event" /> -->
             <textarea
               class="edit-text-area"
               id="description"
@@ -59,14 +59,17 @@ export default {
           station: editedStation,
         })
         showSuccessMsg('Station edited')
-        // this.$emit('close') // add this line to close the modal
       } catch (err) {
         showErrorMsg('Cannot edit station', err)
       }
     },
+    updateName(newName) {
+      this.station.name = newName
+      console.log('this.station.name', this.station.name)
+    },
 
     async handleFile(ev) {
-      this.loading = true // set the loading flag to true
+      this.loading = true
 
       const file =
         ev.type === 'change' ? ev.target.files[0] : ev.dataTransfer.files[0]

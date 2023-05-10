@@ -53,7 +53,6 @@
               <!-- <span v-if="station.songs[0].duration" class="posted-at">{{
                 aboutCalc
               }}</span> -->
-              <span class="posted-at">about 11 hr </span>
 
               <span v-if="station.songs[0].duration" class="posted-at">{{
                 aboutCalc
