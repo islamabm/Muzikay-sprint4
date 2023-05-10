@@ -104,7 +104,7 @@
           v-for="(song, idx) in station.songs"
           :key="idx"
         >
-          <div class="img-and-title" @click="songDetails(song)">
+          <div class="img-and-title" @click="songDetails(song,idx)">
             <!-- :class="{ 'active-song': song.active }" -->
             <img
               v-show="activeSongIndex === idx"
@@ -182,7 +182,7 @@
           v-for="(song, idx) in likedSongsUser"
           :key="idx"
         >
-          <div class="img-and-title" @click="songDetails(song)">
+          <div class="img-and-title" @click="songDetails(song,idx)">
             <!-- :class="{ 'active-song': song.active }" -->
             <img
               v-show="activeSongIndex === idx"
@@ -389,12 +389,12 @@ export default {
       let seconds = Math.floor(duration % 60)
       return `${minutes}:${seconds}`
     },
-
-    songDetails(song) {
-      eventBus.emit('song-details', song)
-    },
-    songDetailss(song) {
-      eventBus.emit('song-detailss', song)
+    songDetails(song,idx) {
+      const currSong = {
+        song,
+        idx
+      }
+      eventBus.emit('song-details', currSong)
     },
     dontAddSong() {
       this.showAreYouSureModal = false
