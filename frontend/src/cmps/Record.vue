@@ -1,6 +1,10 @@
 <template>
   <div>
-    <i :class="`mic`" @click.stop="ToggleMic" v-html="getSvg('record')"></i>
+    <span
+      :class="`mic`"
+      @click.stop="ToggleMic"
+      v-html="getSvg('record')"
+    ></span>
     <!-- <button :class="`mic`" @click.stop="ToggleMic">r</button> -->
   </div>
 </template>
