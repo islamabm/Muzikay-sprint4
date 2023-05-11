@@ -90,7 +90,7 @@ import YouTube from 'vue3-youtube'
 import SVGService from '../services/SVG.service'
 import { eventBus } from '../services/event-bus.service'
 import { stationService } from '../services/station.service.local.js'
-
+import { utilService } from '../services/util.service'
 export default {
   name: 'MediaPlayer',
   props: {
@@ -133,10 +133,17 @@ export default {
           song: this.song,
           idx: this.songIdx,
         }
+
         this.$emit('songDetails', songDetails)
       } catch (error) {
         console.error(error)
       }
+    })
+    eventBus.on('station', (station) => {
+      const { songs } = station
+      this.song = songs[0]
+      // this.song = song
+      console.log('song', songs)
     })
   },
   computed: {
@@ -188,40 +195,59 @@ export default {
     },
     //  does algorithem to do a new array with random songs
     ShuffleSong() {
+      console.log('this.station', this.station)
       this.isShuffleOn = !this.isShuffleOn
-      if (this.isShuffleOn) {
-        // shuffle the array of song indexes
-        let currentIndex = this.station.songs.length
-        let randomIndex
-        let temporaryValue
-        let shuffledIndexes = [...Array(currentIndex).keys()]
-
-        while (0 !== currentIndex) {
-          // pick a remaining element
-          randomIndex = Math.floor(Math.random() * currentIndex)
-          currentIndex--
-          // swap with current element
-          temporaryValue = shuffledIndexes[currentIndex]
-          shuffledIndexes[currentIndex] = shuffledIndexes[randomIndex]
-          shuffledIndexes[randomIndex] = temporaryValue
-        }
-        // update the shuffledSongs array with the shuffled indexes
-        this.shuffledSongs = shuffledIndexes
-      } else {
-        this.shuffledSongs = []
+      const randomIndex = utilService.getRandomIntInclusive(
+        1,
+        this.station.songs.length - 1
+      )
+      this.song = this.station.songs[randomIndex]
+      const songDetails = {
+        song: this.song,
+        idx: randomIndex,
       }
+      this.switchSong(randomIndex)
+      this.$emit('songDetails', songDetails)
+      // if (this.isShuffleOn) {
+      //   // shuffle the array of song indexes
+      //   let currentIndex = this.station.songs.length
+      //   let randomIndex
+      //   let temporaryValue
+      //   let shuffledIndexes = [...Array(currentIndex).keys()]
+
+      //   while (0 !== currentIndex) {
+      //     // pick a remaining element
+      //     randomIndex = Math.floor(Math.random() * currentIndex)
+      //     currentIndex--
+      //     // swap with current element
+      //     temporaryValue = shuffledIndexes[currentIndex]
+      //     shuffledIndexes[currentIndex] = shuffledIndexes[randomIndex]
+      //     shuffledIndexes[randomIndex] = temporaryValue
+      //   }
+      //   // update the shuffledSongs array with the shuffled indexes
+      //   this.shuffledSongs = shuffledIndexes
+      // } else {
+      //   this.shuffledSongs = []
+      // }
     },
     // the function gets direction 1/-1 and switches the song by it
     async switchSong(num) {
       eventBus.emit('song-idx', this.songIdx)
-      console.log('num', num)
+      if (this.isShuffleOn) {
+        this.songIdx = utilService.getRandomIntInclusive(
+          1,
+          this.station.songs.length
+        )
+        eventBus.emit('song-idx', this.songIdx)
+      }
       const nextSong = this.station.songs[this.songIdx]
+
       this.songIdx += num
       try {
         const searchStr = `${nextSong.artist} ${nextSong.title}`
         const videos = await stationService.getVideos(searchStr)
         this.song = videos[0]
-
+        this.duration = this.$refs.youtube.getDuration()
         const songDetails = {
           song: this.song,
           idx: this.songIdx,
@@ -241,16 +267,26 @@ export default {
     // when something happens- Video has ended/Video 1=> is playing 2=> pause 0=> finished 3=> when passing forward or switching a song
     // supposed to be a switch case
     onStateChange(event) {
-      if (event.data === 1) {
-      }
-      if (event.data === 2)
+      console.log('event.data', event.data)
+      if ([0, 2].includes(event.data)) {
+        clearInterval(this.intervalId)
+        this.isPlaying = true
+        this.playAudio()
+
         if (event.data === 0) {
-          clearInterval(this.intervalId)
-          this.isPlaying = true
-          this.playAudio()
-          // this.switchSong(1)
+          if (this.isShuffleOn) {
+            this.switchSong(
+              utilService.getRandomIntInclusive(
+                1,
+                this.station.songs.length - 1
+              )
+            )
+          }
+          this.switchSong(1)
         }
+      }
       if (event.data === 3) {
+        this.duration = this.$refs.youtube.getDuration()
         this.isPlaying = false
         this.currentTime = 0
         this.playAudio()

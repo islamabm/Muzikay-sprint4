@@ -108,14 +108,13 @@ export const userStore = {
       }
     },
     async updateUser({ commit }, { song, user }) {
-      console.log('user in the store', user)
-      console.log('user in the store song', song)
+      console.log('song in store', song)
+      console.log('user in store', user)
       try {
         const updatedUser = await userService.update(song, user)
-        console.log('user after update back in store', updatedUser)
+
         commit({ type: 'updateUser', song, updatedUser })
       } catch (err) {
-        console.log('userStore: Error in updateUser', err)
         throw err
       }
     },

@@ -17,7 +17,7 @@
           v-else-if="station.name === 'Liked songs'"
           src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
         />
-        <div class="icon-container" v-else>
+        <div v-else class="icon-container">
           <i class="music-note" v-html="getSvg(currImgSvg)"></i>
           <img
             class="default-image"
@@ -54,9 +54,7 @@
                 aboutCalc
               }}</span> -->
 
-              <span v-if="station.songs[0].duration" class="posted-at">{{
-                aboutCalc
-              }}</span>
+              <span v-if="station.songs[0].duration" class="posted-at"> </span>
               <span v-else class="posted-at">about 11 hr </span>
             </div>
           </div>
@@ -70,7 +68,7 @@
         <div
           v-if="station.songs.length"
           class="btn-play-green"
-          @click.stop="playStation"
+          @click.stop="songDetails(station.songs[0], 0)"
         ></div>
         <BubblingHeart
           v-if="station.songs.length"
@@ -400,6 +398,9 @@ export default {
     },
     dontAddSong() {
       this.showAreYouSureModal = false
+    },
+    playStation() {
+      eventBus.emit('station', this.station)
     },
     showDeleteModel() {
       this.showDeleteModal = true
