@@ -1,8 +1,9 @@
 .mic {
   /* your existing styles */
   border: none;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.7);
   position: relative;
+  fill: white;
   overflow: hidden;
   transition: all 0.2s ease-in-out;
 }
