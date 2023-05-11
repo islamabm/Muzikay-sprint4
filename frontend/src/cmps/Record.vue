@@ -1,11 +1,13 @@
 <template>
   <div>
-    <button :class="`mic`" @click.stop="ToggleMic">r</button>
+    <i :class="`mic`" @click.stop="ToggleMic" v-html="getSvg('record')"></i>
+    <!-- <button :class="`mic`" @click.stop="ToggleMic">r</button> -->
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, defineEmits } from 'vue'
+import svgService from '../services/SVG.service.js'
 const transcript = ref('')
 const isRecording = ref(false)
 
@@ -19,6 +21,7 @@ const emit = defineEmits(['update-name'])
 //   context.emit('update-name', text)
 //   console.log('text', text)
 // }
+
 const emitTranscript = (text) => {
   emit('update-name', text)
 }
@@ -75,5 +78,8 @@ const ToggleMic = () => {
   } else {
     sr.start()
   }
+}
+const getSvg = (iconName) => {
+  return svgService.getSpotifySvg(iconName)
 }
 </script>
