@@ -90,7 +90,6 @@ export default {
       this.msgs.push(msg)
     },
     sendMsg() {
-      console.log('Sending', this.msg)
       const user = userService.getLoggedinUser()
       const from = (user && user.fullname) || 'Guest'
       this.msg.from = from

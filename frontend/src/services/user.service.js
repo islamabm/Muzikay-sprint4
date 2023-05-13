@@ -49,17 +49,14 @@ function remove(userId) {
 }
 
 async function update(song, user) {
-  console.log('song service', song)
-  console.log('user service', user)
   // const user = await storageService.get('user', _id)
   // let user = getById(_id)
-  console.log('user in service after back like', user)
+
   // user.LikedSongs.push(song)
   // await storageService.put('user', user)
-  console.log('user in service after back like', user)
 
   const savedUser = await httpService.put(`user/${user._id}`, user)
-  console.log('user in the service from the back', savedUser)
+
   // Handle case in which admin updates other user's details
   if (getLoggedinUser()._id === savedUser._id) saveLocalUser(savedUser)
   return savedUser
@@ -78,7 +75,6 @@ async function login(userCred) {
   //   }
 }
 async function signup(userCred) {
-  console.log('userCred in the user service', userCred)
   // console.log('service', userCred)
   //   userCred.score = 10000
   if (!userCred.imgUrl) {
@@ -90,8 +86,7 @@ async function signup(userCred) {
   // const users = utilService.loadFromStorage('user')
   // console.log(users)
   const user = await httpService.post('auth/signup', userCred)
-  console.log('user in user service', user)
-  //   socketService.login(user._id)
+
   return saveLocalUser(user)
 }
 async function logout() {

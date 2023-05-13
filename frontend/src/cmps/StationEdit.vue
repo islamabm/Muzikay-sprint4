@@ -10,7 +10,11 @@
         <div class="edit-details-img">
           <label class="cover-img" @drop.prevent="handleFile" @dragover.prevent>
             <div v-if="loading" class="loader"></div>
-            <img :src="imgSrc" alt="Station cover" class="img-edit" />
+            <img
+              :src="editedStation.songs[0].imgUrl"
+              alt="Station cover"
+              class="img-edit"
+            />
             <input type="file" @change="handleFile" hidden />
           </label>
           <div class="edit-details-inputs">
@@ -18,7 +22,7 @@
               class="edit-name"
               id="name"
               type="text"
-              v-model="station.name"
+              v-model="editedStation.name"
             />
             <textarea
               class="edit-text-area"
@@ -47,25 +51,25 @@ export default {
     return {
       // station: null,
       loading: false,
+      editedStation: null,
     }
   },
   methods: {
     async stationInput() {
-      let editedStation = { ...this.station }
-      console.log('editedStation', editedStation)
+      let editedStation = { ...this.editedStation }
       try {
         await this.$store.dispatch({
           type: 'editstation',
           station: editedStation,
         })
         showSuccessMsg('Station edited')
+        this.$emit('close')
       } catch (err) {
         showErrorMsg('Cannot edit station', err)
       }
     },
     updateName(newName) {
       this.station.name = newName
-      console.log('this.station.name', this.station.name)
     },
 
     async handleFile(ev) {
@@ -76,17 +80,11 @@ export default {
 
       try {
         const { url } = await uploadImg(file)
-        const newSong = { ...this.station.songs[0], imgUrl: url }
-        await this.$store.dispatch({
-          type: 'updateStationSong',
-          stationId: this.station._id,
-          newSong,
-        })
-        showSuccessMsg('Song updated')
+        this.editedStation.songs[0].imgUrl = url
+        this.loading = false
       } catch (err) {
         showErrorMsg('Cannot update song', err)
-      } finally {
-        this.loading = false // clear the loading flag once the upload is complete
+        this.loading = false
       }
     },
   },
@@ -106,6 +104,9 @@ export default {
     stations() {
       return this.$store.getters.stations
     },
+  },
+  created() {
+    this.editedStation = JSON.parse(JSON.stringify(this.station))
   },
   components: {
     Record,

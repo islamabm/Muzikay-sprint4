@@ -74,7 +74,6 @@ export const stationStore = {
       state.currUserStationId = stationId
     },
     removeSong(state, { stationId, removedId }) {
-      console.log('remove song from mutation', stationId)
       const station = state.stations.find((s) => s._id === stationId)
       const songIdx = station.songs.findIndex((s) => s.id === removedId)
       station.songs.splice(songIdx, 1)
@@ -124,7 +123,6 @@ export const stationStore = {
       station.songs.push(newSong)
     },
     setStationSongs(state, { obj }) {
-      console.log('obj', obj)
       const station = state.stations.find((s) => s._id === obj.stationId)
       station.songs = obj.songs
     },
@@ -151,7 +149,7 @@ export const stationStore = {
         const stations = await stationService.query()
         context.commit({ type: 'setStations', stations })
       } catch (err) {
-        console.log('stationStore: Error in loadStations', err)
+        console.error('stationStore: Error in loadStations', err)
         throw err
       }
     },
@@ -161,7 +159,7 @@ export const stationStore = {
         const stations = await stationService.querySearch()
         context.commit({ type: 'setSearchStations', stations })
       } catch (err) {
-        console.log('stationStore: Error in loadStations', err)
+        console.error('stationStore: Error in loadStations', err)
         throw err
       }
     },
@@ -172,7 +170,7 @@ export const stationStore = {
 
         commit({ type: 'removeStation', id })
       } catch (err) {
-        console.log('stationStore: Error in ', err)
+        console.error('stationStore: Error in ', err)
         throw err
       }
     },
@@ -191,29 +189,26 @@ export const stationStore = {
         await stationService.getById(stationId)
         commit({ type: 'setCurrStation', stationId })
       } catch (err) {
-        console.log('Could Not create station')
+        console.error('Could Not create station')
         throw err
       }
     },
     async createStation({ commit }, { StationName }) {
-      console.log('from the store', StationName)
       try {
         const station = await stationService.createNewStation(StationName)
         commit({ type: 'createStation', station })
         return station
       } catch (err) {
-        console.log('Could Not create station')
+        console.error('Could Not create station')
         throw err
       }
     },
     async removeSong({ commit }, { stationId, songId }) {
-      console.log('songid', songId)
-      console.log('stationid', stationId)
       try {
         const removedId = await stationService.removeSong(stationId, songId)
         commit({ type: 'removeSong', stationId, removedId })
       } catch (err) {
-        console.log('Could Not delete song')
+        console.error('Could Not delete song')
         throw err
       }
     },

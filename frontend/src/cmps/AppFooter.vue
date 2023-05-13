@@ -50,12 +50,9 @@ export default {
       return this.$store.getters.stations
     },
     url() {
-      console.log('this.currSong', this.currSong)
-      console.log('this.currSong.imgUrl', this.currSong.imgUrl)
       return this.currSong.imgUrl
     },
     async getImageUrl() {
-      console.log('this.currSong', this.currSong.imgUrl)
       if (this.currSong && this.currSong.imgUrl) {
         return this.currSong.imgUrl
       } else if (this.youtubeSong && this.youtubeSong.url) {
@@ -67,7 +64,6 @@ export default {
           const ogImageUrl = doc
             .querySelector('meta[property="og:image"]')
             .getAttribute('content')
-          console.log(ogImageUrl, 'this is ogImageUrl')
           return ogImageUrl
         } catch (err) {
           console.error(err)
@@ -80,7 +76,6 @@ export default {
   },
   methods: {
     getSongDetails(songDetails) {
-      console.log('songDetails', songDetails)
       const { idx } = songDetails
       this.songIdx = idx - 1
       // this.currSong = song

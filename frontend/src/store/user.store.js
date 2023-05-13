@@ -42,8 +42,6 @@ export const userStore = {
       state.loggedinUser.score = score
     },
     updateUser(state, { song, updatedUser }) {
-      console.log('mutationnnnnnn song', song)
-      console.log('mutationnnnnnn user', updatedUser)
       state.loggedinUser.LikedSongs.push(song)
       updatedUser.LikedSongs.push(song)
     },
@@ -55,19 +53,18 @@ export const userStore = {
         commit({ type: 'setLoggedinUser', user })
         return user
       } catch (err) {
-        console.log('userStore: Error in login', err)
+        console.error('userStore: Error in login', err)
         throw err
       }
     },
     async signup({ commit }, { userCred }) {
-      console.log('userCred in the store', userCred)
       try {
         const user = await userService.signup(userCred)
-        console.log('user in sign up user in store after', user)
+
         commit({ type: 'setLoggedinUser', user })
         return user
       } catch (err) {
-        console.log('userStore: Error in signup', err)
+        console.error('userStore: Error in signup', err)
         throw err
       }
     },
@@ -76,7 +73,7 @@ export const userStore = {
         await userService.logout()
         commit({ type: 'setLoggedinUser', user: null })
       } catch (err) {
-        console.log('userStore: Error in logout', err)
+        console.error('userStore: Error in logout', err)
         throw err
       }
     },
@@ -85,7 +82,7 @@ export const userStore = {
         const users = await userService.getUsers()
         commit({ type: 'setUsers', users })
       } catch (err) {
-        console.log('userStore: Error in loadUsers', err)
+        console.error('userStore: Error in loadUsers', err)
         throw err
       }
     },
@@ -94,7 +91,7 @@ export const userStore = {
         const user = await userService.getById(userId)
         commit({ type: 'setWatchedUser', user })
       } catch (err) {
-        console.log('userStore: Error in loadAndWatchUser', err)
+        console.error('userStore: Error in loadAndWatchUser', err)
         throw err
       }
     },
@@ -103,13 +100,11 @@ export const userStore = {
         await userService.remove(userId)
         commit({ type: 'removeUser', userId })
       } catch (err) {
-        console.log('userStore: Error in removeUser', err)
+        console.error('userStore: Error in removeUser', err)
         throw err
       }
     },
     async updateUser({ commit }, { song, user }) {
-      console.log('song in store', song)
-      console.log('user in store', user)
       try {
         const updatedUser = await userService.update(song, user)
 
@@ -123,7 +118,7 @@ export const userStore = {
         const score = await userService.changeScore(100)
         commit({ type: 'setUserScore', score })
       } catch (err) {
-        console.log('userStore: Error in increaseScore', err)
+        console.error('userStore: Error in increaseScore', err)
         throw err
       }
     },

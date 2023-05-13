@@ -174,8 +174,6 @@ export default {
           type: 'createStation',
           StationName,
         })
-        console.log('hi')
-        console.log(newStation)
         socketService.emit('station-added', newStation)
       } catch (err) {
         console.log('err')

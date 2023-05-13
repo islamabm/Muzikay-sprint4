@@ -125,7 +125,7 @@ export default {
       this.songIdx = idx + 1
 
       try {
-        console.log(this.song)
+
         const searchStr = `${this.song.artist} ${this.song.title}`
         const videos = await stationService.getVideos(searchStr)
         this.song = videos[0]
@@ -143,7 +143,7 @@ export default {
       const { songs } = station
       this.song = songs[0]
       // this.song = song
-      console.log('song', songs)
+
     })
   },
   computed: {
@@ -195,7 +195,6 @@ export default {
     },
     //  does algorithem to do a new array with random songs
     ShuffleSong() {
-      console.log('this.station', this.station)
       this.isShuffleOn = !this.isShuffleOn
       const randomIndex = utilService.getRandomIntInclusive(
         1,
@@ -267,7 +266,7 @@ export default {
     // when something happens- Video has ended/Video 1=> is playing 2=> pause 0=> finished 3=> when passing forward or switching a song
     // supposed to be a switch case
     onStateChange(event) {
-      console.log('event.data', event.data)
+
       if ([0, 2].includes(event.data)) {
         clearInterval(this.intervalId)
         this.isPlaying = true

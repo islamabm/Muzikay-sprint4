@@ -7,7 +7,6 @@ export const userService = {
 }
 
 function login() {
-  console.log('hi,login')
   const station = {}
   storageService.store('loggedinUser', station)
 

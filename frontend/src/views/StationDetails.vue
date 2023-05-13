@@ -378,7 +378,7 @@ export default {
     changeStatus(idx) {
       eventBus.on('song-idx', (songIdx) => (this.activeSongIndex = songIdx))
 
-      console.log('idx', idx)
+
       this.activeSongIndex = idx
     },
     formatDuration(duration) {
@@ -460,8 +460,6 @@ export default {
       }
     },
     async addSongToUser(song) {
-      console.log(this.$store.getters.userSongs)
-      console.log('add user to song in the details', song)
       try {
         await this.$store.dispatch({
           type: 'updateUser',
@@ -518,8 +516,6 @@ export default {
     },
     async onDrop(dropResult) {
       const { removedIndex, addedIndex } = dropResult
-      console.log('removedIndex', removedIndex)
-      console.log('addedIndex', addedIndex)
       if (removedIndex !== null || addedIndex !== null) {
         const songs = this.applyDrag(this.station.songs, dropResult)
         const obj = {
@@ -548,8 +544,6 @@ export default {
     },
     //Step 1
     async removeSong(songId) {
-      console.log('station details function remove song', songId)
-      console.log('station details function remove song', this.station._id)
       try {
         await this.$store.dispatch({
           type: 'removeSong',
@@ -567,10 +561,8 @@ export default {
     },
 
     async addToSelectedStation(stationId, song) {
-      console.log('we are in the details in the add song', song)
-      console.log('we are in the details in the add song station', stationId)
 
-      // Check if song is already in the station's playlist
+
 
       try {
         await this.$store.dispatch({

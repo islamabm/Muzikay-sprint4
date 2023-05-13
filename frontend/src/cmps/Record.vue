@@ -38,12 +38,10 @@ onMounted(() => {
   sr.interimResults = true
 
   sr.onstart = () => {
-    console.log('SR Started')
     isRecording.value = true
   }
 
   sr.onend = () => {
-    console.log('SR Stopped')
     isRecording.value = false
   }
 

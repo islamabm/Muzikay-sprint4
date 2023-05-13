@@ -43,7 +43,7 @@ function _getUrl(id = '') {
 }
 
 async function query() {
-  console.log('query')
+
   return httpService.get('station')
   // var stations = await storageService.query(STORAGE_KEY)
   // if (filterBy.name) {
@@ -95,17 +95,17 @@ function getVideos(keyword) {
     return Promise.resolve(gSearchCache[keyword])
   }
   let videosIds = utilService.loadFromStorage(VIDEOS_KEY) || []
-  console.log('keyword', keyword)
+
   const existTitle = videosIds.find((video) =>
     video.title.toLowerCase().includes(keyword.toLowerCase())
   )
-  console.log(existTitle)
+
 
   return axios.get(gUrl + keyword).then((res) => {
     const videos = res.data.items.map((item) => _prepareData(item))
-    console.log(videos)
+
     gSearchCache = videos
-    // console.log('gSearchCache', gSearchCache)
+
     videosIds.push(videos[0])
     utilService.saveToStorage(SEARCH_KEY, gSearchCache)
     utilService.saveToStorage(VIDEOS_KEY, videosIds)
@@ -185,13 +185,13 @@ async function addUserToSong(song, station, loggedinUser) {
   if (!station) {
     throw new Error('Station parameter is undefined')
   }
-  console.log('before song', song)
+
   // Create a new song object with the updated likedByUsers array
   const updatedSong = {
     ...song,
     likedByUsers: [...song.likedByUsers, loggedinUser.fullname],
   }
-  console.log('after song', song)
+
   const updatedStation = {
     ...station,
     songs: station.songs.map((s) => (s.id === song.id ? updatedSong : s)),
