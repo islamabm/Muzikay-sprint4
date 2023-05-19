@@ -4,11 +4,16 @@
       <div ref="stationDetailsHeader" class="header-content">
         <img
           v-if="
-            station.songs &&
-            station.songs.length > 0 &&
+            (station.imgUrl || (station.songs && station.songs.length > 0)) &&
             station.name !== 'Liked songs'
           "
-          :src="station.imgUrl ? station.imgUrl : station.songs[0].imgUrl"
+          :src="
+            station.imgUrl
+              ? station.imgUrl
+              : station.songs && station.songs.length > 0
+              ? station.songs[0].imgUrl
+              : 'src/assets/img/empty-img.png'
+          "
           @click="toggleModal"
         />
 
@@ -435,13 +440,18 @@ export default {
       let imgUrl = ''
       if (station.name === 'Liked songs') {
         imgUrl = 'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png'
-      } else if (station.songs && station.songs.length > 0) {
-        imgUrl = station.imgUrl ? station.imgUrl : station.songs[0].imgUrl
+      } else {
+        imgUrl =
+          station.imgUrl ||
+          (station.songs && station.songs.length > 0
+            ? station.songs[0].imgUrl
+            : '')
       }
       if (imgUrl !== '') {
         this.getDominantColor(imgUrl)
       }
     },
+
     getTimeAgo(idx) {
       const date = new Date(idx)
       const timeDiff = Date.now() - date.getTime()
@@ -607,7 +617,12 @@ export default {
       }
     },
     toggleModal() {
-      if (this.station.imgUrl || this.station.name === 'Liked songs') return
+      //don't change out demo data
+      if (
+        this.station.createdBy.fullname === 'system' ||
+        this.station.name === 'Liked songs'
+      )
+        return
       this.showModal = true
     },
     toggleSongModal(ev, song, idx) {

@@ -11,10 +11,11 @@
           <label class="cover-img" @drop.prevent="handleFile" @dragover.prevent>
             <div v-if="loading" class="loader"></div>
             <img
-              :src="imgUrl ? imgUrl : editedStation.songs[0]?.imgUrl"
-              alt="Station cover"
-              class="img-edit"
-            />
+  :src="editedStation.imgUrl || 'src/assets/img/empty-img.png'"
+  alt="Station cover"
+  class="img-edit"
+/>
+
             <input type="file" @change="handleFile" hidden />
           </label>
           <div class="edit-details-inputs">
@@ -28,9 +29,10 @@
               class="edit-text-area"
               id="description"
               rows="4"
-              v-model="station.description"
+              v-model="editedStation.description"
               placeholder="Add an optional description"
             ></textarea>
+
             <button class="btn-save-changes">Save</button>
           </div>
         </div>
@@ -56,38 +58,42 @@ export default {
     }
   },
   methods: {
-    async stationInput() {
-      let editedStation = { ...this.editedStation }
-      try {
-        await this.$store.dispatch({
-          type: 'editstation',
-          station: editedStation,
-        })
-        showSuccessMsg('Station edited')
-        this.$emit('close')
-      } catch (err) {
-        showErrorMsg('Cannot edit station', err)
-      }
-    },
+async stationInput() {
+  let editedStation = { ...this.editedStation }
+  editedStation.imgUrl = this.imgUrl  // Add this line
+  try {
+    await this.$store.dispatch({
+      type: 'editstation',
+      station: editedStation,
+    })
+    showSuccessMsg('Station edited')
+    this.$emit('close')
+  } catch (err) {
+    showErrorMsg('Cannot edit station', err)
+  }
+},
+
     updateName(newName) {
       this.station.name = newName
     },
 
     async handleFile(ev) {
-      this.loading = true
+  this.loading = true
+  const file =
+    ev.type === 'change' ? ev.target.files[0] : ev.dataTransfer.files[0]
 
-      const file =
-        ev.type === 'change' ? ev.target.files[0] : ev.dataTransfer.files[0]
+  try {
+    const { url } = await uploadImg(file)
+    this.imgUrl = url
+    this.editedStation.imgUrl = url  // Add this line
+    this.loading = false
+  } catch (err) {
+    showErrorMsg('Cannot update song', err)
+    this.loading = false
+  }
+}
 
-      try {
-        const { url } = await uploadImg(file)
-        this.imgUrl = url
-        this.loading = false
-      } catch (err) {
-        showErrorMsg('Cannot update song', err)
-        this.loading = false
-      }
-    },
+
   },
 
   computed: {
@@ -106,16 +112,29 @@ export default {
       return this.$store.getters.stations
     },
   },
+  
   created() {
-    this.editedStation = JSON.parse(JSON.stringify(this.station))
-    this.imgUrl =
-      this.station.imgUrl ||
-      (this.station.songs && this.station.songs[0]?.imgUrl) ||
-      'src/assets/img/empty-img.png'
-  },
-
+  this.editedStation = JSON.parse(JSON.stringify(this.station))
+  this.imgUrl =
+    this.station.imgUrl ||
+    (this.station.songs && this.station.songs.length > 0 ? this.station.songs[0].imgUrl : 'src/assets/img/empty-img.png')
+},
   components: {
     Record,
   },
+  watch: {
+  station: {
+    immediate: true,
+    handler(newValue) {
+      if(newValue) {
+        this.editedStation = JSON.parse(JSON.stringify(newValue))
+        this.imgUrl =
+          newValue.imgUrl ||
+          (newValue.songs && newValue.songs[0]?.imgUrl) ||
+          'src/assets/img/empty-img.png'
+      }
+    }
+  }
+},
 }
 </script>
