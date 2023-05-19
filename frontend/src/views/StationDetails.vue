@@ -277,12 +277,6 @@
             >
               Remove
             </li>
-            <!-- <li
-              v-if="station.createdBy.fullname !== 'system'"
-              @click="removeSong(selectedSongId)"
-            >
-              like
-            </li> -->
           </ul>
         </div>
       </div>
