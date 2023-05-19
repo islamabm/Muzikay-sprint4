@@ -1,4 +1,4 @@
-#signup-page {
+#signup-page{
   margin: 0 auto;
   padding-bottom: 130px;
   display: flex;
@@ -68,27 +68,9 @@
     padding-inline: 5.2rem;
     font-size: 16px;
     font-weight: 600;
-    border: none;
     border-radius: 25px;
     cursor: pointer;
     margin-bottom: 10px;
-    &:first-of-type {
-      background-color: #405a93;
-      color: #ffffff;
-      &:hover {
-        transform: scale(1.04);
-        background-color: #384f81;
-      }
-    }
-    &:last-of-type {
-      background-color: #ffffff;
-      color: #535353;
-      border: 2px solid rgb(83, 83, 83);
-      &:hover {
-        font-weight: 700;
-        transform: scale(1.04);
-      }
-    }
     &:focus {
       outline: 2.5px solid #212121;
       outline-offset: 4px;
@@ -329,4 +311,51 @@
       max-width: 150px; // Adjust this value based on the desired width
     }
   }
+}
+
+
+.google-signup {
+  background-color: #ffffff;
+  color: #535353;
+  border: 2px solid rgb(83, 83, 83);
+  &:hover {
+    font-weight: 700;
+    transform: scale(1.04);
+  }
+}
+
+.facebook-signup {
+  background-color: #405a93;
+  color: #ffffff;
+  &:hover {
+    transform: scale(1.04);
+    background-color: #384f81;
+  }
+}
+
+.social-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.facebook-signup, .google-signup  {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  padding-inline: 5.2rem;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  &:focus {
+    outline: 2.5px solid #212121;
+    outline-offset: 4px;
+  }
+}
+
+.btn-img {
+  height: 24px;
+  padding-right: 1rem;
 }

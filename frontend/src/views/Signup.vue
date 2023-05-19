@@ -1,7 +1,5 @@
 <template>
   <section class="signup-section">
-    <GoogleLogin @google-logged-in="handleSocialLogin"></GoogleLogin>
-    <FacebookLogin @facebook-logged-in="handleSocialLogin"></FacebookLogin>
     <div id="signup-page">
       <div class="signup-header">
         <div class="black-logo-container">
@@ -16,28 +14,9 @@
       </div>
 
       <div class="social-btns">
-        <button class="facebook-signup">
-          <div class="btn-logo-container">
-            <img
-              class="btn-img"
-              src="./../assets/img/fb-icon.png"
-              alt="Facebook logo"
-            />
-            <span>Sign up with Facebook</span>
-          </div>
-        </button>
-
-        <button class="google-signup btn-logo">
-          <div class="btn-logo-container">
-            <img
-              class="btn-img"
-              src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png"
-              alt="Google logo"
-            />
-            <span>Sign up with Google</span>
-          </div>
-        </button>
-      </div>
+      <FacebookLogin @facebook-logged-in="handleSocialLogin" :context="'signup'"></FacebookLogin>
+      <GoogleLogin @google-logged-in="handleSocialLogin" :context="'signup'"></GoogleLogin>
+    </div>
 
       <div class="separator">
         <span>or</span>

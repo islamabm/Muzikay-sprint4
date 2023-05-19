@@ -15,38 +15,11 @@
       <p class="spotify-login-user-content-header">
         To continue, log in to Muzikay.
       </p>
-      <ul class="btns-container">
-        <li class="btn-li">
-          <button type="button" class="spotify-login-facebook-btn spotify-btn">
-            <span class="login-li-span">
-              <img class="fb-logo-img" src="./../assets/img/fb-icon.png" />
-              Continue With Facebook
-            </span>
-          </button>
-        </li>
-        <li class="btn-li">
-          <button type="button" class="spotify-login-apple-btn spotify-btn">
-            <span class="login-li-span">
-              <img class="apple-logo-img" src="./../assets/img/apple.png" />
-              Continue With Apple
-            </span>
-          </button>
-        </li>
-        <li class="btn-li">
-          <button type="button" class="spotify-login-google-btn spotify-btn">
-            <img
-              class="google-img"
-              src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png"
-            />
-            <span class="login-li-span"> Continue With Google </span>
-          </button>
-        </li>
-        <div class="ul-or-div">
-          <hr class="ul-btns-hr" />
-          <span class="spotify-login-user-content-span">OR</span>
-          <hr class="ul-btns-hr" />
-        </div>
-      </ul>
+      
+        <div class="social-btns">
+      <FacebookLogin @facebook-logged-in="handleSocialLogin" :context="'login'"></FacebookLogin>
+      <GoogleLogin @google-logged-in="handleSocialLogin" :context="'login'"></GoogleLogin>
+          </div>
 
       <form class="spotify-login-form" @submit.prevent="doLogin">
         <div class="spotify-form-group">
@@ -96,6 +69,8 @@
   </section>
 </template>
 <script>
+import FacebookLogin from '../cmps/FacebookLogin.vue'
+import GoogleLogin from '../cmps/GoogleLogin.vue'
 export default {
   name: 'login',
   data() {
@@ -135,6 +110,16 @@ export default {
     loadUsers() {
       this.$store.dispatch({ type: 'loadUsers' })
     },
+    handleSocialLogin(loginCred) {
+      console.log('loginCred', loginCred)
+      this.signupCred = loginCred
+      this.doLogin()
+      this.$router.push('/station/collection')
+    },
+  },
+  components: {
+    GoogleLogin,
+    FacebookLogin,
   },
 }
 </script>

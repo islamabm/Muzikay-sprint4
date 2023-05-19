@@ -1,13 +1,28 @@
 <template>
   <div>
-    <button class="button" @click="logInWithFacebook">
-      Login with Facebook
+    <button @click="logInWithFacebook" class="facebook-signup">
+      <div class="btn-logo-container">
+        <img class="btn-img" src="./../assets/img/fb-icon.png" alt="Facebook logo" />
+        <span>{{ buttonText }}</span>
+      </div>
     </button>
   </div>
 </template>
+
 <script>
 export default {
   name: 'FacebookLogin',
+  props: {
+    context: {
+      type: String,
+      default: 'signup' // Default context is 'signup'
+    }
+  },
+  computed: {
+    buttonText() {
+      return this.context === 'signup' ? 'Sign up with Facebook' : 'Log in with Facebook';
+    }
+  },
   methods: {
     logInWithFacebook() {
       this.loadFacebookSDK(document, 'script', 'facebook-jssdk')
