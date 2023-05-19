@@ -273,7 +273,7 @@
             </div>
             <li
               v-if="station.createdBy.fullname !== 'system'"
-              @click="removeSong(selectedSong._id)"
+              @click="removeSong(selectedSong)"
             >
               Remove
             </li>
@@ -565,14 +565,14 @@ export default {
       return result
     },
 
-    async removeSong(songId) {
+    async removeSong(selectedSong) {
       console.log('this.station._id', this.station)
-      console.log('songId', songId)
+      console.log('songId', selectedSong.id)
       try {
         await this.$store.dispatch({
           type: 'removeSong',
           stationId: this.station._id,
-          songId,
+          songId: selectedSong.id,
         })
 
         showSuccessMsg('Song removed')
@@ -585,6 +585,7 @@ export default {
     },
 
     async addToSelectedStation(stationId, song) {
+      console.log('song', song)
       try {
         await this.$store.dispatch({
           type: 'addToStation',
@@ -731,6 +732,7 @@ export default {
       .catch((error) => {
         console.error('Error getting station:', error)
       })
+    console.log('stations', this.$store.getters.stations)
   },
 }
 </script>

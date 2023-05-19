@@ -125,7 +125,6 @@ export default {
       this.songIdx = idx + 1
 
       try {
-
         const searchStr = `${this.song.artist} ${this.song.title}`
         const videos = await stationService.getVideos(searchStr)
         this.song = videos[0]
@@ -143,7 +142,6 @@ export default {
       const { songs } = station
       this.song = songs[0]
       // this.song = song
-
     })
   },
   computed: {
@@ -152,6 +150,11 @@ export default {
     },
     putSongName() {
       if (this.song) {
+        console.log(
+          'this.station.songs[this.songIdx].id',
+          this.station.songs[this.songIdx].id
+        )
+        console.log('this.song.id', this.song.id)
         if (this.song.id) return this.song[this.songIdx].id
         // situation when we have a song from YouTube on our list-considered as a song
         return this.song.videoId
@@ -266,7 +269,6 @@ export default {
     // when something happens- Video has ended/Video 1=> is playing 2=> pause 0=> finished 3=> when passing forward or switching a song
     // supposed to be a switch case
     onStateChange(event) {
-
       if ([0, 2].includes(event.data)) {
         clearInterval(this.intervalId)
         this.isPlaying = true
