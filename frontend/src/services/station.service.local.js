@@ -28,6 +28,7 @@ export const stationService = {
   createNewStation,
   addSongToStation,
   removeSong,
+  getEmotion,
   generateSongs,
   // addSongToUserStation,
   // addUserToSong,
@@ -153,6 +154,11 @@ async function addSongToStation(stationId, song) {
   return httpService.post(`station/${stationId}/song`, { song })
 }
 
-async function generateSongs(mood) {
-  return httpService.post('openai/generateSongs', { mood })
+async function getEmotion(text) {
+  console.log('hi from service')
+  return httpService.get('openai/getEmotion', { text })
+}
+
+async function generateSongs(emotion) {
+  return httpService.post('openai/generateSongs', { emotion })
 }

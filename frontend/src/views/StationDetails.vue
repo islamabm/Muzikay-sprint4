@@ -565,6 +565,7 @@ export default {
     },
 
     async removeSong(songId) {
+      console.log('songId', songId)
       try {
         await this.$store.dispatch({
           type: 'removeSong',
@@ -656,7 +657,6 @@ export default {
     },
     likedSongsUser() {
       if (this.$store.getters.userSongs) return this.$store.getters.userSongs
-      // return []
     },
 
     userStations() {
