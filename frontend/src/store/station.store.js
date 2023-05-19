@@ -208,6 +208,7 @@ export const stationStore = {
     },
     async removeSong({ commit }, { stationId, songId }) {
       console.log('from the action, song id', songId)
+      console.log('from the action, stationId id', stationId)
       try {
         const removedId = await stationService.removeSong(stationId, songId)
         commit({ type: 'removeSong', stationId, removedId })

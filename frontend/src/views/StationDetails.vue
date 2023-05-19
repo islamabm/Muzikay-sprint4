@@ -273,7 +273,7 @@
             </div>
             <li
               v-if="station.createdBy.fullname !== 'system'"
-              @click="removeSong(selectedSongId)"
+              @click="removeSong(selectedSong._id)"
             >
               Remove
             </li>
@@ -483,6 +483,7 @@ export default {
       console.log('hi')
       console.log('this.user', this.user)
       console.log('Adding song to user', selectedSong)
+      console.log('Adding song to user', selectedSong._id)
       try {
         await this.$store.dispatch({
           type: 'updateUser',
@@ -565,6 +566,7 @@ export default {
     },
 
     async removeSong(songId) {
+      console.log('this.station._id', this.station)
       console.log('songId', songId)
       try {
         await this.$store.dispatch({

@@ -123,9 +123,13 @@ export default {
       }
       try {
         await this.$store.dispatch({ type: 'login', userCred: this.loginCred })
+        this.$router.push('/station/collection')
       } catch (err) {
         console.log(err)
         this.msg = 'Failed to login'
+      }
+      finally{
+        this.$router.push('/station/collection')
       }
     },
     loadUsers() {
