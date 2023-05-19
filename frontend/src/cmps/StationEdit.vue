@@ -11,7 +11,7 @@
           <label class="cover-img" @drop.prevent="handleFile" @dragover.prevent>
             <div v-if="loading" class="loader"></div>
             <img
-              :src="editedStation.songs[0].imgUrl"
+              :src="imgUrl ? imgUrl : editedStation.songs[0]?.imgUrl"
               alt="Station cover"
               class="img-edit"
             />
@@ -52,6 +52,7 @@ export default {
       // station: null,
       loading: false,
       editedStation: null,
+      imgUrl: null,
     }
   },
   methods: {
@@ -80,7 +81,7 @@ export default {
 
       try {
         const { url } = await uploadImg(file)
-        this.editedStation.songs[0].imgUrl = url
+        this.imgUrl = url
         this.loading = false
       } catch (err) {
         showErrorMsg('Cannot update song', err)
@@ -107,7 +108,12 @@ export default {
   },
   created() {
     this.editedStation = JSON.parse(JSON.stringify(this.station))
+    this.imgUrl =
+      this.station.imgUrl ||
+      (this.station.songs && this.station.songs[0]?.imgUrl) ||
+      'src/assets/img/empty-img.png'
   },
+
   components: {
     Record,
   },

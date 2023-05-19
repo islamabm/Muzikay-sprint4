@@ -13,7 +13,6 @@
         />
 
         <img
-          @click="toggleModal"
           v-else-if="station.name === 'Liked songs'"
           src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
         />
@@ -431,6 +430,18 @@ export default {
         )}, ${Math.round(color.value[2] * shadeLevel)}, 0.7)`,
       }
     },
+    updateImgUrlAndColor(station) {
+      if (!station) return
+      let imgUrl = ''
+      if (station.name === 'Liked songs') {
+        imgUrl = 'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png'
+      } else if (station.songs && station.songs.length > 0) {
+        imgUrl = station.imgUrl ? station.imgUrl : station.songs[0].imgUrl
+      }
+      if (imgUrl !== '') {
+        this.getDominantColor(imgUrl)
+      }
+    },
     getTimeAgo(idx) {
       const date = new Date(idx)
       const timeDiff = Date.now() - date.getTime()
@@ -596,6 +607,7 @@ export default {
       }
     },
     toggleModal() {
+      if (this.station.imgUrl || this.station.name === 'Liked songs') return
       this.showModal = true
     },
     toggleSongModal(ev, song, idx) {
@@ -615,12 +627,8 @@ export default {
   watch: {
     station: {
       handler(newStation) {
-        if (!newStation) return
-
         this.$nextTick(() => {
-          this.getDominantColor(
-            newStation.imgUrl ? newStation.imgUrl : newStation.songs[0].imgUrl
-          )
+          this.updateImgUrlAndColor(newStation)
         })
       },
       deep: true,
@@ -686,20 +694,15 @@ export default {
       stationService
         .getById(stationId)
         .then((station) => {
-          if (!station) return
           this.station = station
-          this.getDominantColor(this.station.imgUrl)
+          this.$nextTick(() => {
+            this.updateImgUrlAndColor(this.station)
+          })
         })
         .catch((error) => {
           console.error('Error getting station:', error)
         })
     }
-
-    this.$nextTick(() => {
-      this.getDominantColor(
-        this.station.imgUrl ? this.station.imgUrl : this.station.songs[0].imgUrl
-      )
-    })
   },
 
   beforeUnmount() {
@@ -711,18 +714,12 @@ export default {
     stationService
       .getById(stationId)
       .then((station) => {
-        if (!station) return
         this.station = station
-        this.getDominantColor(
-          this.station.imgUrl
-            ? this.station.imgUrl
-            : this.station.songs[0].imgUrl
-        )
+        this.updateImgUrlAndColor(this.station)
       })
       .catch((error) => {
         console.error('Error getting station:', error)
       })
-    console.log('this.$store.getters.userSongs', this.$store.getters.userSongs)
   },
 }
 </script>
