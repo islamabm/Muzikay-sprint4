@@ -1,4 +1,5 @@
 <template>
+  <GptStation></GptStation>
   <div class="chat-container">
     <div class="chat-header">
       <h1 class="chat-title">Chatify</h1>
@@ -40,6 +41,7 @@
 </template>
 <script>
 import Record from '../cmps/Record.vue'
+import GptStation from '../cmps/GptStation.vue'
 import {
   socketService,
   SOCKET_EMIT_SEND_MSG,
@@ -102,6 +104,7 @@ export default {
   },
   components: {
     Record,
+    GptStation,
   },
 }
 </script>

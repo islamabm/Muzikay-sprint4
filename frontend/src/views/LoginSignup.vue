@@ -21,8 +21,6 @@
         <button>Login</button>
       </form>
 
-
-      
       <form @submit.prevent="doSignup">
         <h2>Signup</h2>
         <input
@@ -93,7 +91,7 @@ export default {
       }
       try {
         await this.$store.dispatch({ type: 'login', userCred: this.loginCred })
-        this.$router.push('/station/collection')
+        // this.$router.push('/station/collection')
       } catch (err) {
         console.log(err)
         this.msg = 'Failed to login'

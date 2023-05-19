@@ -43,11 +43,12 @@ export const userStore = {
     },
     updateUser(state, { song, updatedUser }) {
       state.loggedinUser.LikedSongs.push(song)
-      updatedUser.LikedSongs.push(song)
+      // updatedUser.LikedSongs.push(song)
     },
   },
   actions: {
     async login({ commit }, { userCred }) {
+      console.log('userCred', userCred)
       try {
         const user = await userService.login(userCred)
         commit({ type: 'setLoggedinUser', user })
@@ -104,9 +105,9 @@ export const userStore = {
         throw err
       }
     },
-    async updateUser({ commit }, { song, user }) {
+    async updateUser({ commit }, { selectedSong, user }) {
       try {
-        const updatedUser = await userService.update(song, user)
+        const updatedUser = await userService.update(selectedSong, user)
 
         commit({ type: 'updateUser', song, updatedUser })
       } catch (err) {

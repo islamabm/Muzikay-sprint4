@@ -7,7 +7,7 @@ import gStations from '../../data/station.json'
 import gSearchStations from '../../data/search.json'
 import { userService } from './user.service.js'
 
-const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyDeLEUpKIKvjS-Xsh-xozwiBjBv5A_tjsk&q=`
+const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBLJ8UmMOnvqy-M98LebSWxelSiIT1XKb0&q=`
 const STORAGE_KEY = 'station'
 const SEARCH_KEY = 'videosDB'
 const VIDEOS_KEY = 'videosIdDB'
@@ -28,8 +28,9 @@ export const stationService = {
   createNewStation,
   addSongToStation,
   removeSong,
-  addSongToUserStation,
-  addUserToSong,
+  generateSongs,
+  // addSongToUserStation,
+  // addUserToSong,
 }
 window.cs = stationService
 
@@ -43,23 +44,13 @@ function _getUrl(id = '') {
 }
 
 async function query() {
-
   return httpService.get('station')
-  // var stations = await storageService.query(STORAGE_KEY)
-  // if (filterBy.name) {
-  //   const regex = new RegExp(filterBy.name, 'i')
-  //   stations = stations.filter((station) => regex.test(station.name))
-  // }
-  // return stations
 }
 
 async function querySearch() {
   // return httpService.get('search')
   var stations = await storageService.query(SEARCH_STATIONS_KEY)
-  // if (filterBy.name) {
-  //   const regex = new RegExp(filterBy.name, 'i')
-  //   stations = stations.filter((station) => regex.test(station.name))
-  // }
+
   return stations
 }
 
@@ -69,10 +60,6 @@ function getById(stationId) {
 }
 
 async function remove(stationId) {
-  // console.log('service', stationId)
-  // const station = await storageService.remove(STORAGE_KEY, stationId)
-  // console.log(station)
-  // return station
   return httpService.delete(`station/${stationId}`)
 }
 
@@ -99,7 +86,6 @@ function getVideos(keyword) {
   const existTitle = videosIds.find((video) =>
     video.title.toLowerCase().includes(keyword.toLowerCase())
   )
-
 
   return axios.get(gUrl + keyword).then((res) => {
     const videos = res.data.items.map((item) => _prepareData(item))
@@ -158,64 +144,14 @@ function createNewStation(name) {
     ],
     desc: '',
   }
-  // working with backend
+
   return httpService.post('station', newStation)
-
-  // working with local
-
-  // const stations = utilService.loadFromStorage(STORAGE_KEY)
-  // console.log(stations)
-  // stations.push(newStation)
-  // localStorage.setItem('station', JSON.stringify(stations))
-
-  // localStorage.setItem(STORAGE_KEY, JSON.stringify(stations))
-
-  // const users = utilService.loadFromStorage('user')
-
-  // const currUserIdx = users.findIndex((u) => u._id === loggedinUser._id)
-
-  // users[currUserIdx].stations.push(newStation)
-
-  // localStorage.setItem('user', JSON.stringify(users))
-
-  // return newStation
-}
-
-async function addUserToSong(song, station, loggedinUser) {
-  if (!station) {
-    throw new Error('Station parameter is undefined')
-  }
-
-  // Create a new song object with the updated likedByUsers array
-  const updatedSong = {
-    ...song,
-    likedByUsers: [...song.likedByUsers, loggedinUser.fullname],
-  }
-
-  const updatedStation = {
-    ...station,
-    songs: station.songs.map((s) => (s.id === song.id ? updatedSong : s)),
-  }
-  const savedStation = await save(updatedStation)
-  return { updatedSong, savedStation }
 }
 
 async function addSongToStation(stationId, song) {
   return httpService.post(`station/${stationId}/song`, { song })
-  // if (!station) {
-  //   throw new Error('Station parameter is undefined')
-  // }
-  // const updatedStation = { ...station, songs: [...station.songs, video] }
-  // const savedStation = await save(updatedStation)
-  // return savedStation
 }
 
-async function addSongToUserStation(song, station) {
-  if (!station) {
-    throw new Error('Station parameter is undefined')
-  }
-  const updatedSongs = [...station.songs, song]
-  const updatedStation = { ...station, songs: updatedSongs }
-  const savedStation = await save(updatedStation)
-  return savedStation
+async function generateSongs(mood) {
+  return httpService.post('openai/generateSongs', { mood })
 }

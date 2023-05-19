@@ -54,8 +54,8 @@
                 aboutCalc
               }}</span> -->
 
-              <span v-if="station.songs[0].duration" class="posted-at"> </span>
-              <span v-else class="posted-at">about 11 hr </span>
+              <!-- <span v-if="station.songs[0].duration" class="posted-at"> </span> -->
+              <!-- <span v-else class="posted-at">about 11 hr </span> -->
             </div>
           </div>
           <div v-else>...</div>
@@ -70,10 +70,10 @@
           class="btn-play-green"
           @click.stop="songDetails(station.songs[0], 0)"
         ></div>
-        <BubblingHeart
+        <!-- <BubblingHeart
           v-if="station.songs.length"
           @toggleLike="toggleHeaderLike"
-        />
+        /> -->
 
         <div class="btn-icons" @click="showDeleteModel">
           <i class="options-icon" v-html="getSvg('optionsIcon')"></i>
@@ -147,7 +147,8 @@
                 :songIndex="idx"
                 :liked="song.liked"
                 @click="addSongToUser(song), onHeartClick(idx)"
-              />
+              >
+              </BubblingHeart>
             </div>
             <p v-if="song.duration" class="song-duration">
               {{ song.duration }}
@@ -181,7 +182,6 @@
           :key="idx"
         >
           <div class="img-and-title" @click="songDetails(song, idx)">
-            <!-- :class="{ 'active-song': song.active }" -->
             <img
               v-show="activeSongIndex === idx"
               class="song-animation-gif"
@@ -205,7 +205,6 @@
               class="song-title"
               :class="{ 'active-song': activeTitle === idx }"
             >
-              <!-- v-bind:class="{ 'active-song': isActive }" -->
               {{ song.title }} - {{ song.artist }}
             </p>
           </div>
@@ -217,15 +216,15 @@
           <p class="posted-at">{{ getTimeAgo(new Date(song.addedAt)) }}</p>
           <div class="flex-end list-end">
             <div class="like-song-icon">
-              <BubblingHeart
+              <!-- <BubblingHeart
                 ref="heart"
                 title="heart"
                 class="heart-song station-details-heart"
                 :class="{ 'hover-effect': clickedHeartIndex !== idx }"
                 :songIndex="idx"
                 :liked="song.liked"
-                @click="addSongToUser(song), onHeartClick(idx)"
-              />
+              /> -->
+              <!-- @click="addSongToUser(song), onHeartClick(idx)" -->
             </div>
             <p v-if="song.duration" class="song-duration">
               {{ song.duration }}
@@ -256,6 +255,7 @@
         >
           <ul class="modal-options">
             <li @click="openStationSelection">Add to playlist</li>
+            <li @click="addSongToUser(selectedSong)">like</li>
             <div v-show="showStationsSubMenu">
               <ul class="stations-sub-menu">
                 <li
@@ -273,6 +273,12 @@
             >
               Remove
             </li>
+            <!-- <li
+              v-if="station.createdBy.fullname !== 'system'"
+              @click="removeSong(selectedSongId)"
+            >
+              like
+            </li> -->
           </ul>
         </div>
       </div>
@@ -330,7 +336,7 @@ import {
 import { socketService } from '../services/socket.service'
 import MiniSearch from '../cmps/MiniSearch.vue'
 import BubblingHeart from '../cmps/BubblingHeart.vue'
-
+import { utilService } from '../services/util.service'
 export default {
   props: {
     stationId: {
@@ -367,7 +373,6 @@ export default {
       inactiveClass: 'inactive-song',
       currSongSelected: null,
       activeSongIndex: null,
-      // running: true,
     }
   },
   methods: {
@@ -377,7 +382,6 @@ export default {
     },
     changeStatus(idx) {
       eventBus.on('song-idx', (songIdx) => (this.activeSongIndex = songIdx))
-
 
       this.activeSongIndex = idx
     },
@@ -459,13 +463,18 @@ export default {
         return years + (years === 1 ? ' year ago' : ' years ago')
       }
     },
-    async addSongToUser(song) {
+
+    async addSongToUser(selectedSong) {
+      console.log('hi')
+      console.log('this.user', this.user)
+      console.log('Adding song to user', selectedSong)
       try {
         await this.$store.dispatch({
           type: 'updateUser',
-          song,
+          selectedSong,
           user: this.user,
         })
+        console.log('Song added to user')
         showSuccessMsg('Song liked')
       } catch (err) {
         console.log(err)
@@ -522,11 +531,8 @@ export default {
           stationId: this.station._id,
           songs,
         }
-
         this.$store.commit({ type: 'setStationSongs', obj })
         socketService.emit('station-updated', obj)
-
-        // this.station.songs = songs
       }
     },
     applyDrag(arr, dragResult) {
@@ -542,7 +548,7 @@ export default {
       }
       return result
     },
-    //Step 1
+
     async removeSong(songId) {
       try {
         await this.$store.dispatch({
@@ -550,7 +556,7 @@ export default {
           stationId: this.station._id,
           songId,
         })
-        // socketService.emit('update-station', id)
+
         showSuccessMsg('Song removed')
       } catch (err) {
         console.log(err)
@@ -561,9 +567,6 @@ export default {
     },
 
     async addToSelectedStation(stationId, song) {
-
-
-
       try {
         await this.$store.dispatch({
           type: 'addToStation',
@@ -597,7 +600,6 @@ export default {
     },
     toggleSongModal(ev, song, idx) {
       const btn = ev.target
-      // Get the x and y coordinates of the button in the screen
       const { left, top, height } = btn.getBoundingClientRect()
       this.modalX = left - 200
       this.modalY = top + height - 60
@@ -629,17 +631,6 @@ export default {
     songClass() {
       return this.isActive ? this.activeClass : this.inactiveClass
     },
-    // aboutCalc() {
-    //   const about = this.station.songs.map((s) => s.duration.split(':'))
-    //   const minutes = about.reduce((acc, val) => {
-    //     const [mins, secs] = val.split(':').map(Number)
-    //     return acc + mins * 60 + secs
-    //   }, 0)
-
-    //   const totalHours = Math.floor(totalMinutes / 60)
-    //   console.log(`The total duration is ${totalHours} hours`)
-    // },
-
     user() {
       return this.$store.getters.loggedinUser
     },
@@ -648,15 +639,13 @@ export default {
     },
     likedSongsUser() {
       if (this.$store.getters.userSongs) return this.$store.getters.userSongs
+      // return []
     },
-    isLikedPageWanted() {
-      return this.$route.path === `/station/likeduser123`
-    },
+
     userStations() {
       return this.$store.getters.getUserStations
     },
     songsCount() {
-      //this 'songs' word should be dynamic, in case we might wanna translate it
       const count = this.station.songs.length
       return `${count} Songs`
     },
@@ -733,6 +722,7 @@ export default {
       .catch((error) => {
         console.error('Error getting station:', error)
       })
+    console.log('this.$store.getters.userSongs', this.$store.getters.userSongs)
   },
 }
 </script>

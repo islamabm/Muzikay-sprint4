@@ -146,9 +146,15 @@ export default {
     //   this.$store.commit({ type: 'setCurrStation', stationId })
     //   this.$router.push(`/station/${stationId}`)
     // },
-    setStation(stationId) {
+    async setStation(stationId) {
+      console.log('stationId', stationId)
+
+      // const station = this.userStations.find((s) => s._id === stationId)
+      // if (station.name === 'Liked songs') console.log('hi')
+
       this.activeStationId = stationId
-      this.$store.commit({ type: 'setCurrStation', stationId })
+      await this.$store.dispatch({ type: 'setcurrStation', stationId })
+      console.log('hi')
       this.$router.push(`/station/${stationId}`)
     },
     getSvg(iconName) {
@@ -180,33 +186,7 @@ export default {
       }
     },
     async showLikedSongs() {
-      try {
-        // this.stationCounter++
-        const StationName = 'Liked songs'
-        await this.$store.dispatch({
-          type: 'createStation',
-          StationName,
-        })
-        // console.log('hi')
-        // console.log(newStation)
-        // socketService.emit('station-added', newStation)
-      } catch (err) {
-        console.log('err')
-      }
-      // console.log(this.$store.getters.userSongs)
-      // const stationId = 'likeduser123'
-      // await this.$store.dispatch({
-      //   type: 'setcurrStation',
-      //   stationId,
-      // })
-
-      // socketService.emit('station-added', savedStation)
-      // this.$store.commit({ type: 'setCurrStation', stationId })
-      // this.$router.push(`/station/${stationId}`)
-      // this.$store.dispatch({
-      //         type: 'createStation',
-      //         StationName,
-      //       })
+      await this.setStation('6466c0bf5aa2c46190c54046')
     },
   },
   computed: {

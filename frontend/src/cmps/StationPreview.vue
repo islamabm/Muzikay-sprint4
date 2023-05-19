@@ -1,10 +1,7 @@
 <template>
   <!-- v-if="station.createdBy.fullname === 'system'" -->
-  <section
-    v-if="station.name !== 'Liked songs'"
-    class="station-preview"
-    @click="setStation(station._id)"
-  >
+  <!-- v-if="station.name !== 'Liked songs'" -->
+  <section class="station-preview" @click="setStation(station._id)">
     <div class="station-image">
       <img :src="station.imgUrl ? station.imgUrl : station.songs[0].imgUrl" />
       <div class="play-button"></div>
@@ -25,7 +22,6 @@ export default {
   methods: {
     async setStation(stationId) {
       await this.$store.dispatch({ type: 'setcurrStation', stationId })
-
       this.$router.push(`/station/${stationId}`)
       // this.$store.commit({ type: 'setCurrStation', stationId })
     },

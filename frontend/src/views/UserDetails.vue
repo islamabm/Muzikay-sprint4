@@ -43,26 +43,24 @@ export default {
     },
   },
   methods: {
-    async handleFile(ev) {
-      this.loading = true // set the loading flag to true
-
-      const file =
-        ev.type === 'change' ? ev.target.files[0] : ev.dataTransfer.files[0]
-
-      try {
-        const { url } = await uploadImg(file)
-        const newUser = { ...this.user, imgUrl: url }
-        await this.$store.dispatch({
-          type: 'updateUser',
-          user: newUser,
-        })
-        showSuccessMsg('Profile image updated')
-      } catch (err) {
-        showErrorMsg('Cannot update profile image', err)
-      } finally {
-        this.loading = false // clear the loading flag once the upload is complete
-      }
-    },
+    // async handleFile(ev) {
+    //   this.loading = true // set the loading flag to true
+    //   const file =
+    //     ev.type === 'change' ? ev.target.files[0] : ev.dataTransfer.files[0]
+    //   try {
+    //     const { url } = await uploadImg(file)
+    //     const newUser = { ...this.user, imgUrl: url }
+    //     await this.$store.dispatch({
+    //       type: 'updateUser',
+    //       user: newUser,
+    //     })
+    //     showSuccessMsg('Profile image updated')
+    //   } catch (err) {
+    //     showErrorMsg('Cannot update profile image', err)
+    //   } finally {
+    //     this.loading = false // clear the loading flag once the upload is complete
+    //   }
+    // },
   },
 
   computed: {

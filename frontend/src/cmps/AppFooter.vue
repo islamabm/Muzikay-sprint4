@@ -16,7 +16,7 @@
       </div>
 
       <button class="footer-like">
-        <BubblingHeart />
+        <!-- <BubblingHeart /> -->
         <!-- :songIndex="currSongIdx" -->
         <!-- :liked="currSong ? currSong.liked : false" -->
         <!-- @toggleLike="toggleSongLike" -->

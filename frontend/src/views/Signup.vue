@@ -1,5 +1,7 @@
 <template>
   <section class="signup-section">
+    <GoogleLogin @google-logged-in="handleSocialLogin"></GoogleLogin>
+    <FacebookLogin @facebook-logged-in="handleSocialLogin"></FacebookLogin>
     <div id="signup-page">
       <div class="signup-header">
         <div class="black-logo-container">
@@ -235,6 +237,8 @@
 </template>
 
 <script>
+import FacebookLogin from '../cmps/FacebookLogin.vue'
+import GoogleLogin from '../cmps/GoogleLogin.vue'
 export default {
   data() {
     return {
@@ -261,6 +265,15 @@ export default {
     }
   },
   methods: {
+    handleSocialLogin(loginCred) {
+      console.log('loginCred', loginCred)
+      this.signupCred = loginCred
+      this.doSignup()
+    },
+    // handleFacebookLogin(loginCred) {
+    //   this.signupCred = loginCred
+    //   this.doSignup()
+    // },
     async doSignup() {
       if (
         !this.signupCred.fullname ||
@@ -273,6 +286,10 @@ export default {
       await this.$store.dispatch({ type: 'signup', userCred: this.signupCred })
       this.$router.push('/station/collection')
     },
+  },
+  components: {
+    GoogleLogin,
+    FacebookLogin,
   },
 }
 </script>

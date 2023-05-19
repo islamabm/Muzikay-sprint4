@@ -115,6 +115,7 @@ export default {
       this.showStationsSubMenu = !this.showStationsSubMenu
     },
     filterStationCategories(categoryName) {
+      console.log('categoryName', categoryName)
       try {
         this.$router.push(`/station/collection/${categoryName}`)
       } catch (error) {

@@ -5,7 +5,7 @@
       class="heart-input"
       :id="'like-' + songIndex"
       :checked="liked"
-      @click="toggleLike"
+      @change="toggleLike"
     />
     <label class="label" :for="'like-' + songIndex">
       <svg
@@ -108,19 +108,15 @@
 <script>
 export default {
   name: 'BubblingHeart',
-  props: {
-    songIndex: {
-      type: Number,
-    },
-    liked: {
-      type: Boolean,
-      default: false,
-    },
+  props: ['songIndex'],
+  data() {
+    return {
+      liked: false,
+    }
   },
   methods: {
     toggleLike() {
-      this.$emit('toggleLike', this.songIndex)
-      this.$emit('addLikeToSong')
+      this.liked = !this.liked
     },
   },
 }

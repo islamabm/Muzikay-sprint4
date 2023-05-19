@@ -18,8 +18,8 @@ export default {
       return this.$store.getters.filteredStations(this.category)
     },
     category() {
-    return this.$route.params.category;
-  },
+      return this.$route.params.category
+    },
   },
 
   methods: {
