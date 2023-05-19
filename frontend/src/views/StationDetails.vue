@@ -550,6 +550,7 @@ export default {
     },
 
     async removeSong(songId) {
+      console.log('songId', songId)
       try {
         await this.$store.dispatch({
           type: 'removeSong',
@@ -639,7 +640,6 @@ export default {
     },
     likedSongsUser() {
       if (this.$store.getters.userSongs) return this.$store.getters.userSongs
-      // return []
     },
 
     userStations() {
@@ -723,6 +723,9 @@ export default {
         console.error('Error getting station:', error)
       })
     console.log('this.$store.getters.userSongs', this.$store.getters.userSongs)
+    if (this.$store.getters.userSongs) {
+      this.likedSongsUser = this.$store.getters.userSongs
+    }
   },
 }
 </script>
