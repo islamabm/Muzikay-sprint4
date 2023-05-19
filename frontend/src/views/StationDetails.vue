@@ -74,10 +74,10 @@
           class="btn-play-green"
           @click.stop="songDetails(station.songs[0], 0)"
         ></div>
-        <!-- <BubblingHeart
+        <BubblingHeart
           v-if="station.songs.length"
           @toggleLike="toggleHeaderLike"
-        /> -->
+        />
 
         <div class="btn-icons" @click="showDeleteModel">
           <i class="options-icon" v-html="getSvg('optionsIcon')"></i>
