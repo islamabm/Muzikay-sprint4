@@ -74,8 +74,11 @@ export const stationStore = {
       state.currUserStationId = stationId
     },
     removeSong(state, { stationId, removedId }) {
+      console.log(removedId, 'removedid what is this')
       const station = state.stations.find((s) => s._id === stationId)
+      console.log('this is the station songs in store', station.songs)
       const songIdx = station.songs.findIndex((s) => s.id === removedId)
+      console.log(songIdx, 'songidx from store')
       station.songs.splice(songIdx, 1)
     },
     // updateSong(state, { song }) {
@@ -204,6 +207,7 @@ export const stationStore = {
       }
     },
     async removeSong({ commit }, { stationId, songId }) {
+      console.log('from the action, song id', songId)
       try {
         const removedId = await stationService.removeSong(stationId, songId)
         commit({ type: 'removeSong', stationId, removedId })

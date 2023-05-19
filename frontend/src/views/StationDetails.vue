@@ -4,16 +4,20 @@
       <div ref="stationDetailsHeader" class="header-content">
         <img
           v-if="
-            station.songs &&
-            station.songs.length > 0 &&
+            (station.imgUrl || (station.songs && station.songs.length > 0)) &&
             station.name !== 'Liked songs'
           "
-          :src="station.imgUrl ? station.imgUrl : station.songs[0].imgUrl"
+          :src="
+            station.imgUrl
+              ? station.imgUrl
+              : station.songs && station.songs.length > 0
+              ? station.songs[0].imgUrl
+              : 'src/assets/img/empty-img.png'
+          "
           @click="toggleModal"
         />
 
         <img
-          @click="toggleModal"
           v-else-if="station.name === 'Liked songs'"
           src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
         />
@@ -70,10 +74,10 @@
           class="btn-play-green"
           @click.stop="songDetails(station.songs[0], 0)"
         ></div>
-        <!-- <BubblingHeart
+        <BubblingHeart
           v-if="station.songs.length"
           @toggleLike="toggleHeaderLike"
-        /> -->
+        />
 
         <div class="btn-icons" @click="showDeleteModel">
           <i class="options-icon" v-html="getSvg('optionsIcon')"></i>
@@ -273,12 +277,6 @@
             >
               Remove
             </li>
-            <!-- <li
-              v-if="station.createdBy.fullname !== 'system'"
-              @click="removeSong(selectedSongId)"
-            >
-              like
-            </li> -->
           </ul>
         </div>
       </div>
@@ -431,6 +429,23 @@ export default {
         )}, ${Math.round(color.value[2] * shadeLevel)}, 0.7)`,
       }
     },
+    updateImgUrlAndColor(station) {
+      if (!station) return
+      let imgUrl = ''
+      if (station.name === 'Liked songs') {
+        imgUrl = 'https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png'
+      } else {
+        imgUrl =
+          station.imgUrl ||
+          (station.songs && station.songs.length > 0
+            ? station.songs[0].imgUrl
+            : '')
+      }
+      if (imgUrl !== '') {
+        this.getDominantColor(imgUrl)
+      }
+    },
+
     getTimeAgo(idx) {
       const date = new Date(idx)
       const timeDiff = Date.now() - date.getTime()
@@ -597,6 +612,12 @@ export default {
       }
     },
     toggleModal() {
+      //don't change out demo data
+      if (
+        this.station.createdBy.fullname === 'system' ||
+        this.station.name === 'Liked songs'
+      )
+        return
       this.showModal = true
     },
     toggleSongModal(ev, song, idx) {
@@ -616,12 +637,8 @@ export default {
   watch: {
     station: {
       handler(newStation) {
-        if (!newStation) return
-
         this.$nextTick(() => {
-          this.getDominantColor(
-            newStation.imgUrl ? newStation.imgUrl : newStation.songs[0].imgUrl
-          )
+          this.updateImgUrlAndColor(newStation)
         })
       },
       deep: true,
@@ -686,20 +703,15 @@ export default {
       stationService
         .getById(stationId)
         .then((station) => {
-          if (!station) return
           this.station = station
-          this.getDominantColor(this.station.imgUrl)
+          this.$nextTick(() => {
+            this.updateImgUrlAndColor(this.station)
+          })
         })
         .catch((error) => {
           console.error('Error getting station:', error)
         })
     }
-
-    this.$nextTick(() => {
-      this.getDominantColor(
-        this.station.imgUrl ? this.station.imgUrl : this.station.songs[0].imgUrl
-      )
-    })
   },
 
   beforeUnmount() {
@@ -711,21 +723,12 @@ export default {
     stationService
       .getById(stationId)
       .then((station) => {
-        if (!station) return
         this.station = station
-        this.getDominantColor(
-          this.station.imgUrl
-            ? this.station.imgUrl
-            : this.station.songs[0].imgUrl
-        )
+        this.updateImgUrlAndColor(this.station)
       })
       .catch((error) => {
         console.error('Error getting station:', error)
       })
-    console.log('this.$store.getters.userSongs', this.$store.getters.userSongs)
-    if (this.$store.getters.userSongs) {
-      this.likedSongsUser = this.$store.getters.userSongs
-    }
   },
 }
 </script>

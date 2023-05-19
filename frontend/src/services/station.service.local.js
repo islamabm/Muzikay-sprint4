@@ -75,6 +75,7 @@ function getEmptyStation() {
 }
 
 function removeSong(stationId, songId) {
+  console.log('song id from service', songId)
   return httpService.delete(`station/${stationId}/song/${songId}`)
 }
 
