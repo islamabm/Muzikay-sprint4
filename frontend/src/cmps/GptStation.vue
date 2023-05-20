@@ -1,11 +1,17 @@
 <template>
   <article class="gpt-banner-container">
-    <img src="./../assets/img/111.png" class="gpt-banner-img" alt="banner" >
+    <img src="./../assets/img/111.png" class="gpt-banner-img" alt="banner" />
     <form @submit.prevent="createPlaylist">
-        <input class="gpt-input" v-model="mood" type="text" placeholder="Enter your mood or activity..."/>
+      <input
+        class="gpt-input"
+        v-model="mood"
+        type="text"
+        placeholder="Enter your mood or activity..."
+      />
       <button class="btn-generate" type="submit">
-         <span>Create</span>
+        <span>Create</span>
       </button>
+      <span class="gpt-loader" v-if="isLoading"></span>
     </form>
   </article>
 </template>
@@ -17,22 +23,24 @@ export default {
     return {
       mood: '',
       playlist: null,
+      isLoading: false,
     }
   },
   methods: {
     async createPlaylist() {
       try {
+        this.isLoading = true
         const response = await stationService.getEmotion(this.mood)
         const emotion = response.emotion
 
-        const StationNameResponse = await stationService.generateStationName(
-          emotion
-        )
-        let names = StationNameResponse.name.match(/(?<=\d\. ).*?(?=\n|$)/g)
-        let randomIndex = Math.floor(Math.random() * names.length)
-        const StationName = names[randomIndex]
+        // const StationNameResponse = await stationService.generateStationName(
+        //   emotion
+        // )
+        // let names = StationNameResponse.name.match(/(?<=\d\. ).*?(?=\n|$)/g)
+        // let randomIndex = Math.floor(Math.random() * names.length)
+        // const StationName = names[randomIndex]
 
-        // const StationName = emotion
+        const StationName = emotion
         // const StationName = emotion
         const newStation = await this.$store.dispatch({
           type: 'createStation',
@@ -50,9 +58,15 @@ export default {
             stationId: newStation._id,
             song,
           })
+          if (this.isLoading) {
+            this.isLoading = false
+          }
         }
       } catch (err) {
         console.error(err)
+        this.isLoading = false
+      } finally {
+        this.isLoading = false
       }
     },
   },

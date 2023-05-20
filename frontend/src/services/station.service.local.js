@@ -155,14 +155,13 @@ async function addSongToStation(stationId, song) {
   return httpService.post(`station/${stationId}/song`, { song })
 }
 
+async function generateStationName(emotion) {
+  return httpService.post('openai/generateStationName', { emotion })
+}
 async function getEmotion(text) {
   return httpService.get('openai/getEmotion', { text })
 }
 
 async function generateSongs(emotion) {
   return httpService.post('openai/generateSongs', { emotion })
-}
-
-async function generateStationName(emotion) {
-  return httpService.post('openai/generateStationName', { emotion })
 }
