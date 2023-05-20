@@ -52,11 +52,7 @@ export const userStore = {
       try {
         const user = await userService.login(userCred)
         commit({ type: 'setLoggedinUser', user })
-<<<<<<< HEAD
-
-=======
         // this.$router.push('/station/collection')
->>>>>>> 540abc9fb4657f68991569fb5edd0524de1ae437
         return user
       } catch (err) {
         console.error('userStore: Error in login', err)
