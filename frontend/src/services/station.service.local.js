@@ -30,6 +30,7 @@ export const stationService = {
   removeSong,
   getEmotion,
   generateSongs,
+  generateStationName,
   // addSongToUserStation,
   // addUserToSong,
 }
@@ -160,4 +161,8 @@ async function getEmotion(text) {
 
 async function generateSongs(emotion) {
   return httpService.post('openai/generateSongs', { emotion })
+}
+
+async function generateStationName(emotion) {
+  return httpService.post('openai/generateStationName', { emotion })
 }
