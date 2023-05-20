@@ -1,8 +1,7 @@
 <template>
-  <!-- <div class="loader-wrapper">
-    <div class="loader"></div>
-  </div> -->
-  <span class="gpt-loader"></span>
+  <div class="loader-wrapper">
+    <span class="gpt-loader"></span>
+  </div>
 </template>
 
 <script>
@@ -10,7 +9,7 @@ export default {}
 </script>
 
 <style scoped>
-/* .loader-wrapper {
+.loader-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,7 +21,7 @@ export default {}
   background: rgba(0, 0, 0, 0.5);
   z-index: 9999;
 }
-
+/*
 .loader {
   border: 16px solid #f3f3f3;
   border-top: 16px solid #3498db;
