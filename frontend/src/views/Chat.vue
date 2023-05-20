@@ -1,5 +1,4 @@
 <template>
-  <GptStation></GptStation>
   <div class="chat-container">
     <div class="chat-header">
       <h1 class="chat-title">Chatify</h1>

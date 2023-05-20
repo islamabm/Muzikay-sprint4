@@ -1,15 +1,31 @@
 <template>
   <section class="stations-app">
+    <transition name="modal-transition">
+      <div v-if="GptIsVisible" class="gpt-modal">
+        <div class="gpt-modal-content">
+          <span class="close" @click="hideModal">&times;</span>
+          <GptStation></GptStation>
+        </div>
+      </div>
+    </transition>
+    <h3 class="gpt-modal-link neon-effect" @click="showModal">Click Here to Try Our New AI-Powered Feature!</h3>
     <StationsList :stations="stations" />
   </section>
 </template>
+
 
 <script>
 import StationsList from '../cmps/StationList.vue'
 import { eventBus } from '../services/event-bus.service.js'
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
+import GptStation from '../cmps/GptStation.vue'
 
 export default {
+  data() {
+    return {
+      GptIsVisible: false,
+    }
+  },
   computed: {
     loggedInUser() {
       return this.$store.getters.loggedinUser
@@ -21,7 +37,6 @@ export default {
       return this.$route.params.category
     },
   },
-
   methods: {
     async removeStation(stationId) {
       try {
@@ -37,9 +52,16 @@ export default {
         station.tags.includes(categoryName)
       )
     },
+    showModal() {
+      this.GptIsVisible = true;
+    },
+    hideModal() {
+      this.GptIsVisible = false;
+    },
   },
   components: {
     StationsList,
+    GptStation,
   },
   created() {
     eventBus.on('filter-stations', (categoryName) => {

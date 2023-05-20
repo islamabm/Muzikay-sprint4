@@ -1,5 +1,6 @@
 <template>
   <section v-if="!search">
+    <GptStation></GptStation>
     <h2 class="search-header">Browse all</h2>
     <div class="categories-container">
       <article
@@ -62,6 +63,7 @@
 </template>
 <script>
 import { stationService } from '../services/station.service.local'
+import GptStation from '../cmps/GptStation.vue'
 import {
   eventBus,
   showErrorMsg,
@@ -145,5 +147,8 @@ export default {
       }, search.delay || 2000)
     })
   },
+  components: {
+    GptStation,
+  }
 }
 </script>
