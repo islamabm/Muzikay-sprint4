@@ -2,7 +2,11 @@
   <GoogleLogin :callback="handleGoogleLogin" prompt auto-login>
     <button class="google-signup btn-logo">
       <div class="btn-logo-container">
-        <img class="btn-img" src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png" alt="Google logo" />
+        <img
+          class="btn-img"
+          src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png"
+          alt="Google logo"
+        />
         <span>{{ buttonText }}</span>
       </div>
     </button>
@@ -10,18 +14,21 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   props: {
     context: {
       type: String,
-      default: 'signup' // Default context is 'signup'
-    }
+      default: 'signup', // Default context is 'signup'
+    },
   },
   computed: {
     buttonText() {
-      return this.context === 'signup' ? 'Sign up with Google' : 'Sign in with Google';
-    }
-  },  
+      return this.context === 'signup'
+        ? 'Sign up with Google'
+        : 'Sign in with Google'
+    },
+  },
   methods: {
     async handleGoogleLogin(response) {
       if (response.code) {

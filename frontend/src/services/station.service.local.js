@@ -155,7 +155,6 @@ async function addSongToStation(stationId, song) {
 }
 
 async function getEmotion(text) {
-  console.log('hi from service')
   return httpService.get('openai/getEmotion', { text })
 }
 
