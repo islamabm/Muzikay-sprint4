@@ -25,7 +25,15 @@ export default {
         const response = await stationService.getEmotion(this.mood)
         const emotion = response.emotion
 
-        const StationName = emotion
+        const StationNameResponse = await stationService.generateStationName(
+          emotion
+        )
+        let names = StationNameResponse.name.match(/(?<=\d\. ).*?(?=\n|$)/g)
+        let randomIndex = Math.floor(Math.random() * names.length)
+        const StationName = names[randomIndex]
+
+        // const StationName = emotion
+        // const StationName = emotion
         const newStation = await this.$store.dispatch({
           type: 'createStation',
           StationName,
@@ -33,8 +41,10 @@ export default {
 
         const SongsResponse = await stationService.generateSongs(emotion)
         const songs = SongsResponse.songs
+        console.log('songs', songs)
 
         for (let song of songs) {
+          console.log('in songs loop')
           await this.$store.dispatch({
             type: 'addToStation',
             stationId: newStation._id,
