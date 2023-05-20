@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <article class="gpt-banner-container">
+    <img src="./../assets/img/111.png" class="gpt-banner-img" alt="banner" >
     <form @submit.prevent="createPlaylist">
-      <label>
-        Enter your mood:
-        <input class="gpt-input" v-model="mood" type="text" />
-      </label>
-      <button type="submit">Create Playlist</button>
+        <input class="gpt-input" v-model="mood" type="text" placeholder="Enter your mood or activity..."/>
+      <button class="btn-generate" type="submit">
+         <span>Create</span>
+      </button>
     </form>
-  </div>
+  </article>
 </template>
 
 <script>

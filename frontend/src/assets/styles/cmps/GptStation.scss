@@ -1,0 +1,212 @@
+.gpt-banner-container {
+  margin-block-start: 40px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .gpt-banner-img {
+    width: 750px;
+    height: 290px;
+    z-index: 1;
+    border-radius: 20px;
+  }
+
+  form {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+
+    .gpt-input {
+      width: 200%;
+      height: 50px;
+      padding: 10px;
+      margin-block-start: 165px;
+      margin-block-end: 15px;
+      border: none;
+      border-radius: 25px;
+      background: #f8f8f8;
+      color: #313030;
+      outline: none;
+      font-size: 16px;
+      transition: all 0.3s ease-in-out;
+      border: 1px solid #91dcf3;
+      box-shadow: 0 0 15px #9ecaed;
+      font-family: Circular-light;
+
+      &::placeholder {
+        color: #787777;
+      }
+
+      &:focus {
+        box-shadow: 0 0 20px #91dcf3, 0 0 30px #91dcf3, 0 0 30px #91dcf3;
+        border: 1px solid #91dcf3;
+      }
+    }
+
+    .btn-generate {
+      cursor: pointer;
+      width: 130px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #b198f1, #a32efc);
+      border-radius: 20px;
+      -webkit-box-shadow: 0px 0px 16px 7px rgba(139, 91, 255, 1);
+      -moz-box-shadow: 0px 0px 16px 7px rgba(139, 91, 255, 1);
+      box-shadow: 0px 0px 16px 7px rgba(139, 91, 255, 1);
+      transition: ease 0.3s;
+    }
+
+    .btn-generate:hover {
+      background: #e92197;
+      border: 10px solid #d11d87;
+      -webkit-box-shadow: 0px 0px 16px 7px rgba(233, 33, 150, 1);
+      -moz-box-shadow: 0px 0px 16px 7px rgba(233, 33, 150, 1);
+      box-shadow: 0px 0px 16px 7px rgba(233, 33, 150, 1);
+    }
+
+    .btn-generate:hover > span {
+      color: #fff;
+      letter-spacing: 0.4em;
+    }
+
+    .btn-generate span {
+      font-size: 15px;
+      color: #222;
+      text-align: center;
+      line-height: 40px;
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      transition: ease 0.3s;
+    }
+  }
+}
+
+.gpt-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+}
+
+.gpt-modal-content {
+  position: relative;
+  padding: 20px;
+  border-radius: 4px;
+
+  .close {
+    position: absolute;
+    z-index: 200;
+    right: 35px;
+    top: 65px;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      text-shadow: 0 0 10px #ffffff, 
+                   0 0 20px #ffffff, 
+                   0 0 30px #ffffff, 
+                   0 0 40px #ffffff;
+    }
+  }
+}
+
+
+
+//modal
+.neon-effect {
+  margin-inline-start: 30%;
+  position: absolute;
+  left:10%;
+  top: 10%;
+  font-family: Circular-book;
+  cursor: pointer;
+  color: #ffffff;
+  -webkit-animation: neon6 1.5s ease-in-out infinite alternate;
+  -moz-animation: neon6 1.5s ease-in-out infinite alternate;
+  animation: neon6 1.5s ease-in-out infinite alternate;
+  transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out; /* Add transition for smooth effect */
+}
+
+.neon-effect:hover {
+  transform: scale(1.05); /* Make the text a bit larger */
+}
+
+@-webkit-keyframes neon6 {
+  from {
+    text-shadow: 0 0 10px #fff,
+               0 0 20px #3f45fe,
+               0 0 30px #3f45fe,
+               0 0 40px #3f45fe,
+
+  }
+  to {
+    text-shadow: 0 0 5px #fff,
+               0 0 10px #3f45fe,
+               0 0 15px #3f45fe,
+               0 0 20px #3f45fe,
+
+  }
+}
+
+@-moz-keyframes neon6 {
+  from {
+    text-shadow: 0 0 10px #fff,
+               0 0 20px #3f45fe,
+               0 0 30px #3f45fe,
+               0 0 40px #3f45fe,
+
+
+  }
+  to {
+    text-shadow: 0 0 5px #fff,
+               0 0 10px #3f45fe,
+               0 0 15px #3f45fe,
+               0 0 20px #3f45fe,
+
+
+  }
+}
+@keyframes neon6 {
+  from {
+    text-shadow: 0 0 10px #fff,
+                 0 0 20px #3f45fe,
+                 0 0 30px #3f45fe,
+                 0 0 40px #3f45fe,
+
+  }
+  to {
+    text-shadow: 0 0 5px #fff,
+                 0 0 10px #3f45fe,
+                 0 0 15px #3f45fe,
+                 0 0 20px #3f45fe,
+
+  }
+}
+
+
+/* Modal transition */
+.modal-transition-enter-from, .modal-transition-leave-to {
+  opacity: 0;
+  transform: scale(1.1);
+}
+
+.modal-transition-enter-to, .modal-transition-leave-from {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.modal-transition-enter-active, .modal-transition-leave-active {
+  transition: opacity .5s, transform .5s;
+}

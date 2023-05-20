@@ -15,7 +15,7 @@ html {
 body {
   font-size: rem(18px);
   margin: 0;
-  background-image: linear-gradient(to bottom, $clr4, $clr2);
+  background-image: linear-gradient(to bottom, $clr4 10%, $clr2 150%);
   color: $clr6;
   font-family: Circular-medium;
 }
