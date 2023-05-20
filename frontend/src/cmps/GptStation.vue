@@ -21,30 +21,48 @@ export default {
   },
   methods: {
     async createPlaylist() {
-      try {
-        const response = await stationService.getEmotion(this.mood)
-        const emotion = response.emotion
+  try {
+    console.log('Starting createPlaylist')
+    
+    const response = await stationService.getEmotion(this.mood)
+    console.log('Response from getEmotion:', response)
+    
+    const emotion = response.emotion
+    console.log('Detected emotion:', emotion)
 
-        const StationName = emotion
-        const newStation = await this.$store.dispatch({
-          type: 'createStation',
-          StationName,
-        })
+    const StationName = emotion
+    console.log('Creating new station with name:', StationName)
+    
+    const newStation = await this.$store.dispatch({
+      type: 'createStation',
+      StationName,
+    })
+    console.log('New station created:', newStation)
+    
+    const SongsResponse = await stationService.generateSongs(emotion)
+    console.log('Response from generateSongs:', SongsResponse)
+    
+    const songs = SongsResponse.songs
+    console.log('Generated songs:', songs)
+    
+    for (let song of songs) {
+      console.log('Adding song to station:', song)
+      
+      await this.$store.dispatch({
+        type: 'addToStation',
+        stationId: newStation._id,
+        song,
+      })
+      
+      console.log('Song added to station')
+    }
+    
+    console.log('createPlaylist completed successfully')
+  } catch (err) {
+    console.error('Error in createPlaylist:', err)
+  }
+},
 
-        const SongsResponse = await stationService.generateSongs(emotion)
-        const songs = SongsResponse.songs
-
-        for (let song of songs) {
-          await this.$store.dispatch({
-            type: 'addToStation',
-            stationId: newStation._id,
-            song,
-          })
-        }
-      } catch (err) {
-        console.error(err)
-      }
-    },
   },
 }
 </script>
