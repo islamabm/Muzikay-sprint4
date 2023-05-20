@@ -11,7 +11,6 @@
       <button class="btn-generate" type="submit">
         <span>Create</span>
       </button>
-      <span class="gpt-loader" v-if="isLoading"></span>
     </form>
   </article>
 </template>
@@ -23,14 +22,16 @@ export default {
     return {
       mood: '',
       playlist: null,
-      isLoading: false,
     }
   },
   methods: {
     async createPlaylist() {
       try {
-        this.isLoading = true
+        this.$emit('close-modal')
+        this.$emit('isLoading', true)
+
         const response = await stationService.getEmotion(this.mood)
+
         const emotion = response.emotion
 
         // const StationNameResponse = await stationService.generateStationName(
@@ -49,24 +50,24 @@ export default {
 
         const SongsResponse = await stationService.generateSongs(emotion)
         const songs = SongsResponse.songs
-        console.log('songs', songs)
 
         for (let song of songs) {
-          console.log('in songs loop')
+          if (newStation.songs) {
+            const stationId = newStation._id
+            await this.$store.dispatch({ type: 'setcurrStation', stationId })
+            console.log('hi')
+            this.$router.push(`/station/${stationId}`)
+          }
           await this.$store.dispatch({
             type: 'addToStation',
             stationId: newStation._id,
             song,
           })
-          if (this.isLoading) {
-            this.isLoading = false
-          }
         }
       } catch (err) {
         console.error(err)
-        this.isLoading = false
       } finally {
-        this.isLoading = false
+        this.$emit('isLoading', false)
       }
     },
   },
