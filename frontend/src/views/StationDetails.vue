@@ -480,10 +480,8 @@ export default {
     },
 
     async addSongToUser(selectedSong) {
-      console.log('hi')
+      console.log()
       console.log('this.user', this.user)
-      console.log('Adding song to user', selectedSong)
-      console.log('Adding song to user', selectedSong._id)
       try {
         await this.$store.dispatch({
           type: 'updateUser',
@@ -494,6 +492,9 @@ export default {
         showSuccessMsg('Song liked')
       } catch (err) {
         console.log(err)
+      } finally {
+        this.showSongModal = false
+        this.showStationsSubMenu = false
       }
     },
     openStationSelection() {
@@ -732,7 +733,8 @@ export default {
       .catch((error) => {
         console.error('Error getting station:', error)
       })
-    console.log('stations', this.$store.getters.stations)
+    console.log('hi')
+    // this.$store.dispatch({ type: 'loadLoggedinUserDetails' })
   },
 }
 </script>

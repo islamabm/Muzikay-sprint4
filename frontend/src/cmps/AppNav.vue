@@ -102,7 +102,7 @@
 
 <script>
 import svgService from '../services/SVG.service.js'
-import { socketService } from '../services/socket.service.js'
+
 import { Container, Draggable } from 'vue3-smooth-dnd'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
@@ -180,7 +180,6 @@ export default {
           type: 'createStation',
           StationName,
         })
-        socketService.emit('station-added', newStation)
       } catch (err) {
         console.log('err')
       }
