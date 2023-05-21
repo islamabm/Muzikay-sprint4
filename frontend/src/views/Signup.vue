@@ -14,14 +14,14 @@
       </div>
 
       <div class="social-btns">
-        <!-- <FacebookLogin
+        <FacebookLogin
           @facebook-logged-in="handleSocialLogin"
           :context="'signup'"
-        ></FacebookLogin> -->
-        <!-- <GoogleLogin
+        ></FacebookLogin>
+        <GoogleLogin
           @google-logged-in="handleSocialLogin"
           :context="'signup'"
-        ></GoogleLogin> -->
+        ></GoogleLogin>
       </div>
 
       <div class="separator">
@@ -222,8 +222,8 @@
 </template>
 
 <script>
-// import FacebookLogin from '../cmps/FacebookLogin.vue'
-// import GoogleLogin from '../cmps/GoogleLogin.vue'
+import FacebookLogin from '../cmps/FacebookLogin.vue'
+import GoogleLogin from '../cmps/GoogleLogin.vue'
 export default {
   data() {
     return {
@@ -250,15 +250,15 @@ export default {
     }
   },
   methods: {
-    // handleSocialLogin(loginCred) {
-    //   console.log('loginCred', loginCred)
-    //   this.signupCred = loginCred
-    //   this.doSignup()
-    // },
-    // handleFacebookLogin(loginCred) {
-    //   this.signupCred = loginCred
-    //   this.doSignup()
-    // },
+    handleSocialLogin(loginCred) {
+      console.log('loginCred', loginCred)
+      this.signupCred = loginCred
+      this.doSignup()
+    },
+    handleFacebookLogin(loginCred) {
+      this.signupCred = loginCred
+      this.doSignup()
+    },
     async doSignup() {
       if (
         !this.signupCred.fullname ||
@@ -270,16 +270,11 @@ export default {
       }
       await this.$store.dispatch({ type: 'signup', userCred: this.signupCred })
       this.$router.push('/station/collection')
-      // let synth = window.speechSynthesis
-      // let utterThis = new SpeechSynthesisUtterance(
-      //   `Hello ${this.signupCred.fullname} welcome to muzikay application`
-      // )
-      // synth.speak(utterThis)
     },
   },
   components: {
-    // GoogleLogin,
-    // FacebookLogin,
+    GoogleLogin,
+    FacebookLogin,
   },
 }
 </script>
