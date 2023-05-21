@@ -73,13 +73,20 @@ export const stationStore = {
     setCurrUserStation(state, { stationId }) {
       state.currUserStationId = stationId
     },
-    removeSong(state, { stationId, removedId }) {
-      console.log(removedId, 'removedid what is this')
+    removeSong(state, { stationId, removedSongDetails }) {
+      console.log(removedSongDetails, 'removedSongDetails what is this')
       const station = state.stations.find((s) => s._id === stationId)
       console.log('this is the station songs in store', station.songs)
-      const songIdx = station.songs.findIndex((s) => s.id === removedId)
+      const songIdx = station.songs.findIndex(
+        (s) =>
+          s.artist === removedSongDetails.artist &&
+          s.title === removedSongDetails.title
+      )
       console.log(songIdx, 'songidx from store')
-      station.songs.splice(songIdx, 1)
+      if (songIdx !== -1) {
+        // Ensure we found the song before trying to remove it
+        station.songs.splice(songIdx, 1)
+      }
     },
     // updateSong(state, { song }) {
     //   const st = state.stations.find((s) => s._id === 'likeduser123')
@@ -149,7 +156,9 @@ export const stationStore = {
 
     async loadStations(context) {
       try {
+        console.log('hi')
         const stations = await stationService.query()
+        console.log('stations[0]', stations[0])
         context.commit({ type: 'setStations', stations })
       } catch (err) {
         console.error('stationStore: Error in loadStations', err)
@@ -206,12 +215,17 @@ export const stationStore = {
         throw err
       }
     },
-    async removeSong({ commit }, { stationId, songId }) {
-      console.log('from the action, song id', songId)
+    async removeSong({ commit }, { stationId, songArtist, songTitle }) {
+      console.log('from the action, song artist', songArtist)
+      console.log('from the action, song title', songTitle)
       console.log('from the action, stationId id', stationId)
       try {
-        const removedId = await stationService.removeSong(stationId, songId)
-        commit({ type: 'removeSong', stationId, removedId })
+        const removedSongDetails = await stationService.removeSong(
+          stationId,
+          songArtist,
+          songTitle
+        )
+        commit({ type: 'removeSong', stationId, removedSongDetails })
       } catch (err) {
         console.error('Could Not delete song')
         throw err

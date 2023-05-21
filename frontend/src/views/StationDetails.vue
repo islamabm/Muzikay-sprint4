@@ -568,12 +568,14 @@ export default {
 
     async removeSong(selectedSong) {
       console.log('this.station._id', this.station)
-      console.log('songId', selectedSong.id)
+      console.log('song artist', selectedSong.artist)
+      console.log('song title', selectedSong.title)
       try {
         await this.$store.dispatch({
           type: 'removeSong',
           stationId: this.station._id,
-          songId: selectedSong.id,
+          songArtist: selectedSong.artist,
+          songTitle: selectedSong.title,
         })
 
         showSuccessMsg('Song removed')

@@ -74,12 +74,13 @@ function getEmptyStation() {
     //   _id: utilService.makeId(),
   }
 }
-
-function removeSong(stationId, songId) {
-  console.log('song id from service', songId)
-  return httpService.delete(`station/${stationId}/song/${songId}`)
+function removeSong(stationId, songArtist, songTitle) {
+  console.log('song artist from service', songArtist)
+  console.log('song title from service', songTitle)
+  return httpService.delete(
+    `station/${stationId}/song/${songArtist}/${songTitle}`
+  )
 }
-
 function getVideos(keyword) {
   if (gSearchCache[keyword]) {
     return Promise.resolve(gSearchCache[keyword])
@@ -158,6 +159,7 @@ async function addSongToStation(stationId, song) {
 async function generateStationName(emotion) {
   return httpService.post('openai/generateStationName', { emotion })
 }
+
 async function getEmotion(text) {
   return httpService.get('openai/getEmotion', { text })
 }
