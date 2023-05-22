@@ -64,7 +64,7 @@ import { eventBus } from '../services/event-bus.service'
 
 export default {
   name: 'AppHeader',
-  //Note: this header will take the color of the station's img.
+
   data() {
     return {
       headerOpacity: 0,
@@ -101,7 +101,6 @@ export default {
       }
     },
     goForward() {
-      // console.log(this.$router.currentRoute.name === 'last-page')
       this.$router.go(-1)
     },
     getSvg(iconName) {
@@ -123,19 +122,9 @@ export default {
       return this.$route.path === '/station/search'
     },
     backLinkClass() {
-      // console.log(
-      //   'back class',
-      //   window.history.length >= 1 ? 'pointer-cursor' : 'not-allowed'
-      // )
       return window.history.length >= 1 ? 'pointer-cursor' : 'not-allowed'
     },
     forwardLinkClass() {
-      // console.log(
-      //   'forward class',
-      //   this.$router.currentRoute.name === 'last-page'
-      //     ? 'not-allowed'
-      //     : 'pointer-cursor'
-      // )
       return this.$router.currentRoute.name === 'last-page'
         ? 'not-allowed'
         : 'pointer-cursor'
@@ -145,7 +134,6 @@ export default {
     },
   },
   created() {
-    // console.log(window.history.length)
     eventBus.on('fetch-videos', (title) => {
       this.search = title
       var delay = title.delay || 2000

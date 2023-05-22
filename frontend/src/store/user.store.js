@@ -1,8 +1,4 @@
 import { userService } from '../services/user.service'
-// import { socketService, SOCKET_EMIT_USER_WATCH, SOCKET_EVENT_USER_UPDATED } from '../services/socket.service'
-
-// var localLoggedinUser = null
-// if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user || null)
 
 export const userStore = {
   state: {
@@ -26,8 +22,6 @@ export const userStore = {
   },
   mutations: {
     setLoggedinUser(state, { user }) {
-      console.log('user', user)
-      // Yaron: needed this workaround as for score not reactive from birth
       state.loggedinUser = user ? { ...user } : null
     },
     setWatchedUser(state, { user }) {
@@ -49,11 +43,9 @@ export const userStore = {
   },
   actions: {
     async login({ commit }, { userCred }) {
-      console.log('userCred', userCred)
       try {
         const user = await userService.login(userCred)
         commit({ type: 'setLoggedinUser', user })
-        // this.$router.push('/station/collection')
         return user
       } catch (err) {
         console.error('userStore: Error in login', err)
@@ -118,9 +110,6 @@ export const userStore = {
     async updateUser({ commit }, { selectedSong, user }) {
       try {
         const updatedUser = await userService.update(selectedSong, user)
-        console.log('hi')
-        console.log('updatedUser', updatedUser)
-        // commit({ type: 'updateUser', song, updatedUser })
         commit({ type: 'updateUser', song: selectedSong, updatedUser })
       } catch (err) {
         throw err
@@ -136,10 +125,8 @@ export const userStore = {
       }
     },
     async loadLoggedinUserDetails({ commit }) {
-      console.log('hi from user deatsils')
       try {
         const user = await userService.getLoggedinUserDetails()
-        console.log('user in store details', user)
         if (user) {
           commit({ type: 'setLoggedinUser', user })
         }
@@ -157,7 +144,6 @@ export const userStore = {
         throw err
       }
     },
-    // Keep this action for compatability with a common user.service ReactJS/VueJS
     setWatchedUser({ commit }, payload) {
       commit(payload)
     },

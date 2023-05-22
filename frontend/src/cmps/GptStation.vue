@@ -42,7 +42,6 @@ export default {
         const StationName = names[randomIndex]
 
         // const StationName = emotion
-        // const StationName = emotion
         const newStation = await this.$store.dispatch({
           type: 'createStation',
           StationName,

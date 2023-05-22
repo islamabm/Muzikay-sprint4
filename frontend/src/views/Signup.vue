@@ -251,7 +251,6 @@ export default {
   },
   methods: {
     handleSocialLogin(loginCred) {
-      console.log('loginCred', loginCred)
       this.signupCred = loginCred
       this.doSignup()
     },
