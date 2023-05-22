@@ -150,7 +150,7 @@
                 :class="{ 'hover-effect': clickedHeartIndex !== idx }"
                 :songIndex="idx"
                 :liked="song.liked"
-                @click="addSongToUser(song), onHeartClick(idx)"
+                @toggle-like="addSongToUser(song)"
               >
               </BubblingHeart>
             </div>
@@ -259,7 +259,6 @@
         >
           <ul class="modal-options">
             <li @click="openStationSelection">Add to playlist</li>
-            <li @click="addSongToUser(selectedSong)">like</li>
             <div v-show="showStationsSubMenu">
               <ul class="stations-sub-menu">
                 <li
@@ -480,8 +479,6 @@ export default {
     },
 
     async addSongToUser(selectedSong) {
-      console.log()
-      console.log('this.user', this.user)
       try {
         await this.$store.dispatch({
           type: 'updateUser',

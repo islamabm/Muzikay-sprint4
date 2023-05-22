@@ -1,12 +1,13 @@
 <template>
   <div class="bubbling-heart" :class="{ 'bubbling-heart--liked': liked }">
     <input
-      type="checkbox"
-      class="heart-input"
-      :id="'like-' + songIndex"
-      :checked="liked"
-      @change="toggleLike"
-    />
+  type="checkbox"
+  class="heart-input"
+  :id="'like-' + songIndex"
+  :checked="liked"
+  @change.prevent="toggleLike"
+/>
+
     <label class="label" :for="'like-' + songIndex">
       <svg
         class="heart-svg"
@@ -115,9 +116,11 @@ export default {
     }
   },
   methods: {
-    toggleLike() {
-      this.liked = !this.liked
-    },
+  toggleLike() {
+    this.liked = !this.liked;
+    this.$emit('toggle-like', this.liked);
   },
+},
+
 }
 </script>
