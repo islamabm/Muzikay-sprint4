@@ -155,18 +155,17 @@ export default {
       this.stations = this.$store.getters.getUserStations
     },
     async handleStartGuestMode() {
-      const date = Date.now() / 1000
       const userCred = {
         username: 'guest',
         password: utilService.makeId(),
-        fullname: `Guest User${date}`,
+        fullname: `Guest`,
         imgUrl: '',
         stations: [],
         LikedSongs: [],
       }
       try {
         await this.$store.dispatch({
-          type: 'signup',
+          type: 'signupGuest',
           userCred,
         })
         console.log('userCred', userCred)
@@ -177,6 +176,7 @@ export default {
       } catch (err) {
         console.log('err')
       } finally {
+        location.reload()
         this.showGuestModeModal = false
       }
     },
@@ -214,6 +214,10 @@ export default {
         this.libraryIcon === 'libraryIcon' ? 'libraryIconActive' : 'libraryIcon'
     },
     async createStation() {
+      console.log(
+        'this.$store.getters.loggedinUser',
+        this.$store.getters.loggedinUser
+      )
       const user = this.$store.getters.loggedinUser
       console.log('user', user)
       if (!user) this.showGuestModeModal = true

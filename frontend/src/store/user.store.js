@@ -71,6 +71,14 @@ export const userStore = {
         throw err
       }
     },
+    async signupGuest({ commit }, { userCred }) {
+      try {
+        await userService.signupGuest(userCred)
+      } catch (err) {
+        console.error('userStore: Error in signup', err)
+        throw err
+      }
+    },
     async logout({ commit }) {
       try {
         await userService.logout()
