@@ -86,7 +86,7 @@
       </div>
 
       <Container @drop="onDrop" class="clean-list user-stations">
-        <Draggable v-for="(station, index) in userStations" :key="index">
+        <Draggable v-for="(station, index) in stations" :key="index">
           <div
             class="station-nav-hover"
             :class="{ active: station._id === activeStationId }"
@@ -98,11 +98,16 @@
       </Container>
     </div>
   </nav>
+  <GuestMoodModal
+    v-if="showGuestModeModal"
+    @startGuestMode="handleStartGuestMode"
+    @closeModal="handleShowModal"
+  ></GuestMoodModal>
 </template>
 
 <script>
 import svgService from '../services/SVG.service.js'
-
+import GuestMoodModal from './GuestMoodModal.vue'
 import { Container, Draggable } from 'vue3-smooth-dnd'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
@@ -111,6 +116,8 @@ import {
   faCommentDollar,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { utilService } from '../services/util.service'
+import { eventBus } from '../services/event-bus.service'
 library.add(faPlus, faHeart)
 export default {
   name: 'AppNav',
@@ -123,6 +130,8 @@ export default {
       homeIcon: 'homeIcon',
       libraryIcon: 'libraryIcon',
       counter: 0,
+      showGuestModeModal: false,
+      stations: [],
     }
   },
   methods: {
@@ -141,6 +150,38 @@ export default {
         result.splice(addedIndex, 0, itemToAdd)
       }
       return result
+    },
+    updateStations() {
+      this.stations = this.$store.getters.getUserStations
+    },
+    async handleStartGuestMode() {
+      const date = Date.now() / 1000
+      const userCred = {
+        username: 'guest',
+        password: utilService.makeId(),
+        fullname: `Guest User${date}`,
+        imgUrl: '',
+        stations: [],
+        LikedSongs: [],
+      }
+      try {
+        await this.$store.dispatch({
+          type: 'signup',
+          userCred,
+        })
+        console.log('userCred', userCred)
+        console.log(
+          'this.$store.getters.loggedinUser',
+          this.$store.getters.loggedinUser
+        )
+      } catch (err) {
+        console.log('err')
+      } finally {
+        this.showGuestModeModal = false
+      }
+    },
+    handleShowModal() {
+      this.showGuestModeModal = false
     },
     // setStation(stationId) {
     //   this.$store.commit({ type: 'setCurrStation', stationId })
@@ -173,6 +214,9 @@ export default {
         this.libraryIcon === 'libraryIcon' ? 'libraryIconActive' : 'libraryIcon'
     },
     async createStation() {
+      const user = this.$store.getters.loggedinUser
+      console.log('user', user)
+      if (!user) this.showGuestModeModal = true
       try {
         this.stationCounter++
         const StationName = `My Playlist #${this.stationCounter}`
@@ -190,20 +234,18 @@ export default {
   },
   computed: {
     userStations() {
-      return this.$store.getters.getUserStations
+      this.stations = this.$store.getters.getUserStations
+      return this.stations
     },
-    // stations() {
-    //   return this.$store.getters.stations
-    // },
-    // userStationsData() {
-    //   return (this.userStationsData = this.userStations)
-    // },
   },
-  components: {
-    FontAwesomeIcon,
-    Container,
-    Draggable,
+  created() {
+    eventBus.on('user-logged-in', this.updateStations)
   },
+
+  // stations() {
+  //   return this.$store.getters.stations
+  // },
+  // userStationsData() {
   watch: {
     userStations: {
       immediate: true,
@@ -211,6 +253,14 @@ export default {
         this.userStationsData = newValue
       },
     },
+  },
+  //   return (this.userStationsData = this.userStations)
+  // },
+  components: {
+    FontAwesomeIcon,
+    Container,
+    Draggable,
+    GuestMoodModal,
   },
 }
 </script>

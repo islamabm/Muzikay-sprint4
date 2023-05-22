@@ -15,11 +15,17 @@
       <p class="spotify-login-user-content-header">
         To continue, log in to Muzikay.
       </p>
-      
-        <div class="social-btns">
-      <FacebookLogin @facebook-logged-in="handleSocialLogin" :context="'login'"></FacebookLogin>
-      <GoogleLogin @google-logged-in="handleSocialLogin" :context="'login'"></GoogleLogin>
-          </div>
+
+      <div class="social-btns">
+        <FacebookLogin
+          @facebook-logged-in="handleSocialLogin"
+          :context="'login'"
+        ></FacebookLogin>
+        <GoogleLogin
+          @google-logged-in="handleSocialLogin"
+          :context="'login'"
+        ></GoogleLogin>
+      </div>
 
       <form class="spotify-login-form" @submit.prevent="doLogin">
         <div class="spotify-form-group">
@@ -71,6 +77,7 @@
 <script>
 import FacebookLogin from '../cmps/FacebookLogin.vue'
 import GoogleLogin from '../cmps/GoogleLogin.vue'
+import { eventBus } from '../services/event-bus.service'
 export default {
   name: 'login',
   data() {
@@ -99,11 +106,11 @@ export default {
       try {
         await this.$store.dispatch({ type: 'login', userCred: this.loginCred })
         this.$router.push('/station/collection')
+        eventBus.emit('user-logged-in')
       } catch (err) {
         console.log(err)
         this.msg = 'Failed to login'
-      }
-      finally{
+      } finally {
         this.$router.push('/station/collection')
       }
     },
