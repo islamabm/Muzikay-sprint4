@@ -16,6 +16,7 @@ export const userService = {
   remove,
   update,
   getLoggedinUserDetails,
+  signupGuest,
   //   changeScore,
 }
 
@@ -60,6 +61,10 @@ async function signup(userCred) {
 
   return saveLocalUser(user)
 }
+
+async function signupGuest(userCred) {
+  sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(userCred))
+}
 async function logout() {
   return await httpService.post('auth/logout')
 }
@@ -87,9 +92,20 @@ function saveLocalUser(user) {
 function getLoggedinUser() {
   const user = JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
   // console.log('user', user)
+  if (user) {
+    console.log('hi')
+    if (user.username === 'guest') {
+      console.log('hi guest ')
+      return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
+    } else {
+      console.log('hi not guest')
+      return httpService.get(`user/${user._id}`)
+    }
+  }
+
   // console.log('JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))')
   // return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
-  if (user) return httpService.get(`user/${user._id}`)
+  // if (user) return httpService.get(`user/${user._id}`)
 }
 
 // function getById(userId) {
