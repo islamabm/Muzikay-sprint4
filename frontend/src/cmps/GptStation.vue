@@ -34,14 +34,14 @@ export default {
 
         const emotion = response.emotion
 
-        // const StationNameResponse = await stationService.generateStationName(
-        //   emotion
-        // )
-        // let names = StationNameResponse.name.match(/(?<=\d\. ).*?(?=\n|$)/g)
-        // let randomIndex = Math.floor(Math.random() * names.length)
-        // const StationName = names[randomIndex]
+        const StationNameResponse = await stationService.generateStationName(
+          emotion
+        )
+        let names = StationNameResponse.name.match(/(?<=\d\. ).*?(?=\n|$)/g)
+        let randomIndex = Math.floor(Math.random() * names.length)
+        const StationName = names[randomIndex]
 
-        const StationName = emotion
+        // const StationName = emotion
         // const StationName = emotion
         const newStation = await this.$store.dispatch({
           type: 'createStation',
