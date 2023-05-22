@@ -26,6 +26,7 @@ export const userStore = {
   },
   mutations: {
     setLoggedinUser(state, { user }) {
+      console.log('user', user)
       // Yaron: needed this workaround as for score not reactive from birth
       state.loggedinUser = user ? { ...user } : null
     },
@@ -42,8 +43,8 @@ export const userStore = {
       state.loggedinUser.score = score
     },
     updateUser(state, { song, updatedUser }) {
-      state.loggedinUser.LikedSongs.push(song)
-      // updatedUser.LikedSongs.push(song)
+      state.loggedinUser.LikedSongs = [...state.loggedinUser.LikedSongs, song]
+      updatedUser.LikedSongs = [...updatedUser.LikedSongs, song]
     },
   },
   actions: {
@@ -109,9 +110,33 @@ export const userStore = {
     async updateUser({ commit }, { selectedSong, user }) {
       try {
         const updatedUser = await userService.update(selectedSong, user)
-
-        commit({ type: 'updateUser', song, updatedUser })
+        console.log('hi')
+        console.log('updatedUser', updatedUser)
+        // commit({ type: 'updateUser', song, updatedUser })
+        commit({ type: 'updateUser', song: selectedSong, updatedUser })
       } catch (err) {
+        throw err
+      }
+    },
+    async loadLoggedinUser({ commit }) {
+      try {
+        const user = await userService.getLoggedinUser()
+        commit({ type: 'setLoggedinUser', user })
+      } catch (err) {
+        console.error('userStore: Error in loadLoggedinUser', err)
+        throw err
+      }
+    },
+    async loadLoggedinUserDetails({ commit }) {
+      console.log('hi from user deatsils')
+      try {
+        const user = await userService.getLoggedinUserDetails()
+        console.log('user in store details', user)
+        if (user) {
+          commit({ type: 'setLoggedinUser', user })
+        }
+      } catch (err) {
+        console.error('userStore: Error in loadLoggedinUserDetails', err)
         throw err
       }
     },

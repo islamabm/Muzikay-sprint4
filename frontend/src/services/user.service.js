@@ -15,6 +15,7 @@ export const userService = {
   getById,
   remove,
   update,
+  getLoggedinUserDetails,
   //   changeScore,
 }
 
@@ -36,8 +37,7 @@ function remove(userId) {
 async function update(selectedSong, user) {
   const userCopy = { ...user }
 
-  // console.log('Adding song to user in service', song)
-  userCopy.LikedSongs.push(selectedSong)
+  userCopy.LikedSongs = [...userCopy.LikedSongs, selectedSong]
 
   const savedUser = await httpService.put(`user/${userCopy._id}`, userCopy)
 
@@ -63,6 +63,13 @@ async function signup(userCred) {
 async function logout() {
   return await httpService.post('auth/logout')
 }
+async function getLoggedinUserDetails() {
+  const user = getLoggedinUser()
+
+  if (!user) return null
+  const userDetails = await httpService.get(`user/${user._id}`)
+  return userDetails
+}
 
 function saveLocalUser(user) {
   user = {
@@ -78,5 +85,12 @@ function saveLocalUser(user) {
 }
 
 function getLoggedinUser() {
-  return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
+  const user = JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
+  // console.log('user', user)
+  // console.log('JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))')
+  // return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
+  if (user) return httpService.get(`user/${user._id}`)
 }
+
+// function getById(userId) {
+// }

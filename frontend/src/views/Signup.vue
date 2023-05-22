@@ -14,9 +14,15 @@
       </div>
 
       <div class="social-btns">
-      <FacebookLogin @facebook-logged-in="handleSocialLogin" :context="'signup'"></FacebookLogin>
-      <GoogleLogin @google-logged-in="handleSocialLogin" :context="'signup'"></GoogleLogin>
-    </div>
+        <FacebookLogin
+          @facebook-logged-in="handleSocialLogin"
+          :context="'signup'"
+        ></FacebookLogin>
+        <GoogleLogin
+          @google-logged-in="handleSocialLogin"
+          :context="'signup'"
+        ></GoogleLogin>
+      </div>
 
       <div class="separator">
         <span>or</span>
@@ -249,10 +255,10 @@ export default {
       this.signupCred = loginCred
       this.doSignup()
     },
-    // handleFacebookLogin(loginCred) {
-    //   this.signupCred = loginCred
-    //   this.doSignup()
-    // },
+    handleFacebookLogin(loginCred) {
+      this.signupCred = loginCred
+      this.doSignup()
+    },
     async doSignup() {
       if (
         !this.signupCred.fullname ||
@@ -263,6 +269,7 @@ export default {
         return
       }
       await this.$store.dispatch({ type: 'signup', userCred: this.signupCred })
+
       this.$router.push('/station/collection')
     },
   },
