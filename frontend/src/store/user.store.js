@@ -37,6 +37,7 @@ export const userStore = {
       state.loggedinUser.score = score
     },
     updateUser(state, { song, updatedUser }) {
+      console.log('the song from user store', song)
       state.loggedinUser.LikedSongs = [...state.loggedinUser.LikedSongs, song]
       updatedUser.LikedSongs = [...updatedUser.LikedSongs, song]
     },
