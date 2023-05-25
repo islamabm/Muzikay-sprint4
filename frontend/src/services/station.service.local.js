@@ -7,7 +7,7 @@ import gStations from '../../data/station.json'
 import gSearchStations from '../../data/search.json'
 import { userService } from './user.service.js'
 
-const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBLJ8UmMOnvqy-M98LebSWxelSiIT1XKb0&q=`
+const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyDfQizMdjGSxdrsdWEdvFwkMD613EiJ0hA&q=`
 const STORAGE_KEY = 'station'
 const SEARCH_KEY = 'videosDB'
 const VIDEOS_KEY = 'videosIdDB'
