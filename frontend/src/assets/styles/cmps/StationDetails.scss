@@ -1,10 +1,9 @@
-.station-details {
+.station-details, .song-details-section {
   .header-content {
     width: 100%;
     display: flex;
     align-items: center;
     padding: 24px;
-    background-color: $clr1;
     padding-block-end: 1.5rem;
   }
   .likes-count-logo {
@@ -33,7 +32,7 @@
     margin-inline-end: 5px;
   }
 
-  img {
+  .station-cover-img, img {
     width: 240px;
     height: 240px;
     object-fit: cover;
@@ -50,6 +49,7 @@
     flex-direction: column;
     justify-content: center;
     font-family: 'circular-book';
+  }
 
     .playlist-word {
       font-size: 0.9rem;
@@ -113,7 +113,6 @@
         margin-inline-end: 0;
       }
     }
-  }
 }
 
 .btn-play-green {

@@ -3,6 +3,7 @@
     <section class="station-details-header">
       <div ref="stationDetailsHeader" class="header-content">
         <img
+        class="station-cover-img"
           v-if="
             (station.imgUrl || (station.songs && station.songs.length > 0)) &&
             station.name !== 'Liked songs'
@@ -18,13 +19,14 @@
         />
 
         <img
+        class="station-cover-img"
           v-else-if="station.name === 'Liked songs'"
           src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
         />
         <div v-else class="icon-container">
           <i class="music-note" v-html="getSvg(currImgSvg)"></i>
           <img
-            class="default-image"
+            class="default-image station-cover-img"
             src="../assets/img/default.png"
             @click="toggleModal"
             v-show="station.name !== 'Liked songs'"
@@ -106,8 +108,7 @@
           v-for="(song, idx) in station.songs"
           :key="idx"
         >
-          <div class="img-and-title" @click="songDetails(song, idx)">
-            <!-- :class="{ 'active-song': song.active }" -->
+          <div class="img-and-title" @click.stop="songDetails(song, idx)">
             <img
               v-show="activeSongIndex === idx"
               class="song-animation-gif"
@@ -136,7 +137,7 @@
             </p>
           </div>
 
-          <p class="song-album">
+          <p class="song-album" @click.stop="viewSongDetails(song)">
             {{ song.album }}
           </p>
 
@@ -185,7 +186,7 @@
           v-for="(song, idx) in likedSongsUser"
           :key="idx"
         >
-          <div class="img-and-title" @click="songDetails(song, idx)">
+          <div class="img-and-title" @click.stop="songDetails(song, idx)">
             <img
               v-show="activeSongIndex === idx"
               class="song-animation-gif"
@@ -259,6 +260,7 @@
         >
           <ul class="modal-options">
             <li @click="openStationSelection">Add to playlist</li>
+            <li @click.stop="viewSongDetails(selectedSong)">lyrics</li>
             <div v-show="showStationsSubMenu">
               <ul class="stations-sub-menu">
                 <li
@@ -396,6 +398,10 @@ export default {
         idx,
       }
       eventBus.emit('song-details', currSong)
+    },
+    viewSongDetails(song) {
+      eventBus.emit('view-song-details', song)
+      this.$router.push({ name: 'song-details-page' })
     },
     dontAddSong() {
       this.showAreYouSureModal = false
