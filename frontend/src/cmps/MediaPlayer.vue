@@ -210,27 +210,6 @@ export default {
       }
       this.switchSong(randomIndex)
       this.$emit('songDetails', songDetails)
-      // if (this.isShuffleOn) {
-      //   // shuffle the array of song indexes
-      //   let currentIndex = this.station.songs.length
-      //   let randomIndex
-      //   let temporaryValue
-      //   let shuffledIndexes = [...Array(currentIndex).keys()]
-
-      //   while (0 !== currentIndex) {
-      //     // pick a remaining element
-      //     randomIndex = Math.floor(Math.random() * currentIndex)
-      //     currentIndex--
-      //     // swap with current element
-      //     temporaryValue = shuffledIndexes[currentIndex]
-      //     shuffledIndexes[currentIndex] = shuffledIndexes[randomIndex]
-      //     shuffledIndexes[randomIndex] = temporaryValue
-      //   }
-      //   // update the shuffledSongs array with the shuffled indexes
-      //   this.shuffledSongs = shuffledIndexes
-      // } else {
-      //   this.shuffledSongs = []
-      // }
     },
     // the function gets direction 1/-1 and switches the song by it
     async switchSong(num) {
@@ -301,8 +280,9 @@ export default {
         this.$refs.youtube.playVideo()
         this.intervalId = setInterval(() => {
           this.currentTime = this.$refs.youtube.getCurrentTime()
+          eventBus.emit('song-progress', this.currentTime)
         }, 1000)
-        this.$refs.youtube.setVolume(this.speakerLevel) // Set the volume when starting to play
+        this.$refs.youtube.setVolume(this.speakerLevel)
       } else {
         this.$refs.youtube.pauseVideo()
       }

@@ -47,19 +47,11 @@
             <div class="likes-count-logo">
               <div class="logo-container-header">
                 <i class="logo-green" v-html="getSvg('greenLogo')"></i>
-                <!-- <h1 v-if="user">{{ user.fullname }}</h1> -->
                 <span class="small-logo-word">Muzikay</span>
               </div>
 
               <span class="dot">•</span>
               <span class="songs-count">{{ songsCount }},</span>
-
-              <!-- <span v-if="station.songs[0].duration" class="posted-at">{{
-                aboutCalc
-              }}</span> -->
-
-              <!-- <span v-if="station.songs[0].duration" class="posted-at"> </span> -->
-              <!-- <span v-else class="posted-at">about 11 hr </span> -->
             </div>
           </div>
           <div v-else>...</div>
@@ -220,15 +212,15 @@
           <p class="posted-at">{{ getTimeAgo(new Date(song.addedAt)) }}</p>
           <div class="flex-end list-end">
             <div class="like-song-icon">
-              <!-- <BubblingHeart
+              <BubblingHeart
                 ref="heart"
                 title="heart"
                 class="heart-song station-details-heart"
                 :class="{ 'hover-effect': clickedHeartIndex !== idx }"
                 :songIndex="idx"
                 :liked="song.liked"
-              /> -->
-              <!-- @click="addSongToUser(song), onHeartClick(idx)" -->
+                @click="addSongToUser(song), onHeartClick(idx)"
+              />
             </div>
             <p v-if="song.duration" class="song-duration">
               {{ song.duration }}
@@ -396,6 +388,7 @@ export default {
         idx,
       }
       eventBus.emit('song-details', currSong)
+      eventBus.emit('song-lyrics', song)
     },
     dontAddSong() {
       this.showAreYouSureModal = false

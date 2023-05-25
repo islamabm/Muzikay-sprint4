@@ -1,5 +1,8 @@
 <template>
   <footer class="main-footer">
+    <p class="lyrics" v-if="currentLyrics" :key="currentLyricsKey">
+      {{ currentLyrics }}
+    </p>
     <div class="footer-media-player">
       <MediaPlayer @songDetails="getSongDetails" />
     </div>
@@ -21,9 +24,10 @@
 </template>
 
 <script>
+import { eventBus } from '../services/event-bus.service'
 import MediaPlayer from './MediaPlayer.vue'
 import BubblingHeart from './BubblingHeart.vue'
-
+import { stationService } from '../services/station.service.local.js'
 export default {
   name: 'AppFooter',
   emits: ['songFromYoutube', 'songDetails'],
@@ -35,6 +39,10 @@ export default {
       alive: false,
       currSong: null,
       songIdx: 0,
+      lyrics: '',
+      currentLyrics: '',
+      currentLyricsIdx: 0,
+      currentLyricsKey: 0,
     }
   },
   computed: {
@@ -79,6 +87,28 @@ export default {
     getSvg(iconName) {
       return SVGService.getSpotifySvg(iconName)
     },
+    fetchLyrics(song) {
+      stationService
+        .getSongLyrics(song.artist, song.title)
+        .then((lyrics) => {
+          this.lyrics = lyrics
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    },
+    updateLyrics(currentTime) {
+      let currentLine = this.lyrics.reduce((lastValidLyric, lyric) => {
+        return lyric.time <= currentTime ? lyric : lastValidLyric
+      }, this.lyrics[0])
+
+      this.currentLyrics = currentLine ? currentLine.text : ''
+      this.currentLyricsKey += 1
+    },
+  },
+  created() {
+    eventBus.on('song-lyrics', this.fetchLyrics)
+    eventBus.on('song-progress', this.updateLyrics)
   },
 
   components: {
