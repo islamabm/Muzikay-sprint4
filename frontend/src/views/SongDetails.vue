@@ -9,14 +9,13 @@
       </div>
     </div>
     <article class="song-details-lyrics">
-  <div v-if="lyrics">
-    <div v-for="line in lyrics" :key="line.time">
-      {{ line.text }}
-    </div>
-  </div>
-  <div v-else>Loading lyrics...</div>
-</article>
-
+      <div v-if="lyrics">
+        <div v-for="line in lyrics" :key="line.time">
+          {{ line.text }}
+        </div>
+      </div>
+      <div v-else>Loading lyrics...</div>
+    </article>
   </section>
 </template>
 
