@@ -5,66 +5,18 @@
       <div class="song-details-header">
         <h1 :class="stationNameClass">{{ song.title }}</h1>
         <h2 class="song-details-artist">{{ song.artist }}</h2>
-        <small>Album: {{ song.album }}</small>
+        <small>Album - {{ song.album }}</small>
       </div>
     </div>
-    <article
-      class="song-details-lyrics"
-      data-lyrics="
-I need a pick me up
-A Rollin' Thunder truck
-I need a shot of you
-A tattooed lady wild
-Like a mountain ride
-I got a hunger, that's the loving truth
-You got a long night coming
-And a long night pumping
-You got the right position
-The heat of transmission
-A shot in the dark
-Make you feel alright
-A shot in the dark
-All through the whole night
-A shot in the dark
-Yeah, electric sparks
-A shot in the dark
-Beats a walk in the park, yeah
-Blast it on the radio
-Breaking on the TV show
-Send it out on all the wires
-And if I didn't know any better
-Your mission is to party
-'Til the broad daylight
-You got a long night coming
-And a long night going
-You got the right position
-The heat of transmission
-A shot in the dark
-Make you feel alright
-A shot in the dark
-All through the whole night
-A shot in the dark
-Yeah, еlectric sparks
-A shot in the dark
-Beats a walk in the park, yeah
-My mission is to hit ignition
-A shot in the dark
-Make you feel alright
-A shot in the dark
-All through the whole night
-A shot in the dark
-Yeah, electric sparks
-A shot in the dark
-Beats a walk in the park, yeah
-A shot in the dark
-Ooh, a shot in the dark
-A shot in the dark
-A shot in the dark
-A shot in the dark
-Make you feel alright
-A shot in the dark
-Beats a walk in the park, yeah"
-    ></article>
+    <article class="song-details-lyrics">
+  <div v-if="lyrics">
+    <div v-for="line in lyrics" :key="line.time">
+      {{ line.text }}
+    </div>
+  </div>
+  <div v-else>Loading lyrics...</div>
+</article>
+
   </section>
 </template>
 
@@ -72,13 +24,15 @@ Beats a walk in the park, yeah"
 import { eventBus } from '../services/event-bus.service'
 import { storageService } from '../services/async-storage.service'
 import { FastAverageColor } from 'fast-average-color'
+import { stationService } from '../services/station.service.local'
 
 export default {
   data() {
     return {
-      song: storageService.load('song') || '',
+      song: storageService.load('song'),
       colorCache: {},
       bgStyle: {},
+      lyrics: storageService.load('lyrics'),
     }
   },
 
@@ -90,6 +44,16 @@ export default {
   },
   methods: {
     changeSong(song) {
+      stationService
+        .getSongLyrics(song.artist, song.title)
+        .then((lyrics) => {
+          storageService.store('lyrics', lyrics)
+          this.lyrics = storageService.load('lyrics')
+          console.log('the lyrics in the then', this.lyrics)
+        })
+        .catch((error) => {
+          console.error(error)
+        })
       storageService.store('song', song)
       this.song = storageService.load('song')
       this.updateImgUrlAndColor(this.song)
@@ -102,30 +66,31 @@ export default {
       }
     },
     async getDominantColor(imageSrc) {
-  const cachedColor = this.colorCache[imageSrc];
-  if (cachedColor) {
-    this.bgStyle = `background: linear-gradient(to bottom, ${cachedColor} 0%, black 30%, ${cachedColor} 70%, black 100%)`;
-    return;
-  }
+      const cachedColor = this.colorCache[imageSrc]
+      if (cachedColor) {
+        const gradient = `background: linear-gradient(to bottom, ${cachedColor} 0%, black 30%, ${cachedColor} 70%, black 100%)`
+        this.bgStyle = gradient
+        document.body.style.backgroundImage = gradient
+        return
+      }
 
-  const fac = new FastAverageColor();
-  const img = new Image();
-  img.crossOrigin = 'Anonymous';
-  const corsProxyUrl = 'https://api.codetabs.com/v1/proxy?quest=';
-  img.src = corsProxyUrl + encodeURIComponent(imageSrc);
-  img.onload = async () => {
-    try {
-      const color = await fac.getColorAsync(img);
-      this.colorCache[imageSrc] = color;
-      this.bgStyle = {
-        background: `linear-gradient(to bottom, ${color.rgb} 0%, black 30%, black 70%, black 100%)`,
-      };
-    } catch (e) {
-      console.error(e);
-    }
-  };
-}
-
+      const fac = new FastAverageColor()
+      const img = new Image()
+      img.crossOrigin = 'Anonymous'
+      const corsProxyUrl = 'https://api.codetabs.com/v1/proxy?quest='
+      img.src = corsProxyUrl + encodeURIComponent(imageSrc)
+      img.onload = async () => {
+        try {
+          const color = await fac.getColorAsync(img)
+          this.colorCache[imageSrc] = color
+          this.bgStyle = {
+            background: `linear-gradient(to bottom, ${color.rgb} 0%, black 30%, black 70%, black 100%)`,
+          }
+        } catch (e) {
+          console.error(e)
+        }
+      }
+    },
   },
   computed: {
     stationNameClass() {

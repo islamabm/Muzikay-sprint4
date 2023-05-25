@@ -30,6 +30,7 @@ export const stationService = {
   getEmotion,
   generateSongs,
   generateStationName,
+  getSongLyrics,
 }
 window.cs = stationService
 
@@ -154,4 +155,31 @@ async function getEmotion(text) {
 
 async function generateSongs(emotion) {
   return httpService.post('openai/generateSongs', { emotion })
+}
+
+async function getSongLyrics(artist, title) {
+  
+  return axios
+    .get(`http://localhost:3030/api/lyrics/${artist}/${title}`)
+    .then((response) => {
+      const lyricsLines = response.data.split('\n')
+      let timer = 0
+      const lyricsArray = lyricsLines.map((line, index) => {
+        const timedLyric = {
+          time: timer,
+          text: line,
+        }
+        timer += 4
+        return timedLyric
+      })
+      
+      // Remove the last two elements
+      const trimmedLyricsArray = lyricsArray.slice(0, -2);
+      
+      console.log('trimmedLyricsArray', trimmedLyricsArray)
+      return trimmedLyricsArray
+    })
+    .catch((error) => {
+      console.error(error)
+    })
 }

@@ -82,6 +82,7 @@ function store(key, val) {
 }
 
 function load(key) {
+  console.log('loading failure')
   var val = localStorage.getItem(key)
   return val ? JSON.parse(val) : null
 }
