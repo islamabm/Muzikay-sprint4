@@ -74,34 +74,18 @@ export const stationStore = {
       state.currUserStationId = stationId
     },
     removeSong(state, { stationId, removedSongDetails }) {
-      console.log(removedSongDetails, 'removedSongDetails what is this')
       const station = state.stations.find((s) => s._id === stationId)
-      console.log('this is the station songs in store', station.songs)
+
       const songIdx = station.songs.findIndex(
         (s) =>
           s.artist === removedSongDetails.artist &&
           s.title === removedSongDetails.title
       )
-      console.log(songIdx, 'songidx from store')
+
       if (songIdx !== -1) {
-        // Ensure we found the song before trying to remove it
         station.songs.splice(songIdx, 1)
       }
     },
-    // updateSong(state, { song }) {
-    //   const st = state.stations.find((s) => s._id === 'likeduser123')
-    //   st.songs.push(song)
-    //   console.log(st)
-    //   const stationIdx = state.stations.findIndex(
-    //     (s) => s._id === song.stationId
-    //   )
-
-    //   const station = state.stations[stationIdx]
-    //   const songIdx = station.songs.findIndex((so) => so.id === song.id)
-
-    //   station.songs.splice(songIdx, 1, song)
-    //   state.stations[stationIdx] = station
-    // },
 
     setUserStations(state, stations) {
       state.userStations = stations
@@ -138,27 +122,12 @@ export const stationStore = {
     },
   },
   actions: {
-    // async addSongToUser({ commit, rootGetters }, { song }) {
-    //   const loggedinUser = rootGetters.loggedinUser
-    //   console.log('loggedinUser', loggedinUser)
-    //   console.log('song', song)
-    //   try {
-    //     await stationService.addSongToUser(song, loggedinUser)
-
-    //     commit({ type: 'updateUser', song, user: loggedinUser })
-
-    //     return savedStation
-    //   } catch (err) {
-    //     console.error('Cannot add song', err)
-    //     throw err
-    //   }
-    // },
-
+   
     async loadStations(context) {
       try {
-        console.log('hi')
+   
         const stations = await stationService.query()
-        console.log('stations[0]', stations[0])
+
         context.commit({ type: 'setStations', stations })
       } catch (err) {
         console.error('stationStore: Error in loadStations', err)
@@ -216,9 +185,6 @@ export const stationStore = {
       }
     },
     async removeSong({ commit }, { stationId, songArtist, songTitle }) {
-      console.log('from the action, song artist', songArtist)
-      console.log('from the action, song title', songTitle)
-      console.log('from the action, stationId id', stationId)
       try {
         const removedSongDetails = await stationService.removeSong(
           stationId,

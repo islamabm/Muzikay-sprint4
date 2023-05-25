@@ -23,7 +23,6 @@ export const stationService = {
   save,
   querySearch,
   remove,
-  getEmptyStation,
   getVideos,
   createNewStation,
   addSongToStation,
@@ -31,8 +30,6 @@ export const stationService = {
   getEmotion,
   generateSongs,
   generateStationName,
-  // addSongToUserStation,
-  // addUserToSong,
 }
 window.cs = stationService
 
@@ -50,7 +47,6 @@ async function query() {
 }
 
 async function querySearch() {
-  // return httpService.get('search')
   var stations = await storageService.query(SEARCH_STATIONS_KEY)
 
   return stations
@@ -58,7 +54,6 @@ async function querySearch() {
 
 function getById(stationId) {
   return httpService.get(`station/${stationId}`)
-  // return storageService.get(STORAGE_KEY, stationId)
 }
 
 async function remove(stationId) {
@@ -69,14 +64,7 @@ async function save(station) {
   return httpService.put(`station/${station._id}`, station)
 }
 
-function getEmptyStation() {
-  return {
-    //   _id: utilService.makeId(),
-  }
-}
 function removeSong(stationId, songArtist, songTitle) {
-  console.log('song artist from service', songArtist)
-  console.log('song title from service', songTitle)
   return httpService.delete(
     `station/${stationId}/song/${songArtist}/${songTitle}`
   )

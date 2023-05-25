@@ -15,12 +15,7 @@
         <h3 class="footer-details-title">{{ station.songs[0].title }}</h3>
       </div>
 
-      <button class="footer-like">
-        <!-- <BubblingHeart /> -->
-        <!-- :songIndex="currSongIdx" -->
-        <!-- :liked="currSong ? currSong.liked : false" -->
-        <!-- @toggleLike="toggleSongLike" -->
-      </button>
+      <button class="footer-like"></button>
     </div>
   </footer>
 </template>
@@ -78,32 +73,13 @@ export default {
     getSongDetails(songDetails) {
       const { idx } = songDetails
       this.songIdx = idx - 1
-      // this.currSong = song
+
       this.currSong = this.station.songs[this.songIdx]
     },
     getSvg(iconName) {
       return SVGService.getSpotifySvg(iconName)
     },
-    // Add functionality
-    toggleSongLike(idx) {
-      // const song = this.station.songs[idx]
-      // song.liked = !song.liked
-      // console.log(
-      //   `Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`
-      // )
-    },
   },
-  // mounted() {
-  //   eventBus.on('song-detailss', (song) => {
-  //     this.currSong = song
-  //     var delay = song.delay || 2000
-  //     this.alive = true
-  //     setTimeout(() => {
-  //       this.alive = false
-  //     }, delay)
-  //   })
-
-  // },
 
   components: {
     MediaPlayer,

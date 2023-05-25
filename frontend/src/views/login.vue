@@ -98,7 +98,6 @@ export default {
   },
   methods: {
     async doLogin() {
-      console.log('this.loginCred', this.loginCred)
       if (!this.loginCred.username || !this.loginCred.password) {
         this.msg = 'Please enter username/password'
         return
@@ -118,7 +117,6 @@ export default {
       this.$store.dispatch({ type: 'loadUsers' })
     },
     handleSocialLogin(loginCred) {
-      console.log('loginCred', loginCred)
       this.signupCred = loginCred
       this.doLogin()
       this.$router.push('/station/collection')

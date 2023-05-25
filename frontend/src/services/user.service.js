@@ -1,7 +1,4 @@
-import { storageService } from './async-storage.service'
 import { httpService } from './http.service'
-
-// import { socketService, SOCKET_EVENT_USER_UPDATED, SOCKET_EMIT_USER_WATCH } from './socket.service'
 
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 
@@ -17,7 +14,6 @@ export const userService = {
   update,
   getLoggedinUserDetails,
   signupGuest,
-  //   changeScore,
 }
 
 window.userService = userService
@@ -45,12 +41,14 @@ async function update(selectedSong, user) {
   if (getLoggedinUser()._id === savedUser._id) saveLocalUser(savedUser)
   return savedUser
 }
+
 async function login(userCred) {
   const user = await httpService.post('auth/login', userCred)
 
   return saveLocalUser(user)
   //   }
 }
+
 async function signup(userCred) {
   if (!userCred.imgUrl) {
     userCred.imgUrl =
@@ -65,6 +63,7 @@ async function signup(userCred) {
 async function signupGuest(userCred) {
   sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(userCred))
 }
+
 async function logout() {
   return await httpService.post('auth/logout')
 }
@@ -91,22 +90,11 @@ function saveLocalUser(user) {
 
 function getLoggedinUser() {
   const user = JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
-  // console.log('user', user)
   if (user) {
-    console.log('hi')
     if (user.username === 'guest') {
-      console.log('hi guest ')
       return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
     } else {
-      console.log('hi not guest')
       return httpService.get(`user/${user._id}`)
     }
   }
-
-  // console.log('JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))')
-  // return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
-  // if (user) return httpService.get(`user/${user._id}`)
 }
-
-// function getById(userId) {
-// }

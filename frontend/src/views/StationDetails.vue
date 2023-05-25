@@ -485,7 +485,6 @@ export default {
           selectedSong,
           user: this.user,
         })
-        console.log('Song added to user')
         showSuccessMsg('Song liked')
       } catch (err) {
         console.log(err)
@@ -564,9 +563,6 @@ export default {
     },
 
     async removeSong(selectedSong) {
-      console.log('this.station._id', this.station)
-      console.log('song artist', selectedSong.artist)
-      console.log('song title', selectedSong.title)
       try {
         await this.$store.dispatch({
           type: 'removeSong',
@@ -585,7 +581,6 @@ export default {
     },
 
     async addToSelectedStation(stationId, song) {
-      console.log('song', song)
       try {
         await this.$store.dispatch({
           type: 'addToStation',
@@ -732,8 +727,6 @@ export default {
       .catch((error) => {
         console.error('Error getting station:', error)
       })
-    console.log('hi')
-    // this.$store.dispatch({ type: 'loadLoggedinUserDetails' })
   },
 }
 </script>

@@ -168,11 +168,6 @@ export default {
           type: 'signupGuest',
           userCred,
         })
-        console.log('userCred', userCred)
-        console.log(
-          'this.$store.getters.loggedinUser',
-          this.$store.getters.loggedinUser
-        )
       } catch (err) {
         console.log('err')
       } finally {
@@ -183,19 +178,10 @@ export default {
     handleShowModal() {
       this.showGuestModeModal = false
     },
-    // setStation(stationId) {
-    //   this.$store.commit({ type: 'setCurrStation', stationId })
-    //   this.$router.push(`/station/${stationId}`)
-    // },
+
     async setStation(stationId) {
-      console.log('stationId', stationId)
-
-      // const station = this.userStations.find((s) => s._id === stationId)
-      // if (station.name === 'Liked songs') console.log('hi')
-
       this.activeStationId = stationId
       await this.$store.dispatch({ type: 'setcurrStation', stationId })
-      console.log('hi')
       this.$router.push(`/station/${stationId}`)
     },
     getSvg(iconName) {
@@ -214,12 +200,7 @@ export default {
         this.libraryIcon === 'libraryIcon' ? 'libraryIconActive' : 'libraryIcon'
     },
     async createStation() {
-      console.log(
-        'this.$store.getters.loggedinUser',
-        this.$store.getters.loggedinUser
-      )
       const user = this.$store.getters.loggedinUser
-      console.log('user', user)
       if (!user) this.showGuestModeModal = true
       try {
         this.stationCounter++
@@ -245,11 +226,6 @@ export default {
   created() {
     eventBus.on('user-logged-in', this.updateStations)
   },
-
-  // stations() {
-  //   return this.$store.getters.stations
-  // },
-  // userStationsData() {
   watch: {
     userStations: {
       immediate: true,
@@ -258,8 +234,6 @@ export default {
       },
     },
   },
-  //   return (this.userStationsData = this.userStations)
-  // },
   components: {
     FontAwesomeIcon,
     Container,

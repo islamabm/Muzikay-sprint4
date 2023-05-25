@@ -2,7 +2,11 @@
   <div>
     <button @click="logInWithFacebook" class="facebook-signup">
       <div class="btn-logo-container">
-        <img class="btn-img" src="./../assets/img/fb-icon.png" alt="Facebook logo" />
+        <img
+          class="btn-img"
+          src="./../assets/img/fb-icon.png"
+          alt="Facebook logo"
+        />
         <span>{{ buttonText }}</span>
       </div>
     </button>
@@ -15,13 +19,15 @@ export default {
   props: {
     context: {
       type: String,
-      default: 'signup' // Default context is 'signup'
-    }
+      default: 'signup',
+    },
   },
   computed: {
     buttonText() {
-      return this.context === 'signup' ? 'Sign up with Facebook' : 'Log in with Facebook';
-    }
+      return this.context === 'signup'
+        ? 'Sign up with Facebook'
+        : 'Log in with Facebook'
+    },
   },
   methods: {
     logInWithFacebook() {

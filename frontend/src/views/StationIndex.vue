@@ -22,11 +22,8 @@ export default {
   name: 'StationIndex',
   props: [],
   created() {
-    console.log('hy')
     this.$store.dispatch({ type: 'loadStations' })
-    console.log('hy')
     this.$store.dispatch({ type: 'loadSearchStations' })
-    console.log('hy')
   },
   data() {
     return {}

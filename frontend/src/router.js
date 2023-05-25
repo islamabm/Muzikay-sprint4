@@ -5,7 +5,6 @@ import UserLibrary from './views/UserLibrary.vue'
 import StationIndex from './views/StationIndex.vue'
 import Signup from './views/Signup.vue'
 import Login from './views/Login.vue'
-// import LoginSignup from './views/LoginSignup.vue'
 import StationDetails from './views/StationDetails.vue'
 import StationCollection from './views/StationCollection.vue'
 import UserDetails from './views/UserDetails.vue'
@@ -42,11 +41,6 @@ const routes = [
         name: 'search',
         component: Search,
       },
-      // {
-      //   path: '/station/search',
-      //   name: 'search',
-      //   component: Search,
-      // },
 
       {
         path: '/station/chat',

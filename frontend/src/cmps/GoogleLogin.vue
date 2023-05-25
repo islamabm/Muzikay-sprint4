@@ -49,17 +49,12 @@ export default {
           const { data: userData } = await axios.get(
             `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${access_token}`
           )
-          console.log('userData', userData)
 
-          //   !this.signupCred.fullname ||
-          // !this.signupCred.password ||
-          // !this.signupCred.username
           const loginCred = {
             fullname: userData.name,
             username: userData.given_name,
             password: userData.id,
           }
-          console.log('loginCred', loginCred)
 
           this.$emit('google-logged-in', loginCred)
         } catch (error) {
@@ -67,7 +62,6 @@ export default {
         }
       } else {
         console.log('cannot sign in')
-        // Handle other response types if needed
       }
     },
   },
