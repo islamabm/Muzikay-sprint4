@@ -269,18 +269,11 @@ export default {
     // when something happens- Video has ended/Video 1=> is playing 2=> pause 0=> finished 3=> when passing forward or switching a song
     // supposed to be a switch case
     onStateChange(event) {
-<<<<<<< HEAD
-      console.log('event', event.data)
-      if (event.data === 1) {
-      }
-      if (event.data === 2)
-=======
       if ([0, 2].includes(event.data)) {
         clearInterval(this.intervalId)
         this.isPlaying = true
         this.playAudio()
 
->>>>>>> 84992358da353a7c405c49572fb88dff4ecb7e7c
         if (event.data === 0) {
           if (this.isShuffleOn) {
             this.switchSong(

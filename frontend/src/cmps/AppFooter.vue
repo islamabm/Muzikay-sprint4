@@ -79,17 +79,6 @@ export default {
     getSvg(iconName) {
       return SVGService.getSpotifySvg(iconName)
     },
-<<<<<<< HEAD
-    // Add functionality
-    toggleSongLike(idx) {
-      // const song = this.station.songs[idx]
-      // song.liked = !song.liked
-      // console.log(
-      //   `Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`
-      // )
-    },
-=======
->>>>>>> 84992358da353a7c405c49572fb88dff4ecb7e7c
   },
 
   components: {
