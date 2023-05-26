@@ -1,6 +1,6 @@
 <template>
-  <!-- class="youtube-player" -->
   <YouTube
+    class="youtube-player"
     :src="`https://www.youtube.com/watch?q=${putSongName}`"
     @ready="onReady"
     @state-change="onStateChange"
@@ -86,20 +86,20 @@
   </div>
 </template>
 <script>
-import YouTube from 'vue3-youtube'
-import SVGService from '../services/SVG.service'
-import { eventBus } from '../services/event-bus.service'
-import { stationService } from '../services/station.service.local.js'
-import { utilService } from '../services/util.service'
+import YouTube from "vue3-youtube"
+import SVGService from "../services/SVG.service"
+import { eventBus } from "../services/event-bus.service"
+import { stationService } from "../services/station.service.local.js"
+import { utilService } from "../services/util.service"
 export default {
-  name: 'MediaPlayer',
+  name: "MediaPlayer",
   props: {
     speakerLevel: {
       type: Number,
       default: 80,
     },
   },
-  emits: ['songDetails'],
+  emits: ["songDetails"],
   components: {
     YouTube,
   },
@@ -113,13 +113,13 @@ export default {
       isRepeatOn: false,
       shuffledSongs: [],
       isShuffleOn: false,
-      speakerSvg: '',
+      speakerSvg: "",
       song: null,
       songIdx: 0,
     }
   },
   created() {
-    eventBus.on('song-details', async (currSong) => {
+    eventBus.on("song-details", async (currSong) => {
       const { song, idx } = currSong
       this.song = song
       this.songIdx = idx + 1
@@ -133,12 +133,12 @@ export default {
           idx: this.songIdx,
         }
 
-        this.$emit('songDetails', songDetails)
+        this.$emit("songDetails", songDetails)
       } catch (error) {
         console.error(error)
       }
     })
-    eventBus.on('station', (station) => {
+    eventBus.on("station", (station) => {
       const { songs } = station
       this.song = songs[0]
       // this.song = song
@@ -151,10 +151,10 @@ export default {
     putSongName() {
       if (this.song) {
         console.log(
-          'this.station.songs[this.songIdx].id',
+          "this.station.songs[this.songIdx].id",
           this.station.songs[this.songIdx].id
         )
-        console.log('this.song.id', this.song.id)
+        console.log("this.song.id", this.song.id)
         if (this.song.id) return this.song[this.songIdx].id
         // situation when we have a song from YouTube on our list-considered as a song
         return this.song.videoId
@@ -167,13 +167,13 @@ export default {
         } else {
           return this.station.songs[this.songIdx].id
         }
-      } else return 'IXdNnw99-Ic' // default value
+      } else return "IXdNnw99-Ic" // default value
     },
     toggleSvgIcone() {
       let icon
-      if (this.volume > 80) icon = 'speakerFullBtnIcon'
-      else if (this.volume >= 10) icon = 'speakerMediumBtnIcon'
-      else icon = 'speakerMuteBtnIcon'
+      if (this.volume > 80) icon = "speakerFullBtnIcon"
+      else if (this.volume >= 10) icon = "speakerMediumBtnIcon"
+      else icon = "speakerMuteBtnIcon"
       return icon
     },
     progressBarWidth() {
@@ -209,7 +209,7 @@ export default {
         idx: randomIndex,
       }
       this.switchSong(randomIndex)
-      this.$emit('songDetails', songDetails)
+      this.$emit("songDetails", songDetails)
       // if (this.isShuffleOn) {
       //   // shuffle the array of song indexes
       //   let currentIndex = this.station.songs.length
@@ -234,13 +234,13 @@ export default {
     },
     // the function gets direction 1/-1 and switches the song by it
     async switchSong(num) {
-      eventBus.emit('song-idx', this.songIdx)
+      eventBus.emit("song-idx", this.songIdx)
       if (this.isShuffleOn) {
         this.songIdx = utilService.getRandomIntInclusive(
           1,
           this.station.songs.length
         )
-        eventBus.emit('song-idx', this.songIdx)
+        eventBus.emit("song-idx", this.songIdx)
       }
       const nextSong = this.station.songs[this.songIdx]
 
@@ -255,7 +255,7 @@ export default {
           idx: this.songIdx,
         }
 
-        this.$emit('songDetails', songDetails)
+        this.$emit("songDetails", songDetails)
       } catch (error) {
         console.error(error)
       }
@@ -314,7 +314,7 @@ export default {
     formatTime(time) {
       const minutes = Math.floor(time / 60)
       const seconds = Math.floor(time % 60)
-      return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`
+      return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`
     },
     // find and navigate by click to any part of the song
     findProgress(ev) {
@@ -334,10 +334,10 @@ export default {
       this.$refs.youtube.seekTo(newTime)
 
       // update the width of the progress bar fill
-      progressBarFill.style.width = progressPercentage * 100 + '%'
+      progressBarFill.style.width = progressPercentage * 100 + "%"
     },
     setSpeakerLevel(level) {
-      this.$emit('update:speaker-level', level)
+      this.$emit("update:speaker-level", level)
     },
   },
   watch: {
