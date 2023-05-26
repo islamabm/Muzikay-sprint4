@@ -3,7 +3,7 @@
     <section class="station-details-header">
       <div ref="stationDetailsHeader" class="header-content">
         <img
-        class="station-cover-img"
+          class="station-cover-img"
           v-if="
             (station.imgUrl || (station.songs && station.songs.length > 0)) &&
             station.name !== 'Liked songs'
@@ -19,7 +19,7 @@
         />
 
         <img
-        class="station-cover-img"
+          class="station-cover-img"
           v-else-if="station.name === 'Liked songs'"
           src="https://t.scdn.co/images/3099b3803ad9496896c43f22fe9be8c4.png"
         />
@@ -265,10 +265,19 @@
               </ul>
             </div>
             <li
-              v-if="station.createdBy.fullname !== 'system'"
+              v-if="
+                station.createdBy.fullname !== 'system' &&
+                station.name !== 'Liked songs'
+              "
               @click="removeSong(selectedSong)"
             >
               Remove
+            </li>
+            <li
+              v-if="station.name === 'Liked songs'"
+              @click="removeFromLikedSongs(selectedSong)"
+            >
+              Delete
             </li>
           </ul>
         </div>
@@ -290,7 +299,7 @@
       <div class="delete-modla-btns">
         <button class="delete-modal-cancle-btn" @click="cancle">Cancel</button>
         <button class="delete-modal-delete-btn" @click="removeStation">
-          Delete
+          Unlike
         </button>
       </div>
     </div>
@@ -394,7 +403,7 @@ export default {
     },
     viewSongDetails(song) {
       eventBus.emit('view-song-details', song)
-      this.songDetails(song,this.selectedIndex)
+      this.songDetails(song, this.selectedIndex)
       this.$router.push({ name: 'song-details-page' })
     },
     dontAddSong() {
@@ -523,7 +532,9 @@ export default {
       this.currImgSvg = svg
     },
     onHeartClick(index) {
+      console.log('index', index)
       if (this.clickedHeartIndex === index) {
+        console.log('this.clickedHeartIndex', this.clickedHeartIndex)
         this.clickedHeartIndex = null
       } else {
         this.clickedHeartIndex = index
@@ -577,6 +588,7 @@ export default {
     },
 
     async removeSong(selectedSong) {
+      console.log('this.station._id', this.station._id)
       try {
         await this.$store.dispatch({
           type: 'removeSong',
@@ -589,6 +601,21 @@ export default {
       } catch (err) {
         console.log(err)
         showErrorMsg('Cannot remove song')
+      } finally {
+        this.showSongModal = false
+      }
+    },
+    async removeFromLikedSongs(selectedSong) {
+      try {
+        await this.$store.dispatch({
+          type: 'removeSongFromUser',
+          selectedSong,
+          user: this.user,
+        })
+        showSuccessMsg('Song removed from liked songs')
+      } catch (err) {
+        console.log(err)
+        showErrorMsg('Cannot remove song from liked songs')
       } finally {
         this.showSongModal = false
       }

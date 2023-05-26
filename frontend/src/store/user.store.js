@@ -41,6 +41,14 @@ export const userStore = {
       state.loggedinUser.LikedSongs = [...state.loggedinUser.LikedSongs, song]
       updatedUser.LikedSongs = [...updatedUser.LikedSongs, song]
     },
+    removeSongFromUser(state, { song, updatedUser }) {
+      state.loggedinUser.LikedSongs = state.loggedinUser.LikedSongs.filter(
+        (s) => s.title !== song.title
+      )
+      updatedUser.LikedSongs = updatedUser.LikedSongs.filter(
+        (s) => s.title !== song.title
+      )
+    },
     // removeSongFromUser(state, { song, updatedUser }) {
     //   state.loggedinUser.LikedSongs = state.loggedinUser.LikedSongs.filter(
     //     (s) => s.id !== song.id
@@ -120,6 +128,14 @@ export const userStore = {
       try {
         const updatedUser = await userService.update(selectedSong, user)
         commit({ type: 'updateUser', song: selectedSong, updatedUser })
+      } catch (err) {
+        throw err
+      }
+    },
+    async removeSongFromUser({ commit }, { selectedSong, user }) {
+      try {
+        const updatedUser = await userService.removeSong(selectedSong, user)
+        commit({ type: 'removeSongFromUser', song: selectedSong, updatedUser })
       } catch (err) {
         throw err
       }

@@ -43,28 +43,6 @@ function _getUrl(id = '') {
   return `${BASE_URL}/${id}`
 }
 
-async function getSongLyrics(artist, title) {
-  return axios
-    .get(`http://localhost:3030/api/lyrics/${artist}/${title}`)
-    .then((response) => {
-      const lyricsLines = response.data.split('\n')
-      let timer = 0
-      const lyricsArray = lyricsLines.map((line, index) => {
-        const timedLyric = {
-          time: timer,
-          text: line,
-        }
-        timer += 4
-        return timedLyric
-      })
-      console.log('lyricsArray', lyricsArray)
-      return lyricsArray
-    })
-    .catch((error) => {
-      console.error(error)
-    })
-}
-
 async function query() {
   return httpService.get('station')
 }
