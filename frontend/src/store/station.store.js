@@ -8,11 +8,21 @@ export const stationStore = {
     currStationId: null,
     userStations: [],
     likedSongsData: [],
+    currentSongDetails: {
+      song: null,
+      lyrics: null,
+    },
   },
   getters: {
     filteredStations: (state) => (category) => {
       if (!category) return state.stations
       return state.stations.filter((station) => station.tags.includes(category))
+    },
+    currentSong({ currentSongDetails }) {
+      return currentSongDetails.song
+    },
+    currentLyrics({ currentSongDetails }) {
+      return currentSongDetails.lyrics
     },
     stations({ stations }) {
       return stations
@@ -63,6 +73,12 @@ export const stationStore = {
       station[remove] = addedSong
       station[add] = removeSong
       return station
+    },
+    setSongDetails(state, { song }) {
+      state.currentSongDetails.song = song
+    },
+    setSongLyrics(state, { lyrics }) {
+      state.currentSongDetails.lyrics = lyrics
     },
     setSearchStations(state, { stations }) {
       state.searchStations = stations
@@ -122,16 +138,44 @@ export const stationStore = {
     },
   },
   actions: {
-   
     async loadStations(context) {
       try {
-   
         const stations = await stationService.query()
 
         context.commit({ type: 'setStations', stations })
       } catch (err) {
         console.error('stationStore: Error in loadStations', err)
         throw err
+      }
+    },
+
+    async fetchSongDetails({ commit }, song) {
+      try {
+        if (
+          song.title &&
+          song.imgUrl &&
+          song.addedAt &&
+          song.album &&
+          song.artist &&
+          song.likedByUsers
+        ) {
+          commit({ type: 'setSongDetails', song })
+        } else {
+          throw new Error('Song details are incomplete')
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async fetchSongLyrics({ commit, state }, song) {
+      try {
+        const lyrics = await stationService.getSongLyrics(
+          song.artist,
+          song.title
+        )
+        commit({ type: 'setSongLyrics', lyrics })
+      } catch (error) {
+        console.error(error)
       }
     },
 

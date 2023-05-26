@@ -21,42 +21,35 @@
 
 <script>
 import { eventBus } from '../services/event-bus.service'
-import { storageService } from '../services/async-storage.service'
 import { FastAverageColor } from 'fast-average-color'
-import { stationService } from '../services/station.service.local'
 
 export default {
   data() {
     return {
-      song: storageService.load('song'),
       colorCache: {},
       bgStyle: {},
-      lyrics: storageService.load('lyrics'),
     }
   },
 
   created() {
+    console.log('hi')
     eventBus.on('view-song-details', this.changeSong)
     if (this.song) {
       this.updateImgUrlAndColor(this.song)
     }
   },
   methods: {
-    changeSong(song) {
-      stationService
-        .getSongLyrics(song.artist, song.title)
-        .then((lyrics) => {
-          storageService.store('lyrics', lyrics)
-          this.lyrics = storageService.load('lyrics')
-          console.log('the lyrics in the then', this.lyrics)
-        })
-        .catch((error) => {
-          console.error(error)
-        })
-      storageService.store('song', song)
-      this.song = storageService.load('song')
-      this.updateImgUrlAndColor(this.song)
+    async changeSong(song) {
+      console.log('song', song)
+      try {
+        await this.$store.dispatch('fetchSongDetails', song)
+        await this.$store.dispatch('fetchSongLyrics', song)
+        this.updateImgUrlAndColor(song)
+      } catch (error) {
+        console.error(error)
+      }
     },
+
     updateImgUrlAndColor(song) {
       if (!song) return
       const imgUrl = song.imgUrl
@@ -101,6 +94,13 @@ export default {
       } else {
         return 'huge-station-name'
       }
+    },
+
+    song() {
+      return this.$store.getters.currentSong
+    },
+    lyrics() {
+      return this.$store.getters.currentLyrics
     },
   },
   watch: {
