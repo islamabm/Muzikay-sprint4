@@ -1,8 +1,4 @@
 import { userService } from '../services/user.service'
-// import { socketService, SOCKET_EMIT_USER_WATCH, SOCKET_EVENT_USER_UPDATED } from '../services/socket.service'
-
-// var localLoggedinUser = null
-// if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user || null)
 
 export const userStore = {
   state: {
@@ -26,7 +22,6 @@ export const userStore = {
   },
   mutations: {
     setLoggedinUser(state, { user }) {
-      // Yaron: needed this workaround as for score not reactive from birth
       state.loggedinUser = user ? { ...user } : null
     },
     setWatchedUser(state, { user }) {
@@ -42,10 +37,9 @@ export const userStore = {
       state.loggedinUser.score = score
     },
     updateUser(state, { song, updatedUser }) {
-      console.log('mutationnnnnnn song', song)
-      console.log('mutationnnnnnn user', updatedUser)
-      state.loggedinUser.LikedSongs.push(song)
-      updatedUser.LikedSongs.push(song)
+      console.log('the song from user store', song)
+      state.loggedinUser.LikedSongs = [...state.loggedinUser.LikedSongs, song]
+      updatedUser.LikedSongs = [...updatedUser.LikedSongs, song]
     },
   },
   actions: {
@@ -55,19 +49,26 @@ export const userStore = {
         commit({ type: 'setLoggedinUser', user })
         return user
       } catch (err) {
-        console.log('userStore: Error in login', err)
+        console.error('userStore: Error in login', err)
         throw err
       }
     },
     async signup({ commit }, { userCred }) {
-      console.log('userCred in the store', userCred)
       try {
         const user = await userService.signup(userCred)
-        console.log('user in sign up user in store after', user)
+
         commit({ type: 'setLoggedinUser', user })
         return user
       } catch (err) {
-        console.log('userStore: Error in signup', err)
+        console.error('userStore: Error in signup', err)
+        throw err
+      }
+    },
+    async signupGuest({ commit }, { userCred }) {
+      try {
+        await userService.signupGuest(userCred)
+      } catch (err) {
+        console.error('userStore: Error in signup', err)
         throw err
       }
     },
@@ -76,7 +77,7 @@ export const userStore = {
         await userService.logout()
         commit({ type: 'setLoggedinUser', user: null })
       } catch (err) {
-        console.log('userStore: Error in logout', err)
+        console.error('userStore: Error in logout', err)
         throw err
       }
     },
@@ -85,7 +86,7 @@ export const userStore = {
         const users = await userService.getUsers()
         commit({ type: 'setUsers', users })
       } catch (err) {
-        console.log('userStore: Error in loadUsers', err)
+        console.error('userStore: Error in loadUsers', err)
         throw err
       }
     },
@@ -94,7 +95,7 @@ export const userStore = {
         const user = await userService.getById(userId)
         commit({ type: 'setWatchedUser', user })
       } catch (err) {
-        console.log('userStore: Error in loadAndWatchUser', err)
+        console.error('userStore: Error in loadAndWatchUser', err)
         throw err
       }
     },
@@ -103,19 +104,35 @@ export const userStore = {
         await userService.remove(userId)
         commit({ type: 'removeUser', userId })
       } catch (err) {
-        console.log('userStore: Error in removeUser', err)
+        console.error('userStore: Error in removeUser', err)
         throw err
       }
     },
-    async updateUser({ commit }, { song, user }) {
-      console.log('user in the store', user)
-      console.log('user in the store song', song)
+    async updateUser({ commit }, { selectedSong, user }) {
       try {
-        const updatedUser = await userService.update(song, user)
-        console.log('user after update back in store', updatedUser)
-        commit({ type: 'updateUser', song, updatedUser })
+        const updatedUser = await userService.update(selectedSong, user)
+        commit({ type: 'updateUser', song: selectedSong, updatedUser })
       } catch (err) {
-        console.log('userStore: Error in updateUser', err)
+        throw err
+      }
+    },
+    async loadLoggedinUser({ commit }) {
+      try {
+        const user = await userService.getLoggedinUser()
+        commit({ type: 'setLoggedinUser', user })
+      } catch (err) {
+        console.error('userStore: Error in loadLoggedinUser', err)
+        throw err
+      }
+    },
+    async loadLoggedinUserDetails({ commit }) {
+      try {
+        const user = await userService.getLoggedinUserDetails()
+        if (user) {
+          commit({ type: 'setLoggedinUser', user })
+        }
+      } catch (err) {
+        console.error('userStore: Error in loadLoggedinUserDetails', err)
         throw err
       }
     },
@@ -124,11 +141,10 @@ export const userStore = {
         const score = await userService.changeScore(100)
         commit({ type: 'setUserScore', score })
       } catch (err) {
-        console.log('userStore: Error in increaseScore', err)
+        console.error('userStore: Error in increaseScore', err)
         throw err
       }
     },
-    // Keep this action for compatability with a common user.service ReactJS/VueJS
     setWatchedUser({ commit }, payload) {
       commit(payload)
     },

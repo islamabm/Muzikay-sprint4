@@ -1,5 +1,6 @@
 <template>
   <div class="backdrop">
+    <Record @update-name="updateName" />
     <section class="edit-details-section">
       <form class="edit-details-form" @submit.prevent="stationInput">
         <div class="edit-details-header">
@@ -9,7 +10,12 @@
         <div class="edit-details-img">
           <label class="cover-img" @drop.prevent="handleFile" @dragover.prevent>
             <div v-if="loading" class="loader"></div>
-            <img :src="imgSrc" alt="Station cover" class="img-edit" />
+            <img
+  :src="editedStation.imgUrl || 'src/assets/img/empty-img.png'"
+  alt="Station cover"
+  class="img-edit"
+/>
+
             <input type="file" @change="handleFile" hidden />
           </label>
           <div class="edit-details-inputs">
@@ -17,16 +23,16 @@
               class="edit-name"
               id="name"
               type="text"
-              v-model="station.name"
+              v-model="editedStation.name"
             />
-            <!-- <Record :name="station.name" @transcript="station.name = $event" /> -->
             <textarea
               class="edit-text-area"
               id="description"
               rows="4"
-              v-model="station.description"
+              v-model="editedStation.description"
               placeholder="Add an optional description"
             ></textarea>
+
             <button class="btn-save-changes">Save</button>
           </div>
         </div>
@@ -47,45 +53,47 @@ export default {
     return {
       // station: null,
       loading: false,
+      editedStation: null,
+      imgUrl: null,
     }
   },
   methods: {
-    async stationInput() {
-      let editedStation = { ...this.station }
-      console.log('editedStation', editedStation)
-      try {
-        await this.$store.dispatch({
-          type: 'editstation',
-          station: editedStation,
-        })
-        showSuccessMsg('Station edited')
-        // this.$emit('close') // add this line to close the modal
-      } catch (err) {
-        showErrorMsg('Cannot edit station', err)
-      }
+async stationInput() {
+  let editedStation = { ...this.editedStation }
+  editedStation.imgUrl = this.imgUrl  // Add this line
+  try {
+    await this.$store.dispatch({
+      type: 'editstation',
+      station: editedStation,
+    })
+    showSuccessMsg('Station edited')
+    this.$emit('close')
+  } catch (err) {
+    showErrorMsg('Cannot edit station', err)
+  }
+},
+
+    updateName(newName) {
+      this.station.name = newName
     },
 
     async handleFile(ev) {
-      this.loading = true // set the loading flag to true
+  this.loading = true
+  const file =
+    ev.type === 'change' ? ev.target.files[0] : ev.dataTransfer.files[0]
 
-      const file =
-        ev.type === 'change' ? ev.target.files[0] : ev.dataTransfer.files[0]
+  try {
+    const { url } = await uploadImg(file)
+    this.imgUrl = url
+    this.editedStation.imgUrl = url  // Add this line
+    this.loading = false
+  } catch (err) {
+    showErrorMsg('Cannot update song', err)
+    this.loading = false
+  }
+}
 
-      try {
-        const { url } = await uploadImg(file)
-        const newSong = { ...this.station.songs[0], imgUrl: url }
-        await this.$store.dispatch({
-          type: 'updateStationSong',
-          stationId: this.station._id,
-          newSong,
-        })
-        showSuccessMsg('Song updated')
-      } catch (err) {
-        showErrorMsg('Cannot update song', err)
-      } finally {
-        this.loading = false // clear the loading flag once the upload is complete
-      }
-    },
+
   },
 
   computed: {
@@ -104,8 +112,29 @@ export default {
       return this.$store.getters.stations
     },
   },
+  
+  created() {
+  this.editedStation = JSON.parse(JSON.stringify(this.station))
+  this.imgUrl =
+    this.station.imgUrl ||
+    (this.station.songs && this.station.songs.length > 0 ? this.station.songs[0].imgUrl : 'src/assets/img/empty-img.png')
+},
   components: {
     Record,
   },
+  watch: {
+  station: {
+    immediate: true,
+    handler(newValue) {
+      if(newValue) {
+        this.editedStation = JSON.parse(JSON.stringify(newValue))
+        this.imgUrl =
+          newValue.imgUrl ||
+          (newValue.songs && newValue.songs[0]?.imgUrl) ||
+          'src/assets/img/empty-img.png'
+      }
+    }
+  }
+},
 }
 </script>

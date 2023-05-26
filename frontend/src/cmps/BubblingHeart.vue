@@ -1,12 +1,13 @@
 <template>
   <div class="bubbling-heart" :class="{ 'bubbling-heart--liked': liked }">
     <input
-      type="checkbox"
-      class="heart-input"
-      :id="'like-' + songIndex"
-      :checked="liked"
-      @click="toggleLike"
-    />
+  type="checkbox"
+  class="heart-input"
+  :id="'like-' + songIndex"
+  :checked="liked"
+  @change.prevent="toggleLike"
+/>
+
     <label class="label" :for="'like-' + songIndex">
       <svg
         class="heart-svg"
@@ -108,20 +109,18 @@
 <script>
 export default {
   name: 'BubblingHeart',
-  props: {
-    songIndex: {
-      type: Number,
-    },
-    liked: {
-      type: Boolean,
-      default: false,
-    },
+  props: ['songIndex'],
+  data() {
+    return {
+      liked: false,
+    }
   },
   methods: {
-    toggleLike() {
-      this.$emit('toggleLike', this.songIndex)
-      this.$emit('addLikeToSong')
-    },
+  toggleLike() {
+    this.liked = !this.liked;
+    this.$emit('toggle-like', this.liked);
   },
+},
+
 }
 </script>

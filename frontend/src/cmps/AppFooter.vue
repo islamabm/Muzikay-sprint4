@@ -15,12 +15,7 @@
         <h3 class="footer-details-title">{{ station.songs[0].title }}</h3>
       </div>
 
-      <button class="footer-like">
-        <BubblingHeart />
-        <!-- :songIndex="currSongIdx" -->
-        <!-- :liked="currSong ? currSong.liked : false" -->
-        <!-- @toggleLike="toggleSongLike" -->
-      </button>
+      <button class="footer-like"></button>
     </div>
   </footer>
 </template>
@@ -31,7 +26,7 @@ import BubblingHeart from './BubblingHeart.vue'
 
 export default {
   name: 'AppFooter',
-  emits: ['songFromYoutube','songDetails'],
+  emits: ['songFromYoutube', 'songDetails'],
   data() {
     return {
       hover: false,
@@ -64,7 +59,6 @@ export default {
           const ogImageUrl = doc
             .querySelector('meta[property="og:image"]')
             .getAttribute('content')
-          console.log(ogImageUrl, 'this is ogImageUrl')
           return ogImageUrl
         } catch (err) {
           console.error(err)
@@ -77,13 +71,15 @@ export default {
   },
   methods: {
     getSongDetails(songDetails) {
-      const {idx,song} = songDetails
-      this.songIdx = idx
-      this.currSong = song
+      const { idx } = songDetails
+      this.songIdx = idx - 1
+
+      this.currSong = this.station.songs[this.songIdx]
     },
     getSvg(iconName) {
       return SVGService.getSpotifySvg(iconName)
     },
+<<<<<<< HEAD
     // Add functionality
     toggleSongLike(idx) {
       // const song = this.station.songs[idx]
@@ -92,12 +88,13 @@ export default {
       //   `Song at index ${idx} has been ${song.liked ? 'liked' : 'unliked'}.`
       // )
     },
+=======
+>>>>>>> 84992358da353a7c405c49572fb88dff4ecb7e7c
   },
 
   components: {
     MediaPlayer,
     BubblingHeart,
   },
-
 }
 </script>

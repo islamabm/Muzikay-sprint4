@@ -3,18 +3,16 @@
 </template>
 
 <script>
-import { socketService } from './services/socket.service.js'
 import { userService } from './services/user.service'
 import { store } from './store/store'
-
+import { utilService } from './services/util.service'
 export default {
   async created() {
-    const user = userService.getLoggedinUser()
-    if (user) store.commit({ type: 'setLoggedinUser', user })
+    const user = await userService.getLoggedinUser()
 
-    socketService.on('station-created', (savedStation) => {
-      this.$store.commit({ type: 'addUserStation', station: savedStation })
-    })
+    if (user) {
+      this.$store.commit({ type: 'setLoggedinUser', user })
+    }
   },
   components: {},
 }

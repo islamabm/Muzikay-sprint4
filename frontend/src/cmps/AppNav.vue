@@ -86,7 +86,7 @@
       </div>
 
       <Container @drop="onDrop" class="clean-list user-stations">
-        <Draggable v-for="(station, index) in userStations" :key="index">
+        <Draggable v-for="(station, index) in stations" :key="index">
           <div
             class="station-nav-hover"
             :class="{ active: station._id === activeStationId }"
@@ -98,11 +98,16 @@
       </Container>
     </div>
   </nav>
+  <GuestMoodModal
+    v-if="showGuestModeModal"
+    @startGuestMode="handleStartGuestMode"
+    @closeModal="handleShowModal"
+  ></GuestMoodModal>
 </template>
 
 <script>
 import svgService from '../services/SVG.service.js'
-import { socketService } from '../services/socket.service.js'
+import GuestMoodModal from './GuestMoodModal.vue'
 import { Container, Draggable } from 'vue3-smooth-dnd'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
@@ -111,6 +116,8 @@ import {
   faCommentDollar,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { utilService } from '../services/util.service'
+import { eventBus } from '../services/event-bus.service'
 library.add(faPlus, faHeart)
 export default {
   name: 'AppNav',
@@ -123,6 +130,8 @@ export default {
       homeIcon: 'homeIcon',
       libraryIcon: 'libraryIcon',
       counter: 0,
+      showGuestModeModal: false,
+      stations: [],
     }
   },
   methods: {
@@ -142,13 +151,37 @@ export default {
       }
       return result
     },
-    // setStation(stationId) {
-    //   this.$store.commit({ type: 'setCurrStation', stationId })
-    //   this.$router.push(`/station/${stationId}`)
-    // },
-    setStation(stationId) {
+    updateStations() {
+      this.stations = this.$store.getters.getUserStations
+    },
+    async handleStartGuestMode() {
+      const userCred = {
+        username: 'guest',
+        password: utilService.makeId(),
+        fullname: `Guest`,
+        imgUrl: '',
+        stations: [],
+        LikedSongs: [],
+      }
+      try {
+        await this.$store.dispatch({
+          type: 'signupGuest',
+          userCred,
+        })
+      } catch (err) {
+        console.log('err')
+      } finally {
+        location.reload()
+        this.showGuestModeModal = false
+      }
+    },
+    handleShowModal() {
+      this.showGuestModeModal = false
+    },
+
+    async setStation(stationId) {
       this.activeStationId = stationId
-      this.$store.commit({ type: 'setCurrStation', stationId })
+      await this.$store.dispatch({ type: 'setcurrStation', stationId })
       this.$router.push(`/station/${stationId}`)
     },
     getSvg(iconName) {
@@ -167,6 +200,8 @@ export default {
         this.libraryIcon === 'libraryIcon' ? 'libraryIconActive' : 'libraryIcon'
     },
     async createStation() {
+      const user = this.$store.getters.loggedinUser
+      if (!user) this.showGuestModeModal = true
       try {
         this.stationCounter++
         const StationName = `My Playlist #${this.stationCounter}`
@@ -174,58 +209,22 @@ export default {
           type: 'createStation',
           StationName,
         })
-        console.log('hi')
-        console.log(newStation)
-        socketService.emit('station-added', newStation)
       } catch (err) {
         console.log('err')
       }
     },
     async showLikedSongs() {
-      try {
-        // this.stationCounter++
-        const StationName = 'Liked songs'
-        await this.$store.dispatch({
-          type: 'createStation',
-          StationName,
-        })
-        // console.log('hi')
-        // console.log(newStation)
-        // socketService.emit('station-added', newStation)
-      } catch (err) {
-        console.log('err')
-      }
-      // console.log(this.$store.getters.userSongs)
-      // const stationId = 'likeduser123'
-      // await this.$store.dispatch({
-      //   type: 'setcurrStation',
-      //   stationId,
-      // })
-
-      // socketService.emit('station-added', savedStation)
-      // this.$store.commit({ type: 'setCurrStation', stationId })
-      // this.$router.push(`/station/${stationId}`)
-      // this.$store.dispatch({
-      //         type: 'createStation',
-      //         StationName,
-      //       })
+      await this.setStation('6466c0bf5aa2c46190c54046')
     },
   },
   computed: {
     userStations() {
-      return this.$store.getters.getUserStations
+      this.stations = this.$store.getters.getUserStations
+      return this.stations
     },
-    // stations() {
-    //   return this.$store.getters.stations
-    // },
-    // userStationsData() {
-    //   return (this.userStationsData = this.userStations)
-    // },
   },
-  components: {
-    FontAwesomeIcon,
-    Container,
-    Draggable,
+  created() {
+    eventBus.on('user-logged-in', this.updateStations)
   },
   watch: {
     userStations: {
@@ -234,6 +233,12 @@ export default {
         this.userStationsData = newValue
       },
     },
+  },
+  components: {
+    FontAwesomeIcon,
+    Container,
+    Draggable,
+    GuestMoodModal,
   },
 }
 </script>

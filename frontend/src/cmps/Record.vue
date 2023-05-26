@@ -1,36 +1,47 @@
 <template>
   <div>
-    <button :class="`mic`" @click.stop="ToggleMic">r</button>
-    <div v-text="transcript"></div>
+    <span
+      :class="`mic`"
+      @click.stop="ToggleMic"
+      v-html="getSvg('record')"
+    ></span>
+    <!-- <button :class="`mic`" @click.stop="ToggleMic">r</button> -->
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-
+import { ref, onMounted, defineEmits } from 'vue'
+import svgService from '../services/SVG.service.js'
 const transcript = ref('')
 const isRecording = ref(false)
 
 const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition
 const sr = new Recognition()
 
+const emit = defineEmits(['update-name'])
+// const emitTranscript = (text) => {
+//   const event = new CustomEvent('transcript', { detail: text })
+//   window.dispatchEvent(event)
+//   context.emit('update-name', text)
+//   console.log('text', text)
+// }
+
 const emitTranscript = (text) => {
-  const event = new CustomEvent('transcript', { detail: text })
-  window.dispatchEvent(event)
+  emit('update-name', text)
 }
-// In the ToggleMic function, after the sr.stop() call
+// const emitTranscript = (text) => {
+//   context.emit('update-name', text);
+// }
 
 onMounted(() => {
   sr.continuous = true
   sr.interimResults = true
 
   sr.onstart = () => {
-    console.log('SR Started')
     isRecording.value = true
   }
 
   sr.onend = () => {
-    console.log('SR Stopped')
     isRecording.value = false
   }
 
@@ -54,6 +65,7 @@ const CheckForCommand = (result) => {
   const t = result[0].transcript
   if (t.includes('stop recording')) {
     sr.stop()
+    emitTranscript(transcript.value)
   } else if (t.includes('what is the time') || t.includes("what's the time")) {
     sr.stop()
     alert(new Date().toLocaleTimeString())
@@ -68,5 +80,8 @@ const ToggleMic = () => {
   } else {
     sr.start()
   }
+}
+const getSvg = (iconName) => {
+  return svgService.getSpotifySvg(iconName)
 }
 </script>

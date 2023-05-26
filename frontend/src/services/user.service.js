@@ -1,9 +1,5 @@
-import { storageService } from './async-storage.service'
 import { httpService } from './http.service'
 
-// import { socketService, SOCKET_EVENT_USER_UPDATED, SOCKET_EMIT_USER_WATCH } from './socket.service'
-import { showSuccessMsg } from './event-bus.service'
-import { utilService } from './util.service'
 const STORAGE_KEY_LOGGEDIN_USER = 'loggedinUser'
 
 export const userService = {
@@ -16,97 +12,68 @@ export const userService = {
   getById,
   remove,
   update,
-  //   changeScore,
+  getLoggedinUserDetails,
+  signupGuest,
 }
 
 window.userService = userService
 
 function getUsers() {
-  // return storageService.query('user')
   return httpService.get(`user`)
 }
 
-// function onUserUpdate(user) {
-//   showSuccessMsg(
-//     `This user ${user.fullname} just got updated from socket, new score: ${user.score}`
-//   )
-//   store.dispatch({ type: 'setWatchedUser', user })
-// }
-
 async function getById(userId) {
-  // const user = await storageService.get('user', userId)
   const user = await httpService.get(`user/${userId}`)
-
-  // socketService.emit(SOCKET_EMIT_USER_WATCH, userId)
-  // socketService.off(SOCKET_EVENT_USER_UPDATED, onUserUpdate)
-  // socketService.on(SOCKET_EVENT_USER_UPDATED, onUserUpdate)
 
   return user
 }
 function remove(userId) {
-  // return storageService.remove('user', userId)
   return httpService.delete(`user/${userId}`)
 }
 
-async function update(song, user) {
-  console.log('song service', song)
-  console.log('user service', user)
-  // const user = await storageService.get('user', _id)
-  // let user = getById(_id)
-  console.log('user in service after back like', user)
-  // user.LikedSongs.push(song)
-  // await storageService.put('user', user)
-  console.log('user in service after back like', user)
+async function update(selectedSong, user) {
+  const userCopy = { ...user }
 
-  const savedUser = await httpService.put(`user/${user._id}`, user)
-  console.log('user in the service from the back', savedUser)
-  // Handle case in which admin updates other user's details
+  userCopy.LikedSongs = [...userCopy.LikedSongs, selectedSong]
+
+  const savedUser = await httpService.put(`user/${userCopy._id}`, userCopy)
+
   if (getLoggedinUser()._id === savedUser._id) saveLocalUser(savedUser)
   return savedUser
 }
-{
-  /* <input class="edit-name" id="name" type="text" v-model="transcript" /> */
-}
+
 async function login(userCred) {
-  // const users = await storageService.query('user')
-  // const user = users.find((user) => user.username === userCred.username)
   const user = await httpService.post('auth/login', userCred)
-  //   if (user) {
-  // socketService.login(user._id)
 
   return saveLocalUser(user)
   //   }
 }
+
 async function signup(userCred) {
-  console.log('userCred in the user service', userCred)
-  // console.log('service', userCred)
-  //   userCred.score = 10000
   if (!userCred.imgUrl) {
     userCred.imgUrl =
       'https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg'
   }
 
-  // const user = await storageService.post('user', userCred)
-  // const users = utilService.loadFromStorage('user')
-  // console.log(users)
   const user = await httpService.post('auth/signup', userCred)
-  console.log('user in user service', user)
-  //   socketService.login(user._id)
+
   return saveLocalUser(user)
 }
-async function logout() {
-  // sessionStorage.removeItem(STORAGE_KEY_LOGGEDIN_USER)
-  // socketService.logout()
-  return await httpService.post('auth/logout')
+
+async function signupGuest(userCred) {
+  sessionStorage.setItem(STORAGE_KEY_LOGGEDIN_USER, JSON.stringify(userCred))
 }
 
-// async function changeScore(by) {
-//   const user = getLoggedinUser()
-//   if (!user) throw new Error('Not loggedin')
-//   user.score = user.score + by || by
-//   await update(user)
-//   return user.score
-// }
+async function logout() {
+  return await httpService.post('auth/logout')
+}
+async function getLoggedinUserDetails() {
+  const user = getLoggedinUser()
+
+  if (!user) return null
+  const userDetails = await httpService.get(`user/${user._id}`)
+  return userDetails
+}
 
 function saveLocalUser(user) {
   user = {
@@ -122,11 +89,12 @@ function saveLocalUser(user) {
 }
 
 function getLoggedinUser() {
-  return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
+  const user = JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
+  if (user) {
+    if (user.username === 'guest') {
+      return JSON.parse(sessionStorage.getItem(STORAGE_KEY_LOGGEDIN_USER))
+    } else {
+      return httpService.get(`user/${user._id}`)
+    }
+  }
 }
-
-// ;(async ()=>{
-//     await userService.signup({fullname: 'Puki Norma', username: 'puki', password:'123',score: 10000, isAdmin: false})
-//     await userService.signup({fullname: 'Master Adminov', username: 'admin', password:'123', score: 10000, isAdmin: true})
-//     await userService.signup({fullname: 'Muki G', username: 'muki', password:'123', score: 10000})
-// })()
