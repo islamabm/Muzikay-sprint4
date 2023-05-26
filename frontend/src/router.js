@@ -9,6 +9,7 @@ import StationDetails from './views/StationDetails.vue'
 import StationCollection from './views/StationCollection.vue'
 import UserDetails from './views/UserDetails.vue'
 import Chat from './views/Chat.vue'
+import SongDetails from './views/SongDetails.vue'
 
 const routes = [
   {
@@ -51,6 +52,11 @@ const routes = [
         path: '/station/library',
         name: 'Library',
         component: UserLibrary,
+      },
+      {
+        path: '/station/song',
+        name: 'song-details-page',
+        component: SongDetails,
       },
 
       {

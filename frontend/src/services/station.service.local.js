@@ -7,7 +7,11 @@ import gStations from '../../data/station.json'
 import gSearchStations from '../../data/search.json'
 import { userService } from './user.service.js'
 
+<<<<<<< HEAD
 const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyBJF6iDr-3NXG-k-Zlls_oqEc0LaafJ89w&q=`
+=======
+const gUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyDYctMc3RHrD9gwvz4dwPUjnaUNu_rMUqo&q=`
+>>>>>>> 3ae36015496cb7dcb489a6aee8952cbc8d623299
 const STORAGE_KEY = 'station'
 const SEARCH_KEY = 'videosDB'
 const VIDEOS_KEY = 'videosIdDB'
@@ -177,4 +181,31 @@ async function getEmotion(text) {
 
 async function generateSongs(emotion) {
   return httpService.post('openai/generateSongs', { emotion })
+}
+
+async function getSongLyrics(artist, title) {
+  
+  return axios
+    .get(`http://localhost:3030/api/lyrics/${artist}/${title}`)
+    .then((response) => {
+      const lyricsLines = response.data.split('\n')
+      let timer = 0
+      const lyricsArray = lyricsLines.map((line, index) => {
+        const timedLyric = {
+          time: timer,
+          text: line,
+        }
+        timer += 4
+        return timedLyric
+      })
+      
+      // Remove the last two elements
+      const trimmedLyricsArray = lyricsArray.slice(0, -2);
+      
+      console.log('trimmedLyricsArray', trimmedLyricsArray)
+      return trimmedLyricsArray
+    })
+    .catch((error) => {
+      console.error(error)
+    })
 }
