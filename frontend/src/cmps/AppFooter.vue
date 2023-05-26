@@ -93,17 +93,6 @@ export default {
       // )
     },
   },
-  mounted() {
-    eventBus.on('song-detailss', (song) => {
-      this.currSong = song
-      var delay = song.delay || 2000
-      this.alive = true
-      setTimeout(() => {
-        this.alive = false
-      }, delay)
-    })
-
-  },
 
   components: {
     MediaPlayer,

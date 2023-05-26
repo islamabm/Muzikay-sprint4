@@ -1,6 +1,6 @@
 <template>
+  <!-- class="youtube-player" -->
   <YouTube
-    class="youtube-player"
     :src="`https://www.youtube.com/watch?q=${putSongName}`"
     @ready="onReady"
     @state-change="onStateChange"
@@ -236,6 +236,7 @@ export default {
     // when something happens- Video has ended/Video 1=> is playing 2=> pause 0=> finished 3=> when passing forward or switching a song
     // supposed to be a switch case
     onStateChange(event) {
+      console.log('event', event.data)
       if (event.data === 1) {
       }
       if (event.data === 2)
