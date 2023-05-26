@@ -277,7 +277,7 @@
               v-if="station.name === 'Liked songs'"
               @click="removeFromLikedSongs(selectedSong)"
             >
-              Delete
+              Unlike
             </li>
           </ul>
         </div>
@@ -299,7 +299,7 @@
       <div class="delete-modla-btns">
         <button class="delete-modal-cancle-btn" @click="cancle">Cancel</button>
         <button class="delete-modal-delete-btn" @click="removeStation">
-          Unlike
+          Delete
         </button>
       </div>
     </div>
