@@ -401,6 +401,7 @@ export default {
     },
     viewSongDetails(song) {
       eventBus.emit('view-song-details', song)
+      this.songDetails(song,this.selectedIndex)
       this.$router.push({ name: 'song-details-page' })
     },
     dontAddSong() {
