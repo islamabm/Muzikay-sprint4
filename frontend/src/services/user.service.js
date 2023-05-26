@@ -14,6 +14,7 @@ export const userService = {
   update,
   getLoggedinUserDetails,
   signupGuest,
+  removeSongFromUser,
 }
 
 window.userService = userService
@@ -29,6 +30,18 @@ async function getById(userId) {
 }
 function remove(userId) {
   return httpService.delete(`user/${userId}`)
+}
+async function removeSongFromUser(selectedSong, user) {
+  const userCopy = { ...user }
+
+  userCopy.LikedSongs = userCopy.LikedSongs.filter(
+    (s) => s.id !== selectedSong.id
+  )
+
+  const savedUser = await httpService.put(`user/${userCopy._id}`, userCopy)
+
+  if (getLoggedinUser()._id === savedUser._id) saveLocalUser(savedUser)
+  return savedUser
 }
 
 async function update(selectedSong, user) {

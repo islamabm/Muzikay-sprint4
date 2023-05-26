@@ -486,6 +486,20 @@ export default {
         this.showStationsSubMenu = false
       }
     },
+    // async removeSongFromUser(song) {
+    //   try {
+    //     await this.$store.dispatch('removeSongFromUser', {
+    //       song,
+    //       user: this.user,
+    //     })
+    //     showSuccessMsg('Song unliked')
+    //   } catch (err) {
+    //     console.log(err)
+    //   } finally {
+    //     this.showSongModal = false
+    //     this.showStationsSubMenu = false
+    //   }
+    // },
     openStationSelection() {
       this.showStationsSubMenu = !this.showStationsSubMenu
     },

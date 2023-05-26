@@ -41,6 +41,14 @@ export const userStore = {
       state.loggedinUser.LikedSongs = [...state.loggedinUser.LikedSongs, song]
       updatedUser.LikedSongs = [...updatedUser.LikedSongs, song]
     },
+    // removeSongFromUser(state, { song, updatedUser }) {
+    //   state.loggedinUser.LikedSongs = state.loggedinUser.LikedSongs.filter(
+    //     (s) => s.id !== song.id
+    //   )
+    //   updatedUser.LikedSongs = updatedUser.LikedSongs.filter(
+    //     (s) => s.id !== song.id
+    //   )
+    // },
   },
   actions: {
     async login({ commit }, { userCred }) {
@@ -116,6 +124,14 @@ export const userStore = {
         throw err
       }
     },
+    // async removeSongFromUser({ commit }, { song, user }) {
+    //   try {
+    //     const updatedUser = await userService.removeSongFromUser(song, user)
+    //     commit({ type: 'removeSongFromUser', song: selectedSong, updatedUser })
+    //   } catch (err) {
+    //     throw err
+    //   }
+    // },
     async loadLoggedinUser({ commit }) {
       try {
         const user = await userService.getLoggedinUser()
