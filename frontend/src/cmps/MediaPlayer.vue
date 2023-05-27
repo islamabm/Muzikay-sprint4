@@ -150,11 +150,6 @@ export default {
     },
     putSongName() {
       if (this.song) {
-        console.log(
-          'this.station.songs[this.songIdx].id',
-          this.station.songs[this.songIdx].id
-        )
-        console.log('this.song.id', this.song.id)
         if (this.song.id) return this.song[this.songIdx].id
         // situation when we have a song from YouTube on our list-considered as a song
         return this.song.videoId
@@ -210,27 +205,6 @@ export default {
       }
       this.switchSong(randomIndex)
       this.$emit('songDetails', songDetails)
-      // if (this.isShuffleOn) {
-      //   // shuffle the array of song indexes
-      //   let currentIndex = this.station.songs.length
-      //   let randomIndex
-      //   let temporaryValue
-      //   let shuffledIndexes = [...Array(currentIndex).keys()]
-
-      //   while (0 !== currentIndex) {
-      //     // pick a remaining element
-      //     randomIndex = Math.floor(Math.random() * currentIndex)
-      //     currentIndex--
-      //     // swap with current element
-      //     temporaryValue = shuffledIndexes[currentIndex]
-      //     shuffledIndexes[currentIndex] = shuffledIndexes[randomIndex]
-      //     shuffledIndexes[randomIndex] = temporaryValue
-      //   }
-      //   // update the shuffledSongs array with the shuffled indexes
-      //   this.shuffledSongs = shuffledIndexes
-      // } else {
-      //   this.shuffledSongs = []
-      // }
     },
     // the function gets direction 1/-1 and switches the song by it
     async switchSong(num) {

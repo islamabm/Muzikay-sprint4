@@ -104,6 +104,7 @@ export default {
       }
       try {
         await this.$store.dispatch({ type: 'login', userCred: this.loginCred })
+        await this.$store.dispatch('fetchLoggedInUser')
         this.$router.push('/station/collection')
         eventBus.emit('user-logged-in')
       } catch (err) {

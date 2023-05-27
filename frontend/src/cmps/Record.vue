@@ -5,7 +5,6 @@
       @click.stop="ToggleMic"
       v-html="getSvg('record')"
     ></span>
-    <!-- <button :class="`mic`" @click.stop="ToggleMic">r</button> -->
   </div>
 </template>
 
@@ -19,19 +18,10 @@ const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition
 const sr = new Recognition()
 
 const emit = defineEmits(['update-name'])
-// const emitTranscript = (text) => {
-//   const event = new CustomEvent('transcript', { detail: text })
-//   window.dispatchEvent(event)
-//   context.emit('update-name', text)
-//   console.log('text', text)
-// }
 
 const emitTranscript = (text) => {
   emit('update-name', text)
 }
-// const emitTranscript = (text) => {
-//   context.emit('update-name', text);
-// }
 
 onMounted(() => {
   sr.continuous = true

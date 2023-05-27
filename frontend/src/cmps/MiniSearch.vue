@@ -83,7 +83,6 @@ export default {
       return SVGService.getSpotifySvg(iconName)
     },
     async add() {
-      // this function makes a mess Tal help!
       this.songs = await stationService.getVideos(this.search)
     },
     async addVideo(stationId, song) {

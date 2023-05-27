@@ -12,6 +12,7 @@ export const stationStore = {
       song: null,
       lyrics: null,
     },
+    loggedInUser: null,
   },
   getters: {
     filteredStations: (state) => (category) => {
@@ -38,14 +39,12 @@ export const stationStore = {
       return station
     },
     getUserStations(state) {
-      const loggedinUser = userService.getLoggedinUser()
-      if (loggedinUser) {
+      if (state.loggedInUser) {
         const userStations = state.stations.filter(
-          (s) => s.createdBy.fullname === loggedinUser.fullname
+          (s) => s.createdBy.fullname === state.loggedInUser.fullname
         )
         return userStations
       }
-      return state.userStations
     },
     stationById: (state) => (id) => {
       const foundStation = state.stations.find((station) => {
@@ -113,6 +112,9 @@ export const stationStore = {
       const idx = state.stations.findIndex((c) => c._id === station._id)
       state.stations.splice(idx, 1, station)
     },
+    setLoggedInUser(state, user) {
+      state.loggedInUser = user
+    },
 
     editUserStation(state, { station }) {
       const idx = state.userStations.findIndex((c) => c._id === station._id)
@@ -177,6 +179,10 @@ export const stationStore = {
       } catch (error) {
         console.error(error)
       }
+    },
+    async fetchLoggedInUser({ commit }) {
+      const user = await userService.getLoggedinUser()
+      commit('setLoggedInUser', user)
     },
 
     async loadSearchStations(context) {

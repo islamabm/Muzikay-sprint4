@@ -36,11 +36,9 @@ export default {
         .then(() => {
           window.FB.login((response) => {
             if (response.authResponse) {
-              console.log('response.authResponse', response.authResponse)
+
               window.FB.api('/me?fields=id,name,first_name', (response) => {
-                console.log('Successful login for: ', response.name)
-                console.log('Successful login for: ', response.id)
-                console.log('First name: ', response.first_name)
+
                 const loginCred = {
                   fullname: response.name,
                   username: response.first_name,

@@ -268,7 +268,7 @@ export default {
         return
       }
       await this.$store.dispatch({ type: 'signup', userCred: this.signupCred })
-
+      await this.$store.dispatch('fetchLoggedInUser')
       this.$router.push('/station/collection')
     },
   },

@@ -290,7 +290,7 @@
     <button @click="toggleModal">x</button>
   </section>
 
-  <section v-if="showDeleteModal" class="delete-modal-backdrop">
+  <!-- <section v-if="showDeleteModal" class="delete-modal-backdrop">
     <div class="delete-modal">
       <h1>Delete from Library?</h1>
       <p>
@@ -303,9 +303,15 @@
         </button>
       </div>
     </div>
-  </section>
+  </section> -->
+  <DeleteModal
+    :showDeleteModal.sync="showDeleteModal"
+    :station="station"
+    @removeStation="removeStation"
+    @closeDeleteModal="closeDeleteModal"
+  />
 
-  <section v-if="showAreYouSureModal" class="delete-modal-backdrop">
+  <!-- <section v-if="showAreYouSureModal" class="delete-modal-backdrop">
     <div class="delete-modal">
       <h1>Already added</h1>
       <p>This is already in your <span>playlist</span></p>
@@ -318,10 +324,11 @@
         </button>
       </div>
     </div>
-  </section>
+  </section> -->
 </template>
 
 <script>
+import DeleteModal from '../cmps/DeleteModal.vue'
 import { Container, Draggable } from 'vue3-smooth-dnd'
 import { FastAverageColor } from 'fast-average-color'
 import StationEdit from '../cmps/StationEdit.vue'
@@ -405,16 +412,14 @@ export default {
       eventBus.emit('view-song-details', song)
       this.$router.push({ name: 'song-details-page' })
     },
-    dontAddSong() {
-      this.showAreYouSureModal = false
-    },
+
     playStation() {
       eventBus.emit('station', this.station)
     },
     showDeleteModel() {
       this.showDeleteModal = true
     },
-    cancle() {
+    closeDeleteModal() {
       this.showDeleteModal = false
     },
     updateBodyBackgroundColor(color) {
@@ -501,20 +506,6 @@ export default {
         this.showStationsSubMenu = false
       }
     },
-    // async removeSongFromUser(song) {
-    //   try {
-    //     await this.$store.dispatch('removeSongFromUser', {
-    //       song,
-    //       user: this.user,
-    //     })
-    //     showSuccessMsg('Song unliked')
-    //   } catch (err) {
-    //     console.log(err)
-    //   } finally {
-    //     this.showSongModal = false
-    //     this.showStationsSubMenu = false
-    //   }
-    // },
     openStationSelection() {
       this.showStationsSubMenu = !this.showStationsSubMenu
     },
@@ -531,9 +522,7 @@ export default {
       this.currImgSvg = svg
     },
     onHeartClick(index) {
-      console.log('index', index)
       if (this.clickedHeartIndex === index) {
-        console.log('this.clickedHeartIndex', this.clickedHeartIndex)
         this.clickedHeartIndex = null
       } else {
         this.clickedHeartIndex = index
@@ -587,7 +576,6 @@ export default {
     },
 
     async removeSong(selectedSong) {
-      console.log('this.station._id', this.station._id)
       try {
         await this.$store.dispatch({
           type: 'removeSong',
@@ -732,6 +720,7 @@ export default {
     Container,
     Draggable,
     BubblingHeart,
+    DeleteModal,
   },
   mounted() {
     window.scrollTo(0, 0)

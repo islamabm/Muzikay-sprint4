@@ -54,7 +54,6 @@ export default {
           if (newStation.songs) {
             const stationId = newStation._id
             await this.$store.dispatch({ type: 'setcurrStation', stationId })
-            console.log('hi')
             this.$router.push(`/station/${stationId}`)
           }
           await this.$store.dispatch({

@@ -8,6 +8,7 @@ import { store } from './store/store'
 import { utilService } from './services/util.service'
 export default {
   async created() {
+    await this.$store.dispatch('fetchLoggedInUser')
     const user = await userService.getLoggedinUser()
 
     if (user) {

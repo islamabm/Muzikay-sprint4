@@ -32,7 +32,6 @@ export default {
   },
 
   created() {
-    console.log('hi')
     eventBus.on('view-song-details', this.changeSong)
     if (this.song) {
       this.updateImgUrlAndColor(this.song)
@@ -40,7 +39,6 @@ export default {
   },
   methods: {
     async changeSong(song) {
-      console.log('song', song)
       try {
         await this.$store.dispatch('fetchSongDetails', song)
         await this.$store.dispatch('fetchSongLyrics', song)

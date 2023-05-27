@@ -42,6 +42,17 @@ function _getUrl(id = '') {
 
   return `${BASE_URL}/${id}`
 }
+// function getLinesOfCode() {
+//   const url = 'https://api.codetabs.com/v1/loc?github=islamabm/Muzikay-sprint4'
+//   return axios
+//     .get(url)
+//     .then((response) => {
+//       console.log(response.data)
+//     })
+//     .catch((error) => {
+//       console.error(error)
+//     })
+// }
 
 async function query() {
   return httpService.get('station')
@@ -115,8 +126,8 @@ function _createSearchStations() {
   }
 }
 
-function createNewStation(name) {
-  const loggedinUser = userService.getLoggedinUser()
+async function createNewStation(name) {
+  let loggedinUser = await userService.getLoggedinUser()
   const newStation = {
     imgUrl: '',
     name: name,
@@ -172,10 +183,8 @@ async function getSongLyrics(artist, title) {
         return timedLyric
       })
 
-      // Remove the last two elements
       const trimmedLyricsArray = lyricsArray.slice(0, -2)
 
-      console.log('trimmedLyricsArray', trimmedLyricsArray)
       return trimmedLyricsArray
     })
     .catch((error) => {

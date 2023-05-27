@@ -77,13 +77,10 @@ function _makeId(length = 5) {
 }
 
 function store(key, val) {
-  console.log('hi')
   localStorage[key] = JSON.stringify(val)
 }
 
 function load(key) {
-  // console.log('loading failure')
   var val = localStorage.getItem(key)
-  // console.log('val', val)
   return val ? JSON.parse(val) : null
 }

@@ -85,7 +85,10 @@
         </a>
       </div>
 
-      <Container @drop="onDrop" class="clean-list user-stations">
+      <Container
+        @drop="onDrop"
+        class="clean-list user-stations scrollable-section"
+      >
         <Draggable v-for="(station, index) in stations" :key="index">
           <div
             class="station-nav-hover"
@@ -158,7 +161,7 @@ export default {
       const userCred = {
         username: 'guest',
         password: utilService.makeId(),
-        fullname: `Guest`,
+        fullname: 'Guest',
         imgUrl: '',
         stations: [],
         LikedSongs: [],
@@ -242,3 +245,22 @@ export default {
   },
 }
 </script>
+<style scoped>
+.scrollable-section {
+  overflow-y: auto;
+  height: 300px;
+  scrollbar-width: thin;
+}
+
+.scrollable-section::-webkit-scrollbar {
+  width: 20px;
+}
+
+.scrollable-section::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-image: url('https://www.publicdomainpictures.net/pictures/490000/nahled/image-1676013608zYK.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 35px;
+}
+</style>
