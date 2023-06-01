@@ -290,44 +290,28 @@
     <button @click="toggleModal">x</button>
   </section>
 
-  <!-- <section v-if="showDeleteModal" class="delete-modal-backdrop">
-    <div class="delete-modal">
-      <h1>Delete from Library?</h1>
-      <p>
-        This will delete <span>{{ stationDeleteMsg }} </span> from Your Library.
-      </p>
-      <div class="delete-modla-btns">
-        <button class="delete-modal-cancle-btn" @click="cancle">Cancel</button>
-        <button class="delete-modal-delete-btn" @click="removeStation">
-          Delete
-        </button>
-      </div>
-    </div>
-  </section> -->
+  <RecommendationsModal
+    v-if="showRecommendationModal"
+    @closeRecoModal="closeRecoModal"
+  ></RecommendationsModal>
+
+  <StationModal
+    v-if="showStationModal"
+    @openDeleteStationModal="openDeleteStationModal"
+    @toggleRecommendationModal="toggleRecommendationModal"
+    @copyLink="copyLink"
+  ></StationModal>
   <DeleteModal
     :showDeleteModal.sync="showDeleteModal"
     :station="station"
     @removeStation="removeStation"
     @closeDeleteModal="closeDeleteModal"
   />
-
-  <!-- <section v-if="showAreYouSureModal" class="delete-modal-backdrop">
-    <div class="delete-modal">
-      <h1>Already added</h1>
-      <p>This is already in your <span>playlist</span></p>
-      <div class="delete-modla-btns">
-        <button class="delete-modal-cancle-btn" @click="addSongAnyway">
-          Add anyway
-        </button>
-        <button class="delete-modal-delete-btn" @click="dontAddSong">
-          Don't add
-        </button>
-      </div>
-    </div>
-  </section> -->
 </template>
 
 <script>
+import RecommendationsModal from '../cmps/RecommendationsModal.vue'
+import StationModal from '../cmps/StationModal.vue'
 import DeleteModal from '../cmps/DeleteModal.vue'
 import { Container, Draggable } from 'vue3-smooth-dnd'
 import { FastAverageColor } from 'fast-average-color'
@@ -358,6 +342,7 @@ export default {
       modalX: 0,
       modalY: 0,
       showAddSongModal: false,
+      showRecommendationModal: false,
       showSongModal: false,
       showModal: '',
       activeTitle: null,
@@ -380,12 +365,24 @@ export default {
       inactiveClass: 'inactive-song',
       currSongSelected: null,
       activeSongIndex: null,
+      showStationModal: false,
     }
   },
   methods: {
     toggleHeaderLike() {},
     handelYoutubeSong(video) {
       eventBus.emit('youtube-song', video)
+    },
+    openDeleteStationModal() {
+      this.showDeleteModal = true
+      this.showStationModal = false
+    },
+    closeRecoModal() {
+      this.showRecommendationModal = false
+    },
+    toggleRecommendationModal() {
+      this.showRecommendationModal = true
+      this.showStationModal = false
     },
     changeStatus(idx) {
       eventBus.on('song-idx', (songIdx) => (this.activeSongIndex = songIdx))
@@ -399,6 +396,18 @@ export default {
       let minutes = Math.floor(duration / 60)
       let seconds = Math.floor(duration % 60)
       return `${minutes}:${seconds}`
+    },
+    async copyLink() {
+      const playlistLink = `https://muzikay.onrender.com/#/station/${this.$route.params.stationId}`
+      try {
+        await navigator.clipboard.writeText(playlistLink)
+        showSuccessMsg('Link copied to clipboard')
+      } catch (err) {
+        showErrorMsg('Failed to copy link to clipboard')
+        console.error('Failed to copy playlist link: ', err)
+      } finally {
+        this.showStationModal = false
+      }
     },
     songDetails(song, idx) {
       const currSong = {
@@ -417,7 +426,7 @@ export default {
       eventBus.emit('station', this.station)
     },
     showDeleteModel() {
-      this.showDeleteModal = true
+      this.showStationModal = !this.showStationModal
     },
     closeDeleteModal() {
       this.showDeleteModal = false
@@ -721,6 +730,8 @@ export default {
     Draggable,
     BubblingHeart,
     DeleteModal,
+    RecommendationsModal,
+    StationModal,
   },
   mounted() {
     window.scrollTo(0, 0)
@@ -733,6 +744,7 @@ export default {
           this.station = station
           this.$nextTick(() => {
             this.updateImgUrlAndColor(this.station)
+            window.scrollTo(0, 0)
           })
         })
         .catch((error) => {

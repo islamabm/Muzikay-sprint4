@@ -125,6 +125,7 @@ export const stationStore = {
     },
     createStation(state, { station }) {
       state.userStations.push(station)
+      state.loggedInUser.givenReviews.push(station)
       state.stations.push(station)
     },
     addSong(state, { stationId, newSong }) {
@@ -271,30 +272,30 @@ export const stationStore = {
         throw err
       }
     },
-    async updateStationSong(context, { stationId, newSong }) {
-      try {
-        const idx = context.state.stations.findIndex(
-          (station) => station._id === stationId
-        )
-        if (idx === -1) return // station not found
-        const station = context.state.stations[idx]
-        const updatedStation = {
-          ...station,
-          songs: [newSong, ...station.songs.slice(1)],
-        }
-        const savedStation = await stationService.save(updatedStation)
-        context.commit({
-          type: 'setStations',
-          stations: [
-            ...context.state.stations.slice(0, idx),
-            savedStation,
-            ...context.state.stations.slice(idx + 1),
-          ],
-        })
-      } catch (err) {
-        console.error('Cannot update station song', err)
-        throw err
-      }
-    },
+    // async updateStationSong(context, { stationId, newSong }) {
+    //   try {
+    //     const idx = context.state.stations.findIndex(
+    //       (station) => station._id === stationId
+    //     )
+    //     if (idx === -1) return // station not found
+    //     const station = context.state.stations[idx]
+    //     const updatedStation = {
+    //       ...station,
+    //       songs: [newSong, ...station.songs.slice(1)],
+    //     }
+    //     const savedStation = await stationService.save(updatedStation)
+    //     context.commit({
+    //       type: 'setStations',
+    //       stations: [
+    //         ...context.state.stations.slice(0, idx),
+    //         savedStation,
+    //         ...context.state.stations.slice(idx + 1),
+    //       ],
+    //     })
+    //   } catch (err) {
+    //     console.error('Cannot update station song', err)
+    //     throw err
+    //   }
+    // },
   },
 }

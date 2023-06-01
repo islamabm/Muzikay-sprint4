@@ -207,6 +207,7 @@ export default {
       if (!user) this.showGuestModeModal = true
       try {
         this.stationCounter++
+        // name: 'My Playlist #' + (this.loggedinUser.stations.length + 1),
         const StationName = `My Playlist #${this.stationCounter}`
         const newStation = await this.$store.dispatch({
           type: 'createStation',
@@ -214,6 +215,11 @@ export default {
         })
       } catch (err) {
         console.log('err')
+      } finally {
+        console.log(
+          'this.$store.getters.loggedinUser',
+          this.$store.getters.loggedinUser
+        )
       }
     },
     async showLikedSongs() {
